@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Image Description for Amazon EC2 &mdash; KIWI NG 9.21.9 documentation</title>
+  <title>Image Description for Vagrant &mdash; KIWI NG 9.21.10 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Image Description for Microsoft Azure" href="vmx_setup_for_azure.html" />
-    <link rel="prev" title="Deploy ISO Image as File on a FAT32 Formated USB Stick" href="iso_to_usb_stick_file_based_deployment.html" /> 
+    <link rel="next" title="Booting a Live ISO Image from Network" href="network_live_iso_boot.html" />
+    <link rel="prev" title="Setting Up YaST at First Boot" href="setup_yast_on_first_boot.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -286,24 +286,24 @@
 <li class="toctree-l3"><a class="reference internal" href="../building_images/build_live_iso.html#decision-for-a-live-iso-technology">Decision for a live ISO technology</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../building_images/build_vmx_disk.html">Build a Virtual Disk Image</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../building_images/build_vmx_disk.html#setting-up-the-bootloader-of-the-image">Setting up the Bootloader of the Image</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../building_images/build_vmx_disk.html#modifying-the-size-of-the-image">Modifying the Size of the Image</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../building_images/build_vmx_disk.html#customizing-the-virtual-machine">Customizing the Virtual Machine</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../building_images/build_vmx_disk.html#modifying-the-vm-configuration-directly">Modifying the VM Configuration Directly</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../building_images/build_vmx_disk.html#adding-network-interfaces-to-the-vm">Adding Network Interfaces to the VM</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../building_images/build_vmx_disk.html#specifying-disks-and-disk-controllers">Specifying Disks and Disk Controllers</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../building_images/build_vmx_disk.html#adding-cd-dvd-drives">Adding CD/DVD Drives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building_images/build_simple_disk.html">Build a Virtual Disk Image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../building_images/build_simple_disk.html#setting-up-the-bootloader-of-the-image">Setting up the Bootloader of the Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../building_images/build_simple_disk.html#modifying-the-size-of-the-image">Modifying the Size of the Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../building_images/build_simple_disk.html#customizing-the-virtual-machine">Customizing the Virtual Machine</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../building_images/build_simple_disk.html#modifying-the-vm-configuration-directly">Modifying the VM Configuration Directly</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../building_images/build_simple_disk.html#adding-network-interfaces-to-the-vm">Adding Network Interfaces to the VM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../building_images/build_simple_disk.html#specifying-disks-and-disk-controllers">Specifying Disks and Disk Controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../building_images/build_simple_disk.html#adding-cd-dvd-drives">Adding CD/DVD Drives</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../building_images/build_oem_disk.html">Build an OEM Expandable Disk Image</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../building_images/build_oem_disk.html#deployment-methods">Deployment Methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../building_images/build_oem_disk.html#manual-deployment">Manual Deployment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../building_images/build_oem_disk.html#cd-dvd-deployment">CD/DVD Deployment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../building_images/build_oem_disk.html#network-deployment">Network Deployment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../building_images/build_oem_disk.html#oem-customization">OEM Customization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building_images/build_expandable_disk.html">Build an Expandable Disk Image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#deployment-methods">Deployment Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#manual-deployment">Manual Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#cd-dvd-deployment">CD/DVD Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#network-deployment">Network Deployment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#oem-customization">OEM Customization</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
@@ -318,27 +318,27 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../working_with_images.html">Working with Images</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="iso_to_usb_stick_deployment.html">Deploy ISO Image on an USB Stick</a></li>
 <li class="toctree-l2"><a class="reference internal" href="iso_to_usb_stick_file_based_deployment.html">Deploy ISO Image as File on a FAT32 Formated USB Stick</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Image Description for Amazon EC2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vmx_setup_for_azure.html">Image Description for Microsoft Azure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vmx_setup_for_google.html">Image Description for Google Compute Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="disk_setup_for_ec2.html">Image Description for Amazon EC2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="disk_setup_for_azure.html">Image Description for Microsoft Azure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="disk_setup_for_google.html">Image Description for Google Compute Engine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="setup_yast_on_first_boot.html">Setting Up YaST at First Boot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vmx_vagrant_setup.html">Image Description for Vagrant</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="vmx_vagrant_setup.html#customizing-the-embedded-vagrantfile">Customizing the embedded Vagrantfile</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Image Description for Vagrant</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#customizing-the-embedded-vagrantfile">Customizing the embedded Vagrantfile</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="network_live_iso_boot.html">Booting a Live ISO Image from Network</a></li>
-<li class="toctree-l2"><a class="reference internal" href="oem_ramdisk_deployment.html">Deploy and Run System in a RamDisk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="disk_ramdisk_deployment.html">Deploy and Run System in a RamDisk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_partitions.html">Custom Disk Partitions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="custom_partitions.html#custom-partitioning-at-boot-time">Custom Partitioning at Boot Time</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="custom_volumes.html">Custom Disk Volumes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_fstab_extension.html">Add or Update the Fstab File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="vmx_setup_for_luks.html">Image Description Encrypted Disk</a></li>
+<li class="toctree-l2"><a class="reference internal" href="disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="build_with_profiles.html">Building Images with Profiles</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="build_with_profiles.html#local-builds">Local Builds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_with_profiles.html#building-with-the-open-build-service">Building with the Open Build Service</a></li>
@@ -707,13 +707,13 @@
         
           <li><a href="../working_with_images.html">Working with Images</a> &raquo;</li>
         
-      <li>Image Description for Amazon EC2</li>
+      <li>Image Description for Vagrant</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/working_with_images/vmx_setup_for_ec2.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/working_with_images/disk_setup_for_vagrant.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -726,127 +726,275 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="image-description-for-amazon-ec2">
-<span id="setup-for-ec2"></span><h1>Image Description for Amazon EC2<a class="headerlink" href="#image-description-for-amazon-ec2" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="image-description-for-vagrant">
+<span id="setup-vagrant"></span><h1>Image Description for Vagrant<a class="headerlink" href="#image-description-for-vagrant" title="Permalink to this headline">¶</a></h1>
 <div class="sidebar">
 <p class="sidebar-title">Abstract</p>
 <p>This page provides further information for handling
-vmx images built with KIWI NG and references the following
-articles:</p>
+Vagrant controlled disk images built with KIWI NG and references
+the following article:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="../building_images/build_vmx_disk.html#vmx"><span class="std std-ref">Build a Virtual Disk Image</span></a></p></li>
+<li><p><a class="reference internal" href="../building_images/build_simple_disk.html#simple-disk"><span class="std std-ref">Build a Virtual Disk Image</span></a></p></li>
 </ul>
 </div>
-<p>A virtual disk image which is able to boot in the Amazon EC2
-cloud framework has to comply the following constraints:</p>
-<ul class="simple">
-<li><p>Xen tools and libraries must be installed</p></li>
-<li><p>cloud-init package must be installed</p></li>
-<li><p>cloud-init configuration for Amazon must be provided</p></li>
-<li><p>Grub bootloader modules for Xen must be installed</p></li>
-<li><p>AWS tools must be installed</p></li>
-<li><p>Disk size must be set to 10G</p></li>
-<li><p>Kernel parameters must allow for xen console</p></li>
-</ul>
-<p>To meet this requirements add or update the KIWI NG image
-description as follows:</p>
+<p><a class="reference external" href="https://www.vagrantup.com">Vagrant</a> is a framework to
+implement consistent processing/testing work environments based on
+Virtualization technologies. To run a system, Vagrant needs so-called
+<strong>boxes</strong>. A box is a TAR archive containing a virtual disk image and
+some metadata.</p>
+<p>To build Vagrant boxes, you can use <a class="reference external" href="https://www.packer.io">Packer</a> which
+is provided by Hashicorp itself. Packer is based on the official
+installation media (DVDs) as shipped by the distribution vendor.</p>
+<p>The KIWI NG way of building images might be helpful, if such a media does not
+exist or does not suit your needs. For example, if the distribution is
+still under development or you want to use a collection of your own
+repositories. Note, that in contrast to Packer KIWI NG only supports the
+libvirt and VirtualBox providers. Other providers require a different box
+layout that is currently not supported by KIWI NG.</p>
+<p>In addition, you can use the KIWI NG image description as source for the
+<a class="reference external" href="https://openbuildservice.org">Open Build Service</a> which allows
+building and maintaining boxes.</p>
+<p>Vagrant expects boxes to be setup in a specific way (for details refer to
+the <a class="reference external" href="https://www.vagrantup.com/docs/boxes/base.html">Vagrant box documentation</a>.), applied to the
+referenced KIWI NG image description from <a class="reference internal" href="../building_images/build_simple_disk.html#simple-disk"><span class="std std-ref">Build a Virtual Disk Image</span></a>, the following
+steps are required:</p>
 <ol class="arabic">
-<li><p>Software packages</p>
-<p>Make sure to add the following packages to the package list</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Package names used in the following list matches the
-package names of the SUSE distribution and might be different
-on other distributions.</p>
-</div>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;aws-cli&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;grub2-x86_64-xen&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;xen-libs&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;xen-tools-domU&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;cloud-init&quot;</span><span class="nt">/&gt;</span>
-</pre></div>
-</div>
-</li>
-<li><p>Image Type definition</p>
-<p>Update the vmx image type setup as follows</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;vmx&quot;</span>
-      <span class="na">filesystem=</span><span class="s">&quot;ext4&quot;</span>
-      <span class="na">kernelcmdline=</span><span class="s">&quot;console=xvc0 multipath=off net.ifnames=0&quot;</span>
-      <span class="na">devicepersistency=</span><span class="s">&quot;by-label&quot;</span>
-      <span class="na">firmware=</span><span class="s">&quot;ec2&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;bootloader</span> <span class="na">name=</span><span class="s">&quot;grub2&quot;</span> <span class="na">timeout=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;size</span> <span class="na">unit=</span><span class="s">&quot;M&quot;</span><span class="nt">&gt;</span>10240<span class="nt">&lt;/size&gt;</span>
-  <span class="nt">&lt;machine</span> <span class="na">xen_loader=</span><span class="s">&quot;hvmloader&quot;</span><span class="nt">/&gt;</span>
+<li><p>Update the image type setup</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;oem&quot;</span> <span class="na">filesystem=</span><span class="s">&quot;ext4&quot;</span> <span class="na">format=</span><span class="s">&quot;vagrant&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;bootloader</span> <span class="na">name=</span><span class="s">&quot;grub2&quot;</span> <span class="na">timeout=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;vagrantconfig</span> <span class="na">provider=</span><span class="s">&quot;libvirt&quot;</span> <span class="na">virtualsize=</span><span class="s">&quot;42&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;size</span> <span class="na">unit=</span><span class="s">&quot;G&quot;</span><span class="nt">&gt;</span>42<span class="nt">&lt;/size&gt;</span>
+    <span class="nt">&lt;oemconfig&gt;</span>
+        <span class="nt">&lt;oem-resize&gt;</span>false<span class="nt">&lt;/oem-resize&gt;</span>
+    <span class="nt">&lt;/oemconfig&gt;</span>
 <span class="nt">&lt;/type&gt;</span>
 </pre></div>
 </div>
+<p>This modifies the type to build a Vagrant box for the libvirt
+provider including a pre-defined disk size. The disk size is
+optional, but recommended to provide some free space on disk.</p>
+<p>For the VirtualBox provider, the additional attribute
+<code class="docutils literal notranslate"><span class="pre">virtualbox_guest_additions_present</span></code> can be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> when the
+VirtualBox guest additions are installed in the KIWI NG image:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;oem&quot;</span> <span class="na">filesystem=</span><span class="s">&quot;ext4&quot;</span> <span class="na">format=</span><span class="s">&quot;vagrant&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;bootloader</span> <span class="na">name=</span><span class="s">&quot;grub2&quot;</span> <span class="na">timeout=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;vagrantconfig</span>
+      <span class="na">provider=</span><span class="s">&quot;virtualbox&quot;</span>
+      <span class="na">virtualbox_guest_additions_present=</span><span class="s">&quot;true&quot;</span>
+      <span class="na">virtualsize=</span><span class="s">&quot;42&quot;</span>
+    <span class="nt">/&gt;</span>
+    <span class="nt">&lt;size</span> <span class="na">unit=</span><span class="s">&quot;G&quot;</span><span class="nt">&gt;</span>42<span class="nt">&lt;/size&gt;</span>
+    <span class="nt">&lt;oemconfig&gt;</span>
+        <span class="nt">&lt;oem-resize&gt;</span>false<span class="nt">&lt;/oem-resize&gt;</span>
+    <span class="nt">&lt;/oemconfig&gt;</span>
+<span class="nt">&lt;/type&gt;</span>
+</pre></div>
+</div>
+<p>The resulting Vagrant box then uses the <code class="docutils literal notranslate"><span class="pre">vboxfs</span></code> module for the
+synchronized folder instead of <code class="docutils literal notranslate"><span class="pre">rsync</span></code>, that is used by default.</p>
 </li>
-<li><p>Cloud Init setup</p>
-<p>Cloud init is a service which runs at boot time and allows
-to customize the system by activating one ore more cloud init
-modules. For Amazon EC2 the following configuration file
-<code class="file docutils literal notranslate"><span class="pre">/etc/cloud/cloud.cfg</span></code> needs to be provided as part of the
-overlay files in your KIWI NG image description</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">users</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">default</span>
-
-<span class="nt">disable_root</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">preserve_hostname</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">false</span>
-<span class="nt">syslog_fix_perms</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">root:root</span>
-
-<span class="nt">datasource_list</span><span class="p">:</span> <span class="p p-Indicator">[</span> <span class="nv">NoCloud</span><span class="p p-Indicator">,</span> <span class="nv">Ec2</span><span class="p p-Indicator">,</span> <span class="nv">None</span> <span class="p p-Indicator">]</span>
-
-<span class="nt">cloud_init_modules</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">migrator</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">bootcmd</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">write-files</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">growpart</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">resizefs</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">set_hostname</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update_hostname</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">update_etc_hosts</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ca-certs</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">rsyslog</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">users-groups</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ssh</span>
-
-<span class="nt">cloud_config_modules</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mounts</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ssh-import-id</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">locale</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">set-passwords</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">package-update-upgrade-install</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">timezone</span>
-
-<span class="nt">cloud_final_modules</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">scripts-per-once</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">scripts-per-boot</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">scripts-per-instance</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">scripts-user</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">ssh-authkey-fingerprints</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">keys-to-console</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">phone-home</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">final-message</span>
-  <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">power-state-change</span>
-
-<span class="nt">system_info</span><span class="p">:</span>
-  <span class="nt">default_user</span><span class="p">:</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ec2-user</span>
-    <span class="nt">gecos</span><span class="p">:</span> <span class="s">&quot;cloud-init</span><span class="nv"> </span><span class="s">created</span><span class="nv"> </span><span class="s">default</span><span class="nv"> </span><span class="s">user&quot;</span>
-    <span class="nt">lock_passwd</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
-    <span class="nt">sudo</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&quot;ALL=(ALL)</span><span class="nv"> </span><span class="s">NOPASSWD:ALL&quot;</span><span class="p p-Indicator">]</span>
-    <span class="nt">shell</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/bin/bash</span>
-  <span class="nt">paths</span><span class="p">:</span>
-    <span class="nt">cloud_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/var/lib/cloud/</span>
-    <span class="nt">templates_dir</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/etc/cloud/templates/</span>
-  <span class="nt">ssh_svcname</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sshd</span>
+<li><p>Add mandatory packages</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;sudo&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;openssh&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p>Add additional packages</p>
+<p>If you have set the attribute <code class="docutils literal notranslate"><span class="pre">virtualbox_guest_additions_present</span></code> to
+<code class="docutils literal notranslate"><span class="pre">true</span></code>, add the VirtualBox guest additions. For openSUSE the following
+packages are required:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;virtualbox-guest-tools&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;virtualbox-guest-x11&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;virtualbox-guest-kmp-default&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Otherwise, you must add <code class="docutils literal notranslate"><span class="pre">rsync</span></code>:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;rsync&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>Note that KIWI NG cannot verify whether these packages are installed. If
+they are missing, the resulting Vagrant box will be broken.</p>
+</li>
+<li><p>Add Vagrant user</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;users</span> <span class="na">group=</span><span class="s">&#39;vagrant&#39;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;user</span> <span class="na">name=</span><span class="s">&#39;vagrant&#39;</span> <span class="na">password=</span><span class="s">&#39;vh4vw1N4alxKQ&#39;</span> <span class="na">home=</span><span class="s">&#39;/home/vagrant&#39;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/users&gt;</span>
+</pre></div>
+</div>
+<p>This adds the <strong>vagrant</strong> user to the system and applies the
+name of the user as the password for login.</p>
+</li>
+<li><p>Integrate public SSH key</p>
+<p>Vagrant requires an insecure public key pair <a class="footnote-reference brackets" href="#f1" id="id1">1</a> to be added to the
+authorized keys for the user <code class="docutils literal notranslate"><span class="pre">vagrant</span></code> so that Vagrant itself can
+connect to the box via ssh.
+The key can be obtained from <a class="reference external" href="https://github.com/hashicorp/vagrant/blob/master/keys/vagrant.pub">GitHub</a>
+and should be inserted into the file
+<code class="file docutils literal notranslate"><span class="pre">home/vagrant/.ssh/authorized_keys</span></code>, which can be added as an
+overlay file into the image description.</p>
+<p>Keep in mind to set the file system permissions of
+<code class="file docutils literal notranslate"><span class="pre">home/vagrant/.ssh/</span></code> and <code class="file docutils literal notranslate"><span class="pre">home/vagrant/.ssh/authorized_keys</span></code>
+correctly, otherwise Vagrant will not be able to connect to your
+box. The following snippet can be added to <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod <span class="m">0600</span> /home/vagrant/.ssh/authorized_keys
+chown -R vagrant:vagrant /home/vagrant/
+</pre></div>
+</div>
+</li>
+<li><p>Create the default shared folder</p>
+<p>Vagrant boxes usually provide a default shared folder under
+<code class="file docutils literal notranslate"><span class="pre">/vagrant</span></code>. Consider adding this empty folder to your overlay
+files and ensure that the user <code class="docutils literal notranslate"><span class="pre">vagrant</span></code> has write permissions to
+it.</p>
+<p>Note, that the boxes that KIWI NG produces <strong>require</strong> this folder to
+exist, otherwise Vagrant will not be able to start them properly.</p>
+</li>
+<li><p>Setup and start SSH daemon</p>
+<p>In <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code> add the start of sshd:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#======================================</span>
+<span class="c1"># Activate services</span>
+<span class="c1">#--------------------------------------</span>
+baseInsertService sshd
+</pre></div>
+</div>
+<p>Also make sure to add the line <strong>UseDNS=no</strong> into
+<code class="file docutils literal notranslate"><span class="pre">/etc/ssh/sshd_config</span></code>. This can be done by an overlay file or by
+patching the file in the above mentioned <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code> file.</p>
+</li>
+<li><p>Configure sudo for the Vagrant user</p>
+<p>Vagrant expects to have passwordless root permissions via <code class="docutils literal notranslate"><span class="pre">sudo</span></code> to be
+able to setup your box. Add the following line to <code class="file docutils literal notranslate"><span class="pre">/etc/sudoers</span></code>
+or add it into a new file <code class="file docutils literal notranslate"><span class="pre">/etc/sudoers.d/vagrant</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vagrant</span> <span class="n">ALL</span><span class="o">=</span><span class="p">(</span><span class="n">ALL</span><span class="p">)</span> <span class="n">NOPASSWD</span><span class="p">:</span> <span class="n">ALL</span>
+</pre></div>
+</div>
+<p>You can also use <strong class="command">visudo</strong> to verify that the resulting
+<code class="file docutils literal notranslate"><span class="pre">/etc/sudoers</span></code> or <code class="file docutils literal notranslate"><span class="pre">/etc/sudoers.d/vagrant</span></code> are valid:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>visudo -cf /etc/sudoers
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    <span class="nb">exit</span> <span class="m">1</span>
+<span class="k">fi</span>
 </pre></div>
 </div>
 </li>
 </ol>
-<p>An image built with the above setup can be uploaded into the
-Amazon EC2 cloud and registered as image. For further information
-on how to upload to EC2 see: <a class="reference external" href="https://github.com/SUSE-Enceladus/ec2imgutils">ec2uploadimg</a></p>
+<p>An image built with the above setup creates a Vagrant box file with the
+extension <code class="file docutils literal notranslate"><span class="pre">.vagrant.libvirt.box</span></code> or
+<code class="file docutils literal notranslate"><span class="pre">.vagrant.virtualbox.box</span></code>. Add the box file to Vagrant with the
+command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vagrant box add my-box image-file.vagrant.libvirt.box
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using the box with the libvirt provider requires alongside a correct
+Vagrant installation:</p>
+<ul class="simple">
+<li><p>the plugin <code class="docutils literal notranslate"><span class="pre">vagrant-libvirt</span></code> to be installed</p></li>
+<li><p>a running libvirtd daemon</p></li>
+</ul>
+</div>
+<p>Once added to Vagrant, boot the box and log in
+with the following sequence of <strong class="command">vagrant</strong> commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vagrant init my-box
+vagrant up --provider libvirt
+vagrant ssh
+</pre></div>
+</div>
+<div class="section" id="customizing-the-embedded-vagrantfile">
+<h2>Customizing the embedded Vagrantfile<a class="headerlink" href="#customizing-the-embedded-vagrantfile" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is an advanced topic and not required for most users</p>
+</div>
+<p>Vagrant ship with an embedded <code class="file docutils literal notranslate"><span class="pre">Vagrantfile</span></code> that carries settings
+specific to this box, for instance the synchronization mechanism for the
+shared folder. KIWI NG generates such a file automatically for you and it
+should be sufficient for most use cases.</p>
+<p>If a box requires different settings in the embedded <code class="file docutils literal notranslate"><span class="pre">Vagrantfile</span></code>,
+then the user can provide KIWI NG with a path to an alternative via the
+attribute <code class="xref py py-obj docutils literal notranslate"><span class="pre">embebbed_vagrantfile</span></code> of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">vagrantconfig</span></code> element: it
+specifies a relative path to the <code class="file docutils literal notranslate"><span class="pre">Vagrantfile</span></code> that will be included
+in the finished box.</p>
+<p>In the following example snippet from <code class="file docutils literal notranslate"><span class="pre">config.xml</span></code> we add a custom
+<code class="file docutils literal notranslate"><span class="pre">MyVagrantfile</span></code> into the box (the file should be in the image
+description directory next to <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code>):</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;oem&quot;</span> <span class="na">filesystem=</span><span class="s">&quot;ext4&quot;</span> <span class="na">format=</span><span class="s">&quot;vagrant&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;bootloader</span> <span class="na">name=</span><span class="s">&quot;grub2&quot;</span> <span class="na">timeout=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;vagrantconfig</span>
+      <span class="na">provider=</span><span class="s">&quot;libvirt&quot;</span>
+      <span class="na">virtualsize=</span><span class="s">&quot;42&quot;</span>
+      <span class="na">embedded_vagrantfile=</span><span class="s">&quot;MyVagrantfile&quot;</span>
+    <span class="nt">/&gt;</span>
+    <span class="nt">&lt;size</span> <span class="na">unit=</span><span class="s">&quot;G&quot;</span><span class="nt">&gt;</span>42<span class="nt">&lt;/size&gt;</span>
+    <span class="nt">&lt;oemconfig&gt;</span>
+        <span class="nt">&lt;oem-resize&gt;</span>false<span class="nt">&lt;/oem-resize&gt;</span>
+    <span class="nt">&lt;/oemconfig&gt;</span>
+<span class="nt">&lt;/type&gt;</span>
+</pre></div>
+</div>
+<p>The option to provide a custom <code class="file docutils literal notranslate"><span class="pre">Vagrantfile</span></code> can be combined with the
+usage of <em>profiles</em> (see <a class="reference internal" href="../concept_and_workflow/profiles.html#image-profiles"><span class="std std-ref">Image Profiles</span></a>), so that
+certain builds can use the automatically generated <code class="file docutils literal notranslate"><span class="pre">Vagrantfile</span></code> (in
+the following example that is the Virtualbox build) and others get a
+customized one (the libvirt profile in the following example):</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+
+<span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;LimeJeOS-Leap-15.1&quot;</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- description goes here --&gt;</span>
+  <span class="nt">&lt;profiles&gt;</span>
+    <span class="nt">&lt;profile</span> <span class="na">name=</span><span class="s">&quot;libvirt&quot;</span> <span class="na">description=</span><span class="s">&quot;Vagrant Box for Libvirt&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;profile</span> <span class="na">name=</span><span class="s">&quot;virtualbox&quot;</span> <span class="na">description=</span><span class="s">&quot;Vagrant Box for VirtualBox&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/profiles&gt;</span>
+
+  <span class="c">&lt;!-- general preferences go here --&gt;</span>
+
+  <span class="nt">&lt;preferences</span> <span class="na">profiles=</span><span class="s">&quot;libvirt&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;type</span>
+      <span class="na">image=</span><span class="s">&quot;oem&quot;</span>
+      <span class="na">filesystem=</span><span class="s">&quot;ext4&quot;</span>
+      <span class="na">format=</span><span class="s">&quot;vagrant&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;bootloader</span> <span class="na">name=</span><span class="s">&quot;grub2&quot;</span> <span class="na">timeout=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;vagrantconfig</span>
+          <span class="na">provider=</span><span class="s">&quot;libvirt&quot;</span>
+          <span class="na">virtualsize=</span><span class="s">&quot;42&quot;</span>
+          <span class="na">embedded_vagrantfile=</span><span class="s">&quot;LibvirtVagrantfile&quot;</span>
+        <span class="nt">/&gt;</span>
+        <span class="nt">&lt;size</span> <span class="na">unit=</span><span class="s">&quot;G&quot;</span><span class="nt">&gt;</span>42<span class="nt">&lt;/size&gt;</span>
+        <span class="nt">&lt;oemconfig&gt;</span>
+            <span class="nt">&lt;oem-resize&gt;</span>false<span class="nt">&lt;/oem-resize&gt;</span>
+        <span class="nt">&lt;/oemconfig&gt;</span>
+   <span class="nt">&lt;/type&gt;</span>
+   <span class="nt">&lt;/preferences&gt;</span>
+   <span class="nt">&lt;preferences</span> <span class="na">profiles=</span><span class="s">&quot;virtualbox&quot;</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;type</span>
+       <span class="na">image=</span><span class="s">&quot;oem&quot;</span>
+       <span class="na">filesystem=</span><span class="s">&quot;ext4&quot;</span>
+       <span class="na">format=</span><span class="s">&quot;vagrant&quot;</span><span class="nt">&gt;</span>
+         <span class="nt">&lt;bootloader</span> <span class="na">name=</span><span class="s">&quot;grub2&quot;</span> <span class="na">timeout=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+         <span class="nt">&lt;vagrantconfig</span>
+           <span class="na">provider=</span><span class="s">&quot;virtualbox&quot;</span>
+           <span class="na">virtualbox_guest_additions_present=</span><span class="s">&quot;true&quot;</span>
+           <span class="na">virtualsize=</span><span class="s">&quot;42&quot;</span>
+         <span class="nt">/&gt;</span>
+         <span class="nt">&lt;size</span> <span class="na">unit=</span><span class="s">&quot;G&quot;</span><span class="nt">&gt;</span>42<span class="nt">&lt;/size&gt;</span>
+         <span class="nt">&lt;oemconfig&gt;</span>
+             <span class="nt">&lt;oem-resize&gt;</span>false<span class="nt">&lt;/oem-resize&gt;</span>
+         <span class="nt">&lt;/oemconfig&gt;</span>
+     <span class="nt">&lt;/type&gt;</span>
+   <span class="nt">&lt;/preferences&gt;</span>
+
+   <span class="c">&lt;!-- remaining box description --&gt;</span>
+ <span class="nt">&lt;/image&gt;</span>
+</pre></div>
+</div>
+<dl class="footnote brackets">
+<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>The insecure key is removed from the box when the it is first
+booted via Vagrant.</p>
+</dd>
+</dl>
+</div>
 </div>
 
 
@@ -857,10 +1005,10 @@ on how to upload to EC2 see: <a class="reference external" href="https://github.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="vmx_setup_for_azure.html" class="btn btn-neutral float-right" title="Image Description for Microsoft Azure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="network_live_iso_boot.html" class="btn btn-neutral float-right" title="Booting a Live ISO Image from Network" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="iso_to_usb_stick_file_based_deployment.html" class="btn btn-neutral float-left" title="Deploy ISO Image as File on a FAT32 Formated USB Stick" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="setup_yast_on_first_boot.html" class="btn btn-neutral float-left" title="Setting Up YaST at First Boot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
