@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi-ng &mdash; KIWI NG 9.21.10 documentation</title>
+  <title>kiwi-ng &mdash; KIWI NG 9.21.11 documentation</title>
   
 
   
@@ -763,10 +763,9 @@ one <code class="file docutils literal notranslate"><span class="pre">config.xml
 scripts or configuration data.</p>
 <p>A collection of example image descriptions can be found on the github
 repository here: <a class="reference external" href="https://github.com/OSInside/kiwi-descriptions">https://github.com/OSInside/kiwi-descriptions</a>. Most of the
-descriptions provide a so called JeOS image. JeOS means Just enough
-Operating System. A JeOS is a small, text only based image including a
-predefined remote source setup to allow installation of missing
-software components at a later point in time.</p>
+descriptions provide a so called appliance image. Appliance means that it’s a small, text only based
+image including a predefined remote source setup to allow installation of missing software
+components at a later point in time.</p>
 <p>KIWI NG operates in two steps. The system build command combines
 both steps into one to make it easier to start with KIWI NG. The first
 step is the preparation step and if that step was successful, a
@@ -830,7 +829,7 @@ as part of the XML description.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/OSInside/kiwi-descriptions
 
 $ kiwi --type oem system build <span class="se">\</span>
-    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1-JeOS <span class="se">\</span>
+    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
     --target-dir /tmp/myimage
 </pre></div>
 </div>
@@ -841,7 +840,7 @@ $ kiwi --type oem system build <span class="se">\</span>
 former versions. However there is a compatibility mode which allows
 to use a legacy KIWI NG commandline as follows:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kiwi compat <span class="se">\</span>
-    --build kiwi-descriptions/suse/x86_64/suse-leap-15.1-JeOS <span class="se">\</span>
+    --build kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
     --type oem -d /tmp/myimage
 </pre></div>
 </div>

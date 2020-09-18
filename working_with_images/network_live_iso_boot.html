@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Booting a Live ISO Image from Network &mdash; KIWI NG 9.21.10 documentation</title>
+  <title>Booting a Live ISO Image from Network &mdash; KIWI NG 9.21.11 documentation</title>
   
 
   
@@ -749,7 +749,7 @@ the network:</p>
 <p>The PXE boot process loads the configured kernel and initrd from
 the PXE server. For this reason, those two files must be extracted
 from the live ISO image and copied to the PXE server as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mount LimeJeOS-Leap-15.1.x86_64-1.15.1.iso /mnt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mount Leap-15.1_appliance.x86_64-1.15.1.iso /mnt
 $ cp /mnt/boot/x86_64/loader/initrd /srv/tftpboot/boot/initrd
 $ cp /mnt/boot/x86_64/loader/linux /srv/tftpboot/boot/linux
 $ umount /mnt
@@ -777,7 +777,7 @@ must provide a compatible aoe kernel module compared to the
 kernel used in the live ISO image.</p>
 </div>
 <p>Once done, export the live ISO image as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ vbladed <span class="m">0</span> <span class="m">1</span> INTERFACE LimeJeOS-Leap-15.1.x86_64-1.15.1.iso
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ vbladed <span class="m">0</span> <span class="m">1</span> INTERFACE Leap-15.1_appliance.x86_64-1.15.1.iso
 </pre></div>
 </div>
 <p>The above command exports the given ISO file as a block storage

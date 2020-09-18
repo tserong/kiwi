@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quick Start &mdash; KIWI NG 9.21.10 documentation</title>
+  <title>Quick Start &mdash; KIWI NG 9.21.11 documentation</title>
   
 
   
@@ -731,7 +731,7 @@
 <p><strong>Abstract</strong></p>
 <p>This document describes how to start working with KIWI NG, an OS appliance
 builder.
-This description applies for version 9.21.10.</p>
+This description applies for version 9.21.11.</p>
 </div>
 <div class="section" id="before-you-start">
 <h2>Before you start<a class="headerlink" href="#before-you-start" title="Permalink to this headline">¶</a></h2>
@@ -762,7 +762,7 @@ just use the one given in the examples below.</p>
 in any full virtualization system like QEMU. Invoke the following KIWI NG
 command in order to build it:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --type oem system build <span class="se">\</span>
-    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1-JeOS <span class="se">\</span>
+    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
     --target-dir /tmp/myimage
 </pre></div>
 </div>
@@ -778,7 +778,7 @@ folder that contains the image description which you selected.</p>
 do that attach the disk image to a virtual system. In this example we use
 QEMU and boot it as follows:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qemu -boot c <span class="se">\</span>
-    -drive <span class="nv">file</span><span class="o">=</span>LimeJeOS-Leap-15.1.x86_64-1.15.1.raw,format<span class="o">=</span>raw,if<span class="o">=</span>virtio <span class="se">\</span>
+    -drive <span class="nv">file</span><span class="o">=</span>Leap-15.1_appliance.x86_64-1.15.1.raw,format<span class="o">=</span>raw,if<span class="o">=</span>virtio <span class="se">\</span>
     -m <span class="m">4096</span>
 </pre></div>
 </div>

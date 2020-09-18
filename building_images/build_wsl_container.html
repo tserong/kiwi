@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Build a WSL Container Image &mdash; KIWI NG 9.21.10 documentation</title>
+  <title>Build a WSL Container Image &mdash; KIWI NG 9.21.11 documentation</title>
   
 
   
@@ -835,7 +835,7 @@ Service worker that runs the KIWI NG build process.</p>
 </li>
 <li><p>Setup the image type:</p>
 <p>Edit the XML description file:
-<code class="file docutils literal notranslate"><span class="pre">kiwi-descriptions/suse/x86_64/suse-tumbleweed-JeOS/config.xml</span></code>
+<code class="file docutils literal notranslate"><span class="pre">kiwi-descriptions/suse/x86_64/suse-tumbleweed/config.xml</span></code>
 and add the following type and containerconfig:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;appx&quot;</span> <span class="na">metadata_path=</span><span class="s">&quot;/meta/data&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;containerconfig</span> <span class="na">name=</span><span class="s">&quot;Tumbleweed&quot;</span><span class="nt">&gt;</span>
@@ -845,7 +845,7 @@ and add the following type and containerconfig:</p>
             <span class="na">application_id=</span><span class="s">&quot;tumbleweed&quot;</span>
             <span class="na">package_version=</span><span class="s">&quot;2003.12.0.0&quot;</span>
             <span class="na">launcher=</span><span class="s">&quot;openSUSE-Tumbleweed.exe&quot;</span>
-        <span class="nt">&gt;</span>TW JeOS text based<span class="nt">&lt;/history&gt;</span>
+        <span class="nt">&gt;</span>Tumbleweed Appliance text based<span class="nt">&lt;/history&gt;</span>
     <span class="nt">&lt;/containerconfig&gt;</span>
 <span class="nt">&lt;/type&gt;</span>
 </pre></div>
@@ -861,7 +861,7 @@ complete with respect to the requirements of the
 </li>
 <li><p>Build the image with KIWI NG:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --type appx system build <span class="se">\</span>
-    --description kiwi-descriptions/suse/x86_64/suse-tumbleweed-JeOS <span class="se">\</span>
+    --description kiwi-descriptions/suse/x86_64/suse-tumbleweed <span class="se">\</span>
     --target-dir /tmp/myimage
 </pre></div>
 </div>

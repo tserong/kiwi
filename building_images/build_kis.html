@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Build KIS Image (Kernel, Initrd, System) &mdash; KIWI NG 9.21.10 documentation</title>
+  <title>Build KIS Image (Kernel, Initrd, System) &mdash; KIWI NG 9.21.11 documentation</title>
   
 
   
@@ -780,7 +780,7 @@ image as well.</p>
 <p>With the appropriate settings present in <code class="file docutils literal notranslate"><span class="pre">config.xml</span></code> KIWI NG can now
 build the image:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --type kis system build <span class="se">\</span>
-    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1-JeOS <span class="se">\</span>
+    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
     --target-dir /tmp/myimage
 </pre></div>
 </div>
@@ -791,7 +791,7 @@ tested with QEMU as follows:</p>
     -kernel /tmp/myimage/*.kernel <span class="se">\</span>
     -initrd /tmp/myimage/*.initrd.xz <span class="se">\</span>
     -append <span class="k">$(</span>cat /tmp/myimage/*.append<span class="k">)</span> <span class="se">\</span>
-    -hda /tmp/myimage/LimeJeOS-Leap-15.1.*-1.15.1 <span class="se">\</span>
+    -hda /tmp/myimage/Leap-15.1_appliance.*-1.15.1 <span class="se">\</span>
 </pre></div>
 </div>
 <div class="admonition note">

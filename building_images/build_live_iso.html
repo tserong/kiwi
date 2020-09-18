@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Build an ISO Hybrid Live Image &mdash; KIWI NG 9.21.10 documentation</title>
+  <title>Build an ISO Hybrid Live Image &mdash; KIWI NG 9.21.11 documentation</title>
   
 
   
@@ -742,7 +742,7 @@ with other system storage components making it a useful pocket system for
 testing and demo- and debugging-purposes.</p>
 <p>To add a live ISO build to your appliance, create a <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a> element with
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">image</span></code> set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">iso</span></code> in your <code class="file docutils literal notranslate"><span class="pre">config.xml</span></code> as shown below:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;6.9&quot;</span> <span class="na">name=</span><span class="s">&quot;JeOS-Tumbleweed&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;Tumbleweed_appliance&quot;</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- snip --&gt;</span>
   <span class="nt">&lt;preferences&gt;</span>
     <span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;iso&quot;</span> <span class="na">primary=</span><span class="s">&quot;true&quot;</span> <span class="na">flags=</span><span class="s">&quot;overlay&quot;</span> <span class="na">hybridpersistent_filesystem=</span><span class="s">&quot;ext4&quot;</span> <span class="na">hybridpersistent=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
@@ -773,13 +773,13 @@ file. Possible values are <code class="xref py py-obj docutils literal notransla
 <p>With the appropriate settings present in <code class="file docutils literal notranslate"><span class="pre">config.xml</span></code> KIWI NG can now
 build the image:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --type iso system build <span class="se">\</span>
-      --description kiwi-descriptions/suse/x86_64/suse-leap-15.1-JeOS <span class="se">\</span>
+      --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
       --target-dir /tmp/myimage
 </pre></div>
 </div>
 <p>The resulting image is saved in the folder <code class="file docutils literal notranslate"><span class="pre">/tmp/myimage</span></code> and can
 be tested with QEMU:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qemu -cdrom LimeJeOS-Leap-15.1.x86_64-1.15.1.iso -m <span class="m">4096</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qemu -cdrom Leap-15.1_appliance.x86_64-1.15.1.iso -m <span class="m">4096</span>
 </pre></div>
 </div>
 <p>The image is now complete and ready to use. See <a class="reference internal" href="../working_with_images/iso_to_usb_stick_deployment.html#iso-to-usb-stick"><span class="std std-ref">Deploy ISO Image on an USB Stick</span></a> and

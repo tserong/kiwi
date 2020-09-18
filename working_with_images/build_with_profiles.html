@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Building Images with Profiles &mdash; KIWI NG 9.21.10 documentation</title>
+  <title>Building Images with Profiles &mdash; KIWI NG 9.21.11 documentation</title>
   
 
   
@@ -737,7 +737,7 @@ defaults. For further details, see <a class="reference internal" href="../concep
 command line flag <code class="xref py py-obj docutils literal notranslate"><span class="pre">--profile=$PROFILE_NAME</span></code>:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo kiwi-ng --type iso system build <span class="se">\</span>
       --profile<span class="o">=</span>workstation <span class="se">\</span>
-      --description kiwi-descriptions/suse/x86_64/suse-leap-15.1-JeOS <span class="se">\</span>
+      --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
       --target-dir /tmp/myimage
 </pre></div>
 </div>
@@ -748,7 +748,7 @@ command line flag <code class="xref py py-obj docutils literal notranslate"><spa
 <h2>Building with the Open Build Service<a class="headerlink" href="#building-with-the-open-build-service" title="Permalink to this headline">¶</a></h2>
 <p>The Open Build Service (OBS) support profiles via the <a class="reference external" href="https://openbuildservice.org/help/manuals/obs-reference-guide/cha.obs.multibuild.html">multibuild</a>
 feature. An example project using this feature is the
-<a class="reference external" href="https://build.opensuse.org/package/show/openSUSE:Factory/openSUSE-Tumbleweed-JeOS">openSUSE-Tumbleweed-JeOS</a>
+<a class="reference external" href="https://build.opensuse.org/package/show/openSUSE:Factory/openSUSE-Tumbleweed">openSUSE-Tumbleweed</a>
 image.</p>
 <p>To enable and use the profiles, follow these steps:</p>
 <ol class="arabic">
@@ -760,7 +760,7 @@ image.</p>
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;?xml?&gt;</span></code> element, e.g.:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="c">&lt;!-- OBS-Profiles: @BUILD_FLAVOR@ --&gt;</span>
-<span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;LimeJeOS-Leap-15.1&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;Leap-15.1_appliance&quot;</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- snip --&gt;</span>
 <span class="nt">&lt;/image&gt;</span>
 </pre></div>

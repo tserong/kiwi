@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Build PXE Root File System Image for the legacy netboot infrastructure &mdash; KIWI NG 9.21.10 documentation</title>
+  <title>Build PXE Root File System Image for the legacy netboot infrastructure &mdash; KIWI NG 9.21.11 documentation</title>
   
 
   
@@ -786,7 +786,7 @@ PXE.</p></li>
 see <a class="reference internal" href="../installation.html#example-descriptions"><span class="std std-ref">Example Appliance Descriptions</span></a>.</p></li>
 <li><p>Build the image with KIWI NG:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --type pxe system build <span class="se">\</span>
-    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1-JeOS <span class="se">\</span>
+    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
     --target-dir /tmp/mypxe-result
 </pre></div>
 </div>
@@ -803,8 +803,8 @@ $ cp *.kernel /srv/tftpboot/boot/linux
 </div>
 </li>
 <li><p>Copy the system image and its MD5 sum to <code class="file docutils literal notranslate"><span class="pre">/srv/tftpboot/image</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cp LimeJeOS-Leap-15.1.x86_64-1.15.1/srv/tftpboot/image
-$ cp LimeJeOS-Leap-15.1.x86_64-1.15.1.md5 /srv/tftpboot/image
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cp Leap-15.1_appliance.x86_64-1.15.1/srv/tftpboot/image
+$ cp Leap-15.1_appliance.x86_64-1.15.1.md5 /srv/tftpboot/image
 </pre></div>
 </div>
 </li>
@@ -826,7 +826,7 @@ LABEL KIWI-Boot
 <li><p>Create the image client configuration file:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ vi /srv/tftpboot/KIWI/config.default
 
-<span class="nv">IMAGE</span><span class="o">=</span>/dev/ram1<span class="p">;</span>LimeJeOS-Leap-15.1.x86_64<span class="p">;</span><span class="m">1</span>.15.1<span class="p">;</span><span class="m">192</span>.168.100.2<span class="p">;</span><span class="m">4096</span>
+<span class="nv">IMAGE</span><span class="o">=</span>/dev/ram1<span class="p">;</span>Leap-15.1_appliance.x86_64<span class="p">;</span><span class="m">1</span>.15.1<span class="p">;</span><span class="m">192</span>.168.100.2<span class="p">;</span><span class="m">4096</span>
 <span class="nv">UNIONFS_CONFIG</span><span class="o">=</span>/dev/ram2,/dev/ram1,overlay
 </pre></div>
 </div>
@@ -924,14 +924,14 @@ NFS on the image server is required beforehand.</p>
 is required:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In the referenced suse-leap-15.1-JeOS XML description the <code class="docutils literal notranslate"><span class="pre">pxe</span></code>
+<p>In the referenced suse-leap-15.1 XML description the <code class="docutils literal notranslate"><span class="pre">pxe</span></code>
 type must be changed as follows and the image needs to be
 rebuild:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;pxe&quot;</span> <span class="na">filesystem=</span><span class="s">&quot;ext3&quot;</span> <span class="na">boot=</span><span class="s">&quot;netboot/suse-leap15.1&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">IMAGE</span><span class="o">=</span><span class="s2">&quot;/dev/sda2;LimeJeOS-Leap-15.1.x86_64;1.15.1;192.168.100.2;4096&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">IMAGE</span><span class="o">=</span><span class="s2">&quot;/dev/sda2;Leap-15.1_appliance.x86_64;1.15.1;192.168.100.2;4096&quot;</span>
 <span class="nv">DISK</span><span class="o">=</span><span class="s2">&quot;/dev/sda&quot;</span>
 <span class="nv">PART</span><span class="o">=</span><span class="s2">&quot;5;S;X,X;L;/&quot;</span>
 </pre></div>
@@ -947,7 +947,7 @@ a place holder to indicate the default behaviour.</p>
 configuration, the following setup is required:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In the referenced suse-leap-15.1-JeOS XML description the <code class="docutils literal notranslate"><span class="pre">pxe</span></code>
+<p>In the referenced suse-leap-15.1 XML description the <code class="docutils literal notranslate"><span class="pre">pxe</span></code>
 type must be changed as follows and the image needs to be
 rebuild:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;pxe&quot;</span> <span class="na">filesystem=</span><span class="s">&quot;ext3&quot;</span> <span class="na">boot=</span><span class="s">&quot;netboot/suse-leap15.1&quot;</span><span class="nt">/&gt;</span>
@@ -955,7 +955,7 @@ rebuild:</p>
 </div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">RAID</span><span class="o">=</span><span class="s2">&quot;1;/dev/sda;/dev/sdb&quot;</span>
-<span class="nv">IMAGE</span><span class="o">=</span><span class="s2">&quot;/dev/md1;LimeJeOS-Leap-15.1.x86_64;1.15.1;192.168.100.2;4096&quot;</span>
+<span class="nv">IMAGE</span><span class="o">=</span><span class="s2">&quot;/dev/md1;Leap-15.1_appliance.x86_64;1.15.1;192.168.100.2;4096&quot;</span>
 <span class="nv">PART</span><span class="o">=</span><span class="s2">&quot;5;S;x,x;L;/&quot;</span>
 </pre></div>
 </div>

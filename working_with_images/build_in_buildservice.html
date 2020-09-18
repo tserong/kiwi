@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Building in the Open Build Service &mdash; KIWI NG 9.21.10 documentation</title>
+  <title>Building in the Open Build Service &mdash; KIWI NG 9.21.11 documentation</title>
   
 
   
@@ -732,7 +732,7 @@
 <p class="admonition-title">Note</p>
 <p><strong>Abstract</strong></p>
 <p>This document gives a brief overview how to build images with
-KIWI NG in version 9.21.10 inside of the Open Build Service.
+KIWI NG in version 9.21.11 inside of the Open Build Service.
 A tutorial on the Open Buildservice itself can be found here:
 <a class="reference external" href="https://en.opensuse.org/openSUSE:Build_Service_Tutorial">https://en.opensuse.org/openSUSE:Build_Service_Tutorial</a></p>
 </div>
@@ -900,7 +900,7 @@ version of KIWI NG (which you are very likely using for your local builds).</p>
 repositories from the <code class="xref py py-obj docutils literal notranslate"><span class="pre">Virtualization:Appliances:Builder</span></code> project and
 those from the latest snapshot of openSUSE Tumbleweed:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">&quot;Virtualization:Appliances:Images:openSUSE-Tumbleweed&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;title&gt;</span>JeOS for Tumbleweed <span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Tumbleweed JeOS images<span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;description&gt;</span>Host JeOS images for Tumbleweed<span class="nt">&lt;/description&gt;</span>
   <span class="nt">&lt;repository</span> <span class="na">name=</span><span class="s">&quot;images&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;path</span> <span class="na">project=</span><span class="s">&quot;Virtualization:Appliances:Builder&quot;</span> <span class="na">repository=</span><span class="s">&quot;Factory&quot;</span><span class="nt">/&gt;</span>
@@ -913,7 +913,7 @@ those from the latest snapshot of openSUSE Tumbleweed:</p>
 <p>The above can be simplified further using the path expansion of the last
 repository to:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">&quot;Virtualization:Appliances:Images:openSUSE-Tumbleweed&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;title&gt;</span>JeOS for Tumbleweed <span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;title&gt;</span>Tumbleweed JeOS images<span class="nt">&lt;/title&gt;</span>
   <span class="nt">&lt;description&gt;</span>Host JeOS images for Tumbleweed<span class="nt">&lt;/description&gt;</span>
   <span class="nt">&lt;repository</span> <span class="na">name=</span><span class="s">&quot;images&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;path</span> <span class="na">project=</span><span class="s">&quot;Virtualization:Appliances:Builder&quot;</span> <span class="na">repository=</span><span class="s">&quot;Factory&quot;</span><span class="nt">/&gt;</span>

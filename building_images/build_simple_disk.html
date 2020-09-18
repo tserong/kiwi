@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Build a Virtual Disk Image &mdash; KIWI NG 9.21.10 documentation</title>
+  <title>Build a Virtual Disk Image &mdash; KIWI NG 9.21.11 documentation</title>
   
 
   
@@ -748,7 +748,7 @@ procedure which is why we call it a <em>simple</em> disk image.</p>
 disabled. An example configuration for a 42 GB large VMDK image with
 512 MB RAM, an IDE controller and a bridged network interface is shown
 below:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;JeOS-Tumbleweed&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;Tumbleweed_appliance&quot;</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- snip --&gt;</span>
   <span class="nt">&lt;preferences&gt;</span>
     <span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;oem&quot;</span> <span class="na">filesystem=</span><span class="s">&quot;ext4&quot;</span> <span class="na">format=</span><span class="s">&quot;vmdk&quot;</span><span class="nt">&gt;</span>
@@ -788,7 +788,7 @@ and <a class="reference internal" href="#disk-the-machine-element"><span class="
 from the <a class="reference internal" href="../installation.html#example-descriptions"><span class="std std-ref">example descriptions</span></a> and use one of
 them) build the image with KIWI NG:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --type oem system build <span class="se">\</span>
-    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1-JeOS <span class="se">\</span>
+    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
     --target-dir /tmp/myimage
 </pre></div>
 </div>
@@ -796,7 +796,7 @@ them) build the image with KIWI NG:</p>
 the file extension <code class="file docutils literal notranslate"><span class="pre">.raw</span></code>.</p>
 <p>The live image can then be tested with QEMU:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qemu <span class="se">\</span>
-    -drive <span class="nv">file</span><span class="o">=</span>LimeJeOS-Leap-15.1.x86_64-1.15.1.raw,format<span class="o">=</span>raw,if<span class="o">=</span>virtio <span class="se">\</span>
+    -drive <span class="nv">file</span><span class="o">=</span>Leap-15.1_appliance.x86_64-1.15.1.raw,format<span class="o">=</span>raw,if<span class="o">=</span>virtio <span class="se">\</span>
     -m <span class="m">4096</span>
 </pre></div>
 </div>

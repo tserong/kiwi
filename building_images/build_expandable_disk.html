@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Build an Expandable Disk Image &mdash; KIWI NG 9.21.10 documentation</title>
+  <title>Build an Expandable Disk Image &mdash; KIWI NG 9.21.11 documentation</title>
   
 
   
@@ -750,7 +750,7 @@ system:</p>
 see <a class="reference internal" href="../installation.html#example-descriptions"><span class="std std-ref">Example Appliance Descriptions</span></a>.</p></li>
 <li><p>Build the image with KIWI NG:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --type oem system build <span class="se">\</span>
-    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1-JeOS <span class="se">\</span>
+    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
     --target-dir /tmp/myimage
 </pre></div>
 </div>
@@ -804,7 +804,7 @@ original disk geometry stays untouched.</p>
 </div>
 </li>
 <li><p>Dump disk image on target disk.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ dd <span class="k">if</span><span class="o">=</span>LimeJeOS-Leap-15.1.x86_64-1.15.1.raw <span class="nv">of</span><span class="o">=</span>target_disk <span class="nv">conv</span><span class="o">=</span>notrunc
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ dd <span class="k">if</span><span class="o">=</span>Leap-15.1_appliance.x86_64-1.15.1.raw <span class="nv">of</span><span class="o">=</span>target_disk <span class="nv">conv</span><span class="o">=</span>notrunc
 </pre></div>
 </div>
 </li>
@@ -829,7 +829,7 @@ The following steps shows how to do it:</p>
 </li>
 <li><p>Boot the installation image as CD/DVD with the
 target disk attached.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qemu -cdromLimeJeOS-Leap-15.1.x86_64-1.15.1.install.iso -hda target_disk -boot d -m <span class="m">4096</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qemu -cdromLeap-15.1_appliance.x86_64-1.15.1.install.iso -hda target_disk -boot d -m <span class="m">4096</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -854,7 +854,7 @@ target system:</p>
 <ol class="arabic">
 <li><p>Make sure to create an installation PXE TAR archive along with your
 disk image by replacing the following setup in
-kiwi-descriptions/suse/x86_64/suse-leap-15.1-JeOS/config.xml</p>
+kiwi-descriptions/suse/x86_64/suse-leap-15.1/config.xml</p>
 <p>Instead of</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;oem&quot;</span> <span class="na">installiso=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
@@ -865,19 +865,19 @@ kiwi-descriptions/suse/x86_64/suse-leap-15.1-JeOS/config.xml</p>
 </div>
 </li>
 <li><p>Rebuild the image, unpack the resulting
-<code class="file docutils literal notranslate"><span class="pre">LimeJeOS-Leap-15.1.x86_64-1.15.1.install.tar.xz</span></code>
+<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.install.tar.xz</span></code>
 file to a temporary directory and copy the initrd and kernel images to
 the PXE server:</p>
 <ol class="loweralpha">
 <li><p>Unpack installation tarball</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir /tmp/pxe <span class="o">&amp;&amp;</span> <span class="nb">cd</span> /tmp/pxe
-tar -xf LimeJeOS-Leap-15.1.x86_64-1.15.1.install.tar.xz
+tar -xf Leap-15.1_appliance.x86_64-1.15.1.install.tar.xz
 </pre></div>
 </div>
 </li>
 <li><p>Copy kernel and initrd used for pxe boot</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scp pxeboot.LimeJeOS-Leap-15.1.x86_64-1.15.1.initrd.xz PXE_SERVER_IP:/srv/tftpboot/boot/initrd
-scp pxeboot.LimeJeOS-Leap-15.1.x86_64-1.15.1.kernel PXE_SERVER_IP:/srv/tftpboot/boot/linux
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scp pxeboot.Leap-15.1_appliance.x86_64-1.15.1.initrd.xz PXE_SERVER_IP:/srv/tftpboot/boot/initrd
+scp pxeboot.Leap-15.1_appliance.x86_64-1.15.1.kernel PXE_SERVER_IP:/srv/tftpboot/boot/linux
 </pre></div>
 </div>
 </li>
@@ -889,15 +889,15 @@ the PXE boot server:</p>
 and initrd provided here.</p>
 <ol class="loweralpha">
 <li><p>Copy system image and MD5 checksum</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scp LimeJeOS-Leap-15.1.x86_64-1.15.1.xz PXE_SERVER_IP:/srv/tftpboot/image/
-scp LimeJeOS-Leap-15.1.x86_64-1.15.1.md5 PXE_SERVER_IP:/srv/tftpboot/image/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scp Leap-15.1_appliance.x86_64-1.15.1.xz PXE_SERVER_IP:/srv/tftpboot/image/
+scp Leap-15.1_appliance.x86_64-1.15.1.md5 PXE_SERVER_IP:/srv/tftpboot/image/
 </pre></div>
 </div>
 </li>
 <li><p>Copy kernel, initrd and bootoptions used for booting the system via kexec</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scp LimeJeOS-Leap-15.1.x86_64-1.15.1.initrd PXE_SERVER_IP:/srv/tftpboot/image/
-scp LimeJeOS-Leap-15.1.x86_64-1.15.1.kernel PXE_SERVER_IP:/srv/tftpboot/image/
-scp LimeJeOS-Leap-15.1.x86_64-1.15.1.config.bootoptions PXE_SERVER_IP:/srv/tftpboot/image/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scp Leap-15.1_appliance.x86_64-1.15.1.initrd PXE_SERVER_IP:/srv/tftpboot/image/
+scp Leap-15.1_appliance.x86_64-1.15.1.kernel PXE_SERVER_IP:/srv/tftpboot/image/
+scp Leap-15.1_appliance.x86_64-1.15.1.config.bootoptions PXE_SERVER_IP:/srv/tftpboot/image/
 </pre></div>
 </div>
 <div class="admonition note">
@@ -917,7 +917,7 @@ adapted to match the correct root reference.</p>
 <p>Edit your PXE configuration (for example <code class="file docutils literal notranslate"><span class="pre">pxelinux.cfg/default</span></code>) on
 the PXE server and add these parameters to the append line, typically
 looking like this:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>append <span class="nv">initrd</span><span class="o">=</span>boot/initrd rd.kiwi.install.pxe rd.kiwi.install.image<span class="o">=</span>tftp://192.168.100.16/image/LimeJeOS-Leap-15.1.x86_64-1.15.1.xz
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>append <span class="nv">initrd</span><span class="o">=</span>boot/initrd rd.kiwi.install.pxe rd.kiwi.install.image<span class="o">=</span>tftp://192.168.100.16/image/Leap-15.1_appliance.x86_64-1.15.1.xz
 </pre></div>
 </div>
 <p>The location of the image is specified as a source URI which can point
