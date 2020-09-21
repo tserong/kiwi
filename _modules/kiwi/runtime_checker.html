@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.runtime_checker &mdash; KIWI NG 9.21.11 documentation</title>
+  <title>kiwi.runtime_checker &mdash; KIWI NG 9.21.12 documentation</title>
   
 
   
@@ -743,6 +743,7 @@
 <span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">dedent</span>
 
 <span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
 <span class="kn">from</span> <span class="nn">kiwi.xml_description</span> <span class="kn">import</span> <span class="n">XMLDescription</span>
 <span class="kn">from</span> <span class="nn">kiwi.firmware</span> <span class="kn">import</span> <span class="n">FirmWare</span>
 <span class="kn">from</span> <span class="nn">kiwi.xml_state</span> <span class="kn">import</span> <span class="n">XMLState</span>
@@ -1513,7 +1514,48 @@
             <span class="k">raise</span> <span class="n">KiwiRuntimeError</span><span class="p">(</span><span class="n">message_missing_package_manager</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_image_version</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="n">KiwiRuntimeError</span><span class="p">(</span><span class="n">message_missing_version</span><span class="p">)</span></div></div>
+            <span class="k">raise</span> <span class="n">KiwiRuntimeError</span><span class="p">(</span><span class="n">message_missing_version</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RuntimeChecker.check_image_type_unique"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.runtime_checker.RuntimeChecker.check_image_type_unique">[docs]</a>    <span class="k">def</span> <span class="nf">check_image_type_unique</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verify that the selected image type is unique within</span>
+<span class="sd">        the range of the configured types and profiles.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span><span class="se">\n</span><span class="s1"></span>
+<span class="s1">            Conflicting image type setup detected</span>
+
+<span class="s1">            The selected image type &#39;</span><span class="si">{0}</span><span class="s1">&#39; in the </span><span class="si">{1}</span><span class="s1"> profile</span>
+<span class="s1">            selection is not unique. There are the followng type</span>
+<span class="s1">            settings which overrides each other:</span>
+<span class="s1">            </span><span class="si">{2}</span><span class="s1"></span>
+<span class="s1">            To solve this conflict please move the image type</span>
+<span class="s1">            setup into its own profile and select them using</span>
+<span class="s1">            the --profile option at call time.</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">image_type_sections</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">type_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">preferences</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_preferences_sections</span><span class="p">():</span>
+            <span class="n">image_type_sections</span> <span class="o">+=</span> <span class="n">preferences</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">image_type</span> <span class="ow">in</span> <span class="n">image_type_sections</span><span class="p">:</span>
+            <span class="n">type_name</span> <span class="o">=</span> <span class="n">image_type</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">type_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">type_name</span><span class="p">):</span>
+                <span class="n">type_dict</span><span class="p">[</span><span class="n">type_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image_type</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">type_dict</span><span class="p">[</span><span class="n">type_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">image_type</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">type_name</span><span class="p">,</span> <span class="n">type_list</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">type_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">type_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">type_export</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">image_type</span> <span class="ow">in</span> <span class="n">type_list</span><span class="p">:</span>
+                    <span class="n">type_export</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="p">)</span>
+                    <span class="n">image_type</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">type_export</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">KiwiRuntimeError</span><span class="p">(</span>
+                    <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">type_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">profiles</span> <span class="ow">or</span> <span class="p">[</span><span class="s1">&#39;Default&#39;</span><span class="p">],</span>
+                        <span class="n">type_export</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+                    <span class="p">)</span>
+                <span class="p">)</span></div></div>
 </pre></div>
 
            </div>
