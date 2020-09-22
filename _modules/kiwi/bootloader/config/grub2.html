@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.21.12 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.21.13 documentation</title>
   
 
   
@@ -959,86 +959,15 @@
             <span class="p">]</span>
         <span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">efi_mode</span><span class="p">():</span>
-            <span class="c1"># On systems that are configured to use EFI with grub2</span>
-            <span class="c1"># there is no support for dynamic EFI environment checking.</span>
-            <span class="c1"># In this condition we change the grub config to add this</span>
-            <span class="c1"># support as follows:</span>
-            <span class="c1">#</span>
-            <span class="c1"># * Apply on grub with EFI</span>
-            <span class="c1">#    1. Modify grub.cfg to set linux/initrd as variables</span>
-            <span class="c1">#    2. Prepend hybrid setup to select linux vs. linuxefi on demand</span>
-            <span class="c1">#</span>
-            <span class="c1"># Please note this is a one time modification done by kiwi</span>
-            <span class="c1"># Any subsequent call of the grub config tool will overwrite</span>
-            <span class="c1"># the setup and disables dynamic EFI environment checking</span>
-            <span class="c1"># at boot time</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_config_file</span><span class="p">:</span>
-                <span class="n">grub_config</span> <span class="o">=</span> <span class="n">grub_config_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-                <span class="n">grub_config</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
-                    <span class="sa">r</span><span class="s1">&#39;([ \t]+)linux(efi|16)*([ \t]+)&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\1$linux\3&#39;</span><span class="p">,</span>
-                    <span class="n">grub_config</span>
-                <span class="p">)</span>
-                <span class="n">grub_config</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
-                    <span class="sa">r</span><span class="s1">&#39;([ \t]+)initrd(efi|16)*([ \t]+)&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\1$initrd\3&#39;</span><span class="p">,</span>
-                    <span class="n">grub_config</span>
-                <span class="p">)</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_config_file</span><span class="p">:</span>
-                <span class="n">grub_config_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
-                    <span class="n">Template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grub2</span><span class="o">.</span><span class="n">header_hybrid</span><span class="p">)</span><span class="o">.</span><span class="n">substitute</span><span class="p">()</span>
-                <span class="p">)</span>
-                <span class="n">grub_config_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">grub_config</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span> <span class="ow">or</span> \
-               <span class="n">Defaults</span><span class="o">.</span><span class="n">is_buildservice_worker</span><span class="p">():</span>
-                <span class="c1"># grub2-mkconfig has no idea how the correct root= setup is</span>
-                <span class="c1"># for disk images created with overlayroot enabled or in a</span>
-                <span class="c1"># buildservice worker environment. Because of that the mkconfig</span>
-                <span class="c1"># tool just finds the raw partition loop device and includes it</span>
-                <span class="c1"># which is wrong. In this particular case we have to patch the</span>
-                <span class="c1"># written config file and replace the wrong root= reference with</span>
-                <span class="c1"># the correct value.</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_config_file</span><span class="p">:</span>
-                    <span class="n">grub_config</span> <span class="o">=</span> <span class="n">grub_config_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-                    <span class="n">grub_config</span> <span class="o">=</span> <span class="n">grub_config</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                        <span class="s1">&#39;root=</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">boot_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;root_device&#39;</span><span class="p">)),</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span>
-                    <span class="p">)</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_config_file</span><span class="p">:</span>
-                    <span class="n">grub_config_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">grub_config</span><span class="p">)</span>
-
-                <span class="n">loader_entries_pattern</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                    <span class="p">[</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span>
-                        <span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="s1">&#39;loader&#39;</span><span class="p">,</span> <span class="s1">&#39;entries&#39;</span><span class="p">,</span> <span class="s1">&#39;*.conf&#39;</span>
-                    <span class="p">]</span>
-                <span class="p">)</span>
-                <span class="k">for</span> <span class="n">menu_entry_file</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">iglob</span><span class="p">(</span><span class="n">loader_entries_pattern</span><span class="p">):</span>
-                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">menu_entry_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_menu_entry_file</span><span class="p">:</span>
-                        <span class="n">menu_entry</span> <span class="o">=</span> <span class="n">grub_menu_entry_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-                        <span class="n">menu_entry</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
-                            <span class="sa">r</span><span class="s1">&#39;options (.*)&#39;</span><span class="p">,</span>
-                            <span class="sa">r</span><span class="s1">&#39;options </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmdline</span><span class="p">),</span>
-                            <span class="n">menu_entry</span>
-                        <span class="p">)</span>
-                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">menu_entry_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_menu_entry_file</span><span class="p">:</span>
-                        <span class="n">grub_menu_entry_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">menu_entry</span><span class="p">)</span>
-
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">efi_mode</span><span class="p">():</span>
-                    <span class="n">vendor_grubenv_file</span> <span class="o">=</span> \
-                        <span class="n">Defaults</span><span class="o">.</span><span class="n">get_vendor_grubenv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">efi_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">vendor_grubenv_file</span><span class="p">:</span>
-                        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">vendor_grubenv_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">vendor_grubenv</span><span class="p">:</span>
-                            <span class="n">grubenv</span> <span class="o">=</span> <span class="n">vendor_grubenv</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-                            <span class="n">grubenv</span> <span class="o">=</span> <span class="n">grubenv</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                                <span class="s1">&#39;root=</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">boot_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
-                                    <span class="s1">&#39;root_device&#39;</span><span class="p">)</span>
-                                <span class="p">),</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span>
-                            <span class="p">)</span>
-                        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">vendor_grubenv_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">vendor_grubenv</span><span class="p">:</span>
-                            <span class="n">vendor_grubenv</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">grubenv</span><span class="p">)</span>
+        <span class="c1"># Patch the written grub config file to actually work:</span>
+        <span class="c1"># Unfortunately the grub tooling has several bugs and issues</span>
+        <span class="c1"># which prevents it to work in image build environments.</span>
+        <span class="c1"># More details can be found in the individual methods.</span>
+        <span class="c1"># One fine day the following fix methods can hopefully</span>
+        <span class="c1"># be deleted...</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fix_grub_to_support_dynamic_efi_and_bios_boot</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fix_grub_root_device_reference</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="n">boot_options</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fix_grub_loader_entries_boot_cmdline</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">efi_mode</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">early_boot_script_efi</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_copy_grub_config_to_efi_path</span><span class="p">(</span>
@@ -1847,7 +1776,105 @@
     <span class="k">def</span> <span class="nf">_get_shim_install</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Path</span><span class="o">.</span><span class="n">which</span><span class="p">(</span>
             <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;shim-install&#39;</span><span class="p">,</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_dir</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_fix_grub_to_support_dynamic_efi_and_bios_boot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">efi_mode</span><span class="p">():</span>
+            <span class="c1"># On systems that are configured to use EFI with grub2</span>
+            <span class="c1"># there is no support for dynamic EFI environment checking.</span>
+            <span class="c1"># In this condition we change the grub config to add this</span>
+            <span class="c1"># support as follows:</span>
+            <span class="c1">#</span>
+            <span class="c1"># * Apply on grub with EFI</span>
+            <span class="c1">#    1. Modify grub.cfg to set linux/initrd as variables</span>
+            <span class="c1">#    2. Prepend hybrid setup to select linux vs. linuxefi on demand</span>
+            <span class="c1">#</span>
+            <span class="c1"># Please note this is a one time modification done by kiwi</span>
+            <span class="c1"># Any subsequent call of the grub config tool will overwrite</span>
+            <span class="c1"># the setup and disables dynamic EFI environment checking</span>
+            <span class="c1"># at boot time</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_config_file</span><span class="p">:</span>
+                <span class="n">grub_config</span> <span class="o">=</span> <span class="n">grub_config_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="n">grub_config</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+                    <span class="sa">r</span><span class="s1">&#39;([ \t]+)linux(efi|16)*([ \t]+)&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\1$linux\3&#39;</span><span class="p">,</span>
+                    <span class="n">grub_config</span>
+                <span class="p">)</span>
+                <span class="n">grub_config</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+                    <span class="sa">r</span><span class="s1">&#39;([ \t]+)initrd(efi|16)*([ \t]+)&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;\1$initrd\3&#39;</span><span class="p">,</span>
+                    <span class="n">grub_config</span>
+                <span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_config_file</span><span class="p">:</span>
+                <span class="n">grub_config_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                    <span class="n">Template</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grub2</span><span class="o">.</span><span class="n">header_hybrid</span><span class="p">)</span><span class="o">.</span><span class="n">substitute</span><span class="p">()</span>
+                <span class="p">)</span>
+                <span class="n">grub_config_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">grub_config</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_fix_grub_root_device_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file</span><span class="p">,</span> <span class="n">boot_options</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span> <span class="ow">or</span> \
+               <span class="n">Defaults</span><span class="o">.</span><span class="n">is_buildservice_worker</span><span class="p">():</span>
+                <span class="c1"># grub2-mkconfig has no idea how the correct root= setup is</span>
+                <span class="c1"># for disk images created with overlayroot enabled or in a</span>
+                <span class="c1"># buildservice worker environment. Because of that the mkconfig</span>
+                <span class="c1"># tool just finds the raw partition loop device and includes it</span>
+                <span class="c1"># which is wrong. In this particular case we have to patch the</span>
+                <span class="c1"># written config file and replace the wrong root= reference with</span>
+                <span class="c1"># the correct value.</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_config_file</span><span class="p">:</span>
+                    <span class="n">grub_config</span> <span class="o">=</span> <span class="n">grub_config_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                    <span class="n">grub_config</span> <span class="o">=</span> <span class="n">grub_config</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                        <span class="s1">&#39;root=</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">boot_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;root_device&#39;</span><span class="p">)),</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span>
+                    <span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_config_file</span><span class="p">:</span>
+                    <span class="n">grub_config_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">grub_config</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">efi_mode</span><span class="p">():</span>
+                    <span class="n">vendor_grubenv_file</span> <span class="o">=</span> \
+                        <span class="n">Defaults</span><span class="o">.</span><span class="n">get_vendor_grubenv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">efi_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">vendor_grubenv_file</span><span class="p">:</span>
+                        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">vendor_grubenv_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">vendor_grubenv</span><span class="p">:</span>
+                            <span class="n">grubenv</span> <span class="o">=</span> <span class="n">vendor_grubenv</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                            <span class="n">grubenv</span> <span class="o">=</span> <span class="n">grubenv</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                                <span class="s1">&#39;root=</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                    <span class="n">boot_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;root_device&#39;</span><span class="p">)</span>
+                                <span class="p">),</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span>
+                            <span class="p">)</span>
+                        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">vendor_grubenv_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">vendor_grubenv</span><span class="p">:</span>
+                            <span class="n">vendor_grubenv</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">grubenv</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_fix_grub_loader_entries_boot_cmdline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdline</span><span class="p">:</span>
+            <span class="c1"># For distributions that follows the bootloader spec here:</span>
+            <span class="c1"># https://www.freedesktop.org/wiki/Specifications/BootLoaderSpec</span>
+            <span class="c1"># the menu entries are managed in extra files written to</span>
+            <span class="c1"># boot/loader/entries. The grub2-mkconfig tool imports the</span>
+            <span class="c1"># information from there and has no own menu entries data</span>
+            <span class="c1"># in grub.cfg anymore. Unfortunately the system that writes</span>
+            <span class="c1"># those new boot/loader/entries has several issues. It produces</span>
+            <span class="c1"># a complete mess when used in chroot environments. In such</span>
+            <span class="c1"># an environment it takes the proc/cmdline data from the host</span>
+            <span class="c1"># that built the image and completely ignores the setup of</span>
+            <span class="c1"># the image description. Overall for image building the</span>
+            <span class="c1"># tooling is completely broken and we are forced to patch the</span>
+            <span class="c1"># entire cmdline for the menuentries on such systems.</span>
+            <span class="n">loader_entries_pattern</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span>
+                    <span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="s1">&#39;loader&#39;</span><span class="p">,</span> <span class="s1">&#39;entries&#39;</span><span class="p">,</span> <span class="s1">&#39;*.conf&#39;</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">menu_entry_file</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">iglob</span><span class="p">(</span><span class="n">loader_entries_pattern</span><span class="p">):</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">menu_entry_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_menu_entry_file</span><span class="p">:</span>
+                    <span class="n">menu_entry</span> <span class="o">=</span> <span class="n">grub_menu_entry_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                    <span class="n">menu_entry</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+                        <span class="sa">r</span><span class="s1">&#39;options (.*)&#39;</span><span class="p">,</span>
+                        <span class="sa">r</span><span class="s1">&#39;options </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmdline</span><span class="p">),</span>
+                        <span class="n">menu_entry</span>
+                    <span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">menu_entry_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_menu_entry_file</span><span class="p">:</span>
+                    <span class="n">grub_menu_entry_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">menu_entry</span><span class="p">)</span></div>
 </pre></div>
 
            </div>
