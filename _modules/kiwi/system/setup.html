@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.system.setup &mdash; KIWI NG 9.21.14 documentation</title>
+  <title>kiwi.system.setup &mdash; KIWI NG 9.21.15 documentation</title>
   
 
   
@@ -450,7 +450,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config">Module Contents</a></li>
 </ul>
 </li>
@@ -458,7 +457,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.grub2</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install">Module Contents</a></li>
 </ul>
 </li>
@@ -470,7 +468,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template">Module Contents</a></li>
 </ul>
 </li>
@@ -749,6 +746,7 @@
 <span class="c1"># project</span>
 <span class="kn">import</span> <span class="nn">kiwi.defaults</span> <span class="k">as</span> <span class="nn">defaults</span>
 
+<span class="kn">from</span> <span class="nn">kiwi.runtime_config</span> <span class="kn">import</span> <span class="n">RuntimeConfig</span>
 <span class="kn">from</span> <span class="nn">kiwi.mount_manager</span> <span class="kn">import</span> <span class="n">MountManager</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.uri</span> <span class="kn">import</span> <span class="n">Uri</span>
 <span class="kn">from</span> <span class="nn">kiwi.repository</span> <span class="kn">import</span> <span class="n">Repository</span>
@@ -796,6 +794,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_state</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span> <span class="o">=</span> <span class="n">RuntimeConfig</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_platform_name</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span> <span class="o">=</span> <span class="n">xml_state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">description_dir</span> <span class="o">=</span> \
@@ -1242,6 +1241,33 @@
         <span class="k">elif</span> <span class="n">packager</span> <span class="o">==</span> <span class="s1">&#39;pacman&#39;</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_export_pacman_package_list</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">filename</span></div>
+
+<div class="viewcode-block" id="SystemSetup.export_package_changes"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.setup.SystemSetup.export_package_changes">[docs]</a>    <span class="k">def</span> <span class="nf">export_package_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Export image package changelog for comparision of</span>
+<span class="sd">        actual changes of the installed packages</span>
+
+<span class="sd">        :param str target_dir: path name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span><span class="o">.</span><span class="n">get_package_changes</span><span class="p">():</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">target_dir</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">xml_data</span><span class="o">.</span><span class="n">get_name</span><span class="p">(),</span>
+                    <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">,</span>
+                    <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_image_version</span><span class="p">(),</span>
+                    <span class="s1">&#39;.changes&#39;</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">packager</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_default_packager_tool</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_package_manager</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">packager</span> <span class="o">==</span> <span class="s1">&#39;rpm&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_export_rpm_package_changes</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">filename</span>
+            <span class="k">elif</span> <span class="n">packager</span> <span class="o">==</span> <span class="s1">&#39;dpkg&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_export_deb_package_changes</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">filename</span></div>
 
 <div class="viewcode-block" id="SystemSetup.export_package_verification"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.setup.SystemSetup.export_package_verification">[docs]</a>    <span class="k">def</span> <span class="nf">export_package_verification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1802,7 +1828,12 @@
 
     <span class="k">def</span> <span class="nf">_export_pacman_package_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Export pacman packages metadata&#39;</span><span class="p">)</span>
-        <span class="n">query_call</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;pacman&#39;</span><span class="p">,</span> <span class="s1">&#39;-Qe&#39;</span><span class="p">])</span>
+        <span class="n">query_call</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="s1">&#39;pacman&#39;</span><span class="p">,</span> <span class="s1">&#39;--query&#39;</span><span class="p">,</span> <span class="s1">&#39;--dbpath&#39;</span><span class="p">,</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;var/lib/pacman&#39;</span><span class="p">])</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">packages</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">query_call</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">splitlines</span><span class="p">():</span>
                 <span class="n">package</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">version_release</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
@@ -1812,6 +1843,41 @@
                         <span class="n">package</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">release</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span>
                     <span class="p">)</span>
                 <span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_export_rpm_package_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Export rpm packages changelog metadata&#39;</span><span class="p">)</span>
+        <span class="n">dbpath_option</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;--dbpath&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_rpm_database_location</span><span class="p">()</span>
+        <span class="p">]</span>
+        <span class="n">query_call</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="s1">&#39;rpm&#39;</span><span class="p">,</span> <span class="s1">&#39;--root&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
+                <span class="s1">&#39;-qa&#39;</span><span class="p">,</span> <span class="s1">&#39;--qf&#39;</span><span class="p">,</span> <span class="s1">&#39;%</span><span class="si">{NAME}</span><span class="s1">|</span><span class="se">\\</span><span class="s1">n&#39;</span><span class="p">,</span> <span class="s1">&#39;--changelog&#39;</span>
+            <span class="p">]</span> <span class="o">+</span> <span class="n">dbpath_option</span>
+        <span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">changelog</span><span class="p">:</span>
+            <span class="n">changelog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">query_call</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_export_deb_package_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Export deb packages changelog metadata&#39;</span><span class="p">)</span>
+        <span class="n">package_doc_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;/usr/share/doc&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">changelog</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">package</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">package_doc_dir</span><span class="p">)):</span>
+                <span class="n">changelog_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">package_doc_dir</span><span class="p">,</span> <span class="n">package</span><span class="p">,</span> <span class="s1">&#39;changelog.Debian.gz&#39;</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">changelog_file</span><span class="p">):</span>
+                    <span class="n">changelog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                        <span class="s1">&#39;</span><span class="si">{0}{1}{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">package</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="p">)</span>
+                    <span class="p">)</span>
+                    <span class="n">changelog</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                        <span class="s1">&#39;</span><span class="si">{0}{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;zcat&#39;</span><span class="p">,</span> <span class="n">changelog_file</span><span class="p">])</span><span class="o">.</span><span class="n">output</span><span class="p">,</span>
+                            <span class="n">os</span><span class="o">.</span><span class="n">linesep</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_export_rpm_package_verification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Export rpm verification metadata&#39;</span><span class="p">)</span>

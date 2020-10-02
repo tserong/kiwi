@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.boot.image &mdash; KIWI NG 9.21.14 documentation</title>
+  <title>kiwi.boot.image &mdash; KIWI NG 9.21.15 documentation</title>
   
 
   
@@ -450,7 +450,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config">Module Contents</a></li>
 </ul>
 </li>
@@ -458,7 +457,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.grub2</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install">Module Contents</a></li>
 </ul>
 </li>
@@ -470,7 +468,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template">Module Contents</a></li>
 </ul>
 </li>
@@ -739,15 +736,19 @@
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
 <span class="c1"># project</span>
-<span class="kn">from</span> <span class="nn">kiwi.boot.image.builtin_kiwi</span> <span class="kn">import</span> <span class="n">BootImageKiwi</span>
-<span class="kn">from</span> <span class="nn">kiwi.boot.image.dracut</span> <span class="kn">import</span> <span class="n">BootImageDracut</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ABCMeta</span><span class="p">,</span>
+    <span class="n">abstractmethod</span>
+<span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">KiwiBootImageSetupError</span>
 <span class="p">)</span>
 
 
-<div class="viewcode-block" id="BootImage"><a class="viewcode-back" href="../../../api/kiwi.boot.image.html#kiwi.boot.image.BootImage">[docs]</a><span class="k">class</span> <span class="nc">BootImage</span><span class="p">:</span>
+<div class="viewcode-block" id="BootImage"><a class="viewcode-back" href="../../../api/kiwi.boot.image.html#kiwi.boot.image.BootImage">[docs]</a><span class="k">class</span> <span class="nc">BootImage</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **BootImge Factory**</span>
 
@@ -756,22 +757,38 @@
 <span class="sd">    :param string root_dir: system image root directory</span>
 <span class="sd">    :param list signing_keys: list of package signing keys</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">xml_state</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">,</span> <span class="n">root_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">signing_keys</span><span class="o">=</span><span class="kc">None</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># pragma: no cover</span>
+
+<div class="viewcode-block" id="BootImage.new"><a class="viewcode-back" href="../../../api/kiwi.boot.image.html#kiwi.boot.image.BootImage.new">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span>
+        <span class="n">xml_state</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">signing_keys</span><span class="p">:</span> <span class="n">List</span><span class="o">=</span><span class="kc">None</span>  <span class="c1"># noqa: E252</span>
     <span class="p">):</span>
         <span class="n">initrd_system</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_initrd_system</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">initrd_system</span> <span class="o">==</span> <span class="s1">&#39;kiwi&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">BootImageKiwi</span><span class="p">(</span>
-                <span class="n">xml_state</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">signing_keys</span>
+        <span class="n">name_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;builtin_kiwi&#39;</span><span class="p">:</span>
+                <span class="s1">&#39;BootImageKiwi&#39;</span> <span class="k">if</span> <span class="n">initrd_system</span> <span class="o">==</span> <span class="s1">&#39;kiwi&#39;</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;dracut&#39;</span><span class="p">:</span>
+                <span class="s1">&#39;BootImageDracut&#39;</span> <span class="k">if</span> <span class="n">initrd_system</span> <span class="o">==</span> <span class="s1">&#39;dracut&#39;</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">boot_image_namespace</span><span class="p">,</span> <span class="n">boot_image_name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">name_map</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">boot_image_name</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">boot_image</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span>
+                <span class="s1">&#39;kiwi.boot.image.</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">boot_image_namespace</span><span class="p">)</span>
             <span class="p">)</span>
-        <span class="k">elif</span> <span class="n">initrd_system</span> <span class="o">==</span> <span class="s1">&#39;dracut&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">BootImageDracut</span><span class="p">(</span>
-                <span class="n">xml_state</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">,</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="n">boot_image</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">boot_image_name</span><span class="p">](</span>
+                <span class="n">xml_state</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">,</span> <span class="n">signing_keys</span>
             <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">issue</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiBootImageSetupError</span><span class="p">(</span>
-                <span class="s1">&#39;Support for </span><span class="si">%s</span><span class="s1"> initrd system not implemented&#39;</span> <span class="o">%</span> <span class="n">initrd_system</span>
-            <span class="p">)</span></div>
+                <span class="s1">&#39;Support for </span><span class="si">{0}</span><span class="s1"> initrd system not implemented: </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">initrd_system</span><span class="p">,</span> <span class="n">issue</span>
+                <span class="p">)</span>
+            <span class="p">)</span></div></div>
 </pre></div>
 
            </div>

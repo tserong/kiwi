@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.21.14 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.21.15 documentation</title>
   
 
   
@@ -450,7 +450,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config">Module Contents</a></li>
 </ul>
 </li>
@@ -458,7 +457,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.install.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.grub2</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install">Module Contents</a></li>
 </ul>
 </li>
@@ -470,7 +468,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.template.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template">Module Contents</a></li>
 </ul>
 </li>
@@ -798,6 +795,9 @@
         <span class="k">elif</span> <span class="n">arch</span> <span class="o">==</span> <span class="s1">&#39;aarch64&#39;</span> <span class="ow">or</span> <span class="n">arch</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;arm&#39;</span><span class="p">):</span>
             <span class="c1"># grub2 support for efi systems</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="o">=</span> <span class="n">arch</span>
+        <span class="k">elif</span> <span class="n">arch</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s390&#39;</span><span class="p">):</span>
+            <span class="c1"># grub2 support for s390x systems</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="o">=</span> <span class="n">arch</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiBootLoaderGrubPlatformError</span><span class="p">(</span>
                 <span class="s1">&#39;host architecture </span><span class="si">%s</span><span class="s1"> not supported for grub2 setup&#39;</span> <span class="o">%</span> <span class="n">arch</span>
@@ -895,6 +895,7 @@
 
 <span class="sd">        * cmdline arguments initialization</span>
 <span class="sd">        * etc/default/grub setup file</span>
+<span class="sd">        * etc/default/zipl2grub.conf.in (s390 only)</span>
 <span class="sd">        * etc/sysconfig/bootloader</span>
 
 <span class="sd">        :param string root_uuid: root device UUID</span>
@@ -910,7 +911,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_root_cmdline_parameter</span><span class="p">(</span><span class="n">root_uuid</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_setup_default_grub</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_setup_sysconfig_bootloader</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setup_sysconfig_bootloader</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s390&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_setup_zipl2grub_conf</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="BootLoaderConfigGrub2.setup_disk_image_config"><a class="viewcode-back" href="../../../../api/kiwi.bootloader.config.html#kiwi.bootloader.config.grub2.BootLoaderConfigGrub2.setup_disk_image_config">[docs]</a>    <span class="k">def</span> <span class="nf">setup_disk_image_config</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">boot_uuid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">root_uuid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hypervisor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1251,6 +1254,45 @@
                 <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; </span><span class="si">{0}</span><span class="s1">:</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
                 <span class="n">sysconfig_bootloader</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
             <span class="n">sysconfig_bootloader</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_setup_zipl2grub_conf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">zipl2grub_config_file</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;/etc/default/zipl2grub.conf.in&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">zipl2grub_config_file_orig</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;/etc/default/zipl2grub.conf.in.orig&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">target_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_build_type_bootloader_targettype</span><span class="p">()</span>
+        <span class="n">target_blocksize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_target_blocksize</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">target_type</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">zipl2grub_config_file</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">zipl2grub_config_file_orig</span><span class="p">):</span>
+                <span class="c1"># reset the original template file first</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">zipl2grub_config_file_orig</span><span class="p">,</span> <span class="n">zipl2grub_config_file</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># no copy of the original template, create it</span>
+                <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">zipl2grub_config_file</span><span class="p">,</span> <span class="n">zipl2grub_config_file_orig</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">zipl2grub_config_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">zipl_config_file</span><span class="p">:</span>
+                <span class="n">zipl_config</span> <span class="o">=</span> <span class="n">zipl_config_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="n">zipl_config</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+                    <span class="sa">r</span><span class="s1">&#39;(:menu)&#39;</span><span class="p">,</span>
+                    <span class="sa">r</span><span class="s1">&#39;:menu\n&#39;</span>
+                    <span class="sa">r</span><span class="s1">&#39;    targettype = </span><span class="si">{0}</span><span class="s1">\n&#39;</span>
+                    <span class="sa">r</span><span class="s1">&#39;    targetbase = </span><span class="si">{1}</span><span class="s1">\n&#39;</span>
+                    <span class="sa">r</span><span class="s1">&#39;    targetblocksize = </span><span class="si">{2}</span><span class="s1">\n&#39;</span>
+                    <span class="sa">r</span><span class="s1">&#39;    targetoffset = </span><span class="si">{3}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">target_type</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;targetbase&#39;</span><span class="p">],</span>
+                        <span class="n">target_blocksize</span> <span class="ow">or</span> <span class="mi">512</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_get_partition_start_sector</span><span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;targetbase&#39;</span><span class="p">]</span>
+                        <span class="p">)</span>
+                    <span class="p">),</span>
+                    <span class="n">zipl_config</span>
+                <span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Updated zipl template as follows&#39;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">zipl2grub_config_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zipl_config_file</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">zipl_config</span><span class="p">)</span>
+                <span class="n">zipl_config_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">zipl_config</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_setup_default_grub</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa: C901</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1874,7 +1916,20 @@
                         <span class="n">menu_entry</span>
                     <span class="p">)</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">menu_entry_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_menu_entry_file</span><span class="p">:</span>
-                    <span class="n">grub_menu_entry_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">menu_entry</span><span class="p">)</span></div>
+                    <span class="n">grub_menu_entry_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">menu_entry</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_partition_start_sector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disk_device</span><span class="p">):</span>
+        <span class="n">bash_command</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="s1">&#39;sfdisk&#39;</span><span class="p">,</span> <span class="s1">&#39;--dump&#39;</span><span class="p">,</span> <span class="n">disk_device</span><span class="p">,</span>
+                <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;grep&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;1 :&quot;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;cut&#39;</span><span class="p">,</span> <span class="s1">&#39;-f1&#39;</span><span class="p">,</span> <span class="s1">&#39;-d,&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;cut&#39;</span><span class="p">,</span> <span class="s1">&#39;-f2&#39;</span><span class="p">,</span> <span class="s1">&#39;-d=&#39;</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="n">bash_command</span><span class="p">]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
 </pre></div>
 
            </div>

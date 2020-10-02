@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.boot.image.builtin_kiwi &mdash; KIWI NG 9.21.14 documentation</title>
+  <title>kiwi.boot.image.builtin_kiwi &mdash; KIWI NG 9.21.15 documentation</title>
   
 
   
@@ -450,7 +450,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config">Module Contents</a></li>
 </ul>
 </li>
@@ -458,7 +457,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.install.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.grub2</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install">Module Contents</a></li>
 </ul>
 </li>
@@ -470,7 +468,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.template.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template">Module Contents</a></li>
 </ul>
 </li>
@@ -774,6 +771,11 @@
 <span class="sd">        root filesystem which is a separate image to create</span>
 <span class="sd">        the initrd from</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># builtin kiwi initrd builds its own root tree to create</span>
+        <span class="c1"># an initrd from. Thus there is no pre defined boot root</span>
+        <span class="c1"># directory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span> <span class="o">=</span> <span class="kc">None</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">temp_directories</span> <span class="o">=</span> <span class="p">[]</span></div>
 
 <div class="viewcode-block" id="BootImageKiwi.prepare"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.builtin_kiwi.BootImageKiwi.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

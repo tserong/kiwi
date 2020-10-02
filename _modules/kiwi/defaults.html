@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.defaults &mdash; KIWI NG 9.21.14 documentation</title>
+  <title>kiwi.defaults &mdash; KIWI NG 9.21.15 documentation</title>
   
 
   
@@ -450,7 +450,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config">Module Contents</a></li>
 </ul>
 </li>
@@ -458,7 +457,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.install.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.grub2</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install">Module Contents</a></li>
 </ul>
 </li>
@@ -470,7 +468,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.template.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template">Module Contents</a></li>
 </ul>
 </li>
@@ -890,28 +887,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;http://download.opensuse.org/repositories&#39;</span></div>
 
-<div class="viewcode-block" id="Defaults.get_s390_disk_block_size"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.get_s390_disk_block_size">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_s390_disk_block_size</span><span class="p">():</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Provides the default block size for s390 storage disks</span>
-
-<span class="sd">        :return: blocksize value</span>
-
-<span class="sd">        :rtype: int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s1">&#39;4096&#39;</span></div>
-
-<div class="viewcode-block" id="Defaults.get_s390_disk_type"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.get_s390_disk_type">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_s390_disk_type</span><span class="p">():</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Provides the default disk type for s390 storage disks</span>
-
-<span class="sd">        :return: type name</span>
-
-<span class="sd">        :rtype: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s1">&#39;CDL&#39;</span></div>
-
 <div class="viewcode-block" id="Defaults.get_solvable_location"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.get_solvable_location">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_solvable_location</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1234,6 +1209,22 @@
     <span class="k">def</span> <span class="nf">get_grub_ofw_modules</span><span class="p">():</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Provides list of grub ofw modules (ppc)</span>
+
+<span class="sd">        :return: list of module names</span>
+
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">modules</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_grub_basic_modules</span><span class="p">(</span><span class="n">multiboot</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span>
+            <span class="s1">&#39;part_gpt&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;part_msdos&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;boot&#39;</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">modules</span></div>
+
+<div class="viewcode-block" id="Defaults.get_grub_s390_modules"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.get_grub_s390_modules">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_grub_s390_modules</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Provides list of grub ofw modules (s390)</span>
 
 <span class="sd">        :return: list of module names</span>
 

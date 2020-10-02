@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.bootloader.template Package &mdash; KIWI NG 9.21.14 documentation</title>
+  <title>kiwi.bootloader.template Package &mdash; KIWI NG 9.21.15 documentation</title>
   
 
   
@@ -452,7 +452,6 @@
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.config.html#module-kiwi.bootloader.config.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.config.html#module-kiwi.bootloader.config.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.config.html#module-kiwi.bootloader.config.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.config.html#module-kiwi.bootloader.config.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.config.html#module-kiwi.bootloader.config">Module Contents</a></li>
 </ul>
 </li>
@@ -460,7 +459,6 @@
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.install.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.install.html#module-kiwi.bootloader.install.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.install.html#module-kiwi.bootloader.install.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.grub2</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.install.html#module-kiwi.bootloader.install.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.install.html#module-kiwi.bootloader.install">Module Contents</a></li>
 </ul>
 </li>
@@ -472,7 +470,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-kiwi.bootloader.template.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-kiwi.bootloader.template.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-kiwi.bootloader.template.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-kiwi.bootloader.template">Module Contents</a></li>
 </ul>
 </li>
@@ -935,33 +932,6 @@ hypervisor, e.g Xen dom0</p>
 <li><p><strong>failsafe</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – with failsafe true|false</p></li>
 <li><p><strong>with_theme</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – with graphics theme true|false</p></li>
 </ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Template</span></code></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>Template</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-kiwi.bootloader.template.zipl">
-<span id="kiwi-bootloader-template-zipl-module"></span><h2><a class="reference internal" href="#module-kiwi.bootloader.template.zipl" title="kiwi.bootloader.template.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.zipl</span></code></a> Module<a class="headerlink" href="#module-kiwi.bootloader.template.zipl" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="kiwi.bootloader.template.zipl.BootLoaderTemplateZipl">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.bootloader.template.zipl.</code><code class="sig-name descname">BootLoaderTemplateZipl</code><a class="reference internal" href="../_modules/kiwi/bootloader/template/zipl.html#BootLoaderTemplateZipl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.bootloader.template.zipl.BootLoaderTemplateZipl" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p><strong>zipl configuraton file templates</strong></p>
-<dl class="py method">
-<dt id="kiwi.bootloader.template.zipl.BootLoaderTemplateZipl.get_template">
-<code class="sig-name descname">get_template</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">failsafe</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">targettype</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/zipl.html#BootLoaderTemplateZipl.get_template"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.bootloader.template.zipl.BootLoaderTemplateZipl.get_template" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bootloader configuration template for disk boot</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>failsafe</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – with failsafe true|false</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Template</span></code></p>

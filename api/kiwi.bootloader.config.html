@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.bootloader.config Package &mdash; KIWI NG 9.21.14 documentation</title>
+  <title>kiwi.bootloader.config Package &mdash; KIWI NG 9.21.15 documentation</title>
   
 
   
@@ -452,7 +452,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-kiwi.bootloader.config.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-kiwi.bootloader.config.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-kiwi.bootloader.config.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-kiwi.bootloader.config.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-kiwi.bootloader.config">Module Contents</a></li>
 </ul>
 </li>
@@ -460,7 +459,6 @@
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.install.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.install.html#module-kiwi.bootloader.install.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.install.html#module-kiwi.bootloader.install.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.grub2</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.install.html#module-kiwi.bootloader.install.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.install.html#module-kiwi.bootloader.install">Module Contents</a></li>
 </ul>
 </li>
@@ -472,7 +470,6 @@
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.template.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.template.html#module-kiwi.bootloader.template.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.template.html#module-kiwi.bootloader.template.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.template.html#module-kiwi.bootloader.template.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="kiwi.bootloader.template.html#module-kiwi.bootloader.template">Module Contents</a></li>
 </ul>
 </li>
@@ -1259,6 +1256,7 @@ the iso filesystem</p>
 <ul class="simple">
 <li><p>cmdline arguments initialization</p></li>
 <li><p>etc/default/grub setup file</p></li>
+<li><p>etc/default/zipl2grub.conf.in (s390 only)</p></li>
 <li><p>etc/sysconfig/bootloader</p></li>
 </ul>
 <dl class="field-list simple">
@@ -1366,76 +1364,11 @@ a live system from an ISO image in BIOS boot mode</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-kiwi.bootloader.config.zipl">
-<span id="kiwi-bootloader-config-zipl-module"></span><h2><a class="reference internal" href="#module-kiwi.bootloader.config.zipl" title="kiwi.bootloader.config.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.zipl</span></code></a> Module<a class="headerlink" href="#module-kiwi.bootloader.config.zipl" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="kiwi.bootloader.config.zipl.BootLoaderConfigZipl">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.bootloader.config.zipl.</code><code class="sig-name descname">BootLoaderConfigZipl</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xml_state</span></em>, <em class="sig-param"><span class="n">root_dir</span></em>, <em class="sig-param"><span class="n">boot_dir</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">custom_args</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/config/zipl.html#BootLoaderConfigZipl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.bootloader.config.zipl.BootLoaderConfigZipl" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#kiwi.bootloader.config.base.BootLoaderConfigBase" title="kiwi.bootloader.config.base.BootLoaderConfigBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.bootloader.config.base.BootLoaderConfigBase</span></code></a></p>
-<p><strong>zipl bootloader configuration.</strong></p>
-<dl class="py method">
-<dt id="kiwi.bootloader.config.zipl.BootLoaderConfigZipl.post_init">
-<code class="sig-name descname">post_init</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">custom_args</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/config/zipl.html#BootLoaderConfigZipl.post_init"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.bootloader.config.zipl.BootLoaderConfigZipl.post_init" title="Permalink to this definition">¶</a></dt>
-<dd><p>zipl post initialization method</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>custom_args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – <p>Contains zipl config arguments</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;targetbase&#39;</span><span class="p">:</span> <span class="s1">&#39;device_name&#39;</span><span class="p">}</span>
-</pre></div>
-</div>
-</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="kiwi.bootloader.config.zipl.BootLoaderConfigZipl.setup_disk_boot_images">
-<code class="sig-name descname">setup_disk_boot_images</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">boot_uuid</span></em>, <em class="sig-param"><span class="n">lookup_path</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/config/zipl.html#BootLoaderConfigZipl.setup_disk_boot_images"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.bootloader.config.zipl.BootLoaderConfigZipl.setup_disk_boot_images" title="Permalink to this definition">¶</a></dt>
-<dd><p>On s390 no bootloader images needs to be created</p>
-<p>Thus this method does nothing</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>boot_uuid</strong> (<em>string</em>) – boot device UUID</p></li>
-<li><p><strong>lookup_path</strong> (<em>string</em>) – custom module lookup path</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="kiwi.bootloader.config.zipl.BootLoaderConfigZipl.setup_disk_image_config">
-<code class="sig-name descname">setup_disk_image_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">boot_uuid</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">root_uuid</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">hypervisor</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">kernel</span><span class="o">=</span><span class="default_value">'image'</span></em>, <em class="sig-param"><span class="n">initrd</span><span class="o">=</span><span class="default_value">'initrd'</span></em>, <em class="sig-param"><span class="n">boot_options</span><span class="o">=</span><span class="default_value">{}</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/config/zipl.html#BootLoaderConfigZipl.setup_disk_image_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.bootloader.config.zipl.BootLoaderConfigZipl.setup_disk_image_config" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create the zipl config in memory from a template suitable to
-boot from a disk image.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>boot_uuid</strong> (<em>string</em>) – unused</p></li>
-<li><p><strong>root_uuid</strong> (<em>string</em>) – unused</p></li>
-<li><p><strong>hypervisor</strong> (<em>string</em>) – unused</p></li>
-<li><p><strong>kernel</strong> (<em>string</em>) – kernel name</p></li>
-<li><p><strong>initrd</strong> (<em>string</em>) – initrd name</p></li>
-<li><p><strong>boot_options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a>) – unused</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="kiwi.bootloader.config.zipl.BootLoaderConfigZipl.write">
-<code class="sig-name descname">write</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/config/zipl.html#BootLoaderConfigZipl.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.bootloader.config.zipl.BootLoaderConfigZipl.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>Write zipl config file</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
 <div class="section" id="module-kiwi.bootloader.config">
 <span id="module-contents"></span><span id="db-kiwi-bootloader-config-contents"></span><h2>Module Contents<a class="headerlink" href="#module-kiwi.bootloader.config" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.bootloader.config.BootLoaderConfig">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.bootloader.config.</code><code class="sig-name descname">BootLoaderConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">xml_state</span></em>, <em class="sig-param"><span class="n">root_dir</span></em>, <em class="sig-param"><span class="n">boot_dir</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">custom_args</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/config.html#BootLoaderConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.bootloader.config.BootLoaderConfig" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.bootloader.config.</code><code class="sig-name descname">BootLoaderConfig</code><a class="reference internal" href="../_modules/kiwi/bootloader/config.html#BootLoaderConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.bootloader.config.BootLoaderConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>BootLoaderConfig factory</strong></p>
 <dl class="field-list simple">
@@ -1448,6 +1381,11 @@ boot from a disk image.</p>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt id="kiwi.bootloader.config.BootLoaderConfig.new">
+<em class="property">static </em><code class="sig-name descname">new</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">xml_state</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)">object</a></span></em>, <em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span></em>, <em class="sig-param"><span class="n">boot_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">custom_args</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/config.html#BootLoaderConfig.new"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.bootloader.config.BootLoaderConfig.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>

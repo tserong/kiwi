@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.runtime_config &mdash; KIWI NG 9.21.14 documentation</title>
+  <title>kiwi.runtime_config &mdash; KIWI NG 9.21.15 documentation</title>
   
 
   
@@ -450,7 +450,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config">Module Contents</a></li>
 </ul>
 </li>
@@ -458,7 +457,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.install.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.grub2</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install">Module Contents</a></li>
 </ul>
 </li>
@@ -470,7 +468,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.template.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template">Module Contents</a></li>
 </ul>
 </li>
@@ -816,6 +813,37 @@
             <span class="c1"># if the privacy attribute is not set we assume to be public</span>
             <span class="n">obs_public</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">obs_public</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RuntimeConfig.get_package_changes"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.runtime_config.RuntimeConfig.get_package_changes">[docs]</a>    <span class="k">def</span> <span class="nf">get_package_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return boolean value to express if the image build and bundle</span>
+<span class="sd">        should contain a .changes file. The .changes file contains</span>
+<span class="sd">        the package changelog information from all packages installed</span>
+<span class="sd">        into the image.</span>
+
+<span class="sd">        bundle:</span>
+<span class="sd">          - has_package_changes: true|false</span>
+
+<span class="sd">        By default the creation is switched on.</span>
+<span class="sd">        When building in the Open Build Service the default is</span>
+<span class="sd">        switched off because obs provides a .report file containing</span>
+<span class="sd">        the same information.</span>
+
+<span class="sd">        :param bool default: Default value</span>
+
+<span class="sd">        :return: True or False</span>
+
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bundle_package_changes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute</span><span class="p">(</span>
+            <span class="n">element</span><span class="o">=</span><span class="s1">&#39;bundle&#39;</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;has_package_changes&#39;</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">bundle_package_changes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">is_buildservice_worker</span><span class="p">():</span>
+                <span class="n">bundle_package_changes</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bundle_package_changes</span> <span class="o">=</span> <span class="n">default</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">bundle_package_changes</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="RuntimeConfig.get_bundle_compression"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.runtime_config.RuntimeConfig.get_bundle_compression">[docs]</a>    <span class="k">def</span> <span class="nf">get_bundle_compression</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

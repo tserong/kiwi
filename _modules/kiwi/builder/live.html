@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.builder.live &mdash; KIWI NG 9.21.14 documentation</title>
+  <title>kiwi.builder.live &mdash; KIWI NG 9.21.15 documentation</title>
   
 
   
@@ -450,7 +450,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.config.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.config.html#module-kiwi.bootloader.config">Module Contents</a></li>
 </ul>
 </li>
@@ -458,7 +457,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.base</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.grub2</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.install.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.install.html#module-kiwi.bootloader.install">Module Contents</a></li>
 </ul>
 </li>
@@ -470,7 +468,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.grub2</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.isolinux</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template.zipl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.zipl</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.bootloader.template.html#module-kiwi.bootloader.template">Module Contents</a></li>
 </ul>
 </li>
@@ -752,7 +749,7 @@
 <span class="kn">from</span> <span class="nn">kiwi.filesystem.isofs</span> <span class="kn">import</span> <span class="n">FileSystemIsoFs</span>
 <span class="kn">from</span> <span class="nn">kiwi.filesystem.setup</span> <span class="kn">import</span> <span class="n">FileSystemSetup</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.loop_device</span> <span class="kn">import</span> <span class="n">LoopDevice</span>
-<span class="kn">from</span> <span class="nn">kiwi.boot.image</span> <span class="kn">import</span> <span class="n">BootImageDracut</span>
+<span class="kn">from</span> <span class="nn">kiwi.boot.image.dracut</span> <span class="kn">import</span> <span class="n">BootImageDracut</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.size</span> <span class="kn">import</span> <span class="n">SystemSize</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.setup</span> <span class="kn">import</span> <span class="n">SystemSetup</span>
 <span class="kn">from</span> <span class="nn">kiwi.firmware</span> <span class="kn">import</span> <span class="n">FirmWare</span>
@@ -868,7 +865,7 @@
             <span class="c1"># This also embedds an MBR and the respective BIOS modules</span>
             <span class="c1"># for compat boot. The complete bootloader setup will be</span>
             <span class="c1"># based on grub</span>
-            <span class="n">bootloader_config</span> <span class="o">=</span> <span class="n">BootLoaderConfig</span><span class="p">(</span>
+            <span class="n">bootloader_config</span> <span class="o">=</span> <span class="n">BootLoaderConfig</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
                 <span class="s1">&#39;grub2&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="p">,</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
                 <span class="n">boot_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">media_dir</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="p">{</span>
                     <span class="s1">&#39;grub_directory_name&#39;</span><span class="p">:</span>
@@ -882,7 +879,7 @@
             <span class="c1"># setup bootloader config to boot the ISO via isolinux.</span>
             <span class="c1"># This allows for booting on x86 platforms in BIOS mode</span>
             <span class="c1"># only.</span>
-            <span class="n">bootloader_config</span> <span class="o">=</span> <span class="n">BootLoaderConfig</span><span class="p">(</span>
+            <span class="n">bootloader_config</span> <span class="o">=</span> <span class="n">BootLoaderConfig</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
                 <span class="s1">&#39;isolinux&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="p">,</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
                 <span class="n">boot_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">media_dir</span>
             <span class="p">)</span>
@@ -1024,6 +1021,15 @@
             <span class="p">),</span>
             <span class="n">use_for_bundle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">compress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">shasum</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+            <span class="n">key</span><span class="o">=</span><span class="s1">&#39;image_changes&#39;</span><span class="p">,</span>
+            <span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">system_setup</span><span class="o">.</span><span class="n">export_package_changes</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span>
+            <span class="p">),</span>
+            <span class="n">use_for_bundle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">compress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">shasum</span><span class="o">=</span><span class="kc">False</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
