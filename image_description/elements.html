@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Image Description Elements &mdash; KIWI NG 9.21.17 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.21.18 documentation</title>
   
 
   
@@ -728,7 +728,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.21.17</p>
+and attributes of the KIWI NG XML document in version 9.21.18</p>
 </div>
 <div class="section" id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -991,7 +991,7 @@ Many different deployment strategies are possible.</p>
 </dd>
 </dl>
 <p>For completion of a type description, there could be several other
-optional attributes and child elements. The <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a> element supports a
+optional attributes and child elements. The <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a> element supports a
 plethora of optional attributes, some of these are only relevant for
 certain build types and will be covered in extra chapters that describes
 the individual image types more detailed. Certain attributes are however
@@ -1140,11 +1140,31 @@ is used</p>
 </dd>
 <dt>squashfscompression=”uncompressed|gzip|lzo|lz4|xz|zstd”:</dt><dd><p>Specifies the compression type for mksquashfs</p>
 </dd>
-<dt>overlayroot=”true|false”</dt><dd><p>Specifies to use an overlay root system consisting
-out of a squashfs compressed read-only root system
-overlayed using the overlayfs filesystem into an
-extra read-write partition. Available for the disk
-image type oem only</p>
+<dt>overlayroot=”true|false”</dt><dd><p>For the <code class="xref py py-obj docutils literal notranslate"><span class="pre">oem</span></code> type only, specifies to use an <code class="xref py py-obj docutils literal notranslate"><span class="pre">overlayfs</span></code> based root
+filesystem consisting out of a squashfs compressed read-only root
+filesystem combined with a write-partition or tmpfs.
+The optional kernel boot parameter <code class="xref py py-obj docutils literal notranslate"><span class="pre">rd.root.overlay.readonly</span></code> can
+be used to point the write area into a <code class="xref py py-obj docutils literal notranslate"><span class="pre">tmpfs</span></code> instead of
+the existing persistent write-partition. In this mode all
+written data is temporary until reboot of the system. The kernel
+boot parameter <code class="xref py py-obj docutils literal notranslate"><span class="pre">rd.root.overlay.size</span></code> can be used to configure
+the size for the <code class="xref py py-obj docutils literal notranslate"><span class="pre">tmpfs</span></code> that is used for the <code class="xref py py-obj docutils literal notranslate"><span class="pre">overlayfs</span></code> mount
+process if <code class="xref py py-obj docutils literal notranslate"><span class="pre">rd.root.overlay.readonly</span></code> is requested. That size
+basically configures the amount of space available for writing
+new data during the runtime of the system. The default value
+is set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">50%</span></code> which means one half of the available RAM space can
+be used for writing new data. By default the persistent
+write-partition is used. The size of that partition can be
+influenced via the optional <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;size&gt;</span></code> element in the <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;type&gt;</span></code>
+section or via the optional <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;oem-resize&gt;</span></code> element in the
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;oemconfig&gt;</span></code> section of the XML description. Setting a fixed
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;size&gt;</span></code> value will set the size of the image disk to that
+value and results in an image file of that size. The available
+space for the write partition is that size reduced by the
+size the squashfs read-only system needs. If the <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;oem-resize&gt;</span></code>
+element is set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">true</span></code> an eventually given <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;size&gt;</span></code> element
+will not have any effect because the write partition will be
+resized on first boot to the available disk space.</p>
 </dd>
 <dt>bootfilesystem=”ext2|ext3|ext4|fat32|fat16”:</dt><dd><p>If an extra boot partition is required this attribute
 specify which filesystem should be used for it. The
@@ -1251,7 +1271,7 @@ base root to work on.</p>
 <dt>publisher=”string”:</dt><dd><p>For ISO images, specifies the publisher name of the ISO.</p>
 </dd>
 </dl>
-<p>The following sections shows the supported child elements of the <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.8)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a>
+<p>The following sections shows the supported child elements of the <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a>
 element including references to their usage in a detailed type setup:</p>
 </div>
 <div class="section" id="preferences-type-bootloader">

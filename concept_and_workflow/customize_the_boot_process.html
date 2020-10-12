@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Customizing the Boot Process &mdash; KIWI NG 9.21.17 documentation</title>
+  <title>Customizing the Boot Process &mdash; KIWI NG 9.21.18 documentation</title>
   
 
   
@@ -883,6 +883,13 @@ controllers, it can happen that your buch of big JBOD disks is for
 example <code class="xref py py-obj docutils literal notranslate"><span class="pre">/dev/sda</span></code> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">/dev/sdi</span></code> and the 480G RAID1 configured for
 OS deployment is <code class="xref py py-obj docutils literal notranslate"><span class="pre">/dev/sdj</span></code>. With <code class="xref py py-obj docutils literal notranslate"><span class="pre">rd.kiwi.oem.maxdisk=500G</span></code> the
 deployment will land on that RAID disk.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">rd.live.overlay.size</span></code></dt><dd><p>Tells a live ISO image the size for the <code class="xref py py-obj docutils literal notranslate"><span class="pre">tmpfs</span></code> filesystem that is used
+for the <code class="xref py py-obj docutils literal notranslate"><span class="pre">overlayfs</span></code> mount process. If the write area of the overlayfs
+mount uses this tmpfs, any new data written during the runtime of
+the system will fillup this space. The default value used is set
+to <code class="xref py py-obj docutils literal notranslate"><span class="pre">50%</span></code> which means one half of the available RAM space can be used
+for writing new data.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">rd.live.overlay.persistent</span></code></dt><dd><p>Tells a live ISO image to prepare a persistent
 write partition.</p>

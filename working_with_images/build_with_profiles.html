@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Building Images with Profiles &mdash; KIWI NG 9.21.17 documentation</title>
+  <title>Building Images with Profiles &mdash; KIWI NG 9.21.18 documentation</title>
   
 
   
@@ -732,8 +732,7 @@ defaults. For further details, see <a class="reference internal" href="../concep
 <h2>Local Builds<a class="headerlink" href="#local-builds" title="Permalink to this headline">¶</a></h2>
 <p>To execute local KIWI NG builds with a specific, selected profile, add the
 command line flag <code class="xref py py-obj docutils literal notranslate"><span class="pre">--profile=$PROFILE_NAME</span></code>:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo kiwi-ng --type iso system build <span class="se">\</span>
-      --profile<span class="o">=</span>workstation <span class="se">\</span>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo kiwi-ng --type iso --profile<span class="o">=</span>workstation system build <span class="se">\</span>
       --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
       --target-dir /tmp/myimage
 </pre></div>
