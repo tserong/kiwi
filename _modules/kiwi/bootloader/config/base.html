@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.bootloader.config.base &mdash; KIWI NG 9.21.19 documentation</title>
+  <title>kiwi.bootloader.config.base &mdash; KIWI NG 9.21.20 documentation</title>
   
 
   
@@ -1209,10 +1209,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
             <span class="n">device</span><span class="o">=</span><span class="n">root_device</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
-            <span class="n">device</span><span class="o">=</span><span class="n">boot_device</span><span class="p">,</span>
-            <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/boot&#39;</span>
-        <span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;s390&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                <span class="n">device</span><span class="o">=</span><span class="n">boot_device</span><span class="p">,</span>
+                <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/boot/zipl&#39;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                <span class="n">device</span><span class="o">=</span><span class="n">boot_device</span><span class="p">,</span>
+                <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/boot&#39;</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="n">efi_device</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">efi_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
                 <span class="n">device</span><span class="o">=</span><span class="n">efi_device</span><span class="p">,</span>

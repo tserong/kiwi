@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.volume_manager.btrfs &mdash; KIWI NG 9.21.19 documentation</title>
+  <title>kiwi.volume_manager.btrfs &mdash; KIWI NG 9.21.20 documentation</title>
   
 
   
@@ -879,7 +879,7 @@
             <span class="p">)</span>
 
         <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="n">canonical_volume_list</span><span class="o">.</span><span class="n">volumes</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;LVRoot&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">is_root_volume</span><span class="p">:</span>
                 <span class="c1"># the btrfs root volume named &#39;@&#39; has been created as</span>
                 <span class="c1"># part of the setup procedure</span>
                 <span class="k">pass</span>

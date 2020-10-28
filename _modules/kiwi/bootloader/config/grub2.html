@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.21.19 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.21.20 documentation</title>
   
 
   
@@ -761,6 +761,7 @@
     <span class="n">KiwiBootLoaderGrubModulesError</span><span class="p">,</span>
     <span class="n">KiwiBootLoaderGrubSecureBootError</span><span class="p">,</span>
     <span class="n">KiwiBootLoaderGrubFontError</span><span class="p">,</span>
+    <span class="n">KiwiDiskGeometryError</span>
 <span class="p">)</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
@@ -824,6 +825,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span> <span class="o">=</span> <span class="n">FirmWare</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span>
         <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_table_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">get_partition_table_type</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">live_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_flags</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">live_type</span><span class="p">:</span>
@@ -1275,15 +1277,19 @@
                 <span class="n">zipl_config</span> <span class="o">=</span> <span class="n">zipl_config_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
                 <span class="n">zipl_config</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
                     <span class="sa">r</span><span class="s1">&#39;(:menu)&#39;</span><span class="p">,</span>
-                    <span class="sa">r</span><span class="s1">&#39;:menu\n&#39;</span>
-                    <span class="sa">r</span><span class="s1">&#39;    targettype = </span><span class="si">{0}</span><span class="s1">\n&#39;</span>
-                    <span class="sa">r</span><span class="s1">&#39;    targetbase = </span><span class="si">{1}</span><span class="s1">\n&#39;</span>
-                    <span class="sa">r</span><span class="s1">&#39;    targetblocksize = </span><span class="si">{2}</span><span class="s1">\n&#39;</span>
-                    <span class="sa">r</span><span class="s1">&#39;    targetoffset = </span><span class="si">{3}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="s1">&#39;:menu</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="s1">&#39;    targettype = </span><span class="si">{0}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="s1">&#39;    targetbase = </span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="s1">&#39;    targetblocksize = </span><span class="si">{2}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="s1">&#39;    targetoffset = </span><span class="si">{3}</span><span class="se">\n</span><span class="s1">&#39;</span>
+                    <span class="s1">&#39;    </span><span class="si">{4}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                         <span class="n">target_type</span><span class="p">,</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;targetbase&#39;</span><span class="p">],</span>
                         <span class="n">target_blocksize</span> <span class="ow">or</span> <span class="mi">512</span><span class="p">,</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">_get_partition_start_sector</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_get_partition_start</span><span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;targetbase&#39;</span><span class="p">]</span>
+                        <span class="p">),</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_get_disk_geometry</span><span class="p">(</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;targetbase&#39;</span><span class="p">]</span>
                         <span class="p">)</span>
                     <span class="p">),</span>
@@ -1854,6 +1860,7 @@
     <span class="k">def</span> <span class="nf">_fix_grub_root_device_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file</span><span class="p">,</span> <span class="n">boot_options</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span> <span class="ow">or</span> \
+               <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s390&#39;</span><span class="p">)</span> <span class="ow">or</span> \
                <span class="n">Defaults</span><span class="o">.</span><span class="n">is_buildservice_worker</span><span class="p">():</span>
                 <span class="c1"># grub2-mkconfig has no idea how the correct root= setup is</span>
                 <span class="c1"># for disk images created with overlayroot enabled or in a</span>
@@ -1927,18 +1934,70 @@
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">menu_entry_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_menu_entry_file</span><span class="p">:</span>
                     <span class="n">grub_menu_entry_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">menu_entry</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_get_partition_start_sector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disk_device</span><span class="p">):</span>
-        <span class="n">bash_command</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="p">[</span>
-                <span class="s1">&#39;sfdisk&#39;</span><span class="p">,</span> <span class="s1">&#39;--dump&#39;</span><span class="p">,</span> <span class="n">disk_device</span><span class="p">,</span>
-                <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;grep&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;1 :&quot;&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;cut&#39;</span><span class="p">,</span> <span class="s1">&#39;-f1&#39;</span><span class="p">,</span> <span class="s1">&#39;-d,&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;cut&#39;</span><span class="p">,</span> <span class="s1">&#39;-f2&#39;</span><span class="p">,</span> <span class="s1">&#39;-d=&#39;</span>
+    <span class="k">def</span> <span class="nf">_get_partition_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disk_device</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_table_type</span> <span class="o">==</span> <span class="s1">&#39;dasd&#39;</span><span class="p">:</span>
+            <span class="n">blocks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_dasd_disk_geometry_element</span><span class="p">(</span>
+                <span class="n">disk_device</span><span class="p">,</span> <span class="s1">&#39;blocks per track&#39;</span>
+            <span class="p">)</span>
+            <span class="n">bash_command</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s1">&#39;fdasd&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="n">disk_device</span><span class="p">,</span>
+                <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;grep&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;^ &quot;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;head&#39;</span><span class="p">,</span> <span class="s1">&#39;-n&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;tr&#39;</span><span class="p">,</span> <span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot; &quot;&#39;</span>
             <span class="p">]</span>
+            <span class="n">fdasd_call</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bash_command</span><span class="p">)]</span>
+            <span class="p">)</span>
+            <span class="n">fdasd_output</span> <span class="o">=</span> <span class="n">fdasd_call</span><span class="o">.</span><span class="n">output</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">start_track</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fdasd_output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">KiwiDiskGeometryError</span><span class="p">(</span>
+                    <span class="s1">&#39;unknown partition format: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">fdasd_output</span>
+                <span class="p">)</span>
+            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">start_track</span> <span class="o">*</span> <span class="n">blocks</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">bash_command</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="s1">&#39;sfdisk&#39;</span><span class="p">,</span> <span class="s1">&#39;--dump&#39;</span><span class="p">,</span> <span class="n">disk_device</span><span class="p">,</span>
+                    <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;grep&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;1 :&quot;&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;cut&#39;</span><span class="p">,</span> <span class="s1">&#39;-f1&#39;</span><span class="p">,</span> <span class="s1">&#39;-d,&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;cut&#39;</span><span class="p">,</span> <span class="s1">&#39;-f2&#39;</span><span class="p">,</span> <span class="s1">&#39;-d=&#39;</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="n">bash_command</span><span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_get_disk_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disk_device</span><span class="p">):</span>
+        <span class="n">disk_geometry</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_table_type</span> <span class="o">==</span> <span class="s1">&#39;dasd&#39;</span><span class="p">:</span>
+            <span class="n">disk_geometry</span> <span class="o">=</span> <span class="s1">&#39;targetgeometry = </span><span class="si">{0}</span><span class="s1">,</span><span class="si">{1}</span><span class="s1">,</span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_get_dasd_disk_geometry_element</span><span class="p">(</span>
+                    <span class="n">disk_device</span><span class="p">,</span> <span class="s1">&#39;cylinders&#39;</span>
+                <span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_get_dasd_disk_geometry_element</span><span class="p">(</span>
+                    <span class="n">disk_device</span><span class="p">,</span> <span class="s1">&#39;tracks per cylinder&#39;</span>
+                <span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_get_dasd_disk_geometry_element</span><span class="p">(</span>
+                    <span class="n">disk_device</span><span class="p">,</span> <span class="s1">&#39;blocks per track&#39;</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">disk_geometry</span>
+
+    <span class="k">def</span> <span class="nf">_get_dasd_disk_geometry_element</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disk_device</span><span class="p">,</span> <span class="n">search</span><span class="p">):</span>
+        <span class="n">fdasd</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;fdasd&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="n">disk_device</span><span class="p">]</span>
+        <span class="n">bash_command</span> <span class="o">=</span> <span class="n">fdasd</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;grep&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">search</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">]</span>
+        <span class="n">fdasd_call</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bash_command</span><span class="p">)]</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-            <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="n">bash_command</span><span class="p">]</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
+        <span class="n">fdasd_output</span> <span class="o">=</span> <span class="n">fdasd_call</span><span class="o">.</span><span class="n">output</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">fdasd_output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">KiwiDiskGeometryError</span><span class="p">(</span>
+                <span class="s1">&#39;unknown format for disk geometry: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">fdasd_output</span>
+            <span class="p">)</span></div>
 </pre></div>
 
            </div>

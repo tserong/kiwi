@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.storage.setup &mdash; KIWI NG 9.21.19 documentation</title>
+  <title>kiwi.storage.setup &mdash; KIWI NG 9.21.20 documentation</title>
   
 
   
@@ -1042,7 +1042,7 @@
 
     <span class="k">def</span> <span class="nf">_get_root_volume_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Provide LVRoot volume configuration if present and in</span>
+<span class="sd">        Provide root volume configuration if present and in</span>
 <span class="sd">        use according to the selected volume management. So far</span>
 <span class="sd">        this only affects the LVM volume manager</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1050,7 +1050,7 @@
             <span class="s1">&#39;root_volume_type&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;size_type&#39;</span><span class="p">,</span> <span class="s1">&#39;req_size&#39;</span><span class="p">]</span>
         <span class="p">)</span>
         <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;LVRoot&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">is_root_volume</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
                     <span class="p">[</span><span class="n">size_type</span><span class="p">,</span> <span class="n">req_size</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume</span><span class="o">.</span><span class="n">size</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
                     <span class="k">return</span> <span class="n">root_volume_type</span><span class="p">(</span>

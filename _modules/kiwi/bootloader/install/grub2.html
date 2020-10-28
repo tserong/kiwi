@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.bootloader.install.grub2 &mdash; KIWI NG 9.21.19 documentation</title>
+  <title>kiwi.bootloader.install.grub2 &mdash; KIWI NG 9.21.20 documentation</title>
   
 
   
@@ -882,10 +882,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
             <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;root_device&#39;</span><span class="p">]</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
-            <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;boot_device&#39;</span><span class="p">],</span>
-            <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/boot&#39;</span>
-        <span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;s390&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;boot_device&#39;</span><span class="p">],</span>
+                <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/boot/zipl&#39;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;boot_device&#39;</span><span class="p">],</span>
+                <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/boot&#39;</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;efi_device&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">efi_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
                 <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;efi_device&#39;</span><span class="p">],</span>
@@ -952,18 +958,57 @@
             <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="n">grubenv</span><span class="p">)</span>
 
         <span class="c1"># install grub2 boot code</span>
-        <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-            <span class="p">[</span>
-                <span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_get_grub2_install_tool_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">)</span>
-            <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">install_arguments</span> <span class="o">+</span> <span class="p">[</span>
-                <span class="s1">&#39;--directory&#39;</span><span class="p">,</span> <span class="n">module_directory</span><span class="p">,</span>
-                <span class="s1">&#39;--boot-directory&#39;</span><span class="p">,</span> <span class="n">boot_directory</span><span class="p">,</span>
-                <span class="s1">&#39;--target&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span>
-                <span class="s1">&#39;--modules&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">,</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">install_device</span>
-            <span class="p">]</span>
-        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">get_partition_table_type</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;dasd&#39;</span><span class="p">:</span>
+            <span class="c1"># On s390 and in CDL mode (4k DASD) the call of grub2-install</span>
+            <span class="c1"># does not work because grub2-install is not able to identify</span>
+            <span class="c1"># a 4k fdasd partitioned device as a grub supported device</span>
+            <span class="c1"># and fails. As grub2-install is only used to invoke</span>
+            <span class="c1"># grub2-zipl-setup and has no other job to do we can</span>
+            <span class="c1"># circumvent this problem by directly calling grub2-zipl-setup</span>
+            <span class="c1"># instead.</span>
+            <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span>
+                    <span class="s1">&#39;grub2-zipl-setup&#39;</span><span class="p">,</span> <span class="s1">&#39;--keep&#39;</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">zipl_config_file</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span> <span class="s1">&#39;/boot/zipl/config&#39;</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">zipl2grub_config_file_orig</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span>
+                    <span class="s1">&#39;/etc/default/zipl2grub.conf.in.orig&#39;</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">zipl2grub_config_file_orig</span><span class="p">):</span>
+                <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="s1">&#39;mv&#39;</span><span class="p">,</span> <span class="n">zipl2grub_config_file_orig</span><span class="p">,</span>
+                        <span class="n">zipl2grub_config_file_orig</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.orig&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="p">]</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">zipl_config_file</span><span class="p">):</span>
+                <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                    <span class="p">[</span><span class="s1">&#39;mv&#39;</span><span class="p">,</span> <span class="n">zipl_config_file</span><span class="p">,</span> <span class="n">zipl_config_file</span> <span class="o">+</span> <span class="s1">&#39;.kiwi&#39;</span><span class="p">]</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_get_grub2_install_tool_name</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span>
+                    <span class="p">)</span>
+                <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">install_arguments</span> <span class="o">+</span> <span class="p">[</span>
+                    <span class="s1">&#39;--directory&#39;</span><span class="p">,</span> <span class="n">module_directory</span><span class="p">,</span>
+                    <span class="s1">&#39;--boot-directory&#39;</span><span class="p">,</span> <span class="n">boot_directory</span><span class="p">,</span>
+                    <span class="s1">&#39;--target&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="p">,</span>
+                    <span class="s1">&#39;--modules&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">install_device</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">efi_mode</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;uefi&#39;</span><span class="p">:</span>
             <span class="n">shim_install</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_shim_install_tool_name</span><span class="p">(</span>

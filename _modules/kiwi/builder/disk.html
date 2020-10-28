@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.21.19 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.21.20 documentation</title>
   
 
   
@@ -1378,7 +1378,10 @@
             <span class="n">exclude_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/.*&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spare_part_mountpoint</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span>
             <span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;boot&#39;</span> <span class="ow">in</span> <span class="n">device_map</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;boot&#39;</span> <span class="ow">in</span> <span class="n">device_map</span> <span class="ow">and</span> <span class="s1">&#39;s390&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">:</span>
+            <span class="n">exclude_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;boot/zipl/*&#39;</span><span class="p">)</span>
+            <span class="n">exclude_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;boot/zipl/.*&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s1">&#39;boot&#39;</span> <span class="ow">in</span> <span class="n">device_map</span><span class="p">:</span>
             <span class="n">exclude_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;boot/*&#39;</span><span class="p">)</span>
             <span class="n">exclude_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;boot/.*&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="s1">&#39;efi&#39;</span> <span class="ow">in</span> <span class="n">device_map</span><span class="p">:</span>
@@ -1430,6 +1433,8 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">boot_filesystem</span><span class="p">:</span>
                 <span class="n">boot_filesystem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">requested_filesystem</span>
             <span class="n">boot_directory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">+</span> <span class="s1">&#39;/boot/&#39;</span>
+            <span class="k">if</span> <span class="s1">&#39;s390&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">:</span>
+                <span class="n">boot_directory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">+</span> <span class="s1">&#39;/boot/zipl/&#39;</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
                 <span class="s1">&#39;Creating boot(</span><span class="si">%s</span><span class="s1">) filesystem on </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
                 <span class="n">boot_filesystem</span><span class="p">,</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;boot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>
@@ -1620,7 +1625,10 @@
             <span class="n">custom_root_mount_args</span><span class="p">,</span> <span class="n">fs_check_interval</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">device_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;boot&#39;</span><span class="p">):</span>
-            <span class="n">boot_mount_point</span> <span class="o">=</span> <span class="s1">&#39;/boot&#39;</span>
+            <span class="k">if</span> <span class="s1">&#39;s390&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">:</span>
+                <span class="n">boot_mount_point</span> <span class="o">=</span> <span class="s1">&#39;/boot/zipl&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">boot_mount_point</span> <span class="o">=</span> <span class="s1">&#39;/boot&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_add_generic_fstab_entry</span><span class="p">(</span>
                 <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;boot&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">(),</span> <span class="n">boot_mount_point</span>
             <span class="p">)</span>

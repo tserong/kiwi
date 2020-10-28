@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Custom Disk Volumes &mdash; KIWI NG 9.21.19 documentation</title>
+  <title>Custom Disk Volumes &mdash; KIWI NG 9.21.20 documentation</title>
   
 
   
@@ -769,6 +769,13 @@ defined. For instance:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;volume</span> <span class="na">name=</span><span class="s">&quot;@root&quot;</span> <span class="na">size=</span><span class="s">&quot;4G&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
+<p>In addition to the custom size of the root volume it’s also possible
+to setup the name of the root volume as follows:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;volume</span> <span class="na">name=</span><span class="s">&quot;@root=rootlv&quot;</span> <span class="na">size=</span><span class="s">&quot;4G&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>If no name for the root volume is specified the
+default name: <strong>LVRoot</strong> applies.</p>
 </div>
 </li>
 <li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">freespace</span></code>: Optional attribute defining the additional free space added
