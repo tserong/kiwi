@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.system.prepare &mdash; KIWI NG 9.21.20 documentation</title>
+  <title>kiwi.system.prepare &mdash; KIWI NG 9.21.21 documentation</title>
   
 
   
@@ -795,7 +795,7 @@
         <span class="n">root</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
         <span class="n">image_uri</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_derived_from_image_uri</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">image_uri</span><span class="p">:</span>
-            <span class="n">root_import</span> <span class="o">=</span> <span class="n">RootImport</span><span class="p">(</span>
+            <span class="n">root_import</span> <span class="o">=</span> <span class="n">RootImport</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
                 <span class="n">root_dir</span><span class="p">,</span> <span class="n">image_uri</span><span class="p">,</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span>
             <span class="p">)</span>
             <span class="n">root_import</span><span class="o">.</span><span class="n">sync_data</span><span class="p">()</span>
@@ -939,7 +939,7 @@
             <span class="n">bootstrap_products</span>
         <span class="p">)</span>
         <span class="n">process</span> <span class="o">=</span> <span class="n">CommandProcess</span><span class="p">(</span>
-            <span class="n">command</span><span class="o">=</span><span class="n">manager</span><span class="o">.</span><span class="n">process_install_requests_bootstrap</span><span class="p">(),</span>
+            <span class="n">command</span><span class="o">=</span><span class="n">manager</span><span class="o">.</span><span class="n">process_install_requests_bootstrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_bind</span><span class="p">),</span>
             <span class="n">log_topic</span><span class="o">=</span><span class="s1">&#39;bootstrap&#39;</span>
         <span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
@@ -957,7 +957,7 @@
                         <span class="n">reason</span><span class="o">=</span><span class="n">issue</span>
                     <span class="p">)</span>
                 <span class="p">)</span>
-        <span class="n">manager</span><span class="o">.</span><span class="n">post_process_install_requests_bootstrap</span><span class="p">()</span>
+        <span class="n">manager</span><span class="o">.</span><span class="n">post_process_install_requests_bootstrap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_bind</span><span class="p">)</span>
         <span class="c1"># process archive installations</span>
         <span class="k">if</span> <span class="n">bootstrap_archives</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>

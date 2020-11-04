@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.system.root_bind &mdash; KIWI NG 9.21.20 documentation</title>
+  <title>kiwi.system.root_bind &mdash; KIWI NG 9.21.21 documentation</title>
   
 
   
@@ -818,6 +818,19 @@
                 <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
             <span class="p">)</span></div>
 
+<div class="viewcode-block" id="RootBind.umount_kernel_file_systems"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.root_bind.RootBind.umount_kernel_file_systems">[docs]</a>    <span class="k">def</span> <span class="nf">umount_kernel_file_systems</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Umount kernel filesystems</span>
+
+<span class="sd">        :raises KiwiMountKernelFileSystemsError: if some kernel filesystem</span>
+<span class="sd">            fails to mount</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">umounts</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">mnt</span> <span class="k">for</span> <span class="n">mnt</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mount_stack</span> <span class="k">if</span> <span class="n">mnt</span><span class="o">.</span><span class="n">device</span>
+            <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind_locations</span>
+        <span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_mounts</span><span class="p">(</span><span class="n">umounts</span><span class="p">)</span></div>
+
 <div class="viewcode-block" id="RootBind.mount_shared_directory"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.root_bind.RootBind.mount_shared_directory">[docs]</a>    <span class="k">def</span> <span class="nf">mount_shared_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Bind mount shared location</span>
@@ -986,19 +999,22 @@
 
                 <span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">config_rpm_new</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">+</span> <span class="n">config</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_cleanup_mount_stack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">mount</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mount_stack</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">mount</span><span class="o">.</span><span class="n">is_mounted</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">_cleanup_mounts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">umounts</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">umount</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">umounts</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">umount</span><span class="o">.</span><span class="n">is_mounted</span><span class="p">():</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="n">mount</span><span class="o">.</span><span class="n">umount_lazy</span><span class="p">()</span>
+                    <span class="n">umount</span><span class="o">.</span><span class="n">umount_lazy</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">mount_stack</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">umount</span><span class="p">)</span>
                 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                     <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
                         <span class="s1">&#39;Image root directory </span><span class="si">%s</span><span class="s1"> not cleanly umounted: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
                     <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Path </span><span class="si">%s</span><span class="s1"> not a mountpoint&#39;</span><span class="p">,</span> <span class="n">mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">)</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Path </span><span class="si">%s</span><span class="s1"> not a mountpoint&#39;</span><span class="p">,</span> <span class="n">umount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">_cleanup_mount_stack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_mounts</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mount_stack</span><span class="p">)</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">mount_stack</span><span class="p">[:]</span>
 
     <span class="k">def</span> <span class="nf">_cleanup_dir_stack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

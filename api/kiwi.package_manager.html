@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.package_manager Package &mdash; KIWI NG 9.21.20 documentation</title>
+  <title>kiwi.package_manager Package &mdash; KIWI NG 9.21.21 documentation</title>
   
 
   
@@ -836,7 +836,7 @@ overwritten in specialized package manager class</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.base.PackageManagerBase.post_process_install_requests_bootstrap">
-<code class="sig-name descname">post_process_install_requests_bootstrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.post_process_install_requests_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.post_process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">post_process_install_requests_bootstrap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_bind</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.post_process_install_requests_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.post_process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process extra code required after bootstrapping</p>
 <p>Implementation in specialized package manager class</p>
 </dd></dl>
@@ -862,7 +862,7 @@ overwritten in specialized package manager class</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.base.PackageManagerBase.process_install_requests_bootstrap">
-<code class="sig-name descname">process_install_requests_bootstrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.process_install_requests_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">process_install_requests_bootstrap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_bind</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.process_install_requests_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package install requests for bootstrap phase (no chroot)</p>
 <p>Implementation in specialized package manager class</p>
 </dd></dl>
@@ -1028,9 +1028,14 @@ the same base package name</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.dnf.PackageManagerDnf.post_process_install_requests_bootstrap">
-<code class="sig-name descname">post_process_install_requests_bootstrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.post_process_install_requests_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.post_process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">post_process_install_requests_bootstrap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_bind</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.post_process_install_requests_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.post_process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Move the rpm database to the place as it is expected by the
 rpm package installed during bootstrap phase</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>root_bind</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – unused</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -1070,14 +1075,17 @@ installed.</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.dnf.PackageManagerDnf.process_install_requests_bootstrap">
-<code class="sig-name descname">process_install_requests_bootstrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.process_install_requests_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">process_install_requests_bootstrap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_bind</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.process_install_requests_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package install requests for bootstrap phase (no chroot)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>process results in command type</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>root_bind</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – unused</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>namedtuple</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>process results in command type</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>namedtuple</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1303,14 +1311,17 @@ installed</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.zypper.PackageManagerZypper.process_install_requests_bootstrap">
-<code class="sig-name descname">process_install_requests_bootstrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper.process_install_requests_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper.process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">process_install_requests_bootstrap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_bind</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper.process_install_requests_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper.process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package install requests for bootstrap phase (no chroot)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>process results in command type</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>root_bind</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – unused</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>namedtuple</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>process results in command type</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>namedtuple</p>
 </dd>
 </dl>
 </dd></dl>

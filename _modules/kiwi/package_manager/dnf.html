@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.package_manager.dnf &mdash; KIWI NG 9.21.20 documentation</title>
+  <title>kiwi.package_manager.dnf &mdash; KIWI NG 9.21.21 documentation</title>
   
 
   
@@ -806,9 +806,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">exclude_requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PackageManagerDnf.process_install_requests_bootstrap"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.dnf.PackageManagerDnf.process_install_requests_bootstrap">[docs]</a>    <span class="k">def</span> <span class="nf">process_install_requests_bootstrap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerDnf.process_install_requests_bootstrap"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.dnf.PackageManagerDnf.process_install_requests_bootstrap">[docs]</a>    <span class="k">def</span> <span class="nf">process_install_requests_bootstrap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_bind</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Process package install requests for bootstrap phase (no chroot)</span>
+
+<span class="sd">        :param object root_bind: unused</span>
 
 <span class="sd">        :return: process results in command type</span>
 
@@ -980,10 +982,12 @@
             <span class="s1">&#39;.*Removing: &#39;</span> <span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.*&#39;</span><span class="p">,</span> <span class="n">dnf_output</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="PackageManagerDnf.post_process_install_requests_bootstrap"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.dnf.PackageManagerDnf.post_process_install_requests_bootstrap">[docs]</a>    <span class="k">def</span> <span class="nf">post_process_install_requests_bootstrap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerDnf.post_process_install_requests_bootstrap"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.dnf.PackageManagerDnf.post_process_install_requests_bootstrap">[docs]</a>    <span class="k">def</span> <span class="nf">post_process_install_requests_bootstrap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_bind</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Move the rpm database to the place as it is expected by the</span>
 <span class="sd">        rpm package installed during bootstrap phase</span>
+
+<span class="sd">        :param object root_bind: unused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rpmdb</span> <span class="o">=</span> <span class="n">RpmDataBase</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">rpmdb</span><span class="o">.</span><span class="n">has_rpm</span><span class="p">():</span>

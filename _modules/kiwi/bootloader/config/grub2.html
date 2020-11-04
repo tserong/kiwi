@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.21.20 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.21.21 documentation</title>
   
 
   
@@ -816,6 +816,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_boot_timeout_seconds</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">timeout_style</span> <span class="o">=</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_build_type_bootloader_timeout_style</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">displayname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">xml_data</span><span class="o">.</span><span class="n">get_displayname</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">serial_line_setup</span> <span class="o">=</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_build_type_bootloader_serial_line_setup</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">continue_on_timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_continue_on_timeout</span><span class="p">()</span>
@@ -1316,12 +1317,17 @@
 <span class="sd">        * GRUB_CMDLINE_LINUX_DEFAULT</span>
 <span class="sd">        * GRUB_GFXMODE</span>
 <span class="sd">        * GRUB_TERMINAL</span>
+<span class="sd">        * GRUB_DISTRIBUTOR</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">grub_default_entries</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;GRUB_TIMEOUT&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
             <span class="s1">&#39;GRUB_GFXMODE&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">gfxmode</span><span class="p">,</span>
             <span class="s1">&#39;GRUB_TERMINAL&#39;</span><span class="p">:</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="p">)</span>
         <span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">displayname</span><span class="p">:</span>
+            <span class="n">grub_default_entries</span><span class="p">[</span><span class="s1">&#39;GRUB_DISTRIBUTOR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">displayname</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout_style</span><span class="p">:</span>
             <span class="n">grub_default_entries</span><span class="p">[</span><span class="s1">&#39;GRUB_TIMEOUT_STYLE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout_style</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdline</span><span class="p">:</span>
@@ -1875,9 +1881,9 @@
                     <span class="c1"># grub mkconfig root= settings and replaces it with a</span>
                     <span class="c1"># correct value</span>
                     <span class="c1"># 1. root=LOCAL-KIWI-MAPPED-DEVICE</span>
-                    <span class="c1"># 2. root=.*(lazy)=ANY-LINUX-BY-ID-VALUE</span>
+                    <span class="c1"># 2. root=[a-zA-Z]=ANY-LINUX-BY-ID-VALUE</span>
                     <span class="n">grub_config</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
-                        <span class="sa">r</span><span class="s1">&#39;(root=.*?=[a-zA-Z0-9:\.-]+)|(root=</span><span class="si">{0}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="sa">r</span><span class="s1">&#39;(root=[a-zA-Z]+=[a-zA-Z0-9:\.-]+)|(root=</span><span class="si">{0}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                             <span class="n">boot_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;root_device&#39;</span><span class="p">)</span>
                         <span class="p">),</span>
                         <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span><span class="p">),</span>

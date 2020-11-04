@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.21.20 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.21.21 documentation</title>
   
 
   
@@ -1048,7 +1048,7 @@
                 <span class="s1">&#39;resize_on_boot&#39;</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">disk_resize_requested</span>
             <span class="p">}</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager</span> <span class="o">=</span> <span class="n">VolumeManager</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager</span> <span class="o">=</span> <span class="n">VolumeManager</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager_name</span><span class="p">,</span> <span class="n">device_map</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">,</span>
@@ -1270,7 +1270,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_format</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Creating </span><span class="si">%s</span><span class="s1"> Disk Format&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_format</span><span class="p">)</span>
-            <span class="n">disk_format</span> <span class="o">=</span> <span class="n">DiskFormat</span><span class="p">(</span>
+            <span class="n">disk_format</span> <span class="o">=</span> <span class="n">DiskFormat</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">image_format</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span>
             <span class="p">)</span>
@@ -1288,7 +1288,7 @@
                 <span class="s1">&#39;Expanding disk with </span><span class="si">%d</span><span class="s1"> bytes of unpartitioned space&#39;</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">unpartitioned_bytes</span>
             <span class="p">)</span>
-            <span class="n">disk_format</span> <span class="o">=</span> <span class="n">DiskFormat</span><span class="p">(</span>
+            <span class="n">disk_format</span> <span class="o">=</span> <span class="n">DiskFormat</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
                 <span class="s1">&#39;raw&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span>
             <span class="p">)</span>
             <span class="n">disk_format</span><span class="o">.</span><span class="n">resize_raw_disk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">unpartitioned_bytes</span><span class="p">,</span> <span class="n">append</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
