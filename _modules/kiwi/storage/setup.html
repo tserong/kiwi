@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.storage.setup &mdash; KIWI NG 9.21.23 documentation</title>
+  <title>kiwi.storage.setup &mdash; KIWI NG 9.21.24 documentation</title>
   
 
   
@@ -783,7 +783,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">=</span> <span class="n">root_dir</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span> <span class="o">=</span> <span class="n">xml_state</span>
 
-<div class="viewcode-block" id="DiskSetup.get_disksize_mbytes"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.setup.DiskSetup.get_disksize_mbytes">[docs]</a>    <span class="k">def</span> <span class="nf">get_disksize_mbytes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa C901</span>
+<div class="viewcode-block" id="DiskSetup.get_disksize_mbytes"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.setup.DiskSetup.get_disksize_mbytes">[docs]</a>    <span class="k">def</span> <span class="nf">get_disksize_mbytes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Precalculate disk size requirements in mbytes</span>
 
@@ -913,10 +913,9 @@
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager</span> <span class="o">==</span> <span class="s1">&#39;btrfs&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filesystem</span> <span class="o">==</span> <span class="s1">&#39;xfs&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">True</span></div>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="DiskSetup.get_boot_label"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.setup.DiskSetup.get_boot_label">[docs]</a>    <span class="k">def</span> <span class="nf">get_boot_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Adding Users &mdash; KIWI NG 9.21.23 documentation</title>
+  <title>Adding Users &mdash; KIWI NG 9.21.24 documentation</title>
   
 
   
@@ -744,19 +744,8 @@ supports a list of multiple <code class="xref py py-obj docutils literal notrans
 </div>
 <p>Each <code class="xref py py-obj docutils literal notranslate"><span class="pre">user</span></code> element represents a specific user that is added or
 modified. The following attributes are mandatory:</p>
-<ul class="simple">
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code>: the UNIX username</p></li>
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">home</span></code>: the path to the user’s home directory</p></li>
-</ul>
-<p>Additionally, the following optional attributes can be specified:</p>
 <ul>
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">groups</span></code>: A comma separated list of UNIX groups. The first element of the
-list is used as the user’s primary group. The remaining elements are
-appended to the user’s supplementary groups. When no groups are assigned
-then the system’s default primary group will be used.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#id" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">id</span></code></a>: The numeric user id of this account.</p></li>
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwdformat</span></code>: The format in which <code class="xref py py-obj docutils literal notranslate"><span class="pre">password</span></code> is provided, either <code class="xref py py-obj docutils literal notranslate"><span class="pre">plain</span></code>
-or <code class="xref py py-obj docutils literal notranslate"><span class="pre">encrypted</span></code> (the latter is the default).</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code>: the UNIX username</p></li>
 <li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">password</span></code>: The password for this user account. It can be provided either
 in cleartext form (<code class="xref py py-obj docutils literal notranslate"><span class="pre">pwdformat=&quot;plain&quot;</span></code>) or in <a class="reference external" href="https://docs.python.org/3/library/crypt.html#module-crypt" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">crypt</span></code></a>’ed form
 (<code class="xref py py-obj docutils literal notranslate"><span class="pre">pwdformat=&quot;encrypted&quot;</span></code>). Plain passwords are discouraged, as everyone
@@ -767,6 +756,17 @@ follows:</p>
 </pre></div>
 </div>
 </li>
+</ul>
+<p>Additionally, the following optional attributes can be specified:</p>
+<ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">home</span></code>: the path to the user’s home directory</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">groups</span></code>: A comma separated list of UNIX groups. The first element of the
+list is used as the user’s primary group. The remaining elements are
+appended to the user’s supplementary groups. When no groups are assigned
+then the system’s default primary group will be used.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#id" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">id</span></code></a>: The numeric user id of this account.</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">pwdformat</span></code>: The format in which <code class="xref py py-obj docutils literal notranslate"><span class="pre">password</span></code> is provided, either <code class="xref py py-obj docutils literal notranslate"><span class="pre">plain</span></code>
+or <code class="xref py py-obj docutils literal notranslate"><span class="pre">encrypted</span></code> (the latter is the default).</p></li>
 </ul>
 </div>
 

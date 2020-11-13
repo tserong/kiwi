@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.package_manager &mdash; KIWI NG 9.21.23 documentation</title>
+  <title>kiwi.package_manager &mdash; KIWI NG 9.21.24 documentation</title>
   
 
   
@@ -741,6 +741,7 @@
 <span class="kn">from</span> <span class="nn">kiwi.package_manager.zypper</span> <span class="kn">import</span> <span class="n">PackageManagerZypper</span>
 <span class="kn">from</span> <span class="nn">kiwi.package_manager.apt</span> <span class="kn">import</span> <span class="n">PackageManagerApt</span>
 <span class="kn">from</span> <span class="nn">kiwi.package_manager.dnf</span> <span class="kn">import</span> <span class="n">PackageManagerDnf</span>
+<span class="kn">from</span> <span class="nn">kiwi.package_manager.microdnf</span> <span class="kn">import</span> <span class="n">PackageManagerMicroDnf</span>
 <span class="kn">from</span> <span class="nn">kiwi.package_manager.pacman</span> <span class="kn">import</span> <span class="n">PackageManagerPacman</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
@@ -769,6 +770,8 @@
             <span class="n">manager</span> <span class="o">=</span> <span class="n">PackageManagerZypper</span><span class="p">(</span><span class="n">repository</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;dnf&#39;</span> <span class="ow">or</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;yum&#39;</span><span class="p">:</span>
             <span class="n">manager</span> <span class="o">=</span> <span class="n">PackageManagerDnf</span><span class="p">(</span><span class="n">repository</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;microdnf&#39;</span><span class="p">:</span>
+            <span class="n">manager</span> <span class="o">=</span> <span class="n">PackageManagerMicroDnf</span><span class="p">(</span><span class="n">repository</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;apt-get&#39;</span><span class="p">:</span>
             <span class="n">manager</span> <span class="o">=</span> <span class="n">PackageManagerApt</span><span class="p">(</span><span class="n">repository</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;pacman&#39;</span><span class="p">:</span>

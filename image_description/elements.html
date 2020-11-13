@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Image Description Elements &mdash; KIWI NG 9.21.23 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.21.24 documentation</title>
   
 
   
@@ -728,7 +728,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.21.23</p>
+and attributes of the KIWI NG XML document in version 9.21.24</p>
 </div>
 <div class="section" id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -1588,23 +1588,8 @@ in the system. At least one user child element must be specified as
 part of the users element. Multiple user elements may be specified.</p>
 <p>Each <code class="xref py py-obj docutils literal notranslate"><span class="pre">user</span></code> element represents a specific user that is added or
 modified. The following attributes are mandatory:</p>
-<dl class="simple">
-<dt>name=”name”:</dt><dd><p>the UNIX username</p>
-</dd>
-<dt>home=”path”:</dt><dd><p>The path to the user’s home directory</p>
-</dd>
-</dl>
-<p>Additionally, the following optional attributes can be specified:</p>
 <dl>
-<dt>groups=”group_a,group_b”:</dt><dd><p>A comma separated list of UNIX groups. The first element of the
-list is used as the user’s primary group. The remaining elements are
-appended to the user’s supplementary groups. When no groups are assigned
-then the system’s default primary group will be used.</p>
-</dd>
-<dt>id=”number”:</dt><dd><p>The numeric user id of this account.</p>
-</dd>
-<dt>pwdformat=”plain|encrypted”:</dt><dd><p>The format in which <code class="xref py py-obj docutils literal notranslate"><span class="pre">password</span></code> is provided. The default if not
-specified is <code class="xref py py-obj docutils literal notranslate"><span class="pre">encrypted</span></code>.</p>
+<dt>name=”name”:</dt><dd><p>the UNIX username</p>
 </dd>
 <dt>password=”string”</dt><dd><p>The password for this user account. It can be provided either
 in cleartext form or encrypted. An encrypted password can be created
@@ -1627,6 +1612,21 @@ exist. The defined users will be part of the group(s) specified
 with the groups attribute or belong to the default group as configured
 in the system. If specified the first entry in the groups list is used
 as the login group.</p>
+</dd>
+</dl>
+<p>Additionally, the following optional attributes can be specified:</p>
+<dl class="simple">
+<dt>home=”path”:</dt><dd><p>The path to the user’s home directory</p>
+</dd>
+<dt>groups=”group_a,group_b”:</dt><dd><p>A comma separated list of UNIX groups. The first element of the
+list is used as the user’s primary group. The remaining elements are
+appended to the user’s supplementary groups. When no groups are assigned
+then the system’s default primary group will be used.</p>
+</dd>
+<dt>id=”number”:</dt><dd><p>The numeric user id of this account.</p>
+</dd>
+<dt>pwdformat=”plain|encrypted”:</dt><dd><p>The format in which <code class="xref py py-obj docutils literal notranslate"><span class="pre">password</span></code> is provided. The default if not
+specified is <code class="xref py py-obj docutils literal notranslate"><span class="pre">encrypted</span></code>.</p>
 </dd>
 </dl>
 </div>

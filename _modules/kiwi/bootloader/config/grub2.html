@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.21.23 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.21.24 documentation</title>
   
 
   
@@ -964,6 +964,20 @@
                 <span class="n">config_file</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
             <span class="p">]</span>
         <span class="p">)</span>
+        <span class="k">if</span> <span class="n">boot_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;root_device&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="n">boot_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;boot_device&#39;</span><span class="p">):</span>
+            <span class="c1"># Create a boot -&gt; . link on the boot partition.</span>
+            <span class="c1"># The link is useful if the grub mkconfig command</span>
+            <span class="c1"># references all boot files from /boot/... even if</span>
+            <span class="c1"># an extra boot partition should cause it to read the</span>
+            <span class="c1"># data from the toplevel</span>
+            <span class="n">bash_command</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s1">&#39;cd&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span> <span class="s1">&#39;boot&#39;</span><span class="p">]),</span> <span class="s1">&#39;&amp;&amp;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;rm&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="s1">&#39;&amp;&amp;&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;ln&#39;</span><span class="p">,</span> <span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;boot&#39;</span>
+            <span class="p">]</span>
+            <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bash_command</span><span class="p">)]</span>
+            <span class="p">)</span>
 
         <span class="c1"># Patch the written grub config file to actually work:</span>
         <span class="c1"># Unfortunately the grub tooling has several bugs and issues</span>
@@ -1301,7 +1315,7 @@
                 <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">zipl_config</span><span class="p">)</span>
                 <span class="n">zipl_config_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">zipl_config</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_setup_default_grub</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa: C901</span>
+    <span class="k">def</span> <span class="nf">_setup_default_grub</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create or update etc/default/grub by parameters required</span>
 <span class="sd">        according to the root filesystem setup</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.partitioner &mdash; KIWI NG 9.21.23 documentation</title>
+  <title>kiwi.partitioner &mdash; KIWI NG 9.21.24 documentation</title>
   
 
   
@@ -758,7 +758,7 @@
 <span class="sd">    :param object storage_provider: Instance of class based on DeviceProvider</span>
 <span class="sd">    :param int start_sector: sector number</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_type</span><span class="p">,</span> <span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># noqa: C901</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_type</span><span class="p">,</span> <span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">host_architecture</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_platform_name</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">host_architecture</span> <span class="o">==</span> <span class="s1">&#39;x86_64&#39;</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">table_type</span> <span class="o">==</span> <span class="s1">&#39;gpt&#39;</span><span class="p">:</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.21.23 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.21.24 documentation</title>
   
 
   
@@ -925,7 +925,7 @@
 
         <span class="k">return</span> <span class="n">result</span></div>
 
-<div class="viewcode-block" id="DiskBuilder.create_disk"><a class="viewcode-back" href="../../../api/kiwi.builder.html#kiwi.builder.disk.DiskBuilder.create_disk">[docs]</a>    <span class="k">def</span> <span class="nf">create_disk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa: C901</span>
+<div class="viewcode-block" id="DiskBuilder.create_disk"><a class="viewcode-back" href="../../../api/kiwi.builder.html#kiwi.builder.disk.DiskBuilder.create_disk">[docs]</a>    <span class="k">def</span> <span class="nf">create_disk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build a bootable raw disk image</span>
 
@@ -1447,7 +1447,7 @@
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">system_boot</span> <span class="o">=</span> <span class="n">filesystem</span>
 
-    <span class="k">def</span> <span class="nf">_build_and_map_disk_partitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disksize_mbytes</span><span class="p">):</span>  <span class="c1"># noqa: C901</span>
+    <span class="k">def</span> <span class="nf">_build_and_map_disk_partitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disksize_mbytes</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">disk</span><span class="o">.</span><span class="n">wipe</span><span class="p">()</span>
         <span class="n">disksize_used_mbytes</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">legacy_bios_mode</span><span class="p">():</span>

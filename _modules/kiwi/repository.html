@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.repository &mdash; KIWI NG 9.21.23 documentation</title>
+  <title>kiwi.repository &mdash; KIWI NG 9.21.24 documentation</title>
   
 
   
@@ -760,7 +760,7 @@
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_bind</span><span class="p">,</span> <span class="n">package_manager</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;zypper&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">RepositoryZypper</span><span class="p">(</span><span class="n">root_bind</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;dnf&#39;</span> <span class="ow">or</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;yum&#39;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;dnf&#39;</span> <span class="ow">or</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;yum&#39;</span> <span class="ow">or</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;microdnf&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">RepositoryDnf</span><span class="p">(</span><span class="n">root_bind</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;apt-get&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">RepositoryApt</span><span class="p">(</span><span class="n">root_bind</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">)</span>
