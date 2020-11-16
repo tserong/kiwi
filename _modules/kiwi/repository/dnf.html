@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.repository.dnf &mdash; KIWI NG 9.21.24 documentation</title>
+  <title>kiwi.repository.dnf &mdash; KIWI NG 9.21.25 documentation</title>
   
 
   
@@ -369,6 +369,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/network_overlay_boot.html">Booting a Root Filesystem from Network</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a><ul>
@@ -810,7 +811,7 @@
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">dnf_args</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">runtime_dnf_config_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;-y&#39;</span>
+            <span class="s1">&#39;--config&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">runtime_dnf_config_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;-y&#39;</span>
         <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">command_env</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_dnf_runtime_environment</span><span class="p">()</span>

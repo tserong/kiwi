@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Build PXE Root File System Image for the legacy netboot infrastructure &mdash; KIWI NG 9.21.24 documentation</title>
+  <title>Build PXE Root File System Image for the legacy netboot infrastructure &mdash; KIWI NG 9.21.25 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Contributing" href="../contributing.html" />
+    <link rel="next" title="Booting a Root Filesystem from Network" href="network_overlay_boot.html" />
     <link rel="prev" title="Building in the Open Build Service" href="build_in_buildservice.html" /> 
 </head>
 
@@ -371,6 +371,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="network_overlay_boot.html">Booting a Root Filesystem from Network</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a><ul>
@@ -800,7 +801,7 @@ $ cp *.kernel /srv/tftpboot/boot/linux
 </div>
 </li>
 <li><p>Copy the system image and its MD5 sum to <code class="file docutils literal notranslate"><span class="pre">/srv/tftpboot/image</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cp Leap-15.1_appliance.x86_64-1.15.1/srv/tftpboot/image
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cp Leap-15.1_appliance.x86_64-1.15.1 /srv/tftpboot/image
 $ cp Leap-15.1_appliance.x86_64-1.15.1.md5 /srv/tftpboot/image
 </pre></div>
 </div>
@@ -1069,7 +1070,7 @@ as initially provided by the <code class="docutils literal notranslate"><span cl
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="network_overlay_boot.html" class="btn btn-neutral float-right" title="Booting a Root Filesystem from Network" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="build_in_buildservice.html" class="btn btn-neutral float-left" title="Building in the Open Build Service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
