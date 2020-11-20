@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.xml_description &mdash; KIWI NG 9.21.25 documentation</title>
+  <title>kiwi.xml_description &mdash; KIWI NG 9.21.26 documentation</title>
   
 
   
@@ -752,6 +752,7 @@
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">KiwiCommandError</span><span class="p">,</span>
     <span class="n">KiwiSchemaImportError</span><span class="p">,</span>
     <span class="n">KiwiValidationError</span><span class="p">,</span>
     <span class="n">KiwiDescriptionInvalid</span><span class="p">,</span>
@@ -818,12 +819,13 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">issue</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiValidationError</span><span class="p">(</span><span class="n">issue</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">validation_rng</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_get_relaxng_validation_details</span><span class="p">(</span>
+            <span class="n">XMLDescription</span><span class="o">.</span><span class="n">_get_relaxng_validation_details</span><span class="p">(</span>
                 <span class="n">Defaults</span><span class="o">.</span><span class="n">get_schema_file</span><span class="p">(),</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">description</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">,</span>
+                <span class="n">relaxng</span><span class="o">.</span><span class="n">error_log</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">validation_schematron</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_get_schematron_validation_details</span><span class="p">(</span>
+            <span class="n">XMLDescription</span><span class="o">.</span><span class="n">_get_schematron_validation_details</span><span class="p">(</span>
                 <span class="n">schematron</span><span class="o">.</span><span class="n">validation_report</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">validation_rng</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">validation_schematron</span><span class="p">:</span>
@@ -887,8 +889,10 @@
                         <span class="n">extension_file</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
                         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">extension_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">xml_data</span><span class="p">:</span>
                             <span class="n">xml_data</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">xml_data_domtree</span><span class="o">.</span><span class="n">toprettyxml</span><span class="p">())</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">_get_relaxng_validation_details</span><span class="p">(</span>
-                            <span class="n">extension_schema</span><span class="p">,</span> <span class="n">extension_file</span><span class="o">.</span><span class="n">name</span>
+                        <span class="n">XMLDescription</span><span class="o">.</span><span class="n">_get_relaxng_validation_details</span><span class="p">(</span>
+                            <span class="n">extension_schema</span><span class="p">,</span>
+                            <span class="n">extension_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                            <span class="n">extension_relaxng</span><span class="o">.</span><span class="n">error_log</span>
                         <span class="p">)</span>
                         <span class="k">raise</span> <span class="n">KiwiExtensionError</span><span class="p">(</span>
                             <span class="s1">&#39;Schema validation for extension XML data failed&#39;</span>
@@ -909,30 +913,34 @@
         <span class="k">if</span> <span class="n">namespace_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">extension_data</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">extension_data</span><span class="p">[</span><span class="n">namespace_name</span><span class="p">]</span></div>
 
-    <span class="k">def</span> <span class="nf">_get_relaxng_validation_details</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">schema_file</span><span class="p">,</span> <span class="n">description_file</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_relaxng_validation_details</span><span class="p">(</span>
+        <span class="n">schema_file</span><span class="p">,</span> <span class="n">description_file</span><span class="p">,</span> <span class="n">error_log</span>
+    <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Run jing program to validate description against the schema</span>
 
 <span class="sd">        Jing provides detailed error information in case of a schema</span>
-<span class="sd">        validation failure</span>
+<span class="sd">        validation failure. If jing is not present the standard</span>
+<span class="sd">        error_log as provided from the raw XML libraries is used</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">cmd</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-                <span class="p">[</span><span class="s1">&#39;jing&#39;</span><span class="p">,</span> <span class="n">schema_file</span><span class="p">,</span> <span class="n">description_file</span><span class="p">],</span>
-                <span class="n">raise_on_error</span><span class="o">=</span><span class="kc">False</span>
+            <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="p">[</span><span class="s1">&#39;jing&#39;</span><span class="p">,</span> <span class="n">schema_file</span><span class="p">,</span> <span class="n">description_file</span><span class="p">]</span>
             <span class="p">)</span>
+        <span class="k">except</span> <span class="n">KiwiCommandError</span> <span class="k">as</span> <span class="n">issue</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;RelaxNG validation failed. See jing report:&#39;</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">issue</span><span class="p">))</span>
         <span class="k">except</span> <span class="n">KiwiCommandNotFound</span> <span class="k">as</span> <span class="n">issue</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s1">&#39;For detailed schema validation report, please install: jing&#39;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">issue</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s1">&#39;For detailed schema validation report, install: jing&#39;</span>
             <span class="p">)</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">: </span><span class="si">{1}</span><span class="s1">: </span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;jing&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">issue</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">issue</span><span class="p">)</span>
-            <span class="p">)</span>
-            <span class="k">return</span>
-        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;RelaxNG validation failed. See jing report:&#39;</span><span class="p">)</span>
-        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">cmd</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Showing only raw library error log:&#39;</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">error_log</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">_get_schematron_validation_details</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validation_report</span><span class="p">):</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_schematron_validation_details</span><span class="p">(</span><span class="n">validation_report</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extract error message form the schematron validation report</span>
 
