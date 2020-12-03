@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.xml_state &mdash; KIWI NG 9.21.26 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.22.0 documentation</title>
   
 
   
@@ -1602,7 +1602,7 @@
 <div class="viewcode-block" id="XMLState.get_oemconfig_oem_multipath_scan"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_oemconfig_oem_multipath_scan">[docs]</a>    <span class="k">def</span> <span class="nf">get_oemconfig_oem_multipath_scan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        State value to activate multipath maps. Returns a boolean</span>
-<span class="sd">        value if specified or None</span>
+<span class="sd">        value if specified or False</span>
 
 <span class="sd">        :return: Content of &lt;oem-multipath-scan&gt; section value</span>
 
@@ -1610,7 +1610,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">oemconfig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_build_type_oemconfig_section</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">oemconfig</span> <span class="ow">and</span> <span class="n">oemconfig</span><span class="o">.</span><span class="n">get_oem_multipath_scan</span><span class="p">():</span>
-            <span class="k">return</span> <span class="n">oemconfig</span><span class="o">.</span><span class="n">get_oem_multipath_scan</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span></div>
+            <span class="k">return</span> <span class="n">oemconfig</span><span class="o">.</span><span class="n">get_oem_multipath_scan</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="XMLState.get_oemconfig_swap_mbytes"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_oemconfig_swap_mbytes">[docs]</a>    <span class="k">def</span> <span class="nf">get_oemconfig_swap_mbytes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.repository &mdash; KIWI NG 9.21.26 documentation</title>
+  <title>kiwi.repository &mdash; KIWI NG 9.22.0 documentation</title>
   
 
   
@@ -736,18 +736,18 @@
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
-<span class="c1"># project</span>
-<span class="kn">from</span> <span class="nn">kiwi.repository.zypper</span> <span class="kn">import</span> <span class="n">RepositoryZypper</span>
-<span class="kn">from</span> <span class="nn">kiwi.repository.apt</span> <span class="kn">import</span> <span class="n">RepositoryApt</span>
-<span class="kn">from</span> <span class="nn">kiwi.repository.dnf</span> <span class="kn">import</span> <span class="n">RepositoryDnf</span>
-<span class="kn">from</span> <span class="nn">kiwi.repository.pacman</span> <span class="kn">import</span> <span class="n">RepositoryPacman</span>
-
-<span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">KiwiRepositorySetupError</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ABCMeta</span><span class="p">,</span>
+    <span class="n">abstractmethod</span>
 <span class="p">)</span>
 
+<span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="n">KiwiRepositorySetupError</span>
 
-<div class="viewcode-block" id="Repository"><a class="viewcode-back" href="../../api/kiwi.repository.html#kiwi.repository.Repository">[docs]</a><span class="k">class</span> <span class="nc">Repository</span><span class="p">:</span>
+
+<div class="viewcode-block" id="Repository"><a class="viewcode-back" href="../../api/kiwi.repository.html#kiwi.repository.Repository">[docs]</a><span class="k">class</span> <span class="nc">Repository</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Repository factory**</span>
 
@@ -758,20 +758,37 @@
 
 <span class="sd">    :raises KiwiRepositorySetupError: if package_manager is not supported</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_bind</span><span class="p">,</span> <span class="n">package_manager</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;zypper&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">RepositoryZypper</span><span class="p">(</span><span class="n">root_bind</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;dnf&#39;</span> <span class="ow">or</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;yum&#39;</span> <span class="ow">or</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;microdnf&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">RepositoryDnf</span><span class="p">(</span><span class="n">root_bind</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;apt-get&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">RepositoryApt</span><span class="p">(</span><span class="n">root_bind</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">package_manager</span> <span class="o">==</span> <span class="s1">&#39;pacman&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">RepositoryPacman</span><span class="p">(</span><span class="n">root_bind</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># pragma: no cover</span>
+
+<div class="viewcode-block" id="Repository.new"><a class="viewcode-back" href="../../api/kiwi.repository.html#kiwi.repository.Repository.new">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span>
+        <span class="n">root_bind</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">package_manager</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">custom_args</span><span class="p">:</span> <span class="n">List</span><span class="o">=</span><span class="kc">None</span>  <span class="c1"># noqa: E252</span>
+    <span class="p">):</span>
+        <span class="n">name_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;zypper&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;zypper&#39;</span><span class="p">,</span> <span class="s1">&#39;Zypper&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;dnf&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;dnf&#39;</span><span class="p">,</span> <span class="s1">&#39;Dnf&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;yum&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;dnf&#39;</span><span class="p">,</span> <span class="s1">&#39;Dnf&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;microdnf&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;dnf&#39;</span><span class="p">,</span> <span class="s1">&#39;Dnf&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;apt-get&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;apt&#39;</span><span class="p">,</span> <span class="s1">&#39;Apt&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;pacman&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;pacman&#39;</span><span class="p">,</span> <span class="s1">&#39;Pacman&#39;</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">repository</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span>
+                <span class="s1">&#39;kiwi.repository.</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name_map</span><span class="p">[</span><span class="n">package_manager</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="p">)</span>
+            <span class="n">module_name</span> <span class="o">=</span> <span class="s1">&#39;Repository</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name_map</span><span class="p">[</span><span class="n">package_manager</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">repository</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">module_name</span><span class="p">](</span>
+                <span class="n">root_bind</span><span class="p">,</span> <span class="n">custom_args</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">issue</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiRepositorySetupError</span><span class="p">(</span>
-                <span class="s1">&#39;Support for </span><span class="si">%s</span><span class="s1"> repository manager not implemented&#39;</span> <span class="o">%</span>
-                <span class="n">package_manager</span>
-            <span class="p">)</span></div>
+                <span class="s1">&#39;Support for </span><span class="si">{0}</span><span class="s1"> repository not implemented: </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">package_manager</span><span class="p">,</span> <span class="n">issue</span>
+                <span class="p">)</span>
+            <span class="p">)</span></div></div>
 </pre></div>
 
            </div>

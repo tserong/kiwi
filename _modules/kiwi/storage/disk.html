@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.storage.disk &mdash; KIWI NG 9.21.26 documentation</title>
+  <title>kiwi.storage.disk &mdash; KIWI NG 9.22.0 documentation</title>
   
 
   
@@ -769,7 +769,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">partition_id_map</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_mapped</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span> <span class="o">=</span> <span class="n">Partitioner</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span> <span class="o">=</span> <span class="n">Partitioner</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
             <span class="n">table_type</span><span class="p">,</span> <span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span>
         <span class="p">)</span>
 

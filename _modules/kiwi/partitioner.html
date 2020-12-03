@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.partitioner &mdash; KIWI NG 9.21.26 documentation</title>
+  <title>kiwi.partitioner &mdash; KIWI NG 9.22.0 documentation</title>
   
 
   
@@ -736,22 +736,20 @@
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ABCMeta</span><span class="p">,</span>
+    <span class="n">abstractmethod</span>
+<span class="p">)</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="c1"># project</span>
-<span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
-<span class="kn">from</span> <span class="nn">kiwi.partitioner.gpt</span> <span class="kn">import</span> <span class="n">PartitionerGpt</span>
-<span class="kn">from</span> <span class="nn">kiwi.partitioner.msdos</span> <span class="kn">import</span> <span class="n">PartitionerMsDos</span>
-<span class="kn">from</span> <span class="nn">kiwi.partitioner.dasd</span> <span class="kn">import</span> <span class="n">PartitionerDasd</span>
-
-<span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">KiwiPartitionerSetupError</span>
-<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="n">KiwiPartitionerSetupError</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="Partitioner"><a class="viewcode-back" href="../../api/kiwi.partitioner.html#kiwi.partitioner.Partitioner">[docs]</a><span class="k">class</span> <span class="nc">Partitioner</span><span class="p">:</span>
+<div class="viewcode-block" id="Partitioner"><a class="viewcode-back" href="../../api/kiwi.partitioner.html#kiwi.partitioner.Partitioner">[docs]</a><span class="k">class</span> <span class="nc">Partitioner</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Partitioner factory**</span>
 
@@ -759,45 +757,39 @@
 <span class="sd">    :param object storage_provider: Instance of class based on DeviceProvider</span>
 <span class="sd">    :param int start_sector: sector number</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_type</span><span class="p">,</span> <span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="n">host_architecture</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_platform_name</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">host_architecture</span> <span class="o">==</span> <span class="s1">&#39;x86_64&#39;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">table_type</span> <span class="o">==</span> <span class="s1">&#39;gpt&#39;</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">PartitionerGpt</span><span class="p">(</span><span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">table_type</span> <span class="o">==</span> <span class="s1">&#39;msdos&#39;</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">PartitionerMsDos</span><span class="p">(</span><span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="p">)</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># pragma: no cover</span>
 
-        <span class="k">elif</span> <span class="n">host_architecture</span> <span class="o">==</span> <span class="s1">&#39;ix86&#39;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">table_type</span> <span class="o">==</span> <span class="s1">&#39;msdos&#39;</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">PartitionerMsDos</span><span class="p">(</span><span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="p">)</span>
-
-        <span class="k">elif</span> <span class="s1">&#39;ppc64&#39;</span> <span class="ow">in</span> <span class="n">host_architecture</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">table_type</span> <span class="o">==</span> <span class="s1">&#39;gpt&#39;</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">PartitionerGpt</span><span class="p">(</span><span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">table_type</span> <span class="o">==</span> <span class="s1">&#39;msdos&#39;</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">PartitionerMsDos</span><span class="p">(</span><span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="p">)</span>
-
-        <span class="k">elif</span> <span class="s1">&#39;s390&#39;</span> <span class="ow">in</span> <span class="n">host_architecture</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">table_type</span> <span class="o">==</span> <span class="s1">&#39;dasd&#39;</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">start_sector</span><span class="p">:</span>
-                    <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                        <span class="s1">&#39;disk_start_sector value is ignored &#39;</span>
-                        <span class="s1">&#39;for dasd partitions&#39;</span>
-                    <span class="p">)</span>
-                <span class="k">return</span> <span class="n">PartitionerDasd</span><span class="p">(</span><span class="n">storage_provider</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">table_type</span> <span class="o">==</span> <span class="s1">&#39;msdos&#39;</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">PartitionerMsDos</span><span class="p">(</span><span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="p">)</span>
-
-        <span class="k">elif</span> <span class="s1">&#39;arm&#39;</span> <span class="ow">in</span> <span class="n">host_architecture</span> <span class="ow">or</span> <span class="n">host_architecture</span> <span class="o">==</span> <span class="s1">&#39;aarch64&#39;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">table_type</span> <span class="o">==</span> <span class="s1">&#39;gpt&#39;</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">PartitionerGpt</span><span class="p">(</span><span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">table_type</span> <span class="o">==</span> <span class="s1">&#39;msdos&#39;</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">PartitionerMsDos</span><span class="p">(</span><span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="p">)</span>
-
-        <span class="k">raise</span> <span class="n">KiwiPartitionerSetupError</span><span class="p">(</span>
-            <span class="s1">&#39;Support for partitioner on </span><span class="si">%s</span><span class="s1"> architecture not implemented&#39;</span> <span class="o">%</span>
-            <span class="n">host_architecture</span>
-        <span class="p">)</span></div>
+<div class="viewcode-block" id="Partitioner.new"><a class="viewcode-back" href="../../api/kiwi.partitioner.html#kiwi.partitioner.Partitioner.new">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span>
+        <span class="n">table_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">storage_provider</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
+        <span class="n">start_sector</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span>  <span class="c1"># noqa: E252</span>
+    <span class="p">):</span>
+        <span class="n">name_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;msdos&#39;</span><span class="p">:</span> <span class="s1">&#39;MsDos&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;gpt&#39;</span><span class="p">:</span> <span class="s1">&#39;Gpt&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dasd&#39;</span><span class="p">:</span> <span class="s1">&#39;Dasd&#39;</span>
+        <span class="p">}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">partitioner</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span>
+                <span class="s1">&#39;kiwi.partitioner.</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">table_type</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">module_name</span> <span class="o">=</span> <span class="s1">&#39;Partitioner</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name_map</span><span class="p">[</span><span class="n">table_type</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">table_type</span> <span class="o">==</span> <span class="s1">&#39;dasd&#39;</span> <span class="ow">and</span> <span class="n">start_sector</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="s1">&#39;disk start_sector value is ignored for dasd partitions&#39;</span>
+                <span class="p">)</span>
+                <span class="n">start_sector</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="n">partitioner</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">module_name</span><span class="p">](</span>
+                <span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">issue</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">KiwiPartitionerSetupError</span><span class="p">(</span>
+                <span class="s1">&#39;Support for </span><span class="si">{0}</span><span class="s1"> partitioner not implemented: </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">table_type</span><span class="p">,</span> <span class="n">issue</span>
+                <span class="p">)</span>
+            <span class="p">)</span></div></div>
 </pre></div>
 
            </div>

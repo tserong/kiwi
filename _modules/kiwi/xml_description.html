@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.xml_description &mdash; KIWI NG 9.21.26 documentation</title>
+  <title>kiwi.xml_description &mdash; KIWI NG 9.22.0 documentation</title>
   
 
   
@@ -788,7 +788,7 @@
             <span class="k">raise</span> <span class="n">KiwiDescriptionConflict</span><span class="p">(</span>
                 <span class="s1">&#39;description and xml_content are mutually exclusive&#39;</span>
             <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">markup</span> <span class="o">=</span> <span class="n">Markup</span><span class="p">(</span><span class="n">description</span> <span class="ow">or</span> <span class="n">xml_content</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">markup</span> <span class="o">=</span> <span class="n">Markup</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">description</span> <span class="ow">or</span> <span class="n">xml_content</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">markup</span><span class="o">.</span><span class="n">get_xml_description</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">derived_from</span> <span class="o">=</span> <span class="n">derived_from</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">description_origin</span> <span class="o">=</span> <span class="n">description</span>
