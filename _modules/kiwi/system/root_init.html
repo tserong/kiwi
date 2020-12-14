@@ -851,8 +851,7 @@
             <span class="p">(</span><span class="s1">&#39;/proc/self/fd&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/dev/fd&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;fd/2&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/dev/stderr&#39;</span><span class="p">),</span>
             <span class="p">(</span><span class="s1">&#39;fd/0&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/dev/stdin&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;fd/1&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/dev/stdout&#39;</span><span class="p">),</span>
-            <span class="p">(</span><span class="s1">&#39;/run&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/var/run&#39;</span><span class="p">)</span>
+            <span class="p">(</span><span class="s1">&#39;fd/1&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/dev/stdout&#39;</span><span class="p">)</span>
         <span class="p">)</span>
         <span class="k">for</span> <span class="n">src</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">base_system_links</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">target</span> <span class="o">%</span> <span class="n">root</span><span class="p">,</span> <span class="p">)</span></div>

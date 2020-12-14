@@ -787,7 +787,7 @@
 <div class="viewcode-block" id="RepositoryBase.add_repo"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.add_repo">[docs]</a>    <span class="k">def</span> <span class="nf">add_repo</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">,</span> <span class="n">prio</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">components</span><span class="p">,</span>
         <span class="n">user</span><span class="p">,</span> <span class="n">secret</span><span class="p">,</span> <span class="n">credentials_file</span><span class="p">,</span> <span class="n">repo_gpgcheck</span><span class="p">,</span> <span class="n">pkg_gpgcheck</span><span class="p">,</span>
-        <span class="n">sourcetype</span>
+        <span class="n">sourcetype</span><span class="p">,</span> <span class="n">use_for_bootstrap</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add repository</span>
@@ -806,6 +806,7 @@
 <span class="sd">        :param bool repo_gpgcheck: unused</span>
 <span class="sd">        :param bool pkg_gpgcheck: unused</span>
 <span class="sd">        :param str sourcetype: unused</span>
+<span class="sd">        :param bool use_for_bootstrap: unused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
