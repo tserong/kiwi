@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.volume_manager.lvm &mdash; KIWI NG 9.22.1 documentation</title>
+  <title>kiwi.volume_manager.lvm &mdash; KIWI NG 9.22.2 documentation</title>
   
 
   
@@ -798,8 +798,8 @@
                 <span class="c1"># root partition device from the disk. Therefore use</span>
                 <span class="c1"># the same key to put them on the same level</span>
                 <span class="n">volume_name</span> <span class="o">=</span> <span class="s1">&#39;root&#39;</span>
-            <span class="k">if</span> <span class="n">volume_name</span> <span class="o">==</span> <span class="s1">&#39;LVSwap&#39;</span><span class="p">:</span>
-                <span class="c1"># LVSwap volume device takes precedence over the</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_swap_volume</span><span class="p">(</span><span class="n">volume_name</span><span class="p">):</span>
+                <span class="c1"># swap volume device takes precedence over the</span>
                 <span class="c1"># swap partition device from the disk. Therefore use</span>
                 <span class="c1"># the same key to put them on the same level</span>
                 <span class="n">volume_name</span> <span class="o">=</span> <span class="s1">&#39;swap&#39;</span>
@@ -899,7 +899,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">volume</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_volume_map</span><span class="p">(</span><span class="n">volume</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;LVSwap&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">label</span> <span class="o">!=</span> <span class="s1">&#39;SWAP&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_create_filesystem</span><span class="p">(</span>
                     <span class="n">volume</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">volume</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="n">filesystem_name</span>
                 <span class="p">)</span>
@@ -1069,6 +1069,11 @@
     <span class="k">def</span> <span class="nf">_is_root_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">volume</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> <span class="n">volume</span><span class="o">.</span><span class="n">is_root_volume</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">_is_swap_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">volume</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> <span class="n">volume</span><span class="o">.</span><span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;SWAP&#39;</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

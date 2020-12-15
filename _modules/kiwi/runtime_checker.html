@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.runtime_checker &mdash; KIWI NG 9.22.1 documentation</title>
+  <title>kiwi.runtime_checker &mdash; KIWI NG 9.22.2 documentation</title>
   
 
   
@@ -859,10 +859,40 @@
         <span class="n">volume_management</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_volume_management</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">volume_management</span> <span class="o">!=</span> <span class="s1">&#39;lvm&#39;</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_volumes</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">label</span> <span class="ow">and</span> <span class="n">volume</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;LVSwap&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">label</span> <span class="ow">and</span> <span class="n">volume</span><span class="o">.</span><span class="n">label</span> <span class="o">!=</span> <span class="s1">&#39;SWAP&#39;</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="n">KiwiRuntimeError</span><span class="p">(</span>
                         <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">volume_management</span><span class="p">)</span>
                     <span class="p">)</span></div>
+
+<div class="viewcode-block" id="RuntimeChecker.check_swap_name_used_with_lvm"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.runtime_checker.RuntimeChecker.check_swap_name_used_with_lvm">[docs]</a>    <span class="k">def</span> <span class="nf">check_swap_name_used_with_lvm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The optional oem-swapname is only effective if used together</span>
+<span class="sd">        with the LVM volume manager. A name for the swap space can</span>
+<span class="sd">        only be set if it is created as a LVM volume. In any other</span>
+<span class="sd">        case the name does not apply to the system</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span><span class="se">\n</span><span class="s1"></span>
+<span class="s1">             Specified swap space name: </span><span class="si">{0}</span><span class="s1"> will not be used</span>
+
+<span class="s1">             The specified oem-swapname is used without the LVM volume</span>
+<span class="s1">             manager. This means the swap space will be created as simple</span>
+<span class="s1">             partition for which no name assignment can take place.</span>
+<span class="s1">             The name specified in oem-swapname is used to give the</span>
+<span class="s1">             LVM swap volume a name. Outside of LVM the setting is</span>
+<span class="s1">             meaningless and should be removed.</span>
+
+<span class="s1">             Please delete the following setting from your image</span>
+<span class="s1">             description:</span>
+
+<span class="s1">             &lt;oem-swapname&gt;</span><span class="si">{0}</span><span class="s1">&lt;/oem-swapname&gt;</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">volume_management</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_volume_management</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">volume_management</span> <span class="o">!=</span> <span class="s1">&#39;lvm&#39;</span><span class="p">:</span>
+            <span class="n">oemconfig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_build_type_oemconfig_section</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">oemconfig</span> <span class="ow">and</span> <span class="n">oemconfig</span><span class="o">.</span><span class="n">get_oem_swapname</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">KiwiRuntimeError</span><span class="p">(</span>
+                    <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">oemconfig</span><span class="o">.</span><span class="n">get_oem_swapname</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="p">)</span></div>
 
 <div class="viewcode-block" id="RuntimeChecker.check_volume_setup_defines_reserved_labels"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.runtime_checker.RuntimeChecker.check_volume_setup_defines_reserved_labels">[docs]</a>    <span class="k">def</span> <span class="nf">check_volume_setup_defines_reserved_labels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">message</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span><span class="se">\n</span><span class="s1"></span>
@@ -879,7 +909,11 @@
         <span class="n">volume_management</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_volume_management</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">volume_management</span> <span class="o">==</span> <span class="s1">&#39;lvm&#39;</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_volumes</span><span class="p">():</span>
-                <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;LVSwap&#39;</span><span class="p">:</span>
+                <span class="c1"># A swap volume is created implicitly if oem-swap is</span>
+                <span class="c1"># requested. This volume detected via realpath set to</span>
+                <span class="c1"># swap is skipped from the reserved label check as it</span>
+                <span class="c1"># intentionally uses the reserved label named SWAP</span>
+                <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">realpath</span> <span class="o">!=</span> <span class="s1">&#39;swap&#39;</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">label</span> <span class="ow">and</span> <span class="n">volume</span><span class="o">.</span><span class="n">label</span> <span class="ow">in</span> <span class="n">reserved_labels</span><span class="p">:</span>
                         <span class="k">raise</span> <span class="n">KiwiRuntimeError</span><span class="p">(</span>
                             <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>

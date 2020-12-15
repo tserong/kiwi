@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.xml_state &mdash; KIWI NG 9.22.1 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.22.2 documentation</title>
   
 
   
@@ -1634,6 +1634,28 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_swapsize_mbytes</span><span class="p">()</span></div>
 
+<div class="viewcode-block" id="XMLState.get_oemconfig_swap_name"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_oemconfig_swap_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_oemconfig_swap_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the swap space name</span>
+
+<span class="sd">        Operates on the value of oem-swapname and if set</span>
+<span class="sd">        returns the configured name or the default name: LVSwap</span>
+
+<span class="sd">        The name of the swap space is used only if the</span>
+<span class="sd">        image is configured to use the LVM volume manager.</span>
+<span class="sd">        In this case swap is a volume and the volume takes</span>
+<span class="sd">        a name. In any other case the given name will have</span>
+<span class="sd">        no effect.</span>
+
+<span class="sd">        :return: Content of &lt;oem-swapname&gt; section value or default</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">oemconfig</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_build_type_oemconfig_section</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">oemconfig</span> <span class="ow">and</span> <span class="n">oemconfig</span><span class="o">.</span><span class="n">get_oem_swapname</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">oemconfig</span><span class="o">.</span><span class="n">get_oem_swapname</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="s1">&#39;LVSwap&#39;</span></div>
+
 <div class="viewcode-block" id="XMLState.get_build_type_containerconfig_section"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_build_type_containerconfig_section">[docs]</a>    <span class="k">def</span> <span class="nf">get_build_type_containerconfig_section</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        First containerconfig section from the build type section</span>
@@ -1957,6 +1979,7 @@
         <span class="n">volume_type_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">systemdisk_section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_build_type_system_disk_section</span><span class="p">()</span>
         <span class="n">swap_mbytes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_oemconfig_swap_mbytes</span><span class="p">()</span>
+        <span class="n">swap_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_oemconfig_swap_name</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">systemdisk_section</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">volume_type_list</span>
 
@@ -2079,7 +2102,7 @@
         <span class="k">if</span> <span class="n">swap_mbytes</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_volume_management</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;lvm&#39;</span><span class="p">:</span>
             <span class="n">volume_type_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="n">volume_type</span><span class="p">(</span>
-                    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;LVSwap&#39;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">swap_name</span><span class="p">,</span>
                     <span class="n">size</span><span class="o">=</span><span class="s1">&#39;size:</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">swap_mbytes</span><span class="p">),</span>
                     <span class="n">fullsize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                     <span class="n">mountpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
