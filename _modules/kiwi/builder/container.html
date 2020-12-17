@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.builder.container &mdash; KIWI NG 9.22.3 documentation</title>
+  <title>kiwi.builder.container &mdash; KIWI NG 9.22.4 documentation</title>
   
 
   
@@ -836,7 +836,7 @@
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
                 <span class="s1">&#39;Setting up </span><span class="si">%s</span><span class="s1"> container&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">requested_container_type</span>
             <span class="p">)</span>
-            <span class="n">container_setup</span> <span class="o">=</span> <span class="n">ContainerSetup</span><span class="p">(</span>
+            <span class="n">container_setup</span> <span class="o">=</span> <span class="n">ContainerSetup</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">requested_container_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">container_config</span>
             <span class="p">)</span>
@@ -853,7 +853,7 @@
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
             <span class="s1">&#39;--&gt; Creating container image&#39;</span>
         <span class="p">)</span>
-        <span class="n">container_image</span> <span class="o">=</span> <span class="n">ContainerImage</span><span class="p">(</span>
+        <span class="n">container_image</span> <span class="o">=</span> <span class="n">ContainerImage</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">requested_container_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_config</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">container_image</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>

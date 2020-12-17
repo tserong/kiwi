@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.iso_tools &mdash; KIWI NG 9.22.3 documentation</title>
+  <title>kiwi.iso_tools &mdash; KIWI NG 9.22.4 documentation</title>
   
 
   
@@ -736,22 +736,43 @@
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ABCMeta</span><span class="p">,</span>
+    <span class="n">abstractmethod</span>
+<span class="p">)</span>
+
 <span class="c1"># project</span>
-<span class="kn">from</span> <span class="nn">kiwi.iso_tools.cdrtools</span> <span class="kn">import</span> <span class="n">IsoToolsCdrTools</span>
-<span class="kn">from</span> <span class="nn">kiwi.iso_tools.xorriso</span> <span class="kn">import</span> <span class="n">IsoToolsXorrIso</span>
+<span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="n">KiwiIsoToolError</span>
 <span class="kn">from</span> <span class="nn">kiwi.runtime_config</span> <span class="kn">import</span> <span class="n">RuntimeConfig</span>
 
 
-<div class="viewcode-block" id="IsoTools"><a class="viewcode-back" href="../../api/kiwi.iso_tools.html#kiwi.iso_tools.IsoTools">[docs]</a><span class="k">class</span> <span class="nc">IsoTools</span><span class="p">:</span>
+<div class="viewcode-block" id="IsoTools"><a class="viewcode-back" href="../../api/kiwi.iso_tools.html#kiwi.iso_tools.IsoTools">[docs]</a><span class="k">class</span> <span class="nc">IsoTools</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **IsoTools factory**</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_dir</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># pragma: no cover</span>
+
+<div class="viewcode-block" id="IsoTools.new"><a class="viewcode-back" href="../../api/kiwi.iso_tools.html#kiwi.iso_tools.IsoTools.new">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="n">source_dir</span><span class="p">):</span>
+        <span class="n">name_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;xorriso&#39;</span><span class="p">:</span> <span class="s1">&#39;XorrIso&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;cdrtools&#39;</span><span class="p">:</span> <span class="s1">&#39;CdrTools&#39;</span>
+        <span class="p">}</span>
         <span class="n">runtime_config</span> <span class="o">=</span> <span class="n">RuntimeConfig</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">runtime_config</span><span class="o">.</span><span class="n">get_iso_tool_category</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;cdrtools&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">IsoToolsCdrTools</span><span class="p">(</span><span class="n">source_dir</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">IsoToolsXorrIso</span><span class="p">(</span><span class="n">source_dir</span><span class="p">)</span></div>
+        <span class="n">tool</span> <span class="o">=</span> <span class="n">runtime_config</span><span class="o">.</span><span class="n">get_iso_tool_category</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">iso_tool</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span>
+                <span class="s1">&#39;kiwi.iso_tools.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tool</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">module_name</span> <span class="o">=</span> <span class="s1">&#39;IsoTools</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name_map</span><span class="p">[</span><span class="n">tool</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">iso_tool</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">module_name</span><span class="p">](</span><span class="n">source_dir</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">KiwiIsoToolError</span><span class="p">(</span>
+                <span class="s1">&#39;No support for </span><span class="si">{}</span><span class="s1"> tool available&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tool</span><span class="p">)</span>
+            <span class="p">)</span></div></div>
 </pre></div>
 
            </div>

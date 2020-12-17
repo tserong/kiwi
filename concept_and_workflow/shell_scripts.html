@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>User Defined Scripts &mdash; KIWI NG 9.22.3 documentation</title>
+  <title>User Defined Scripts &mdash; KIWI NG 9.22.4 documentation</title>
   
 
   
@@ -800,8 +800,9 @@ description.</p>
 <div class="section" id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="file docutils literal notranslate"><span class="pre">.kconfig</span></code> file provides a common set of functions.  Functions
-specific to SUSE Linux begin with the name <code class="docutils literal notranslate"><span class="pre">suse</span></code>, functions applicable
-to all Linux distributions start with the name <code class="docutils literal notranslate"><span class="pre">base</span></code>.</p>
+specific to SUSE Linux Enterprise and openSUSE begin with the name
+<code class="docutils literal notranslate"><span class="pre">suse</span></code>, functions applicable to all Linux distributions start with the
+name <code class="docutils literal notranslate"><span class="pre">base</span></code>.</p>
 <p>The following list describes all functions provided by <code class="file docutils literal notranslate"><span class="pre">.kconfig</span></code>:</p>
 <dl>
 <dt>baseCleanMount</dt><dd><p>Unmount the filesystems <code class="file docutils literal notranslate"><span class="pre">/proc</span></code>, <code class="file docutils literal notranslate"><span class="pre">/dev/pts</span></code>, <code class="file docutils literal notranslate"><span class="pre">/sys</span></code> and
@@ -886,8 +887,18 @@ pointing to the product referenced by either <code class="file docutils literal 
 and installs all product specific packages. This function fails
 when <strong class="command">zypper</strong> is not the appliances package manager.</p>
 </dd>
+<dt>baseVagrantSetup</dt><dd><p>Configures the image to work as a vagrant box by performing the following
+changes:</p>
+<ul class="simple">
+<li><p>add the <code class="docutils literal notranslate"><span class="pre">vagrant</span></code> user to <code class="file docutils literal notranslate"><span class="pre">/etc/sudoers</span></code>
+or <code class="file docutils literal notranslate"><span class="pre">/etc/sudoers.d/vagrant</span></code></p></li>
+<li><p>insert the insecure vagrant ssh key, apply recommended
+ssh settings and start the ssh daemon</p></li>
+<li><p>create the default shared folder <code class="file docutils literal notranslate"><span class="pre">/vagrant</span></code></p></li>
+</ul>
+</dd>
 <dt>Debug {message}</dt><dd><p>Helper function to print the supplied message if the variable DEBUG is
-set to 1.</p>
+set to 1 (it is off by default).</p>
 </dd>
 <dt>Echo {echo commandline}</dt><dd><p>Helper function to print a message to the controlling terminal.</p>
 </dd>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi Package &mdash; KIWI NG 9.22.3 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.22.4 documentation</title>
   
 
   
@@ -2824,14 +2824,6 @@ were provided or the debootstrap has failed.</p>
 </dd></dl>
 
 <dl class="py exception">
-<dt id="kiwi.exceptions.KiwiDescriptionConflict">
-<em class="property">exception </em><code class="sig-prename descclassname">kiwi.exceptions.</code><code class="sig-name descname">KiwiDescriptionConflict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/exceptions.html#KiwiDescriptionConflict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.exceptions.KiwiDescriptionConflict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
-<p>Exception raised if both, a description file and xml_content
-is provided</p>
-</dd></dl>
-
-<dl class="py exception">
 <dt id="kiwi.exceptions.KiwiDescriptionInvalid">
 <em class="property">exception </em><code class="sig-prename descclassname">kiwi.exceptions.</code><code class="sig-name descname">KiwiDescriptionInvalid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/exceptions.html#KiwiDescriptionInvalid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.exceptions.KiwiDescriptionInvalid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
@@ -3719,17 +3711,17 @@ short form by default, long form with -h | –help</p></li>
 <span id="kiwi-logger-module"></span><h2><a class="reference internal" href="#module-kiwi.logger" title="kiwi.logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.logger</span></code></a> Module<a class="headerlink" href="#module-kiwi.logger" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.logger.Logger">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.logger.</code><code class="sig-name descname">Logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger.html#Logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.logger.</code><code class="sig-name descname">Logger</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger.html#Logger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.Logger" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Logger</span></code></a></p>
 <p><strong>Extended logging facility based on Python logging</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>name</strong> (<em>string</em>) – name of the logger</p>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – name of the logger</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="kiwi.logger.Logger.getLogLevel">
-<code class="sig-name descname">getLogLevel</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.getLogLevel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger.getLogLevel" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getLogLevel</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.getLogLevel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger.getLogLevel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return currently used log level</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -3743,7 +3735,7 @@ short form by default, long form with -h | –help</p></li>
 
 <dl class="py method">
 <dt id="kiwi.logger.Logger.get_logfile">
-<code class="sig-name descname">get_logfile</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.get_logfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger.get_logfile" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_logfile</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.get_logfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger.get_logfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return file path name of logfile</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -3757,7 +3749,7 @@ short form by default, long form with -h | –help</p></li>
 
 <dl class="py method">
 <dt id="kiwi.logger.Logger.progress">
-<code class="sig-name descname">progress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">current</span></em>, <em class="sig-param"><span class="n">total</span></em>, <em class="sig-param"><span class="n">prefix</span></em>, <em class="sig-param"><span class="n">bar_length</span><span class="o">=</span><span class="default_value">40</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.progress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger.progress" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">progress</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">current</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em>, <em class="sig-param"><span class="n">total</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em>, <em class="sig-param"><span class="n">prefix</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">bar_length</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span> <span class="o">=</span> <span class="default_value">40</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.progress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger.progress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Custom progress log information. progress information is
 intentionally only logged to stdout and will bypass any
 handlers. We don’t want this information to show up in
@@ -3776,7 +3768,7 @@ the log file</p>
 
 <dl class="py method">
 <dt id="kiwi.logger.Logger.setLogLevel">
-<code class="sig-name descname">setLogLevel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">level</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.setLogLevel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger.setLogLevel" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setLogLevel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">level</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.setLogLevel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger.setLogLevel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set custom log level for all console handlers</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -3787,17 +3779,17 @@ the log file</p>
 
 <dl class="py method">
 <dt id="kiwi.logger.Logger.set_color_format">
-<code class="sig-name descname">set_color_format</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.set_color_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger.set_color_format" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_color_format</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.set_color_format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger.set_color_format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set color format for all console handlers</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.logger.Logger.set_logfile">
-<code class="sig-name descname">set_logfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.set_logfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger.set_logfile" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_logfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.set_logfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger.Logger.set_logfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set logfile handler</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – logfile file path</p>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – logfile file path</p>
 </dd>
 </dl>
 </dd></dl>
@@ -3809,7 +3801,7 @@ the log file</p>
 <span id="kiwi-logger-color-formatter-module"></span><h2><a class="reference internal" href="#module-kiwi.logger_color_formatter" title="kiwi.logger_color_formatter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.logger_color_formatter</span></code></a> Module<a class="headerlink" href="#module-kiwi.logger_color_formatter" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.logger_color_formatter.ColorFormatter">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.logger_color_formatter.</code><code class="sig-name descname">ColorFormatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger_color_formatter.html#ColorFormatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_color_formatter.ColorFormatter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.logger_color_formatter.</code><code class="sig-name descname">ColorFormatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger_color_formatter.html#ColorFormatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_color_formatter.ColorFormatter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.Formatter" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Formatter</span></code></a></p>
 <p><strong>Extended standard logging Formatter</strong></p>
 <p>Extended format supporting text with color metadata</p>
@@ -3819,7 +3811,7 @@ the log file</p>
 </div>
 <dl class="py method">
 <dt id="kiwi.logger_color_formatter.ColorFormatter.format">
-<code class="sig-name descname">format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger_color_formatter.html#ColorFormatter.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_color_formatter.ColorFormatter.format" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">format</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.LogRecord" title="(in Python v3.9)">logging.LogRecord</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/logger_color_formatter.html#ColorFormatter.format"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_color_formatter.ColorFormatter.format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a logging Formatter with support for color messages</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -3845,7 +3837,7 @@ the log file</p>
 message formatter</p>
 <dl class="py method">
 <dt id="kiwi.logger_color_formatter.ColorMessage.format_message">
-<code class="sig-name descname">format_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">level</span></em>, <em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger_color_formatter.html#ColorMessage.format_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_color_formatter.ColorMessage.format_message" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">format_message</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">level</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">message</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/logger_color_formatter.html#ColorMessage.format_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_color_formatter.ColorMessage.format_message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Message formatter with support for embedded color sequences</p>
 <p>The Message is allowed to contain the following color metadata:</p>
 <ul class="simple">
@@ -3859,8 +3851,8 @@ in the ColorMessage constructor</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>level</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – color level number</p></li>
-<li><p><strong>message</strong> (<em>string</em>) – text</p></li>
+<li><p><strong>level</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – color level name</p></li>
+<li><p><strong>message</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – text</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -3884,7 +3876,7 @@ in the ColorMessage constructor</p>
 <p><strong>Extended standard debug logging Filter</strong></p>
 <dl class="py method">
 <dt id="kiwi.logger_filter.DebugFilter.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger_filter.html#DebugFilter.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_filter.DebugFilter.filter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.LogRecord" title="(in Python v3.9)">logging.LogRecord</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/logger_filter.html#DebugFilter.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_filter.DebugFilter.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Only messages with record level DEBUG can pass
 for messages with another level an extra handler is used</p>
 <dl class="field-list simple">
@@ -3892,10 +3884,10 @@ for messages with another level an extra handler is used</p>
 <dd class="field-odd"><p><strong>record</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><em>tuple</em></a>) – logging message record</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>record.name</p>
+<dd class="field-even"><p>True|False</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3909,7 +3901,7 @@ for messages with another level an extra handler is used</p>
 <p><strong>Extended standard error logging Filter</strong></p>
 <dl class="py method">
 <dt id="kiwi.logger_filter.ErrorFilter.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger_filter.html#ErrorFilter.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_filter.ErrorFilter.filter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.LogRecord" title="(in Python v3.9)">logging.LogRecord</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/logger_filter.html#ErrorFilter.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_filter.ErrorFilter.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Only messages with record level DEBUG can pass
 for messages with another level an extra handler is used</p>
 <dl class="field-list simple">
@@ -3917,10 +3909,10 @@ for messages with another level an extra handler is used</p>
 <dd class="field-odd"><p><strong>record</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><em>tuple</em></a>) – logging message record</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>record.name</p>
+<dd class="field-even"><p>True|False</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3934,18 +3926,18 @@ for messages with another level an extra handler is used</p>
 <p><strong>Extended standard logging Filter</strong></p>
 <dl class="py method">
 <dt id="kiwi.logger_filter.InfoFilter.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger_filter.html#InfoFilter.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_filter.InfoFilter.filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Only messages with record level INFO and WARNING can pass
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.LogRecord" title="(in Python v3.9)">logging.LogRecord</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/logger_filter.html#InfoFilter.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_filter.InfoFilter.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Only messages with record level INFO can pass
 for messages with another level an extra handler is used</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>record</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><em>tuple</em></a>) – logging message record</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>record.name</p>
+<dd class="field-even"><p>True|False</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3959,7 +3951,7 @@ for messages with another level an extra handler is used</p>
 <p><strong>Extended standard logging Filter</strong></p>
 <dl class="py method">
 <dt id="kiwi.logger_filter.LoggerSchedulerFilter.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger_filter.html#LoggerSchedulerFilter.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_filter.LoggerSchedulerFilter.filter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.LogRecord" title="(in Python v3.9)">logging.LogRecord</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/logger_filter.html#LoggerSchedulerFilter.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_filter.LoggerSchedulerFilter.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Messages from apscheduler scheduler instances are filtered out
 They conflict with console progress information</p>
 <dl class="field-list simple">
@@ -3967,10 +3959,10 @@ They conflict with console progress information</p>
 <dd class="field-odd"><p><strong>record</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><em>tuple</em></a>) – logging message record</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>record.name</p>
+<dd class="field-even"><p>True|False</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -3984,7 +3976,7 @@ They conflict with console progress information</p>
 <p><strong>Extended standard warning logging Filter</strong></p>
 <dl class="py method">
 <dt id="kiwi.logger_filter.WarningFilter.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger_filter.html#WarningFilter.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_filter.WarningFilter.filter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.LogRecord" title="(in Python v3.9)">logging.LogRecord</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/logger_filter.html#WarningFilter.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_filter.WarningFilter.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Only messages with record level WARNING can pass
 for messages with another level an extra handler is used</p>
 <dl class="field-list simple">
@@ -3992,10 +3984,10 @@ for messages with another level an extra handler is used</p>
 <dd class="field-odd"><p><strong>record</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><em>tuple</em></a>) – logging message record</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>record.name</p>
+<dd class="field-even"><p>True|False</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -4785,7 +4777,7 @@ the same information.</p>
 <span id="kiwi-xml-description-module"></span><h2><a class="reference internal" href="#module-kiwi.xml_description" title="kiwi.xml_description"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.xml_description</span></code></a> Module<a class="headerlink" href="#module-kiwi.xml_description" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.xml_description.XMLDescription">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.xml_description.</code><code class="sig-name descname">XMLDescription</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">description</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">derived_from</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">xml_content</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_description.html#XMLDescription"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_description.XMLDescription" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.xml_description.</code><code class="sig-name descname">XMLDescription</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">description</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">derived_from</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_description.html#XMLDescription"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_description.XMLDescription" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Implements data management for the image description</strong></p>
 <p>Supported description markup languages are XML, YAML, JSON and INI.
@@ -4800,19 +4792,18 @@ current RelaxNG schema via XSLT and validated against this result.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>description</strong> (<em>string</em>) – path to description file</p></li>
-<li><p><strong>derived_from</strong> (<em>string</em>) – path to base description file</p></li>
-<li><p><strong>xml_content</strong> (<em>string</em>) – XML description data as content string</p></li>
+<li><p><strong>description</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – path to description file</p></li>
+<li><p><strong>derived_from</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – path to base description file</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="kiwi.xml_description.XMLDescription.get_extension_xml_data">
-<code class="sig-name descname">get_extension_xml_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">namespace_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_description.html#XMLDescription.get_extension_xml_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_description.XMLDescription.get_extension_xml_data" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_extension_xml_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">namespace_name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/kiwi/xml_description.html#XMLDescription.get_extension_xml_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_description.XMLDescription.get_extension_xml_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the xml etree parse result for the specified extension namespace</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>namespace_name</strong> (<em>string</em>) – name of the extension namespace</p>
+<dd class="field-odd"><p><strong>namespace_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – name of the extension namespace</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>result of etree.parse</p>
@@ -4825,7 +4816,7 @@ current RelaxNG schema via XSLT and validated against this result.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_description.XMLDescription.load">
-<code class="sig-name descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_description.html#XMLDescription.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_description.XMLDescription.load" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/kiwi/xml_description.html#XMLDescription.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_description.XMLDescription.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read XML description, validate it against the schema
 and the schematron rules and pass it to the
 autogenerated(generateDS) parser.</p>
@@ -4846,7 +4837,7 @@ autogenerated(generateDS) parser.</p>
 <span id="kiwi-xml-state-module"></span><h2><a class="reference internal" href="#module-kiwi.xml_state" title="kiwi.xml_state"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.xml_state</span></code></a> Module<a class="headerlink" href="#module-kiwi.xml_state" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.xml_state.XMLState">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.xml_state.</code><code class="sig-name descname">XMLState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xml_data</span></em>, <em class="sig-param"><span class="n">profiles</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">build_type</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.xml_state.</code><code class="sig-name descname">XMLState</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xml_data</span><span class="p">:</span> <span class="n">Any</span></em>, <em class="sig-param"><span class="n">profiles</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">build_type</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Implements methods to get stateful information from the XML data</strong></p>
 <dl class="field-list simple">
@@ -4860,7 +4851,7 @@ autogenerated(generateDS) parser.</p>
 </dl>
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.add_container_config_label">
-<code class="sig-name descname">add_container_config_label</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">label_name</span></em>, <em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.add_container_config_label"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.add_container_config_label" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_container_config_label</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">label_name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.add_container_config_label"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.add_container_config_label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a new label in the containerconfig section, if a label with the
 same name is already defined in containerconfig it gets overwritten by
 this method.</p>
@@ -4876,17 +4867,17 @@ this method.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.add_repository">
-<code class="sig-name descname">add_repository</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo_source</span></em>, <em class="sig-param"><span class="n">repo_type</span></em>, <em class="sig-param"><span class="n">repo_alias</span></em>, <em class="sig-param"><span class="n">repo_prio</span></em>, <em class="sig-param"><span class="n">repo_imageinclude</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">repo_package_gpgcheck</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.add_repository"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.add_repository" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_repository</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo_source</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_alias</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_prio</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_imageinclude</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">repo_package_gpgcheck</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.add_repository"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.add_repository" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a new repository section at the end of the list</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>repo_source</strong> (<em>string</em>) – repository URI</p></li>
-<li><p><strong>repo_type</strong> (<em>string</em>) – type name defined by schema</p></li>
-<li><p><strong>repo_alias</strong> (<em>string</em>) – alias name</p></li>
-<li><p><strong>repo_prio</strong> (<em>string</em>) – priority number, package manager specific</p></li>
-<li><p><strong>repo_imageinclude</strong> (<em>boolean</em>) – setup repository inside of the image</p></li>
-<li><p><strong>repo_package_gpgcheck</strong> (<em>boolean</em>) – enable/disable package gpg checks</p></li>
+<li><p><strong>repo_source</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – repository URI</p></li>
+<li><p><strong>repo_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – type name defined by schema</p></li>
+<li><p><strong>repo_alias</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – alias name</p></li>
+<li><p><strong>repo_prio</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – priority number, package manager specific</p></li>
+<li><p><strong>repo_imageinclude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – setup repository inside of the image</p></li>
+<li><p><strong>repo_package_gpgcheck</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – enable/disable package gpg checks</p></li>
 </ul>
 </dd>
 </dl>
@@ -4894,7 +4885,7 @@ this method.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_bootdelete_packages">
-<code class="sig-name descname">copy_bootdelete_packages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_bootdelete_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_bootdelete_packages" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_bootdelete_packages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_bootdelete_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_bootdelete_packages" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy packages marked as bootdelete to the packages type=delete
 section in the target xml state</p>
 <dl class="field-list simple">
@@ -4906,7 +4897,7 @@ section in the target xml state</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_bootincluded_archives">
-<code class="sig-name descname">copy_bootincluded_archives</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_bootincluded_archives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_bootincluded_archives" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_bootincluded_archives</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_bootincluded_archives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_bootincluded_archives" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy archives marked as bootinclude to the packages type=bootstrap
 section in the target xml state</p>
 <dl class="field-list simple">
@@ -4918,7 +4909,7 @@ section in the target xml state</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_bootincluded_packages">
-<code class="sig-name descname">copy_bootincluded_packages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_bootincluded_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_bootincluded_packages" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_bootincluded_packages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_bootincluded_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_bootincluded_packages" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy packages marked as bootinclude to the packages type=image
 (or type=bootstrap if no type=image was found) section in the
 target xml state. The package will also be removed from the
@@ -4933,7 +4924,7 @@ present there</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_bootloader_section">
-<code class="sig-name descname">copy_bootloader_section</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_bootloader_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_bootloader_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_bootloader_section</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_bootloader_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_bootloader_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy bootloader section from this xml state to the target xml state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -4944,7 +4935,7 @@ present there</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_build_type_attributes">
-<code class="sig-name descname">copy_build_type_attributes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_names</span></em>, <em class="sig-param"><span class="n">target_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_build_type_attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_build_type_attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_build_type_attributes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">attribute_names</span><span class="p">:</span> <span class="n">List</span></em>, <em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_build_type_attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_build_type_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy specified attributes from this build type section to the
 target xml state build type section</p>
 <dl class="field-list simple">
@@ -4959,7 +4950,7 @@ target xml state build type section</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_displayname">
-<code class="sig-name descname">copy_displayname</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_displayname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_displayname" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_displayname</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_displayname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_displayname" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy image displayname from this xml state to the target xml state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -4970,7 +4961,7 @@ target xml state build type section</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_drivers_sections">
-<code class="sig-name descname">copy_drivers_sections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_drivers_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_drivers_sections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_drivers_sections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_drivers_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_drivers_sections" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy drivers sections from this xml state to the target xml state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -4981,7 +4972,7 @@ target xml state build type section</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_machine_section">
-<code class="sig-name descname">copy_machine_section</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_machine_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_machine_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_machine_section</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_machine_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_machine_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy machine sections from this xml state to the target xml state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -4992,7 +4983,7 @@ target xml state build type section</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_name">
-<code class="sig-name descname">copy_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy image name from this xml state to the target xml state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -5003,7 +4994,7 @@ target xml state build type section</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_oemconfig_section">
-<code class="sig-name descname">copy_oemconfig_section</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_oemconfig_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_oemconfig_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_oemconfig_section</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_oemconfig_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_oemconfig_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy oemconfig sections from this xml state to the target xml state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -5014,7 +5005,7 @@ target xml state build type section</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_preferences_subsections">
-<code class="sig-name descname">copy_preferences_subsections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">section_names</span></em>, <em class="sig-param"><span class="n">target_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_preferences_subsections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_preferences_subsections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_preferences_subsections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">section_names</span><span class="p">:</span> <span class="n">List</span></em>, <em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_preferences_subsections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_preferences_subsections" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy subsections of the preferences sections, matching given
 section names, from this xml state to the target xml state</p>
 <dl class="field-list simple">
@@ -5029,7 +5020,7 @@ section names, from this xml state to the target xml state</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_repository_sections">
-<code class="sig-name descname">copy_repository_sections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span></em>, <em class="sig-param"><span class="n">wipe</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_repository_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_repository_sections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_repository_sections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em>, <em class="sig-param"><span class="n">wipe</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_repository_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_repository_sections" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy repository sections from this xml state to the target xml state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -5043,7 +5034,7 @@ section names, from this xml state to the target xml state</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_strip_sections">
-<code class="sig-name descname">copy_strip_sections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_strip_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_strip_sections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_strip_sections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_strip_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_strip_sections" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy strip sections from this xml state to the target xml state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -5054,7 +5045,7 @@ section names, from this xml state to the target xml state</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.copy_systemdisk_section">
-<code class="sig-name descname">copy_systemdisk_section</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_systemdisk_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_systemdisk_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_systemdisk_section</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_systemdisk_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_systemdisk_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy systemdisk sections from this xml state to the target xml state</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -5065,20 +5056,20 @@ section names, from this xml state to the target xml state</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.delete_repository_sections">
-<code class="sig-name descname">delete_repository_sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.delete_repository_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.delete_repository_sections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">delete_repository_sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.delete_repository_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.delete_repository_sections" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete all repository sections matching configured profiles</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.delete_repository_sections_used_for_build">
-<code class="sig-name descname">delete_repository_sections_used_for_build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.delete_repository_sections_used_for_build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.delete_repository_sections_used_for_build" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">delete_repository_sections_used_for_build</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.delete_repository_sections_used_for_build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.delete_repository_sections_used_for_build" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete all repository sections used to build the image matching
 configured profiles</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_bootstrap_archives">
-<code class="sig-name descname">get_bootstrap_archives</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_archives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_archives" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_bootstrap_archives</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_archives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_archives" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of archive names from the type=”bootstrap” packages section(s)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5092,7 +5083,7 @@ configured profiles</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_bootstrap_collection_type">
-<code class="sig-name descname">get_bootstrap_collection_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_collection_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_collection_type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_bootstrap_collection_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_collection_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_collection_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collection type for packages sections matching type=”bootstrap”</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5106,7 +5097,7 @@ configured profiles</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_bootstrap_collections">
-<code class="sig-name descname">get_bootstrap_collections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_collections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_collections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_bootstrap_collections</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_collections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_collections" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of collection names from the packages sections
 matching type=”bootstrap”</p>
 <dl class="field-list simple">
@@ -5121,7 +5112,7 @@ matching type=”bootstrap”</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_bootstrap_packages">
-<code class="sig-name descname">get_bootstrap_packages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plus_packages</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_packages" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_bootstrap_packages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plus_packages</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_packages" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of package names from the type=”bootstrap” packages section(s)</p>
 <p>The list gets the selected package manager appended
 if there is a request to install packages inside of
@@ -5141,7 +5132,7 @@ the image via a chroot operation</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_bootstrap_packages_sections">
-<code class="sig-name descname">get_bootstrap_packages_sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_packages_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_packages_sections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_bootstrap_packages_sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_packages_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_packages_sections" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of packages sections matching type=”bootstrap”</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5155,7 +5146,7 @@ the image via a chroot operation</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_bootstrap_products">
-<code class="sig-name descname">get_bootstrap_products</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_products"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_products" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_bootstrap_products</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_products"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_products" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of product names from the packages sections
 matching type=”bootstrap”</p>
 <dl class="field-list simple">
@@ -5170,35 +5161,35 @@ matching type=”bootstrap”</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_bootloader_console">
-<code class="sig-name descname">get_build_type_bootloader_console</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_console"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_console" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_bootloader_console</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_console"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_console" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return bootloader console setting for selected build type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>console string</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>string</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_bootloader_name">
-<code class="sig-name descname">get_build_type_bootloader_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_bootloader_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return bootloader name for selected build type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>bootloader name</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>string</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_bootloader_section">
-<code class="sig-name descname">get_build_type_bootloader_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_bootloader_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>First bootloader section from the build type section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5212,7 +5203,7 @@ matching type=”bootstrap”</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_bootloader_serial_line_setup">
-<code class="sig-name descname">get_build_type_bootloader_serial_line_setup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_serial_line_setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_serial_line_setup" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_bootloader_serial_line_setup</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_serial_line_setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_serial_line_setup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return bootloader serial line setup parameters for the
 selected build type</p>
 <dl class="field-list simple">
@@ -5220,14 +5211,14 @@ selected build type</p>
 <dd class="field-odd"><p>serial line setup</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>string</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_bootloader_targettype">
-<code class="sig-name descname">get_build_type_bootloader_targettype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_targettype"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_targettype" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_bootloader_targettype</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_targettype"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_targettype" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return bootloader target type setting. Only relevant for
 the zipl bootloader because zipl is installed differently
 depending on the storage target it runs later</p>
@@ -5236,42 +5227,42 @@ depending on the storage target it runs later</p>
 <dd class="field-odd"><p>target type string</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>string</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_bootloader_timeout">
-<code class="sig-name descname">get_build_type_bootloader_timeout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_timeout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_timeout" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_bootloader_timeout</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_timeout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_timeout" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return bootloader timeout setting for selected build type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>timeout string</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>string</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_bootloader_timeout_style">
-<code class="sig-name descname">get_build_type_bootloader_timeout_style</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_timeout_style"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_timeout_style" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_bootloader_timeout_style</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bootloader_timeout_style"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bootloader_timeout_style" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return bootloader timeout style setting for selected build type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>timeout_style string</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>string</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_containerconfig_section">
-<code class="sig-name descname">get_build_type_containerconfig_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_containerconfig_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_containerconfig_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_containerconfig_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_containerconfig_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_containerconfig_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>First containerconfig section from the build type section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5285,7 +5276,7 @@ depending on the storage target it runs later</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_format_options">
-<code class="sig-name descname">get_build_type_format_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_format_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_format_options" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_format_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_format_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_format_options" title="Permalink to this definition">¶</a></dt>
 <dd><p>Disk format options returned as a dictionary</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5299,7 +5290,7 @@ depending on the storage target it runs later</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_machine_section">
-<code class="sig-name descname">get_build_type_machine_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_machine_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_machine_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_machine_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_machine_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_machine_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>First machine section from the build type section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5313,7 +5304,7 @@ depending on the storage target it runs later</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_name">
-<code class="sig-name descname">get_build_type_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default build type name</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5327,7 +5318,7 @@ depending on the storage target it runs later</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_oemconfig_section">
-<code class="sig-name descname">get_build_type_oemconfig_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_oemconfig_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_oemconfig_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_oemconfig_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_oemconfig_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_oemconfig_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>First oemconfig section from the build type section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5341,7 +5332,7 @@ depending on the storage target it runs later</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_size">
-<code class="sig-name descname">get_build_type_size</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">include_unpartitioned</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_size" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_size</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">include_unpartitioned</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference internal" href="#kiwi.xml_state.size_type" title="kiwi.xml_state.size_type">kiwi.xml_state.size_type</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Size information from the build type section.
 If no unit is set the value is treated as mbytes</p>
 <dl class="field-list simple">
@@ -5360,7 +5351,7 @@ should be included in the computed size or not</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_spare_part_fs_attributes">
-<code class="sig-name descname">get_build_type_spare_part_fs_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_spare_part_fs_attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_spare_part_fs_attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_spare_part_fs_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>List<span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_spare_part_fs_attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_spare_part_fs_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build type specific list of filesystem attributes applied to
 the spare partition.</p>
 <dl class="field-list simple">
@@ -5375,7 +5366,7 @@ the spare partition.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_spare_part_size">
-<code class="sig-name descname">get_build_type_spare_part_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_spare_part_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_spare_part_size" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_spare_part_size</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_spare_part_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_spare_part_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Size information for the spare_part size from the build
 type. If no unit is set the value is treated as mbytes</p>
 <dl class="field-list simple">
@@ -5390,7 +5381,7 @@ type. If no unit is set the value is treated as mbytes</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_system_disk_section">
-<code class="sig-name descname">get_build_type_system_disk_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_system_disk_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_system_disk_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_system_disk_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_system_disk_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_system_disk_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>First system disk section from the build type section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5404,7 +5395,7 @@ type. If no unit is set the value is treated as mbytes</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_unpartitioned_bytes">
-<code class="sig-name descname">get_build_type_unpartitioned_bytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_unpartitioned_bytes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_unpartitioned_bytes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_unpartitioned_bytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_unpartitioned_bytes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_unpartitioned_bytes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Size of the unpartitioned area for image in megabytes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5418,7 +5409,7 @@ type. If no unit is set the value is treated as mbytes</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_vagrant_config_section">
-<code class="sig-name descname">get_build_type_vagrant_config_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_vagrant_config_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_vagrant_config_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_vagrant_config_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_vagrant_config_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_vagrant_config_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>First vagrantconfig section from the build type section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5432,7 +5423,7 @@ type. If no unit is set the value is treated as mbytes</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_vmconfig_entries">
-<code class="sig-name descname">get_build_type_vmconfig_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_vmconfig_entries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_vmconfig_entries" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_vmconfig_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_vmconfig_entries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_vmconfig_entries" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of vmconfig-entry section values from the first
 machine section in the build type section</p>
 <dl class="field-list simple">
@@ -5447,7 +5438,7 @@ machine section in the build type section</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_vmdisk_section">
-<code class="sig-name descname">get_build_type_vmdisk_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_vmdisk_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_vmdisk_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_vmdisk_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_vmdisk_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_vmdisk_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>First vmdisk section from the first machine section in the
 build type section</p>
 <dl class="field-list simple">
@@ -5462,7 +5453,7 @@ build type section</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_vmdvd_section">
-<code class="sig-name descname">get_build_type_vmdvd_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_vmdvd_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_vmdvd_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_vmdvd_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Any<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_vmdvd_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_vmdvd_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>First vmdvd section from the first machine section in the
 build type section</p>
 <dl class="field-list simple">
@@ -5477,7 +5468,7 @@ build type section</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_build_type_vmnic_entries">
-<code class="sig-name descname">get_build_type_vmnic_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_vmnic_entries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_vmnic_entries" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_build_type_vmnic_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_vmnic_entries"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_vmnic_entries" title="Permalink to this definition">¶</a></dt>
 <dd><p>vmnic section(s) from the first machine section in the
 build type section</p>
 <dl class="field-list simple">
@@ -5492,14 +5483,14 @@ build type section</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_collection_type">
-<code class="sig-name descname">get_collection_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">section_type</span><span class="o">=</span><span class="default_value">'image'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_collection_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_collection_type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_collection_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">section_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">'image'</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_collection_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_collection_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collection type from packages sections matching given section
 type.</p>
 <p>If no collection type is specified the default collection
 type is set to: onlyRequired</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>section_type</strong> (<em>string</em>) – type name from packages section</p>
+<dd class="field-odd"><p><strong>section_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – type name from packages section</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>collection type name</p>
@@ -5512,7 +5503,7 @@ type is set to: onlyRequired</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_collections">
-<code class="sig-name descname">get_collections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">section_type</span><span class="o">=</span><span class="default_value">'image'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_collections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_collections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_collections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">section_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">'image'</span></em><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_collections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_collections" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of collection names from the packages sections matching
 type=section_type and type=build_type</p>
 <dl class="field-list simple">
@@ -5527,7 +5518,7 @@ type=section_type and type=build_type</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_container_config">
-<code class="sig-name descname">get_container_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_container_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_container_config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_container_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_container_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_container_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary of containerconfig information</p>
 <p>Takes attributes and subsection data from the selected
 &lt;containerconfig&gt; section and stores it in a dictionary</p>
@@ -5535,7 +5526,7 @@ type=section_type and type=build_type</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_derived_from_image_uri">
-<code class="sig-name descname">get_derived_from_image_uri</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_derived_from_image_uri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_derived_from_image_uri" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_derived_from_image_uri</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference internal" href="kiwi.system.html#kiwi.system.uri.Uri" title="kiwi.system.uri.Uri">kiwi.system.uri.Uri</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_derived_from_image_uri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_derived_from_image_uri" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uri object of derived image if configured</p>
 <p>Specific image types can be based on a master image.
 This method returns the location of this image when
@@ -5552,7 +5543,7 @@ configured in the XML description</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_description_section">
-<code class="sig-name descname">get_description_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_description_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_description_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_description_section</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#kiwi.xml_state.description_type" title="kiwi.xml_state.description_type">kiwi.xml_state.description_type</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_description_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_description_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>The description section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5567,7 +5558,7 @@ author contact and specification</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_disk_start_sector">
-<code class="sig-name descname">get_disk_start_sector</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_disk_start_sector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_disk_start_sector" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_disk_start_sector</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_disk_start_sector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_disk_start_sector" title="Permalink to this definition">¶</a></dt>
 <dd><p>First disk sector number to be used by the first disk partition.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5581,7 +5572,7 @@ author contact and specification</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_distribution_name_from_boot_attribute">
-<code class="sig-name descname">get_distribution_name_from_boot_attribute</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_distribution_name_from_boot_attribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_distribution_name_from_boot_attribute" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_distribution_name_from_boot_attribute</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_distribution_name_from_boot_attribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_distribution_name_from_boot_attribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract the distribution name from the boot attribute of the
 build type section.</p>
 <p>If no boot attribute is configured or the contents does not
@@ -5599,7 +5590,7 @@ an exception is thrown</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_drivers_list">
-<code class="sig-name descname">get_drivers_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_drivers_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_drivers_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_drivers_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_drivers_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_drivers_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of driver names from all drivers sections matching
 configured profiles</p>
 <dl class="field-list simple">
@@ -5614,7 +5605,7 @@ configured profiles</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_fs_create_option_list">
-<code class="sig-name descname">get_fs_create_option_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_fs_create_option_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_fs_create_option_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_fs_create_option_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_fs_create_option_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_fs_create_option_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of root filesystem creation options</p>
 <p>The list contains elements with the information from the
 fscreateoptions attribute string that got split into its
@@ -5631,7 +5622,7 @@ substring components</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_fs_mount_option_list">
-<code class="sig-name descname">get_fs_mount_option_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_fs_mount_option_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_fs_mount_option_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_fs_mount_option_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_fs_mount_option_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_fs_mount_option_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of root filesystem mount options</p>
 <p>The list contains one element with the information from the
 fsmountoptions attribute. The value there is passed along to
@@ -5648,7 +5639,7 @@ the -o mount option</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_image_packages_sections">
-<code class="sig-name descname">get_image_packages_sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_image_packages_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_image_packages_sections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_image_packages_sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_image_packages_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_image_packages_sections" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of packages sections matching type=”image”</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5662,7 +5653,7 @@ the -o mount option</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_image_version">
-<code class="sig-name descname">get_image_version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_image_version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_image_version" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_image_version</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_image_version"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_image_version" title="Permalink to this definition">¶</a></dt>
 <dd><p>Image version from preferences section.</p>
 <p>Multiple occurences of version in preferences sections are not
 forbidden, however only the first version found defines the
@@ -5679,7 +5670,7 @@ final image version</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_initrd_system">
-<code class="sig-name descname">get_initrd_system</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_initrd_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_initrd_system" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_initrd_system</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_initrd_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_initrd_system" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of initrd system to use</p>
 <p>Depending on the image type a specific initrd system is
 either pre selected or free of choice according to the
@@ -5696,7 +5687,7 @@ XML type setup</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_locale">
-<code class="sig-name descname">get_locale</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_locale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_locale" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_locale</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>List<span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_locale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_locale" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets list of locale names if configured. Takes
 the first locale setup from the existing preferences
 sections into account.</p>
@@ -5712,7 +5703,7 @@ sections into account.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_oemconfig_oem_multipath_scan">
-<code class="sig-name descname">get_oemconfig_oem_multipath_scan</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_oemconfig_oem_multipath_scan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_oemconfig_oem_multipath_scan" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_oemconfig_oem_multipath_scan</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_oemconfig_oem_multipath_scan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_oemconfig_oem_multipath_scan" title="Permalink to this definition">¶</a></dt>
 <dd><p>State value to activate multipath maps. Returns a boolean
 value if specified or False</p>
 <dl class="field-list simple">
@@ -5727,7 +5718,7 @@ value if specified or False</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_oemconfig_oem_resize">
-<code class="sig-name descname">get_oemconfig_oem_resize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_oemconfig_oem_resize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_oemconfig_oem_resize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_oemconfig_oem_resize</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_oemconfig_oem_resize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_oemconfig_oem_resize" title="Permalink to this definition">¶</a></dt>
 <dd><p>State value to activate/deactivate disk resize. Returns a
 boolean value if specified or True to set resize on by default</p>
 <dl class="field-list simple">
@@ -5742,7 +5733,7 @@ boolean value if specified or True to set resize on by default</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_oemconfig_swap_mbytes">
-<code class="sig-name descname">get_oemconfig_swap_mbytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_oemconfig_swap_mbytes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_oemconfig_swap_mbytes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_oemconfig_swap_mbytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_oemconfig_swap_mbytes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_oemconfig_swap_mbytes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return swapsize in MB if requested or None</p>
 <p>Operates on the value of oem-swap and if set to true
 returns the given size or the default value.</p>
@@ -5758,7 +5749,7 @@ returns the given size or the default value.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_oemconfig_swap_name">
-<code class="sig-name descname">get_oemconfig_swap_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_oemconfig_swap_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_oemconfig_swap_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_oemconfig_swap_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_oemconfig_swap_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_oemconfig_swap_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the swap space name</p>
 <p>Operates on the value of oem-swapname and if set
 returns the configured name or the default name: LVSwap</p>
@@ -5779,7 +5770,7 @@ no effect.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_package_manager">
-<code class="sig-name descname">get_package_manager</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_package_manager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_package_manager" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_package_manager</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_package_manager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_package_manager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get configured package manager from selected preferences section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5793,7 +5784,7 @@ no effect.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_package_sections">
-<code class="sig-name descname">get_package_sections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">packages_sections</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_package_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_package_sections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_package_sections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">packages_sections</span><span class="p">:</span> <span class="n">List</span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#kiwi.xml_state.package_type" title="kiwi.xml_state.package_type">kiwi.xml_state.package_type</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_package_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_package_sections" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of package sections from the given packages sections.
 Each list element contains a tuple with the &lt;package&gt; section
 reference and the &lt;packages&gt; section this package belongs to</p>
@@ -5818,7 +5809,7 @@ the host architecture matches the configured architecture</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_packages_sections">
-<code class="sig-name descname">get_packages_sections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">section_types</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_packages_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_packages_sections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_packages_sections</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">section_types</span><span class="p">:</span> <span class="n">List</span></em><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_packages_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_packages_sections" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of packages sections matching given section type(s)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -5835,8 +5826,9 @@ the host architecture matches the configured architecture</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_preferences_sections">
-<code class="sig-name descname">get_preferences_sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_preferences_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_preferences_sections" title="Permalink to this definition">¶</a></dt>
-<dd><p>All preferences sections for the selected profiles</p>
+<code class="sig-name descname">get_preferences_sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_preferences_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_preferences_sections" title="Permalink to this definition">¶</a></dt>
+<dd><p>All preferences sections for the selected profiles that match the
+host architecture</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>list of &lt;preferences&gt; section reference(s)</p>
@@ -5849,12 +5841,12 @@ the host architecture matches the configured architecture</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_products">
-<code class="sig-name descname">get_products</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">section_type</span><span class="o">=</span><span class="default_value">'image'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_products"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_products" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_products</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">section_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">'image'</span></em><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_products"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_products" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of product names from the packages sections matching
 type=section_type and type=build_type</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>section_type</strong> (<em>string</em>) – type name from packages section</p>
+<dd class="field-odd"><p><strong>section_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – type name from packages section</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>product names</p>
@@ -5867,7 +5859,7 @@ type=section_type and type=build_type</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_repository_sections">
-<code class="sig-name descname">get_repository_sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_repository_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_repository_sections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_repository_sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_repository_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_repository_sections" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of all repository sections matching configured profiles</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -5881,7 +5873,7 @@ type=section_type and type=build_type</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_repository_sections_used_for_build">
-<code class="sig-name descname">get_repository_sections_used_for_build</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_repository_sections_used_for_build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_repository_sections_used_for_build" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_repository_sections_used_for_build</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_repository_sections_used_for_build"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_repository_sections_used_for_build" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of all repositorys sections used to build the image and
 matching configured profiles.</p>
 <dl class="field-list simple">
@@ -5896,7 +5888,7 @@ matching configured profiles.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_repository_sections_used_in_image">
-<code class="sig-name descname">get_repository_sections_used_in_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_repository_sections_used_in_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_repository_sections_used_in_image" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_repository_sections_used_in_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_repository_sections_used_in_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_repository_sections_used_in_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of all repositorys sections to be configured in the resulting
 image matching configured profiles.</p>
 <dl class="field-list simple">
@@ -5911,19 +5903,19 @@ image matching configured profiles.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_root_filesystem_uuid">
-<code class="sig-name descname">get_root_filesystem_uuid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_root_filesystem_uuid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_root_filesystem_uuid" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_root_filesystem_uuid</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_root_filesystem_uuid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_root_filesystem_uuid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return preserved UUID</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_root_partition_uuid">
-<code class="sig-name descname">get_root_partition_uuid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_root_partition_uuid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_root_partition_uuid" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_root_partition_uuid</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_root_partition_uuid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_root_partition_uuid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return preserved PARTUUID</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_rpm_check_signatures">
-<code class="sig-name descname">get_rpm_check_signatures</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_rpm_check_signatures"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_rpm_check_signatures" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_rpm_check_signatures</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_rpm_check_signatures"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_rpm_check_signatures" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the rpm-check-signatures configuration flag. Returns
 False if not present.</p>
 <dl class="field-list simple">
@@ -5938,7 +5930,7 @@ False if not present.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_rpm_excludedocs">
-<code class="sig-name descname">get_rpm_excludedocs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_rpm_excludedocs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_rpm_excludedocs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_rpm_excludedocs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_rpm_excludedocs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_rpm_excludedocs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the rpm-excludedocs configuration flag. Returns
 False if not present.</p>
 <dl class="field-list simple">
@@ -5953,7 +5945,7 @@ False if not present.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_rpm_locale">
-<code class="sig-name descname">get_rpm_locale</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_rpm_locale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_rpm_locale" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_rpm_locale</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>List<span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_rpm_locale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_rpm_locale" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets list of locale names to filter out by rpm
 if rpm-locale-filtering is switched on the
 the list always contains: [POSIX, C, C.UTF-8]
@@ -5971,7 +5963,7 @@ locale</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_rpm_locale_filtering">
-<code class="sig-name descname">get_rpm_locale_filtering</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_rpm_locale_filtering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_rpm_locale_filtering" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_rpm_locale_filtering</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_rpm_locale_filtering"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_rpm_locale_filtering" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the rpm-locale-filtering configuration flag. Returns
 False if not present.</p>
 <dl class="field-list simple">
@@ -5986,7 +5978,7 @@ False if not present.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_strip_files_to_delete">
-<code class="sig-name descname">get_strip_files_to_delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_strip_files_to_delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_strip_files_to_delete" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_strip_files_to_delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_strip_files_to_delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_strip_files_to_delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Items to delete from strip section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -6000,7 +5992,7 @@ False if not present.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_strip_libraries_to_keep">
-<code class="sig-name descname">get_strip_libraries_to_keep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_strip_libraries_to_keep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_strip_libraries_to_keep" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_strip_libraries_to_keep</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_strip_libraries_to_keep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_strip_libraries_to_keep" title="Permalink to this definition">¶</a></dt>
 <dd><p>Libraries to keep from strip section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -6014,12 +6006,12 @@ False if not present.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_strip_list">
-<code class="sig-name descname">get_strip_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">section_type</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_strip_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_strip_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_strip_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">section_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_strip_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_strip_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of strip names matching the given section type
 and profiles</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>section_type</strong> (<em>string</em>) – type name from packages section</p>
+<dd class="field-odd"><p><strong>section_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – type name from packages section</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>strip names</p>
@@ -6032,7 +6024,7 @@ and profiles</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_strip_tools_to_keep">
-<code class="sig-name descname">get_strip_tools_to_keep</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_strip_tools_to_keep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_strip_tools_to_keep" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_strip_tools_to_keep</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_strip_tools_to_keep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_strip_tools_to_keep" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tools to keep from strip section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -6046,7 +6038,7 @@ and profiles</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_system_archives">
-<code class="sig-name descname">get_system_archives</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_system_archives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_system_archives" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_system_archives</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_system_archives"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_system_archives" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of archive names from the packages sections matching
 type=”image” and type=build_type</p>
 <dl class="field-list simple">
@@ -6061,7 +6053,7 @@ type=”image” and type=build_type</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_system_collection_type">
-<code class="sig-name descname">get_system_collection_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_system_collection_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_system_collection_type" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_system_collection_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_system_collection_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_system_collection_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collection type for packages sections matching type=”image”</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -6075,7 +6067,7 @@ type=”image” and type=build_type</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_system_collections">
-<code class="sig-name descname">get_system_collections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_system_collections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_system_collections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_system_collections</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_system_collections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_system_collections" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of collection names from the packages sections
 matching type=”image”</p>
 <dl class="field-list simple">
@@ -6090,7 +6082,7 @@ matching type=”image”</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_system_ignore_packages">
-<code class="sig-name descname">get_system_ignore_packages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_system_ignore_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_system_ignore_packages" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_system_ignore_packages</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_system_ignore_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_system_ignore_packages" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of ignore package names from the packages sections matching
 type=”image” and type=build_type</p>
 <dl class="field-list simple">
@@ -6105,7 +6097,7 @@ type=”image” and type=build_type</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_system_packages">
-<code class="sig-name descname">get_system_packages</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_system_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_system_packages" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_system_packages</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_system_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_system_packages" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of package names from the packages sections matching
 type=”image” and type=build_type</p>
 <dl class="field-list simple">
@@ -6120,7 +6112,7 @@ type=”image” and type=build_type</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_system_products">
-<code class="sig-name descname">get_system_products</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_system_products"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_system_products" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_system_products</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_system_products"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_system_products" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of product names from the packages sections
 matching type=”image”</p>
 <dl class="field-list simple">
@@ -6135,7 +6127,7 @@ matching type=”image”</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_to_become_deleted_packages">
-<code class="sig-name descname">get_to_become_deleted_packages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_to_become_deleted_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_to_become_deleted_packages" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_to_become_deleted_packages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">force</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_to_become_deleted_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_to_become_deleted_packages" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of package names from the type=”delete” or type=”uninstall”
 packages section(s)</p>
 <dl class="field-list simple">
@@ -6154,7 +6146,7 @@ otherwise</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_user_groups">
-<code class="sig-name descname">get_user_groups</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_user_groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_user_groups" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_user_groups</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_name</span></em><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_user_groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_user_groups" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of group names matching specified user</p>
 <p>Each entry in the list is the name of a group that the specified
 user belongs to. The first item in the list is the login or primary
@@ -6172,7 +6164,7 @@ description file.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_users">
-<code class="sig-name descname">get_users</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_users" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_users</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_users" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of configured users.</p>
 <p>Each entry in the list is a single xml_parse::user instance.</p>
 <dl class="field-list simple">
@@ -6187,7 +6179,7 @@ description file.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_users_sections">
-<code class="sig-name descname">get_users_sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_users_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_users_sections" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_users_sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_users_sections"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_users_sections" title="Permalink to this definition">¶</a></dt>
 <dd><p>All users sections for the selected profiles</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -6201,12 +6193,12 @@ description file.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_vagrant_config_virtualbox_guest_additions">
-<code class="sig-name descname">get_vagrant_config_virtualbox_guest_additions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_vagrant_config_virtualbox_guest_additions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_vagrant_config_virtualbox_guest_additions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_vagrant_config_virtualbox_guest_additions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_vagrant_config_virtualbox_guest_additions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_vagrant_config_virtualbox_guest_additions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Attribute virtualbox_guest_additions_present from the first
 vagrantconfig section.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">&lt;vagrantconfig</span> <span class="pre">virtualbox_guest_additions_present=&gt;</span></code> value</p>
+<dd class="field-odd"><p>True|False</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
@@ -6216,7 +6208,7 @@ vagrantconfig section.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_volume_group_name">
-<code class="sig-name descname">get_volume_group_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_volume_group_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_volume_group_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_volume_group_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_volume_group_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_volume_group_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Volume group name from selected &lt;systemdisk&gt; section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -6230,7 +6222,7 @@ vagrantconfig section.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_volume_management">
-<code class="sig-name descname">get_volume_management</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_volume_management"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_volume_management" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_volume_management</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_volume_management"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_volume_management" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides information which volume management system is used</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -6244,7 +6236,7 @@ vagrantconfig section.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_volumes">
-<code class="sig-name descname">get_volumes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_volumes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_volumes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_volumes</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#kiwi.xml_state.volume_type" title="kiwi.xml_state.volume_type">kiwi.xml_state.volume_type</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_volumes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of configured systemdisk volumes.</p>
 <p>Each entry in the list is a tuple with the following information</p>
 <ul class="simple">
@@ -6283,7 +6275,7 @@ is set the volume name is used as data path.</p></li>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.is_xen_guest">
-<code class="sig-name descname">is_xen_guest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.is_xen_guest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.is_xen_guest" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_xen_guest</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.is_xen_guest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.is_xen_guest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if build type setup specifies a Xen Guest (domX)
 The check is based on the architecture, the firmware and
 xen_loader configuration values:</p>
@@ -6306,7 +6298,7 @@ Xen guest target</p></li>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.is_xen_server">
-<code class="sig-name descname">is_xen_server</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.is_xen_server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.is_xen_server" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_xen_server</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.is_xen_server"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.is_xen_server" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if build type domain setup specifies a Xen Server (dom0)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -6320,7 +6312,7 @@ Xen guest target</p></li>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.package_matches_host_architecture">
-<code class="sig-name descname">package_matches_host_architecture</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">package</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.package_matches_host_architecture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.package_matches_host_architecture" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">package_matches_host_architecture</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">package</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.package_matches_host_architecture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.package_matches_host_architecture" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests if the given package section is applicable for the current host
 architecture. If no architecture is specified within the section
 it is considered as a match returning True.</p>
@@ -6339,8 +6331,28 @@ it is considered as a match returning True.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="kiwi.xml_state.XMLState.preferences_matches_host_architecture">
+<code class="sig-name descname">preferences_matches_host_architecture</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">preferences</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.preferences_matches_host_architecture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.preferences_matches_host_architecture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests if the given preferences section is applicable for the
+current host architecture. If no architecture is specified within
+the section it is considered as a match returning True.</p>
+<p>Note: The XML section pointer must provide an arch attribute</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>section</strong> – XML section object</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True or False</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="kiwi.xml_state.XMLState.profile_matches_host_architecture">
-<code class="sig-name descname">profile_matches_host_architecture</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">profile</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.profile_matches_host_architecture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.profile_matches_host_architecture" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">profile_matches_host_architecture</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">profile</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.profile_matches_host_architecture"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.profile_matches_host_architecture" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests if the given profile section is applicable for the current host
 architecture. If no architecture is specified within the section
 it is considered as a match returning True.</p>
@@ -6360,43 +6372,43 @@ it is considered as a match returning True.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.set_container_config_tag">
-<code class="sig-name descname">set_container_config_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.set_container_config_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.set_container_config_tag" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_container_config_tag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tag</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.set_container_config_tag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.set_container_config_tag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set new tag name in containerconfig section</p>
 <p>In order to set a new tag value an existing containerconfig and
 tag setup is required</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>tag</strong> (<em>string</em>) – tag name</p>
+<dd class="field-odd"><p><strong>tag</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – tag name</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.set_derived_from_image_uri">
-<code class="sig-name descname">set_derived_from_image_uri</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uri</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.set_derived_from_image_uri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.set_derived_from_image_uri" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_derived_from_image_uri</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uri</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.set_derived_from_image_uri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.set_derived_from_image_uri" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set derived_from attribute to a new value</p>
 <p>In order to set a new value the derived_from attribute
 must be already present in the image configuration</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>uri</strong> (<em>string</em>) – URI</p>
+<dd class="field-odd"><p><strong>uri</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – URI</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.set_repository">
-<code class="sig-name descname">set_repository</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo_source</span></em>, <em class="sig-param"><span class="n">repo_type</span></em>, <em class="sig-param"><span class="n">repo_alias</span></em>, <em class="sig-param"><span class="n">repo_prio</span></em>, <em class="sig-param"><span class="n">repo_imageinclude</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">repo_package_gpgcheck</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.set_repository"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.set_repository" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_repository</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo_source</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_alias</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_prio</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_imageinclude</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">repo_package_gpgcheck</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.set_repository"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.set_repository" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overwrite repository data of the first repository</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>repo_source</strong> (<em>string</em>) – repository URI</p></li>
-<li><p><strong>repo_type</strong> (<em>string</em>) – type name defined by schema</p></li>
-<li><p><strong>repo_alias</strong> (<em>string</em>) – alias name</p></li>
-<li><p><strong>repo_prio</strong> (<em>string</em>) – priority number, package manager specific</p></li>
-<li><p><strong>repo_imageinclude</strong> (<em>boolean</em>) – setup repository inside of the image</p></li>
-<li><p><strong>repo_package_gpgcheck</strong> (<em>boolean</em>) – enable/disable package gpg checks</p></li>
+<li><p><strong>repo_source</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – repository URI</p></li>
+<li><p><strong>repo_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – type name defined by schema</p></li>
+<li><p><strong>repo_alias</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – alias name</p></li>
+<li><p><strong>repo_prio</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – priority number, package manager specific</p></li>
+<li><p><strong>repo_imageinclude</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – setup repository inside of the image</p></li>
+<li><p><strong>repo_package_gpgcheck</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – enable/disable package gpg checks</p></li>
 </ul>
 </dd>
 </dl>
@@ -6404,24 +6416,138 @@ must be already present in the image configuration</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.set_root_filesystem_uuid">
-<code class="sig-name descname">set_root_filesystem_uuid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uuid</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.set_root_filesystem_uuid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.set_root_filesystem_uuid" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_root_filesystem_uuid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uuid</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.set_root_filesystem_uuid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.set_root_filesystem_uuid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Store UUID provided in uuid as state information</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>uuid</strong> (<em>string</em>) – UUID</p>
+<dd class="field-odd"><p><strong>uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – UUID</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.set_root_partition_uuid">
-<code class="sig-name descname">set_root_partition_uuid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uuid</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.set_root_partition_uuid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.set_root_partition_uuid" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_root_partition_uuid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uuid</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.set_root_partition_uuid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.set_root_partition_uuid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Store PARTUUID provided in uuid as state information</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>uuid</strong> (<em>string</em>) – PARTUUID</p>
+<dd class="field-odd"><p><strong>uuid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – PARTUUID</p>
 </dd>
 </dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="kiwi.xml_state.description_type">
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.xml_state.</code><code class="sig-name descname">description_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">author</span></em>, <em class="sig-param"><span class="n">contact</span></em>, <em class="sig-param"><span class="n">specification</span></em><span class="sig-paren">)</span><a class="headerlink" href="#kiwi.xml_state.description_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<dl class="py attribute">
+<dt id="kiwi.xml_state.description_type.author">
+<code class="sig-name descname">author</code><a class="headerlink" href="#kiwi.xml_state.description_type.author" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.xml_state.description_type.contact">
+<code class="sig-name descname">contact</code><a class="headerlink" href="#kiwi.xml_state.description_type.contact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.xml_state.description_type.specification">
+<code class="sig-name descname">specification</code><a class="headerlink" href="#kiwi.xml_state.description_type.specification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="kiwi.xml_state.package_type">
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.xml_state.</code><code class="sig-name descname">package_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">packages_section</span></em>, <em class="sig-param"><span class="n">package_section</span></em><span class="sig-paren">)</span><a class="headerlink" href="#kiwi.xml_state.package_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<dl class="py attribute">
+<dt id="kiwi.xml_state.package_type.package_section">
+<code class="sig-name descname">package_section</code><a class="headerlink" href="#kiwi.xml_state.package_type.package_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.xml_state.package_type.packages_section">
+<code class="sig-name descname">packages_section</code><a class="headerlink" href="#kiwi.xml_state.package_type.packages_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="kiwi.xml_state.size_type">
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.xml_state.</code><code class="sig-name descname">size_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mbytes</span></em>, <em class="sig-param"><span class="n">additive</span></em><span class="sig-paren">)</span><a class="headerlink" href="#kiwi.xml_state.size_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<dl class="py attribute">
+<dt id="kiwi.xml_state.size_type.additive">
+<code class="sig-name descname">additive</code><a class="headerlink" href="#kiwi.xml_state.size_type.additive" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.xml_state.size_type.mbytes">
+<code class="sig-name descname">mbytes</code><a class="headerlink" href="#kiwi.xml_state.size_type.mbytes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="kiwi.xml_state.volume_type">
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.xml_state.</code><code class="sig-name descname">volume_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">realpath</span></em>, <em class="sig-param"><span class="n">mountpoint</span></em>, <em class="sig-param"><span class="n">fullsize</span></em>, <em class="sig-param"><span class="n">label</span></em>, <em class="sig-param"><span class="n">attributes</span></em>, <em class="sig-param"><span class="n">is_root_volume</span></em><span class="sig-paren">)</span><a class="headerlink" href="#kiwi.xml_state.volume_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<dl class="py attribute">
+<dt id="kiwi.xml_state.volume_type.attributes">
+<code class="sig-name descname">attributes</code><a class="headerlink" href="#kiwi.xml_state.volume_type.attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 6</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.xml_state.volume_type.fullsize">
+<code class="sig-name descname">fullsize</code><a class="headerlink" href="#kiwi.xml_state.volume_type.fullsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.xml_state.volume_type.is_root_volume">
+<code class="sig-name descname">is_root_volume</code><a class="headerlink" href="#kiwi.xml_state.volume_type.is_root_volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 7</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.xml_state.volume_type.label">
+<code class="sig-name descname">label</code><a class="headerlink" href="#kiwi.xml_state.volume_type.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 5</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.xml_state.volume_type.mountpoint">
+<code class="sig-name descname">mountpoint</code><a class="headerlink" href="#kiwi.xml_state.volume_type.mountpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.xml_state.volume_type.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#kiwi.xml_state.volume_type.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.xml_state.volume_type.realpath">
+<code class="sig-name descname">realpath</code><a class="headerlink" href="#kiwi.xml_state.volume_type.realpath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.xml_state.volume_type.size">
+<code class="sig-name descname">size</code><a class="headerlink" href="#kiwi.xml_state.volume_type.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
 </dd></dl>
 
 </dd></dl>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Image Description for Vagrant &mdash; KIWI NG 9.22.3 documentation</title>
+  <title>Image Description for Vagrant &mdash; KIWI NG 9.22.4 documentation</title>
   
 
   
@@ -822,58 +822,29 @@ they are missing, the resulting Vagrant box will be broken.</p>
 <p>This adds the <strong>vagrant</strong> user to the system and applies the
 name of the user as the password for login.</p>
 </li>
-<li><p>Integrate public SSH key</p>
-<p>Vagrant requires an insecure public key pair <a class="footnote-reference brackets" href="#f1" id="id1">1</a> to be added to the
-authorized keys for the user <code class="docutils literal notranslate"><span class="pre">vagrant</span></code> so that Vagrant itself can
-connect to the box via ssh.
-The key can be obtained from <a class="reference external" href="https://github.com/hashicorp/vagrant/blob/master/keys/vagrant.pub">GitHub</a>
-and should be inserted into the file
-<code class="file docutils literal notranslate"><span class="pre">home/vagrant/.ssh/authorized_keys</span></code>, which can be added as an
-overlay file into the image description.</p>
-<p>Keep in mind to set the file system permissions of
-<code class="file docutils literal notranslate"><span class="pre">home/vagrant/.ssh/</span></code> and <code class="file docutils literal notranslate"><span class="pre">home/vagrant/.ssh/authorized_keys</span></code>
-correctly, otherwise Vagrant will not be able to connect to your
-box. The following snippet can be added to <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod <span class="m">0600</span> /home/vagrant/.ssh/authorized_keys
-chown -R vagrant:vagrant /home/vagrant/
+<li><p>Configure SSH, the default shared folder and sudo permissions</p>
+<p>Vagrant expects that it can login as the user <code class="docutils literal notranslate"><span class="pre">vagrant</span></code> using an
+insecure public key <a class="footnote-reference brackets" href="#f1" id="id1">1</a>. Furthermore, vagrant also usually uses
+<code class="file docutils literal notranslate"><span class="pre">/vagrant</span></code> as the default shared folder and assumes that the
+<code class="docutils literal notranslate"><span class="pre">vagrant</span></code> user can invoke commands via <strong class="command">sudo</strong> without having
+to enter a password.</p>
+<p>This can be achieved using the function <code class="docutils literal notranslate"><span class="pre">baseVagrantSetup</span></code> in
+<code class="file docutils literal notranslate"><span class="pre">config.sh</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>baseVagrantSetup
 </pre></div>
 </div>
 </li>
-<li><p>Create the default shared folder</p>
-<p>Vagrant boxes usually provide a default shared folder under
-<code class="file docutils literal notranslate"><span class="pre">/vagrant</span></code>. Consider adding this empty folder to your overlay
-files and ensure that the user <code class="docutils literal notranslate"><span class="pre">vagrant</span></code> has write permissions to
-it.</p>
-<p>Note, that the boxes that KIWI NG produces <strong>require</strong> this folder to
-exist, otherwise Vagrant will not be able to start them properly.</p>
-</li>
-<li><p>Setup and start SSH daemon</p>
-<p>In <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code> add the start of sshd:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#======================================</span>
-<span class="c1"># Activate services</span>
-<span class="c1">#--------------------------------------</span>
-baseInsertService sshd
-</pre></div>
-</div>
-<p>Also make sure to add the line <strong>UseDNS=no</strong> into
-<code class="file docutils literal notranslate"><span class="pre">/etc/ssh/sshd_config</span></code>. This can be done by an overlay file or by
-patching the file in the above mentioned <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code> file.</p>
-</li>
-<li><p>Configure sudo for the Vagrant user</p>
-<p>Vagrant expects to have passwordless root permissions via <code class="docutils literal notranslate"><span class="pre">sudo</span></code> to be
-able to setup your box. Add the following line to <code class="file docutils literal notranslate"><span class="pre">/etc/sudoers</span></code>
-or add it into a new file <code class="file docutils literal notranslate"><span class="pre">/etc/sudoers.d/vagrant</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vagrant</span> <span class="n">ALL</span><span class="o">=</span><span class="p">(</span><span class="n">ALL</span><span class="p">)</span> <span class="n">NOPASSWD</span><span class="p">:</span> <span class="n">ALL</span>
-</pre></div>
-</div>
-<p>You can also use <strong class="command">visudo</strong> to verify that the resulting
-<code class="file docutils literal notranslate"><span class="pre">/etc/sudoers</span></code> or <code class="file docutils literal notranslate"><span class="pre">/etc/sudoers.d/vagrant</span></code> are valid:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>visudo -cf /etc/sudoers
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    <span class="nb">exit</span> <span class="m">1</span>
-<span class="k">fi</span>
-</pre></div>
-</div>
+<li><p>Additional customizations:</p>
+<p>Additionally to <code class="docutils literal notranslate"><span class="pre">baseVagrantSetup</span></code>, you might want to also ensure the
+following:</p>
+<ul class="simple">
+<li><p>If you have installed the Virtualbox guest additions into your box,
+then also load the <code class="docutils literal notranslate"><span class="pre">vboxsf</span></code> kernel module.</p></li>
+<li><p>When building boxes for libvirt, then ensure that the default wired
+networking interface is called <code class="docutils literal notranslate"><span class="pre">eth0</span></code> and uses DHCP. This is
+necessary since libvirt uses <code class="docutils literal notranslate"><span class="pre">dnsmasq</span></code> to issue IPs to the VMs. This
+step can be omitted for Virtualbox boxes.</p></li>
+</ul>
 </li>
 </ol>
 <p>An image built with the above setup creates a Vagrant box file with the

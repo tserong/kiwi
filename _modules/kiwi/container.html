@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>kiwi.container &mdash; KIWI NG 9.22.3 documentation</title>
+  <title>kiwi.container &mdash; KIWI NG 9.22.4 documentation</title>
   
 
   
@@ -736,16 +736,19 @@
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
-<span class="c1"># project</span>
-<span class="kn">from</span> <span class="nn">kiwi.container.oci</span> <span class="kn">import</span> <span class="n">ContainerImageOCI</span>
-<span class="kn">from</span> <span class="nn">kiwi.container.appx</span> <span class="kn">import</span> <span class="n">ContainerImageAppx</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ABCMeta</span><span class="p">,</span>
+    <span class="n">abstractmethod</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">KiwiContainerImageSetupError</span>
 <span class="p">)</span>
 
 
-<div class="viewcode-block" id="ContainerImage"><a class="viewcode-back" href="../../api/kiwi.container.html#kiwi.container.ContainerImage">[docs]</a><span class="k">class</span> <span class="nc">ContainerImage</span><span class="p">:</span>
+<div class="viewcode-block" id="ContainerImage"><a class="viewcode-back" href="../../api/kiwi.container.html#kiwi.container.ContainerImage">[docs]</a><span class="k">class</span> <span class="nc">ContainerImage</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Container Image factory**</span>
 
@@ -753,23 +756,32 @@
 <span class="sd">    :param string root_dir: root directory path name</span>
 <span class="sd">    :param dict custom_args: custom arguments</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;docker&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ContainerImageOCI</span><span class="p">(</span>
-                <span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;docker-archive&#39;</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="n">custom_args</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># pragma: no cover</span>
+
+<div class="viewcode-block" id="ContainerImage.new"><a class="viewcode-back" href="../../api/kiwi.container.html#kiwi.container.ContainerImage.new">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">Dict</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># noqa: E252</span>
+        <span class="n">name_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;docker&#39;</span><span class="p">:</span> <span class="s1">&#39;OCI&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;oci&#39;</span><span class="p">:</span> <span class="s1">&#39;OCI&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;appx&#39;</span><span class="p">:</span> <span class="s1">&#39;Appx&#39;</span>
+        <span class="p">}</span>
+        <span class="n">args_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;docker&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;docker-archive&#39;</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">],</span>
+            <span class="s1">&#39;oci&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;oci-archive&#39;</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">],</span>
+            <span class="s1">&#39;appx&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">]</span>
+        <span class="p">}</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">container_image</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span>
+                <span class="s1">&#39;kiwi.container.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;oci&#39;</span> <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;docker&#39;</span> <span class="k">else</span> <span class="n">name</span><span class="p">)</span>
             <span class="p">)</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;oci&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ContainerImageOCI</span><span class="p">(</span>
-                <span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;oci-archive&#39;</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="n">custom_args</span>
-            <span class="p">)</span>
-        <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;appx&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ContainerImageAppx</span><span class="p">(</span>
-                <span class="n">root_dir</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="n">custom_args</span>
-            <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
+            <span class="n">module_name</span> <span class="o">=</span> <span class="s1">&#39;ContainerImage</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name_map</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">container_image</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">module_name</span><span class="p">](</span><span class="o">*</span><span class="n">args_map</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiContainerImageSetupError</span><span class="p">(</span>
                 <span class="s1">&#39;Support for </span><span class="si">{0}</span><span class="s1"> container not implemented&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-            <span class="p">)</span></div>
+            <span class="p">)</span></div></div>
 </pre></div>
 
            </div>

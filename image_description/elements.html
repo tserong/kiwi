@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Image Description Elements &mdash; KIWI NG 9.22.3 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.22.4 documentation</title>
   
 
   
@@ -729,7 +729,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.22.3</p>
+and attributes of the KIWI NG XML document in version 9.22.4</p>
 </div>
 <div class="section" id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -781,7 +781,7 @@ value <code class="xref py py-obj docutils literal notranslate"><span class="pre
 <div class="section" id="preferences">
 <span id="sec-preferences"></span><h2>&lt;preferences&gt;<a class="headerlink" href="#preferences" title="Permalink to this headline">¶</a></h2>
 <p>Setup image type and layout.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;preferences&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;preferences</span> <span class="na">arch=</span><span class="s">&quot;arch&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;version&gt;</span>1.2.3<span class="nt">&lt;/version&gt;</span>
   <span class="nt">&lt;packagemanager</span> <span class="na">name=</span><span class="s">&quot;zypper&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;tbz&quot;</span><span class="nt">/&gt;</span>
@@ -790,7 +790,10 @@ value <code class="xref py py-obj docutils literal notranslate"><span class="pre
 </div>
 <p>The mandatory preferences section contains information about the
 supported image type(s), the used package manager, the version of this
-image, and further optional elements.</p>
+image, and further optional elements. The preferences section can
+be configured to apply only for a certain architecture. In this
+case specify the <code class="xref py py-obj docutils literal notranslate"><span class="pre">arch</span></code> attribute with a value as it is reported
+by <strong class="command">uname -m</strong></p>
 <div class="section" id="preferences-version">
 <h3>&lt;preferences&gt;&lt;version&gt;<a class="headerlink" href="#preferences-version" title="Permalink to this headline">¶</a></h3>
 <p>The mandatory image version must be a three-part version number of the
