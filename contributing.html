@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Contributing &mdash; KIWI NG 9.23.4 documentation</title>
+  <title>Contributing &mdash; KIWI NG 9.23.5 documentation</title>
   
 
   
@@ -733,7 +733,7 @@
 <p><strong>Abstract</strong></p>
 <p>This document describes the development process of KIWI NG
 and how you can be part of it. This description applies
-to version 9.23.4.</p>
+to version 9.23.5.</p>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
@@ -759,9 +759,9 @@ GitHub first to discuss the changes. Or join the discussion in the
 </div>
 <div class="section" id="create-a-local-clone-of-the-forked-repository">
 <h2>Create a local clone of the forked repository<a class="headerlink" href="#create-a-local-clone-of-the-forked-repository" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/YOUR-USERNAME/kiwi
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/YOUR-USERNAME/kiwi
 
-<span class="gp">$</span> git remote add upstream https://github.com/OSInside/kiwi.git
+<span class="gp">$ </span>git remote add upstream https://github.com/OSInside/kiwi.git
 </pre></div>
 </div>
 </div>
@@ -787,7 +787,7 @@ GitHub first to discuss the changes. Or join the discussion in the
 <p>The above mentioned system packages will be installed by calling the
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">install_devel_packages.sh</span></code> helper script from the checked out Git
 repository as follows:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo helper/install_devel_packages.sh
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo helper/install_devel_packages.sh
 </pre></div>
 </div>
 <div class="admonition note">
@@ -805,14 +805,14 @@ distribution and package manager as needed.</p>
 <h2>Create a Python Virtual Development Environment<a class="headerlink" href="#create-a-python-virtual-development-environment" title="Permalink to this headline">¶</a></h2>
 <p>The following commands initializes and activates a development
 environment for Python 3:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> tox -e devel
-<span class="gp">$</span> <span class="nb">source</span> .tox/3/bin/activate
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>tox -e devel
+<span class="gp">$ </span><span class="nb">source</span> .tox/3/bin/activate
 </pre></div>
 </div>
 <p>The commands above automatically creates the application script
 called <strong class="command">kiwi-ng</strong>, which allows you to run KIWI NG from the
 Python sources inside the virtual environment:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> kiwi-ng --help
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>kiwi-ng --help
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -820,16 +820,16 @@ Python sources inside the virtual environment:</p>
 <p>The virtualenv’s <code class="xref py py-obj docutils literal notranslate"><span class="pre">$PATH</span></code> will not be taken into account when calling
 KIWI NG via <strong class="command">sudo</strong>! Use the absolute path to the KIWI NG executable
 to run an actual build using your local changes:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo <span class="nv">$PWD</span>/.tox/3/bin/kiwi-ng system build ...
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo <span class="nv">$PWD</span>/.tox/3/bin/kiwi-ng system build ...
 </pre></div>
 </div>
 </div>
 <p>To leave the development mode, run:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> deactivate
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>deactivate
 </pre></div>
 </div>
 <p>To resume your work, <strong class="command">cd</strong> into your local Git repository and call:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">source</span> .tox/3/bin/activate
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">source</span> .tox/3/bin/activate
 </pre></div>
 </div>
 </div>
@@ -840,13 +840,13 @@ virtualenvs inside the <code class="file docutils literal notranslate"><span cla
 and should thus <strong>not</strong> be invoked from inside your development virtualenv.</p>
 <p>Before submitting your changes via a pull request, ensure that all tests
 pass and that the code has the required test coverage via the command:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> tox
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>tox
 </pre></div>
 </div>
 <p>We also include <code class="xref py py-obj docutils literal notranslate"><span class="pre">pytest-xdist</span></code> in the development virtualenv which allows
 to run the unit tests in parallel. It is turned off by default but can be
 enabled via:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> tox <span class="s2">&quot;-n NUMBER_OF_PROCESSES&quot;</span>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>tox <span class="s2">&quot;-n NUMBER_OF_PROCESSES&quot;</span>
 </pre></div>
 </div>
 <p>where you can insert an arbitrary number as <code class="xref py py-obj docutils literal notranslate"><span class="pre">NUMBER_OF_PROCESSES</span></code> (or a
@@ -857,12 +857,12 @@ this command line flag instead of forwarding it to <strong class="command">pytes
 check the source code for errors and build the documentation.</p>
 <p>If you want to see the available targets, use the option <code class="xref py py-obj docutils literal notranslate"><span class="pre">-l</span></code> to let
 <strong class="command">tox</strong> print a list of them:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> tox -l
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>tox -l
 </pre></div>
 </div>
 <p>To only run a special target, use the <code class="xref py py-obj docutils literal notranslate"><span class="pre">-e</span></code> option. The following
 example runs the test cases for the Python 3.6 interpreter only:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> tox -e unit_py3_6
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>tox -e unit_py3_6
 </pre></div>
 </div>
 </div>
@@ -871,7 +871,7 @@ example runs the test cases for the Python 3.6 interpreter only:</p>
 <p>Code changes should be done in an extra Git branch. This allows for
 creating GitHub pull requests in a clean way. See also: <a class="reference external" href="https://help.github.com/en/categories/collaborating-with-issues-and-pull-requests">Collaborating with
 issues and pull requests</a></p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git checkout -b my-topic-branch
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git checkout -b my-topic-branch
 </pre></div>
 </div>
 <p>Make and commit your changes.</p>
@@ -887,17 +887,17 @@ review your work.</p>
 the repository and the code. Thus we recommend to setup a signing key
 as documented in <a class="reference internal" href="#signing-git-patches"><span class="std std-ref">Signing Git Patches</span></a>.</p>
 </div>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git commit -S -a
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git commit -S -a
 </pre></div>
 </div>
 <p>Run the tests and code style checks. All of these are also performed by
 <a class="reference external" href="https://gitlab.com/kiwi3">GitLab CI</a> when a pull request is created.</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> tox
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>tox
 </pre></div>
 </div>
 <p>Once everything is done, push your local branch to your forked repository and
 create a pull request into the upstream repository.</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git push origin my-topic-branch
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git push origin my-topic-branch
 </pre></div>
 </div>
 <p>Thank you much for contributing to KIWI NG. Your time and work effort is very
@@ -984,7 +984,7 @@ for inclusion should be signed with a GPG key.</p>
 <ol class="arabic">
 <li><p>Create a key suitable for signing (it is not recommended to use
 existing keys to not mix it with your email environment):</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> gpg2 --expert --full-gen-key
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>gpg2 --expert --full-gen-key
 </pre></div>
 </div>
 </li>
@@ -995,14 +995,14 @@ validity period (we recommend 2 to 5 years). Complete the key generation
 by entering your name and email address.</p></li>
 <li><p>Add the key ID to your git configuration, by running the following
 <strong class="command">git config</strong> commands:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git config --local user.signingkey <span class="nv">$YOUR_SIGN_KEY_ID</span>
-<span class="gp">$</span> git config --local commit.gpgSign <span class="nb">true</span>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git config --local user.signingkey <span class="nv">$YOUR_SIGN_KEY_ID</span>
+<span class="gp">$ </span>git config --local commit.gpgSign <span class="nb">true</span>
 </pre></div>
 </div>
 <p>Omitting the flag <code class="xref py py-obj docutils literal notranslate"><span class="pre">--local</span></code> will make these settings global for all
 repositories (they will be added to <code class="file docutils literal notranslate"><span class="pre">~/.gitconfig</span></code>). You can find
 your signkey’s ID via:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> gpg2 --list-keys --keyid-format long <span class="nv">$YOUR_EMAIL</span>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>gpg2 --list-keys --keyid-format long <span class="nv">$YOUR_EMAIL</span>
 <span class="go">pub   rsa4096/AABBCCDDEEFF0011 2019-04-26 [S] [expires: 2021-04-16]</span>
 <span class="go">AAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBB</span>
 <span class="go">uid                 [ultimate] YOU &lt;$YOUR_EMAIL&gt;</span>
@@ -1023,19 +1023,19 @@ KIWI NG version. Ensure that your repository is clean (i.e. no modified and
 unknown files exist) beforehand running <strong class="command">bumpversion</strong>.</p>
 <ul>
 <li><p>For backwards-compatible bug fixes:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> bumpversion patch
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>bumpversion patch
 </pre></div>
 </div>
 </li>
 <li><p>For additional functionality in a backwards-compatible manner. When
 changed, the patch level is reset to zero:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> bumpversion minor
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>bumpversion minor
 </pre></div>
 </div>
 </li>
 <li><p>For incompatible API changes. When changed, the patch and minor
 levels are reset to zero:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> bumpversion major
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>bumpversion major
 </pre></div>
 </div>
 </li>
@@ -1048,7 +1048,7 @@ levels are reset to zero:</p>
 configuration file and an automatically updated
 <code class="file docutils literal notranslate"><span class="pre">python-kiwi.changes</span></code>.</p>
 <p>To create the necessary files to build a RPM package via <code class="xref py py-obj docutils literal notranslate"><span class="pre">rpmbuild</span></code>, run:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> make build
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>make build
 </pre></div>
 </div>
 <p>The sources are collected in the <code class="file docutils literal notranslate"><span class="pre">dist/</span></code> directory. These can be
