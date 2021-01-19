@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.5 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.6 documentation</title>
   
 
   
@@ -978,17 +978,18 @@
         <span class="p">)</span>
 
         <span class="c1"># create the bootloader instance</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bootloader_config</span> <span class="o">=</span> <span class="n">BootLoaderConfig</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bootloader</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="p">,</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
-            <span class="n">boot_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="p">{</span>
-                <span class="s1">&#39;targetbase&#39;</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">loop_provider</span><span class="o">.</span><span class="n">get_device</span><span class="p">(),</span>
-                <span class="s1">&#39;grub_directory_name&#39;</span><span class="p">:</span>
-                    <span class="n">Defaults</span><span class="o">.</span><span class="n">get_grub_boot_directory_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">),</span>
-                <span class="s1">&#39;boot_is_crypto&#39;</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">boot_is_crypto</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bootloader</span> <span class="o">!=</span> <span class="s1">&#39;custom&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bootloader_config</span> <span class="o">=</span> <span class="n">BootLoaderConfig</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">bootloader</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="p">,</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
+                <span class="n">boot_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s1">&#39;targetbase&#39;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">loop_provider</span><span class="o">.</span><span class="n">get_device</span><span class="p">(),</span>
+                    <span class="s1">&#39;grub_directory_name&#39;</span><span class="p">:</span>
+                        <span class="n">Defaults</span><span class="o">.</span><span class="n">get_grub_boot_directory_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">),</span>
+                    <span class="s1">&#39;boot_is_crypto&#39;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">boot_is_crypto</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
 
         <span class="c1"># create disk partitions and instance device map</span>
         <span class="n">device_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_and_map_disk_partitions</span><span class="p">(</span><span class="n">disksize_mbytes</span><span class="p">)</span>
@@ -1152,45 +1153,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_setup_selinux_file_contexts</span><span class="p">()</span>
 
         <span class="c1"># syncing system data to disk image</span>
-        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Syncing system to image&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_spare</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">system_spare</span><span class="o">.</span><span class="n">sync_data</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_efi</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Syncing EFI boot data to EFI partition&#39;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">system_efi</span><span class="o">.</span><span class="n">sync_data</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_boot</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Syncing boot data at extra partition&#39;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">system_boot</span><span class="o">.</span><span class="n">sync_data</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_get_exclude_list_for_boot_data_sync</span><span class="p">()</span>
-            <span class="p">)</span>
-
-        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Syncing root filesystem data&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span><span class="p">:</span>
-            <span class="n">squashed_root_file</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
-            <span class="n">squashed_root</span> <span class="o">=</span> <span class="n">FileSystemSquashFs</span><span class="p">(</span>
-                <span class="n">device_provider</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
-                <span class="n">custom_args</span><span class="o">=</span><span class="p">{</span>
-                    <span class="s1">&#39;compression&#39;</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_squashfscompression</span><span class="p">()</span>
-                <span class="p">}</span>
-            <span class="p">)</span>
-            <span class="n">squashed_root</span><span class="o">.</span><span class="n">create_on_file</span><span class="p">(</span>
-                <span class="n">filename</span><span class="o">=</span><span class="n">squashed_root_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="n">exclude</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_exclude_list_for_root_data_sync</span><span class="p">(</span><span class="n">device_map</span><span class="p">)</span>
-            <span class="p">)</span>
-            <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-                <span class="p">[</span>
-                    <span class="s1">&#39;dd&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;if=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">squashed_root_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                    <span class="s1">&#39;of=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;readonly&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>
-                <span class="p">]</span>
-            <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">sync_data</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_get_exclude_list_for_root_data_sync</span><span class="p">(</span><span class="n">device_map</span><span class="p">)</span>
-            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sync_system_to_image</span><span class="p">(</span><span class="n">device_map</span><span class="p">)</span>
 
         <span class="c1"># run post sync script hook</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_setup</span><span class="o">.</span><span class="n">script_exists</span><span class="p">(</span>
@@ -1782,6 +1745,47 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">requested_filesystem</span><span class="p">,</span> <span class="n">boot_partition_id</span>
         <span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">_sync_system_to_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_map</span><span class="p">):</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Syncing system to image&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_spare</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">system_spare</span><span class="o">.</span><span class="n">sync_data</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_efi</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Syncing EFI boot data to EFI partition&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">system_efi</span><span class="o">.</span><span class="n">sync_data</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_boot</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Syncing boot data at extra partition&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">system_boot</span><span class="o">.</span><span class="n">sync_data</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_get_exclude_list_for_boot_data_sync</span><span class="p">()</span>
+            <span class="p">)</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Syncing root filesystem data&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span><span class="p">:</span>
+            <span class="n">squashed_root_file</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
+            <span class="n">squashed_root</span> <span class="o">=</span> <span class="n">FileSystemSquashFs</span><span class="p">(</span>
+                <span class="n">device_provider</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
+                <span class="n">custom_args</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s1">&#39;compression&#39;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_squashfscompression</span><span class="p">()</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+            <span class="n">squashed_root</span><span class="o">.</span><span class="n">create_on_file</span><span class="p">(</span>
+                <span class="n">filename</span><span class="o">=</span><span class="n">squashed_root_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">exclude</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_exclude_list_for_root_data_sync</span><span class="p">(</span><span class="n">device_map</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="s1">&#39;dd&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;if=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">squashed_root_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="s1">&#39;of=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;readonly&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">sync_data</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_get_exclude_list_for_root_data_sync</span><span class="p">(</span><span class="n">device_map</span><span class="p">)</span>
+            <span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">_install_bootloader</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_map</span><span class="p">):</span>
         <span class="n">root_device</span> <span class="o">=</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;root&#39;</span><span class="p">]</span>
         <span class="n">boot_device</span> <span class="o">=</span> <span class="n">root_device</span>
@@ -1816,17 +1820,17 @@
                 <span class="p">{</span><span class="s1">&#39;system_volumes&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">get_volumes</span><span class="p">()}</span>
             <span class="p">)</span>
 
-        <span class="c1"># create bootloader config prior bootloader installation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bootloader_config</span><span class="o">.</span><span class="n">setup_disk_image_config</span><span class="p">(</span>
-            <span class="n">boot_options</span><span class="o">=</span><span class="n">custom_install_arguments</span>
-        <span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;s390&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bootloader_config</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
-
-        <span class="c1"># cleanup bootloader config resources taken prior to next steps</span>
-        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">bootloader_config</span>
-
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bootloader</span> <span class="o">!=</span> <span class="s1">&#39;custom&#39;</span><span class="p">:</span>
+            <span class="c1"># create bootloader config prior bootloader installation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bootloader_config</span><span class="o">.</span><span class="n">setup_disk_image_config</span><span class="p">(</span>
+                <span class="n">boot_options</span><span class="o">=</span><span class="n">custom_install_arguments</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;s390&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">bootloader_config</span><span class="o">.</span><span class="n">write</span><span class="p">()</span>
+
+            <span class="c1"># cleanup bootloader config resources taken prior to next steps</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">bootloader_config</span>
+
             <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
                 <span class="s2">&quot;custom arguments for bootloader installation </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
                 <span class="n">custom_install_arguments</span>

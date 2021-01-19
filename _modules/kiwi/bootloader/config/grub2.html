@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.5 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.6 documentation</title>
   
 
   
@@ -1343,15 +1343,18 @@
             <span class="s1">&#39;GRUB_GFXMODE&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">gfxmode</span><span class="p">,</span>
             <span class="s1">&#39;GRUB_TERMINAL&#39;</span><span class="p">:</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="p">)</span>
         <span class="p">}</span>
+        <span class="n">grub_final_cmdline</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+            <span class="sa">r</span><span class="s1">&#39;root=.* |root=.*$&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdline</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">displayname</span><span class="p">:</span>
             <span class="n">grub_default_entries</span><span class="p">[</span><span class="s1">&#39;GRUB_DISTRIBUTOR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">displayname</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout_style</span><span class="p">:</span>
             <span class="n">grub_default_entries</span><span class="p">[</span><span class="s1">&#39;GRUB_TIMEOUT_STYLE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout_style</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdline</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">grub_final_cmdline</span><span class="p">:</span>
             <span class="n">grub_default_entries</span><span class="p">[</span><span class="s1">&#39;GRUB_CMDLINE_LINUX_DEFAULT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;root=.* |root=.*$&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdline</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">grub_final_cmdline</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span> <span class="ow">and</span> <span class="s1">&#39;serial&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span> <span class="ow">and</span> \
            <span class="bp">self</span><span class="o">.</span><span class="n">serial_line_setup</span><span class="p">:</span>
