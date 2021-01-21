@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.xml_state &mdash; KIWI NG 9.23.6 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.23.7 documentation</title>
   
 
   
@@ -992,7 +992,7 @@
                 <span class="k">return</span> <span class="n">check_signatures</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="XMLState.get_package_manager"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_package_manager">[docs]</a>    <span class="k">def</span> <span class="nf">get_package_manager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="XMLState.get_package_manager"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_package_manager">[docs]</a>    <span class="k">def</span> <span class="nf">get_package_manager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get configured package manager from selected preferences section</span>
 
@@ -1004,7 +1004,7 @@
             <span class="n">package_manager</span> <span class="o">=</span> <span class="n">preferences</span><span class="o">.</span><span class="n">get_packagemanager</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">package_manager</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">package_manager</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">return</span> <span class="kc">None</span></div>
+        <span class="k">return</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_default_package_manager</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="XMLState.get_packages_sections"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_packages_sections">[docs]</a>    <span class="k">def</span> <span class="nf">get_packages_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_types</span><span class="p">:</span> <span class="n">List</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>

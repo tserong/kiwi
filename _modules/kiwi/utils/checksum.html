@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.utils.checksum &mdash; KIWI NG 9.23.6 documentation</title>
+  <title>kiwi.utils.checksum &mdash; KIWI NG 9.23.7 documentation</title>
   
 
   
@@ -743,7 +743,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="kn">import</span> <span class="nn">hashlib</span>
-<span class="kn">import</span> <span class="nn">encodings.ascii</span>
+<span class="kn">import</span> <span class="nn">encodings.ascii</span> <span class="k">as</span> <span class="nn">encoding</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
@@ -768,6 +768,7 @@
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">source_filename</span> <span class="o">=</span> <span class="n">source_filename</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checksum_filename</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ascii</span> <span class="o">=</span> <span class="n">encoding</span><span class="o">.</span><span class="n">getregentry</span><span class="p">()</span><span class="o">.</span><span class="n">name</span>
 
 <div class="viewcode-block" id="Checksum.matches"><a class="viewcode-back" href="../../../api/kiwi.utils.html#kiwi.utils.checksum.Checksum.matches">[docs]</a>    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checksum</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -784,7 +785,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encodings</span><span class="o">.</span><span class="n">ascii</span><span class="p">)</span> <span class="k">as</span> <span class="n">checksum_file</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ascii</span><span class="p">)</span> <span class="k">as</span> <span class="n">checksum_file</span><span class="p">:</span>
             <span class="n">checksum_from_file</span> <span class="o">=</span> <span class="n">checksum_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
             <span class="c1"># checksum is expected to be stored in the first field</span>
             <span class="c1"># separated by space, other information might contain</span>
@@ -852,9 +853,7 @@
             <span class="n">blocks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_block_list</span><span class="p">(</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source_filename</span><span class="p">)</span>
             <span class="p">)</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span>
-            <span class="n">filename</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encodings</span><span class="o">.</span><span class="n">ascii</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span>
-        <span class="p">)</span> <span class="k">as</span> <span class="n">checksum_file</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ascii</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">checksum_file</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">compressed_blocks</span><span class="p">:</span>
                 <span class="n">checksum_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
                     <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
@@ -878,7 +877,7 @@
 <span class="sd">        :param int digest_blocks: Number of blocks processed at a time</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">chunk_size</span> <span class="o">=</span> <span class="n">digest_blocks</span> <span class="o">*</span> <span class="n">digest</span><span class="o">.</span><span class="n">block_size</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encodings</span><span class="o">.</span><span class="n">ascii</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">source</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">source</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">source</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">),</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
                 <span class="n">digest</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">digest</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>

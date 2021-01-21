@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system.profile &mdash; KIWI NG 9.23.6 documentation</title>
+  <title>kiwi.system.profile &mdash; KIWI NG 9.23.7 documentation</title>
   
 
   
@@ -743,9 +743,11 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
 
 <span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.xml_state</span> <span class="kn">import</span> <span class="n">XMLState</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.shell</span> <span class="kn">import</span> <span class="n">Shell</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
 
@@ -754,17 +756,13 @@
 
 <div class="viewcode-block" id="Profile"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.profile.Profile">[docs]</a><span class="k">class</span> <span class="nc">Profile</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    **Create bash readable .profile environment from the XML</span>
-<span class="sd">    description**</span>
-
-<span class="sd">    The information is used by the kiwi first boot code.</span>
+<span class="sd">    **Create bash readable .profile environment from the XML description**</span>
 
 <span class="sd">    :param object xml_state: instance of :class`XMLState`</span>
-<span class="sd">    :param dict dot_profile: profile dictionary</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_state</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_state</span><span class="p">:</span> <span class="n">XMLState</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span> <span class="o">=</span> <span class="n">xml_state</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dot_profile</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dot_profile</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_image_names_to_profile</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_profile_names_to_profile</span><span class="p">()</span>
@@ -778,7 +776,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_drivers_to_profile</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_root_partition_uuid_to_profile</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Profile.get_settings"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.profile.Profile.get_settings">[docs]</a>    <span class="k">def</span> <span class="nf">get_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Profile.get_settings"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.profile.Profile.get_settings">[docs]</a>    <span class="k">def</span> <span class="nf">get_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return all profile elements that has a value</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -789,7 +787,7 @@
             <span class="nb">sorted</span><span class="p">(</span><span class="n">profile</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Profile.add"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.profile.Profile.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<div class="viewcode-block" id="Profile.add"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.profile.Profile.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add key/value pair to profile dictionary</span>
 
@@ -798,11 +796,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dot_profile</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
 
-<div class="viewcode-block" id="Profile.delete"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.profile.Profile.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+<div class="viewcode-block" id="Profile.delete"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.profile.Profile.delete">[docs]</a>    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dot_profile</span><span class="p">:</span>
             <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">dot_profile</span><span class="p">[</span><span class="n">key</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="Profile.create"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.profile.Profile.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<div class="viewcode-block" id="Profile.create"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.profile.Profile.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create bash quoted profile</span>
 

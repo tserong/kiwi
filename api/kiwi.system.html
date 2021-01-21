@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system Package &mdash; KIWI NG 9.23.6 documentation</title>
+  <title>kiwi.system Package &mdash; KIWI NG 9.23.7 documentation</title>
   
 
   
@@ -885,29 +885,28 @@ and kernel is not found</p>
 <span id="kiwi-system-prepare-module"></span><h2><a class="reference internal" href="#module-kiwi.system.prepare" title="kiwi.system.prepare"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.system.prepare</span></code></a> Module<a class="headerlink" href="#module-kiwi.system.prepare" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.system.prepare.SystemPrepare">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.prepare.</code><code class="sig-name descname">SystemPrepare</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xml_state</span></em>, <em class="sig-param"><span class="n">root_dir</span></em>, <em class="sig-param"><span class="n">allow_existing</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.prepare.</code><code class="sig-name descname">SystemPrepare</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xml_state</span><span class="p">:</span> <span class="n"><a class="reference internal" href="kiwi.html#kiwi.xml_state.XMLState" title="kiwi.xml_state.XMLState">kiwi.xml_state.XMLState</a></span></em>, <em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">allow_existing</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Implements preparation and installation of a new root system</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>xml_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">XMLState</span></code></p></li>
-<li><p><strong>profiles</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – list of configured profiles</p></li>
-<li><p><strong>root_bind</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">RootBind</span></code></p></li>
-<li><p><strong>uri_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – a list of Uri references</p></li>
+<li><p><strong>root_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Path to new root directory</p></li>
+<li><p><strong>allow_existing</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Allow using an existing root_dir</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="kiwi.system.prepare.SystemPrepare.clean_package_manager_leftovers">
-<code class="sig-name descname">clean_package_manager_leftovers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.clean_package_manager_leftovers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.clean_package_manager_leftovers" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">clean_package_manager_leftovers</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.clean_package_manager_leftovers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.clean_package_manager_leftovers" title="Permalink to this definition">¶</a></dt>
 <dd><p>This methods cleans some package manager artifacts created
 at run time such as macros</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.prepare.SystemPrepare.delete_packages">
-<code class="sig-name descname">delete_packages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span></em>, <em class="sig-param"><span class="n">packages</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.delete_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.delete_packages" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">delete_packages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="kiwi.package_manager.html#kiwi.package_manager.base.PackageManagerBase" title="kiwi.package_manager.base.PackageManagerBase">kiwi.package_manager.base.PackageManagerBase</a></span></em>, <em class="sig-param"><span class="n">packages</span><span class="p">:</span> <span class="n">List</span></em>, <em class="sig-param"><span class="n">force</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.delete_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.delete_packages" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete one or more packages using the package manager inside
 of the new root directory. If the removal is set with <code class="xref py py-obj docutils literal notranslate"><span class="pre">force</span></code> flag
 only listed packages are deleted and any dependency break or leftover
@@ -928,7 +927,7 @@ is ignored.</p>
 
 <dl class="py method">
 <dt id="kiwi.system.prepare.SystemPrepare.install_bootstrap">
-<code class="sig-name descname">install_bootstrap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span></em>, <em class="sig-param"><span class="n">plus_packages</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.install_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.install_bootstrap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">install_bootstrap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="kiwi.package_manager.html#kiwi.package_manager.base.PackageManagerBase" title="kiwi.package_manager.base.PackageManagerBase">kiwi.package_manager.base.PackageManagerBase</a></span></em>, <em class="sig-param"><span class="n">plus_packages</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.install_bootstrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.install_bootstrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Install system software using the package manager
 from the host, also known as bootstrapping</p>
 <dl class="field-list simple">
@@ -939,15 +938,15 @@ from the host, also known as bootstrapping</p>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="kiwi.html#kiwi.exceptions.KiwiBootStrapPhaseFailed" title="kiwi.exceptions.KiwiBootStrapPhaseFailed"><strong>KiwiBootStrapPhaseFailed</strong></a> – if the bootstrapping process fails
-either installing packages or including bootstrap archives</p>
+<dd class="field-even"><p><a class="reference internal" href="kiwi.html#kiwi.exceptions.KiwiBootStrapPhaseFailed" title="kiwi.exceptions.KiwiBootStrapPhaseFailed"><strong>KiwiBootStrapPhaseFailed</strong></a> – if the bootstrapping process fails either installing
+packages or including bootstrap archives</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.prepare.SystemPrepare.install_packages">
-<code class="sig-name descname">install_packages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span></em>, <em class="sig-param"><span class="n">packages</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.install_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.install_packages" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">install_packages</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="kiwi.package_manager.html#kiwi.package_manager.base.PackageManagerBase" title="kiwi.package_manager.base.PackageManagerBase">kiwi.package_manager.base.PackageManagerBase</a></span></em>, <em class="sig-param"><span class="n">packages</span><span class="p">:</span> <span class="n">List</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.install_packages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.install_packages" title="Permalink to this definition">¶</a></dt>
 <dd><p>Install one or more packages using the package manager inside
 of the new root directory</p>
 <dl class="field-list simple">
@@ -965,7 +964,7 @@ of the new root directory</p>
 
 <dl class="py method">
 <dt id="kiwi.system.prepare.SystemPrepare.install_system">
-<code class="sig-name descname">install_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.install_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.install_system" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">install_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="kiwi.package_manager.html#kiwi.package_manager.base.PackageManagerBase" title="kiwi.package_manager.base.PackageManagerBase">kiwi.package_manager.base.PackageManagerBase</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.install_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.install_system" title="Permalink to this definition">¶</a></dt>
 <dd><p>Install system software using the package manager inside
 of the new root directory. This is done via a chroot operation
 and requires the desired package manager to became installed
@@ -975,15 +974,15 @@ via the bootstrap phase</p>
 <dd class="field-odd"><p><strong>manager</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – instance of a <code class="xref py py-class docutils literal notranslate"><span class="pre">PackageManager</span></code> subclass</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="kiwi.html#kiwi.exceptions.KiwiInstallPhaseFailed" title="kiwi.exceptions.KiwiInstallPhaseFailed"><strong>KiwiInstallPhaseFailed</strong></a> – if the install process fails
-either installing packages or including any archive</p>
+<dd class="field-even"><p><a class="reference internal" href="kiwi.html#kiwi.exceptions.KiwiInstallPhaseFailed" title="kiwi.exceptions.KiwiInstallPhaseFailed"><strong>KiwiInstallPhaseFailed</strong></a> – if the install process fails either installing
+packages or including any archive</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.prepare.SystemPrepare.pinch_system">
-<code class="sig-name descname">pinch_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.pinch_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.pinch_system" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">pinch_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference internal" href="kiwi.package_manager.html#kiwi.package_manager.base.PackageManagerBase" title="kiwi.package_manager.base.PackageManagerBase">kiwi.package_manager.base.PackageManagerBase</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">force</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.pinch_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.pinch_system" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete packages marked for deletion in the XML description. If force
 param is set to False uninstalls packages marked with
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">type=&quot;uninstall&quot;</span></code> if any; if force is set to True deletes packages
@@ -991,32 +990,30 @@ marked with <code class="xref py py-obj docutils literal notranslate"><span clas
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>manager</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">PackageManager</span></code></p></li>
+<li><p><strong>manager</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">PackageManager</span></code> subclass</p></li>
 <li><p><strong>force</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Forced deletion True|False</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference internal" href="kiwi.html#kiwi.exceptions.KiwiPackagesDeletePhaseFailed" title="kiwi.exceptions.KiwiPackagesDeletePhaseFailed"><strong>KiwiPackagesDeletePhaseFailed</strong></a> – if the deletion packages
-process fails</p>
+<dd class="field-even"><p><a class="reference internal" href="kiwi.html#kiwi.exceptions.KiwiPackagesDeletePhaseFailed" title="kiwi.exceptions.KiwiPackagesDeletePhaseFailed"><strong>KiwiPackagesDeletePhaseFailed</strong></a> – if the deletion packages process fails</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.prepare.SystemPrepare.setup_repositories">
-<code class="sig-name descname">setup_repositories</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">clear_cache</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">signing_keys</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.setup_repositories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.setup_repositories" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_repositories</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">clear_cache</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">signing_keys</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="kiwi.package_manager.html#kiwi.package_manager.base.PackageManagerBase" title="kiwi.package_manager.base.PackageManagerBase">kiwi.package_manager.base.PackageManagerBase</a><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.setup_repositories"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.setup_repositories" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set up repositories for software installation and return a
 package manager for performing software installation tasks</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>clear_cache</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – flag the clear cache before configure
-anything</p></li>
-<li><p><strong>signing_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – keys imported to the package manager</p></li>
+<li><p><strong>clear_cache</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Flag the clear cache before configure anything</p></li>
+<li><p><strong>signing_keys</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – Keys imported to the package manager</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">PackageManager</span></code></p>
+<dd class="field-even"><p>instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">PackageManager</span></code> subclass</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference internal" href="kiwi.package_manager.html#kiwi.package_manager.PackageManager" title="kiwi.package_manager.PackageManager">PackageManager</a></p>
@@ -1026,7 +1023,7 @@ anything</p></li>
 
 <dl class="py method">
 <dt id="kiwi.system.prepare.SystemPrepare.update_system">
-<code class="sig-name descname">update_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.update_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.update_system" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">manager</span><span class="p">:</span> <span class="n"><a class="reference internal" href="kiwi.package_manager.html#kiwi.package_manager.base.PackageManagerBase" title="kiwi.package_manager.base.PackageManagerBase">kiwi.package_manager.base.PackageManagerBase</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/prepare.html#SystemPrepare.update_system"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.prepare.SystemPrepare.update_system" title="Permalink to this definition">¶</a></dt>
 <dd><p>Install package updates from the used repositories.
 the process uses the package manager from inside of the
 new root directory</p>
@@ -1047,22 +1044,17 @@ new root directory</p>
 <span id="kiwi-system-profile-module"></span><h2><a class="reference internal" href="#module-kiwi.system.profile" title="kiwi.system.profile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.system.profile</span></code></a> Module<a class="headerlink" href="#module-kiwi.system.profile" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.system.profile.Profile">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.profile.</code><code class="sig-name descname">Profile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xml_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/profile.html#Profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.profile.Profile" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.profile.</code><code class="sig-name descname">Profile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xml_state</span><span class="p">:</span> <span class="n"><a class="reference internal" href="kiwi.html#kiwi.xml_state.XMLState" title="kiwi.xml_state.XMLState">kiwi.xml_state.XMLState</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/profile.html#Profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.profile.Profile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p><strong>Create bash readable .profile environment from the XML
-description</strong></p>
-<p>The information is used by the kiwi first boot code.</p>
+<p><strong>Create bash readable .profile environment from the XML description</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>xml_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – instance of :class`XMLState`</p></li>
-<li><p><strong>dot_profile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – profile dictionary</p></li>
-</ul>
+<dd class="field-odd"><p><strong>xml_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – instance of :class`XMLState`</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="kiwi.system.profile.Profile.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">value</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/profile.html#Profile.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.profile.Profile.add" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">value</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/profile.html#Profile.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.profile.Profile.add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add key/value pair to profile dictionary</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1076,7 +1068,7 @@ description</strong></p>
 
 <dl class="py method">
 <dt id="kiwi.system.profile.Profile.create">
-<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/profile.html#Profile.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.profile.Profile.create" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/profile.html#Profile.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.profile.Profile.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create bash quoted profile</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1087,12 +1079,12 @@ description</strong></p>
 
 <dl class="py method">
 <dt id="kiwi.system.profile.Profile.delete">
-<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/profile.html#Profile.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.profile.Profile.delete" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/profile.html#Profile.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.profile.Profile.delete" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.profile.Profile.get_settings">
-<code class="sig-name descname">get_settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/profile.html#Profile.get_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.profile.Profile.get_settings" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_settings</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="reference internal" href="../_modules/kiwi/system/profile.html#Profile.get_settings"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.profile.Profile.get_settings" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return all profile elements that has a value</p>
 </dd></dl>
 
@@ -1368,7 +1360,7 @@ at some point</p>
 <span id="kiwi-system-setup-module"></span><h2><a class="reference internal" href="#module-kiwi.system.setup" title="kiwi.system.setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.system.setup</span></code></a> Module<a class="headerlink" href="#module-kiwi.system.setup" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.system.setup.SystemSetup">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.setup.</code><code class="sig-name descname">SystemSetup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xml_state</span></em>, <em class="sig-param"><span class="n">root_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.setup.</code><code class="sig-name descname">SystemSetup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xml_state</span><span class="p">:</span> <span class="n"><a class="reference internal" href="kiwi.html#kiwi.xml_state.XMLState" title="kiwi.xml_state.XMLState">kiwi.xml_state.XMLState</a></span></em>, <em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Implementation of system setup steps supported by kiwi</strong></p>
 <p>Kiwi is not responsible for the system configuration, however
@@ -1378,33 +1370,26 @@ the desired image type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>arch</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – Defaults.get_platform_name</p></li>
 <li><p><strong>xml_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">XMLState</span></code></p></li>
-<li><p><strong>description_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – path to image description directory</p></li>
-<li><p><strong>derived_description_dir</strong> – path to derived_description_dir
-boot image descriptions inherits data from the system image
-description, thus they are derived from another image
-description directory which is needed to e.g find system
-image archives, overlay files</p></li>
 <li><p><strong>root_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – root directory path name</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.call_config_script">
-<code class="sig-name descname">call_config_script</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.call_config_script"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.call_config_script" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">call_config_script</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.call_config_script"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.call_config_script" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call config.sh script chrooted</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.call_disk_script">
-<code class="sig-name descname">call_disk_script</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.call_disk_script"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.call_disk_script" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">call_disk_script</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.call_disk_script"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.call_disk_script" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call disk.sh script chrooted</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.call_edit_boot_config_script">
-<code class="sig-name descname">call_edit_boot_config_script</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span></em>, <em class="sig-param"><span class="n">boot_part_id</span></em>, <em class="sig-param"><span class="n">working_directory</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.call_edit_boot_config_script"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.call_edit_boot_config_script" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">call_edit_boot_config_script</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filesystem</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">boot_part_id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em>, <em class="sig-param"><span class="n">working_directory</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.call_edit_boot_config_script"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.call_edit_boot_config_script" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call configured editbootconfig script _NON_ chrooted</p>
 <p>Pass the boot filesystem name and the partition number of
 the boot partition as parameters to the call</p>
@@ -1421,7 +1406,7 @@ the boot partition as parameters to the call</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.call_edit_boot_install_script">
-<code class="sig-name descname">call_edit_boot_install_script</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">diskname</span></em>, <em class="sig-param"><span class="n">boot_device_node</span></em>, <em class="sig-param"><span class="n">working_directory</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.call_edit_boot_install_script"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.call_edit_boot_install_script" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">call_edit_boot_install_script</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">diskname</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">boot_device_node</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">working_directory</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.call_edit_boot_install_script"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.call_edit_boot_install_script" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call configured editbootinstall script _NON_ chrooted</p>
 <p>Pass the disk file name and the device node of the boot partition
 as parameters to the call</p>
@@ -1438,20 +1423,20 @@ as parameters to the call</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.call_image_script">
-<code class="sig-name descname">call_image_script</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.call_image_script"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.call_image_script" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">call_image_script</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.call_image_script"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.call_image_script" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call images.sh script chrooted</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.cleanup">
-<code class="sig-name descname">cleanup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.cleanup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.cleanup" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cleanup</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.cleanup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.cleanup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete all traces of a kiwi description which are not
 required in the later image</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.create_fstab">
-<code class="sig-name descname">create_fstab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fstab</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.create_fstab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.create_fstab" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_fstab</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fstab</span><span class="p">:</span> <span class="n">kiwi.utils.fstab.Fstab</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.create_fstab"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.create_fstab" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create etc/fstab from given Fstab object</p>
 <p>Custom fstab modifications are possible and handled
 in the following order:</p>
@@ -1472,14 +1457,14 @@ file will be deleted</p></li>
 </ol>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>fstab</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – instance of Fstab</p>
+<dd class="field-odd"><p><strong>fstab</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – instance of Fstab</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.create_init_link_from_linuxrc">
-<code class="sig-name descname">create_init_link_from_linuxrc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.create_init_link_from_linuxrc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.create_init_link_from_linuxrc" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_init_link_from_linuxrc</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.create_init_link_from_linuxrc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.create_init_link_from_linuxrc" title="Permalink to this definition">¶</a></dt>
 <dd><p>kiwi boot images provides the linuxrc script, however the kernel
 also expects an init executable to be present. This method creates
 a hard link to the linuxrc file</p>
@@ -1487,7 +1472,7 @@ a hard link to the linuxrc file</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.create_recovery_archive">
-<code class="sig-name descname">create_recovery_archive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.create_recovery_archive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.create_recovery_archive" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create_recovery_archive</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.create_recovery_archive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.create_recovery_archive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a compressed recovery archive from the root tree
 for use with kiwi’s recvoery system. The method creates
 additional data into the image root filesystem which is
@@ -1496,7 +1481,7 @@ deleted prior to the creation of a new recovery data set</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.export_modprobe_setup">
-<code class="sig-name descname">export_modprobe_setup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_root_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.export_modprobe_setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.export_modprobe_setup" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">export_modprobe_setup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_root_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.export_modprobe_setup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.export_modprobe_setup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export etc/modprobe.d to given root_dir</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1507,7 +1492,7 @@ deleted prior to the creation of a new recovery data set</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.export_package_changes">
-<code class="sig-name descname">export_package_changes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.export_package_changes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.export_package_changes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">export_package_changes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.export_package_changes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.export_package_changes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export image package changelog for comparision of
 actual changes of the installed packages</p>
 <dl class="field-list simple">
@@ -1519,7 +1504,7 @@ actual changes of the installed packages</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.export_package_list">
-<code class="sig-name descname">export_package_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.export_package_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.export_package_list" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">export_package_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.export_package_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.export_package_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export image package list as metadata reference
 used by the open buildservice</p>
 <dl class="field-list simple">
@@ -1531,7 +1516,7 @@ used by the open buildservice</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.export_package_verification">
-<code class="sig-name descname">export_package_verification</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.export_package_verification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.export_package_verification" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">export_package_verification</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.export_package_verification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.export_package_verification" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export package verification result as metadata reference
 used by the open buildservice</p>
 <dl class="field-list simple">
@@ -1543,7 +1528,7 @@ used by the open buildservice</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.import_cdroot_files">
-<code class="sig-name descname">import_cdroot_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.import_cdroot_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.import_cdroot_files" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">import_cdroot_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.import_cdroot_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.import_cdroot_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy cdroot files from the image description to the
 specified target directory. Supported is a tar
 archive named config-cdroot.tar[.compression-postfix]</p>
@@ -1556,20 +1541,20 @@ archive named config-cdroot.tar[.compression-postfix]</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.import_description">
-<code class="sig-name descname">import_description</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.import_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.import_description" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">import_description</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.import_description"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.import_description" title="Permalink to this definition">¶</a></dt>
 <dd><p>Import XML descriptions, custom scripts, archives and
 script helper methods</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.import_image_identifier">
-<code class="sig-name descname">import_image_identifier</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.import_image_identifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.import_image_identifier" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">import_image_identifier</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.import_image_identifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.import_image_identifier" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create etc/ImageID identifier file</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.import_overlay_files">
-<code class="sig-name descname">import_overlay_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">follow_links</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">preserve_owner_group</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.import_overlay_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.import_overlay_files" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">import_overlay_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">follow_links</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">preserve_owner_group</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.import_overlay_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.import_overlay_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy overlay files from the image description to
 the image root tree. Supported are a root/ directory
 or a root.tar.gz tarball. The root/ directory takes
@@ -1596,7 +1581,7 @@ profiles</p></li>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.import_repositories_marked_as_imageinclude">
-<code class="sig-name descname">import_repositories_marked_as_imageinclude</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.import_repositories_marked_as_imageinclude"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.import_repositories_marked_as_imageinclude" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">import_repositories_marked_as_imageinclude</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.import_repositories_marked_as_imageinclude"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.import_repositories_marked_as_imageinclude" title="Permalink to this definition">¶</a></dt>
 <dd><p>Those &lt;repository&gt; sections which are marked with the
 imageinclude attribute should be permanently added to
 the image repository configuration</p>
@@ -1604,13 +1589,18 @@ the image repository configuration</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.script_exists">
-<code class="sig-name descname">script_exists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.script_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.script_exists" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">script_exists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.script_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.script_exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if provided script base name exists in the image description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – script base name</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.set_selinux_file_contexts">
-<code class="sig-name descname">set_selinux_file_contexts</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">security_context_file</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.set_selinux_file_contexts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.set_selinux_file_contexts" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_selinux_file_contexts</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">security_context_file</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.set_selinux_file_contexts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.set_selinux_file_contexts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialize the security context fields (extended attributes)
 on the files matching the security_context_file</p>
 <dl class="field-list simple">
@@ -1622,25 +1612,25 @@ on the files matching the security_context_file</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.setup_groups">
-<code class="sig-name descname">setup_groups</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_groups" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_groups</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_groups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_groups" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add groups for configured users</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.setup_keyboard_map">
-<code class="sig-name descname">setup_keyboard_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_keyboard_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_keyboard_map" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_keyboard_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_keyboard_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_keyboard_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setup console keyboard</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.setup_locale">
-<code class="sig-name descname">setup_locale</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_locale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_locale" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_locale</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_locale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_locale" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setup UTF8 system wide locale</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.setup_machine_id">
-<code class="sig-name descname">setup_machine_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_machine_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_machine_id" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_machine_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_machine_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_machine_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setup systemd machine id</p>
 <p>Empty out the machine id which was provided by the package
 installation process. This will instruct the dracut initrd
@@ -1656,7 +1646,7 @@ creating a new one produces an inconsistent system</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.setup_permissions">
-<code class="sig-name descname">setup_permissions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_permissions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_permissions" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_permissions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_permissions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_permissions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check and Fix permissions using chkstat</p>
 <p>Call chkstat in system mode which reads /etc/sysconfig/security
 to determine the configured security level and applies the
@@ -1672,7 +1662,7 @@ warning.</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.setup_plymouth_splash">
-<code class="sig-name descname">setup_plymouth_splash</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_plymouth_splash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_plymouth_splash" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_plymouth_splash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_plymouth_splash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_plymouth_splash" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setup the KIWI configured splash theme as default</p>
 <p>The method uses the plymouth-set-default-theme tool to setup the
 theme for the plymouth splash system. Only in case the tool could
@@ -1682,13 +1672,13 @@ use and the tool is called in a chroot operation</p>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.setup_timezone">
-<code class="sig-name descname">setup_timezone</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_timezone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_timezone" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_timezone</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_timezone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_timezone" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setup timezone symlink</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.setup.SystemSetup.setup_users">
-<code class="sig-name descname">setup_users</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_users" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_users</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_users" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add/Modify configured users</p>
 </dd></dl>
 

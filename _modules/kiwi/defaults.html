@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.defaults &mdash; KIWI NG 9.23.6 documentation</title>
+  <title>kiwi.defaults &mdash; KIWI NG 9.23.7 documentation</title>
   
 
   
@@ -2259,6 +2259,18 @@
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="s1">&#39;macros.kiwi-image-config&#39;</span></div>
+
+<div class="viewcode-block" id="Defaults.get_default_package_manager"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.get_default_package_manager">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_default_package_manager</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the default package manager name if none</span>
+<span class="sd">        is configured in the image description</span>
+
+<span class="sd">        :return: package manager name</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;dnf&#39;</span></div>
 
 <div class="viewcode-block" id="Defaults.get_default_packager_tool"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.get_default_packager_tool">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_default_packager_tool</span><span class="p">(</span><span class="n">package_manager</span><span class="p">):</span>

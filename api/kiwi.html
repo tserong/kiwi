@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi Package &mdash; KIWI NG 9.23.6 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.23.7 documentation</title>
   
 
   
@@ -1507,6 +1507,21 @@ relevant for inode based filesystems</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>live iso type</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="kiwi.defaults.Defaults.get_default_package_manager">
+<em class="property">static </em><code class="sig-name descname">get_default_package_manager</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/defaults.html#Defaults.get_default_package_manager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.defaults.Defaults.get_default_package_manager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the default package manager name if none
+is configured in the image description</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>package manager name</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
@@ -3816,7 +3831,7 @@ the log file</p>
 <span id="kiwi-logger-color-formatter-module"></span><h2><a class="reference internal" href="#module-kiwi.logger_color_formatter" title="kiwi.logger_color_formatter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.logger_color_formatter</span></code></a> Module<a class="headerlink" href="#module-kiwi.logger_color_formatter" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.logger_color_formatter.ColorFormatter">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.logger_color_formatter.</code><code class="sig-name descname">ColorFormatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger_color_formatter.html#ColorFormatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_color_formatter.ColorFormatter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.logger_color_formatter.</code><code class="sig-name descname">ColorFormatter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fmt</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">datefmt</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">style</span><span class="o">=</span><span class="default_value">'%'</span></em>, <em class="sig-param"><span class="n">validate</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/logger_color_formatter.html#ColorFormatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.logger_color_formatter.ColorFormatter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.Formatter" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Formatter</span></code></a></p>
 <p><strong>Extended standard logging Formatter</strong></p>
 <p>Extended format supporting text with color metadata</p>
@@ -4426,6 +4441,13 @@ the range of the configured types and profiles.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="kiwi.runtime_checker.RuntimeChecker.check_image_version_provided">
+<code class="sig-name descname">check_image_version_provided</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_image_version_provided"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_image_version_provided" title="Permalink to this definition">¶</a></dt>
+<dd><p>Kiwi requires a &lt;version&gt; element to be specified as part
+of at least one &lt;preferences&gt; section.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="kiwi.runtime_checker.RuntimeChecker.check_initrd_selection_required">
 <code class="sig-name descname">check_initrd_selection_required</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_initrd_selection_required"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_initrd_selection_required" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the boot attribute is used without selecting kiwi
@@ -4441,15 +4463,6 @@ the custom kiwi initrd system and not dracut.</p>
 <dd><p>If the image description enables the mediacheck attribute
 the required tools to run this check must be installed
 on the image build host</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="kiwi.runtime_checker.RuntimeChecker.check_minimal_required_preferences">
-<code class="sig-name descname">check_minimal_required_preferences</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_minimal_required_preferences"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_minimal_required_preferences" title="Permalink to this definition">¶</a></dt>
-<dd><p>Kiwi requires some of the elements of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">preferences</span></code> element
-to be present at least in one of the preferences section. This
-runtime check validates &lt;version&gt; and &lt;packagemanager&gt; are
-provided.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -5785,7 +5798,7 @@ no effect.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.get_package_manager">
-<code class="sig-name descname">get_package_manager</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_package_manager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_package_manager" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_package_manager</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_package_manager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_package_manager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get configured package manager from selected preferences section</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
