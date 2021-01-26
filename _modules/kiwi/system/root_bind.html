@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system.root_bind &mdash; KIWI NG 9.23.7 documentation</title>
+  <title>kiwi.system.root_bind &mdash; KIWI NG 9.23.8 documentation</title>
   
 
   
@@ -743,7 +743,8 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
-<span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">dedent</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
@@ -751,6 +752,7 @@
 <span class="kn">from</span> <span class="nn">kiwi.path</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">kiwi.mount_manager</span> <span class="kn">import</span> <span class="n">MountManager</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.checksum</span> <span class="kn">import</span> <span class="n">Checksum</span>
+<span class="kn">from</span> <span class="nn">kiwi.system.root_init</span> <span class="kn">import</span> <span class="n">RootInit</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">KiwiMountKernelFileSystemsError</span><span class="p">,</span>
@@ -775,11 +777,11 @@
 <span class="sd">    :param str shared_location: shared directory between image root and</span>
 <span class="sd">        build system root</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_init</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_init</span><span class="p">:</span> <span class="n">RootInit</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">=</span> <span class="n">root_init</span><span class="o">.</span><span class="n">root_dir</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_files</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mount_stack</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dir_stack</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mount_stack</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MountManager</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dir_stack</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c1"># need resolv.conf/hosts for chroot name resolution</span>
         <span class="c1"># need /etc/sysconfig/proxy for chroot proxy usage</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">config_files</span> <span class="o">=</span> <span class="p">[</span>
@@ -797,7 +799,7 @@
         <span class="c1"># share the following directory with the host</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">shared_location</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_shared_cache_location</span><span class="p">()</span>
 
-<div class="viewcode-block" id="RootBind.mount_kernel_file_systems"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.root_bind.RootBind.mount_kernel_file_systems">[docs]</a>    <span class="k">def</span> <span class="nf">mount_kernel_file_systems</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RootBind.mount_kernel_file_systems"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.root_bind.RootBind.mount_kernel_file_systems">[docs]</a>    <span class="k">def</span> <span class="nf">mount_kernel_file_systems</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Bind mount kernel filesystems</span>
 
@@ -823,7 +825,7 @@
                 <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="RootBind.umount_kernel_file_systems"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.root_bind.RootBind.umount_kernel_file_systems">[docs]</a>    <span class="k">def</span> <span class="nf">umount_kernel_file_systems</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RootBind.umount_kernel_file_systems"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.root_bind.RootBind.umount_kernel_file_systems">[docs]</a>    <span class="k">def</span> <span class="nf">umount_kernel_file_systems</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Umount kernel filesystems</span>
 
@@ -836,7 +838,7 @@
         <span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_mounts</span><span class="p">(</span><span class="n">umounts</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RootBind.mount_shared_directory"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.root_bind.RootBind.mount_shared_directory">[docs]</a>    <span class="k">def</span> <span class="nf">mount_shared_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="RootBind.mount_shared_directory"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.root_bind.RootBind.mount_shared_directory">[docs]</a>    <span class="k">def</span> <span class="nf">mount_shared_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Bind mount shared location</span>
 
@@ -851,7 +853,7 @@
 
 <span class="sd">        :raises KiwiMountSharedDirectoryError: if mount fails</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">host_dir</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">host_dir</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">host_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_location</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">Path</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">+</span> <span class="n">host_dir</span><span class="p">)</span>
@@ -868,7 +870,7 @@
                 <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="RootBind.setup_intermediate_config"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.root_bind.RootBind.setup_intermediate_config">[docs]</a>    <span class="k">def</span> <span class="nf">setup_intermediate_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RootBind.setup_intermediate_config"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.root_bind.RootBind.setup_intermediate_config">[docs]</a>    <span class="k">def</span> <span class="nf">setup_intermediate_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create intermediate config files</span>
 
@@ -901,7 +903,7 @@
                 <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="RootBind.cleanup"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.root_bind.RootBind.cleanup">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RootBind.cleanup"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.root_bind.RootBind.cleanup">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cleanup mounted locations, directories and intermediate config files</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -922,7 +924,7 @@
 
             <span class="n">checksum</span> <span class="o">=</span> <span class="n">Checksum</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">checksum</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="n">checksum</span><span class="o">.</span><span class="n">sha256</span><span class="p">(),</span> <span class="n">shasum_file</span><span class="p">):</span>
-                <span class="n">message</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span><span class="se">\n</span><span class="s1"></span>
+                <span class="n">message</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span><span class="se">\n</span><span class="s1"></span>
 <span class="s1">                    Modifications to intermediate config file detected</span>
 
 <span class="s1">                    The file: </span><span class="si">{0}</span><span class="s1"></span>

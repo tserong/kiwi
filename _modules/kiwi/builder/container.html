@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.builder.container &mdash; KIWI NG 9.23.7 documentation</title>
+  <title>kiwi.builder.container &mdash; KIWI NG 9.23.8 documentation</title>
   
 
   
@@ -863,7 +863,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="n">container_image</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_image</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">verify_image_size</span><span class="p">(</span>
+        <span class="n">Result</span><span class="o">.</span><span class="n">verify_image_size</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span><span class="o">.</span><span class="n">get_max_size_constraint</span><span class="p">(),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">filename</span>
         <span class="p">)</span>

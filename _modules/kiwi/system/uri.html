@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system.uri &mdash; KIWI NG 9.23.7 documentation</title>
+  <title>kiwi.system.uri &mdash; KIWI NG 9.23.8 documentation</title>
   
 
   
@@ -746,6 +746,9 @@
 <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlparse</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="p">)</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.mount_manager</span> <span class="kn">import</span> <span class="n">MountManager</span>
@@ -775,13 +778,13 @@
 <span class="sd">    :param dict remote_uri_types: dictionary of remote uri type names</span>
 <span class="sd">    :param dict local_uri_type: dictionary of local uri type names</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">repo_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span> <span class="o">=</span> <span class="n">RuntimeConfig</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">repo_type</span> <span class="o">=</span> <span class="n">repo_type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="n">uri</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">uri</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="p">[</span><span class="n">Defaults</span><span class="o">.</span><span class="n">get_default_uri_type</span><span class="p">(),</span> <span class="n">uri</span><span class="p">]</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mount_stack</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mount_stack</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">remote_uri_types</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;http&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
@@ -796,7 +799,7 @@
             <span class="s1">&#39;obsrepositories&#39;</span><span class="p">:</span> <span class="kc">True</span>
         <span class="p">}</span>
 
-<div class="viewcode-block" id="Uri.translate"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">check_build_environment</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="Uri.translate"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">check_build_environment</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Translate repository location according to their URI type</span>
 
@@ -811,6 +814,8 @@
 <span class="sd">            should depend on the environment the build is called in. As of</span>
 <span class="sd">            today this only effects the translation result if the image</span>
 <span class="sd">            build happens inside of the Open Build Service</span>
+
+<span class="sd">        :return: translated repository location</span>
 
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -862,7 +867,7 @@
                 <span class="s1">&#39;URI schema </span><span class="si">%s</span><span class="s1"> not supported&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">uri</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Uri.credentials_file_name"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri.credentials_file_name">[docs]</a>    <span class="k">def</span> <span class="nf">credentials_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Uri.credentials_file_name"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri.credentials_file_name">[docs]</a>    <span class="k">def</span> <span class="nf">credentials_file_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Filename to store repository credentials</span>
 
@@ -881,7 +886,7 @@
 
         <span class="k">return</span> <span class="n">query</span><span class="p">[</span><span class="s1">&#39;credentials&#39;</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="Uri.alias"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri.alias">[docs]</a>    <span class="k">def</span> <span class="nf">alias</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Uri.alias"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri.alias">[docs]</a>    <span class="k">def</span> <span class="nf">alias</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create hexdigest from URI as alias</span>
 
@@ -896,11 +901,11 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Uri.is_remote"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri.is_remote">[docs]</a>    <span class="k">def</span> <span class="nf">is_remote</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Uri.is_remote"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri.is_remote">[docs]</a>    <span class="k">def</span> <span class="nf">is_remote</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check if URI is a remote or local location</span>
 
-<span class="sd">        :return: True or False</span>
+<span class="sd">        :return: True|False</span>
 
 <span class="sd">        :rtype: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -920,11 +925,11 @@
                 <span class="s1">&#39;URI type </span><span class="si">%s</span><span class="s1"> unknown&#39;</span> <span class="o">%</span> <span class="n">uri</span><span class="o">.</span><span class="n">scheme</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Uri.is_public"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri.is_public">[docs]</a>    <span class="k">def</span> <span class="nf">is_public</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Uri.is_public"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri.is_public">[docs]</a>    <span class="k">def</span> <span class="nf">is_public</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check if URI is considered to be publicly reachable</span>
 
-<span class="sd">        :return: True or False</span>
+<span class="sd">        :return: True|False</span>
 
 <span class="sd">        :rtype: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -942,7 +947,7 @@
             <span class="c1"># unknown uri type considered not public</span>
             <span class="k">return</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="Uri.get_fragment"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri.get_fragment">[docs]</a>    <span class="k">def</span> <span class="nf">get_fragment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Uri.get_fragment"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri.get_fragment">[docs]</a>    <span class="k">def</span> <span class="nf">get_fragment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the fragment part of the URI.</span>
 

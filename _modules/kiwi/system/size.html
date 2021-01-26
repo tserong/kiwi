@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system.size &mdash; KIWI NG 9.23.7 documentation</title>
+  <title>kiwi.system.size &mdash; KIWI NG 9.23.8 documentation</title>
   
 
   
@@ -741,6 +741,7 @@
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
@@ -753,10 +754,10 @@
 
 <span class="sd">    :param str source_dir: source directory path name</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_dir</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">source_dir</span> <span class="o">=</span> <span class="n">source_dir</span>
 
-<div class="viewcode-block" id="SystemSize.customize"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.size.SystemSize.customize">[docs]</a>    <span class="k">def</span> <span class="nf">customize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">requested_filesystem</span><span class="p">):</span>
+<div class="viewcode-block" id="SystemSize.customize"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.size.SystemSize.customize">[docs]</a>    <span class="k">def</span> <span class="nf">customize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">requested_filesystem</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Increase the sum of all file sizes by an empiric factor</span>
 
@@ -767,7 +768,7 @@
 <span class="sd">        ensure the given data size can be stored in a filesystem</span>
 <span class="sd">        of the customized size</span>
 
-<span class="sd">        :param int size: mbsize to update</span>
+<span class="sd">        :param float size: mbsize to update</span>
 <span class="sd">        :param str requested_filesystem: filesystem name</span>
 
 <span class="sd">        :return: mbytes</span>
@@ -788,7 +789,7 @@
 
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SystemSize.accumulate_mbyte_file_sizes"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.size.SystemSize.accumulate_mbyte_file_sizes">[docs]</a>    <span class="k">def</span> <span class="nf">accumulate_mbyte_file_sizes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="SystemSize.accumulate_mbyte_file_sizes"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.size.SystemSize.accumulate_mbyte_file_sizes">[docs]</a>    <span class="k">def</span> <span class="nf">accumulate_mbyte_file_sizes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exclude</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate data size of all data in the source tree</span>
 
@@ -798,7 +799,7 @@
 
 <span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">exclude_options</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">exclude_options</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">nodev</span> <span class="ow">in</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_exclude_list_for_non_physical_devices</span><span class="p">():</span>
             <span class="n">exclude_options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;--exclude&#39;</span><span class="p">)</span>
             <span class="n">exclude_options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
@@ -815,9 +816,9 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">source_dir</span>
             <span class="p">]</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">du_call</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">1048576</span></div>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">du_call</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">1048576</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SystemSize.accumulate_files"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.size.SystemSize.accumulate_files">[docs]</a>    <span class="k">def</span> <span class="nf">accumulate_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SystemSize.accumulate_files"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.size.SystemSize.accumulate_files">[docs]</a>    <span class="k">def</span> <span class="nf">accumulate_files</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate sum of all files in the source tree</span>
 

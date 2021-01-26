@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system Package &mdash; KIWI NG 9.23.7 documentation</title>
+  <title>kiwi.system Package &mdash; KIWI NG 9.23.8 documentation</title>
   
 
   
@@ -748,14 +748,14 @@
 </dl>
 <dl class="py method">
 <dt id="kiwi.system.identifier.SystemIdentifier.calculate_id">
-<code class="sig-name descname">calculate_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/identifier.html#SystemIdentifier.calculate_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.identifier.SystemIdentifier.calculate_id" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">calculate_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/identifier.html#SystemIdentifier.calculate_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.identifier.SystemIdentifier.calculate_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate random hex id</p>
 <p>Using 4 tuples of rand in range from 1..0xfe</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.identifier.SystemIdentifier.get_id">
-<code class="sig-name descname">get_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/identifier.html#SystemIdentifier.get_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.identifier.SystemIdentifier.get_id" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/system/identifier.html#SystemIdentifier.get_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.identifier.SystemIdentifier.get_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current hex identifier</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -769,7 +769,7 @@
 
 <dl class="py method">
 <dt id="kiwi.system.identifier.SystemIdentifier.write">
-<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/identifier.html#SystemIdentifier.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.identifier.SystemIdentifier.write" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/identifier.html#SystemIdentifier.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.identifier.SystemIdentifier.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write current hex identifier to file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -780,7 +780,7 @@
 
 <dl class="py method">
 <dt id="kiwi.system.identifier.SystemIdentifier.write_to_disk">
-<code class="sig-name descname">write_to_disk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">device_provider</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/identifier.html#SystemIdentifier.write_to_disk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.identifier.SystemIdentifier.write_to_disk" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">write_to_disk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">device_provider</span><span class="p">:</span> <span class="n"><a class="reference internal" href="kiwi.storage.html#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider">kiwi.storage.device_provider.DeviceProvider</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/identifier.html#SystemIdentifier.write_to_disk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.identifier.SystemIdentifier.write_to_disk" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write current hex identifier to MBR at offset 0x1b8 on disk</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -796,7 +796,7 @@
 <span id="kiwi-system-kernel-module"></span><h2><a class="reference internal" href="#module-kiwi.system.kernel" title="kiwi.system.kernel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.system.kernel</span></code></a> Module<a class="headerlink" href="#module-kiwi.system.kernel" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.system.kernel.Kernel">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.kernel.</code><code class="sig-name descname">Kernel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/kernel.html#Kernel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.kernel.Kernel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.kernel.</code><code class="sig-name descname">Kernel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/kernel.html#Kernel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.kernel.Kernel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Implementes kernel lookup and extraction from given root tree</strong></p>
 <dl class="field-list simple">
@@ -812,7 +812,7 @@ names in this code</p></li>
 </dl>
 <dl class="py method">
 <dt id="kiwi.system.kernel.Kernel.copy_kernel">
-<code class="sig-name descname">copy_kernel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_dir</span></em>, <em class="sig-param"><span class="n">file_name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/kernel.html#Kernel.copy_kernel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.kernel.Kernel.copy_kernel" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_kernel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">file_name</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/kernel.html#Kernel.copy_kernel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.kernel.Kernel.copy_kernel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy kernel to specified target</p>
 <p>If no file_name is given the target filename is set
 as kernel-&lt;kernel.version&gt;.kernel</p>
@@ -828,7 +828,7 @@ as kernel-&lt;kernel.version&gt;.kernel</p>
 
 <dl class="py method">
 <dt id="kiwi.system.kernel.Kernel.copy_xen_hypervisor">
-<code class="sig-name descname">copy_xen_hypervisor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_dir</span></em>, <em class="sig-param"><span class="n">file_name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/kernel.html#Kernel.copy_xen_hypervisor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.kernel.Kernel.copy_xen_hypervisor" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy_xen_hypervisor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">file_name</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/kernel.html#Kernel.copy_xen_hypervisor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.kernel.Kernel.copy_xen_hypervisor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Copy xen hypervisor to specified target</p>
 <p>If no file_name is given the target filename is set
 as hypervisor-&lt;xen.name&gt;</p>
@@ -844,7 +844,7 @@ as hypervisor-&lt;xen.name&gt;</p>
 
 <dl class="py method">
 <dt id="kiwi.system.kernel.Kernel.get_kernel">
-<code class="sig-name descname">get_kernel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raise_on_not_found</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/kernel.html#Kernel.get_kernel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.kernel.Kernel.get_kernel" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_kernel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">raise_on_not_found</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference internal" href="#kiwi.system.kernel.kernel_type" title="kiwi.system.kernel.kernel_type">kiwi.system.kernel.kernel_type</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/system/kernel.html#Kernel.get_kernel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.kernel.Kernel.get_kernel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lookup kernel files and provide filename and version</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -859,23 +859,65 @@ and kernel is not found</p>
 <dd class="field-odd"><p>tuple with filename, kernelname and version</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>namedtuple</p>
+<dd class="field-even"><p>tuple|None</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.kernel.Kernel.get_xen_hypervisor">
-<code class="sig-name descname">get_xen_hypervisor</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/kernel.html#Kernel.get_xen_hypervisor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.kernel.Kernel.get_xen_hypervisor" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_xen_hypervisor</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span><a class="reference internal" href="#kiwi.system.kernel.xen_hypervisor_type" title="kiwi.system.kernel.xen_hypervisor_type">kiwi.system.kernel.xen_hypervisor_type</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/system/kernel.html#Kernel.get_xen_hypervisor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.kernel.Kernel.get_xen_hypervisor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lookup xen hypervisor and provide filename and hypervisor name</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>tuple with filename and hypervisor name</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>namedtuple</p>
+<dd class="field-even"><p>tuple|None</p>
 </dd>
 </dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="kiwi.system.kernel.kernel_type">
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.kernel.</code><code class="sig-name descname">kernel_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">version</span></em><span class="sig-paren">)</span><a class="headerlink" href="#kiwi.system.kernel.kernel_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<dl class="py attribute">
+<dt id="kiwi.system.kernel.kernel_type.filename">
+<code class="sig-name descname">filename</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#kiwi.system.kernel.kernel_type.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.system.kernel.kernel_type.name">
+<code class="sig-name descname">name</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#kiwi.system.kernel.kernel_type.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.system.kernel.kernel_type.version">
+<code class="sig-name descname">version</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#kiwi.system.kernel.kernel_type.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="kiwi.system.kernel.xen_hypervisor_type">
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.kernel.</code><code class="sig-name descname">xen_hypervisor_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#kiwi.system.kernel.xen_hypervisor_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<dl class="py attribute">
+<dt id="kiwi.system.kernel.xen_hypervisor_type.filename">
+<code class="sig-name descname">filename</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#kiwi.system.kernel.xen_hypervisor_type.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.system.kernel.xen_hypervisor_type.name">
+<code class="sig-name descname">name</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#kiwi.system.kernel.xen_hypervisor_type.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
 </dd></dl>
 
 </dd></dl>
@@ -1095,13 +1137,13 @@ new root directory</p>
 <span id="kiwi-system-result-module"></span><h2><a class="reference internal" href="#module-kiwi.system.result" title="kiwi.system.result"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.system.result</span></code></a> Module<a class="headerlink" href="#module-kiwi.system.result" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.system.result.Result">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.result.</code><code class="sig-name descname">Result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xml_state</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/result.html#Result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.result.</code><code class="sig-name descname">Result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">xml_state</span><span class="p">:</span> <span class="n"><a class="reference internal" href="kiwi.html#kiwi.xml_state.XMLState" title="kiwi.xml_state.XMLState">kiwi.xml_state.XMLState</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/result.html#Result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Collect image building results</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>result_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – list of result files</p></li>
+<li><p><strong>result_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – dict of result files</p></li>
 <li><p><strong>class_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – <a class="reference internal" href="#kiwi.system.result.Result" title="kiwi.system.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> class version</p></li>
 <li><p><strong>xml_state</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">XMLState</span></code></p></li>
 </ul>
@@ -1109,7 +1151,7 @@ new root directory</p>
 </dl>
 <dl class="py method">
 <dt id="kiwi.system.result.Result.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span></em>, <em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">use_for_bundle</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">compress</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">shasum</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/result.html#Result.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result.add" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">key</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">use_for_bundle</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">compress</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">shasum</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/result.html#Result.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result.add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add result tuple to result_files list</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1126,7 +1168,7 @@ new root directory</p>
 
 <dl class="py method">
 <dt id="kiwi.system.result.Result.dump">
-<code class="sig-name descname">dump</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/result.html#Result.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result.dump" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dump</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/result.html#Result.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result.dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Picke dump this instance to a file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1141,13 +1183,13 @@ instance</p>
 
 <dl class="py method">
 <dt id="kiwi.system.result.Result.get_results">
-<code class="sig-name descname">get_results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/result.html#Result.get_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result.get_results" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_results</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span><a class="reference internal" href="#kiwi.system.result.result_file_type" title="kiwi.system.result.result_file_type">kiwi.system.result.result_file_type</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/system/result.html#Result.get_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result.get_results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Current list of result tuples</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.result.Result.load">
-<em class="property">static </em><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/result.html#Result.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result.load" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">load</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; result_type<a class="reference internal" href="../_modules/kiwi/system/result.html#Result.load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result.load" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load pickle dumped filename into a Result instance</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1162,13 +1204,13 @@ to load filename</p>
 
 <dl class="py method">
 <dt id="kiwi.system.result.Result.print_results">
-<code class="sig-name descname">print_results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/result.html#Result.print_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result.print_results" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">print_results</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/result.html#Result.print_results"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result.print_results" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print results human readable</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.result.Result.verify_image_size">
-<code class="sig-name descname">verify_image_size</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size_limit</span></em>, <em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/result.html#Result.verify_image_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result.verify_image_size" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">verify_image_size</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size_limit</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em>, <em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/result.html#Result.verify_image_size"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.result.Result.verify_image_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Verifies the given image file does not exceed the size limit.
 Throws an exception if the limit is exceeded. If the size limit
 is set to None no verification is done.</p>
@@ -1193,25 +1235,25 @@ is set to None no verification is done.</p>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
 <dl class="py attribute">
 <dt id="kiwi.system.result.result_file_type.compress">
-<code class="sig-name descname">compress</code><a class="headerlink" href="#kiwi.system.result.result_file_type.compress" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">compress</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><a class="headerlink" href="#kiwi.system.result.result_file_type.compress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 2</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.system.result.result_file_type.filename">
-<code class="sig-name descname">filename</code><a class="headerlink" href="#kiwi.system.result.result_file_type.filename" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">filename</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#kiwi.system.result.result_file_type.filename" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 0</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.system.result.result_file_type.shasum">
-<code class="sig-name descname">shasum</code><a class="headerlink" href="#kiwi.system.result.result_file_type.shasum" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">shasum</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><a class="headerlink" href="#kiwi.system.result.result_file_type.shasum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 3</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.system.result.result_file_type.use_for_bundle">
-<code class="sig-name descname">use_for_bundle</code><a class="headerlink" href="#kiwi.system.result.result_file_type.use_for_bundle" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">use_for_bundle</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><a class="headerlink" href="#kiwi.system.result.result_file_type.use_for_bundle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 1</p>
 </dd></dl>
 
@@ -1222,7 +1264,7 @@ is set to None no verification is done.</p>
 <span id="kiwi-system-root-bind-module"></span><h2><a class="reference internal" href="#module-kiwi.system.root_bind" title="kiwi.system.root_bind"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.system.root_bind</span></code></a> Module<a class="headerlink" href="#module-kiwi.system.root_bind" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.system.root_bind.RootBind">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.root_bind.</code><code class="sig-name descname">RootBind</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_init</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/root_bind.html#RootBind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_bind.RootBind" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.root_bind.</code><code class="sig-name descname">RootBind</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_init</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#kiwi.system.root_init.RootInit" title="kiwi.system.root_init.RootInit">kiwi.system.root_init.RootInit</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/root_bind.html#RootBind"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_bind.RootBind" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Implements binding/copying of host system paths
 into the new root directory</strong></p>
@@ -1242,13 +1284,13 @@ build system root</p></li>
 </dl>
 <dl class="py method">
 <dt id="kiwi.system.root_bind.RootBind.cleanup">
-<code class="sig-name descname">cleanup</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/root_bind.html#RootBind.cleanup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_bind.RootBind.cleanup" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cleanup</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/root_bind.html#RootBind.cleanup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_bind.RootBind.cleanup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cleanup mounted locations, directories and intermediate config files</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.root_bind.RootBind.mount_kernel_file_systems">
-<code class="sig-name descname">mount_kernel_file_systems</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/root_bind.html#RootBind.mount_kernel_file_systems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_bind.RootBind.mount_kernel_file_systems" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mount_kernel_file_systems</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/root_bind.html#RootBind.mount_kernel_file_systems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_bind.RootBind.mount_kernel_file_systems" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bind mount kernel filesystems</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises</dt>
@@ -1260,7 +1302,7 @@ fails to mount</p>
 
 <dl class="py method">
 <dt id="kiwi.system.root_bind.RootBind.mount_shared_directory">
-<code class="sig-name descname">mount_shared_directory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">host_dir</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/root_bind.html#RootBind.mount_shared_directory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_bind.RootBind.mount_shared_directory" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mount_shared_directory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">host_dir</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/root_bind.html#RootBind.mount_shared_directory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_bind.RootBind.mount_shared_directory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bind mount shared location</p>
 <p>The shared location is a directory which shares data from
 the image buildsystem host with the image root system. It
@@ -1280,7 +1322,7 @@ system root</p>
 
 <dl class="py method">
 <dt id="kiwi.system.root_bind.RootBind.setup_intermediate_config">
-<code class="sig-name descname">setup_intermediate_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/root_bind.html#RootBind.setup_intermediate_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_bind.RootBind.setup_intermediate_config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_intermediate_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/root_bind.html#RootBind.setup_intermediate_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_bind.RootBind.setup_intermediate_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create intermediate config files</p>
 <p>Some config files e.g etc/hosts needs to be temporarly copied
 from the buildsystem host to the image root system in order to
@@ -1297,7 +1339,7 @@ intermediate configuration files fails</p>
 
 <dl class="py method">
 <dt id="kiwi.system.root_bind.RootBind.umount_kernel_file_systems">
-<code class="sig-name descname">umount_kernel_file_systems</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/root_bind.html#RootBind.umount_kernel_file_systems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_bind.RootBind.umount_kernel_file_systems" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">umount_kernel_file_systems</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/root_bind.html#RootBind.umount_kernel_file_systems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_bind.RootBind.umount_kernel_file_systems" title="Permalink to this definition">¶</a></dt>
 <dd><p>Umount kernel filesystems</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises</dt>
@@ -1314,7 +1356,7 @@ fails to mount</p>
 <span id="kiwi-system-root-init-module"></span><h2><a class="reference internal" href="#module-kiwi.system.root_init" title="kiwi.system.root_init"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.system.root_init</span></code></a> Module<a class="headerlink" href="#module-kiwi.system.root_init" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.system.root_init.RootInit">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.root_init.</code><code class="sig-name descname">RootInit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_dir</span></em>, <em class="sig-param"><span class="n">allow_existing</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/root_init.html#RootInit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_init.RootInit" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.root_init.</code><code class="sig-name descname">RootInit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">allow_existing</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/root_init.html#RootInit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_init.RootInit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Implements creation of new root directory for a linux system</strong></p>
 <p>Host system independent static default files and device nodes
@@ -1326,7 +1368,7 @@ are created to initialize a new base system</p>
 </dl>
 <dl class="py method">
 <dt id="kiwi.system.root_init.RootInit.create">
-<code class="sig-name descname">create</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/root_init.html#RootInit.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_init.RootInit.create" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">create</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/root_init.html#RootInit.create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_init.RootInit.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create new system root directory</p>
 <p>The method creates a temporary directory and initializes it
 for the purpose of building a system image from it. This
@@ -1349,7 +1391,7 @@ at some point</p>
 
 <dl class="py method">
 <dt id="kiwi.system.root_init.RootInit.delete">
-<code class="sig-name descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/root_init.html#RootInit.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_init.RootInit.delete" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/root_init.html#RootInit.delete"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.root_init.RootInit.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Force delete root directory and its contents</p>
 </dd></dl>
 
@@ -1717,7 +1759,7 @@ If the provided value is not representable as a string
 
 <dl class="py method">
 <dt id="kiwi.system.shell.Shell.quote">
-<em class="property">static </em><code class="sig-name descname">quote</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/shell.html#Shell.quote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.shell.Shell.quote" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">quote</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/system/shell.html#Shell.quote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.shell.Shell.quote" title="Permalink to this definition">¶</a></dt>
 <dd><p>Quote characters which have a special meaning for bash
 but should be used as normal characters. actually I had
 planned to use pipes.quote but it does not quote as I
@@ -1738,7 +1780,7 @@ so we do it on our own for the scope of kiwi</p>
 
 <dl class="py method">
 <dt id="kiwi.system.shell.Shell.quote_key_value_file">
-<em class="property">static </em><code class="sig-name descname">quote_key_value_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/shell.html#Shell.quote_key_value_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.shell.Shell.quote_key_value_file" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">quote_key_value_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="reference internal" href="../_modules/kiwi/system/shell.html#Shell.quote_key_value_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.shell.Shell.quote_key_value_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Quote given input file which has to be of the form
 key=value to be able to become sourced by the shell</p>
 <dl class="field-list simple">
@@ -1746,17 +1788,17 @@ key=value to be able to become sourced by the shell</p>
 <dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – file path name</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>quoted text</p>
+<dd class="field-even"><p>list of quoted text</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dd class="field-odd"><p>List[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.shell.Shell.run_common_function">
-<em class="property">static </em><code class="sig-name descname">run_common_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">parameters</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/shell.html#Shell.run_common_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.shell.Shell.run_common_function" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">run_common_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">parameters</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/shell.html#Shell.run_common_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.shell.Shell.run_common_function" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a function implemented in config/functions.sh</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1775,7 +1817,7 @@ key=value to be able to become sourced by the shell</p>
 <span id="kiwi-system-size-module"></span><h2><a class="reference internal" href="#module-kiwi.system.size" title="kiwi.system.size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.system.size</span></code></a> Module<a class="headerlink" href="#module-kiwi.system.size" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.system.size.SystemSize">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.size.</code><code class="sig-name descname">SystemSize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">source_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/size.html#SystemSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.size.SystemSize" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.size.</code><code class="sig-name descname">SystemSize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">source_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/size.html#SystemSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.size.SystemSize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Provide source tree size information</strong></p>
 <dl class="field-list simple">
@@ -1785,7 +1827,7 @@ key=value to be able to become sourced by the shell</p>
 </dl>
 <dl class="py method">
 <dt id="kiwi.system.size.SystemSize.accumulate_files">
-<code class="sig-name descname">accumulate_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/size.html#SystemSize.accumulate_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.size.SystemSize.accumulate_files" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">accumulate_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="reference internal" href="../_modules/kiwi/system/size.html#SystemSize.accumulate_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.size.SystemSize.accumulate_files" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate sum of all files in the source tree</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1799,7 +1841,7 @@ key=value to be able to become sourced by the shell</p>
 
 <dl class="py method">
 <dt id="kiwi.system.size.SystemSize.accumulate_mbyte_file_sizes">
-<code class="sig-name descname">accumulate_mbyte_file_sizes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exclude</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/size.html#SystemSize.accumulate_mbyte_file_sizes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.size.SystemSize.accumulate_mbyte_file_sizes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">accumulate_mbyte_file_sizes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exclude</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="reference internal" href="../_modules/kiwi/system/size.html#SystemSize.accumulate_mbyte_file_sizes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.size.SystemSize.accumulate_mbyte_file_sizes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate data size of all data in the source tree</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1816,7 +1858,7 @@ key=value to be able to become sourced by the shell</p>
 
 <dl class="py method">
 <dt id="kiwi.system.size.SystemSize.customize">
-<code class="sig-name descname">customize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span></em>, <em class="sig-param"><span class="n">requested_filesystem</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/size.html#SystemSize.customize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.size.SystemSize.customize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">customize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">size</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></span></em>, <em class="sig-param"><span class="n">requested_filesystem</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="reference internal" href="../_modules/kiwi/system/size.html#SystemSize.customize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.size.SystemSize.customize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Increase the sum of all file sizes by an empiric factor</p>
 <p>Each filesystem has some overhead it needs to manage itself.
 Thus the plain data size is always smaller as the size of
@@ -1827,7 +1869,7 @@ of the customized size</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – mbsize to update</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – mbsize to update</p></li>
 <li><p><strong>requested_filesystem</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – filesystem name</p></li>
 </ul>
 </dd>
@@ -1847,7 +1889,7 @@ of the customized size</p>
 <span id="kiwi-system-uri-module"></span><h2><a class="reference internal" href="#module-kiwi.system.uri" title="kiwi.system.uri"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.system.uri</span></code></a> Module<a class="headerlink" href="#module-kiwi.system.uri" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.system.uri.Uri">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.uri.</code><code class="sig-name descname">Uri</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uri</span></em>, <em class="sig-param"><span class="n">repo_type</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.uri.</code><code class="sig-name descname">Uri</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uri</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_type</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Dict<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Normalize url types available in a kiwi configuration into
 standard mime types</strong></p>
@@ -1866,7 +1908,7 @@ e.g for yast2 vs. rpm-md obs repositories</p></li>
 </dl>
 <dl class="py method">
 <dt id="kiwi.system.uri.Uri.alias">
-<code class="sig-name descname">alias</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri.alias"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri.alias" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">alias</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri.alias"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri.alias" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create hexdigest from URI as alias</p>
 <p>If the repository definition from the XML description does
 not provide an alias, kiwi creates one for you. However it’s
@@ -1884,7 +1926,7 @@ configuration</p>
 
 <dl class="py method">
 <dt id="kiwi.system.uri.Uri.credentials_file_name">
-<code class="sig-name descname">credentials_file_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri.credentials_file_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri.credentials_file_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">credentials_file_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri.credentials_file_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri.credentials_file_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filename to store repository credentials</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1898,7 +1940,7 @@ configuration</p>
 
 <dl class="py method">
 <dt id="kiwi.system.uri.Uri.get_fragment">
-<code class="sig-name descname">get_fragment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri.get_fragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri.get_fragment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_fragment</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri.get_fragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri.get_fragment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the fragment part of the URI.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1912,11 +1954,11 @@ configuration</p>
 
 <dl class="py method">
 <dt id="kiwi.system.uri.Uri.is_public">
-<code class="sig-name descname">is_public</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri.is_public"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri.is_public" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_public</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri.is_public"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri.is_public" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if URI is considered to be publicly reachable</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True or False</p>
+<dd class="field-odd"><p>True|False</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
@@ -1926,11 +1968,11 @@ configuration</p>
 
 <dl class="py method">
 <dt id="kiwi.system.uri.Uri.is_remote">
-<code class="sig-name descname">is_remote</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri.is_remote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri.is_remote" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_remote</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri.is_remote"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri.is_remote" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if URI is a remote or local location</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True or False</p>
+<dd class="field-odd"><p>True|False</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
@@ -1940,7 +1982,7 @@ configuration</p>
 
 <dl class="py method">
 <dt id="kiwi.system.uri.Uri.translate">
-<code class="sig-name descname">translate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">check_build_environment</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri.translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri.translate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">translate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">check_build_environment</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri.translate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri.translate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Translate repository location according to their URI type</p>
 <p>Depending on the URI type the provided location needs to
 be adapted e.g loop mounted in case of an ISO or updated
@@ -1957,8 +1999,11 @@ should depend on the environment the build is called in. As of
 today this only effects the translation result if the image
 build happens inside of the Open Build Service</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>translated repository location</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1970,7 +2015,7 @@ build happens inside of the Open Build Service</p>
 <span id="kiwi-system-users-module"></span><h2><a class="reference internal" href="#module-kiwi.system.users" title="kiwi.system.users"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.system.users</span></code></a> Module<a class="headerlink" href="#module-kiwi.system.users" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.system.users.Users">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.users.</code><code class="sig-name descname">Users</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/users.html#Users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.users.</code><code class="sig-name descname">Users</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">root_dir</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/users.html#Users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Operations on users and groups in a root directory</strong></p>
 <dl class="field-list simple">
@@ -1980,7 +2025,7 @@ build happens inside of the Open Build Service</p>
 </dl>
 <dl class="py method">
 <dt id="kiwi.system.users.Users.group_add">
-<code class="sig-name descname">group_add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group_name</span></em>, <em class="sig-param"><span class="n">options</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/users.html#Users.group_add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users.group_add" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">group_add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group_name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">options</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/users.html#Users.group_add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users.group_add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add group with options</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1994,14 +2039,14 @@ build happens inside of the Open Build Service</p>
 
 <dl class="py method">
 <dt id="kiwi.system.users.Users.group_exists">
-<code class="sig-name descname">group_exists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/users.html#Users.group_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users.group_exists" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">group_exists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group_name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/system/users.html#Users.group_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users.group_exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if group exists</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>group_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – group name</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>True or False</p>
+<dd class="field-even"><p>True|False</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
@@ -2011,7 +2056,7 @@ build happens inside of the Open Build Service</p>
 
 <dl class="py method">
 <dt id="kiwi.system.users.Users.setup_home_for_user">
-<code class="sig-name descname">setup_home_for_user</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_name</span></em>, <em class="sig-param"><span class="n">group_name</span></em>, <em class="sig-param"><span class="n">home_path</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/users.html#Users.setup_home_for_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users.setup_home_for_user" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setup_home_for_user</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">group_name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">home_path</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/users.html#Users.setup_home_for_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users.setup_home_for_user" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setup user home directory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2026,7 +2071,7 @@ build happens inside of the Open Build Service</p>
 
 <dl class="py method">
 <dt id="kiwi.system.users.Users.user_add">
-<code class="sig-name descname">user_add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_name</span></em>, <em class="sig-param"><span class="n">options</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/users.html#Users.user_add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users.user_add" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">user_add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">options</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/users.html#Users.user_add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users.user_add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add user with options</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2040,21 +2085,24 @@ build happens inside of the Open Build Service</p>
 
 <dl class="py method">
 <dt id="kiwi.system.users.Users.user_exists">
-<code class="sig-name descname">user_exists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/users.html#Users.user_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users.user_exists" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">user_exists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="reference internal" href="../_modules/kiwi/system/users.html#Users.user_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users.user_exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if user exists</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>user_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – user name</p>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True|False</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.system.users.Users.user_modify">
-<code class="sig-name descname">user_modify</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_name</span></em>, <em class="sig-param"><span class="n">options</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/users.html#Users.user_modify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users.user_modify" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">user_modify</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_name</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">options</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/system/users.html#Users.user_modify"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.users.Users.user_modify" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modify user with options</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

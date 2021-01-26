@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system.result &mdash; KIWI NG 9.23.7 documentation</title>
+  <title>kiwi.system.result &mdash; KIWI NG 9.23.8 documentation</title>
   
 
   
@@ -740,12 +740,15 @@
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Dict</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">TypeVar</span>
+<span class="p">)</span>
 
 <span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.xml_state</span> <span class="kn">import</span> <span class="n">XMLState</span>
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">KiwiResultError</span>
 <span class="p">)</span>
@@ -753,32 +756,39 @@
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
 
 <span class="c1"># must be global to allow pickle to find it</span>
-<span class="n">result_file_type</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
-    <span class="s1">&#39;result_file_type&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="s1">&#39;use_for_bundle&#39;</span><span class="p">,</span> <span class="s1">&#39;compress&#39;</span><span class="p">,</span> <span class="s1">&#39;shasum&#39;</span><span class="p">]</span>
+<span class="n">result_file_type</span> <span class="o">=</span> <span class="n">NamedTuple</span><span class="p">(</span>
+    <span class="s1">&#39;result_file_type&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;use_for_bundle&#39;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;compress&#39;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;shasum&#39;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">)</span>
+    <span class="p">]</span>
 <span class="p">)</span>
+<span class="n">result_type</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;result_type&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;Result&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.result.Result">[docs]</a><span class="k">class</span> <span class="nc">Result</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Collect image building results**</span>
 
-<span class="sd">    :param list result_files: list of result files</span>
+<span class="sd">    :param dict result_files: dict of result files</span>
 <span class="sd">    :param object class_version: :class:`Result` class version</span>
 <span class="sd">    :param object xml_state: instance of :class:`XMLState`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_state</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">result_files</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_state</span><span class="p">:</span> <span class="n">XMLState</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result_files</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">result_file_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="c1"># Instances of this class are stored as result reference.</span>
         <span class="c1"># In order to handle class format changes any instance</span>
         <span class="c1"># provides a version information</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">class_version</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">class_version</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span> <span class="o">=</span> <span class="n">xml_state</span>
 
 <div class="viewcode-block" id="Result.add"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.result.Result.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">use_for_bundle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">compress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">shasum</span><span class="o">=</span><span class="kc">True</span>
-    <span class="p">):</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">use_for_bundle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">compress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">shasum</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add result tuple to result_files list</span>
 
@@ -796,13 +806,13 @@
                 <span class="n">shasum</span><span class="o">=</span><span class="n">shasum</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Result.get_results"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.result.Result.get_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.get_results"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.result.Result.get_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">result_file_type</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Current list of result tuples</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result_files</span></div>
 
-<div class="viewcode-block" id="Result.print_results"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.result.Result.print_results">[docs]</a>    <span class="k">def</span> <span class="nf">print_results</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.print_results"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.result.Result.print_results">[docs]</a>    <span class="k">def</span> <span class="nf">print_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print results human readable</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -811,7 +821,7 @@
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result_files</span><span class="o">.</span><span class="n">items</span><span class="p">())):</span>
                 <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Result.dump"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.result.Result.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.dump"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.result.Result.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Picke dump this instance to a file</span>
 
@@ -829,7 +839,7 @@
             <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Result.load"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.result.Result.load">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">result_type</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Load pickle dumped filename into a Result instance</span>
 
@@ -850,7 +860,8 @@
                 <span class="s1">&#39;Failed to pickle load results: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="Result.verify_image_size"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.result.Result.verify_image_size">[docs]</a>    <span class="k">def</span> <span class="nf">verify_image_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size_limit</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+<div class="viewcode-block" id="Result.verify_image_size"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.result.Result.verify_image_size">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">verify_image_size</span><span class="p">(</span><span class="n">size_limit</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Verifies the given image file does not exceed the size limit.</span>
 <span class="sd">        Throws an exception if the limit is exceeded. If the size limit</span>
