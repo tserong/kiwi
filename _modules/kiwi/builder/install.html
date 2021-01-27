@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.builder.install &mdash; KIWI NG 9.23.8 documentation</title>
+  <title>kiwi.builder.install &mdash; KIWI NG 9.23.9 documentation</title>
   
 
   
@@ -248,6 +248,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-oemconfig">&lt;preferences&gt;&lt;type&gt;&lt;oemconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-size">&lt;preferences&gt;&lt;type&gt;&lt;size&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-machine">&lt;preferences&gt;&lt;type&gt;&lt;machine&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-installmedia">&lt;preferences&gt;&lt;type&gt;&lt;installmedia&gt;</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../image_description/elements.html#repository">&lt;repository&gt;</a><ul>
@@ -304,6 +305,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_expandable_disk.html#cd-dvd-deployment">CD/DVD Deployment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_expandable_disk.html#network-deployment">Network Deployment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_expandable_disk.html#oem-customization">OEM Customization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
@@ -1115,6 +1117,14 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">boot_image_task</span><span class="o">.</span><span class="n">omit_module</span><span class="p">(</span>
                     <span class="s1">&#39;multipath&#39;</span><span class="p">,</span> <span class="n">install_media</span><span class="o">=</span><span class="kc">True</span>
                 <span class="p">)</span>
+            <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_installmedia_initrd_modules</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boot_image_task</span><span class="o">.</span><span class="n">include_module</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">install_media</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_installmedia_initrd_modules</span><span class="p">(</span><span class="s1">&#39;omit&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boot_image_task</span><span class="o">.</span><span class="n">omit_module</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">install_media</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boot_image_task</span><span class="o">.</span><span class="n">set_static_modules</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_installmedia_initrd_modules</span><span class="p">(</span><span class="s1">&#39;set&#39;</span><span class="p">),</span>
+                <span class="n">install_media</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">boot_image_task</span><span class="o">.</span><span class="n">create_initrd</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">mbrid</span><span class="p">,</span> <span class="s1">&#39;initrd_kiwi_install&#39;</span><span class="p">,</span>
             <span class="n">install_initrd</span><span class="o">=</span><span class="kc">True</span>
@@ -1157,6 +1167,14 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">boot_image_task</span><span class="o">.</span><span class="n">omit_module</span><span class="p">(</span>
                     <span class="s1">&#39;multipath&#39;</span><span class="p">,</span> <span class="n">install_media</span><span class="o">=</span><span class="kc">True</span>
                 <span class="p">)</span>
+            <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_installmedia_initrd_modules</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boot_image_task</span><span class="o">.</span><span class="n">include_module</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">install_media</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_installmedia_initrd_modules</span><span class="p">(</span><span class="s1">&#39;omit&#39;</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boot_image_task</span><span class="o">.</span><span class="n">omit_module</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">install_media</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boot_image_task</span><span class="o">.</span><span class="n">set_static_modules</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_installmedia_initrd_modules</span><span class="p">(</span><span class="s1">&#39;set&#39;</span><span class="p">),</span>
+                <span class="n">install_media</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_add_system_image_boot_options_to_boot_image</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">boot_image_task</span><span class="o">.</span><span class="n">create_initrd</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">mbrid</span><span class="p">,</span> <span class="s1">&#39;initrd_kiwi_install&#39;</span><span class="p">,</span>

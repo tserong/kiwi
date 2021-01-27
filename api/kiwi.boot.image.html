@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.boot.image Package &mdash; KIWI NG 9.23.8 documentation</title>
+  <title>kiwi.boot.image Package &mdash; KIWI NG 9.23.9 documentation</title>
   
 
   
@@ -250,6 +250,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-oemconfig">&lt;preferences&gt;&lt;type&gt;&lt;oemconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-size">&lt;preferences&gt;&lt;type&gt;&lt;size&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-machine">&lt;preferences&gt;&lt;type&gt;&lt;machine&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-installmedia">&lt;preferences&gt;&lt;type&gt;&lt;installmedia&gt;</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../image_description/elements.html#repository">&lt;repository&gt;</a><ul>
@@ -306,6 +307,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#cd-dvd-deployment">CD/DVD Deployment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#network-deployment">Network Deployment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#oem-customization">OEM Customization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
@@ -913,6 +915,22 @@ is only needed if there is no other root system available</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="kiwi.boot.image.base.BootImageBase.set_static_modules">
+<code class="sig-name descname">set_static_modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">modules</span></em>, <em class="sig-param"><span class="n">install_media</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/boot/image/base.html#BootImageBase.set_static_modules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.boot.image.base.BootImageBase.set_static_modules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set static modules list for boot image</p>
+<p>For kiwi boot no modules configuration is required. Thus in
+such a case this method is a noop.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modules</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – list of modules to include</p></li>
+<li><p><strong>install_media</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – lists the modules for install initrds</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="kiwi.boot.image.base.BootImageBase.write_system_config_file">
 <code class="sig-name descname">write_system_config_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">config_file</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/boot/image/base.html#BootImageBase.write_system_config_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.boot.image.base.BootImageBase.write_system_config_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes relevant boot image configuration into configuration file
@@ -1011,6 +1029,20 @@ the result into the image build target directory</p>
 <ul class="simple">
 <li><p>Setup machine_id(s) to be generic and rebuild by dracut on boot</p></li>
 </ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="kiwi.boot.image.dracut.BootImageDracut.set_static_modules">
+<code class="sig-name descname">set_static_modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">modules</span></em>, <em class="sig-param"><span class="n">install_media</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/boot/image/dracut.html#BootImageDracut.set_static_modules"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.boot.image.dracut.BootImageDracut.set_static_modules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set static dracut modules list for boot image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modules</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – list of the modules to include</p></li>
+<li><p><strong>install_media</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – lists the modules for install initrds</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">

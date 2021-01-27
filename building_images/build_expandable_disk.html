@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Build an Expandable Disk Image &mdash; KIWI NG 9.23.8 documentation</title>
+  <title>Build an Expandable Disk Image &mdash; KIWI NG 9.23.9 documentation</title>
   
 
   
@@ -250,6 +250,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-oemconfig">&lt;preferences&gt;&lt;type&gt;&lt;oemconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-size">&lt;preferences&gt;&lt;type&gt;&lt;size&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-machine">&lt;preferences&gt;&lt;type&gt;&lt;machine&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-installmedia">&lt;preferences&gt;&lt;type&gt;&lt;installmedia&gt;</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../image_description/elements.html#repository">&lt;repository&gt;</a><ul>
@@ -306,6 +307,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#cd-dvd-deployment">CD/DVD Deployment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#network-deployment">Network Deployment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#oem-customization">OEM Customization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="build_docker_container.html">Build a Docker Container Image</a></li>
@@ -1070,6 +1072,25 @@ possible target devices are discovered the image is deployed to
 the first device. <code class="docutils literal notranslate"><span class="pre">kiwi_oemunattended</span></code> in the initrd</p>
 </dd>
 </dl>
+</div>
+<div class="section" id="installation-media-customization">
+<span id="installmedia-customize"></span><h2>Installation Media Customization<a class="headerlink" href="#installation-media-customization" title="Permalink to this headline">¶</a></h2>
+<p>The installation media created for OEM network or CD/DVD deployments can
+be customized with the <code class="xref py py-obj docutils literal notranslate"><span class="pre">installmedia</span></code> section which is a child section of the <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a>
+element as it appears in the following example:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;installmedia&gt;</span>
+  <span class="nt">&lt;initrd</span> <span class="na">action=</span><span class="s">&quot;omit&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;dracut</span> <span class="na">module=</span><span class="s">&quot;network-legacy&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/initrd&gt;</span>
+<span class="nt">&lt;/installmedia&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">installmedia</span></code> is only available for OEM image types that includes the
+request to create an installation media.</p>
+<p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">initrd</span></code> child element of <code class="xref py py-obj docutils literal notranslate"><span class="pre">installmedia</span></code> lists dracut modules, they
+can be omitted, added or staticaly set the list of included ones. This is
+specified with the <code class="xref py py-obj docutils literal notranslate"><span class="pre">action</span></code> attribute and can take <code class="xref py py-obj docutils literal notranslate"><span class="pre">action=&quot;omit&quot;</span></code>,
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">action=&quot;add&quot;</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">action=&quot;set&quot;</span></code> values.</p>
 </div>
 </div>
 

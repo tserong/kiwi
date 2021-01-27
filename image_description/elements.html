@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Image Description Elements &mdash; KIWI NG 9.23.8 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.23.9 documentation</title>
   
 
   
@@ -250,6 +250,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#preferences-type-oemconfig">&lt;preferences&gt;&lt;type&gt;&lt;oemconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#preferences-type-size">&lt;preferences&gt;&lt;type&gt;&lt;size&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#preferences-type-machine">&lt;preferences&gt;&lt;type&gt;&lt;machine&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#preferences-type-installmedia">&lt;preferences&gt;&lt;type&gt;&lt;installmedia&gt;</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#repository">&lt;repository&gt;</a><ul>
@@ -306,6 +307,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#cd-dvd-deployment">CD/DVD Deployment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#network-deployment">Network Deployment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#oem-customization">OEM Customization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
@@ -733,7 +735,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.23.8</p>
+and attributes of the KIWI NG XML document in version 9.23.9</p>
 </div>
 <div class="section" id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -1318,6 +1320,12 @@ oem image. For details see: <a class="reference internal" href="../building_imag
 <p>Used to customize the virtual machine configuration which describes
 the components of an emulated hardware.
 For details see: <a class="reference internal" href="../building_images/build_simple_disk.html#disk-the-machine-element"><span class="std std-ref">Customizing the Virtual Machine</span></a></p>
+</div>
+<div class="section" id="preferences-type-installmedia">
+<h3>&lt;preferences&gt;&lt;type&gt;&lt;installmedia&gt;<a class="headerlink" href="#preferences-type-installmedia" title="Permalink to this headline">¶</a></h3>
+<p>Used to customize the installation media images created for oem images
+deployment.
+For details see: <a class="reference internal" href="../building_images/build_expandable_disk.html#installmedia-customize"><span class="std std-ref">Installation Media Customization</span></a></p>
 </div>
 </div>
 <div class="section" id="repository">
