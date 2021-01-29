@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.10 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.11 documentation</title>
   
 
   
@@ -1544,10 +1544,25 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_create_early_boot_script_for_mbrid_search</span><span class="p">(</span>
                 <span class="n">early_boot_script</span><span class="p">,</span> <span class="n">mbrid</span>
             <span class="p">)</span>
+        <span class="n">root_efi_path</span> <span class="o">=</span> <span class="s1">&#39;/boot/efi/EFI/BOOT/&#39;</span>
+        <span class="n">root_efi_image</span> <span class="o">=</span> <span class="n">root_efi_path</span> <span class="o">+</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_efi_image_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">)</span>
+
+        <span class="n">Path</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">+</span> <span class="n">root_efi_path</span><span class="p">)</span>
+
         <span class="n">module_list</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_grub_efi_modules</span><span class="p">(</span><span class="n">multiboot</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">xen_guest</span><span class="p">)</span>
         <span class="n">module_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_efi_modules_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">module_path</span> <span class="o">+</span> <span class="s1">&#39;/linuxefi.mod&#39;</span><span class="p">):</span>
             <span class="n">module_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;linuxefi&#39;</span><span class="p">)</span>
+
+        <span class="n">early_boot_script_on_media</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">+</span> <span class="n">root_efi_path</span> <span class="o">+</span> <span class="s1">&#39;earlyboot.cfg&#39;</span>
+        <span class="k">if</span> <span class="n">early_boot_script</span> <span class="o">!=</span> <span class="n">early_boot_script_on_media</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;Copy earlyboot to media path: </span><span class="si">{</span><span class="n">early_boot_script_on_media</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">)</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span>
+                <span class="n">early_boot_script</span><span class="p">,</span> <span class="n">early_boot_script_on_media</span>
+            <span class="p">)</span>
         <span class="n">mkimage_call</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
             <span class="p">[</span>
                 <span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
@@ -1555,18 +1570,27 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">_get_grub2_mkimage_tool</span><span class="p">()</span>
                 <span class="p">)</span> <span class="ow">or</span> <span class="s1">&#39;grub2-mkimage&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;-O&#39;</span><span class="p">,</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_efi_module_directory_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">),</span>
-                <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                    <span class="p">[</span>
-                        <span class="s1">&#39;/boot/efi/EFI/BOOT/&#39;</span><span class="p">,</span>
-                        <span class="n">Defaults</span><span class="o">.</span><span class="n">get_efi_image_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">)</span>
-                    <span class="p">]</span>
-                <span class="p">),</span>
-                <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;/boot/efi/EFI/BOOT/earlyboot.cfg&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="n">root_efi_image</span><span class="p">,</span>
+                <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="n">root_efi_path</span> <span class="o">+</span> <span class="s1">&#39;earlyboot.cfg&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_boot_path</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_directory_name</span><span class="p">,</span>
                 <span class="s1">&#39;-d&#39;</span><span class="p">,</span> <span class="n">module_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
             <span class="p">]</span> <span class="o">+</span> <span class="n">module_list</span>
         <span class="p">)</span>
         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">mkimage_call</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+
+        <span class="c1"># Copy generated EFI image to the media directory if this</span>
+        <span class="c1"># is different from the system root directory, e.g the case</span>
+        <span class="c1"># for live image builds or when using a custom kiwi initrd</span>
+        <span class="n">efi_image_root_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">+</span> <span class="n">root_efi_image</span>
+        <span class="n">efi_image_media_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">efi_boot_path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">efi_image_root_file</span><span class="p">)]</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">efi_image_root_file</span> <span class="o">!=</span> <span class="n">efi_image_media_file</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;Copy grub image to media path: </span><span class="si">{</span><span class="n">efi_image_media_file</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">)</span>
+            <span class="n">Path</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">efi_image_media_file</span><span class="p">))</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">efi_image_root_file</span><span class="p">,</span> <span class="n">efi_image_media_file</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_create_efi_config_search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uuid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mbrid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="n">efi_boot_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">efi_boot_path</span> <span class="o">+</span> <span class="s1">&#39;/grub.cfg&#39;</span>
@@ -1587,11 +1611,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_create_early_boot_script_for_mbrid_search</span><span class="p">(</span>
             <span class="n">early_boot_script</span><span class="p">,</span> <span class="n">mbrid</span>
         <span class="p">)</span>
-        <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span>
-            <span class="n">early_boot_script</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_directory_name</span><span class="p">]</span>
-            <span class="p">)</span>
+        <span class="n">early_boot_script_on_media</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_directory_name</span><span class="p">]</span>
         <span class="p">)</span>
+        <span class="k">if</span> <span class="n">early_boot_script</span> <span class="o">!=</span> <span class="n">early_boot_script_on_media</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;Copy earlyboot to media path: </span><span class="si">{</span><span class="n">early_boot_script_on_media</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">)</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span>
+                <span class="n">early_boot_script</span><span class="p">,</span> <span class="n">early_boot_script_on_media</span>
+            <span class="p">)</span>
         <span class="n">mkimage_call</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
             <span class="p">[</span>
                 <span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
@@ -1609,15 +1638,17 @@
         <span class="p">)</span>
         <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">mkimage_call</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
 
-        <span class="c1"># The following copy is needed for images that uses the</span>
-        <span class="c1"># custom boot image feature. In this mode the boot image(initrd)</span>
-        <span class="c1"># root tree is different from the system root tree</span>
-        <span class="c1"># and it&#39;s needed to copy the generated grub image there</span>
+        <span class="c1"># Copy generated EFI image to the media directory if this</span>
+        <span class="c1"># is different from the system root directory, e.g the case</span>
+        <span class="c1"># for live image builds or when using a custom kiwi initrd</span>
         <span class="n">bios_image_root_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_bios_image_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>
         <span class="n">bios_image_media_file</span> <span class="o">=</span> <span class="n">bios_image_root_file</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">lookup_path</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">bios_image_root_file</span> <span class="o">!=</span> <span class="n">bios_image_media_file</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;Copy grub image to media path: </span><span class="si">{</span><span class="n">bios_image_media_file</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">)</span>
             <span class="n">Path</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">bios_image_media_file</span><span class="p">))</span>
             <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">bios_image_root_file</span><span class="p">,</span> <span class="n">bios_image_media_file</span><span class="p">)</span>
 
