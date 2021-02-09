@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.tasks.base &mdash; KIWI NG 9.23.12 documentation</title>
+  <title>kiwi.tasks.base &mdash; KIWI NG 9.23.13 documentation</title>
   
 
   
@@ -905,15 +905,13 @@
 <span class="sd">        Make sure to provide a common result for option values which</span>
 <span class="sd">        separates the information in a comma separated list of values</span>
 
+<span class="sd">        :param str option: comma separated option string</span>
+
 <span class="sd">        :return: common option value representation</span>
-<span class="sd">        :rtype: str</span>
+
+<span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tokens</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_pop_token</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
-                <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span>
-            <span class="p">)</span>
-        <span class="p">]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ntuple_token</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CliTask.sextuple_token"><a class="viewcode-back" href="../../../api/kiwi.tasks.html#kiwi.tasks.base.CliTask.sextuple_token">[docs]</a>    <span class="k">def</span> <span class="nf">sextuple_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -922,15 +920,13 @@
 <span class="sd">        Make sure to provide a common result for option values which</span>
 <span class="sd">        separates the information in a comma separated list of values</span>
 
+<span class="sd">        :param str option: comma separated option string</span>
+
 <span class="sd">        :return: common option value representation</span>
-<span class="sd">        :rtype: str</span>
+
+<span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">tokens</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_pop_token</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
-                <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span>
-            <span class="p">)</span>
-        <span class="p">]</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ntuple_token</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CliTask.run_checks"><a class="viewcode-back" href="../../../api/kiwi.tasks.html#kiwi.tasks.base.CliTask.run_checks">[docs]</a>    <span class="k">def</span> <span class="nf">run_checks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checks</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -955,7 +951,28 @@
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">token</span> <span class="o">==</span> <span class="s1">&#39;false&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">token</span></div>
+            <span class="k">return</span> <span class="n">token</span>
+
+    <span class="k">def</span> <span class="nf">_ntuple_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">tuple_count</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Helper method for commandline options of the form --option a,b,c,d,e,f</span>
+
+<span class="sd">        Make sure to provide a common result for option values which</span>
+<span class="sd">        separates the information in a comma separated list of values</span>
+
+<span class="sd">        :param str option: comma separated option string</span>
+<span class="sd">        :param int tuple_count: divide into tuple_count tuples</span>
+
+<span class="sd">        :return: common option value representation</span>
+
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">tuple_count</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_pop_token</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span>
+                <span class="mi">0</span><span class="p">,</span> <span class="n">tuple_count</span>
+            <span class="p">)</span>
+        <span class="p">]</span></div>
 </pre></div>
 
            </div>

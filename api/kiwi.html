@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi Package &mdash; KIWI NG 9.23.12 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.23.13 documentation</title>
   
 
   
@@ -2165,6 +2165,21 @@ kiwi-live module to setup persistent writing</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="kiwi.defaults.Defaults.get_obs_api_server_url">
+<em class="property">static </em><code class="sig-name descname">get_obs_api_server_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/defaults.html#Defaults.get_obs_api_server_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.defaults.Defaults.get_obs_api_server_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides the default API server url to access the
+public open buildservice API</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>url path</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="kiwi.defaults.Defaults.get_obs_download_server_url">
 <em class="property">static </em><code class="sig-name descname">get_obs_download_server_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/defaults.html#Defaults.get_obs_download_server_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.defaults.Defaults.get_obs_download_server_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides the default download server url hosting the public open
@@ -3278,6 +3293,14 @@ directory has failed.</p>
 <em class="property">exception </em><code class="sig-prename descclassname">kiwi.exceptions.</code><code class="sig-name descname">KiwiRpmDirNotRemoteError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/exceptions.html#KiwiRpmDirNotRemoteError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.exceptions.KiwiRpmDirNotRemoteError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
 <p>Exception raised if the provided rpm-dir repository is not local</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="kiwi.exceptions.KiwiRuntimeConfigFileError">
+<em class="property">exception </em><code class="sig-prename descclassname">kiwi.exceptions.</code><code class="sig-name descname">KiwiRuntimeConfigFileError</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/exceptions.html#KiwiRuntimeConfigFileError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.exceptions.KiwiRuntimeConfigFileError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
+<p>Exception raised if the provided custom runtime config
+file could not be found</p>
 </dd></dl>
 
 <dl class="py exception">
@@ -4554,16 +4577,22 @@ the image as such</p>
 <span id="kiwi-runtime-config-module"></span><h2><a class="reference internal" href="#module-kiwi.runtime_config" title="kiwi.runtime_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.runtime_config</span></code></a> Module<a class="headerlink" href="#module-kiwi.runtime_config" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.runtime_config.RuntimeConfig">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.runtime_config.</code><code class="sig-name descname">RuntimeConfig</code><a class="reference internal" href="../_modules/kiwi/runtime_config.html#RuntimeConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.runtime_config.RuntimeConfig" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.runtime_config.</code><code class="sig-name descname">RuntimeConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">reread</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_config.html#RuntimeConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.runtime_config.RuntimeConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Implements reading of runtime configuration file:</strong></p>
 <ol class="arabic simple">
+<li><p>Check for –config provided from the CLI</p></li>
 <li><p>~/.config/kiwi/config.yml</p></li>
 <li><p>/etc/kiwi.yml</p></li>
 </ol>
 <p>The KIWI runtime configuration file is a yaml formatted file
 containing information to control the behavior of the tools
 used by KIWI.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>reread</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – reread runtime config</p>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="kiwi.runtime_config.RuntimeConfig.get_bundle_compression">
 <code class="sig-name descname">get_bundle_compression</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_config.html#RuntimeConfig.get_bundle_compression"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.runtime_config.RuntimeConfig.get_bundle_compression" title="Permalink to this definition">¶</a></dt>
@@ -4671,6 +4700,28 @@ it can be specified with m=MB or g=GB.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="kiwi.runtime_config.RuntimeConfig.get_obs_api_server_url">
+<code class="sig-name descname">get_obs_api_server_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_config.html#RuntimeConfig.get_obs_api_server_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.runtime_config.RuntimeConfig.get_obs_api_server_url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return URL of buildservice API server in:</p>
+<dl class="simple">
+<dt>obs:</dt><dd><ul class="simple">
+<li><p>api_url: …</p></li>
+</ul>
+</dd>
+</dl>
+<p>if no configuration exists the API server from
+the Defaults class is returned</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>URL type data</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -4897,7 +4948,7 @@ this method.</p>
 
 <dl class="py method">
 <dt id="kiwi.xml_state.XMLState.add_repository">
-<code class="sig-name descname">add_repository</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo_source</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_alias</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_prio</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_imageinclude</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">repo_package_gpgcheck</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.add_repository"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.add_repository" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_repository</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo_source</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_alias</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">repo_prio</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">''</span></em>, <em class="sig-param"><span class="n">repo_imageinclude</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">repo_package_gpgcheck</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.add_repository"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.add_repository" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a new repository section at the end of the list</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi-ng system prepare &mdash; KIWI NG 9.23.12 documentation</title>
+  <title>kiwi-ng system prepare &mdash; KIWI NG 9.23.13 documentation</title>
   
 
   
@@ -747,6 +747,9 @@ kiwi-ng system prepare --description<span class="o">=</span>&lt;directory&gt; --
     <span class="o">[</span>--add-package<span class="o">=</span>&lt;name&gt;...<span class="o">]</span>
     <span class="o">[</span>--add-bootstrap-package<span class="o">=</span>&lt;name&gt;...<span class="o">]</span>
     <span class="o">[</span>--delete-package<span class="o">=</span>&lt;name&gt;...<span class="o">]</span>
+    <span class="o">[</span>--set-container-derived-from<span class="o">=</span>&lt;uri&gt;<span class="o">]</span>
+    <span class="o">[</span>--set-container-tag<span class="o">=</span>&lt;name&gt;<span class="o">]</span>
+    <span class="o">[</span>--add-container-label<span class="o">=</span>&lt;label&gt;...<span class="o">]</span>
     <span class="o">[</span>--signing-key<span class="o">=</span>&lt;key-file&gt;...<span class="o">]</span>
 kiwi-ng system prepare <span class="nb">help</span>
 </pre></div>
@@ -769,12 +772,20 @@ As the root user you can enter this system via chroot as follows:</p>
 <dd><p>specify package to install as part of the early kiwi bootstrap phase.
 The option can be specified multiple times</p>
 </dd>
+<dt><kbd><span class="option">--add-container-label=<var>&lt;name=value&gt;</var></span></kbd></dt>
+<dd><p>add a container label in the container configuration metadata. It
+overwrites the label with the provided key-value pair in case it was
+already defined in the XML description</p>
+</dd>
 <dt><kbd><span class="option">--add-package=<var>&lt;name&gt;</var></span></kbd></dt>
 <dd><p>specify package to add(install). The option can be specified
 multiple times</p>
 </dd>
 <dt><kbd><span class="option">--add-repo=<var>&lt;source,type,alias,priority,imageinclude,package_gpgcheck&gt;</var></span></kbd></dt>
-<dd><p>See the kiwi::system::build manual page for further details</p>
+<dd><p>Add a new repository to the existing repository setup in the XML
+description. This option can be specified multiple times.
+For details about the provided option values see the <strong>–set-repo</strong>
+information below</p>
 </dd>
 <dt><kbd><span class="option">--allow-existing-root</span></kbd></dt>
 <dd><p>allow to re-use an existing image root directory</p>
@@ -812,7 +823,48 @@ will not be ignored.</p>
 <dd><p>Path to create the new root system.</p>
 </dd>
 <dt><kbd><span class="option">--set-repo=<var>&lt;source,type,alias,priority,imageinclude,package_gpgcheck&gt;</var></span></kbd></dt>
-<dd><p>See the kiwi::system::build manual page for further details</p>
+<dd><p>Overwrite the first repository entry in the XML description with the
+provided information:</p>
+<ul>
+<li><p><strong>source</strong></p>
+<p>source url, pointing to a package repository which must be in a format
+supported by the selected package manager. See the URI_TYPES section for
+details about the supported source locators.</p>
+</li>
+<li><p><strong>type</strong></p>
+<p>repository type, could be one of <code class="xref py py-obj docutils literal notranslate"><span class="pre">rpm-md</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">rpm-dir</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">yast2</span></code>.</p>
+</li>
+<li><p><strong>alias</strong></p>
+<p>An alias name for the repository. If not specified kiwi calculates
+an alias name as result from a sha sum. The sha sum is used to uniquely
+identify the repository, but not very expressive. We recommend to
+set an expressive and uniq alias name.</p>
+</li>
+<li><p><strong>priority</strong></p>
+<p>A number indicating the repository priority. How the value is evaluated
+depends on the selected package manager. Please refer to the package
+manager documentation for details about the supported priority ranges
+and their meaning.</p>
+</li>
+<li><p><strong>imageinclude</strong></p>
+<p>Set to either <strong>true</strong> or <strong>false</strong> to specify if this repository
+should be part of the system image repository setup or not.</p>
+</li>
+<li><p><strong>package_gpgcheck</strong></p>
+<p>Set to either <strong>true</strong> or <strong>false</strong> to specify if this repository
+should validate the package signatures.</p>
+</li>
+</ul>
+</dd>
+<dt><kbd><span class="option">--set-container-derived-from=<var>&lt;uri&gt;</var></span></kbd></dt>
+<dd><p>overwrite the source location of the base container for the selected
+image type. The setting is only effective if the configured image type
+is setup with an initial derived_from reference</p>
+</dd>
+<dt><kbd><span class="option">--set-container-tag=<var>&lt;name&gt;</var></span></kbd></dt>
+<dd><p>overwrite the container tag in the container configuration.
+The setting is only effective if the container configuraiton
+provides an initial tag value</p>
 </dd>
 <dt><kbd><span class="option">--signing-key=<var>&lt;key-file&gt;</var></span></kbd></dt>
 <dd><p>set the key file to be trusted and imported into the package

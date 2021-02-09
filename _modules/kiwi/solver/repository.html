@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.solver.repository &mdash; KIWI NG 9.23.12 documentation</title>
+  <title>kiwi.solver.repository &mdash; KIWI NG 9.23.13 documentation</title>
   
 
   
@@ -750,6 +750,7 @@
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="n">KiwiSolverRepositorySetupError</span>
+<span class="kn">from</span> <span class="nn">kiwi.system.uri</span> <span class="kn">import</span> <span class="n">Uri</span>
 
 
 <div class="viewcode-block" id="SolverRepository"><a class="viewcode-back" href="../../../api/kiwi.solver.repository.html#kiwi.solver.repository.SolverRepository">[docs]</a><span class="k">class</span> <span class="nc">SolverRepository</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
@@ -763,7 +764,7 @@
         <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># pragma: no cover</span>
 
 <div class="viewcode-block" id="SolverRepository.new"><a class="viewcode-back" href="../../../api/kiwi.solver.repository.html#kiwi.solver.repository.SolverRepository.new">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">secret</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># noqa: E252</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">:</span> <span class="n">Uri</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">secret</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># noqa: E252</span>
         <span class="n">name_map</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;yast2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;SolverRepositorySUSE&#39;</span><span class="p">,</span> <span class="s1">&#39;suse&#39;</span><span class="p">],</span>
             <span class="s1">&#39;rpm-md&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;SolverRepositoryRpmMd&#39;</span><span class="p">,</span> <span class="s1">&#39;rpm_md&#39;</span><span class="p">],</span>

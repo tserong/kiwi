@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.solver.repository.base &mdash; KIWI NG 9.23.12 documentation</title>
+  <title>kiwi.solver.repository.base &mdash; KIWI NG 9.23.13 documentation</title>
   
 
   
@@ -744,6 +744,7 @@
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64encode</span>
 <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">Request</span>
@@ -866,10 +867,59 @@
             <span class="n">location</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiUriOpenError</span><span class="p">(</span>
-                <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">: </span><span class="si">{1}</span><span class="s1"> </span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">download_link</span><span class="p">)</span>
+                <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">download_link</span><span class="si">}</span><span class="s1">&#39;</span>
             <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">target_file</span><span class="p">:</span>
             <span class="n">target_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">read</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="SolverRepositoryBase.get_repo_type"><a class="viewcode-back" href="../../../../api/kiwi.solver.repository.html#kiwi.solver.repository.base.SolverRepositoryBase.get_repo_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_repo_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_repomd_xml</span><span class="p">():</span>
+                <span class="k">return</span> <span class="s1">&#39;rpm-md&#39;</span>
+        <span class="k">except</span> <span class="n">KiwiUriOpenError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_deb_packages</span><span class="p">():</span>
+                <span class="k">return</span> <span class="s1">&#39;deb&#39;</span>
+        <span class="k">except</span> <span class="n">KiwiUriOpenError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">repo_listing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_pacman_packages</span><span class="p">()</span>
+            <span class="k">if</span> <span class="s1">&#39;.db.sig</span><span class="se">\&quot;</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">repo_listing</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s1">&#39;pacman&#39;</span>
+        <span class="k">except</span> <span class="n">KiwiUriOpenError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_pacman_packages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Download Arch repository listing for the current architecture</span>
+
+<span class="sd">        :return: html directory listing</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dir_listing_download</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">download_from_repository</span><span class="p">(</span>
+            <span class="n">platform</span><span class="o">.</span><span class="n">machine</span><span class="p">(),</span> <span class="n">dir_listing_download</span><span class="o">.</span><span class="n">name</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">dir_listing_download</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dir_listing_download</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">as</span> <span class="n">listing</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">listing</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_get_deb_packages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Download Packages file from an apt repository</span>
+
+<span class="sd">        :return: Contents of Packages file</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">packages_download</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">download_from_repository</span><span class="p">(</span><span class="s1">&#39;Packages&#39;</span><span class="p">,</span> <span class="n">packages_download</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">packages_download</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">packages_download</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">as</span> <span class="n">packages</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">packages</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_get_repomd_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lookup_path</span><span class="o">=</span><span class="s1">&#39;repodata&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

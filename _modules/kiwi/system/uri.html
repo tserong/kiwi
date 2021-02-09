@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system.uri &mdash; KIWI NG 9.23.12 documentation</title>
+  <title>kiwi.system.uri &mdash; KIWI NG 9.23.13 documentation</title>
   
 
   
@@ -748,9 +748,7 @@
 <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlparse</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">hashlib</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
-<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.mount_manager</span> <span class="kn">import</span> <span class="n">MountManager</span>
@@ -769,18 +767,19 @@
 
 <div class="viewcode-block" id="Uri"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri">[docs]</a><span class="k">class</span> <span class="nc">Uri</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    **Normalize url types available in a kiwi configuration into</span>
-<span class="sd">    standard mime types**</span>
+<span class="sd">    **Normalize url types**</span>
 
-<span class="sd">    :param str repo_type: repository type name. Only needed if the uri</span>
-<span class="sd">        is not enough to determine the repository type</span>
-<span class="sd">        e.g for yast2 vs. rpm-md obs repositories</span>
-<span class="sd">    :param str uri: URI, repository location, file</span>
-<span class="sd">    :param list mount_stack: list of mounted locations</span>
-<span class="sd">    :param dict remote_uri_types: dictionary of remote uri type names</span>
-<span class="sd">    :param dict local_uri_type: dictionary of local uri type names</span>
+<span class="sd">    Allow to translate the available KIWI repo source types</span>
+<span class="sd">    into standard mime types</span>
+
+<span class="sd">    :param str uri: URI, remote or local repository location</span>
+<span class="sd">    :param str repo_type:</span>
+<span class="sd">        repository type name, defaults to &#39;rpm-md&#39; and is only</span>
+<span class="sd">        effectively used when building inside of the open</span>
+<span class="sd">        build service which maps local repositories to a</span>
+<span class="sd">        specific environment</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;rpm-md&#39;</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span> <span class="o">=</span> <span class="n">RuntimeConfig</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">repo_type</span> <span class="o">=</span> <span class="n">repo_type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="n">uri</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">uri</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>

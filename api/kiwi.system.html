@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system Package &mdash; KIWI NG 9.23.12 documentation</title>
+  <title>kiwi.system Package &mdash; KIWI NG 9.23.13 documentation</title>
   
 
   
@@ -1891,20 +1891,19 @@ of the customized size</p>
 <span id="kiwi-system-uri-module"></span><h2><a class="reference internal" href="#module-kiwi.system.uri" title="kiwi.system.uri"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.system.uri</span></code></a> Module<a class="headerlink" href="#module-kiwi.system.uri" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.system.uri.Uri">
-<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.uri.</code><code class="sig-name descname">Uri</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uri</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_type</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Dict<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.system.uri.</code><code class="sig-name descname">Uri</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">uri</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">repo_type</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span> <span class="o">=</span> <span class="default_value">'rpm-md'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/system/uri.html#Uri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.system.uri.Uri" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p><strong>Normalize url types available in a kiwi configuration into
-standard mime types</strong></p>
+<p><strong>Normalize url types</strong></p>
+<p>Allow to translate the available KIWI repo source types
+into standard mime types</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>repo_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – repository type name. Only needed if the uri
-is not enough to determine the repository type
-e.g for yast2 vs. rpm-md obs repositories</p></li>
-<li><p><strong>uri</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – URI, repository location, file</p></li>
-<li><p><strong>mount_stack</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – list of mounted locations</p></li>
-<li><p><strong>remote_uri_types</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – dictionary of remote uri type names</p></li>
-<li><p><strong>local_uri_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – dictionary of local uri type names</p></li>
+<li><p><strong>uri</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – URI, remote or local repository location</p></li>
+<li><p><strong>repo_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – repository type name, defaults to ‘rpm-md’ and is only
+effectively used when building inside of the open
+build service which maps local repositories to a
+specific environment</p></li>
 </ul>
 </dd>
 </dl>

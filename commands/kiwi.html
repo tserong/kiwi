@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi-ng &mdash; KIWI NG 9.23.12 documentation</title>
+  <title>kiwi-ng &mdash; KIWI NG 9.23.13 documentation</title>
   
 
   
@@ -742,9 +742,11 @@ kiwi-ng <span class="o">[</span>--profile<span class="o">=</span>&lt;name&gt;...
         <span class="o">[</span>--logfile<span class="o">=</span>&lt;filename&gt;<span class="o">]</span>
         <span class="o">[</span>--debug<span class="o">]</span>
         <span class="o">[</span>--color-output<span class="o">]</span>
+        <span class="o">[</span>--config<span class="o">=</span>&lt;configfile&gt;<span class="o">]</span>
     image &lt;command&gt; <span class="o">[</span>&lt;args&gt;...<span class="o">]</span>
 kiwi-ng <span class="o">[</span>--debug<span class="o">]</span>
         <span class="o">[</span>--color-output<span class="o">]</span>
+        <span class="o">[</span>--config<span class="o">=</span>&lt;configfile&gt;<span class="o">]</span>
     result &lt;command&gt; <span class="o">[</span>&lt;args&gt;...<span class="o">]</span>
 kiwi-ng <span class="o">[</span>--profile<span class="o">=</span>&lt;name&gt;...<span class="o">]</span>
         <span class="o">[</span>--shared-cache-dir<span class="o">=</span>&lt;directory&gt;<span class="o">]</span>
@@ -752,6 +754,7 @@ kiwi-ng <span class="o">[</span>--profile<span class="o">=</span>&lt;name&gt;...
         <span class="o">[</span>--logfile<span class="o">=</span>&lt;filename&gt;<span class="o">]</span>
         <span class="o">[</span>--debug<span class="o">]</span>
         <span class="o">[</span>--color-output<span class="o">]</span>
+        <span class="o">[</span>--config<span class="o">=</span>&lt;configfile&gt;<span class="o">]</span>
     system &lt;command&gt; <span class="o">[</span>&lt;args&gt;...<span class="o">]</span>
 kiwi-ng compat &lt;legacy_args&gt;...
 kiwi-ng -v <span class="p">|</span> --version
@@ -799,6 +802,11 @@ in colored output. The underlaying terminal has to understand
 those escape characters. Error messages appear red, warning
 messages yellow and debugging information will be printed light
 grey.</p>
+</dd>
+<dt><kbd><span class="option">--config=<var>&lt;configfile&gt;</var></span></kbd></dt>
+<dd><p>Use specified runtime configuration file. If not specified the
+runtime configuration is looked up at <code class="file docutils literal notranslate"><span class="pre">~/.config/kiwi/config.yml</span></code>
+or <code class="file docutils literal notranslate"><span class="pre">/etc/kiwi.yml</span></code></p>
 </dd>
 <dt><kbd><span class="option">--debug</span></kbd></dt>
 <dd><p>Print debug information on the commandline.</p>

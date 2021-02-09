@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.runtime_config &mdash; KIWI NG 9.23.12 documentation</title>
+  <title>kiwi.runtime_config &mdash; KIWI NG 9.23.13 documentation</title>
   
 
   
@@ -747,40 +747,59 @@
 <span class="kn">import</span> <span class="nn">yaml</span>
 
 <span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.cli</span> <span class="kn">import</span> <span class="n">Cli</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.size</span> <span class="kn">import</span> <span class="n">StringToSize</span>
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">KiwiRuntimeConfigFormatError</span>
+    <span class="n">KiwiRuntimeConfigFormatError</span><span class="p">,</span>
+    <span class="n">KiwiRuntimeConfigFileError</span>
 <span class="p">)</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
+
+<span class="n">RUNTIME_CONFIG</span> <span class="o">=</span> <span class="kc">None</span>
 
 
 <div class="viewcode-block" id="RuntimeConfig"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.runtime_config.RuntimeConfig">[docs]</a><span class="k">class</span> <span class="nc">RuntimeConfig</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Implements reading of runtime configuration file:**</span>
 
-<span class="sd">    1. ~/.config/kiwi/config.yml</span>
-<span class="sd">    2. /etc/kiwi.yml</span>
+<span class="sd">    1. Check for --config provided from the CLI</span>
+<span class="sd">    2. ~/.config/kiwi/config.yml</span>
+<span class="sd">    3. /etc/kiwi.yml</span>
 
 <span class="sd">    The KIWI runtime configuration file is a yaml formatted file</span>
 <span class="sd">    containing information to control the behavior of the tools</span>
 <span class="sd">    used by KIWI.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="n">config_file</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_home_path</span><span class="p">():</span>
-            <span class="n">config_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_home_path</span><span class="p">(),</span> <span class="s1">&#39;.config&#39;</span><span class="p">,</span> <span class="s1">&#39;kiwi&#39;</span><span class="p">,</span> <span class="s1">&#39;config.yml&#39;</span><span class="p">]</span>
-            <span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">config_file</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>
-            <span class="n">config_file</span> <span class="o">=</span> <span class="s1">&#39;/etc/kiwi.yml&#39;</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Reading runtime config file: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">config_file</span><span class="p">))</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+<span class="sd">    :param bool reread: reread runtime config</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reread</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">global</span> <span class="n">RUNTIME_CONFIG</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">RUNTIME_CONFIG</span> <span class="ow">or</span> <span class="n">reread</span><span class="p">:</span>
+            <span class="n">cli</span> <span class="o">=</span> <span class="n">Cli</span><span class="p">()</span>
+            <span class="n">config_file</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">custom_config_file</span> <span class="o">=</span> <span class="n">cli</span><span class="o">.</span><span class="n">get_global_args</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;--config&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">custom_config_file</span><span class="p">:</span>
+                <span class="n">config_file</span> <span class="o">=</span> <span class="n">custom_config_file</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="n">KiwiRuntimeConfigFileError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s1">&#39;Custom config file </span><span class="si">{</span><span class="n">config_file</span><span class="si">!r}</span><span class="s1"> not found&#39;</span>
+                    <span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_home_path</span><span class="p">():</span>
+                <span class="n">config_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_home_path</span><span class="p">(),</span> <span class="s1">&#39;.config&#39;</span><span class="p">,</span> <span class="s1">&#39;kiwi&#39;</span><span class="p">,</span> <span class="s1">&#39;config.yml&#39;</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">config_file</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>
+                <span class="n">config_file</span> <span class="o">=</span> <span class="s1">&#39;/etc/kiwi.yml&#39;</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s1">&#39;Reading runtime config file: </span><span class="si">{</span><span class="n">config_file</span><span class="si">!r}</span><span class="s1">&#39;</span>
+                <span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config</span><span class="p">:</span>
+                    <span class="n">RUNTIME_CONFIG</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 
 <div class="viewcode-block" id="RuntimeConfig.get_obs_download_server_url"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.runtime_config.RuntimeConfig.get_obs_download_server_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_obs_download_server_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -801,6 +820,26 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">obs_download_server_url</span> <span class="k">if</span> <span class="n">obs_download_server_url</span> <span class="k">else</span> \
             <span class="n">Defaults</span><span class="o">.</span><span class="n">get_obs_download_server_url</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="RuntimeConfig.get_obs_api_server_url"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.runtime_config.RuntimeConfig.get_obs_api_server_url">[docs]</a>    <span class="k">def</span> <span class="nf">get_obs_api_server_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return URL of buildservice API server in:</span>
+
+<span class="sd">        obs:</span>
+<span class="sd">          - api_url: ...</span>
+
+<span class="sd">        if no configuration exists the API server from</span>
+<span class="sd">        the Defaults class is returned</span>
+
+<span class="sd">        :return: URL type data</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">obs_api_server_url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute</span><span class="p">(</span>
+            <span class="n">element</span><span class="o">=</span><span class="s1">&#39;obs&#39;</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;api_url&#39;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">obs_api_server_url</span> <span class="k">if</span> <span class="n">obs_api_server_url</span> <span class="k">else</span> \
+            <span class="n">Defaults</span><span class="o">.</span><span class="n">get_obs_api_server_url</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="RuntimeConfig.is_obs_public"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.runtime_config.RuntimeConfig.is_obs_public">[docs]</a>    <span class="k">def</span> <span class="nf">is_obs_public</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1018,17 +1057,15 @@
         <span class="k">return</span> <span class="n">disabled_checks</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span></div>
 
     <span class="k">def</span> <span class="nf">_get_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">attribute</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">RUNTIME_CONFIG</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="p">:</span>
-                    <span class="k">for</span> <span class="n">attribute_dict</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="p">[</span><span class="n">element</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">RUNTIME_CONFIG</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">attribute_dict</span> <span class="ow">in</span> <span class="n">RUNTIME_CONFIG</span><span class="p">[</span><span class="n">element</span><span class="p">]:</span>
                         <span class="k">if</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">attribute_dict</span><span class="p">:</span>
                             <span class="k">return</span> <span class="n">attribute_dict</span><span class="p">[</span><span class="n">attribute</span><span class="p">]</span>
-            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">issue</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">KiwiRuntimeConfigFormatError</span><span class="p">(</span>
-                    <span class="s1">&#39;</span><span class="si">{error_type}</span><span class="s1">: </span><span class="si">{error_text}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="n">error_type</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">error_text</span><span class="o">=</span><span class="nb">format</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-                    <span class="p">)</span>
+                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">issue</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">issue</span><span class="si">}</span><span class="s1">&#39;</span>
                 <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_home_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi-ng system build &mdash; KIWI NG 9.23.12 documentation</title>
+  <title>kiwi-ng system build &mdash; KIWI NG 9.23.13 documentation</title>
   
 
   
@@ -747,6 +747,9 @@ kiwi-ng system build --description<span class="o">=</span>&lt;directory&gt; --ta
     <span class="o">[</span>--add-package<span class="o">=</span>&lt;name&gt;...<span class="o">]</span>
     <span class="o">[</span>--add-bootstrap-package<span class="o">=</span>&lt;name&gt;...<span class="o">]</span>
     <span class="o">[</span>--delete-package<span class="o">=</span>&lt;name&gt;...<span class="o">]</span>
+    <span class="o">[</span>--set-container-derived-from<span class="o">=</span>&lt;uri&gt;<span class="o">]</span>
+    <span class="o">[</span>--set-container-tag<span class="o">=</span>&lt;name&gt;<span class="o">]</span>
+    <span class="o">[</span>--add-container-label<span class="o">=</span>&lt;label&gt;...<span class="o">]</span>
     <span class="o">[</span>--signing-key<span class="o">=</span>&lt;key-file&gt;...<span class="o">]</span>
 kiwi-ng system build <span class="nb">help</span>
 </pre></div>
@@ -767,6 +770,11 @@ are created in the specified target-dir.</p>
 <dt><kbd><span class="option">--add-bootstrap-package=<var>&lt;name&gt;</var></span></kbd></dt>
 <dd><p>specify package to install as part of the early kiwi bootstrap phase.
 The option can be specified multiple times</p>
+</dd>
+<dt><kbd><span class="option">--add-container-label=<var>&lt;name=value&gt;</var></span></kbd></dt>
+<dd><p>add a container label in the container configuration metadata. It
+overwrites the label with the provided key-value pair in case it was
+already defined in the XML description</p>
 </dd>
 <dt><kbd><span class="option">--add-package=<var>&lt;name&gt;</var></span></kbd></dt>
 <dd><p>specify package to add(install). The option can be specified
@@ -846,6 +854,16 @@ should be part of the system image repository setup or not.</p>
 should validate the package signatures.</p>
 </li>
 </ul>
+</dd>
+<dt><kbd><span class="option">--set-container-derived-from=<var>&lt;uri&gt;</var></span></kbd></dt>
+<dd><p>overwrite the source location of the base container for the selected
+image type. The setting is only effective if the configured image type
+is setup with an initial derived_from reference</p>
+</dd>
+<dt><kbd><span class="option">--set-container-tag=<var>&lt;name&gt;</var></span></kbd></dt>
+<dd><p>overwrite the container tag in the container configuration.
+The setting is only effective if the container configuraiton
+provides an initial tag value</p>
 </dd>
 <dt><kbd><span class="option">--signing-key=<var>&lt;key-file&gt;</var></span></kbd></dt>
 <dd><p>set the key file to be trusted and imported into the package
