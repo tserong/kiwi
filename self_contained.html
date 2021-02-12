@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Building in a Self-Contained Environment &mdash; KIWI NG 9.23.14 documentation</title>
+  <title>Building in a Self-Contained Environment &mdash; KIWI NG 9.23.15 documentation</title>
   
 
   
@@ -744,6 +744,8 @@ compared to the target image distribution. For example
 building an apt/dpkg  based system on an rpm based system.</p></li>
 <li><p>run more than one build process at the same time on the
 same host.</p></li>
+<li><p>run a build process for a different target architecture
+compared to the host architecture (Cross Arch Image Build)</p></li>
 </ul>
 <p>This document describes how to perform the build process in
 a self contained environment using fast booting virtual
@@ -782,7 +784,7 @@ capabilities of the <code class="xref py py-obj docutils literal notranslate"><s
 is exactly the same as with the <code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code> command. The separation between
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">boxbuild</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code> options is done using the <code class="xref py py-obj docutils literal notranslate"><span class="pre">--</span></code> separator like
 shown in the following example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kiwi-ng --type iso system boxbuild --box suse -- <span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kiwi-ng --type iso system boxbuild --box leap -- <span class="se">\</span>
       --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
       --target-dir /tmp/myimage
 </pre></div>

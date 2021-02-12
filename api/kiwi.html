@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi Package &mdash; KIWI NG 9.23.14 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.23.15 documentation</title>
   
 
   
@@ -948,10 +948,28 @@ code not equal to zero</p>
 
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="py class">
 <dt id="kiwi.command.command_type">
-<code class="sig-prename descclassname">kiwi.command.</code><code class="sig-name descname">command_type</code><a class="headerlink" href="#kiwi.command.command_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.command.command</span></code></p>
+<em class="property">class </em><code class="sig-prename descclassname">kiwi.command.</code><code class="sig-name descname">command_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output</span></em>, <em class="sig-param"><span class="n">error</span></em>, <em class="sig-param"><span class="n">returncode</span></em><span class="sig-paren">)</span><a class="headerlink" href="#kiwi.command.command_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<dl class="py attribute">
+<dt id="kiwi.command.command_type.error">
+<code class="sig-name descname">error</code><a class="headerlink" href="#kiwi.command.command_type.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.command.command_type.output">
+<code class="sig-name descname">output</code><a class="headerlink" href="#kiwi.command.command_type.output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.command.command_type.returncode">
+<code class="sig-name descname">returncode</code><a class="headerlink" href="#kiwi.command.command_type.returncode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -4705,6 +4723,32 @@ it can be specified with m=MB or g=GB.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="kiwi.runtime_config.RuntimeConfig.get_obs_api_credentials">
+<code class="sig-name descname">get_obs_api_credentials</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_config.html#RuntimeConfig.get_obs_api_credentials"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.runtime_config.RuntimeConfig.get_obs_api_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return OBS API credentials if configured:</p>
+<dl class="simple">
+<dt>obs:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>user:</dt><dd><ul>
+<li><p>user_name: user_credentials</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of Dicts with credentials per user</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="kiwi.runtime_config.RuntimeConfig.get_obs_api_server_url">
 <code class="sig-name descname">get_obs_api_server_url</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_config.html#RuntimeConfig.get_obs_api_server_url"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#kiwi.runtime_config.RuntimeConfig.get_obs_api_server_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return URL of buildservice API server in:</p>
@@ -6539,19 +6583,19 @@ must be already present in the image configuration</p>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
 <dl class="py attribute">
 <dt id="kiwi.xml_state.description_type.author">
-<code class="sig-name descname">author</code><a class="headerlink" href="#kiwi.xml_state.description_type.author" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">author</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#kiwi.xml_state.description_type.author" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 0</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.xml_state.description_type.contact">
-<code class="sig-name descname">contact</code><a class="headerlink" href="#kiwi.xml_state.description_type.contact" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">contact</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#kiwi.xml_state.description_type.contact" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 1</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.xml_state.description_type.specification">
-<code class="sig-name descname">specification</code><a class="headerlink" href="#kiwi.xml_state.description_type.specification" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">specification</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#kiwi.xml_state.description_type.specification" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 2</p>
 </dd></dl>
 
@@ -6563,13 +6607,13 @@ must be already present in the image configuration</p>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
 <dl class="py attribute">
 <dt id="kiwi.xml_state.package_type.package_section">
-<code class="sig-name descname">package_section</code><a class="headerlink" href="#kiwi.xml_state.package_type.package_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">package_section</code><em class="property">: kiwi.xml_parse.package</em><a class="headerlink" href="#kiwi.xml_state.package_type.package_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 1</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.xml_state.package_type.packages_section">
-<code class="sig-name descname">packages_section</code><a class="headerlink" href="#kiwi.xml_state.package_type.packages_section" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">packages_section</code><em class="property">: kiwi.xml_parse.packages</em><a class="headerlink" href="#kiwi.xml_state.package_type.packages_section" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 0</p>
 </dd></dl>
 
@@ -6581,13 +6625,13 @@ must be already present in the image configuration</p>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
 <dl class="py attribute">
 <dt id="kiwi.xml_state.size_type.additive">
-<code class="sig-name descname">additive</code><a class="headerlink" href="#kiwi.xml_state.size_type.additive" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">additive</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#kiwi.xml_state.size_type.additive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 1</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.xml_state.size_type.mbytes">
-<code class="sig-name descname">mbytes</code><a class="headerlink" href="#kiwi.xml_state.size_type.mbytes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mbytes</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></em><a class="headerlink" href="#kiwi.xml_state.size_type.mbytes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 0</p>
 </dd></dl>
 
@@ -6599,49 +6643,49 @@ must be already present in the image configuration</p>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
 <dl class="py attribute">
 <dt id="kiwi.xml_state.volume_type.attributes">
-<code class="sig-name descname">attributes</code><a class="headerlink" href="#kiwi.xml_state.volume_type.attributes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">attributes</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a></em><a class="headerlink" href="#kiwi.xml_state.volume_type.attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 6</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.xml_state.volume_type.fullsize">
-<code class="sig-name descname">fullsize</code><a class="headerlink" href="#kiwi.xml_state.volume_type.fullsize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fullsize</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><a class="headerlink" href="#kiwi.xml_state.volume_type.fullsize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 4</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.xml_state.volume_type.is_root_volume">
-<code class="sig-name descname">is_root_volume</code><a class="headerlink" href="#kiwi.xml_state.volume_type.is_root_volume" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_root_volume</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></em><a class="headerlink" href="#kiwi.xml_state.volume_type.is_root_volume" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 7</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.xml_state.volume_type.label">
-<code class="sig-name descname">label</code><a class="headerlink" href="#kiwi.xml_state.volume_type.label" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">label</code><em class="property">: Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></em><a class="headerlink" href="#kiwi.xml_state.volume_type.label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 5</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.xml_state.volume_type.mountpoint">
-<code class="sig-name descname">mountpoint</code><a class="headerlink" href="#kiwi.xml_state.volume_type.mountpoint" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mountpoint</code><em class="property">: Optional<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></em><a class="headerlink" href="#kiwi.xml_state.volume_type.mountpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 3</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.xml_state.volume_type.name">
-<code class="sig-name descname">name</code><a class="headerlink" href="#kiwi.xml_state.volume_type.name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">name</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#kiwi.xml_state.volume_type.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 0</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.xml_state.volume_type.realpath">
-<code class="sig-name descname">realpath</code><a class="headerlink" href="#kiwi.xml_state.volume_type.realpath" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">realpath</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#kiwi.xml_state.volume_type.realpath" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 2</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt id="kiwi.xml_state.volume_type.size">
-<code class="sig-name descname">size</code><a class="headerlink" href="#kiwi.xml_state.volume_type.size" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">size</code><em class="property">: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></em><a class="headerlink" href="#kiwi.xml_state.volume_type.size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 1</p>
 </dd></dl>
 

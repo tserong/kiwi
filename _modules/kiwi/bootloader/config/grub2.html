@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.14 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.15 documentation</title>
   
 
   
@@ -1612,11 +1612,14 @@
             <span class="n">early_boot_script</span><span class="p">,</span> <span class="n">mbrid</span>
         <span class="p">)</span>
         <span class="n">early_boot_script_on_media</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_directory_name</span><span class="p">]</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_directory_name</span><span class="p">,</span> <span class="s1">&#39;earlyboot.cfg&#39;</span><span class="p">]</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">early_boot_script</span> <span class="o">!=</span> <span class="n">early_boot_script_on_media</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s1">&#39;Copy earlyboot to media path: </span><span class="si">{</span><span class="n">early_boot_script_on_media</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">)</span>
+            <span class="n">Path</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">early_boot_script_on_media</span><span class="p">)</span>
             <span class="p">)</span>
             <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span>
                 <span class="n">early_boot_script</span><span class="p">,</span> <span class="n">early_boot_script_on_media</span>
