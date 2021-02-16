@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Installation &mdash; KIWI NG 9.23.15 documentation</title>
+  <title>Installation &mdash; KIWI NG 9.23.16 documentation</title>
   
 
   
@@ -773,6 +773,18 @@ database. For rpm run:</p>
 </pre></div>
 </div>
 </li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong class="command">rpm</strong> requires network utilities in order to download and
+import remote keys. Make sure <strong class="command">curl</strong> is installed before
+trying to import remote keys using <strong class="command">rpm</strong>.</p>
+<p>Alternatively, the package manager, if not executed in non-interactive mode,
+will ask you to trust or not the public key of the new repository when
+refreshing repositories or installing new packages. If trusted the package
+manager will automatically import it.</p>
+</div>
+<ol class="arabic" start="5">
 <li><p>Install KIWI NG:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo zypper <span class="k">in</span> python3-kiwi
 </pre></div>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.filesystem.isofs &mdash; KIWI NG 9.23.15 documentation</title>
+  <title>kiwi.filesystem.isofs &mdash; KIWI NG 9.23.16 documentation</title>
   
 
   
@@ -746,6 +746,7 @@
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">dedent</span>
 
 <span class="c1"># project</span>
@@ -760,7 +761,9 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Implements creation of iso filesystem**</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="FileSystemIsoFs.create_on_file"><a class="viewcode-back" href="../../../api/kiwi.filesystem.html#kiwi.filesystem.isofs.FileSystemIsoFs.create_on_file">[docs]</a>    <span class="k">def</span> <span class="nf">create_on_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="FileSystemIsoFs.create_on_file"><a class="viewcode-back" href="../../../api/kiwi.filesystem.html#kiwi.filesystem.isofs.FileSystemIsoFs.create_on_file">[docs]</a>    <span class="k">def</span> <span class="nf">create_on_file</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exclude</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create iso filesystem from data tree</span>
 
@@ -769,7 +772,7 @@
 
 <span class="sd">        :param string filename: result file path name</span>
 <span class="sd">        :param string label: unused</span>
-<span class="sd">        :param string exclude: unused</span>
+<span class="sd">        :param list exclude: unused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">meta_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;meta_data&#39;</span><span class="p">]</span>
         <span class="n">efi_mode</span> <span class="o">=</span> <span class="n">meta_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;efi_mode&#39;</span><span class="p">)</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.storage.device_provider &mdash; KIWI NG 9.23.15 documentation</title>
+  <title>kiwi.storage.device_provider &mdash; KIWI NG 9.23.16 documentation</title>
   
 
   
@@ -764,7 +764,7 @@
             <span class="s1">&#39;No storage device(s) provided&#39;</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="DeviceProvider.get_uuid"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.device_provider.DeviceProvider.get_uuid">[docs]</a>    <span class="k">def</span> <span class="nf">get_uuid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+<div class="viewcode-block" id="DeviceProvider.get_uuid"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.device_provider.DeviceProvider.get_uuid">[docs]</a>    <span class="k">def</span> <span class="nf">get_uuid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        UUID of device</span>
 
@@ -779,7 +779,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">uuid_call</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DeviceProvider.get_byte_size"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.device_provider.DeviceProvider.get_byte_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_byte_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+<div class="viewcode-block" id="DeviceProvider.get_byte_size"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.device_provider.DeviceProvider.get_byte_size">[docs]</a>    <span class="k">def</span> <span class="nf">get_byte_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Size of device in bytes</span>
 
@@ -794,7 +794,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">blockdev_call</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="DeviceProvider.is_loop"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.device_provider.DeviceProvider.is_loop">[docs]</a>    <span class="k">def</span> <span class="nf">is_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DeviceProvider.is_loop"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.device_provider.DeviceProvider.is_loop">[docs]</a>    <span class="k">def</span> <span class="nf">is_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check if device provider is loop based</span>
 

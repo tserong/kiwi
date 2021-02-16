@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.storage.mapped_device &mdash; KIWI NG 9.23.15 documentation</title>
+  <title>kiwi.storage.mapped_device &mdash; KIWI NG 9.23.16 documentation</title>
   
 
   
@@ -758,7 +758,7 @@
 <span class="sd">    :param object device_provider: Instance of class based on DeviceProvider</span>
 <span class="sd">    :param string device: Device node name</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">device_provider</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">device_provider</span><span class="p">:</span> <span class="n">DeviceProvider</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">device</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">KiwiMappedDeviceError</span><span class="p">(</span>
                 <span class="s1">&#39;Device </span><span class="si">%s</span><span class="s1"> does not exist&#39;</span> <span class="o">%</span> <span class="n">device</span>
@@ -766,7 +766,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">device_provider</span> <span class="o">=</span> <span class="n">device_provider</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
 
-<div class="viewcode-block" id="MappedDevice.get_device"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.mapped_device.MappedDevice.get_device">[docs]</a>    <span class="k">def</span> <span class="nf">get_device</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="MappedDevice.get_device"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.mapped_device.MappedDevice.get_device">[docs]</a>    <span class="k">def</span> <span class="nf">get_device</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Mapped device node name</span>
 
@@ -776,7 +776,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span></div>
 
-<div class="viewcode-block" id="MappedDevice.is_loop"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.mapped_device.MappedDevice.is_loop">[docs]</a>    <span class="k">def</span> <span class="nf">is_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="MappedDevice.is_loop"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.mapped_device.MappedDevice.is_loop">[docs]</a>    <span class="k">def</span> <span class="nf">is_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check if storage provider is loop based</span>
 
