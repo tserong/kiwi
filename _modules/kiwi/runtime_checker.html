@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.runtime_checker &mdash; KIWI NG 9.23.18 documentation</title>
+  <title>kiwi.runtime_checker &mdash; KIWI NG 9.23.19 documentation</title>
   
 
   
@@ -1682,7 +1682,8 @@
         <span class="k">elif</span> <span class="n">tool</span> <span class="o">==</span> <span class="s1">&#39;dpkg&#39;</span><span class="p">:</span>
             <span class="n">package_query</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
                 <span class="p">[</span>
-                    <span class="s1">&#39;dpkg-query&#39;</span><span class="p">,</span> <span class="s1">&#39;--admindir&#39;</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;-W&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;dpkg-query&#39;</span><span class="p">,</span> <span class="s1">&#39;--admindir&#39;</span><span class="p">,</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;var/lib/dpkg&#39;</span><span class="p">]),</span> <span class="s1">&#39;-W&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;$</span><span class="si">{Version}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">package_name</span>
                 <span class="p">]</span>
             <span class="p">)</span>
