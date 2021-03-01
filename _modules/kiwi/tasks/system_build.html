@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.tasks.system_build &mdash; KIWI NG 9.23.17 documentation</title>
+  <title>kiwi.tasks.system_build &mdash; KIWI NG 9.23.18 documentation</title>
   
 
   
@@ -871,9 +871,7 @@
         <span class="n">build_checks</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
             <span class="p">{</span>
                 <span class="s1">&#39;check_target_directory_not_in_shared_cache&#39;</span><span class="p">:</span>
-                    <span class="p">[</span><span class="n">abs_target_dir_path</span><span class="p">],</span>
-                <span class="s1">&#39;check_dracut_module_versions_compatible_to_kiwi&#39;</span><span class="p">:</span>
-                    <span class="p">[</span><span class="n">image_root</span><span class="p">]</span>
+                    <span class="p">[</span><span class="n">abs_target_dir_path</span><span class="p">]</span>
             <span class="p">}</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">run_checks</span><span class="p">(</span><span class="n">build_checks</span><span class="p">)</span>
@@ -992,6 +990,12 @@
         <span class="k">del</span> <span class="n">setup</span>
 
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Creating system image&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">run_checks</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;check_dracut_module_versions_compatible_to_kiwi&#39;</span><span class="p">:</span>
+                    <span class="p">[</span><span class="n">image_root</span><span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
         <span class="n">image_builder</span> <span class="o">=</span> <span class="n">ImageBuilder</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="p">,</span>
             <span class="n">abs_target_dir_path</span><span class="p">,</span>

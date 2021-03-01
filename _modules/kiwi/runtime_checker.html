@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.runtime_checker &mdash; KIWI NG 9.23.17 documentation</title>
+  <title>kiwi.runtime_checker &mdash; KIWI NG 9.23.18 documentation</title>
   
 
   
@@ -1328,6 +1328,10 @@
         <span class="n">dracut_module_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="p">[</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;/usr/lib/dracut/modules.d&#39;</span><span class="p">]</span>
         <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">dracut_module_dir</span><span class="p">):</span>
+            <span class="c1"># no dracut module dir present</span>
+            <span class="k">return</span>
+
         <span class="n">incompatible_modules</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dracut_module_dir</span><span class="p">):</span>
             <span class="n">module_meta</span> <span class="o">=</span> <span class="n">kiwi_dracut_modules</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
