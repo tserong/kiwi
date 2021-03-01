@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Legacy KIWI vs. KIWI Next Generation (KIWI NG) &mdash; KIWI NG 9.23.16 documentation</title>
+  <title>Host Requirements To Build Images &mdash; KIWI NG 9.23.17 documentation</title>
   
 
   
@@ -39,8 +39,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Image Description" href="../image_description.html" />
-    <link rel="prev" title="Customizing the Boot Process" href="customize_the_boot_process.html" /> 
+    <link rel="next" title="Setting up Repositories" href="repository_setup.html" />
+    <link rel="prev" title="Concept and Workflow" href="../concept_and_workflow.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -171,12 +171,19 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting/filesystems.html">Incompatible Filesystem Settings on Host vs. Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#build-host-constraints">Build Host Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#architectures">Architectures</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../self_contained.html">Building in a Self-Contained Environment</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../self_contained.html#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../self_contained.html#building-with-the-boxbuild-command">Building with the boxbuild command</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../concept_and_workflow.html">Concept and Workflow</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Host Requirements To Build Images</a></li>
 <li class="toctree-l2"><a class="reference internal" href="repository_setup.html">Setting up Repositories</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="repository_setup.html#adding-repositories">Adding repositories</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="repository_setup.html#supported-repository-paths">Supported repository paths</a></li>
@@ -211,12 +218,6 @@
 <li class="toctree-l4"><a class="reference internal" href="customize_the_boot_process.html#boot-debugging">Boot Debugging</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Legacy KIWI vs. KIWI Next Generation (KIWI NG)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#when-do-i-need-to-use-kiwi-legacy">When Do I need to use KIWI Legacy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#dropped-features">Dropped Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#compatibility">Compatibility</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../concept_and_workflow.html#overview">Overview</a></li>
@@ -280,8 +281,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../image_types_and_results.html">Image Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../image_types_and_results.html#image-results">Image Results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../image_types_and_results.html#build-host-constraints">Build Host Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../image_types_and_results.html#architectures">Architectures</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../building_images.html">Building Images for Supported Types</a><ul>
@@ -325,38 +324,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/disk_setup_for_ec2.html">Image Description for Amazon EC2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/disk_setup_for_azure.html">Image Description for Microsoft Azure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/disk_setup_for_google.html">Image Description for Google Compute Engine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../working_with_images/setup_yast_on_first_boot.html">Setting Up YaST at First Boot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/disk_setup_for_vagrant.html">Image Description for Vagrant</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../working_with_images/disk_setup_for_vagrant.html#customizing-the-embedded-vagrantfile">Customizing the embedded Vagrantfile</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../working_with_images/network_live_iso_boot.html">Booting a Live ISO Image from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/disk_ramdisk_deployment.html">Deploy and Run System in a RamDisk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/custom_partitions.html">Custom Disk Partitions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../working_with_images/custom_partitions.html#custom-partitioning-at-boot-time">Custom Partitioning at Boot Time</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/custom_volumes.html">Custom Disk Volumes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../working_with_images/custom_fstab_extension.html">Add or Update the Fstab File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../working_with_images/build_with_profiles.html">Building Images with Profiles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../working_with_images/build_with_profiles.html#local-builds">Local Builds</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../working_with_images/build_with_profiles.html#building-with-the-open-build-service">Building with the Open Build Service</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../working_with_images/build_in_buildservice.html">Building in the Open Build Service</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../working_with_images/build_in_buildservice.html#advantages-of-using-the-open-build-service-obs">Advantages of using the Open Build Service (OBS)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../working_with_images/build_in_buildservice.html#differences-between-building-locally-and-on-obs">Differences Between Building Locally and on OBS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../working_with_images/build_in_buildservice.html#recommendations">Recommendations</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../working_with_images/build_in_buildservice.html#working-with-obs">Working with OBS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../working_with_images/build_in_buildservice.html#repository-configuration">Repository Configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../working_with_images/build_in_buildservice.html#project-configuration">Project Configuration</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/legacy_netboot_root_filesystem.html">Build PXE Root File System Image for the legacy netboot infrastructure</a><ul>
@@ -376,6 +356,26 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/network_overlay_boot.html">Booting a Root Filesystem from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_images/network_live_iso_boot.html">Booting a Live ISO Image from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_images/setup_yast_on_first_boot.html">Setting Up YaST at First Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_images/custom_fstab_extension.html">Add or Update the Fstab File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_images/build_with_profiles.html">Building Images with Profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../working_with_images/build_with_profiles.html#local-builds">Local Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../working_with_images/build_with_profiles.html#building-with-the-open-build-service">Building with the Open Build Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_images/build_in_buildservice.html">Building in the Open Build Service</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../working_with_images/build_in_buildservice.html#advantages-of-using-the-open-build-service-obs">Advantages of using the Open Build Service (OBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../working_with_images/build_in_buildservice.html#differences-between-building-locally-and-on-obs">Differences Between Building Locally and on OBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../working_with_images/build_in_buildservice.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../working_with_images/build_in_buildservice.html#working-with-obs">Working with OBS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working_with_images/build_in_buildservice.html#repository-configuration">Repository Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../working_with_images/build_in_buildservice.html#project-configuration">Project Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_images/use_suse_media.html">Using SUSE Product ISO To Build</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a><ul>
@@ -711,13 +711,13 @@
         
           <li><a href="../concept_and_workflow.html">Concept and Workflow</a> &raquo;</li>
         
-      <li>Legacy KIWI vs. KIWI Next Generation (KIWI NG)</li>
+      <li>Host Requirements To Build Images</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/concept_and_workflow/legacy_kiwi.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/concept_and_workflow/systemdeps.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -730,146 +730,104 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="legacy-kiwi-vs-kiwi-next-generation-kiwi-ng">
-<span id="legacy-kiwi"></span><h1>Legacy KIWI vs. KIWI Next Generation (KIWI NG)<a class="headerlink" href="#legacy-kiwi-vs-kiwi-next-generation-kiwi-ng" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="host-requirements-to-build-images">
+<span id="systemdeps"></span><h1>Host Requirements To Build Images<a class="headerlink" href="#host-requirements-to-build-images" title="Permalink to this headline">¶</a></h1>
+<p>When building OS images, several tools and sub-systems are used
+and required on the host KIWI NG is called at. For example, to
+build a virtual disk image, several tools needs to be available
+on the host that builds the image. This includes tools for
+partition table setup or tools to create filesystems.</p>
+<p>The number of required components depends on the selected image
+type and the <em>features</em> used with the image. We cannot expect
+the users of KIWI NG to know about each and every component that
+is needed to build the image. Therefore a concept to help with
+the host requirements exists and is named <code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-systemdeps</span></code></p>
+<p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-systemdeps</span></code> concept consists out of a collection of
+sub-packages provided with the <code class="xref py py-obj docutils literal notranslate"><span class="pre">python-kiwi</span></code> main package. Each
+individual package requires a number of tools and subsystem packages
+which belongs to the package category. There are the following
+systemdeps packages:</p>
+<dl>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-systemdeps-core</span></code>:</dt><dd><ul class="simple">
+<li><p>Supports building the simple root archive <code class="xref py py-obj docutils literal notranslate"><span class="pre">tbz</span></code> image type.</p></li>
+<li><p>Installs the package managers which are supported by the
+target distribution as well as the <code class="xref py py-obj docutils literal notranslate"><span class="pre">tar</span></code> archiving tool.</p></li>
+</ul>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-systemdeps-containers</span></code>:</dt><dd><ul class="simple">
+<li><p>Supports building <code class="xref py py-obj docutils literal notranslate"><span class="pre">docker</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">appx</span></code> image types.</p></li>
+<li><p>Installs the distribution specific tool chain to build OCI
+compliant and WSL container images.</p></li>
+</ul>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-systemdeps-iso-media</span></code>:</dt><dd><ul class="simple">
+<li><p>Supports building <code class="xref py py-obj docutils literal notranslate"><span class="pre">iso</span></code> image types and <code class="xref py py-obj docutils literal notranslate"><span class="pre">oem</span></code> install media.</p></li>
+<li><p>Installs all tools required to build ISO filesystems.</p></li>
+<li><p>Depends on the <code class="xref py py-obj docutils literal notranslate"><span class="pre">-core</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">-filesystems</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">-bootloaders</span></code>
+kiwi-systemdeps packages.</p></li>
+</ul>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-systemdeps-bootloaders</span></code>:</dt><dd><ul class="simple">
+<li><p>Supports building bootable <code class="xref py py-obj docutils literal notranslate"><span class="pre">oem</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">iso</span></code> image types.</p></li>
+<li><p>Installs all bootloader tools depending on the host architecture
+to allow setup and install of the bootloader. The pulled in
+components are required for any image that is able to boot
+through some BIOS or firmware.</p></li>
+<li><p>Depends on the <code class="xref py py-obj docutils literal notranslate"><span class="pre">-core</span></code> kiwi-systemdeps packages.</p></li>
+</ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>Abstract</strong></p>
-<p>Users currently have the choice for the kiwi legacy version
-or this next generation kiwi. This document describes the
-maintenance state of the legacy kiwi version and under which
-circumstances the use of the legacy kiwi version is required.</p>
+<p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">iso</span></code> type is an exception which might not require the
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">-bootloaders</span></code> systemdeps. In case of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">firmware</span></code> attribute
+to be set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">bios</span></code>, KIWI NG builds bootable ISO images still
+based on isolinux which is provided with the <code class="xref py py-obj docutils literal notranslate"><span class="pre">-iso-media</span></code>
+systemdeps. However, by default, any KIWI NG created ISO image
+is BIOS and EFI capable and based on the grub bootloader which
+causes a requirement to the <code class="xref py py-obj docutils literal notranslate"><span class="pre">-bootloaders</span></code> systemdeps.</p>
 </div>
-<p>There is still the former
-<a class="reference external" href="https://github.com/OSInside/kiwi-legacy">KIWI Legacy</a>
-version and we decided to rewrite it.</p>
-<p>The reasons to rewrite software from scratch could be very different
-and should be explained in order to let users understand why it
-makes sense. We are receiving feedback and defect reports from a
-variety of groups with different use cases and requirements. It
-became more and more difficult to handle those requests in good
-quality and without regressions. At some point we asked ourselves:</p>
-<blockquote>
-<div><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Is</span> <span class="pre">KIWI</span> <span class="pre">Legacy</span> <span class="pre">really</span> <span class="pre">well</span> <span class="pre">prepared</span> <span class="pre">for</span> <span class="pre">future</span> <span class="pre">challenges?</span></code></p>
-</div></blockquote>
-<p>The conclusion was that the former version has some major weaknesses
-which has to be addressed prior to continue with future development.
-The following issues are most relevant:</p>
-<ul class="simple">
-<li><p>Not based on a modern programming language</p></li>
-<li><p>Major design flaws but hardly any unit tests. The risk for
-regressions on refactoring is high</p></li>
-<li><p>No arch specific build integration tests</p></li>
-<li><p>Lots of legacy code for old distributions</p></li>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-systemdeps-filesystems</span></code>:</dt><dd><ul class="simple">
+<li><p>Supports building <code class="xref py py-obj docutils literal notranslate"><span class="pre">fs-type</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">oem</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">pxe</span></code>,
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">kis</span></code> and live <code class="xref py py-obj docutils literal notranslate"><span class="pre">iso</span></code> image types.</p></li>
+<li><p>Installs all tools to create filesystems supported with KIWI NG.
+The pulled in components are needed for any image type that
+needs to create a filesystem. This excludes the archive based
+image types like <code class="xref py py-obj docutils literal notranslate"><span class="pre">docker</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">appx</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">tbz</span></code>. The package also
+installs tools one level below the actual filesystem creation
+toolkit. These are components to manage loop devices as well
+as partition table setup and subsystem support like LVM and LUKS.</p></li>
+<li><p>Depends on the <code class="xref py py-obj docutils literal notranslate"><span class="pre">-core</span></code> kiwi-systemdeps packages.</p></li>
 </ul>
-<p>In order to address all of these the questions came up:</p>
-<blockquote>
-<div><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">How</span> <span class="pre">to</span> <span class="pre">modernize</span> <span class="pre">the</span> <span class="pre">project</span> <span class="pre">without</span> <span class="pre">producing</span> <span class="pre">regressions?</span></code></p>
-<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">How</span> <span class="pre">to</span> <span class="pre">change/drop</span> <span class="pre">features</span> <span class="pre">without</span> <span class="pre">making</span> <span class="pre">anybody</span> <span class="pre">unhappy?</span></code></p>
-</div></blockquote>
-<p>As there is no good way to achieve this in the former code base the
-decision was made to start a rewrite of KIWI Legacy with a maintained and
-stable version in the background.</p>
-<p>Users will be able to use both versions in parallel. In addition,
-KIWI NG will be fully compatible with the current format of
-the appliance description. This means, users can build an appliance from
-the same appliance description with KIWI Legacy and
-KIWI NG, if the distribution and all configured features are
-supported by the used version.</p>
-<p>This provides an opportunity for users to test KIWI NG
-with their appliance descriptions without risk. If it builds and works
-as expected, I recommend to switch to the KIWI NG. If not,
-please open an issue on <a class="reference external" href="https://github.com/OSInside/kiwi">https://github.com/OSInside/kiwi</a>.</p>
-<p>The KIWI Legacy version will be further developed in maintenance mode.
-There won’t be any new features added in that code base though.
-Packages will be available at the known place:
-<a class="reference external" href="http://download.opensuse.org/repositories/Virtualization:/Appliances">KIWI Legacy packages</a></p>
-<div class="section" id="when-do-i-need-to-use-kiwi-legacy">
-<h2>When Do I need to use KIWI Legacy<a class="headerlink" href="#when-do-i-need-to-use-kiwi-legacy" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>If you are building images using one of the features of the dropped
-features list below.</p></li>
-<li><p>If you are building images for an older distribution compared to
-the list on the main page, see <a class="reference internal" href="../image_types_and_results.html#supported-distributions"><span class="std std-ref">Build Host Constraints</span></a>.</p></li>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-systemdeps-disk-images</span></code>:</dt><dd><ul class="simple">
+<li><p>Supports building the <code class="xref py py-obj docutils literal notranslate"><span class="pre">oem</span></code> image type.</p></li>
+<li><p>Installs all tools to create virtual disks. In KIWI NG, virtual disks
+are created using the QEMU toolchain.</p></li>
+<li><p>Depends on the <code class="xref py py-obj docutils literal notranslate"><span class="pre">-filesystems</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">-bootloaders</span></code> kiwi-systemdeps
+packages.</p></li>
 </ul>
-</div>
-<div class="section" id="dropped-features">
-<h2>Dropped Features<a class="headerlink" href="#dropped-features" title="Permalink to this headline">¶</a></h2>
-<p>The following features have been dropped. If you make use of them
-consider to use the KIWI Legacy version.</p>
-<dl class="simple">
-<dt>Split systems</dt><dd><p>The KIWI Legacy version supports building of split systems
-which uses a static definition of files and directories marked
-as read-only or read-write. Evolving technologies like overlayfs
-makes this feature obsolete.</p>
 </dd>
-<dt>ZFS filesystem</dt><dd><p>The successor for ZFS is Btrfs in the opensource world. All major
-distributions put on Btrfs. This and the proprietary attitude of
-ZFS obsoletes the feature.</p>
-</dd>
-<dt>Reiserfs filesystem</dt><dd><p>The number of people using this filesystem is decreasing. For image
-building reiserfs was an interesting filesystem however with Btrfs and
-XFS there are good non inode based alternatives out there. Therefore we
-don’t continue supporting Reiserfs.</p>
-</dd>
-<dt>Btrfs seed based live systems</dt><dd><p>A Btrfs seed device is an alternative for other copy on write
-filesystems like overlayfs. Unfortunately the stability of the seed
-device when used as cow part in a live system was not as good as we
-provide with overlayfs and clicfs. Therefore this variant is no longer
-supported. We might think of adding this feature back if people demand
-it.</p>
-</dd>
-<dt>lxc container format</dt><dd><p>lxc has a successor in docker based on the former lxc technology.
-Many distributions also dropped the lxc tools from the distribution
-in favour of docker.</p>
-</dd>
-<dt>OEM Recovery/Restore</dt><dd><p>Recovery/Restore in the world of images has been moved from the
-operating system layer into higher layers. For example, in private and
-public Cloud environments disk and image recovery as well as backup
-strategies are part of Cloud services. Pure operating system recovery
-and snapshots for consumer machines are provided as features of the
-distribution. SUSE as an example provides this via Rear
-(Relax-and-Recover) and snapshot based filesystems (btrfs+snapper).
-Therefore the recovery feature offered in the KIWI Legacy version
-will not be continued.</p>
-</dd>
-<dt>Partition based install method in OEM install image</dt><dd><p>The section <a class="reference internal" href="../building_images/build_expandable_disk.html#deployment-methods"><span class="std std-ref">Deployment Methods</span></a> describes the supported OEM
-installation procedures. The KIWI Legacy version also provided a method
-to install an image based on the partitions of the OEM disk image.
-Instead of selecting one target disk to dump the entire image file to,
-the user selects target partitions. Target partitions could be located
-on several disks. Each partition of the OEM disk image must be mapped
-on a selectable target partition. It turned out, users needed a lot of
-experience in a very sensitive area of the operating system. This is
-contrary to the idea of images to be dumped and be happy. Thus the
-partition based install method will not be continued.</p>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-systemdeps-image-validation</span></code>:</dt><dd><ul class="simple">
+<li><p>Installs the <code class="xref py py-obj docutils literal notranslate"><span class="pre">jing</span></code> tool to validate the image description. This is
+useful for detailed error reports from KIWI NG in case of an image
+description validation error. In addition, the <code class="xref py py-obj docutils literal notranslate"><span class="pre">anymarkup</span></code> Python
+module is installed if the the option to install recommended packages
+is set. With <code class="xref py py-obj docutils literal notranslate"><span class="pre">anymarkup</span></code> available, KIWI NG can also handle image
+descriptions in another format than the XML markup, like YAML.</p></li>
+</ul>
 </dd>
 </dl>
-</div>
-<div class="section" id="compatibility">
-<h2>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">¶</a></h2>
-<p>The KIWI Legacy version can be installed and used together with
-KIWI NG.</p>
+<p>Depending on the image type the kiwi-systemdeps packages can help
+to setup the host system quickly for the task to build an image.
+In case the host should support <em>everything</em> there is also the
+main <code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-systemdeps</span></code> package which has a dependency on all other
+existing systemdeps packages.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Automatic Link Creation for <strong class="command">kiwi</strong> Command</p>
-<p>Note the python3-kiwi package uses the alternatives mechanism to
-setup a symbolic link named <strong class="command">kiwi</strong> to the real executable
-named <strong class="command">kiwi-ng</strong>. If the link target <code class="file docutils literal notranslate"><span class="pre">/usr/bin/kiwi</span></code>
-already exists on your system, the alternative setup will skip the
-creation of the link target because it already exists.</p>
-</div>
-<p>From an appliance description perspective, both versions are fully
-compatible. Users can build their appliances with both versions and the
-same appliance description. If the appliance description uses features
-KIWI NG does not provide, the build will fail with an
-exception early. If the appliance description uses next generation
-features like the selection of the initrd system, it’s not possible to
-build that with the KIWI Legacy, unless the appliance description
-properly encapsulates the differences into a profile.</p>
-<p>KIWI NG also provides the <code class="xref py py-obj docutils literal notranslate"><span class="pre">--compat</span></code> option and
-the <strong class="command">kiwicompat</strong> tool to be able to use the same commandline
-as provided with the KIWI Legacy version.</p>
+<p>Pulling in all <code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-systemdeps</span></code> packages can result in quite
+some packages to become installed on the host. This is because
+the required packages itself comes with a number of dependencies
+like java for jing as one example.</p>
 </div>
 </div>
 
@@ -879,8 +837,8 @@ as provided with the KIWI Legacy version.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../image_description.html" class="btn btn-neutral float-right" title="Image Description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="customize_the_boot_process.html" class="btn btn-neutral float-left" title="Customizing the Boot Process" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="repository_setup.html" class="btn btn-neutral float-right" title="Setting up Repositories" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../concept_and_workflow.html" class="btn btn-neutral float-left" title="Concept and Workflow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

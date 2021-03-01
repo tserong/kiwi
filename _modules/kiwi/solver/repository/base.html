@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.solver.repository.base &mdash; KIWI NG 9.23.16 documentation</title>
+  <title>kiwi.solver.repository.base &mdash; KIWI NG 9.23.17 documentation</title>
   
 
   
@@ -169,12 +169,19 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../troubleshooting/filesystems.html">Incompatible Filesystem Settings on Host vs. Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../troubleshooting.html#build-host-constraints">Build Host Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../troubleshooting.html#architectures">Architectures</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../self_contained.html">Building in a Self-Contained Environment</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../../self_contained.html#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../self_contained.html#building-with-the-boxbuild-command">Building with the boxbuild command</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../concept_and_workflow.html">Concept and Workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concept_and_workflow/systemdeps.html">Host Requirements To Build Images</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../concept_and_workflow/repository_setup.html">Setting up Repositories</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../../concept_and_workflow/repository_setup.html#adding-repositories">Adding repositories</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../../concept_and_workflow/repository_setup.html#supported-repository-paths">Supported repository paths</a></li>
@@ -209,12 +216,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../../concept_and_workflow/customize_the_boot_process.html#boot-debugging">Boot Debugging</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../concept_and_workflow/legacy_kiwi.html">Legacy KIWI vs. KIWI Next Generation (KIWI NG)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../concept_and_workflow/legacy_kiwi.html#when-do-i-need-to-use-kiwi-legacy">When Do I need to use KIWI Legacy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../concept_and_workflow/legacy_kiwi.html#dropped-features">Dropped Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../concept_and_workflow/legacy_kiwi.html#compatibility">Compatibility</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../concept_and_workflow.html#overview">Overview</a></li>
@@ -278,8 +279,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../image_types_and_results.html">Image Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../../image_types_and_results.html#image-results">Image Results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../image_types_and_results.html#build-host-constraints">Build Host Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../image_types_and_results.html#architectures">Architectures</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../building_images.html">Building Images for Supported Types</a><ul>
@@ -323,38 +322,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_ec2.html">Image Description for Amazon EC2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_azure.html">Image Description for Microsoft Azure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_google.html">Image Description for Google Compute Engine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/setup_yast_on_first_boot.html">Setting Up YaST at First Boot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_vagrant.html">Image Description for Vagrant</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_vagrant.html#customizing-the-embedded-vagrantfile">Customizing the embedded Vagrantfile</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/network_live_iso_boot.html">Booting a Live ISO Image from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_ramdisk_deployment.html">Deploy and Run System in a RamDisk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/custom_partitions.html">Custom Disk Partitions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/custom_partitions.html#custom-partitioning-at-boot-time">Custom Partitioning at Boot Time</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/custom_volumes.html">Custom Disk Volumes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/custom_fstab_extension.html">Add or Update the Fstab File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/build_with_profiles.html">Building Images with Profiles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_with_profiles.html#local-builds">Local Builds</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_with_profiles.html#building-with-the-open-build-service">Building with the Open Build Service</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html">Building in the Open Build Service</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#advantages-of-using-the-open-build-service-obs">Advantages of using the Open Build Service (OBS)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#differences-between-building-locally-and-on-obs">Differences Between Building Locally and on OBS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#recommendations">Recommendations</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#working-with-obs">Working with OBS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#repository-configuration">Repository Configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#project-configuration">Project Configuration</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/legacy_netboot_root_filesystem.html">Build PXE Root File System Image for the legacy netboot infrastructure</a><ul>
@@ -374,6 +354,26 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/network_overlay_boot.html">Booting a Root Filesystem from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/network_live_iso_boot.html">Booting a Live ISO Image from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/setup_yast_on_first_boot.html">Setting Up YaST at First Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/custom_fstab_extension.html">Add or Update the Fstab File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/build_with_profiles.html">Building Images with Profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_with_profiles.html#local-builds">Local Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_with_profiles.html#building-with-the-open-build-service">Building with the Open Build Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html">Building in the Open Build Service</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#advantages-of-using-the-open-build-service-obs">Advantages of using the Open Build Service (OBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#differences-between-building-locally-and-on-obs">Differences Between Building Locally and on OBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#working-with-obs">Working with OBS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#repository-configuration">Repository Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#project-configuration">Project Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/use_suse_media.html">Using SUSE Product ISO To Build</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html">Contributing</a><ul>
@@ -880,7 +880,7 @@
             <span class="k">pass</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_deb_packages</span><span class="p">():</span>
-                <span class="k">return</span> <span class="s1">&#39;deb&#39;</span>
+                <span class="k">return</span> <span class="s1">&#39;apt-deb&#39;</span>
         <span class="k">except</span> <span class="n">KiwiUriOpenError</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="k">try</span><span class="p">:</span>
@@ -907,19 +907,31 @@
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dir_listing_download</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">as</span> <span class="n">listing</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">listing</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_get_deb_packages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_get_deb_packages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">download_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Download Packages file from an apt repository</span>
+<span class="sd">        Download Packages.gz file from an apt repository and</span>
+<span class="sd">        return its contents. If download_dir is set, download</span>
+<span class="sd">        the file and return the file path name</span>
 
-<span class="sd">        :return: Contents of Packages file</span>
+<span class="sd">        :param str download_dir: Download directory</span>
+
+<span class="sd">        :return: Contents of Packages file or file path name</span>
 
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">packages_download</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">download_from_repository</span><span class="p">(</span><span class="s1">&#39;Packages&#39;</span><span class="p">,</span> <span class="n">packages_download</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">packages_download</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">packages_download</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">as</span> <span class="n">packages</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">packages</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">repo_source</span> <span class="o">=</span> <span class="s1">&#39;Packages.gz&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">download_dir</span><span class="p">:</span>
+            <span class="n">packages_download</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">download_from_repository</span><span class="p">(</span><span class="n">repo_source</span><span class="p">,</span> <span class="n">packages_download</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">packages_download</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">packages_download</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">as</span> <span class="n">packages</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">packages</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">packages_download</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">download_dir</span><span class="p">,</span> <span class="n">repo_source</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)]</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">download_from_repository</span><span class="p">(</span><span class="n">repo_source</span><span class="p">,</span> <span class="n">packages_download</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">packages_download</span>
 
     <span class="k">def</span> <span class="nf">_get_repomd_xml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lookup_path</span><span class="o">=</span><span class="s1">&#39;repodata&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -991,6 +1003,9 @@
 <span class="sd">        * rpms2solv</span>
 <span class="sd">          solvable from rpm header files</span>
 
+<span class="sd">        * deb2solv</span>
+<span class="sd">          solvable from deb header files</span>
+
 <span class="sd">        :param str metadata_dir: path name</span>
 <span class="sd">        :param str tool: one of the above tools</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1007,9 +1022,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># each file in the metadata_dir is considered a valid</span>
             <span class="c1"># solvable for the selected solv tool</span>
+            <span class="n">tool_options</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="n">tool</span> <span class="o">==</span> <span class="s1">&#39;deb2solv&#39;</span><span class="p">:</span>
+                <span class="n">tool_options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-r&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">source</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">iglob</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">metadata_dir</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">])):</span>
                 <span class="n">bash_command</span> <span class="o">=</span> <span class="p">[</span>
-                    <span class="s1">&#39;gzip&#39;</span><span class="p">,</span> <span class="s1">&#39;-cd&#39;</span><span class="p">,</span> <span class="s1">&#39;--force&#39;</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">tool</span><span class="p">,</span>
+                    <span class="s1">&#39;gzip&#39;</span><span class="p">,</span> <span class="s1">&#39;-cd&#39;</span><span class="p">,</span> <span class="s1">&#39;--force&#39;</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">tool</span>
+                <span class="p">]</span> <span class="o">+</span> <span class="n">tool_options</span> <span class="o">+</span> <span class="p">[</span>
                     <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_random_solvable_name</span><span class="p">()</span>
                 <span class="p">]</span>
                 <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bash_command</span><span class="p">)])</span>

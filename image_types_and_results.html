@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Image Types &mdash; KIWI NG 9.23.16 documentation</title>
+  <title>Image Types &mdash; KIWI NG 9.23.17 documentation</title>
   
 
   
@@ -171,12 +171,19 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/filesystems.html">Incompatible Filesystem Settings on Host vs. Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#build-host-constraints">Build Host Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#architectures">Architectures</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="self_contained.html">Building in a Self-Contained Environment</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="self_contained.html#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="self_contained.html#building-with-the-boxbuild-command">Building with the boxbuild command</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="concept_and_workflow.html">Concept and Workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concept_and_workflow/systemdeps.html">Host Requirements To Build Images</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concept_and_workflow/repository_setup.html">Setting up Repositories</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="concept_and_workflow/repository_setup.html#adding-repositories">Adding repositories</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="concept_and_workflow/repository_setup.html#supported-repository-paths">Supported repository paths</a></li>
@@ -211,12 +218,6 @@
 <li class="toctree-l4"><a class="reference internal" href="concept_and_workflow/customize_the_boot_process.html#boot-debugging">Boot Debugging</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="concept_and_workflow/legacy_kiwi.html">Legacy KIWI vs. KIWI Next Generation (KIWI NG)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="concept_and_workflow/legacy_kiwi.html#when-do-i-need-to-use-kiwi-legacy">When Do I need to use KIWI Legacy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="concept_and_workflow/legacy_kiwi.html#dropped-features">Dropped Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="concept_and_workflow/legacy_kiwi.html#compatibility">Compatibility</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="concept_and_workflow.html#overview">Overview</a></li>
@@ -280,8 +281,6 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Image Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#image-results">Image Results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#build-host-constraints">Build Host Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#architectures">Architectures</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="building_images.html">Building Images for Supported Types</a><ul>
@@ -325,38 +324,19 @@
 <li class="toctree-l2"><a class="reference internal" href="working_with_images/disk_setup_for_ec2.html">Image Description for Amazon EC2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="working_with_images/disk_setup_for_azure.html">Image Description for Microsoft Azure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="working_with_images/disk_setup_for_google.html">Image Description for Google Compute Engine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="working_with_images/setup_yast_on_first_boot.html">Setting Up YaST at First Boot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="working_with_images/disk_setup_for_vagrant.html">Image Description for Vagrant</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="working_with_images/disk_setup_for_vagrant.html#customizing-the-embedded-vagrantfile">Customizing the embedded Vagrantfile</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="working_with_images/network_live_iso_boot.html">Booting a Live ISO Image from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="working_with_images/disk_ramdisk_deployment.html">Deploy and Run System in a RamDisk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="working_with_images/custom_partitions.html">Custom Disk Partitions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="working_with_images/custom_partitions.html#custom-partitioning-at-boot-time">Custom Partitioning at Boot Time</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="working_with_images/custom_volumes.html">Custom Disk Volumes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="working_with_images/custom_fstab_extension.html">Add or Update the Fstab File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="working_with_images/build_with_profiles.html">Building Images with Profiles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="working_with_images/build_with_profiles.html#local-builds">Local Builds</a></li>
-<li class="toctree-l3"><a class="reference internal" href="working_with_images/build_with_profiles.html#building-with-the-open-build-service">Building with the Open Build Service</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="working_with_images/build_in_buildservice.html">Building in the Open Build Service</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="working_with_images/build_in_buildservice.html#advantages-of-using-the-open-build-service-obs">Advantages of using the Open Build Service (OBS)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="working_with_images/build_in_buildservice.html#differences-between-building-locally-and-on-obs">Differences Between Building Locally and on OBS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="working_with_images/build_in_buildservice.html#recommendations">Recommendations</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="working_with_images/build_in_buildservice.html#working-with-obs">Working with OBS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="working_with_images/build_in_buildservice.html#repository-configuration">Repository Configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="working_with_images/build_in_buildservice.html#project-configuration">Project Configuration</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="working_with_images/legacy_netboot_root_filesystem.html">Build PXE Root File System Image for the legacy netboot infrastructure</a><ul>
@@ -376,6 +356,26 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="working_with_images/network_overlay_boot.html">Booting a Root Filesystem from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_images/network_live_iso_boot.html">Booting a Live ISO Image from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_images/setup_yast_on_first_boot.html">Setting Up YaST at First Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_images/custom_fstab_extension.html">Add or Update the Fstab File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_images/build_with_profiles.html">Building Images with Profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="working_with_images/build_with_profiles.html#local-builds">Local Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_images/build_with_profiles.html#building-with-the-open-build-service">Building with the Open Build Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_images/build_in_buildservice.html">Building in the Open Build Service</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="working_with_images/build_in_buildservice.html#advantages-of-using-the-open-build-service-obs">Advantages of using the Open Build Service (OBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_images/build_in_buildservice.html#differences-between-building-locally-and-on-obs">Differences Between Building Locally and on OBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="working_with_images/build_in_buildservice.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="working_with_images/build_in_buildservice.html#working-with-obs">Working with OBS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working_with_images/build_in_buildservice.html#repository-configuration">Repository Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="working_with_images/build_in_buildservice.html#project-configuration">Project Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="working_with_images/use_suse_media.html">Using SUSE Product ISO To Build</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
@@ -898,80 +898,6 @@ details about the kis archive:</p>
 </ul>
 </dd>
 </dl>
-</div>
-<div class="section" id="build-host-constraints">
-<span id="supported-distributions"></span><h2>Build Host Constraints<a class="headerlink" href="#build-host-constraints" title="Permalink to this headline">¶</a></h2>
-<p>For building images a host system is required that runs the build process.
-Tools to create the image are used from that host and this creates an
-indirect dependency to the target image. For example; Building an
-Ubuntu image requires the apt and dpkg tools and metadata to be available
-and functional on the host to build an Ubuntu image. There are many more
-of those host vs. image dependencies and not all of them can be resolved
-in a clear and clean way.</p>
-<p>The most compatible environment is provided if the build host is of the same
-distribution than the target image. This always applies for the Open Build
-Service (OBS). In other cases our recommendation is that the build host
-is of the same distribution than the target and near to the major
-version (+-1) compared to the target.</p>
-<p>In general, our goal is to support any major distribution with KIWI NG. However
-for building images we rely on core tools which are not under our control.
-Also several design aspects of distributions like <strong>secure boot</strong> and working
-with <strong>upstream projects</strong> are different and not influenced by us. There
-are many side effects that can be annoying especially if the build host
-is not of the same distribution vendor than the image target.</p>
-</div>
-<div class="section" id="architectures">
-<h2>Architectures<a class="headerlink" href="#architectures" title="Permalink to this headline">¶</a></h2>
-<p>As described in the section above one requirement between the build host
-and the image when it comes to architecture support is, that the image
-architecture should match the build host architecture. Cross arch building
-would require any core tool that is used to build an image to be cross
-arch capable. To patch e.g an x86_64 system such that it can build an
-aarch64 image would require some work on binutils and hacks as well as
-performance tweaks which is all not worth the effort and still can lead
-to broken results. Thus we recommend to provide native systems for the
-target architecture and build there. One possible alternative is to
-use the kiwi boxed plugin as documented here: <a class="reference internal" href="self_contained.html#self-contained"><span class="std std-ref">Building in a Self-Contained Environment</span></a>
-together with a box created for the desired architecture. However keep
-in mind the performance problematic when running a VM of a different
-architecture.</p>
-<p>The majority of the image builds are based on the x86 architecture.
-As mentioned KIWI NG also supports other architectures, shown in the
-table below:</p>
-<table class="docutils align-left">
-<colgroup>
-<col style="width: 40%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Architecture</p></th>
-<th class="head"><p>Supported</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>x86_64</p></td>
-<td><p>yes</p></td>
-</tr>
-<tr class="row-odd"><td><p>ix86</p></td>
-<td><p>yes <strong>note:distro</strong></p></td>
-</tr>
-<tr class="row-even"><td><p>s390/s390x</p></td>
-<td><p>yes <strong>note:distro</strong></p></td>
-</tr>
-<tr class="row-odd"><td><p>arm/aarch64</p></td>
-<td><p>yes <strong>note:distro</strong></p></td>
-</tr>
-<tr class="row-even"><td><p>ppc64</p></td>
-<td><p>no (alpha-phase)</p></td>
-</tr>
-</tbody>
-</table>
-<div class="admonition-distro admonition">
-<p class="admonition-title">distro</p>
-<p>The support status for an architecture depends on the distribution.
-If the distribution does not build its packages for the desired
-architecture, KIWI NG will not be able to build an image for it</p>
-</div>
 </div>
 </div>
 

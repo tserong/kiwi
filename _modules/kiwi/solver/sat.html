@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.solver.sat &mdash; KIWI NG 9.23.16 documentation</title>
+  <title>kiwi.solver.sat &mdash; KIWI NG 9.23.17 documentation</title>
   
 
   
@@ -169,12 +169,19 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../troubleshooting/filesystems.html">Incompatible Filesystem Settings on Host vs. Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../troubleshooting.html#build-host-constraints">Build Host Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../troubleshooting.html#architectures">Architectures</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../self_contained.html">Building in a Self-Contained Environment</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../self_contained.html#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../self_contained.html#building-with-the-boxbuild-command">Building with the boxbuild command</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../concept_and_workflow.html">Concept and Workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../concept_and_workflow/systemdeps.html">Host Requirements To Build Images</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../concept_and_workflow/repository_setup.html">Setting up Repositories</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../concept_and_workflow/repository_setup.html#adding-repositories">Adding repositories</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../concept_and_workflow/repository_setup.html#supported-repository-paths">Supported repository paths</a></li>
@@ -209,12 +216,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../concept_and_workflow/customize_the_boot_process.html#boot-debugging">Boot Debugging</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../concept_and_workflow/legacy_kiwi.html">Legacy KIWI vs. KIWI Next Generation (KIWI NG)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../concept_and_workflow/legacy_kiwi.html#when-do-i-need-to-use-kiwi-legacy">When Do I need to use KIWI Legacy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../concept_and_workflow/legacy_kiwi.html#dropped-features">Dropped Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../concept_and_workflow/legacy_kiwi.html#compatibility">Compatibility</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../concept_and_workflow.html#overview">Overview</a></li>
@@ -278,8 +279,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../image_types_and_results.html">Image Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../image_types_and_results.html#image-results">Image Results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../image_types_and_results.html#build-host-constraints">Build Host Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../image_types_and_results.html#architectures">Architectures</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../building_images.html">Building Images for Supported Types</a><ul>
@@ -323,38 +322,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_setup_for_ec2.html">Image Description for Amazon EC2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_setup_for_azure.html">Image Description for Microsoft Azure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_setup_for_google.html">Image Description for Google Compute Engine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/setup_yast_on_first_boot.html">Setting Up YaST at First Boot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_setup_for_vagrant.html">Image Description for Vagrant</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/disk_setup_for_vagrant.html#customizing-the-embedded-vagrantfile">Customizing the embedded Vagrantfile</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/network_live_iso_boot.html">Booting a Live ISO Image from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_ramdisk_deployment.html">Deploy and Run System in a RamDisk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/custom_partitions.html">Custom Disk Partitions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/custom_partitions.html#custom-partitioning-at-boot-time">Custom Partitioning at Boot Time</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/custom_volumes.html">Custom Disk Volumes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/custom_fstab_extension.html">Add or Update the Fstab File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/build_with_profiles.html">Building Images with Profiles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/build_with_profiles.html#local-builds">Local Builds</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/build_with_profiles.html#building-with-the-open-build-service">Building with the Open Build Service</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html">Building in the Open Build Service</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html#advantages-of-using-the-open-build-service-obs">Advantages of using the Open Build Service (OBS)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html#differences-between-building-locally-and-on-obs">Differences Between Building Locally and on OBS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html#recommendations">Recommendations</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html#working-with-obs">Working with OBS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html#repository-configuration">Repository Configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html#project-configuration">Project Configuration</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/legacy_netboot_root_filesystem.html">Build PXE Root File System Image for the legacy netboot infrastructure</a><ul>
@@ -374,6 +354,26 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/network_overlay_boot.html">Booting a Root Filesystem from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/network_live_iso_boot.html">Booting a Live ISO Image from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/setup_yast_on_first_boot.html">Setting Up YaST at First Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/custom_fstab_extension.html">Add or Update the Fstab File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/build_with_profiles.html">Building Images with Profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/build_with_profiles.html#local-builds">Local Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/build_with_profiles.html#building-with-the-open-build-service">Building with the Open Build Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html">Building in the Open Build Service</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html#advantages-of-using-the-open-build-service-obs">Advantages of using the Open Build Service (OBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html#differences-between-building-locally-and-on-obs">Differences Between Building Locally and on OBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html#working-with-obs">Working with OBS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html#repository-configuration">Repository Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../working_with_images/build_in_buildservice.html#project-configuration">Project Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/use_suse_media.html">Using SUSE Product ISO To Build</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a><ul>
@@ -744,6 +744,7 @@
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="kn">import</span> <span class="n">ElementTree</span>
 <span class="kn">from</span> <span class="nn">xml.dom</span> <span class="kn">import</span> <span class="n">minidom</span>
@@ -782,6 +783,26 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solv</span><span class="o">.</span><span class="n">Pool</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">setarch</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Sat.set_dist_type"><a class="viewcode-back" href="../../../api/kiwi.solver.html#kiwi.solver.sat.Sat.set_dist_type">[docs]</a>    <span class="k">def</span> <span class="nf">set_dist_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">arch</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">arch</span><span class="p">:</span>
+            <span class="n">arch</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">machine</span><span class="p">()</span>
+        <span class="n">dist_types</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;deb-x86_64&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;pool_dist&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">solv</span><span class="o">.</span><span class="n">Pool</span><span class="o">.</span><span class="n">DISTTYPE_DEB</span><span class="p">,</span>
+                <span class="s1">&#39;arch&#39;</span><span class="p">:</span> <span class="s1">&#39;amd64&#39;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">dist_type</span> <span class="o">=</span> <span class="n">dist_types</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">dist</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">arch</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dist_type</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">setdisttype</span><span class="p">(</span><span class="n">dist_type</span><span class="p">[</span><span class="s1">&#39;pool_dist&#39;</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">KiwiSatSolverPluginError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s1">&#39;Failed to set dist type for distribution: </span><span class="si">{</span><span class="n">dist</span><span class="si">!r}</span><span class="s1">&#39;</span>
+                <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">setarch</span><span class="p">(</span>
+            <span class="n">dist_type</span><span class="p">[</span><span class="s1">&#39;arch&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">dist_type</span> <span class="k">else</span> <span class="n">arch</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">dist_type</span></div>
 
 <div class="viewcode-block" id="Sat.add_repository"><a class="viewcode-back" href="../../../api/kiwi.solver.html#kiwi.solver.sat.Sat.add_repository">[docs]</a>    <span class="k">def</span> <span class="nf">add_repository</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">solver_repository</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -882,7 +903,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Iterate over solver result and return a data dictionary</span>
 
-<span class="sd">        :param object solver_transaction: result of :class:`Pool::Solver::transaction()`</span>
+<span class="sd">        :param object solver_transaction:</span>
+<span class="sd">            result of :class:`Pool::Solver::transaction()`</span>
 
 <span class="sd">        :return: dict of packages and their details</span>
 
@@ -926,6 +948,18 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">jobs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">job_name</span> <span class="ow">in</span> <span class="n">job_names</span><span class="p">:</span>
+            <span class="c1"># There is a special handling for apt-get. In kiwi the</span>
+            <span class="c1"># package manager for debian based distros is selected</span>
+            <span class="c1"># by the name apt-get. That name is added to the package</span>
+            <span class="c1"># list, but apt-get does not really exist in Debian based</span>
+            <span class="c1"># distros. The name of the package manager from a packaging</span>
+            <span class="c1"># perspective is just: apt not apt-get. We should change</span>
+            <span class="c1"># this in the schema and code in kiwi. But so far we</span>
+            <span class="c1"># have the hack here. The reason why we don&#39;t see an issue</span>
+            <span class="c1"># by this when building debian based images is because</span>
+            <span class="c1"># the bootstrap phase is handled by debootstrap</span>
+            <span class="k">if</span> <span class="n">job_name</span> <span class="o">==</span> <span class="s1">&#39;apt-get&#39;</span><span class="p">:</span>
+                <span class="n">job_name</span> <span class="o">=</span> <span class="s1">&#39;apt&#39;</span>
             <span class="n">selection_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solv</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">SELECTION_NAME</span>
             <span class="n">selection_provides</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solv</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">SELECTION_PROVIDES</span>
             <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>

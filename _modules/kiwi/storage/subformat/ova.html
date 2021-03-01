@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.storage.subformat.ova &mdash; KIWI NG 9.23.16 documentation</title>
+  <title>kiwi.storage.subformat.ova &mdash; KIWI NG 9.23.17 documentation</title>
   
 
   
@@ -169,12 +169,19 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../troubleshooting/filesystems.html">Incompatible Filesystem Settings on Host vs. Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../troubleshooting.html#build-host-constraints">Build Host Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../troubleshooting.html#architectures">Architectures</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../self_contained.html">Building in a Self-Contained Environment</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../../self_contained.html#requirements">Requirements</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../self_contained.html#building-with-the-boxbuild-command">Building with the boxbuild command</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../concept_and_workflow.html">Concept and Workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../concept_and_workflow/systemdeps.html">Host Requirements To Build Images</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../concept_and_workflow/repository_setup.html">Setting up Repositories</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../../concept_and_workflow/repository_setup.html#adding-repositories">Adding repositories</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../../concept_and_workflow/repository_setup.html#supported-repository-paths">Supported repository paths</a></li>
@@ -209,12 +216,6 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../../concept_and_workflow/customize_the_boot_process.html#boot-debugging">Boot Debugging</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../concept_and_workflow/legacy_kiwi.html">Legacy KIWI vs. KIWI Next Generation (KIWI NG)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../concept_and_workflow/legacy_kiwi.html#when-do-i-need-to-use-kiwi-legacy">When Do I need to use KIWI Legacy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../concept_and_workflow/legacy_kiwi.html#dropped-features">Dropped Features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../concept_and_workflow/legacy_kiwi.html#compatibility">Compatibility</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../concept_and_workflow.html#overview">Overview</a></li>
@@ -278,8 +279,6 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../image_types_and_results.html">Image Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../../image_types_and_results.html#image-results">Image Results</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../image_types_and_results.html#build-host-constraints">Build Host Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../image_types_and_results.html#architectures">Architectures</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../building_images.html">Building Images for Supported Types</a><ul>
@@ -323,38 +322,19 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_ec2.html">Image Description for Amazon EC2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_azure.html">Image Description for Microsoft Azure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_google.html">Image Description for Google Compute Engine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/setup_yast_on_first_boot.html">Setting Up YaST at First Boot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_vagrant.html">Image Description for Vagrant</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_vagrant.html#customizing-the-embedded-vagrantfile">Customizing the embedded Vagrantfile</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/network_live_iso_boot.html">Booting a Live ISO Image from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_ramdisk_deployment.html">Deploy and Run System in a RamDisk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/custom_partitions.html">Custom Disk Partitions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/custom_partitions.html#custom-partitioning-at-boot-time">Custom Partitioning at Boot Time</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/custom_volumes.html">Custom Disk Volumes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/custom_fstab_extension.html">Add or Update the Fstab File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/build_with_profiles.html">Building Images with Profiles</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_with_profiles.html#local-builds">Local Builds</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_with_profiles.html#building-with-the-open-build-service">Building with the Open Build Service</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html">Building in the Open Build Service</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#advantages-of-using-the-open-build-service-obs">Advantages of using the Open Build Service (OBS)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#differences-between-building-locally-and-on-obs">Differences Between Building Locally and on OBS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#recommendations">Recommendations</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#working-with-obs">Working with OBS</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#repository-configuration">Repository Configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#project-configuration">Project Configuration</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/legacy_netboot_root_filesystem.html">Build PXE Root File System Image for the legacy netboot infrastructure</a><ul>
@@ -374,6 +354,26 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/network_overlay_boot.html">Booting a Root Filesystem from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/network_live_iso_boot.html">Booting a Live ISO Image from Network</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/setup_yast_on_first_boot.html">Setting Up YaST at First Boot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/custom_fstab_extension.html">Add or Update the Fstab File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/build_with_profiles.html">Building Images with Profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_with_profiles.html#local-builds">Local Builds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_with_profiles.html#building-with-the-open-build-service">Building with the Open Build Service</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html">Building in the Open Build Service</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#advantages-of-using-the-open-build-service-obs">Advantages of using the Open Build Service (OBS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#differences-between-building-locally-and-on-obs">Differences Between Building Locally and on OBS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#recommendations">Recommendations</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#working-with-obs">Working with OBS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#repository-configuration">Repository Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../working_with_images/build_in_buildservice.html#project-configuration">Project Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/use_suse_media.html">Using SUSE Product ISO To Build</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html">Contributing</a><ul>
@@ -754,6 +754,7 @@
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.command_capabilities</span> <span class="kn">import</span> <span class="n">CommandCapabilities</span>
 <span class="kn">from</span> <span class="nn">kiwi.path</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">kiwi.system.result</span> <span class="kn">import</span> <span class="n">Result</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">KiwiFormatSetupError</span><span class="p">,</span>
@@ -765,7 +766,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Create ova disk format, based on vmdk**</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="DiskFormatOva.post_init"><a class="viewcode-back" href="../../../../api/kiwi.storage.subformat.html#kiwi.storage.subformat.ova.DiskFormatOva.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">):</span>
+<div class="viewcode-block" id="DiskFormatOva.post_init"><a class="viewcode-back" href="../../../../api/kiwi.storage.subformat.html#kiwi.storage.subformat.ova.DiskFormatOva.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        vmdk disk format post initialization method</span>
 
@@ -782,7 +783,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span><span class="p">,</span> <span class="n">custom_args</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="DiskFormatOva.create_image_format"><a class="viewcode-back" href="../../../../api/kiwi.storage.subformat.html#kiwi.storage.subformat.ova.DiskFormatOva.create_image_format">[docs]</a>    <span class="k">def</span> <span class="nf">create_image_format</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DiskFormatOva.create_image_format"><a class="viewcode-back" href="../../../../api/kiwi.storage.subformat.html#kiwi.storage.subformat.ova.DiskFormatOva.create_image_format">[docs]</a>    <span class="k">def</span> <span class="nf">create_image_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create ova disk format using ovftool from</span>
 <span class="sd">        https://www.vmware.com/support/developer/ovf</span>
@@ -826,7 +827,7 @@
         <span class="n">st</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">vmx</span><span class="p">)</span>
         <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">ova</span><span class="p">,</span> <span class="n">stat</span><span class="o">.</span><span class="n">S_IMODE</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">st_mode</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="DiskFormatOva.store_to_result"><a class="viewcode-back" href="../../../../api/kiwi.storage.subformat.html#kiwi.storage.subformat.ova.DiskFormatOva.store_to_result">[docs]</a>    <span class="k">def</span> <span class="nf">store_to_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+<div class="viewcode-block" id="DiskFormatOva.store_to_result"><a class="viewcode-back" href="../../../../api/kiwi.storage.subformat.html#kiwi.storage.subformat.ova.DiskFormatOva.store_to_result">[docs]</a>    <span class="k">def</span> <span class="nf">store_to_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Result</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Store the resulting ova file into the provided result instance.</span>
 
