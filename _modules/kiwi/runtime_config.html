@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.runtime_config &mdash; KIWI NG 9.23.19 documentation</title>
+  <title>kiwi.runtime_config &mdash; KIWI NG 9.23.20 documentation</title>
   
 
   
@@ -747,7 +747,8 @@
 <span class="kn">import</span> <span class="nn">yaml</span>
 
 <span class="c1"># project</span>
-<span class="kn">from</span> <span class="nn">kiwi.cli</span> <span class="kn">import</span> <span class="n">Cli</span>
+<span class="kn">import</span> <span class="nn">kiwi.defaults</span> <span class="k">as</span> <span class="nn">defaults</span>
+
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.size</span> <span class="kn">import</span> <span class="n">StringToSize</span>
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
@@ -778,9 +779,8 @@
         <span class="k">global</span> <span class="n">RUNTIME_CONFIG</span>
 
         <span class="k">if</span> <span class="n">RUNTIME_CONFIG</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">reread</span><span class="p">:</span>
-            <span class="n">cli</span> <span class="o">=</span> <span class="n">Cli</span><span class="p">()</span>
             <span class="n">config_file</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="n">custom_config_file</span> <span class="o">=</span> <span class="n">cli</span><span class="o">.</span><span class="n">get_global_args</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;--config&#39;</span><span class="p">)</span>
+            <span class="n">custom_config_file</span> <span class="o">=</span> <span class="n">defaults</span><span class="o">.</span><span class="n">CUSTOM_RUNTIME_CONFIG_FILE</span>
 
             <span class="k">if</span> <span class="n">custom_config_file</span><span class="p">:</span>
                 <span class="n">config_file</span> <span class="o">=</span> <span class="n">custom_config_file</span>

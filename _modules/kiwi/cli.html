@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.cli &mdash; KIWI NG 9.23.19 documentation</title>
+  <title>kiwi.cli &mdash; KIWI NG 9.23.20 documentation</title>
   
 
   
@@ -945,6 +945,8 @@
                     <span class="n">value</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_shared_cache_location</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;--shared-cache-dir&#39;</span> <span class="ow">and</span> <span class="n">value</span><span class="p">:</span>
                     <span class="n">Defaults</span><span class="o">.</span><span class="n">set_shared_cache_location</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;--config&#39;</span> <span class="ow">and</span> <span class="n">value</span><span class="p">:</span>
+                    <span class="n">Defaults</span><span class="o">.</span><span class="n">set_custom_runtime_config_file</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
                 <span class="n">result</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="k">return</span> <span class="n">result</span></div>
 

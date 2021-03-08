@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi Package &mdash; KIWI NG 9.23.19 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.23.20 documentation</title>
   
 
   
@@ -2607,6 +2607,17 @@ files and directories from the application</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="kiwi.defaults.Defaults.set_custom_runtime_config_file">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">set_custom_runtime_config_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/defaults.html#Defaults.set_custom_runtime_config_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.defaults.Defaults.set_custom_runtime_config_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the runtime config file once</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – a file path name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="kiwi.defaults.Defaults.set_shared_cache_location">
 <em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">set_shared_cache_location</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">location</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/defaults.html#Defaults.set_shared_cache_location"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.defaults.Defaults.set_shared_cache_location" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the shared cache location once</p>
@@ -2832,6 +2843,13 @@ could not be understood by the compat option parser.</p>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
 <p>Exception raised if the compression format of the data could
 not be detected.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="kiwi.exceptions.KiwiConfigFileFormatNotSupported">
+<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.exceptions.</span></code><code class="sig-name descname"><span class="pre">KiwiConfigFileFormatNotSupported</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/exceptions.html#KiwiConfigFileFormatNotSupported"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.exceptions.KiwiConfigFileFormatNotSupported" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
+<p>Exception raised if kiwi description file format is not supported.</p>
 </dd></dl>
 
 <dl class="py exception">

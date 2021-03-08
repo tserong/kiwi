@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.tasks.base &mdash; KIWI NG 9.23.19 documentation</title>
+  <title>kiwi.tasks.base &mdash; KIWI NG 9.23.20 documentation</title>
   
 
   
@@ -781,9 +781,6 @@
         <span class="c1"># initialize runtime checker</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runtime_checker</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="c1"># initialize runtime configuration</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span> <span class="o">=</span> <span class="n">RuntimeConfig</span><span class="p">()</span>
-
         <span class="c1"># help requested</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">show_and_exit_on_help_request</span><span class="p">()</span>
 
@@ -795,6 +792,9 @@
 
         <span class="c1"># get global args</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">global_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">get_global_args</span><span class="p">()</span>
+
+        <span class="c1"># initialize runtime configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span> <span class="o">=</span> <span class="n">RuntimeConfig</span><span class="p">()</span>
 
         <span class="c1"># initialize generic runtime check dicts</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checks_before_command_args</span> <span class="o">=</span> <span class="p">{</span>

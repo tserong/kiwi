@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.19 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.20 documentation</title>
   
 
   
@@ -1843,6 +1843,7 @@
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">bootloader</span><span class="o">.</span><span class="n">install_required</span><span class="p">():</span>
                 <span class="n">bootloader</span><span class="o">.</span><span class="n">install</span><span class="p">()</span>
+            <span class="n">bootloader</span><span class="o">.</span><span class="n">secure_boot_install</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">system_setup</span><span class="o">.</span><span class="n">call_edit_boot_install_script</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">diskname</span><span class="p">,</span> <span class="n">boot_device</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>

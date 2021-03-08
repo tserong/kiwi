@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.install.grub2 &mdash; KIWI NG 9.23.19 documentation</title>
+  <title>kiwi.bootloader.install.grub2 &mdash; KIWI NG 9.23.20 documentation</title>
   
 
   
@@ -848,7 +848,7 @@
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="BootLoaderInstallGrub2.install"><a class="viewcode-back" href="../../../../api/kiwi.bootloader.install.html#kiwi.bootloader.install.grub2.BootLoaderInstallGrub2.install">[docs]</a>    <span class="k">def</span> <span class="nf">install</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># noqa: C901</span>
+<div class="viewcode-block" id="BootLoaderInstallGrub2.install"><a class="viewcode-back" href="../../../../api/kiwi.bootloader.install.html#kiwi.bootloader.install.grub2.BootLoaderInstallGrub2.install">[docs]</a>    <span class="k">def</span> <span class="nf">install</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Install bootloader on disk device</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -886,61 +886,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">arch</span>
             <span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
-            <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;root_device&#39;</span><span class="p">]</span>
-        <span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;s390&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
-                <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;boot_device&#39;</span><span class="p">],</span>
-                <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/boot/zipl&#39;</span>
-            <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
-                <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;boot_device&#39;</span><span class="p">],</span>
-                <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/boot&#39;</span>
-            <span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;efi_device&#39;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">efi_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
-                <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;efi_device&#39;</span><span class="p">],</span>
-                <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/boot/efi&#39;</span>
-            <span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mount</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">device</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span><span class="o">.</span><span class="n">device</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span><span class="o">.</span><span class="n">mount</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">efi_mount</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">efi_mount</span><span class="o">.</span><span class="n">mount</span><span class="p">()</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">volume_path</span> <span class="ow">in</span> <span class="n">Path</span><span class="o">.</span><span class="n">sort_by_hierarchy</span><span class="p">(</span>
-                <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-            <span class="p">):</span>
-                <span class="n">volume_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
-                    <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">[</span><span class="n">volume_path</span><span class="p">][</span><span class="s1">&#39;volume_device&#39;</span><span class="p">],</span>
-                    <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">volume_path</span>
-                <span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">volumes_mount</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">volume_mount</span><span class="p">)</span>
-                <span class="n">volume_mount</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span>
-                    <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">[</span><span class="n">volume_path</span><span class="p">][</span><span class="s1">&#39;volume_options&#39;</span><span class="p">]]</span>
-                <span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">device_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
-            <span class="n">device</span><span class="o">=</span><span class="s1">&#39;/dev&#39;</span><span class="p">,</span>
-            <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/dev&#39;</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">proc_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
-            <span class="n">device</span><span class="o">=</span><span class="s1">&#39;/proc&#39;</span><span class="p">,</span>
-            <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/proc&#39;</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sysfs_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
-            <span class="n">device</span><span class="o">=</span><span class="s1">&#39;/sys&#39;</span><span class="p">,</span>
-            <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/sys&#39;</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">device_mount</span><span class="o">.</span><span class="n">bind_mount</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">proc_mount</span><span class="o">.</span><span class="n">bind_mount</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sysfs_mount</span><span class="o">.</span><span class="n">bind_mount</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mount_device_and_volumes</span><span class="p">()</span>
 
         <span class="c1"># check if a grub installation could be found in the image system</span>
         <span class="n">module_directory</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_grub_path</span><span class="p">(</span>
@@ -1015,9 +961,14 @@
                     <span class="s1">&#39;--modules&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">,</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">install_device</span>
                 <span class="p">]</span>
-            <span class="p">)</span>
+            <span class="p">)</span></div>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">efi_mode</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;uefi&#39;</span><span class="p">:</span>
+<div class="viewcode-block" id="BootLoaderInstallGrub2.secure_boot_install"><a class="viewcode-back" href="../../../../api/kiwi.bootloader.install.html#kiwi.bootloader.install.grub2.BootLoaderInstallGrub2.secure_boot_install">[docs]</a>    <span class="k">def</span> <span class="nf">secure_boot_install</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">efi_mode</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;uefi&#39;</span> <span class="ow">and</span> <span class="p">(</span>
+            <span class="n">Defaults</span><span class="o">.</span><span class="n">is_x86_arch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="s1">&#39;arm&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="o">==</span> <span class="s1">&#39;aarch64&#39;</span>     <span class="c1"># noqa: W503</span>
+        <span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_mount_device_and_volumes</span><span class="p">()</span>
             <span class="n">shim_install</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_shim_install_tool_name</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span>
             <span class="p">)</span>
@@ -1037,11 +988,70 @@
                     <span class="p">[</span>
                         <span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span>
                         <span class="s1">&#39;shim-install&#39;</span><span class="p">,</span> <span class="s1">&#39;--removable&#39;</span><span class="p">,</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">install_device</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">device</span>
                     <span class="p">]</span>
                 <span class="p">)</span>
                 <span class="c1"># restore the grub installer noop</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_enable_grub2_install</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_mount_device_and_volumes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;root_device&#39;</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mount</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;s390&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                    <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;boot_device&#39;</span><span class="p">],</span>
+                    <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/boot/zipl&#39;</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                    <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;boot_device&#39;</span><span class="p">],</span>
+                    <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/boot&#39;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">device</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span><span class="o">.</span><span class="n">device</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boot_mount</span><span class="o">.</span><span class="n">mount</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">efi_mount</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;efi_device&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">efi_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">[</span><span class="s1">&#39;efi_device&#39;</span><span class="p">],</span>
+                <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/boot/efi&#39;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">efi_mount</span><span class="o">.</span><span class="n">mount</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">volumes_mount</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">volume_path</span> <span class="ow">in</span> <span class="n">Path</span><span class="o">.</span><span class="n">sort_by_hierarchy</span><span class="p">(</span>
+                <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="p">):</span>
+                <span class="n">volume_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                    <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">[</span><span class="n">volume_path</span><span class="p">][</span><span class="s1">&#39;volume_device&#39;</span><span class="p">],</span>
+                    <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">volume_path</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">volumes_mount</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">volume_mount</span><span class="p">)</span>
+                <span class="n">volume_mount</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span>
+                    <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">[</span><span class="n">volume_path</span><span class="p">][</span><span class="s1">&#39;volume_options&#39;</span><span class="p">]]</span>
+                <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device_mount</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                <span class="n">device</span><span class="o">=</span><span class="s1">&#39;/dev&#39;</span><span class="p">,</span>
+                <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/dev&#39;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device_mount</span><span class="o">.</span><span class="n">bind_mount</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc_mount</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">proc_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                <span class="n">device</span><span class="o">=</span><span class="s1">&#39;/proc&#39;</span><span class="p">,</span>
+                <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/proc&#39;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">proc_mount</span><span class="o">.</span><span class="n">bind_mount</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sysfs_mount</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sysfs_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                <span class="n">device</span><span class="o">=</span><span class="s1">&#39;/sys&#39;</span><span class="p">,</span>
+                <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/sys&#39;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sysfs_mount</span><span class="o">.</span><span class="n">bind_mount</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_disable_grub2_install</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_path</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="n">root_path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">W_OK</span><span class="p">):</span>
