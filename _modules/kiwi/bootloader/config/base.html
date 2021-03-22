@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.config.base &mdash; KIWI NG 9.23.20 documentation</title>
+  <title>kiwi.bootloader.config.base &mdash; KIWI NG 9.23.21 documentation</title>
   
 
   
@@ -754,6 +754,7 @@
 <span class="kn">from</span> <span class="nn">kiwi.storage.setup</span> <span class="kn">import</span> <span class="n">DiskSetup</span>
 <span class="kn">from</span> <span class="nn">kiwi.path</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
+<span class="kn">from</span> <span class="nn">kiwi.utils.block</span> <span class="kn">import</span> <span class="n">BlockID</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">KiwiBootLoaderTargetError</span>
@@ -1278,6 +1279,7 @@
 
     <span class="k">def</span> <span class="nf">_get_root_cmdline_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uuid</span><span class="p">):</span>
         <span class="n">cmdline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_kernelcmdline</span><span class="p">()</span>
+        <span class="n">persistency_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_devicepersistency</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">cmdline</span> <span class="ow">and</span> <span class="s1">&#39;root=&#39;</span> <span class="ow">in</span> <span class="n">cmdline</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
                 <span class="s1">&#39;Kernel root device explicitly set via kernelcmdline&#39;</span>
@@ -1289,10 +1291,13 @@
         <span class="k">if</span> <span class="n">uuid</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_overlayroot</span><span class="p">():</span>
             <span class="k">return</span> <span class="s1">&#39;root=overlay:UUID=</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">uuid</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s1">&#39;root=UUID=</span><span class="si">{0}</span><span class="s1"> rw&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uuid</span><span class="p">)</span>
+            <span class="n">block_operation</span> <span class="o">=</span> <span class="n">BlockID</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;UUID=</span><span class="si">{</span><span class="n">uuid</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">blkid_type</span> <span class="o">=</span> <span class="s1">&#39;LABEL&#39;</span> <span class="k">if</span> <span class="n">persistency_type</span> <span class="o">==</span> <span class="s1">&#39;by-label&#39;</span> <span class="k">else</span> <span class="s1">&#39;UUID&#39;</span>
+            <span class="n">location</span> <span class="o">=</span> <span class="n">block_operation</span><span class="o">.</span><span class="n">get_blkid</span><span class="p">(</span><span class="n">blkid_type</span><span class="p">)</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;root=</span><span class="si">{</span><span class="n">blkid_type</span><span class="si">}</span><span class="s1">=</span><span class="si">{</span><span class="n">location</span><span class="si">}</span><span class="s1"> rw&#39;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                <span class="s1">&#39;root=UUID=&lt;uuid&gt; setup requested, but uuid is not provided&#39;</span>
+                <span class="s1">&#39;root setup based on UUID requested, but uuid is not provided&#39;</span>
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.repository.base &mdash; KIWI NG 9.23.20 documentation</title>
+  <title>kiwi.repository.base &mdash; KIWI NG 9.23.21 documentation</title>
   
 
   
@@ -745,6 +745,10 @@
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
 
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">kiwi.system.root_bind</span> <span class="kn">import</span> <span class="n">RootBind</span>
+
 
 <div class="viewcode-block" id="RepositoryBase"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase">[docs]</a><span class="k">class</span> <span class="nc">RepositoryBase</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -757,14 +761,15 @@
 <span class="sd">    :param str shared_location: shared directory between image root</span>
 <span class="sd">        and build system root</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_bind</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_bind</span><span class="p">:</span> <span class="n">RootBind</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root_bind</span> <span class="o">=</span> <span class="n">root_bind</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">=</span> <span class="n">root_bind</span><span class="o">.</span><span class="n">root_dir</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">shared_location</span> <span class="o">=</span> <span class="n">root_bind</span><span class="o">.</span><span class="n">shared_location</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">post_init</span><span class="p">(</span><span class="n">custom_args</span><span class="p">)</span>
 
-<div class="viewcode-block" id="RepositoryBase.post_init"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryBase.post_init"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Post initialization method</span>
 
@@ -774,7 +779,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="RepositoryBase.use_default_location"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.use_default_location">[docs]</a>    <span class="k">def</span> <span class="nf">use_default_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryBase.use_default_location"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.use_default_location">[docs]</a>    <span class="k">def</span> <span class="nf">use_default_location</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Call repository operations with default repository manager setup</span>
 
@@ -782,7 +787,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="RepositoryBase.runtime_config"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.runtime_config">[docs]</a>    <span class="k">def</span> <span class="nf">runtime_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryBase.runtime_config"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.runtime_config">[docs]</a>    <span class="k">def</span> <span class="nf">runtime_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Repository runtime configuration and environment</span>
 
@@ -791,10 +796,10 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 <div class="viewcode-block" id="RepositoryBase.add_repo"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.add_repo">[docs]</a>    <span class="k">def</span> <span class="nf">add_repo</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">,</span> <span class="n">prio</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">components</span><span class="p">,</span>
-        <span class="n">user</span><span class="p">,</span> <span class="n">secret</span><span class="p">,</span> <span class="n">credentials_file</span><span class="p">,</span> <span class="n">repo_gpgcheck</span><span class="p">,</span> <span class="n">pkg_gpgcheck</span><span class="p">,</span>
-        <span class="n">sourcetype</span><span class="p">,</span> <span class="n">use_for_bootstrap</span><span class="o">=</span><span class="kc">False</span>
-    <span class="p">):</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prio</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dist</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">components</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">secret</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">credentials_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_gpgcheck</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">pkg_gpgcheck</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">sourcetype</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">use_for_bootstrap</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add repository</span>
 
@@ -802,7 +807,7 @@
 
 <span class="sd">        :param str name: unused</span>
 <span class="sd">        :param str uri: unused</span>
-<span class="sd">        :param repo_type: unused</span>
+<span class="sd">        :param str repo_type: unused</span>
 <span class="sd">        :param int prio: unused</span>
 <span class="sd">        :param str dist: unused</span>
 <span class="sd">        :param str components: unused</span>
@@ -816,7 +821,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="RepositoryBase.setup_package_database_configuration"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.setup_package_database_configuration">[docs]</a>    <span class="k">def</span> <span class="nf">setup_package_database_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryBase.setup_package_database_configuration"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.setup_package_database_configuration">[docs]</a>    <span class="k">def</span> <span class="nf">setup_package_database_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Setup package database configuration</span>
 
@@ -824,7 +829,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="RepositoryBase.import_trusted_keys"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.import_trusted_keys">[docs]</a>    <span class="k">def</span> <span class="nf">import_trusted_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signing_keys</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryBase.import_trusted_keys"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.import_trusted_keys">[docs]</a>    <span class="k">def</span> <span class="nf">import_trusted_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signing_keys</span><span class="p">:</span> <span class="n">List</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Imports trusted keys into the image</span>
 
@@ -834,7 +839,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="RepositoryBase.cleanup_unused_repos"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.cleanup_unused_repos">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup_unused_repos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryBase.cleanup_unused_repos"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.cleanup_unused_repos">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup_unused_repos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cleanup/Delete unused repositories</span>
 
@@ -845,7 +850,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="RepositoryBase.delete_repo"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.delete_repo">[docs]</a>    <span class="k">def</span> <span class="nf">delete_repo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryBase.delete_repo"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.delete_repo">[docs]</a>    <span class="k">def</span> <span class="nf">delete_repo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Delete repository</span>
 
@@ -855,7 +860,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="RepositoryBase.delete_all_repos"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.delete_all_repos">[docs]</a>    <span class="k">def</span> <span class="nf">delete_all_repos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryBase.delete_all_repos"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.delete_all_repos">[docs]</a>    <span class="k">def</span> <span class="nf">delete_all_repos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Delete all repositories</span>
 
@@ -863,7 +868,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="RepositoryBase.delete_repo_cache"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.delete_repo_cache">[docs]</a>    <span class="k">def</span> <span class="nf">delete_repo_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryBase.delete_repo_cache"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.delete_repo_cache">[docs]</a>    <span class="k">def</span> <span class="nf">delete_repo_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Delete repository cache</span>
 

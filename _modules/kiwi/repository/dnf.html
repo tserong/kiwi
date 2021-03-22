@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.repository.dnf &mdash; KIWI NG 9.23.20 documentation</title>
+  <title>kiwi.repository.dnf &mdash; KIWI NG 9.23.21 documentation</title>
   
 
   
@@ -748,6 +748,7 @@
 <span class="kn">import</span> <span class="nn">glob</span>
 <span class="kn">from</span> <span class="nn">configparser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
 <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
@@ -767,7 +768,8 @@
 <span class="sd">    :param dict command_env: customized os.environ for dnf</span>
 <span class="sd">    :param str runtime_dnf_config: instance of :class:`ConfigParser`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="RepositoryDnf.post_init"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RepositoryDnf.post_init"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Post initialization method</span>
 
@@ -798,7 +800,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">locale</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">locale</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">repo_names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repo_names</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="c1"># dnf support is based on creating repo files which contains</span>
         <span class="c1"># path names to the repo and its cache. In order to allow a</span>
@@ -829,7 +831,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_create_runtime_plugin_config_parser</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_runtime_config</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="RepositoryDnf.setup_package_database_configuration"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.setup_package_database_configuration">[docs]</a>    <span class="k">def</span> <span class="nf">setup_package_database_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryDnf.setup_package_database_configuration"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.setup_package_database_configuration">[docs]</a>    <span class="k">def</span> <span class="nf">setup_package_database_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Setup rpm macros for bootstrapping and image building</span>
 
@@ -878,7 +880,7 @@
                 <span class="p">],</span> <span class="n">raise_on_error</span><span class="o">=</span><span class="kc">False</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="RepositoryDnf.use_default_location"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.use_default_location">[docs]</a>    <span class="k">def</span> <span class="nf">use_default_location</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryDnf.use_default_location"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.use_default_location">[docs]</a>    <span class="k">def</span> <span class="nf">use_default_location</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Setup dnf repository operations to store all data</span>
 <span class="sd">        in the default places</span>
@@ -895,7 +897,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_create_runtime_plugin_config_parser</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_runtime_config</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="RepositoryDnf.runtime_config"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.runtime_config">[docs]</a>    <span class="k">def</span> <span class="nf">runtime_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryDnf.runtime_config"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.runtime_config">[docs]</a>    <span class="k">def</span> <span class="nf">runtime_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        dnf runtime configuration and environment</span>
 
@@ -909,18 +911,18 @@
         <span class="p">}</span></div>
 
 <div class="viewcode-block" id="RepositoryDnf.add_repo"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.add_repo">[docs]</a>    <span class="k">def</span> <span class="nf">add_repo</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">repo_type</span><span class="o">=</span><span class="s1">&#39;rpm-md&#39;</span><span class="p">,</span>
-        <span class="n">prio</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">components</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">secret</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">credentials_file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">repo_gpgcheck</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pkg_gpgcheck</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">sourcetype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_for_bootstrap</span><span class="o">=</span><span class="kc">False</span>
-    <span class="p">):</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;rpm-md&#39;</span><span class="p">,</span>
+        <span class="n">prio</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dist</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">components</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">user</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">secret</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">credentials_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">repo_gpgcheck</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">pkg_gpgcheck</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">sourcetype</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use_for_bootstrap</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add dnf repository</span>
 
 <span class="sd">        :param str name: repository base file name</span>
 <span class="sd">        :param str uri: repository URI</span>
-<span class="sd">        :param repo_type: repostory type name</span>
+<span class="sd">        :param str repo_type: repostory type name</span>
 <span class="sd">        :param int prio: dnf repostory priority</span>
 <span class="sd">        :param str dist: unused</span>
 <span class="sd">        :param str components: unused</span>
@@ -968,7 +970,7 @@
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">repo_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">repo</span><span class="p">:</span>
             <span class="n">repo_config</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">repo</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RepositoryDnf.import_trusted_keys"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.import_trusted_keys">[docs]</a>    <span class="k">def</span> <span class="nf">import_trusted_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signing_keys</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryDnf.import_trusted_keys"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.import_trusted_keys">[docs]</a>    <span class="k">def</span> <span class="nf">import_trusted_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signing_keys</span><span class="p">:</span> <span class="n">List</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Imports trusted keys into the image</span>
 
@@ -978,7 +980,7 @@
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">signing_keys</span><span class="p">:</span>
             <span class="n">rpmdb</span><span class="o">.</span><span class="n">import_signing_key_to_image</span><span class="p">(</span><span class="n">key</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RepositoryDnf.delete_repo"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.delete_repo">[docs]</a>    <span class="k">def</span> <span class="nf">delete_repo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryDnf.delete_repo"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.delete_repo">[docs]</a>    <span class="k">def</span> <span class="nf">delete_repo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Delete dnf repository</span>
 
@@ -988,14 +990,14 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">shared_dnf_dir</span><span class="p">[</span><span class="s1">&#39;reposd-dir&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;.repo&#39;</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="RepositoryDnf.delete_all_repos"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.delete_all_repos">[docs]</a>    <span class="k">def</span> <span class="nf">delete_all_repos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryDnf.delete_all_repos"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.delete_all_repos">[docs]</a>    <span class="k">def</span> <span class="nf">delete_all_repos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Delete all dnf repositories</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_dnf_dir</span><span class="p">[</span><span class="s1">&#39;reposd-dir&#39;</span><span class="p">])</span>
         <span class="n">Path</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_dnf_dir</span><span class="p">[</span><span class="s1">&#39;reposd-dir&#39;</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="RepositoryDnf.delete_repo_cache"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.delete_repo_cache">[docs]</a>    <span class="k">def</span> <span class="nf">delete_repo_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryDnf.delete_repo_cache"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.delete_repo_cache">[docs]</a>    <span class="k">def</span> <span class="nf">delete_repo_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Delete dnf repository cache</span>
 
@@ -1013,7 +1015,7 @@
         <span class="k">for</span> <span class="n">dnf_cache_file</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">iglob</span><span class="p">(</span><span class="n">dnf_cache_glob_pattern</span><span class="p">):</span>
             <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="n">dnf_cache_file</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RepositoryDnf.cleanup_unused_repos"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.cleanup_unused_repos">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup_unused_repos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RepositoryDnf.cleanup_unused_repos"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.cleanup_unused_repos">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup_unused_repos</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Delete unused dnf repositories</span>
 
@@ -1027,14 +1029,14 @@
             <span class="k">if</span> <span class="n">repo_file</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">repo_names</span><span class="p">:</span>
                 <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="n">repos_dir</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">repo_file</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_create_dnf_runtime_environment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_create_dnf_runtime_environment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">dnf_dir</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_dnf_dir</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
             <span class="n">Path</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">dnf_dir</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
             <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">,</span> <span class="n">LANG</span><span class="o">=</span><span class="s1">&#39;C&#39;</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_create_runtime_config_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_create_runtime_config_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runtime_dnf_config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runtime_dnf_config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="s1">&#39;main&#39;</span><span class="p">)</span>
 
@@ -1073,7 +1075,7 @@
                 <span class="s1">&#39;main&#39;</span><span class="p">,</span> <span class="s1">&#39;tsflags&#39;</span><span class="p">,</span> <span class="s1">&#39;nodocs&#39;</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_create_runtime_plugin_config_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_create_runtime_plugin_config_parser</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runtime_dnf_plugin_config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runtime_dnf_plugin_config</span><span class="o">.</span><span class="n">add_section</span><span class="p">(</span><span class="s1">&#39;main&#39;</span><span class="p">)</span>
 
@@ -1081,7 +1083,7 @@
             <span class="s1">&#39;main&#39;</span><span class="p">,</span> <span class="s1">&#39;enabled&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_write_runtime_config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_write_runtime_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runtime_dnf_config_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">config</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">runtime_dnf_config</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shared_dnf_dir</span><span class="p">[</span><span class="s1">&#39;pluginconf-dir&#39;</span><span class="p">]):</span>

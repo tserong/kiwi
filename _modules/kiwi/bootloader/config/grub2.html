@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.20 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.21 documentation</title>
   
 
   
@@ -830,6 +830,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">failsafe_boot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">failsafe_boot_entry_requested</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mediacheck_boot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_mediacheck</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">xen_guest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">is_xen_guest</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">persistency_type</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_devicepersistency</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span> <span class="o">=</span> <span class="n">FirmWare</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span>
         <span class="p">)</span>
@@ -1339,6 +1341,7 @@
 <span class="sd">        * GRUB_GFXMODE</span>
 <span class="sd">        * GRUB_TERMINAL</span>
 <span class="sd">        * GRUB_DISTRIBUTOR</span>
+<span class="sd">        * GRUB_DISABLE_LINUX_UUID</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">grub_default_entries</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;GRUB_TIMEOUT&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
@@ -1348,6 +1351,8 @@
         <span class="n">grub_final_cmdline</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
             <span class="sa">r</span><span class="s1">&#39;root=.* |root=.*$&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdline</span>
         <span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">persistency_type</span> <span class="o">!=</span> <span class="s1">&#39;by-uuid&#39;</span><span class="p">:</span>
+            <span class="n">grub_default_entries</span><span class="p">[</span><span class="s1">&#39;GRUB_DISABLE_LINUX_UUID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">displayname</span><span class="p">:</span>
             <span class="n">grub_default_entries</span><span class="p">[</span><span class="s1">&#39;GRUB_DISTRIBUTOR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">displayname</span>
@@ -1958,48 +1963,45 @@
 
     <span class="k">def</span> <span class="nf">_fix_grub_root_device_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_file</span><span class="p">,</span> <span class="n">boot_options</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span> <span class="ow">or</span> \
-               <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s390&#39;</span><span class="p">)</span> <span class="ow">or</span> \
-               <span class="n">Defaults</span><span class="o">.</span><span class="n">is_buildservice_worker</span><span class="p">():</span>
-                <span class="c1"># grub2-mkconfig has no idea how the correct root= setup is</span>
-                <span class="c1"># for disk images created with overlayroot enabled or in a</span>
-                <span class="c1"># buildservice worker environment. Because of that the mkconfig</span>
-                <span class="c1"># tool just finds the raw partition loop device and includes it</span>
-                <span class="c1"># which is wrong. In this particular case we have to patch the</span>
-                <span class="c1"># written config file and replace the wrong root= reference with</span>
-                <span class="c1"># the correct value.</span>
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_config_file</span><span class="p">:</span>
-                    <span class="n">grub_config</span> <span class="o">=</span> <span class="n">grub_config_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-                    <span class="c1"># The following expression matches any of the following</span>
-                    <span class="c1"># grub mkconfig root= settings and replaces it with a</span>
-                    <span class="c1"># correct value</span>
-                    <span class="c1"># 1. root=LOCAL-KIWI-MAPPED-DEVICE</span>
-                    <span class="c1"># 2. root=[a-zA-Z]=ANY-LINUX-BY-ID-VALUE</span>
-                    <span class="n">grub_config</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
-                        <span class="sa">r</span><span class="s1">&#39;(root=[a-zA-Z]+=[a-zA-Z0-9:\.-]+)|(root=</span><span class="si">{0}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                            <span class="n">boot_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;root_device&#39;</span><span class="p">)</span>
-                        <span class="p">),</span>
-                        <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span><span class="p">),</span>
-                        <span class="n">grub_config</span>
-                    <span class="p">)</span>
+            <span class="c1"># grub2-mkconfig has no idea how the correct root= setup is</span>
+            <span class="c1"># for disk images created with overlayroot enabled or in a</span>
+            <span class="c1"># buildservice worker environment. Because of that the mkconfig</span>
+            <span class="c1"># tool just finds the raw partition loop device and includes it</span>
+            <span class="c1"># which is wrong. In this particular case we have to patch the</span>
+            <span class="c1"># written config file and replace the wrong root= reference with</span>
+            <span class="c1"># the correct value.</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_config_file</span><span class="p">:</span>
+                <span class="n">grub_config</span> <span class="o">=</span> <span class="n">grub_config_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="c1"># The following expression matches any of the following</span>
+                <span class="c1"># grub mkconfig root= settings and replaces it with a</span>
+                <span class="c1"># correct value</span>
+                <span class="c1"># 1. root=LOCAL-KIWI-MAPPED-DEVICE</span>
+                <span class="c1"># 2. root=[a-zA-Z]=ANY-LINUX-BY-ID-VALUE</span>
+                <span class="n">grub_config</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+                    <span class="sa">r</span><span class="s1">&#39;(root=[a-zA-Z]+=[a-zA-Z0-9:\.-]+)|(root=</span><span class="si">{0}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">boot_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;root_device&#39;</span><span class="p">)</span>
+                    <span class="p">),</span>
+                    <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span><span class="p">),</span>
+                    <span class="n">grub_config</span>
+                <span class="p">)</span>
 
-                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_config_file</span><span class="p">:</span>
-                    <span class="n">grub_config_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">grub_config</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_config_file</span><span class="p">:</span>
+                <span class="n">grub_config_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">grub_config</span><span class="p">)</span>
 
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">efi_mode</span><span class="p">():</span>
-                    <span class="n">vendor_grubenv_file</span> <span class="o">=</span> \
-                        <span class="n">Defaults</span><span class="o">.</span><span class="n">get_vendor_grubenv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">efi_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">vendor_grubenv_file</span><span class="p">:</span>
-                        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">vendor_grubenv_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">vendor_grubenv</span><span class="p">:</span>
-                            <span class="n">grubenv</span> <span class="o">=</span> <span class="n">vendor_grubenv</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-                            <span class="n">grubenv</span> <span class="o">=</span> <span class="n">grubenv</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                                <span class="s1">&#39;root=</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                                    <span class="n">boot_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;root_device&#39;</span><span class="p">)</span>
-                                <span class="p">),</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span>
-                            <span class="p">)</span>
-                        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">vendor_grubenv_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">vendor_grubenv</span><span class="p">:</span>
-                            <span class="n">vendor_grubenv</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">grubenv</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">efi_mode</span><span class="p">():</span>
+                <span class="n">vendor_grubenv_file</span> <span class="o">=</span> \
+                    <span class="n">Defaults</span><span class="o">.</span><span class="n">get_vendor_grubenv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">efi_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">vendor_grubenv_file</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">vendor_grubenv_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">vendor_grubenv</span><span class="p">:</span>
+                        <span class="n">grubenv</span> <span class="o">=</span> <span class="n">vendor_grubenv</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                        <span class="n">grubenv</span> <span class="o">=</span> <span class="n">grubenv</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                            <span class="s1">&#39;root=</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                <span class="n">boot_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;root_device&#39;</span><span class="p">)</span>
+                            <span class="p">),</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">root_reference</span>
+                        <span class="p">)</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">vendor_grubenv_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">vendor_grubenv</span><span class="p">:</span>
+                        <span class="n">vendor_grubenv</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">grubenv</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_fix_grub_loader_entries_boot_cmdline</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdline</span><span class="p">:</span>

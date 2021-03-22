@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.defaults &mdash; KIWI NG 9.23.20 documentation</title>
+  <title>kiwi.defaults &mdash; KIWI NG 9.23.21 documentation</title>
   
 
   
@@ -984,7 +984,7 @@
 <span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">exclude_list</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="s1">&#39;.profile&#39;</span><span class="p">,</span> <span class="s1">&#39;.kconfig&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="s1">&#39;.profile&#39;</span><span class="p">,</span> <span class="s1">&#39;.kconfig&#39;</span><span class="p">,</span> <span class="s1">&#39;run/*&#39;</span><span class="p">,</span> <span class="s1">&#39;tmp/*&#39;</span><span class="p">,</span>
             <span class="n">Defaults</span><span class="o">.</span><span class="n">get_buildservice_env_name</span><span class="p">(),</span>
             <span class="n">Defaults</span><span class="o">.</span><span class="n">get_shared_cache_location</span><span class="p">()</span>
         <span class="p">]</span>
@@ -2308,8 +2308,8 @@
 
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">rpm_based</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;zypper&#39;</span><span class="p">,</span> <span class="s1">&#39;yum&#39;</span><span class="p">,</span> <span class="s1">&#39;dnf&#39;</span><span class="p">,</span> <span class="s1">&#39;microdnf&#39;</span><span class="p">]</span>
-        <span class="n">deb_based</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apt-get&#39;</span><span class="p">]</span>
+        <span class="n">rpm_based</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;zypper&#39;</span><span class="p">,</span> <span class="s1">&#39;dnf&#39;</span><span class="p">,</span> <span class="s1">&#39;microdnf&#39;</span><span class="p">]</span>
+        <span class="n">deb_based</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;apt&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">package_manager</span> <span class="ow">in</span> <span class="n">rpm_based</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;rpm&#39;</span>
         <span class="k">elif</span> <span class="n">package_manager</span> <span class="ow">in</span> <span class="n">deb_based</span><span class="p">:</span>

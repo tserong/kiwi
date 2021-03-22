@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.solver.sat &mdash; KIWI NG 9.23.20 documentation</title>
+  <title>kiwi.solver.sat &mdash; KIWI NG 9.23.21 documentation</title>
   
 
   
@@ -948,18 +948,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">jobs</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">job_name</span> <span class="ow">in</span> <span class="n">job_names</span><span class="p">:</span>
-            <span class="c1"># There is a special handling for apt-get. In kiwi the</span>
-            <span class="c1"># package manager for debian based distros is selected</span>
-            <span class="c1"># by the name apt-get. That name is added to the package</span>
-            <span class="c1"># list, but apt-get does not really exist in Debian based</span>
-            <span class="c1"># distros. The name of the package manager from a packaging</span>
-            <span class="c1"># perspective is just: apt not apt-get. We should change</span>
-            <span class="c1"># this in the schema and code in kiwi. But so far we</span>
-            <span class="c1"># have the hack here. The reason why we don&#39;t see an issue</span>
-            <span class="c1"># by this when building debian based images is because</span>
-            <span class="c1"># the bootstrap phase is handled by debootstrap</span>
-            <span class="k">if</span> <span class="n">job_name</span> <span class="o">==</span> <span class="s1">&#39;apt-get&#39;</span><span class="p">:</span>
-                <span class="n">job_name</span> <span class="o">=</span> <span class="s1">&#39;apt&#39;</span>
             <span class="n">selection_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solv</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">SELECTION_NAME</span>
             <span class="n">selection_provides</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">solv</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">SELECTION_PROVIDES</span>
             <span class="n">selection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>

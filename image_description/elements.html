@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Image Description Elements &mdash; KIWI NG 9.23.20 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.23.21 documentation</title>
   
 
   
@@ -735,7 +735,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.23.20</p>
+and attributes of the KIWI NG XML document in version 9.23.21</p>
 </div>
 <div class="section" id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -839,7 +839,7 @@ table shows which package manager is connected to which distributor:</p>
 <td><p>dnf</p></td>
 </tr>
 <tr class="row-even"><td><p>Debian Based</p></td>
-<td><p>apt-get</p></td>
+<td><p>apt</p></td>
 </tr>
 <tr class="row-odd"><td><p>Arch Linux</p></td>
 <td><p>pacman</p></td>
@@ -1142,7 +1142,7 @@ the spare part at the end of the disk is only applied
 if oem-resize is switched off. There is a runtime
 check in the KIWI NG code to check this condition</p>
 </dd>
-<dt>devicepersistency=”by-uuid|by-label|by-path”:</dt><dd><p>Specifies which method to use for persistent device names.
+<dt>devicepersistency=”by-uuid|by-label”:</dt><dd><p>Specifies which method to use for persistent device names.
 This will affect all files written by kiwi that includes
 device references for example <code class="xref py py-obj docutils literal notranslate"><span class="pre">etc/fstab</span></code> or the <code class="xref py py-obj docutils literal notranslate"><span class="pre">root=</span></code>
 parameter in the kernel commandline. By default by-uuid

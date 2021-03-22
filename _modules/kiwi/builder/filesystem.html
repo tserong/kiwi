@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.builder.filesystem &mdash; KIWI NG 9.23.20 documentation</title>
+  <title>kiwi.builder.filesystem &mdash; KIWI NG 9.23.21 documentation</title>
   
 
   
@@ -746,6 +746,7 @@
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.filesystem</span> <span class="kn">import</span> <span class="n">FileSystem</span>
@@ -756,6 +757,7 @@
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.result</span> <span class="kn">import</span> <span class="n">Result</span>
 <span class="kn">from</span> <span class="nn">kiwi.runtime_config</span> <span class="kn">import</span> <span class="n">RuntimeConfig</span>
+<span class="kn">from</span> <span class="nn">kiwi.xml_state</span> <span class="kn">import</span> <span class="n">XMLState</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">KiwiFileSystemSetupError</span>
@@ -774,7 +776,7 @@
 <span class="sd">    :param dict custom_args: Custom processing arguments defined as hash keys:</span>
 <span class="sd">        * None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_state</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_state</span><span class="p">:</span> <span class="n">XMLState</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root_uuid</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">=</span> <span class="n">root_dir</span>
@@ -817,7 +819,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">Result</span><span class="p">(</span><span class="n">xml_state</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span> <span class="o">=</span> <span class="n">RuntimeConfig</span><span class="p">()</span>
 
-<div class="viewcode-block" id="FileSystemBuilder.create"><a class="viewcode-back" href="../../../api/kiwi.builder.html#kiwi.builder.filesystem.FileSystemBuilder.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="FileSystemBuilder.create"><a class="viewcode-back" href="../../../api/kiwi.builder.html#kiwi.builder.filesystem.FileSystemBuilder.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build a mountable filesystem image</span>
 
@@ -887,7 +889,7 @@
         <span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span></div>
 
-    <span class="k">def</span> <span class="nf">_operate_on_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_operate_on_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">filesystem</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">loop_provider</span> <span class="o">=</span> <span class="n">LoopDevice</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
@@ -908,7 +910,7 @@
             <span class="n">Defaults</span><span class="o">.</span><span class="n">get_exclude_list_for_root_data_sync</span><span class="p">()</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_operate_on_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_operate_on_file</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">default_provider</span> <span class="o">=</span> <span class="n">DeviceProvider</span><span class="p">()</span>
         <span class="n">filesystem</span> <span class="o">=</span> <span class="n">FileSystem</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">requested_filesystem</span><span class="p">,</span> <span class="n">default_provider</span><span class="p">,</span>

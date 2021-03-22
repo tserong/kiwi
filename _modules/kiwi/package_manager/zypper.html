@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.package_manager.zypper &mdash; KIWI NG 9.23.20 documentation</title>
+  <title>kiwi.package_manager.zypper &mdash; KIWI NG 9.23.21 documentation</title>
   
 
   
@@ -746,10 +746,13 @@
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 <span class="kn">from</span> <span class="nn">kiwi.package_manager.base</span> <span class="kn">import</span> <span class="n">PackageManagerBase</span>
+<span class="kn">from</span> <span class="nn">kiwi.system.root_bind</span> <span class="kn">import</span> <span class="n">RootBind</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.rpm_database</span> <span class="kn">import</span> <span class="n">RpmDataBase</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.rpm</span> <span class="kn">import</span> <span class="n">Rpm</span>
 <span class="kn">from</span> <span class="nn">kiwi.path</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -767,7 +770,7 @@
 <span class="sd">    :param dict command_env: zypper command environment from repository</span>
 <span class="sd">        runtime configuration</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="PackageManagerZypper.post_init"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.post_init"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Post initialization method</span>
 
@@ -794,7 +797,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">command_env</span><span class="p">[</span><span class="s1">&#39;ZYPP_CONF&#39;</span><span class="p">]]</span>
             <span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.request_package"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.request_package">[docs]</a>    <span class="k">def</span> <span class="nf">request_package</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.request_package"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.request_package">[docs]</a>    <span class="k">def</span> <span class="nf">request_package</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Queue a package request</span>
 
@@ -802,7 +805,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">package_requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.request_collection"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.request_collection">[docs]</a>    <span class="k">def</span> <span class="nf">request_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.request_collection"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.request_collection">[docs]</a>    <span class="k">def</span> <span class="nf">request_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Queue a collection request</span>
 
@@ -810,7 +813,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">collection_requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;pattern:&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.request_product"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.request_product">[docs]</a>    <span class="k">def</span> <span class="nf">request_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.request_product"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.request_product">[docs]</a>    <span class="k">def</span> <span class="nf">request_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Queue a product request</span>
 
@@ -818,7 +821,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">product_requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;product:&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.request_package_exclusion"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.request_package_exclusion">[docs]</a>    <span class="k">def</span> <span class="nf">request_package_exclusion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.request_package_exclusion"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.request_package_exclusion">[docs]</a>    <span class="k">def</span> <span class="nf">request_package_exclusion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Queue a package exclusion(skip) request</span>
 
@@ -826,7 +829,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">exclude_requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.process_install_requests_bootstrap"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.process_install_requests_bootstrap">[docs]</a>    <span class="k">def</span> <span class="nf">process_install_requests_bootstrap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_bind</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.process_install_requests_bootstrap"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.process_install_requests_bootstrap">[docs]</a>    <span class="k">def</span> <span class="nf">process_install_requests_bootstrap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_bind</span><span class="p">:</span> <span class="n">RootBind</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Process package install requests for bootstrap phase (no chroot)</span>
 
@@ -844,7 +847,7 @@
             <span class="n">command</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">command_env</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.process_install_requests"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.process_install_requests">[docs]</a>    <span class="k">def</span> <span class="nf">process_install_requests</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.process_install_requests"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.process_install_requests">[docs]</a>    <span class="k">def</span> <span class="nf">process_install_requests</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Process package install requests for image phase (chroot)</span>
 
@@ -874,7 +877,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">chroot_command_env</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.process_delete_requests"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.process_delete_requests">[docs]</a>    <span class="k">def</span> <span class="nf">process_delete_requests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.process_delete_requests"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.process_delete_requests">[docs]</a>    <span class="k">def</span> <span class="nf">process_delete_requests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Process package delete requests (chroot)</span>
 
@@ -916,7 +919,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">chroot_command_env</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.update"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.update"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Process package update requests (chroot)</span>
 
@@ -931,21 +934,21 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">chroot_command_env</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.process_only_required"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.process_only_required">[docs]</a>    <span class="k">def</span> <span class="nf">process_only_required</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.process_only_required"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.process_only_required">[docs]</a>    <span class="k">def</span> <span class="nf">process_only_required</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Setup package processing only for required packages</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="s1">&#39;--no-recommends&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;--no-recommends&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.process_plus_recommended"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.process_plus_recommended">[docs]</a>    <span class="k">def</span> <span class="nf">process_plus_recommended</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.process_plus_recommended"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.process_plus_recommended">[docs]</a>    <span class="k">def</span> <span class="nf">process_plus_recommended</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Setup package processing to also include recommended dependencies.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="s1">&#39;--no-recommends&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;--no-recommends&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.match_package_installed"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.match_package_installed">[docs]</a>    <span class="k">def</span> <span class="nf">match_package_installed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">zypper_output</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.match_package_installed"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.match_package_installed">[docs]</a>    <span class="k">def</span> <span class="nf">match_package_installed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">package_manager_output</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Match expression to indicate a package has been installed</span>
 
@@ -954,33 +957,33 @@
 <span class="sd">        be false positives due to sub package names starting with</span>
 <span class="sd">        the same base package name</span>
 
-<span class="sd">        :param list package_list: list of all packages</span>
-<span class="sd">        :param str log_line: zypper status line</span>
+<span class="sd">        :param str package_name: package_name</span>
+<span class="sd">        :param str package_manager_output: zypper status line</span>
 
-<span class="sd">        :returns: match or None if there isn&#39;t any match</span>
+<span class="sd">        :returns: True|False</span>
 
-<span class="sd">        :rtype: match object, None</span>
+<span class="sd">        :rtype: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
-            <span class="s1">&#39;.*Installing: &#39;</span> <span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.*&#39;</span><span class="p">,</span> <span class="n">zypper_output</span>
-        <span class="p">)</span></div>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
+            <span class="s1">&#39;.*Installing: &#39;</span> <span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.*&#39;</span><span class="p">,</span> <span class="n">package_manager_output</span>
+        <span class="p">))</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.match_package_deleted"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.match_package_deleted">[docs]</a>    <span class="k">def</span> <span class="nf">match_package_deleted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_name</span><span class="p">,</span> <span class="n">zypper_output</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.match_package_deleted"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.match_package_deleted">[docs]</a>    <span class="k">def</span> <span class="nf">match_package_deleted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">package_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">package_manager_output</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Match expression to indicate a package has been deleted</span>
 
-<span class="sd">        :param list package_list: list of all packages</span>
-<span class="sd">        :param str log_line: zypper status line</span>
+<span class="sd">        :param str package_name: package_name</span>
+<span class="sd">        :param str package_manager_output: zypper status line</span>
 
-<span class="sd">        :returns: match or None if there isn&#39;t any match</span>
+<span class="sd">        :returns: True|False</span>
 
-<span class="sd">        :rtype: match object, None</span>
+<span class="sd">        :rtype: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
-            <span class="s1">&#39;.*Removing: &#39;</span> <span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.*&#39;</span><span class="p">,</span> <span class="n">zypper_output</span>
-        <span class="p">)</span></div>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
+            <span class="s1">&#39;.*Removing: &#39;</span> <span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.*&#39;</span><span class="p">,</span> <span class="n">package_manager_output</span>
+        <span class="p">))</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.post_process_install_requests_bootstrap"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.post_process_install_requests_bootstrap">[docs]</a>    <span class="k">def</span> <span class="nf">post_process_install_requests_bootstrap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_bind</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.post_process_install_requests_bootstrap"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.post_process_install_requests_bootstrap">[docs]</a>    <span class="k">def</span> <span class="nf">post_process_install_requests_bootstrap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_bind</span><span class="p">:</span> <span class="n">RootBind</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Move the rpm database to the place as it is expected by the</span>
 <span class="sd">        rpm package installed during bootstrap phase</span>
@@ -991,7 +994,8 @@
         <span class="k">if</span> <span class="n">rpmdb</span><span class="o">.</span><span class="n">has_rpm</span><span class="p">():</span>
             <span class="n">rpmdb</span><span class="o">.</span><span class="n">set_database_to_image_path</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.has_failed"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.has_failed">[docs]</a>    <span class="k">def</span> <span class="nf">has_failed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">returncode</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.has_failed"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.has_failed">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">has_failed</span><span class="p">(</span><span class="n">returncode</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Evaluate given result return code</span>
 
@@ -1026,7 +1030,7 @@
         <span class="c1"># Treat any other error code as error</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="PackageManagerZypper.clean_leftovers"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.clean_leftovers">[docs]</a>    <span class="k">def</span> <span class="nf">clean_leftovers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PackageManagerZypper.clean_leftovers"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.clean_leftovers">[docs]</a>    <span class="k">def</span> <span class="nf">clean_leftovers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cleans package manager related data not needed in the</span>
 <span class="sd">        resulting image such as custom macros</span>
@@ -1040,13 +1044,13 @@
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">id_file</span><span class="p">):</span>
             <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">id_file</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_install_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_install_items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
         <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_requests</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_requests</span> \
             <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">product_requests</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_requests</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">items</span>
 
-    <span class="k">def</span> <span class="nf">_delete_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_delete_items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
         <span class="c1"># collections and products can&#39;t be deleted</span>
         <span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">items</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_requests</span>
