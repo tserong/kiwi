@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.volume_manager.btrfs &mdash; KIWI NG 9.23.22 documentation</title>
+  <title>kiwi.volume_manager.btrfs &mdash; KIWI NG 9.23.23 documentation</title>
   
 
   
@@ -938,10 +938,16 @@
         <span class="k">for</span> <span class="n">volume_mount</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subvol_mount_list</span><span class="p">:</span>
             <span class="n">subvol_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_subvol_name_from_mountpoint</span><span class="p">(</span><span class="n">volume_mount</span><span class="p">)</span>
             <span class="n">mount_entry_options</span> <span class="o">=</span> <span class="n">mount_options</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;subvol=&#39;</span> <span class="o">+</span> <span class="n">subvol_name</span><span class="p">]</span>
+            <span class="n">fs_check</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_volume_enabled_for_fs_check</span><span class="p">(</span>
+                <span class="n">volume_mount</span><span class="o">.</span><span class="n">mountpoint</span>
+            <span class="p">)</span>
             <span class="n">fstab_entry</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                 <span class="p">[</span>
                     <span class="n">blkid_type</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="n">device_id</span><span class="p">,</span> <span class="n">subvol_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;@&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
-                    <span class="s1">&#39;btrfs&#39;</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mount_entry_options</span><span class="p">),</span> <span class="s1">&#39;0 0&#39;</span>
+                    <span class="s1">&#39;btrfs&#39;</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mount_entry_options</span><span class="p">),</span>
+                    <span class="s1">&#39;0 </span><span class="si">{fs_passno}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">fs_passno</span><span class="o">=</span><span class="s1">&#39;2&#39;</span> <span class="k">if</span> <span class="n">fs_check</span> <span class="k">else</span> <span class="s1">&#39;0&#39;</span>
+                    <span class="p">)</span>
                 <span class="p">]</span>
             <span class="p">)</span>
             <span class="n">fstab_entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fstab_entry</span><span class="p">)</span>
@@ -1068,6 +1074,13 @@
             <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
                 <span class="p">[</span><span class="s1">&#39;btrfs&#39;</span><span class="p">,</span> <span class="s1">&#39;property&#39;</span><span class="p">,</span> <span class="s1">&#39;set&#39;</span><span class="p">,</span> <span class="n">sync_target</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">]</span>
             <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_is_volume_enabled_for_fs_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mountpoint</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">realpath</span> <span class="ow">in</span> <span class="n">mountpoint</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;enable-for-filesystem-check&#39;</span> <span class="ow">in</span> <span class="n">volume</span><span class="o">.</span><span class="n">attributes</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_set_default_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default_volume</span><span class="p">):</span>
         <span class="n">subvolume_list_call</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>

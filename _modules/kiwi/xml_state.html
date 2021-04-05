@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.xml_state &mdash; KIWI NG 9.23.22 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.23.23 documentation</title>
   
 
   
@@ -2105,6 +2105,12 @@
                     <span class="c1"># filesystem. Thus only if no copy on write is requested</span>
                     <span class="c1"># the attribute is handled</span>
                     <span class="n">attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;no-copy-on-write&#39;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">volume</span><span class="o">.</span><span class="n">get_filesystem_check</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="c1"># by default filesystem check is switched off for any</span>
+                    <span class="c1"># filesystem except the rootfs. Thus only if filesystem</span>
+                    <span class="c1"># check is requested the attribute is handled</span>
+                    <span class="n">attributes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;enable-for-filesystem-check&#39;</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="s1">&#39;@root&#39;</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
                     <span class="c1"># setup root volume, it takes an optional volume</span>

@@ -4,10 +4,11 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>User Defined Scripts &mdash; KIWI NG 9.23.22 documentation</title>
+  <title>User Defined Scripts &mdash; KIWI NG 9.23.23 documentation</title>
   
 
   
@@ -730,7 +731,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="user-defined-scripts">
+  <section id="user-defined-scripts">
 <span id="working-with-kiwi-user-defined-scripts"></span><h1>User Defined Scripts<a class="headerlink" href="#user-defined-scripts" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -743,6 +744,13 @@ via the image description alone.</p>
 <p>KIWI NG supports the following optional scripts that it runs in a
 root environment (chroot) containing your new appliance:</p>
 <dl class="simple">
+<dt>post_bootstrap.sh</dt><dd><p>runs at the end of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">bootstrap</span></code> phase as part of the
+<a class="reference internal" href="../concept_and_workflow.html#prepare-step"><span class="std std-ref">prepare step</span></a>. The script can be used to
+configure the package manager with additional settings that
+should apply in the following chroot based installation step
+which completes the installation. The script is not dedicated to
+this use and can also be used for other tasks.</p>
+</dd>
 <dt>config.sh</dt><dd><p>runs at the end of the <a class="reference internal" href="../concept_and_workflow.html#prepare-step"><span class="std std-ref">prepare step</span></a>
 and after users have been set and the <em>overlay tree directory</em>
 has been applied. It is usually used to apply a permanent and final
@@ -772,7 +780,7 @@ bootloader or filesystem attributes.</p>
 bit is set (in that case a shebang is mandatory) otherwise they will be
 invoked via the BASH. If a script exits with a non-zero exit code
 then KIWI NG will report the failure and abort the image creation.</p>
-<div class="section" id="script-template-for-config-sh-images-sh">
+<section id="script-template-for-config-sh-images-sh">
 <h2>Script Template for config.sh / images.sh<a class="headerlink" href="#script-template-for-config-sh-images-sh" title="Permalink to this headline">¶</a></h2>
 <p>KIWI NG provides a collection of methods and variables that supports users
 with custom operations. For details see <a class="reference internal" href="#image-customization-methods"><span class="std std-ref">Functions and Variables Provided by KIWI NG</span></a>.
@@ -794,8 +802,8 @@ script:</p>
 script operates in. This means that all changes are permanent
 and will not be automatically restored!</p>
 </div>
-</div>
-<div class="section" id="functions-and-variables-provided-by-kiwi-ng">
+</section>
+<section id="functions-and-variables-provided-by-kiwi-ng">
 <span id="image-customization-methods"></span><h2>Functions and Variables Provided by KIWI NG<a class="headerlink" href="#functions-and-variables-provided-by-kiwi-ng" title="Permalink to this headline">¶</a></h2>
 <p>KIWI NG creates the <code class="file docutils literal notranslate"><span class="pre">.kconfig</span></code> and <code class="file docutils literal notranslate"><span class="pre">.profile</span></code> files to be sourced
 by the shell scripts <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code> and <code class="file docutils literal notranslate"><span class="pre">images.sh</span></code>.
@@ -803,7 +811,7 @@ by the shell scripts <code class="file docutils literal notranslate"><span class
 simplify the image configuration and <code class="file docutils literal notranslate"><span class="pre">.profile</span></code> contains environment
 variables which get populated from the settings provided in the image
 description.</p>
-<div class="section" id="functions">
+<section id="functions">
 <h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="file docutils literal notranslate"><span class="pre">.kconfig</span></code> file provides a common set of functions.  Functions
 specific to SUSE Linux Enterprise and openSUSE begin with the name
@@ -914,8 +922,8 @@ set to 1 (it is off by default).</p>
 <code class="docutils literal notranslate"><span class="pre">rpm</span></code> and logs the call.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="profile-environment-variables">
+</section>
+<section id="profile-environment-variables">
 <h3>Profile Environment Variables<a class="headerlink" href="#profile-environment-variables" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="file docutils literal notranslate"><span class="pre">.profile</span></code> environment file is created by KIWI NG and contains a
 specific set of variables which are listed below.</p>
@@ -945,9 +953,9 @@ with <code class="xref py py-obj docutils literal notranslate"><span class="pre"
 <code class="file docutils literal notranslate"><span class="pre">config.xml</span></code>.</p>
 </dd>
 </dl>
-</div>
-</div>
-<div class="section" id="configuration-tips">
+</section>
+</section>
+<section id="configuration-tips">
 <h2>Configuration Tips<a class="headerlink" href="#configuration-tips" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Locale configuration:</strong></p></li>
@@ -1018,8 +1026,8 @@ ln -s /etc/machine-id /var/lib/dbus/machine-id
 </div>
 </div>
 </div></blockquote>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

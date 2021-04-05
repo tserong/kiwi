@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.22 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.23 documentation</title>
   
 
   
@@ -805,6 +805,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="o">=</span> <span class="n">arch</span>
         <span class="k">elif</span> <span class="n">arch</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;s390&#39;</span><span class="p">):</span>
             <span class="c1"># grub2 support for s390x systems</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="o">=</span> <span class="n">arch</span>
+        <span class="k">elif</span> <span class="n">arch</span> <span class="o">==</span> <span class="s1">&#39;riscv64&#39;</span><span class="p">:</span>
+            <span class="c1"># grub2 support for efi systems</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="o">=</span> <span class="n">arch</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiBootLoaderGrubPlatformError</span><span class="p">(</span>

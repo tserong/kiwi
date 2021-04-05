@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system.setup &mdash; KIWI NG 9.23.22 documentation</title>
+  <title>kiwi.system.setup &mdash; KIWI NG 9.23.23 documentation</title>
   
 
   
@@ -1316,6 +1316,14 @@
             <span class="n">defaults</span><span class="o">.</span><span class="n">POST_DISK_SYNC_SCRIPT</span>
         <span class="p">)</span></div>
 
+<div class="viewcode-block" id="SystemSetup.call_post_bootstrap_script"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.setup.SystemSetup.call_post_bootstrap_script">[docs]</a>    <span class="k">def</span> <span class="nf">call_post_bootstrap_script</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Call post_bootstrap.sh script chrooted</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_call_script</span><span class="p">(</span>
+            <span class="n">defaults</span><span class="o">.</span><span class="n">POST_BOOTSTRAP_SCRIPT</span>
+        <span class="p">)</span></div>
+
 <div class="viewcode-block" id="SystemSetup.call_config_script"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.setup.SystemSetup.call_config_script">[docs]</a>    <span class="k">def</span> <span class="nf">call_config_script</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Call config.sh script chrooted</span>
@@ -1642,6 +1650,10 @@
             <span class="s1">&#39;script_type&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;filepath&#39;</span><span class="p">,</span> <span class="s1">&#39;raise_if_not_exists&#39;</span><span class="p">]</span>
         <span class="p">)</span>
         <span class="n">custom_scripts</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">defaults</span><span class="o">.</span><span class="n">POST_BOOTSTRAP_SCRIPT</span><span class="p">:</span> <span class="n">script_type</span><span class="p">(</span>
+                <span class="n">filepath</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">POST_BOOTSTRAP_SCRIPT</span><span class="p">,</span>
+                <span class="n">raise_if_not_exists</span><span class="o">=</span><span class="kc">False</span>
+            <span class="p">),</span>
             <span class="n">defaults</span><span class="o">.</span><span class="n">POST_PREPARE_SCRIPT</span><span class="p">:</span> <span class="n">script_type</span><span class="p">(</span>
                 <span class="n">filepath</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">POST_PREPARE_SCRIPT</span><span class="p">,</span>
                 <span class="n">raise_if_not_exists</span><span class="o">=</span><span class="kc">False</span>

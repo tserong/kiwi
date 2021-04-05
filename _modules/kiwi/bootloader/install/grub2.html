@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.install.grub2 &mdash; KIWI NG 9.23.22 documentation</title>
+  <title>kiwi.bootloader.install.grub2 &mdash; KIWI NG 9.23.23 documentation</title>
   
 
   
@@ -841,6 +841,13 @@
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">elif</span> <span class="s1">&#39;arm&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="o">==</span> <span class="s1">&#39;aarch64&#39;</span><span class="p">:</span>
             <span class="c1"># On arm grub2 is used for EFI setup only, no install</span>
+            <span class="c1"># of grub2 boot code makes sense</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s1">&#39;No grub boot code installation on </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="o">==</span> <span class="s1">&#39;riscv64&#39;</span><span class="p">:</span>
+            <span class="c1"># On riscv grub2 is used for EFI setup only, no install</span>
             <span class="c1"># of grub2 boot code makes sense</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
                 <span class="s1">&#39;No grub boot code installation on </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span>

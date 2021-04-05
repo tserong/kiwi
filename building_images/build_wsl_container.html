@@ -4,10 +4,11 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Build a WSL Container Image &mdash; KIWI NG 9.23.22 documentation</title>
+  <title>Build a WSL Container Image &mdash; KIWI NG 9.23.23 documentation</title>
   
 
   
@@ -730,15 +731,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="build-a-wsl-container-image">
+  <section id="build-a-wsl-container-image">
 <span id="building-wsl-build"></span><h1>Build a WSL Container Image<a class="headerlink" href="#build-a-wsl-container-image" title="Permalink to this headline">¶</a></h1>
-<div class="sidebar">
+<aside class="sidebar">
 <p class="sidebar-title">Abstract</p>
 <p>This page explains how to build a WSL/Appx container image.
 WSL stands for Windows Subsystem Linux and is a zip based
 container format consumable by Windows 10 with enabled
 WSL functionality.</p>
-</div>
+</aside>
 <p>KIWI NG is capable of building WSL images using the <strong class="command">appx</strong>
 utility. Make sure you have installed a package that provides
 this command on your build host.</p>
@@ -765,7 +766,7 @@ Typically this information is delivered in a package
 provided by the Distribution and installed on the
 build host</p>
 </div>
-<div class="section" id="setup-of-the-wsl-distrolauncher">
+<section id="setup-of-the-wsl-distrolauncher">
 <h2>Setup of the WSL-DistroLauncher<a class="headerlink" href="#setup-of-the-wsl-distrolauncher" title="Permalink to this headline">¶</a></h2>
 <p>The contents of the <code class="file docutils literal notranslate"><span class="pre">AppxManifest.xml</span></code> will be changed by KIWI NG
 if a <code class="file docutils literal notranslate"><span class="pre">containerconfig</span></code> section is provided in the XML description.
@@ -871,16 +872,16 @@ complete with respect to the requirements of the
 </div>
 </li>
 </ol>
-</div>
-<div class="section" id="testing-the-wsl-image">
+</section>
+<section id="testing-the-wsl-image">
 <h2>Testing the WSL image<a class="headerlink" href="#testing-the-wsl-image" title="Permalink to this headline">¶</a></h2>
 <p>For testing the image a Windows 10 system is required. As a first step
 the optional feature named <code class="file docutils literal notranslate"><span class="pre">Microsoft-Windows-Subsystem-Linux</span></code>
 must be enabled. For further details on how to setup the Windows machine
 see the following documentation:
 <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/about">Windows Subsystem for Linux</a></p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.defaults &mdash; KIWI NG 9.23.22 documentation</title>
+  <title>kiwi.defaults &mdash; KIWI NG 9.23.23 documentation</title>
   
 
   
@@ -759,6 +759,7 @@
 
 <span class="c1"># Default module variables</span>
 <span class="n">POST_DISK_SYNC_SCRIPT</span> <span class="o">=</span> <span class="s1">&#39;disk.sh&#39;</span>
+<span class="n">POST_BOOTSTRAP_SCRIPT</span> <span class="o">=</span> <span class="s1">&#39;post_bootstrap.sh&#39;</span>
 <span class="n">POST_PREPARE_SCRIPT</span> <span class="o">=</span> <span class="s1">&#39;config.sh&#39;</span>
 <span class="n">PRE_CREATE_SCRIPT</span> <span class="o">=</span> <span class="s1">&#39;images.sh&#39;</span>
 <span class="n">EDIT_BOOT_CONFIG_SCRIPT</span> <span class="o">=</span> <span class="s1">&#39;edit_boot_config.sh&#39;</span>
@@ -1717,6 +1718,7 @@
             <span class="s1">&#39;ppc&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ofw&#39;</span><span class="p">],</span>
             <span class="s1">&#39;ppc64&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ofw&#39;</span><span class="p">,</span> <span class="s1">&#39;opal&#39;</span><span class="p">],</span>
             <span class="s1">&#39;ppc64le&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ofw&#39;</span><span class="p">,</span> <span class="s1">&#39;opal&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;riscv64&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;efi&#39;</span><span class="p">,</span> <span class="s1">&#39;uefi&#39;</span><span class="p">],</span>
             <span class="s1">&#39;s390&#39;</span><span class="p">:</span> <span class="p">[],</span>
             <span class="s1">&#39;s390x&#39;</span><span class="p">:</span> <span class="p">[]</span>
         <span class="p">}</span></div>
@@ -1746,7 +1748,8 @@
             <span class="s1">&#39;armv6hl&#39;</span><span class="p">:</span> <span class="s1">&#39;efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;armv6l&#39;</span><span class="p">:</span> <span class="s1">&#39;efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;armv7hl&#39;</span><span class="p">:</span> <span class="s1">&#39;efi&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;armv7l&#39;</span><span class="p">:</span> <span class="s1">&#39;efi&#39;</span>
+            <span class="s1">&#39;armv7l&#39;</span><span class="p">:</span> <span class="s1">&#39;efi&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;riscv64&#39;</span><span class="p">:</span> <span class="s1">&#39;efi&#39;</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="n">arch</span> <span class="ow">in</span> <span class="n">default_firmware</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">default_firmware</span><span class="p">[</span><span class="n">arch</span><span class="p">]</span></div>
@@ -1802,7 +1805,8 @@
             <span class="s1">&#39;armv5el&#39;</span><span class="p">:</span> <span class="s1">&#39;arm-efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;armv5tel&#39;</span><span class="p">:</span> <span class="s1">&#39;arm-efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;armv6l&#39;</span><span class="p">:</span> <span class="s1">&#39;arm-efi&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;armv7l&#39;</span><span class="p">:</span> <span class="s1">&#39;arm-efi&#39;</span>
+            <span class="s1">&#39;armv7l&#39;</span><span class="p">:</span> <span class="s1">&#39;arm-efi&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;riscv64&#39;</span><span class="p">:</span> <span class="s1">&#39;riscv64-efi&#39;</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="n">arch</span> <span class="ow">in</span> <span class="n">default_module_directory_names</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">default_module_directory_names</span><span class="p">[</span><span class="n">arch</span><span class="p">]</span></div>
@@ -1836,7 +1840,8 @@
             <span class="s1">&#39;armv5el&#39;</span><span class="p">:</span> <span class="s1">&#39;bootarm.efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;armv5tel&#39;</span><span class="p">:</span> <span class="s1">&#39;bootarm.efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;armv6l&#39;</span><span class="p">:</span> <span class="s1">&#39;bootarm.efi&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;armv7l&#39;</span><span class="p">:</span> <span class="s1">&#39;bootarm.efi&#39;</span>
+            <span class="s1">&#39;armv7l&#39;</span><span class="p">:</span> <span class="s1">&#39;bootarm.efi&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;riscv64&#39;</span><span class="p">:</span> <span class="s1">&#39;bootriscv64.efi&#39;</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="n">arch</span> <span class="ow">in</span> <span class="n">default_efi_image_names</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">default_efi_image_names</span><span class="p">[</span><span class="n">arch</span><span class="p">]</span></div>

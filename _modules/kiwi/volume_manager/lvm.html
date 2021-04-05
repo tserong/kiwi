@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.volume_manager.lvm &mdash; KIWI NG 9.23.22 documentation</title>
+  <title>kiwi.volume_manager.lvm &mdash; KIWI NG 9.23.23 documentation</title>
   
 
   
@@ -968,14 +968,21 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">fstab_entries</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">volume_mount</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mount_list</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_root_volume</span><span class="p">(</span><span class="n">volume_mount</span><span class="o">.</span><span class="n">device</span><span class="p">):</span>
+            <span class="n">volume_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_volume_name_from_volume_map</span><span class="p">(</span>
+                <span class="n">volume_mount</span><span class="o">.</span><span class="n">device</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_root_volume</span><span class="p">(</span><span class="n">volume_name</span><span class="p">):</span>
                 <span class="n">mount_path</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">volume_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">3</span><span class="p">:])</span>
+                <span class="n">fs_check</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_volume_enabled_for_fs_check</span><span class="p">(</span><span class="n">volume_name</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">mount_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">):</span>
                     <span class="n">mount_path</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">mount_path</span>
                 <span class="n">fstab_entry</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                     <span class="p">[</span>
                         <span class="n">volume_mount</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">mount_path</span><span class="p">,</span> <span class="n">filesystem_name</span><span class="p">,</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">mount_options</span><span class="p">,</span> <span class="s1">&#39;1 2&#39;</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">mount_options</span><span class="p">,</span>
+                        <span class="s1">&#39;0 </span><span class="si">{fs_passno}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">fs_passno</span><span class="o">=</span><span class="s1">&#39;2&#39;</span> <span class="k">if</span> <span class="n">fs_check</span> <span class="k">else</span> <span class="s1">&#39;0&#39;</span>
+                        <span class="p">)</span>
                     <span class="p">]</span>
                 <span class="p">)</span>
                 <span class="n">fstab_entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fstab_entry</span><span class="p">)</span>
@@ -1026,6 +1033,13 @@
                     <span class="n">all_volumes_umounted</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="n">all_volumes_umounted</span></div>
 
+    <span class="k">def</span> <span class="nf">_is_volume_enabled_for_fs_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">volume_name</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">volume_name</span> <span class="o">==</span> <span class="n">volume</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;enable-for-filesystem-check&#39;</span> <span class="ow">in</span> <span class="n">volume</span><span class="o">.</span><span class="n">attributes</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
     <span class="k">def</span> <span class="nf">_create_filesystem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">volume_name</span><span class="p">,</span> <span class="n">volume_label</span><span class="p">,</span> <span class="n">filesystem_name</span><span class="p">):</span>
         <span class="n">device_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_map</span><span class="p">[</span><span class="n">volume_name</span><span class="p">]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_root_volume</span><span class="p">(</span><span class="n">volume_name</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">volume_label</span><span class="p">:</span>
@@ -1067,6 +1081,11 @@
             <span class="p">[</span><span class="s1">&#39;/dev/&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_group</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">volume_name</span><span class="p">]</span>
         <span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">_get_volume_name_from_volume_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">volume_name</span><span class="p">,</span> <span class="n">volume_path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">volume_path</span> <span class="o">==</span> <span class="n">device</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">volume_name</span>
+
     <span class="k">def</span> <span class="nf">_volume_group_in_use_on_host_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">volume_group_name</span><span class="p">):</span>
         <span class="n">vgs_call</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
             <span class="p">[</span>
@@ -1083,14 +1102,14 @@
             <span class="c1"># group name, it is considered to be not used</span>
             <span class="k">return</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="nf">_is_root_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_is_root_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">volume_name</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">volume</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> <span class="n">volume</span><span class="o">.</span><span class="n">is_root_volume</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">volume_name</span> <span class="o">==</span> <span class="n">volume</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> <span class="n">volume</span><span class="o">.</span><span class="n">is_root_volume</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span>
 
-    <span class="k">def</span> <span class="nf">_is_swap_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_is_swap_volume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">volume_name</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">volume</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">volume</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> <span class="n">volume</span><span class="o">.</span><span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;SWAP&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">volume_name</span> <span class="o">==</span> <span class="n">volume</span><span class="o">.</span><span class="n">name</span> <span class="ow">and</span> <span class="n">volume</span><span class="o">.</span><span class="n">label</span> <span class="o">==</span> <span class="s1">&#39;SWAP&#39;</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
