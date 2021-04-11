@@ -4,11 +4,10 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Adding and Removing Packages &mdash; KIWI NG 9.23.23 documentation</title>
+  <title>Adding and Removing Packages &mdash; KIWI NG 9.23.24 documentation</title>
   
 
   
@@ -731,7 +730,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="adding-and-removing-packages">
+  <div class="section" id="adding-and-removing-packages">
 <span id="packages"></span><h1>Adding and Removing Packages<a class="headerlink" href="#adding-and-removing-packages" title="Permalink to this headline">¶</a></h1>
 <p>On top of the <a class="reference internal" href="repository_setup.html#repositories"><span class="std std-ref">Setting up Repositories</span></a> setup the package setup is
 required. KIWI NG allows the end user to completely customize the selection
@@ -774,7 +773,7 @@ specific build type is currently processed by KIWI NG.</p>
 </ul>
 <p>The following sections describes the different child elements of
 a <code class="xref py py-obj docutils literal notranslate"><span class="pre">packages</span></code> group.</p>
-<section id="the-package-element">
+<div class="section" id="the-package-element">
 <span id="package-element"></span><h2>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">package</span></code> element<a class="headerlink" href="#the-package-element" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">package</span></code> element represents a single package to be installed (or
 removed), whose name is specified via the mandatory <code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code> attribute:</p>
@@ -822,8 +821,8 @@ architecture that builds the image according to the output of <code class="xref 
 <p>which results in <code class="xref py py-obj docutils literal notranslate"><span class="pre">grub2-x86_64-efi</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">shim</span></code> being only installed if the
 build host is a 64bit x86 machine, but <code class="xref py py-obj docutils literal notranslate"><span class="pre">grub2</span></code> will be installed independent
 of the architecture.</p>
-</section>
-<section id="the-archive-element">
+</div>
+<div class="section" id="the-archive-element">
 <span id="archive-element"></span><h2>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">archive</span></code> element<a class="headerlink" href="#the-archive-element" title="Permalink to this headline">¶</a></h2>
 <p>It is sometimes necessary to include additional packages into the image
 which are not available in the package manager’s native format. KIWI NG
@@ -842,8 +841,8 @@ supported by it can be included. When multiple <code class="xref py py-obj docut
 specified then they will be applied in a top to bottom order. If a file is
 already present in the image, then the file from the archive will overwrite
 it (same as with the image overlay).</p>
-</section>
-<section id="uninstall-system-packages">
+</div>
+<div class="section" id="uninstall-system-packages">
 <span id="id1"></span><h2>Uninstall System Packages<a class="headerlink" href="#uninstall-system-packages" title="Permalink to this headline">¶</a></h2>
 <p>KIWI NG supports two different methods how packages can be removed from the
 appliance:</p>
@@ -919,8 +918,8 @@ specialized appliances. For containers one can often remove the package
 partitioning tools (<code class="xref py py-obj docutils literal notranslate"><span class="pre">parted</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">fdisk</span></code>). All networking tools can be
 safely uninstalled in images for embedded devices without a network
 connection.</p>
-</section>
-<section id="the-product-and-namedcollection-element">
+</div>
+<div class="section" id="the-product-and-namedcollection-element">
 <span id="product-and-namedcollection-element"></span><h2>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">product</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">namedCollection</span></code> element<a class="headerlink" href="#the-product-and-namedcollection-element" title="Permalink to this headline">¶</a></h2>
 <p>KIWI NG supports the inclusion of openSUSE products or of namedCollections
 (<em>patterns</em> in SUSE based distributions or <em>groups</em> for RedHat based
@@ -943,8 +942,8 @@ resolution.</p></li>
 <li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plusRecommended</span></code>: Incorporates patterns and packages that are required
 and recommended by the specified patterns and packages.</p></li>
 </ul>
-</section>
-<section id="the-ignore-element">
+</div>
+<div class="section" id="the-ignore-element">
 <h2>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">ignore</span></code> element<a class="headerlink" href="#the-ignore-element" title="Permalink to this headline">¶</a></h2>
 <p>Packages can be explicitly marked to be ignored for installation inside a
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">packages</span></code> collection. This useful to exclude certain packages from being
@@ -971,8 +970,8 @@ package’s name. Optionally one can also specify the architecture via the
 a <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;packages</span> <span class="pre">type=&quot;uninstall&quot;&gt;</span></code> element has no effect! The packages will
 still get deleted.</p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

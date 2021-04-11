@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.command &mdash; KIWI NG 9.23.23 documentation</title>
+  <title>kiwi.command &mdash; KIWI NG 9.23.24 documentation</title>
   
 
   
@@ -742,11 +742,11 @@
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span>
 <span class="kn">import</span> <span class="nn">select</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">subprocess</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.codec</span> <span class="kn">import</span> <span class="n">Codec</span>
@@ -758,8 +758,22 @@
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
 
-<span class="n">command_type</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
-    <span class="s1">&#39;command_type&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;returncode&#39;</span><span class="p">]</span>
+<span class="n">command_type</span> <span class="o">=</span> <span class="n">NamedTuple</span><span class="p">(</span>
+    <span class="s1">&#39;command_type&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;returncode&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">command_call_type</span> <span class="o">=</span> <span class="n">NamedTuple</span><span class="p">(</span>
+    <span class="s1">&#39;command_call_type&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;output_available&#39;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;error_available&#39;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;process&#39;</span><span class="p">,</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">)</span>
+    <span class="p">]</span>
 <span class="p">)</span>
 
 
@@ -930,14 +944,7 @@
                     <span class="k">return</span> <span class="kc">True</span>
             <span class="k">return</span> <span class="n">_select</span>
 
-        <span class="n">command</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
-            <span class="s1">&#39;command&#39;</span><span class="p">,</span> <span class="p">[</span>
-                <span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="s1">&#39;output_available&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;error_available&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;process&#39;</span>
-            <span class="p">]</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="n">command</span><span class="p">(</span>
+        <span class="k">return</span> <span class="n">command_call_type</span><span class="p">(</span>
             <span class="n">output</span><span class="o">=</span><span class="n">process</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
             <span class="n">output_available</span><span class="o">=</span><span class="n">output_available</span><span class="p">(),</span>
             <span class="n">error</span><span class="o">=</span><span class="n">process</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span>

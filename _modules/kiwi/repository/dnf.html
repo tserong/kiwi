@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.repository.dnf &mdash; KIWI NG 9.23.23 documentation</title>
+  <title>kiwi.repository.dnf &mdash; KIWI NG 9.23.24 documentation</title>
   
 
   
@@ -769,7 +769,7 @@
 <span class="sd">    :param str runtime_dnf_config: instance of :class:`ConfigParser`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="RepositoryDnf.post_init"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="RepositoryDnf.post_init"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.dnf.RepositoryDnf.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Post initialization method</span>
 
@@ -780,8 +780,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="o">=</span> <span class="n">custom_args</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">exclude_docs</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">custom_args</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="c1"># extract custom arguments not used in dnf call</span>
         <span class="k">if</span> <span class="s1">&#39;exclude_docs&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">:</span>
@@ -914,7 +912,7 @@
         <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;rpm-md&#39;</span><span class="p">,</span>
         <span class="n">prio</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">dist</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">components</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">user</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">secret</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">credentials_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">repo_gpgcheck</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">pkg_gpgcheck</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">repo_gpgcheck</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">pkg_gpgcheck</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">sourcetype</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">use_for_bootstrap</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -952,18 +950,17 @@
             <span class="n">repo_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
                 <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;priority&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">prio</span><span class="p">)</span>
             <span class="p">)</span>
-        <span class="k">if</span> <span class="n">repo_gpgcheck</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">repo_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-                <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;repo_gpgcheck&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span> <span class="k">if</span> <span class="n">repo_gpgcheck</span> <span class="k">else</span> <span class="s1">&#39;0&#39;</span>
-            <span class="p">)</span>
-        <span class="k">if</span> <span class="n">pkg_gpgcheck</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">repo_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-                <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;gpgcheck&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span> <span class="k">if</span> <span class="n">pkg_gpgcheck</span> <span class="k">else</span> <span class="s1">&#39;0&#39;</span>
-            <span class="p">)</span>
+        <span class="n">repo_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+            <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;repo_gpgcheck&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span> <span class="k">if</span> <span class="n">repo_gpgcheck</span> <span class="k">else</span> <span class="s1">&#39;0&#39;</span>
+        <span class="p">)</span>
+        <span class="n">repo_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+            <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;gpgcheck&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span> <span class="k">if</span> <span class="n">pkg_gpgcheck</span> <span class="k">else</span> <span class="s1">&#39;0&#39;</span>
+        <span class="p">)</span>
         <span class="k">if</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">is_buildservice_worker</span><span class="p">():</span>
-            <span class="c1"># when building in the build service, modular metadata is inaccessible...</span>
-            <span class="c1"># in order to use modular content in the build service, we need to disable</span>
-            <span class="c1"># modular filtering, which is done with module_hotfixes option</span>
+            <span class="c1"># when building in the build service, modular metadata is</span>
+            <span class="c1"># inaccessible. In order to use modular content in the build</span>
+            <span class="c1"># service, we need to disable modular filtering, which is</span>
+            <span class="c1"># done with module_hotfixes option</span>
             <span class="n">repo_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
                 <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;module_hotfixes&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span>
             <span class="p">)</span>

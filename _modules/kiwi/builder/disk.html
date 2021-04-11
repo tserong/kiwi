@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.23 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.24 documentation</title>
   
 
   
@@ -748,22 +748,27 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">pickle</span>
 <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span>
+<span class="p">)</span>
 
 <span class="c1"># project</span>
 <span class="kn">import</span> <span class="nn">kiwi.defaults</span> <span class="k">as</span> <span class="nn">defaults</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
+<span class="kn">from</span> <span class="nn">kiwi.filesystem.base</span> <span class="kn">import</span> <span class="n">FileSystemBase</span>
 <span class="kn">from</span> <span class="nn">kiwi.bootloader.config</span> <span class="kn">import</span> <span class="n">BootLoaderConfig</span>
 <span class="kn">from</span> <span class="nn">kiwi.bootloader.install</span> <span class="kn">import</span> <span class="n">BootLoaderInstall</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.identifier</span> <span class="kn">import</span> <span class="n">SystemIdentifier</span>
 <span class="kn">from</span> <span class="nn">kiwi.boot.image</span> <span class="kn">import</span> <span class="n">BootImage</span>
+<span class="kn">from</span> <span class="nn">kiwi.boot.image.base</span> <span class="kn">import</span> <span class="n">BootImageBase</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.setup</span> <span class="kn">import</span> <span class="n">DiskSetup</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.loop_device</span> <span class="kn">import</span> <span class="n">LoopDevice</span>
 <span class="kn">from</span> <span class="nn">kiwi.firmware</span> <span class="kn">import</span> <span class="n">FirmWare</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.disk</span> <span class="kn">import</span> <span class="n">Disk</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.raid_device</span> <span class="kn">import</span> <span class="n">RaidDevice</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.luks_device</span> <span class="kn">import</span> <span class="n">LuksDevice</span>
+<span class="kn">from</span> <span class="nn">kiwi.storage.device_provider</span> <span class="kn">import</span> <span class="n">DeviceProvider</span>
 <span class="kn">from</span> <span class="nn">kiwi.filesystem</span> <span class="kn">import</span> <span class="n">FileSystem</span>
 <span class="kn">from</span> <span class="nn">kiwi.filesystem.squashfs</span> <span class="kn">import</span> <span class="n">FileSystemSquashFs</span>
 <span class="kn">from</span> <span class="nn">kiwi.volume_manager</span> <span class="kn">import</span> <span class="n">VolumeManager</span>
@@ -800,8 +805,10 @@
 <span class="sd">        * signing_keys: list of package signing keys</span>
 <span class="sd">        * xz_options: string of XZ compression parameters</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_state</span><span class="p">:</span> <span class="n">XMLState</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">xml_state</span><span class="p">:</span> <span class="n">XMLState</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_platform_name</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">=</span> <span class="n">root_dir</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span> <span class="o">=</span> <span class="n">target_dir</span>
@@ -878,20 +885,20 @@
         <span class="c1"># an instance of a class with the sync_data capability</span>
         <span class="c1"># representing the entire image system except for the boot/ area</span>
         <span class="c1"># which could live on another part of the disk</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">system</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">system</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># an instance of a class with the sync_data capability</span>
         <span class="c1"># representing the boot/ area of the disk if not part of</span>
         <span class="c1"># self.system</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">system_boot</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">system_boot</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FileSystemBase</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># an instance of a class with the sync_data capability</span>
         <span class="c1"># representing the boot/efi area of the disk</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">system_efi</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">system_efi</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FileSystemBase</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># an instance of a class with the sync_data capability</span>
         <span class="c1"># representing the spare_part_mountpoint area of the disk</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">system_spare</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">system_spare</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FileSystemBase</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># result store</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">Result</span><span class="p">(</span><span class="n">xml_state</span><span class="p">)</span>
@@ -1052,7 +1059,8 @@
                 <span class="s1">&#39;root_is_snapshot&#39;</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_btrfs_root_is_snapshot</span><span class="p">(),</span>
                 <span class="s1">&#39;root_is_readonly_snapshot&#39;</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_btrfs_root_is_readonly_snapshot</span><span class="p">(),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span>
+                    <span class="n">get_btrfs_root_is_readonly_snapshot</span><span class="p">(),</span>
                 <span class="s1">&#39;quota_groups&#39;</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_btrfs_quota_groups</span><span class="p">(),</span>
                 <span class="s1">&#39;resize_on_boot&#39;</span><span class="p">:</span>
@@ -1314,7 +1322,7 @@
 
         <span class="k">return</span> <span class="n">result_instance</span></div>
 
-    <span class="k">def</span> <span class="nf">_load_boot_image_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BootImage</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_load_boot_image_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BootImageBase</span><span class="p">:</span>
         <span class="n">boot_image_dump_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span> <span class="o">+</span> <span class="s1">&#39;/boot_image.pickledump&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">boot_image_dump_file</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">KiwiInstallMediaError</span><span class="p">(</span>
@@ -1338,7 +1346,9 @@
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_install_image_requested</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">True</span> <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">install_iso</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">install_stick</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">install_pxe</span><span class="p">)</span> <span class="k">else</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">install_iso</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">install_stick</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">install_pxe</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_exclude_list_for_root_data_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="n">exclude_list</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_exclude_list_for_root_data_sync</span><span class="p">()</span>
@@ -1455,24 +1465,25 @@
             <span class="n">disksize_used_mbytes</span> <span class="o">+=</span> <span class="n">partition_mbsize</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">swap_mbytes</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager_name</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager_name</span> <span class="o">!=</span> <span class="s1">&#39;lvm&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager_name</span> <span class="ow">or</span> \
+               <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager_name</span> <span class="o">!=</span> <span class="s1">&#39;lvm&#39;</span><span class="p">:</span>
                 <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; creating SWAP partition&#39;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">disk</span><span class="o">.</span><span class="n">create_swap_partition</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">swap_mbytes</span>
+                    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">swap_mbytes</span><span class="si">}</span><span class="s1">&#39;</span>
                 <span class="p">)</span>
                 <span class="n">disksize_used_mbytes</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">swap_mbytes</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spare_part_mbsize</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spare_part_is_last</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; creating spare partition&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">disk</span><span class="o">.</span><span class="n">create_spare_partition</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">spare_part_mbsize</span>
+                <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">spare_part_mbsize</span><span class="si">}</span><span class="s1">&#39;</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; creating readonly root partition&#39;</span><span class="p">)</span>
             <span class="n">squashed_root_file</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
             <span class="n">squashed_root</span> <span class="o">=</span> <span class="n">FileSystemSquashFs</span><span class="p">(</span>
-                <span class="n">device_provider</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
+                <span class="n">device_provider</span><span class="o">=</span><span class="n">DeviceProvider</span><span class="p">(),</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
                 <span class="n">custom_args</span><span class="o">=</span><span class="p">{</span>
                     <span class="s1">&#39;compression&#39;</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_squashfscompression</span><span class="p">()</span>
@@ -1580,7 +1591,9 @@
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Creating generic boot image etc/fstab&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_write_generic_fstab</span><span class="p">(</span><span class="n">device_map</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">setup</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_write_generic_fstab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">setup</span><span class="p">:</span> <span class="n">DiskSetup</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_write_generic_fstab</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">device_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">setup</span><span class="p">:</span> <span class="n">SystemSetup</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">root_is_snapshot</span> <span class="o">=</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_btrfs_root_is_snapshot</span><span class="p">()</span>
         <span class="n">root_is_readonly_snapshot</span> <span class="o">=</span> \
@@ -1693,7 +1706,9 @@
                 <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">recovery_metadata</span><span class="p">)</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_write_bootloader_meta_data_to_system_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_write_bootloader_meta_data_to_system_image</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">device_map</span><span class="p">:</span> <span class="n">Dict</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bootloader</span> <span class="o">!=</span> <span class="s1">&#39;custom&#39;</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Creating </span><span class="si">%s</span><span class="s1"> bootloader configuration&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bootloader</span><span class="p">)</span>
             <span class="n">boot_options</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1740,7 +1755,7 @@
             <span class="n">boot_partition_id</span> <span class="o">=</span> <span class="n">partition_id_map</span><span class="p">[</span><span class="s1">&#39;kiwi_BootPart&#39;</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">system_setup</span><span class="o">.</span><span class="n">call_edit_boot_config_script</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">requested_filesystem</span><span class="p">,</span> <span class="n">boot_partition_id</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">requested_filesystem</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">boot_partition_id</span><span class="p">)</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_sync_system_to_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1762,7 +1777,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span><span class="p">:</span>
             <span class="n">squashed_root_file</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
             <span class="n">squashed_root</span> <span class="o">=</span> <span class="n">FileSystemSquashFs</span><span class="p">(</span>
-                <span class="n">device_provider</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
+                <span class="n">device_provider</span><span class="o">=</span><span class="n">DeviceProvider</span><span class="p">(),</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
                 <span class="n">custom_args</span><span class="o">=</span><span class="p">{</span>
                     <span class="s1">&#39;compression&#39;</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_squashfscompression</span><span class="p">()</span>

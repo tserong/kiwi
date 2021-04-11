@@ -4,11 +4,10 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Contributing &mdash; KIWI NG 9.23.23 documentation</title>
+  <title>Contributing &mdash; KIWI NG 9.23.24 documentation</title>
   
 
   
@@ -729,14 +728,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="contributing">
+  <div class="section" id="contributing">
 <h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Abstract</strong></p>
 <p>This document describes the development process of KIWI NG
 and how you can be part of it. This description applies
-to version 9.23.23.</p>
+to version 9.23.24.</p>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
@@ -745,30 +744,30 @@ to version 9.23.23.</p>
 <li class="toctree-l1"><a class="reference internal" href="contributing/schema_extensions.html">Extending KIWI NG with Custom Operations</a></li>
 </ul>
 </div>
-<section id="the-basics">
+<div class="section" id="the-basics">
 <h2>The Basics<a class="headerlink" href="#the-basics" title="Permalink to this headline">¶</a></h2>
 <p>The core appliance builder is developed in Python and follows the test
 driven development rules.</p>
 <p>If you want to implement a bigger feature, consider opening an issue on
 GitHub first to discuss the changes. Or join the discussion in the
 <code class="docutils literal notranslate"><span class="pre">#kiwi</span></code> channel on <a class="reference external" href="https://about.riot.im">Riot.im</a>.</p>
-</section>
-<section id="fork-the-upstream-repository">
+</div>
+<div class="section" id="fork-the-upstream-repository">
 <h2>Fork the upstream repository<a class="headerlink" href="#fork-the-upstream-repository" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>On GitHub, navigate to: <a class="reference external" href="https://github.com/OSInside/kiwi">https://github.com/OSInside/kiwi</a></p></li>
 <li><p>In the top-right corner of the page, click <strong class="command">Fork</strong>.</p></li>
 </ol>
-</section>
-<section id="create-a-local-clone-of-the-forked-repository">
+</div>
+<div class="section" id="create-a-local-clone-of-the-forked-repository">
 <h2>Create a local clone of the forked repository<a class="headerlink" href="#create-a-local-clone-of-the-forked-repository" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>git clone https://github.com/YOUR-USERNAME/kiwi
 
 <span class="gp">$ </span>git remote add upstream https://github.com/OSInside/kiwi.git
 </pre></div>
 </div>
-</section>
-<section id="install-required-operating-system-packages">
+</div>
+<div class="section" id="install-required-operating-system-packages">
 <h2>Install Required Operating System Packages<a class="headerlink" href="#install-required-operating-system-packages" title="Permalink to this headline">¶</a></h2>
 <p>KIWI NG requires the following additional packages which are not provided by
 <strong class="command">pip</strong>:</p>
@@ -806,8 +805,8 @@ error message. In this case we recommend to take a look at
 the package list encoded in the script and adapt to your
 distribution and package manager as needed.</p>
 </div>
-</section>
-<section id="create-a-python-virtual-development-environment">
+</div>
+<div class="section" id="create-a-python-virtual-development-environment">
 <h2>Create a Python Virtual Development Environment<a class="headerlink" href="#create-a-python-virtual-development-environment" title="Permalink to this headline">¶</a></h2>
 <p>The following commands initializes and activates a development
 environment for Python 3:</p>
@@ -838,8 +837,8 @@ to run an actual build using your local changes:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">source</span> .tox/3/bin/activate
 </pre></div>
 </div>
-</section>
-<section id="running-the-unit-tests">
+</div>
+<div class="section" id="running-the-unit-tests">
 <h2>Running the Unit Tests<a class="headerlink" href="#running-the-unit-tests" title="Permalink to this headline">¶</a></h2>
 <p>We use <strong class="command">tox</strong> to run the unit tests. Tox sets up its own
 virtualenvs inside the <code class="file docutils literal notranslate"><span class="pre">.tox</span></code> directory for multiple Python versions
@@ -871,8 +870,8 @@ example runs the test cases for the Python 3.6 interpreter only:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>tox -e unit_py3_6
 </pre></div>
 </div>
-</section>
-<section id="create-a-branch-for-each-feature-or-bugfix">
+</div>
+<div class="section" id="create-a-branch-for-each-feature-or-bugfix">
 <h2>Create a Branch for each Feature or Bugfix<a class="headerlink" href="#create-a-branch-for-each-feature-or-bugfix" title="Permalink to this headline">¶</a></h2>
 <p>Code changes should be done in an extra Git branch. This allows for
 creating GitHub pull requests in a clean way. See also: <a class="reference external" href="https://help.github.com/en/categories/collaborating-with-issues-and-pull-requests">Collaborating with
@@ -908,8 +907,8 @@ create a pull request into the upstream repository.</p>
 </div>
 <p>Thank you much for contributing to KIWI NG. Your time and work effort is very
 much appreciated!</p>
-</section>
-<section id="coding-style">
+</div>
+<div class="section" id="coding-style">
 <h2>Coding Style<a class="headerlink" href="#coding-style" title="Permalink to this headline">¶</a></h2>
 <p>KIWI NG follows the general PEP8 guidelines with the following exceptions:</p>
 <ul class="simple">
@@ -920,7 +919,7 @@ of a class, but should be either prefixed with the <code class="xref py py-obj d
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code> method.</p></li>
 <li><p>The names of constants are not written in all capital letters.</p></li>
 </ul>
-<section id="documentation">
+<div class="section" id="documentation">
 <h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h3>
 <p>KIWI NG uses <a class="reference external" href="https://www.sphinx-doc.org/en/master/">Sphinx</a> for the API and
 user documentation.</p>
@@ -976,13 +975,13 @@ found in <code class="xref py py-obj docutils literal notranslate"><span class="
 specialized topics would belong into the <code class="xref py py-obj docutils literal notranslate"><span class="pre">building/</span></code> subfolder.</p>
 <p>Adhere to a line limit of 75 characters when writing the user facing
 documentation <a class="footnote-reference brackets" href="#f2" id="id3">2</a>.</p>
-</section>
-</section>
-<section id="additional-information">
+</div>
+</div>
+<div class="section" id="additional-information">
 <h2>Additional Information<a class="headerlink" href="#additional-information" title="Permalink to this headline">¶</a></h2>
 <p>The following sections provides further information about the repository
 integrity, version, package and documentation management.</p>
-<section id="signing-git-patches">
+<div class="section" id="signing-git-patches">
 <span id="id4"></span><h3>Signing Git Patches<a class="headerlink" href="#signing-git-patches" title="Permalink to this headline">¶</a></h3>
 <p>To ensure the integrity of the repository and the code base, patches sent
 for inclusion should be signed with a GPG key.</p>
@@ -1019,8 +1018,8 @@ signkey will have only a <code class="xref py py-obj docutils literal notranslat
 (then you are looking at your ordinary GPG key that can also encrypt).</p>
 </li>
 </ol>
-</section>
-<section id="bumping-the-version">
+</div>
+<div class="section" id="bumping-the-version">
 <h3>Bumping the Version<a class="headerlink" href="#bumping-the-version" title="Permalink to this headline">¶</a></h3>
 <p>The KIWI NG project follows the <a class="reference external" href="https://semver.org">Semantic Versioning</a>
 scheme. We use the <strong class="command">bumpversion</strong> tool for consistent versioning.</p>
@@ -1046,8 +1045,8 @@ levels are reset to zero:</p>
 </div>
 </li>
 </ul>
-</section>
-<section id="creating-a-rpm-package">
+</div>
+<div class="section" id="creating-a-rpm-package">
 <h3>Creating a RPM Package<a class="headerlink" href="#creating-a-rpm-package" title="Permalink to this headline">¶</a></h3>
 <p>We provide a template for a RPM spec file in
 <code class="file docutils literal notranslate"><span class="pre">package/python-kiwi-spec-template</span></code> alongside with a rpmlint
@@ -1083,9 +1082,9 @@ commands <code class="xref py py-obj docutils literal notranslate"><span class="
 <dd><p>Requires a full LaTeX installation.</p>
 </dd>
 </dl>
-</section>
-</section>
-</section>
+</div>
+</div>
+</div>
 
 
            </div>

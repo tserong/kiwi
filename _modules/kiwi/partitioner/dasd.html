@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.partitioner.dasd &mdash; KIWI NG 9.23.23 documentation</title>
+  <title>kiwi.partitioner.dasd &mdash; KIWI NG 9.23.24 documentation</title>
   
 
   
@@ -793,7 +793,7 @@
             <span class="k">if</span> <span class="n">mbsize</span> <span class="o">==</span> <span class="s1">&#39;all_free&#39;</span><span class="p">:</span>
                 <span class="n">partition</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;n</span><span class="se">\n</span><span class="s1">p</span><span class="se">\n\n\n</span><span class="s1">w</span><span class="se">\n</span><span class="s1">q</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">partition</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;n</span><span class="se">\n</span><span class="s1">p</span><span class="se">\n\n</span><span class="s1">+</span><span class="si">%d</span><span class="s1">M</span><span class="se">\n</span><span class="s1">w</span><span class="se">\n</span><span class="s1">q</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">mbsize</span><span class="p">)</span>
+                <span class="n">partition</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;n</span><span class="se">\n</span><span class="s1">p</span><span class="se">\n\n</span><span class="s1">+</span><span class="si">{</span><span class="n">mbsize</span><span class="si">}</span><span class="s1">M</span><span class="se">\n</span><span class="s1">w</span><span class="se">\n</span><span class="s1">q</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">bash_command</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">fdasd_input</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;fdasd&#39;</span><span class="p">,</span> <span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">disk_device</span><span class="p">]</span>
         <span class="p">)</span>

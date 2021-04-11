@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.install &mdash; KIWI NG 9.23.23 documentation</title>
+  <title>kiwi.bootloader.install &mdash; KIWI NG 9.23.24 documentation</title>
   
 
   
@@ -773,14 +773,12 @@
         <span class="n">custom_args</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">):</span>
         <span class="n">name_map</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;grub2&#39;</span><span class="p">:</span> <span class="s1">&#39;BootLoaderInstallGrub2&#39;</span>
-            <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;grub2&#39;</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;grub2_s390x_emu&#39;</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="s1">&#39;grub2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;grub2&#39;</span><span class="p">:</span> <span class="s1">&#39;BootLoaderInstallGrub2&#39;</span><span class="p">},</span>
+            <span class="s1">&#39;grub2_s390x_emu&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;grub2&#39;</span><span class="p">:</span> <span class="s1">&#39;BootLoaderInstallGrub2&#39;</span><span class="p">}</span>
         <span class="p">}</span>
-
-        <span class="k">for</span> <span class="n">bootloader_namespace</span><span class="p">,</span> <span class="n">bootloader_name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">name_map</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
-            <span class="k">if</span> <span class="n">bootloader_name</span><span class="p">:</span>
-                <span class="k">break</span>
         <span class="k">try</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">bootloader_namespace</span><span class="p">,</span> <span class="n">bootloader_name</span><span class="p">)</span> <span class="o">=</span> \
+                <span class="nb">list</span><span class="p">(</span><span class="n">name_map</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">bootloader_install</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span>
                 <span class="s1">&#39;kiwi.bootloader.install.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bootloader_namespace</span><span class="p">)</span>
             <span class="p">)</span>
@@ -789,8 +787,7 @@
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiBootLoaderInstallSetupError</span><span class="p">(</span>
-                <span class="s1">&#39;Support for </span><span class="si">{}</span><span class="s1"> bootloader installation &#39;</span>
-                <span class="s1">&#39;not implemented&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="sa">f</span><span class="s1">&#39;Support for </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1"> bootloader installation not implemented&#39;</span>
             <span class="p">)</span></div></div>
 </pre></div>
 

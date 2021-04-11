@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.builder.live &mdash; KIWI NG 9.23.23 documentation</title>
+  <title>kiwi.builder.live &mdash; KIWI NG 9.23.24 documentation</title>
   
 
   
@@ -757,6 +757,7 @@
 <span class="kn">from</span> <span class="nn">kiwi.filesystem.isofs</span> <span class="kn">import</span> <span class="n">FileSystemIsoFs</span>
 <span class="kn">from</span> <span class="nn">kiwi.filesystem.setup</span> <span class="kn">import</span> <span class="n">FileSystemSetup</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.loop_device</span> <span class="kn">import</span> <span class="n">LoopDevice</span>
+<span class="kn">from</span> <span class="nn">kiwi.storage.device_provider</span> <span class="kn">import</span> <span class="n">DeviceProvider</span>
 <span class="kn">from</span> <span class="nn">kiwi.boot.image.dracut</span> <span class="kn">import</span> <span class="n">BootImageDracut</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.size</span> <span class="kn">import</span> <span class="n">SystemSize</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.setup</span> <span class="kn">import</span> <span class="n">SystemSetup</span>
@@ -771,10 +772,7 @@
 <span class="kn">from</span> <span class="nn">kiwi.iso_tools.base</span> <span class="kn">import</span> <span class="n">IsoToolsBase</span>
 <span class="kn">from</span> <span class="nn">kiwi.xml_state</span> <span class="kn">import</span> <span class="n">XMLState</span>
 
-
-<span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">KiwiLiveBootImageError</span>
-<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="n">KiwiLiveBootImageError</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
 
@@ -788,9 +786,12 @@
 <span class="sd">    :param str root_dir: root directory path name</span>
 <span class="sd">    :param dict custom_args: Custom processing arguments</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_state</span><span class="p">:</span> <span class="n">XMLState</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">media_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">live_container_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">xml_state</span><span class="p">:</span> <span class="n">XMLState</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">media_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">live_container_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_platform_name</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">=</span> <span class="n">root_dir</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span> <span class="o">=</span> <span class="n">target_dir</span>
@@ -985,7 +986,7 @@
         <span class="p">)</span>
         <span class="n">live_container_image</span> <span class="o">=</span> <span class="n">FileSystem</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
             <span class="n">name</span><span class="o">=</span><span class="s1">&#39;squashfs&#39;</span><span class="p">,</span>
-            <span class="n">device_provider</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">device_provider</span><span class="o">=</span><span class="n">DeviceProvider</span><span class="p">(),</span>
             <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">live_container_dir</span><span class="p">,</span>
             <span class="n">custom_args</span><span class="o">=</span><span class="p">{</span>
                 <span class="s1">&#39;compression&#39;</span><span class="p">:</span>
@@ -1004,7 +1005,7 @@
         <span class="c1"># create iso filesystem from media_dir</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Creating live ISO image&#39;</span><span class="p">)</span>
         <span class="n">iso_image</span> <span class="o">=</span> <span class="n">FileSystemIsoFs</span><span class="p">(</span>
-            <span class="n">device_provider</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">media_dir</span><span class="p">,</span>
+            <span class="n">device_provider</span><span class="o">=</span><span class="n">DeviceProvider</span><span class="p">(),</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">media_dir</span><span class="p">,</span>
             <span class="n">custom_args</span><span class="o">=</span><span class="n">custom_iso_args</span>
         <span class="p">)</span>
         <span class="n">iso_image</span><span class="o">.</span><span class="n">create_on_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isoname</span><span class="p">)</span>

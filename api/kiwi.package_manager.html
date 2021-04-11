@@ -4,11 +4,10 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.package_manager Package &mdash; KIWI NG 9.23.23 documentation</title>
+  <title>kiwi.package_manager Package &mdash; KIWI NG 9.23.24 documentation</title>
   
 
   
@@ -731,19 +730,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="kiwi-package-manager-package">
+  <div class="section" id="kiwi-package-manager-package">
 <h1>kiwi.package_manager Package<a class="headerlink" href="#kiwi-package-manager-package" title="Permalink to this headline">¶</a></h1>
-<section id="submodules">
+<div class="section" id="submodules">
 <span id="db-kiwi-package-manager-submodules"></span><h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</section>
-<section id="module-kiwi.package_manager.base">
+</div>
+<div class="section" id="module-kiwi.package_manager.base">
 <span id="kiwi-package-manager-base-module"></span><h2><a class="reference internal" href="#module-kiwi.package_manager.base" title="kiwi.package_manager.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.package_manager.base</span></code></a> Module<a class="headerlink" href="#module-kiwi.package_manager.base" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.package_manager.base.PackageManagerBase">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.package_manager.base.</span></code><code class="sig-name descname"><span class="pre">PackageManagerBase</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="kiwi.repository.html#kiwi.repository.base.RepositoryBase" title="kiwi.repository.base.RepositoryBase"><span class="pre">kiwi.repository.base.RepositoryBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.package_manager.base.</span></code><code class="sig-name descname"><span class="pre">PackageManagerBase</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="kiwi.repository.html#kiwi.repository.base.RepositoryBase" title="kiwi.repository.base.RepositoryBase"><span class="pre">kiwi.repository.base.RepositoryBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p><strong>Implements base class for installation/deletion of
-packages and collections using a package manager</strong></p>
+<p><strong>Implements base class for Package Management</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -772,14 +770,12 @@ resulting image such as custom macros</p>
 <dl class="py method">
 <dt id="kiwi.package_manager.base.PackageManagerBase.database_consistent">
 <code class="sig-name descname"><span class="pre">database_consistent</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.database_consistent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.database_consistent" title="Permalink to this definition">¶</a></dt>
-<dd><p>OBSOLETE: Will be removed 2019-06-05</p>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.base.PackageManagerBase.dump_reload_package_database">
 <code class="sig-name descname"><span class="pre">dump_reload_package_database</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">45</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.dump_reload_package_database"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.dump_reload_package_database" title="Permalink to this definition">¶</a></dt>
-<dd><p>OBSOLETE: Will be removed 2019-06-05</p>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.base.PackageManagerBase.has_failed">
@@ -844,7 +840,7 @@ overwritten in specialized package manager class</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.base.PackageManagerBase.post_init">
-<code class="sig-name descname"><span class="pre">post_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.post_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.post_init" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">post_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.post_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.post_init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Post initialization method</p>
 <p>Implementation in specialized package manager class</p>
 <dl class="field-list simple">
@@ -863,7 +859,7 @@ overwritten in specialized package manager class</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.base.PackageManagerBase.process_delete_requests">
-<code class="sig-name descname"><span class="pre">process_delete_requests</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.process_delete_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.process_delete_requests" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">process_delete_requests</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="kiwi.html#kiwi.command.command_call_type" title="kiwi.command.command_call_type"><span class="pre">kiwi.command.command_call_type</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.process_delete_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.process_delete_requests" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package delete requests (chroot)</p>
 <p>Implementation in specialized package manager class</p>
 <dl class="field-list simple">
@@ -875,14 +871,14 @@ overwritten in specialized package manager class</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.base.PackageManagerBase.process_install_requests">
-<code class="sig-name descname"><span class="pre">process_install_requests</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.process_install_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.process_install_requests" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">process_install_requests</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="kiwi.html#kiwi.command.command_call_type" title="kiwi.command.command_call_type"><span class="pre">kiwi.command.command_call_type</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.process_install_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.process_install_requests" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package install requests for image phase (chroot)</p>
 <p>Implementation in specialized package manager class</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.base.PackageManagerBase.process_install_requests_bootstrap">
-<code class="sig-name descname"><span class="pre">process_install_requests_bootstrap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_bind</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="kiwi.system.html#kiwi.system.root_bind.RootBind" title="kiwi.system.root_bind.RootBind"><span class="pre">kiwi.system.root_bind.RootBind</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.process_install_requests_bootstrap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">process_install_requests_bootstrap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_bind</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="kiwi.system.html#kiwi.system.root_bind.RootBind" title="kiwi.system.root_bind.RootBind"><span class="pre">kiwi.system.root_bind.RootBind</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="kiwi.html#kiwi.command.command_call_type" title="kiwi.command.command_call_type"><span class="pre">kiwi.command.command_call_type</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.process_install_requests_bootstrap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package install requests for bootstrap phase (no chroot)</p>
 <p>Implementation in specialized package manager class</p>
 </dd></dl>
@@ -940,10 +936,7 @@ overwritten in specialized package manager class</p>
 <dl class="py method">
 <dt id="kiwi.package_manager.base.PackageManagerBase.request_package_lock">
 <code class="sig-name descname"><span class="pre">request_package_lock</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.request_package_lock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.request_package_lock" title="Permalink to this definition">¶</a></dt>
-<dd><p>Queue a package exclusion(skip) request</p>
-<p>OBSOLETE: Will be removed 2019-06-05</p>
-<p>Kept for API compatbility Method calls: request_package_exclusion</p>
-</dd></dl>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.base.PackageManagerBase.request_product">
@@ -959,19 +952,19 @@ overwritten in specialized package manager class</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.base.PackageManagerBase.update">
-<code class="sig-name descname"><span class="pre">update</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">update</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="kiwi.html#kiwi.command.command_call_type" title="kiwi.command.command_call_type"><span class="pre">kiwi.command.command_call_type</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/base.html#PackageManagerBase.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.base.PackageManagerBase.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package update requests (chroot)</p>
 <p>Implementation in specialized package manager class</p>
 </dd></dl>
 
 </dd></dl>
 
-</section>
-<section id="module-kiwi.package_manager.dnf">
+</div>
+<div class="section" id="module-kiwi.package_manager.dnf">
 <span id="kiwi-package-manager-dnf-module"></span><h2><a class="reference internal" href="#module-kiwi.package_manager.dnf" title="kiwi.package_manager.dnf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.package_manager.dnf</span></code></a> Module<a class="headerlink" href="#module-kiwi.package_manager.dnf" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.package_manager.dnf.PackageManagerDnf">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.package_manager.dnf.</span></code><code class="sig-name descname"><span class="pre">PackageManagerDnf</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="kiwi.repository.html#kiwi.repository.base.RepositoryBase" title="kiwi.repository.base.RepositoryBase"><span class="pre">kiwi.repository.base.RepositoryBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.package_manager.dnf.</span></code><code class="sig-name descname"><span class="pre">PackageManagerDnf</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="kiwi.repository.html#kiwi.repository.base.RepositoryBase" title="kiwi.repository.base.RepositoryBase"><span class="pre">kiwi.repository.base.RepositoryBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.package_manager.base.PackageManagerBase" title="kiwi.package_manager.base.PackageManagerBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.package_manager.base.PackageManagerBase</span></code></a></p>
 <p><strong>*Implements base class for installation/deletion of
 packages and collections using dnf*</strong></p>
@@ -1037,7 +1030,7 @@ the same base package name</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.dnf.PackageManagerDnf.post_init">
-<code class="sig-name descname"><span class="pre">post_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.post_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.post_init" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">post_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.post_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.post_init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Post initialization method</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1060,7 +1053,7 @@ rpm package installed during bootstrap phase</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.dnf.PackageManagerDnf.process_delete_requests">
-<code class="sig-name descname"><span class="pre">process_delete_requests</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.process_delete_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.process_delete_requests" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">process_delete_requests</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="kiwi.html#kiwi.command.command_call_type" title="kiwi.command.command_call_type"><span class="pre">kiwi.command.command_call_type</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.process_delete_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.process_delete_requests" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package delete requests (chroot)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1081,7 +1074,7 @@ installed.</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.dnf.PackageManagerDnf.process_install_requests">
-<code class="sig-name descname"><span class="pre">process_install_requests</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.process_install_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.process_install_requests" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">process_install_requests</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="kiwi.html#kiwi.command.command_call_type" title="kiwi.command.command_call_type"><span class="pre">kiwi.command.command_call_type</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.process_install_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.process_install_requests" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package install requests for image phase (chroot)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1095,7 +1088,7 @@ installed.</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.dnf.PackageManagerDnf.process_install_requests_bootstrap">
-<code class="sig-name descname"><span class="pre">process_install_requests_bootstrap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_bind</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="kiwi.system.html#kiwi.system.root_bind.RootBind" title="kiwi.system.root_bind.RootBind"><span class="pre">kiwi.system.root_bind.RootBind</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.process_install_requests_bootstrap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">process_install_requests_bootstrap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_bind</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="kiwi.system.html#kiwi.system.root_bind.RootBind" title="kiwi.system.root_bind.RootBind"><span class="pre">kiwi.system.root_bind.RootBind</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="kiwi.html#kiwi.command.command_call_type" title="kiwi.command.command_call_type"><span class="pre">kiwi.command.command_call_type</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.process_install_requests_bootstrap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package install requests for bootstrap phase (no chroot)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1169,7 +1162,7 @@ installed.</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.dnf.PackageManagerDnf.update">
-<code class="sig-name descname"><span class="pre">update</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">update</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="kiwi.html#kiwi.command.command_call_type" title="kiwi.command.command_call_type"><span class="pre">kiwi.command.command_call_type</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/dnf.html#PackageManagerDnf.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.dnf.PackageManagerDnf.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package update requests (chroot)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1183,20 +1176,18 @@ installed.</p>
 
 </dd></dl>
 
-</section>
-<section id="module-kiwi.package_manager.zypper">
+</div>
+<div class="section" id="module-kiwi.package_manager.zypper">
 <span id="kiwi-package-manager-zypper-module"></span><h2><a class="reference internal" href="#module-kiwi.package_manager.zypper" title="kiwi.package_manager.zypper"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.package_manager.zypper</span></code></a> Module<a class="headerlink" href="#module-kiwi.package_manager.zypper" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.package_manager.zypper.PackageManagerZypper">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.package_manager.zypper.</span></code><code class="sig-name descname"><span class="pre">PackageManagerZypper</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="kiwi.repository.html#kiwi.repository.base.RepositoryBase" title="kiwi.repository.base.RepositoryBase"><span class="pre">kiwi.repository.base.RepositoryBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.package_manager.zypper.</span></code><code class="sig-name descname"><span class="pre">PackageManagerZypper</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="kiwi.repository.html#kiwi.repository.base.RepositoryBase" title="kiwi.repository.base.RepositoryBase"><span class="pre">kiwi.repository.base.RepositoryBase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.package_manager.base.PackageManagerBase" title="kiwi.package_manager.base.PackageManagerBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.package_manager.base.PackageManagerBase</span></code></a></p>
-<p><strong>Implements base class for installation/deletion of
-packages and collections using zypper</strong></p>
+<p><strong>Implements Installation/Deletion of packages/collections with zypper</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>zypper_args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – zypper arguments from repository runtime
-configuration</p></li>
+<li><p><strong>zypper_args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – zypper arguments from repository runtime configuration</p></li>
 <li><p><strong>command_env</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – zypper command environment from repository
 runtime configuration</p></li>
 </ul>
@@ -1277,7 +1268,7 @@ the same base package name</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.zypper.PackageManagerZypper.post_init">
-<code class="sig-name descname"><span class="pre">post_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><span class="pre">list</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper.post_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper.post_init" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">post_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper.post_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper.post_init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Post initialization method</p>
 <p>Store custom zypper arguments</p>
 <dl class="field-list simple">
@@ -1301,7 +1292,7 @@ rpm package installed during bootstrap phase</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.zypper.PackageManagerZypper.process_delete_requests">
-<code class="sig-name descname"><span class="pre">process_delete_requests</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper.process_delete_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper.process_delete_requests" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">process_delete_requests</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="kiwi.html#kiwi.command.command_call_type" title="kiwi.command.command_call_type"><span class="pre">kiwi.command.command_call_type</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper.process_delete_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper.process_delete_requests" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package delete requests (chroot)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1322,7 +1313,7 @@ installed</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.zypper.PackageManagerZypper.process_install_requests">
-<code class="sig-name descname"><span class="pre">process_install_requests</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper.process_install_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper.process_install_requests" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">process_install_requests</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="kiwi.html#kiwi.command.command_call_type" title="kiwi.command.command_call_type"><span class="pre">kiwi.command.command_call_type</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper.process_install_requests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper.process_install_requests" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package install requests for image phase (chroot)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1336,7 +1327,7 @@ installed</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.zypper.PackageManagerZypper.process_install_requests_bootstrap">
-<code class="sig-name descname"><span class="pre">process_install_requests_bootstrap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_bind</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="kiwi.system.html#kiwi.system.root_bind.RootBind" title="kiwi.system.root_bind.RootBind"><span class="pre">kiwi.system.root_bind.RootBind</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper.process_install_requests_bootstrap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper.process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">process_install_requests_bootstrap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_bind</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="kiwi.system.html#kiwi.system.root_bind.RootBind" title="kiwi.system.root_bind.RootBind"><span class="pre">kiwi.system.root_bind.RootBind</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="kiwi.html#kiwi.command.command_call_type" title="kiwi.command.command_call_type"><span class="pre">kiwi.command.command_call_type</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper.process_install_requests_bootstrap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper.process_install_requests_bootstrap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package install requests for bootstrap phase (no chroot)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1409,7 +1400,7 @@ installed</p>
 
 <dl class="py method">
 <dt id="kiwi.package_manager.zypper.PackageManagerZypper.update">
-<code class="sig-name descname"><span class="pre">update</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper.update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">update</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="kiwi.html#kiwi.command.command_call_type" title="kiwi.command.command_call_type"><span class="pre">kiwi.command.command_call_type</span></a><a class="reference internal" href="../_modules/kiwi/package_manager/zypper.html#PackageManagerZypper.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.package_manager.zypper.PackageManagerZypper.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Process package update requests (chroot)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1423,8 +1414,8 @@ installed</p>
 
 </dd></dl>
 
-</section>
-<section id="module-kiwi.package_manager">
+</div>
+<div class="section" id="module-kiwi.package_manager">
 <span id="module-contents"></span><span id="db-kiwi-package-manager-content"></span><h2>Module Contents<a class="headerlink" href="#module-kiwi.package_manager" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt id="kiwi.package_manager.PackageManager">
@@ -1457,8 +1448,8 @@ type is not supported</p>
 
 </dd></dl>
 
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

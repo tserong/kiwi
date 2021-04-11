@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.filesystem.base &mdash; KIWI NG 9.23.23 documentation</title>
+  <title>kiwi.filesystem.base &mdash; KIWI NG 9.23.24 documentation</title>
   
 
   
@@ -778,13 +778,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">device_provider</span><span class="p">:</span> <span class="n">DeviceProvider</span><span class="p">,</span>
-        <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="p">):</span>
         <span class="c1"># filesystems created with a block device stores the mountpoint</span>
         <span class="c1"># here. The file name of the file containing the filesystem is</span>
         <span class="c1"># stored in the device_provider if the filesystem is represented</span>
         <span class="c1"># as a file there</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">filesystem_mount</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filesystem_mount</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MountManager</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># bind the block device providing class instance to this object.</span>
         <span class="c1"># This is done to guarantee the correct destructor order when</span>
@@ -798,7 +798,7 @@
         <span class="c1"># filesystem file name here</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">filename</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">post_init</span><span class="p">(</span><span class="n">custom_args</span><span class="p">)</span>
 
 <div class="viewcode-block" id="FileSystemBase.post_init"><a class="viewcode-back" href="../../../api/kiwi.filesystem.html#kiwi.filesystem.base.FileSystemBase.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
@@ -872,7 +872,8 @@
 <span class="sd">        :rtype: string</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">filesystem_mount</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filesystem_mount</span><span class="o">.</span><span class="n">mountpoint</span></div>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">filesystem_mount</span><span class="o">.</span><span class="n">mountpoint</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="FileSystemBase.sync_data"><a class="viewcode-back" href="../../../api/kiwi.filesystem.html#kiwi.filesystem.base.FileSystemBase.sync_data">[docs]</a>    <span class="k">def</span> <span class="nf">sync_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exclude</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.storage.disk &mdash; KIWI NG 9.23.23 documentation</title>
+  <title>kiwi.storage.disk &mdash; KIWI NG 9.23.24 documentation</title>
   
 
   
@@ -815,14 +815,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage_provider</span><span class="o">.</span><span class="n">is_loop</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Disk.create_root_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_root_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_root_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="Disk.create_root_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_root_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_root_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create root partition</span>
 
 <span class="sd">        Populates kiwi_RootPart(id) and kiwi_BootPart(id) if no extra</span>
 <span class="sd">        boot partition is requested</span>
 
-<span class="sd">        :param int mbsize: partition size</span>
+<span class="sd">        :param str mbsize: partition size NumberString or &#39;all_free&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;p.lxroot&#39;</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="s1">&#39;t.linux&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_map</span><span class="p">(</span><span class="s1">&#39;root&#39;</span><span class="p">)</span>
@@ -832,19 +832,19 @@
         <span class="k">if</span> <span class="s1">&#39;kiwi_BootPart&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_partition_id_map</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_public_id_map</span><span class="p">(</span><span class="s1">&#39;kiwi_BootPart&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Disk.create_root_lvm_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_root_lvm_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_root_lvm_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="Disk.create_root_lvm_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_root_lvm_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_root_lvm_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create root partition for use with LVM</span>
 
 <span class="sd">        Populates kiwi_RootPart(id)</span>
 
-<span class="sd">        :param int mbsize: partition size</span>
+<span class="sd">        :param str mbsize: partition size NumberString or &#39;all_free&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;p.lxlvm&#39;</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="s1">&#39;t.lvm&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_map</span><span class="p">(</span><span class="s1">&#39;root&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_public_id_map</span><span class="p">(</span><span class="s1">&#39;kiwi_RootPart&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Disk.create_root_raid_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_root_raid_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_root_raid_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="Disk.create_root_raid_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_root_raid_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_root_raid_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create root partition for use with MD Raid</span>
 
@@ -852,14 +852,14 @@
 <span class="sd">        as the default raid device node at boot time which is</span>
 <span class="sd">        configured to be kiwi_RaidDev(/dev/mdX)</span>
 
-<span class="sd">        :param int mbsize: partition size</span>
+<span class="sd">        :param str mbsize: partition size NumberString or &#39;all_free&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;p.lxraid&#39;</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="s1">&#39;t.raid&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_map</span><span class="p">(</span><span class="s1">&#39;root&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_public_id_map</span><span class="p">(</span><span class="s1">&#39;kiwi_RootPart&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_public_id_map</span><span class="p">(</span><span class="s1">&#39;kiwi_RaidPart&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Disk.create_root_readonly_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_root_readonly_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_root_readonly_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="Disk.create_root_readonly_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_root_readonly_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_root_readonly_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create root readonly partition for use with overlayfs</span>
 
@@ -868,79 +868,79 @@
 <span class="sd">        should be the size of the squashfs filesystem in order to</span>
 <span class="sd">        avoid wasting disk space</span>
 
-<span class="sd">        :param int mbsize: partition size</span>
+<span class="sd">        :param str mbsize: partition size NumberString or &#39;all_free&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;p.lxreadonly&#39;</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="s1">&#39;t.linux&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_map</span><span class="p">(</span><span class="s1">&#39;readonly&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_public_id_map</span><span class="p">(</span><span class="s1">&#39;kiwi_ROPart&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Disk.create_boot_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_boot_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_boot_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="Disk.create_boot_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_boot_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_boot_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create boot partition</span>
 
 <span class="sd">        Populates kiwi_BootPart(id)</span>
 
-<span class="sd">        :param int mbsize: partition size</span>
+<span class="sd">        :param str mbsize: partition size NumberString or &#39;all_free&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;p.lxboot&#39;</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="s1">&#39;t.linux&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_map</span><span class="p">(</span><span class="s1">&#39;boot&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_public_id_map</span><span class="p">(</span><span class="s1">&#39;kiwi_BootPart&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Disk.create_prep_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_prep_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_prep_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="Disk.create_prep_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_prep_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_prep_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create prep partition</span>
 
 <span class="sd">        Populates kiwi_PrepPart(id)</span>
 
-<span class="sd">        :param int mbsize: partition size</span>
+<span class="sd">        :param str mbsize: partition size NumberString or &#39;all_free&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;p.prep&#39;</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="s1">&#39;t.prep&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_map</span><span class="p">(</span><span class="s1">&#39;prep&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_public_id_map</span><span class="p">(</span><span class="s1">&#39;kiwi_PrepPart&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Disk.create_spare_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_spare_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_spare_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="Disk.create_spare_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_spare_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_spare_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create spare partition for custom use</span>
 
 <span class="sd">        Populates kiwi_SparePart(id)</span>
 
-<span class="sd">        :param int mbsize: partition size</span>
+<span class="sd">        :param str mbsize: partition size NumberString or &#39;all_free&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;p.spare&#39;</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="s1">&#39;t.linux&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_map</span><span class="p">(</span><span class="s1">&#39;spare&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_public_id_map</span><span class="p">(</span><span class="s1">&#39;kiwi_SparePart&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Disk.create_swap_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_swap_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_swap_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="Disk.create_swap_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_swap_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_swap_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create swap partition</span>
 
 <span class="sd">        Populates kiwi_SwapPart(id)</span>
 
-<span class="sd">        :param int mbsize: partition size</span>
+<span class="sd">        :param str mbsize: partition size NumberString or &#39;all_free&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;p.swap&#39;</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="s1">&#39;t.swap&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_map</span><span class="p">(</span><span class="s1">&#39;swap&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_public_id_map</span><span class="p">(</span><span class="s1">&#39;kiwi_SwapPart&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Disk.create_efi_csm_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_efi_csm_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_efi_csm_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="Disk.create_efi_csm_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_efi_csm_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_efi_csm_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create EFI bios grub partition</span>
 
 <span class="sd">        Populates kiwi_BiosGrub(id)</span>
 
-<span class="sd">        :param int mbsize: partition size</span>
+<span class="sd">        :param str mbsize: partition size NumberString or &#39;all_free&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;p.legacy&#39;</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="s1">&#39;t.csm&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_map</span><span class="p">(</span><span class="s1">&#39;efi_csm&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_public_id_map</span><span class="p">(</span><span class="s1">&#39;kiwi_BiosGrub&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Disk.create_efi_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_efi_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_efi_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="viewcode-block" id="Disk.create_efi_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_efi_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_efi_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create EFI partition</span>
 
 <span class="sd">        Populates kiwi_EfiPart(id)</span>
 
-<span class="sd">        :param int mbsize: partition size</span>
+<span class="sd">        :param str mbsize: partition size NumberString or &#39;all_free&#39;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">&#39;p.UEFI&#39;</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="s1">&#39;t.efi&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_map</span><span class="p">(</span><span class="s1">&#39;efi&#39;</span><span class="p">)</span>

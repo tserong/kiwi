@@ -4,11 +4,10 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Building in a Self-Contained Environment &mdash; KIWI NG 9.23.23 documentation</title>
+  <title>Building in a Self-Contained Environment &mdash; KIWI NG 9.23.24 documentation</title>
   
 
   
@@ -729,7 +728,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="building-in-a-self-contained-environment">
+  <div class="section" id="building-in-a-self-contained-environment">
 <span id="self-contained"></span><h1>Building in a Self-Contained Environment<a class="headerlink" href="#building-in-a-self-contained-environment" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -754,7 +753,7 @@ machines to address the issues listed above.</p>
 <p>The changes on the machine to become a build host will
 be reduced to the requirements of the KIWI NG <code class="xref py py-obj docutils literal notranslate"><span class="pre">boxed</span> <span class="pre">plugin</span></code></p>
 </div>
-<section id="requirements">
+<div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>Add the KIWI NG repo from the Open Build Service. For details see
 <a class="reference internal" href="installation.html#installation-from-obs"><span class="std std-ref">Installation from OBS</span></a>. The following KIWI NG plugin needs to be
@@ -762,8 +761,8 @@ installed on the build system:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo zypper <span class="k">in</span> python3-kiwi_boxed_plugin
 </pre></div>
 </div>
-</section>
-<section id="building-with-the-boxbuild-command">
+</div>
+<div class="section" id="building-with-the-boxbuild-command">
 <h2>Building with the boxbuild command<a class="headerlink" href="#building-with-the-boxbuild-command" title="Permalink to this headline">¶</a></h2>
 <p>The installation of the KIWI NG boxed plugin has registered a new kiwi
 command named <code class="xref py py-obj docutils literal notranslate"><span class="pre">boxbuild</span></code>. The command implementation uses KVM as
@@ -796,8 +795,8 @@ shown in the following example:</p>
 setup as shared folders between the host and the guest. No other
 data will be shared with the host.</p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
