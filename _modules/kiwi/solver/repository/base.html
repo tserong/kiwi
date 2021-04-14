@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.solver.repository.base &mdash; KIWI NG 9.23.24 documentation</title>
+  <title>kiwi.solver.repository.base &mdash; KIWI NG 9.23.25 documentation</title>
   
 
   
@@ -744,7 +744,6 @@
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
-<span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64encode</span>
 <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">Request</span>
@@ -756,6 +755,8 @@
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="c1"># project</span>
+<span class="kn">import</span> <span class="nn">kiwi.defaults</span> <span class="k">as</span> <span class="nn">defaults</span>
+
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="n">KiwiUriOpenError</span>
 <span class="kn">from</span> <span class="nn">kiwi.path</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
@@ -901,7 +902,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dir_listing_download</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">download_from_repository</span><span class="p">(</span>
-            <span class="n">platform</span><span class="o">.</span><span class="n">machine</span><span class="p">(),</span> <span class="n">dir_listing_download</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">defaults</span><span class="o">.</span><span class="n">PLATFORM_MACHINE</span><span class="p">,</span> <span class="n">dir_listing_download</span><span class="o">.</span><span class="n">name</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">dir_listing_download</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dir_listing_download</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">as</span> <span class="n">listing</span><span class="p">:</span>

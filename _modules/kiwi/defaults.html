@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.defaults &mdash; KIWI NG 9.23.24 documentation</title>
+  <title>kiwi.defaults &mdash; KIWI NG 9.23.25 documentation</title>
   
 
   
@@ -768,6 +768,7 @@
 <span class="n">ROOT_VOLUME_NAME</span> <span class="o">=</span> <span class="s1">&#39;LVRoot&#39;</span>
 <span class="n">SHARED_CACHE_DIR</span> <span class="o">=</span> <span class="s1">&#39;/var/cache/kiwi&#39;</span>
 <span class="n">CUSTOM_RUNTIME_CONFIG_FILE</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">PLATFORM_MACHINE</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">machine</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="Defaults"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults">[docs]</a><span class="k">class</span> <span class="nc">Defaults</span><span class="p">:</span>
@@ -835,10 +836,31 @@
 
 <div class="viewcode-block" id="Defaults.get_platform_name"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.get_platform_name">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_platform_name</span><span class="p">():</span>
-        <span class="n">arch</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">machine</span><span class="p">()</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Provides the machine architecture name as used by KIWI</span>
+
+<span class="sd">        This is the architecture name as it is returned by &#39;uname -m&#39;</span>
+<span class="sd">        with one exception for the 32bit x86 architecture which is</span>
+<span class="sd">        handled as &#39;ix86&#39; in general</span>
+
+<span class="sd">        :return: architecture name</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">arch</span> <span class="o">=</span> <span class="n">PLATFORM_MACHINE</span>
         <span class="k">if</span> <span class="n">arch</span> <span class="o">==</span> <span class="s1">&#39;i686&#39;</span> <span class="ow">or</span> <span class="n">arch</span> <span class="o">==</span> <span class="s1">&#39;i586&#39;</span><span class="p">:</span>
             <span class="n">arch</span> <span class="o">=</span> <span class="s1">&#39;ix86&#39;</span>
         <span class="k">return</span> <span class="n">arch</span></div>
+
+<div class="viewcode-block" id="Defaults.set_platform_name"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.set_platform_name">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_platform_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the platform architecture once</span>
+
+<span class="sd">        :param str name: an architecture name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">global</span> <span class="n">PLATFORM_MACHINE</span>
+        <span class="n">PLATFORM_MACHINE</span> <span class="o">=</span> <span class="n">name</span></div>
 
 <div class="viewcode-block" id="Defaults.is_x86_arch"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.is_x86_arch">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">is_x86_arch</span><span class="p">(</span><span class="n">arch</span><span class="p">):</span>

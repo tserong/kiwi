@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.cli &mdash; KIWI NG 9.23.24 documentation</title>
+  <title>kiwi.cli &mdash; KIWI NG 9.23.25 documentation</title>
   
 
   
@@ -757,6 +757,7 @@
 <span class="sd">           result &lt;command&gt; [&lt;args&gt;...]</span>
 <span class="sd">       kiwi-ng [--profile=&lt;name&gt;...]</span>
 <span class="sd">               [--shared-cache-dir=&lt;directory&gt;]</span>
+<span class="sd">               [--target-arch=&lt;name&gt;]</span>
 <span class="sd">               [--type=&lt;build_type&gt;]</span>
 <span class="sd">               [--logfile=&lt;filename&gt;]</span>
 <span class="sd">               [--debug]</span>
@@ -798,6 +799,16 @@
 <span class="sd">    --type=&lt;build_type&gt;</span>
 <span class="sd">        image build type. If not set the default XML specified</span>
 <span class="sd">        build type will be used</span>
+
+<span class="sd">global options for services: system</span>
+<span class="sd">    --target-arch=&lt;name&gt;</span>
+<span class="sd">        set the image architecture. By default the host architecture is</span>
+<span class="sd">        used as the image architecture. If the specified architecture name</span>
+<span class="sd">        does not match the host architecture and is therefore requesting</span>
+<span class="sd">        a cross architecture image build, it&#39;s important to understand that</span>
+<span class="sd">        for this process to work a preparatory step to support the image</span>
+<span class="sd">        architecture and binary format on the building host is required</span>
+<span class="sd">        and not a responsibility of kiwi.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -945,6 +956,8 @@
                     <span class="n">value</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_shared_cache_location</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;--shared-cache-dir&#39;</span> <span class="ow">and</span> <span class="n">value</span><span class="p">:</span>
                     <span class="n">Defaults</span><span class="o">.</span><span class="n">set_shared_cache_location</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;--target-arch&#39;</span> <span class="ow">and</span> <span class="n">value</span><span class="p">:</span>
+                    <span class="n">Defaults</span><span class="o">.</span><span class="n">set_platform_name</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;--config&#39;</span> <span class="ow">and</span> <span class="n">value</span><span class="p">:</span>
                     <span class="n">Defaults</span><span class="o">.</span><span class="n">set_custom_runtime_config_file</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
                 <span class="n">result</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>

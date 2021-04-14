@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.solver.sat &mdash; KIWI NG 9.23.24 documentation</title>
+  <title>kiwi.solver.sat &mdash; KIWI NG 9.23.25 documentation</title>
   
 
   
@@ -744,12 +744,13 @@
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="kn">import</span> <span class="n">ElementTree</span>
 <span class="kn">from</span> <span class="nn">xml.dom</span> <span class="kn">import</span> <span class="n">minidom</span>
 
 <span class="c1"># project</span>
+<span class="kn">import</span> <span class="nn">kiwi.defaults</span> <span class="k">as</span> <span class="nn">defaults</span>
+
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">KiwiSatSolverPluginError</span><span class="p">,</span>
     <span class="n">KiwiSatSolverJobError</span><span class="p">,</span>
@@ -786,7 +787,7 @@
 
 <div class="viewcode-block" id="Sat.set_dist_type"><a class="viewcode-back" href="../../../api/kiwi.solver.html#kiwi.solver.sat.Sat.set_dist_type">[docs]</a>    <span class="k">def</span> <span class="nf">set_dist_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">arch</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">arch</span><span class="p">:</span>
-            <span class="n">arch</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">machine</span><span class="p">()</span>
+            <span class="n">arch</span> <span class="o">=</span> <span class="n">defaults</span><span class="o">.</span><span class="n">PLATFORM_MACHINE</span>
         <span class="n">dist_types</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;deb-x86_64&#39;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s1">&#39;pool_dist&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">solv</span><span class="o">.</span><span class="n">Pool</span><span class="o">.</span><span class="n">DISTTYPE_DEB</span><span class="p">,</span>

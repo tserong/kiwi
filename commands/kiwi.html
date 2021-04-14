@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi-ng &mdash; KIWI NG 9.23.24 documentation</title>
+  <title>kiwi-ng &mdash; KIWI NG 9.23.25 documentation</title>
   
 
   
@@ -750,6 +750,7 @@ kiwi-ng <span class="o">[</span>--debug<span class="o">]</span>
     result &lt;command&gt; <span class="o">[</span>&lt;args&gt;...<span class="o">]</span>
 kiwi-ng <span class="o">[</span>--profile<span class="o">=</span>&lt;name&gt;...<span class="o">]</span>
         <span class="o">[</span>--shared-cache-dir<span class="o">=</span>&lt;directory&gt;<span class="o">]</span>
+        <span class="o">[</span>--target-arch<span class="o">=</span>&lt;name&gt;<span class="o">]</span>
         <span class="o">[</span>--type<span class="o">=</span>&lt;build_type&gt;<span class="o">]</span>
         <span class="o">[</span>--logfile<span class="o">=</span>&lt;filename&gt;<span class="o">]</span>
         <span class="o">[</span>--debug<span class="o">]</span>
@@ -826,6 +827,15 @@ is shared via bind mount between the build host and image
 root system and contains information about package repositories
 and their cache and meta data. The default location is set
 to /var/cache/kiwi</p>
+</dd>
+<dt><kbd><span class="option">--target-arch=<var>&lt;name&gt;</var></span></kbd></dt>
+<dd><p>Specify the image architecture. By default the host architecture is
+used as the image architecture. If the specified architecture name
+does not match the host architecture and is therefore requesting
+a cross architecture image build, it’s important to understand that
+for this process to work a preparatory step to support the image
+architecture and binary format on the building host is required
+and not a responsibility of KIWI NG.</p>
 </dd>
 <dt><kbd><span class="option">--type=<var>&lt;build_type&gt;</var></span></kbd></dt>
 <dd><p>Select image build type. The specified build type must be configured

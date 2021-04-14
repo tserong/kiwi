@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.xml_state &mdash; KIWI NG 9.23.24 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.23.25 documentation</title>
   
 
   
@@ -748,7 +748,6 @@
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">platform</span>
 <span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">dedent</span>
 
 <span class="c1"># project</span>
@@ -817,7 +816,7 @@
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root_partition_uuid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_uuid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">host_architecture</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">machine</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">host_architecture</span> <span class="o">=</span> <span class="n">defaults</span><span class="o">.</span><span class="n">PLATFORM_MACHINE</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">xml_data</span> <span class="o">=</span> <span class="n">xml_data</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_used_profiles</span><span class="p">(</span><span class="n">profiles</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_type_section</span><span class="p">(</span>

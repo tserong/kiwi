@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi Package &mdash; KIWI NG 9.23.24 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.23.25 documentation</title>
   
 
   
@@ -2265,7 +2265,19 @@ buildservice repositories</p>
 <dl class="py method">
 <dt id="kiwi.defaults.Defaults.get_platform_name">
 <em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">get_platform_name</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/defaults.html#Defaults.get_platform_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.defaults.Defaults.get_platform_name" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Provides the machine architecture name as used by KIWI</p>
+<p>This is the architecture name as it is returned by ‘uname -m’
+with one exception for the 32bit x86 architecture which is
+handled as ‘ix86’ in general</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>architecture name</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="kiwi.defaults.Defaults.get_preparer">
@@ -2649,6 +2661,17 @@ files and directories from the application</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – a file path name</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="kiwi.defaults.Defaults.set_platform_name">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">set_platform_name</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/defaults.html#Defaults.set_platform_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.defaults.Defaults.set_platform_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the platform architecture once</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – an architecture name</p>
 </dd>
 </dl>
 </dd></dl>
