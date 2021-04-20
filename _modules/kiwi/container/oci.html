@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.container.oci &mdash; KIWI NG 9.23.26 documentation</title>
+  <title>kiwi.container.oci &mdash; KIWI NG 9.23.27 documentation</title>
   
 
   
@@ -824,11 +824,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">oci_config</span><span class="p">[</span><span class="s1">&#39;container_tag&#39;</span><span class="p">]</span> <span class="o">=</span> \
                 <span class="n">Defaults</span><span class="o">.</span><span class="n">get_default_container_tag</span><span class="p">()</span>
 
-        <span class="k">if</span> <span class="s1">&#39;entry_command&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">oci_config</span> <span class="ow">and</span> \
-                <span class="s1">&#39;entry_subcommand&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">oci_config</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">oci_config</span><span class="p">[</span><span class="s1">&#39;entry_subcommand&#39;</span><span class="p">]</span> <span class="o">=</span> \
-                <span class="n">Defaults</span><span class="o">.</span><span class="n">get_default_container_subcommand</span><span class="p">()</span>
-
         <span class="k">if</span> <span class="s1">&#39;history&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">oci_config</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">oci_config</span><span class="p">[</span><span class="s1">&#39;history&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="s1">&#39;created_by&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">oci_config</span><span class="p">[</span><span class="s1">&#39;history&#39;</span><span class="p">]:</span>
@@ -857,6 +852,11 @@
                 <span class="p">)</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Apply default subcommand only for base images</span>
+            <span class="k">if</span> <span class="s1">&#39;entry_command&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">oci_config</span> <span class="ow">and</span> \
+                    <span class="s1">&#39;entry_subcommand&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">oci_config</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">oci_config</span><span class="p">[</span><span class="s1">&#39;entry_subcommand&#39;</span><span class="p">]</span> <span class="o">=</span> \
+                    <span class="n">Defaults</span><span class="o">.</span><span class="n">get_default_container_subcommand</span><span class="p">()</span>
             <span class="n">oci</span><span class="o">.</span><span class="n">init_container</span><span class="p">()</span>
 
         <span class="n">image_ref</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">:</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>

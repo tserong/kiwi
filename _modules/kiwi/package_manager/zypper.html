@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.package_manager.zypper &mdash; KIWI NG 9.23.26 documentation</title>
+  <title>kiwi.package_manager.zypper &mdash; KIWI NG 9.23.27 documentation</title>
   
 
   
@@ -842,7 +842,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">command</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;zypper&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">zypper_args</span> <span class="o">+</span> <span class="p">[</span>
             <span class="s1">&#39;--root&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
-            <span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="s1">&#39;--auto-agree-with-licenses&#39;</span>
+            <span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="s1">&#39;--download&#39;</span><span class="p">,</span> <span class="s1">&#39;in-advance&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;--auto-agree-with-licenses&#39;</span>
         <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;--&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_install_items</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">Command</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
             <span class="n">command</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">command_env</span>
@@ -873,7 +874,8 @@
                 <span class="p">)</span>
         <span class="k">return</span> <span class="n">Command</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
             <span class="p">[</span><span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;zypper&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">chroot_zypper_args</span> <span class="o">+</span> <span class="p">[</span>
-                <span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="s1">&#39;--auto-agree-with-licenses&#39;</span>
+                <span class="s1">&#39;install&#39;</span><span class="p">,</span> <span class="s1">&#39;--download&#39;</span><span class="p">,</span> <span class="s1">&#39;in-advance&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;--auto-agree-with-licenses&#39;</span>
             <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;--&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_install_items</span><span class="p">(),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">chroot_command_env</span>
         <span class="p">)</span></div>
@@ -930,7 +932,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Command</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
             <span class="p">[</span><span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;zypper&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">chroot_zypper_args</span> <span class="o">+</span> <span class="p">[</span>
-                <span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="s1">&#39;--auto-agree-with-licenses&#39;</span>
+                <span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="s1">&#39;--download&#39;</span><span class="p">,</span> <span class="s1">&#39;in-advance&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;--auto-agree-with-licenses&#39;</span>
             <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">chroot_command_env</span>
         <span class="p">)</span></div>
