@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi Package &mdash; KIWI NG 9.23.27 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.23.28 documentation</title>
   
 
   
@@ -2419,19 +2419,19 @@ to the file found</p>
 
 <dl class="py method">
 <dt id="kiwi.defaults.Defaults.get_signed_grub_loader">
-<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">get_signed_grub_loader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/defaults.html#Defaults.get_signed_grub_loader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.defaults.Defaults.get_signed_grub_loader" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">get_signed_grub_loader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#kiwi.defaults.grub_loader_type" title="kiwi.defaults.grub_loader_type"><span class="pre">kiwi.defaults.grub_loader_type</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/kiwi/defaults.html#Defaults.get_signed_grub_loader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.defaults.Defaults.get_signed_grub_loader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides shim signed grub loader file path</p>
 <p>Searches distribution specific locations to find grub.efi
 below the given root path</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>root_path</strong> (<em>string</em>) – image root path</p>
+<dd class="field-odd"><p><strong>root_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – image root path</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>file path or None</p>
+<dd class="field-even"><p>grub_loader_type | None</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dd class="field-odd"><p>NamedTuple</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2715,6 +2715,24 @@ to the specified instance of a Profile class</p>
 <dd class="field-odd"><p><strong>profile</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – Profile instance</p>
 </dd>
 </dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="kiwi.defaults.grub_loader_type">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.defaults.</span></code><code class="sig-name descname"><span class="pre">grub_loader_type</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binaryname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kiwi.defaults.grub_loader_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<dl class="py attribute">
+<dt id="kiwi.defaults.grub_loader_type.binaryname">
+<code class="sig-name descname"><span class="pre">binaryname</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><a class="headerlink" href="#kiwi.defaults.grub_loader_type.binaryname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="kiwi.defaults.grub_loader_type.filename">
+<code class="sig-name descname"><span class="pre">filename</span></code><em class="property"><span class="pre">:</span> <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></em><a class="headerlink" href="#kiwi.defaults.grub_loader_type.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
 </dd></dl>
 
 </dd></dl>

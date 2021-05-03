@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.27 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.28 documentation</title>
   
 
   
@@ -1215,6 +1215,24 @@
             <span class="n">root_path</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">efi_boot_path</span><span class="p">:</span>
+            <span class="c1"># not all distributors installs a vendor directory but</span>
+            <span class="c1"># have them in their encoded early boot script. Thus</span>
+            <span class="c1"># the following code tries to look up the vendor string</span>
+            <span class="c1"># from the signed grub binary</span>
+            <span class="n">grub_image</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_signed_grub_loader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">grub_image</span> <span class="ow">and</span> <span class="n">grub_image</span><span class="o">.</span><span class="n">filename</span><span class="p">:</span>
+                <span class="n">bash_command</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="s1">&#39;strings&#39;</span><span class="p">,</span> <span class="n">grub_image</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;grep&#39;</span><span class="p">,</span> <span class="s1">&#39;EFI\/&#39;</span>
+                <span class="p">]</span>
+                <span class="n">efi_boot_path</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                    <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bash_command</span><span class="p">)],</span>
+                    <span class="n">raise_on_error</span><span class="o">=</span><span class="kc">False</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">output</span>
+                <span class="k">if</span> <span class="n">efi_boot_path</span><span class="p">:</span>
+                    <span class="n">efi_boot_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">root_path</span><span class="p">,</span> <span class="n">efi_boot_path</span><span class="o">.</span><span class="n">strip</span><span class="p">()])</span>
+                    <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">efi_boot_path</span><span class="p">:</span>
             <span class="n">efi_boot_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span>
                 <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">root_path</span><span class="p">,</span> <span class="s1">&#39;EFI/BOOT&#39;</span><span class="p">])</span>
             <span class="p">)</span>
@@ -1456,13 +1474,16 @@
                 <span class="p">[</span><span class="s1">&#39;cp&#39;</span><span class="p">,</span> <span class="n">shim_image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_efi_image_name</span><span class="p">()]</span>
             <span class="p">)</span>
             <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-                <span class="p">[</span><span class="s1">&#39;cp&#39;</span><span class="p">,</span> <span class="n">grub_image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">efi_boot_path</span><span class="p">]</span>
+                <span class="p">[</span>
+                    <span class="s1">&#39;cp&#39;</span><span class="p">,</span> <span class="n">grub_image</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">efi_boot_path</span><span class="p">,</span> <span class="n">grub_image</span><span class="o">.</span><span class="n">binaryname</span><span class="p">])</span>
+                <span class="p">]</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Without shim a self signed grub image is used that</span>
             <span class="c1"># gets loaded by the firmware</span>
             <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-                <span class="p">[</span><span class="s1">&#39;cp&#39;</span><span class="p">,</span> <span class="n">grub_image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_efi_image_name</span><span class="p">()]</span>
+                <span class="p">[</span><span class="s1">&#39;cp&#39;</span><span class="p">,</span> <span class="n">grub_image</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_efi_image_name</span><span class="p">()]</span>
             <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_create_efi_config_search</span><span class="p">(</span><span class="n">uuid</span><span class="p">,</span> <span class="n">mbrid</span><span class="p">)</span>
 
