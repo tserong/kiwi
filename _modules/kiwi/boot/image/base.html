@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.boot.image.base &mdash; KIWI NG 9.23.28 documentation</title>
+  <title>kiwi.boot.image.base &mdash; KIWI NG 9.23.29 documentation</title>
   
 
   
@@ -746,7 +746,6 @@
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pickle</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">glob</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
@@ -761,7 +760,6 @@
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">KiwiTargetDirectoryNotFound</span><span class="p">,</span>
     <span class="n">KiwiConfigFileNotFound</span><span class="p">,</span>
-    <span class="n">KiwiBootImageDumpError</span><span class="p">,</span>
     <span class="n">KiwiDiskBootImageError</span>
 <span class="p">)</span>
 
@@ -878,22 +876,6 @@
 <span class="sd">        :param string config_file: configuration file to write</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
-
-<div class="viewcode-block" id="BootImageBase.dump"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.base.BootImageBase.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Pickle dump this instance to a file. If the object dump</span>
-<span class="sd">        is requested the destructor code will also be disabled</span>
-<span class="sd">        in order to preserve the generated data</span>
-
-<span class="sd">        :param string filename: file path name</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">boot_image</span><span class="p">:</span>
-                <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boot_image</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">KiwiBootImageDumpError</span><span class="p">(</span>
-                <span class="s1">&#39;Failed to pickle dump boot image: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">format</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-            <span class="p">)</span></div>
 
 <div class="viewcode-block" id="BootImageBase.get_boot_names"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.base.BootImageBase.get_boot_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_boot_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

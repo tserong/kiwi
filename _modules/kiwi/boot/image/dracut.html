@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.boot.image.dracut &mdash; KIWI NG 9.23.28 documentation</title>
+  <title>kiwi.boot.image.dracut &mdash; KIWI NG 9.23.29 documentation</title>
   
 
   
@@ -777,13 +777,9 @@
         <span class="c1"># Initialize empty list of dracut caller options</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dracut_options</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">included_files</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">included_files_install</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">modules</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">install_modules</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">add_modules</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_install_modules</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">omit_modules</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">omit_install_modules</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">available_modules</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_modules</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="BootImageDracut.include_file"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.dracut.BootImageDracut.include_file">[docs]</a>    <span class="k">def</span> <span class="nf">include_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">install_media</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -791,25 +787,21 @@
 <span class="sd">        Include file to dracut boot image</span>
 
 <span class="sd">        :param string filename: file path name</span>
+<span class="sd">        :param bool install_media: unused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">included_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;--install&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">included_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">install_media</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">included_files_install</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;--install&#39;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">included_files_install</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">included_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BootImageDracut.include_module"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.dracut.BootImageDracut.include_module">[docs]</a>    <span class="k">def</span> <span class="nf">include_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">install_media</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Include module to dracut boot image</span>
 
 <span class="sd">        :param string module: module to include</span>
-<span class="sd">        :param bool install_media: include the module for install initrds</span>
+<span class="sd">        :param bool install_media: unused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">warn_msg</span> <span class="o">=</span> <span class="s1">&#39;module &quot;</span><span class="si">{0}</span><span class="s1">&quot; not included in initrd&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_module_available</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">install_media</span> <span class="ow">and</span> <span class="n">module</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_install_modules</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">add_install_modules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">module</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_modules</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">module</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_modules</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_modules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">warn_msg</span><span class="p">)</span></div>
@@ -819,11 +811,9 @@
 <span class="sd">        Omit module to dracut boot image</span>
 
 <span class="sd">        :param string module: module to omit</span>
-<span class="sd">        :param bool install_media: omit the module for install initrds</span>
+<span class="sd">        :param bool install_media: unused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">install_media</span> <span class="ow">and</span> <span class="n">module</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">omit_install_modules</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">omit_install_modules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">module</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">omit_modules</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">module</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">omit_modules</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">omit_modules</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">module</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="BootImageDracut.set_static_modules"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.dracut.BootImageDracut.set_static_modules">[docs]</a>    <span class="k">def</span> <span class="nf">set_static_modules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modules</span><span class="p">,</span> <span class="n">install_media</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -831,12 +821,9 @@
 <span class="sd">        Set static dracut modules list for boot image</span>
 
 <span class="sd">        :param list modules: list of the modules to include</span>
-<span class="sd">        :param bool install_media: lists the modules for install initrds</span>
+<span class="sd">        :param bool install_media: unused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">install_media</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">install_modules</span> <span class="o">=</span> <span class="n">modules</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">modules</span> <span class="o">=</span> <span class="n">modules</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modules</span> <span class="o">=</span> <span class="n">modules</span></div>
 
 <div class="viewcode-block" id="BootImageDracut.write_system_config_file"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.dracut.BootImageDracut.write_system_config_file">[docs]</a>    <span class="k">def</span> <span class="nf">write_system_config_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">config_file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -895,7 +882,7 @@
 
 <span class="sd">        :param object mbrid: unused</span>
 <span class="sd">        :param string basename: base initrd file name</span>
-<span class="sd">        :param bool install_initrd: installation media initrd</span>
+<span class="sd">        :param bool install_initrd: unused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_prepared</span><span class="p">():</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Creating generic dracut initrd archive&#39;</span><span class="p">)</span>
@@ -906,30 +893,16 @@
                 <span class="n">dracut_initrd_basename</span> <span class="o">=</span> <span class="n">basename</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">dracut_initrd_basename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initrd_base_name</span>
-            <span class="k">if</span> <span class="n">install_initrd</span><span class="p">:</span>
-                <span class="n">included_files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">included_files_install</span>
-                <span class="n">modules_args</span> <span class="o">=</span> <span class="p">[</span>
-                    <span class="s1">&#39;--modules&#39;</span><span class="p">,</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1"> &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">install_modules</span><span class="p">))</span>
-                <span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">install_modules</span> <span class="k">else</span> <span class="p">[]</span>
-                <span class="n">modules_args</span> <span class="o">+=</span> <span class="p">[</span>
-                    <span class="s1">&#39;--add&#39;</span><span class="p">,</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1"> &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_install_modules</span><span class="p">))</span>
-                <span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_install_modules</span> <span class="k">else</span> <span class="p">[]</span>
-                <span class="n">modules_args</span> <span class="o">+=</span> <span class="p">[</span>
-                    <span class="s1">&#39;--omit&#39;</span><span class="p">,</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1"> &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">omit_install_modules</span><span class="p">)</span>
-                    <span class="p">)</span>
-                <span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">omit_install_modules</span> <span class="k">else</span> <span class="p">[]</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">included_files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">included_files</span>
-                <span class="n">modules_args</span> <span class="o">=</span> <span class="p">[</span>
-                    <span class="s1">&#39;--modules&#39;</span><span class="p">,</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1"> &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">))</span>
-                <span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span> <span class="k">else</span> <span class="p">[]</span>
-                <span class="n">modules_args</span> <span class="o">+=</span> <span class="p">[</span>
-                    <span class="s1">&#39;--add&#39;</span><span class="p">,</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1"> &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_modules</span><span class="p">))</span>
-                <span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_modules</span> <span class="k">else</span> <span class="p">[]</span>
-                <span class="n">modules_args</span> <span class="o">+=</span> <span class="p">[</span>
-                    <span class="s1">&#39;--omit&#39;</span><span class="p">,</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1"> &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">omit_modules</span><span class="p">))</span>
-                <span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">omit_modules</span> <span class="k">else</span> <span class="p">[]</span>
+            <span class="n">included_files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">included_files</span>
+            <span class="n">modules_args</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s1">&#39;--modules&#39;</span><span class="p">,</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1"> &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">modules</span><span class="p">))</span>
+            <span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">modules</span> <span class="k">else</span> <span class="p">[]</span>
+            <span class="n">modules_args</span> <span class="o">+=</span> <span class="p">[</span>
+                <span class="s1">&#39;--add&#39;</span><span class="p">,</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1"> &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_modules</span><span class="p">))</span>
+            <span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_modules</span> <span class="k">else</span> <span class="p">[]</span>
+            <span class="n">modules_args</span> <span class="o">+=</span> <span class="p">[</span>
+                <span class="s1">&#39;--omit&#39;</span><span class="p">,</span> <span class="s1">&#39; </span><span class="si">{0}</span><span class="s1"> &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">omit_modules</span><span class="p">))</span>
+            <span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">omit_modules</span> <span class="k">else</span> <span class="p">[]</span>
             <span class="n">dracut_initrd_basename</span> <span class="o">+=</span> <span class="s1">&#39;.xz&#39;</span>
             <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dracut_options</span> <span class="o">+</span> <span class="n">modules_args</span> <span class="o">+</span> <span class="n">included_files</span>
             <span class="n">dracut_call</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>

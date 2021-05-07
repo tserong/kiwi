@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.boot.image Package &mdash; KIWI NG 9.23.28 documentation</title>
+  <title>kiwi.boot.image Package &mdash; KIWI NG 9.23.29 documentation</title>
   
 
   
@@ -775,19 +775,6 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.boot.image.base.BootImageBase.dump">
-<code class="sig-name descname"><span class="pre">dump</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/boot/image/base.html#BootImageBase.dump"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.boot.image.base.BootImageBase.dump" title="Permalink to this definition">¶</a></dt>
-<dd><p>Pickle dump this instance to a file. If the object dump
-is requested the destructor code will also be disabled
-in order to preserve the generated data</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – file path name</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt id="kiwi.boot.image.base.BootImageBase.get_boot_description_directory">
 <code class="sig-name descname"><span class="pre">get_boot_description_directory</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/boot/image/base.html#BootImageBase.get_boot_description_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.boot.image.base.BootImageBase.get_boot_description_directory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provide path to the boot image XML description</p>
@@ -970,7 +957,7 @@ the result into the image build target directory</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>mbrid</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><em>object</em></a>) – unused</p></li>
 <li><p><strong>basename</strong> (<em>string</em>) – base initrd file name</p></li>
-<li><p><strong>install_initrd</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – installation media initrd</p></li>
+<li><p><strong>install_initrd</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – unused</p></li>
 </ul>
 </dd>
 </dl>
@@ -982,7 +969,10 @@ the result into the image build target directory</p>
 <dd><p>Include file to dracut boot image</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<em>string</em>) – file path name</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>string</em>) – file path name</p></li>
+<li><p><strong>install_media</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – unused</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -995,7 +985,7 @@ the result into the image build target directory</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>module</strong> (<em>string</em>) – module to include</p></li>
-<li><p><strong>install_media</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – include the module for install initrds</p></li>
+<li><p><strong>install_media</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – unused</p></li>
 </ul>
 </dd>
 </dl>
@@ -1009,7 +999,7 @@ the result into the image build target directory</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>module</strong> (<em>string</em>) – module to omit</p></li>
-<li><p><strong>install_media</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – omit the module for install initrds</p></li>
+<li><p><strong>install_media</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – unused</p></li>
 </ul>
 </dd>
 </dl>
@@ -1039,7 +1029,7 @@ the result into the image build target directory</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>modules</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – list of the modules to include</p></li>
-<li><p><strong>install_media</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – lists the modules for install initrds</p></li>
+<li><p><strong>install_media</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – unused</p></li>
 </ul>
 </dd>
 </dl>
