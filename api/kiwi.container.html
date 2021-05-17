@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.container Package &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>kiwi.container Package &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,16 +732,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="kiwi-container-package">
+  <section id="kiwi-container-package">
 <h1>kiwi.container Package<a class="headerlink" href="#kiwi-container-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
+<section id="submodules">
 <span id="db-kiwi-container-submodules"></span><h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-kiwi.container.oci">
+</section>
+<section id="module-kiwi.container.oci">
 <span id="kiwi-container-oci-module"></span><h2><a class="reference internal" href="#module-kiwi.container.oci" title="kiwi.container.oci"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.container.oci</span></code></a> Module<a class="headerlink" href="#module-kiwi.container.oci" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.container.oci.ContainerImageOCI">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.container.oci.</span></code><code class="sig-name descname"><span class="pre">ContainerImageOCI</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/container/oci.html#ContainerImageOCI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.container.oci.ContainerImageOCI" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.container.oci.ContainerImageOCI">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.container.oci.</span></span><span class="sig-name descname"><span class="pre">ContainerImageOCI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/container/oci.html#ContainerImageOCI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.container.oci.ContainerImageOCI" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Create oci container from a root directory</p>
 <dl class="field-list simple">
@@ -774,8 +776,8 @@
 </pre></div>
 </div>
 <dl class="py method">
-<dt id="kiwi.container.oci.ContainerImageOCI.create">
-<code class="sig-name descname"><span class="pre">create</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/container/oci.html#ContainerImageOCI.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.container.oci.ContainerImageOCI.create" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.container.oci.ContainerImageOCI.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/container/oci.html#ContainerImageOCI.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.container.oci.ContainerImageOCI.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create compressed oci system container tar archive</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -789,12 +791,12 @@
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.container">
+</section>
+<section id="module-kiwi.container">
 <span id="module-contents"></span><span id="db-kiwi-container-content"></span><h2>Module Contents<a class="headerlink" href="#module-kiwi.container" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.container.ContainerImage">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.container.</span></code><code class="sig-name descname"><span class="pre">ContainerImage</span></code><a class="reference internal" href="../_modules/kiwi/container.html#ContainerImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.container.ContainerImage" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.container.ContainerImage">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.container.</span></span><span class="sig-name descname"><span class="pre">ContainerImage</span></span><a class="reference internal" href="../_modules/kiwi/container.html#ContainerImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.container.ContainerImage" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Container Image factory</strong></p>
 <dl class="field-list simple">
@@ -807,14 +809,14 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.container.ContainerImage.new">
-<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">new</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/container.html#ContainerImage.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.container.ContainerImage.new" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.container.ContainerImage.new">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/container.html#ContainerImage.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.container.ContainerImage.new" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Booting a Live ISO Image from Network &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Booting a Live ISO Image from Network &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,9 +732,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="booting-a-live-iso-image-from-network">
+  <section id="booting-a-live-iso-image-from-network">
 <span id="network-live-boot"></span><h1>Booting a Live ISO Image from Network<a class="headerlink" href="#booting-a-live-iso-image-from-network" title="Permalink to this headline">¶</a></h1>
-<div class="sidebar">
+<aside class="sidebar">
 <p class="sidebar-title">Abstract</p>
 <p>This page provides further information for handling
 ISO images built with KIWI NG and references the following
@@ -740,7 +742,7 @@ articles:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../building_images/build_live_iso.html#hybrid-iso"><span class="std std-ref">Build an ISO Hybrid Live Image</span></a></p></li>
 </ul>
-</div>
+</aside>
 <p>In KIWI NG, live ISO images can be configured to boot via the
 PXE boot protocol. This functionality requires a network boot
 server setup on the system. Details how to setup such a server
@@ -753,7 +755,7 @@ the network:</p>
 <p>The PXE boot process loads the configured kernel and initrd from
 the PXE server. For this reason, those two files must be extracted
 from the live ISO image and copied to the PXE server as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mount Leap-15.1_appliance.x86_64-1.15.1.iso /mnt
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ mount <span class="o">{</span>exc_image_base_name<span class="o">}</span>.x86_64-1.15.3.iso /mnt
 $ cp /mnt/boot/x86_64/loader/initrd /srv/tftpboot/boot/initrd
 $ cp /mnt/boot/x86_64/loader/linux /srv/tftpboot/boot/linux
 $ umount /mnt
@@ -781,7 +783,7 @@ must provide a compatible aoe kernel module compared to the
 kernel used in the live ISO image.</p>
 </div>
 <p>Once done, export the live ISO image as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ vbladed <span class="m">0</span> <span class="m">1</span> INTERFACE Leap-15.1_appliance.x86_64-1.15.1.iso
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ vbladed <span class="m">0</span> <span class="m">1</span> INTERFACE <span class="o">{</span>exc_image_base_name<span class="o">}</span>.x86_64-1.15.3.iso
 </pre></div>
 </div>
 <p>The above command exports the given ISO file as a block storage
@@ -831,12 +833,12 @@ is supported.</p></li>
 <p>Within the network which has access to the PXE server and the
 exported live ISO image, any network client can now boot the
 live system. A test based on QEMU is done as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qemu -boot n
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo qemu -boot n
 </pre></div>
 </div>
 </li>
 </ol>
-</div>
+</section>
 
 
            </div>

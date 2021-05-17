@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.volume_manager Package &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>kiwi.volume_manager Package &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -97,8 +101,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -116,7 +119,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -729,16 +731,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="kiwi-volume-manager-package">
+  <section id="kiwi-volume-manager-package">
 <h1>kiwi.volume_manager Package<a class="headerlink" href="#kiwi-volume-manager-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
+<section id="submodules">
 <span id="db-kiwi-volume-manager-submodules"></span><h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-kiwi.volume_manager.base">
+</section>
+<section id="module-kiwi.volume_manager.base">
 <span id="kiwi-volume-manager-base-module"></span><h2><a class="reference internal" href="#module-kiwi.volume_manager.base" title="kiwi.volume_manager.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.volume_manager.base</span></code></a> Module<a class="headerlink" href="#module-kiwi.volume_manager.base" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.volume_manager.base.</span></code><code class="sig-name descname"><span class="pre">VolumeManagerBase</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.volume_manager.base.</span></span><span class="sig-name descname"><span class="pre">VolumeManagerBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="kiwi.storage.html#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></code></a></p>
 <p><strong>Implements base class for volume management interface</strong></p>
 <dl class="field-list simple">
@@ -764,19 +766,19 @@ be passed to a FileSystem instance</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.apply_attributes_on_volume">
-<code class="sig-name descname"><span class="pre">apply_attributes_on_volume</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toplevel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.apply_attributes_on_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.apply_attributes_on_volume" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.apply_attributes_on_volume">
+<span class="sig-name descname"><span class="pre">apply_attributes_on_volume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">toplevel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volume</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.apply_attributes_on_volume"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.apply_attributes_on_volume" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.create_volume_paths_in_root_dir">
-<code class="sig-name descname"><span class="pre">create_volume_paths_in_root_dir</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.create_volume_paths_in_root_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.create_volume_paths_in_root_dir" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.create_volume_paths_in_root_dir">
+<span class="sig-name descname"><span class="pre">create_volume_paths_in_root_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.create_volume_paths_in_root_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.create_volume_paths_in_root_dir" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements creation of volume paths in the given root directory</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.create_volumes">
-<code class="sig-name descname"><span class="pre">create_volumes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.create_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.create_volumes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.create_volumes">
+<span class="sig-name descname"><span class="pre">create_volumes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.create_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.create_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements creation of volumes</p>
 <p>Implementation in specialized volume manager class required</p>
 <dl class="field-list simple">
@@ -787,8 +789,8 @@ be passed to a FileSystem instance</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.get_canonical_volume_list">
-<code class="sig-name descname"><span class="pre">get_canonical_volume_list</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.get_canonical_volume_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.get_canonical_volume_list" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.get_canonical_volume_list">
+<span class="sig-name descname"><span class="pre">get_canonical_volume_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.get_canonical_volume_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.get_canonical_volume_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements hierarchical sorting of volumes according to their
 paths and provides information about the volume configured as
 the one eating all the rest space</p>
@@ -803,8 +805,8 @@ the one eating all the rest space</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.get_device">
-<code class="sig-name descname"><span class="pre">get_device</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.get_device" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.get_device">
+<span class="sig-name descname"><span class="pre">get_device</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.get_device" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return current DeviceProvider dictionary</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -817,8 +819,8 @@ the one eating all the rest space</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.get_fstab">
-<code class="sig-name descname"><span class="pre">get_fstab</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">persistency_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.get_fstab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.get_fstab" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.get_fstab">
+<span class="sig-name descname"><span class="pre">get_fstab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">persistency_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.get_fstab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.get_fstab" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements setup of the fstab entries. The method should
 return a list of fstab compatible entries</p>
 <dl class="field-list simple">
@@ -832,8 +834,8 @@ return a list of fstab compatible entries</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.get_mountpoint">
-<code class="sig-name descname"><span class="pre">get_mountpoint</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.get_mountpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.get_mountpoint" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.get_mountpoint">
+<span class="sig-name descname"><span class="pre">get_mountpoint</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.get_mountpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.get_mountpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides mount point directory</p>
 <p>Effective use of the directory is guaranteed only after sync_data</p>
 <dl class="field-list simple">
@@ -847,8 +849,8 @@ return a list of fstab compatible entries</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.get_volume_mbsize">
-<code class="sig-name descname"><span class="pre">get_volume_mbsize</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volume</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_volumes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resize_on_boot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.get_volume_mbsize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.get_volume_mbsize" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.get_volume_mbsize">
+<span class="sig-name descname"><span class="pre">get_volume_mbsize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volume</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_volumes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resize_on_boot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.get_volume_mbsize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.get_volume_mbsize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements size lookup for the given path and desired
 filesystem according to the specified size type</p>
 <dl class="field-list simple">
@@ -875,15 +877,15 @@ needed size.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.get_volumes">
-<code class="sig-name descname"><span class="pre">get_volumes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.get_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.get_volumes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.get_volumes">
+<span class="sig-name descname"><span class="pre">get_volumes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.get_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.get_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements return of dictionary of volumes and
 their mount options</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.is_loop">
-<code class="sig-name descname"><span class="pre">is_loop</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.is_loop" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.is_loop">
+<span class="sig-name descname"><span class="pre">is_loop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.is_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if storage provider is loop based</p>
 <p>The information is taken from the storage provider. If
 the storage provider is loop based the volume manager is it too</p>
@@ -898,15 +900,15 @@ the storage provider is loop based the volume manager is it too</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.mount_volumes">
-<code class="sig-name descname"><span class="pre">mount_volumes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.mount_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.mount_volumes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.mount_volumes">
+<span class="sig-name descname"><span class="pre">mount_volumes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.mount_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.mount_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements mounting of all volumes below one master directory</p>
 <p>Implementation in specialized volume manager class required</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.post_init">
-<code class="sig-name descname"><span class="pre">post_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.post_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.post_init" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.post_init">
+<span class="sig-name descname"><span class="pre">post_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.post_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.post_init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Post initialization method</p>
 <p>Implementation in specialized volume manager class if required</p>
 <dl class="field-list simple">
@@ -917,14 +919,14 @@ the storage provider is loop based the volume manager is it too</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.set_property_readonly_root">
-<code class="sig-name descname"><span class="pre">set_property_readonly_root</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.set_property_readonly_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.set_property_readonly_root" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.set_property_readonly_root">
+<span class="sig-name descname"><span class="pre">set_property_readonly_root</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.set_property_readonly_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.set_property_readonly_root" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements setup of read-only root property</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.setup">
-<code class="sig-name descname"><span class="pre">setup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.setup" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.setup">
+<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.setup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements setup required prior to the creation of volumes</p>
 <p>Implementation in specialized volume manager class required</p>
 <dl class="field-list simple">
@@ -935,15 +937,15 @@ the storage provider is loop based the volume manager is it too</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.setup_mountpoint">
-<code class="sig-name descname"><span class="pre">setup_mountpoint</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.setup_mountpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.setup_mountpoint" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.setup_mountpoint">
+<span class="sig-name descname"><span class="pre">setup_mountpoint</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.setup_mountpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.setup_mountpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements creation of a master directory holding
 the mounts of all volumes</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.sync_data">
-<code class="sig-name descname"><span class="pre">sync_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.sync_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.sync_data" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.sync_data">
+<span class="sig-name descname"><span class="pre">sync_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.sync_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.sync_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements sync of root directory to mounted volumes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -953,20 +955,20 @@ the mounts of all volumes</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.base.VolumeManagerBase.umount_volumes">
-<code class="sig-name descname"><span class="pre">umount_volumes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.umount_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.umount_volumes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.base.VolumeManagerBase.umount_volumes">
+<span class="sig-name descname"><span class="pre">umount_volumes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/base.html#VolumeManagerBase.umount_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.base.VolumeManagerBase.umount_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements umounting of all volumes</p>
 <p>Implementation in specialized volume manager class required</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.volume_manager.btrfs">
+</section>
+<section id="module-kiwi.volume_manager.btrfs">
 <span id="kiwi-volume-manager-btrfs-module"></span><h2><a class="reference internal" href="#module-kiwi.volume_manager.btrfs" title="kiwi.volume_manager.btrfs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.volume_manager.btrfs</span></code></a> Module<a class="headerlink" href="#module-kiwi.volume_manager.btrfs" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.volume_manager.btrfs.</span></code><code class="sig-name descname"><span class="pre">VolumeManagerBtrfs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.volume_manager.btrfs.</span></span><span class="sig-name descname"><span class="pre">VolumeManagerBtrfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.volume_manager.base.VolumeManagerBase" title="kiwi.volume_manager.base.VolumeManagerBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.volume_manager.base.VolumeManagerBase</span></code></a></p>
 <p>Implements btrfs sub-volume management</p>
 <dl class="field-list simple">
@@ -978,8 +980,8 @@ the mounts of all volumes</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.create_volumes">
-<code class="sig-name descname"><span class="pre">create_volumes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.create_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.create_volumes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.create_volumes">
+<span class="sig-name descname"><span class="pre">create_volumes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.create_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.create_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create configured btrfs subvolumes</p>
 <p>Any btrfs subvolume is of the same btrfs filesystem. There is no
 way to have different filesystems per btrfs subvolume. Thus
@@ -992,8 +994,8 @@ the filesystem_name has no effect for btrfs</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.get_fstab">
-<code class="sig-name descname"><span class="pre">get_fstab</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">persistency_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'by-label'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.get_fstab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.get_fstab" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.get_fstab">
+<span class="sig-name descname"><span class="pre">get_fstab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">persistency_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'by-label'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.get_fstab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.get_fstab" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements creation of the fstab entries. The method
 returns a list of fstab compatible entries</p>
 <dl class="field-list simple">
@@ -1013,8 +1015,8 @@ returns a list of fstab compatible entries</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.get_mountpoint">
-<code class="sig-name descname"><span class="pre">get_mountpoint</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.get_mountpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.get_mountpoint" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.get_mountpoint">
+<span class="sig-name descname"><span class="pre">get_mountpoint</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.get_mountpoint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.get_mountpoint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides btrfs root mount point directory</p>
 <p>Effective use of the directory is guaranteed only after sync_data</p>
 <dl class="field-list simple">
@@ -1028,8 +1030,8 @@ returns a list of fstab compatible entries</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.get_volumes">
-<code class="sig-name descname"><span class="pre">get_volumes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.get_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.get_volumes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.get_volumes">
+<span class="sig-name descname"><span class="pre">get_volumes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.get_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.get_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return dict of volumes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1042,14 +1044,14 @@ returns a list of fstab compatible entries</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.mount_volumes">
-<code class="sig-name descname"><span class="pre">mount_volumes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.mount_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.mount_volumes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.mount_volumes">
+<span class="sig-name descname"><span class="pre">mount_volumes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.mount_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.mount_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mount btrfs subvolumes</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.post_init">
-<code class="sig-name descname"><span class="pre">post_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.post_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.post_init" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.post_init">
+<span class="sig-name descname"><span class="pre">post_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.post_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.post_init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Post initialization method</p>
 <p>Store custom btrfs initialization arguments</p>
 <dl class="field-list simple">
@@ -1060,14 +1062,14 @@ returns a list of fstab compatible entries</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.set_property_readonly_root">
-<code class="sig-name descname"><span class="pre">set_property_readonly_root</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.set_property_readonly_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.set_property_readonly_root" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.set_property_readonly_root">
+<span class="sig-name descname"><span class="pre">set_property_readonly_root</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.set_property_readonly_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.set_property_readonly_root" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the root volume to be a readonly filesystem</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.setup">
-<code class="sig-name descname"><span class="pre">setup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.setup" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.setup">
+<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.setup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setup btrfs volume management</p>
 <p>In case of btrfs a toplevel(&#64;) subvolume is created and marked
 as default volume. If snapshots are activated via the custom_args
@@ -1082,8 +1084,8 @@ the name argument is not used for btrfs</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.sync_data">
-<code class="sig-name descname"><span class="pre">sync_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.sync_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.sync_data" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.sync_data">
+<span class="sig-name descname"><span class="pre">sync_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.sync_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.sync_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sync data into btrfs filesystem</p>
 <p>If snapshots are activated the root filesystem is synced
 into the first snapshot</p>
@@ -1095,8 +1097,8 @@ into the first snapshot</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.umount_volumes">
-<code class="sig-name descname"><span class="pre">umount_volumes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.umount_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.umount_volumes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.btrfs.VolumeManagerBtrfs.umount_volumes">
+<span class="sig-name descname"><span class="pre">umount_volumes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/btrfs.html#VolumeManagerBtrfs.umount_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.btrfs.VolumeManagerBtrfs.umount_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Umount btrfs subvolumes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1110,17 +1112,17 @@ into the first snapshot</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.volume_manager.lvm">
+</section>
+<section id="module-kiwi.volume_manager.lvm">
 <span id="kiwi-volume-manager-lvm-module"></span><h2><a class="reference internal" href="#module-kiwi.volume_manager.lvm" title="kiwi.volume_manager.lvm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.volume_manager.lvm</span></code></a> Module<a class="headerlink" href="#module-kiwi.volume_manager.lvm" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.volume_manager.lvm.VolumeManagerLVM">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.volume_manager.lvm.</span></code><code class="sig-name descname"><span class="pre">VolumeManagerLVM</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.lvm.VolumeManagerLVM">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.volume_manager.lvm.</span></span><span class="sig-name descname"><span class="pre">VolumeManagerLVM</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_map</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.volume_manager.base.VolumeManagerBase" title="kiwi.volume_manager.base.VolumeManagerBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.volume_manager.base.VolumeManagerBase</span></code></a></p>
 <p><strong>Implements LVM volume management</strong></p>
 <dl class="py method">
-<dt id="kiwi.volume_manager.lvm.VolumeManagerLVM.create_volumes">
-<code class="sig-name descname"><span class="pre">create_volumes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.create_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.create_volumes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.lvm.VolumeManagerLVM.create_volumes">
+<span class="sig-name descname"><span class="pre">create_volumes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.create_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.create_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create configured lvm volumes and filesystems</p>
 <p>All volumes receive the same filesystem</p>
 <dl class="field-list simple">
@@ -1131,8 +1133,8 @@ into the first snapshot</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.lvm.VolumeManagerLVM.get_device">
-<code class="sig-name descname"><span class="pre">get_device</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.get_device" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.lvm.VolumeManagerLVM.get_device">
+<span class="sig-name descname"><span class="pre">get_device</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.get_device" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary of MappedDevice instances per volume</p>
 <p>Note: The mapping requires an explicit create_volumes() call</p>
 <dl class="field-list simple">
@@ -1146,8 +1148,8 @@ into the first snapshot</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.lvm.VolumeManagerLVM.get_fstab">
-<code class="sig-name descname"><span class="pre">get_fstab</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">persistency_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.get_fstab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.get_fstab" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.lvm.VolumeManagerLVM.get_fstab">
+<span class="sig-name descname"><span class="pre">get_fstab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">persistency_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.get_fstab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.get_fstab" title="Permalink to this definition">¶</a></dt>
 <dd><p>Implements creation of the fstab entries. The method
 returns a list of fstab compatible entries</p>
 <dl class="field-list simple">
@@ -1167,8 +1169,8 @@ returns a list of fstab compatible entries</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.lvm.VolumeManagerLVM.get_volumes">
-<code class="sig-name descname"><span class="pre">get_volumes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.get_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.get_volumes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.lvm.VolumeManagerLVM.get_volumes">
+<span class="sig-name descname"><span class="pre">get_volumes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.get_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.get_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return dict of volumes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1181,14 +1183,14 @@ returns a list of fstab compatible entries</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.lvm.VolumeManagerLVM.mount_volumes">
-<code class="sig-name descname"><span class="pre">mount_volumes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.mount_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.mount_volumes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.lvm.VolumeManagerLVM.mount_volumes">
+<span class="sig-name descname"><span class="pre">mount_volumes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.mount_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.mount_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mount lvm volumes</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.lvm.VolumeManagerLVM.post_init">
-<code class="sig-name descname"><span class="pre">post_init</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.post_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.post_init" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.lvm.VolumeManagerLVM.post_init">
+<span class="sig-name descname"><span class="pre">post_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">custom_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.post_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.post_init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Post initialization method</p>
 <p>Store custom lvm initialization arguments</p>
 <dl class="field-list simple">
@@ -1199,8 +1201,8 @@ returns a list of fstab compatible entries</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.lvm.VolumeManagerLVM.setup">
-<code class="sig-name descname"><span class="pre">setup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volume_group_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'systemVG'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.setup" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.lvm.VolumeManagerLVM.setup">
+<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">volume_group_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'systemVG'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.setup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setup lvm volume management</p>
 <p>In case of LVM a new volume group is created on a PV
 initialized storage device</p>
@@ -1212,8 +1214,8 @@ initialized storage device</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.volume_manager.lvm.VolumeManagerLVM.umount_volumes">
-<code class="sig-name descname"><span class="pre">umount_volumes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.umount_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.umount_volumes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.lvm.VolumeManagerLVM.umount_volumes">
+<span class="sig-name descname"><span class="pre">umount_volumes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager/lvm.html#VolumeManagerLVM.umount_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.lvm.VolumeManagerLVM.umount_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Umount lvm volumes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1227,12 +1229,12 @@ initialized storage device</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.volume_manager">
+</section>
+<section id="module-kiwi.volume_manager">
 <span id="module-contents"></span><span id="db-kiwi-volume-manager-content"></span><h2>Module Contents<a class="headerlink" href="#module-kiwi.volume_manager" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.volume_manager.VolumeManager">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.volume_manager.</span></code><code class="sig-name descname"><span class="pre">VolumeManager</span></code><a class="reference internal" href="../_modules/kiwi/volume_manager.html#VolumeManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.VolumeManager" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.VolumeManager">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.volume_manager.</span></span><span class="sig-name descname"><span class="pre">VolumeManager</span></span><a class="reference internal" href="../_modules/kiwi/volume_manager.html#VolumeManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.VolumeManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>VolumeManager factory</strong></p>
 <dl class="field-list simple">
@@ -1247,14 +1249,14 @@ initialized storage device</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.volume_manager.VolumeManager.new">
-<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">new</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">device_map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><span class="pre">object</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager.html#VolumeManager.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.VolumeManager.new" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.volume_manager.VolumeManager.new">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">device_map</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><span class="pre">object</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">volumes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/volume_manager.html#VolumeManager.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.volume_manager.VolumeManager.new" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

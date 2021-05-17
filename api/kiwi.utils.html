@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.utils Package &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>kiwi.utils Package &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,16 +732,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="kiwi-utils-package">
+  <section id="kiwi-utils-package">
 <h1>kiwi.utils Package<a class="headerlink" href="#kiwi-utils-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
+<section id="submodules">
 <span id="db-kiwi-utils-submodules"></span><h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-kiwi.utils.block">
+</section>
+<section id="module-kiwi.utils.block">
 <span id="kiwi-utils-checksum-module"></span><h2><a class="reference internal" href="#module-kiwi.utils.checksum" title="kiwi.utils.checksum"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.utils.checksum</span></code></a> Module<a class="headerlink" href="#module-kiwi.utils.block" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.utils.block.BlockID">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.utils.block.</span></code><code class="sig-name descname"><span class="pre">BlockID</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/block.html#BlockID"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.block.BlockID" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.block.BlockID">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.utils.block.</span></span><span class="sig-name descname"><span class="pre">BlockID</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/block.html#BlockID"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.block.BlockID" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Get information from a block device</strong></p>
 <dl class="field-list simple">
@@ -749,8 +751,8 @@ also be specified as UUID=&lt;uuid&gt;</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.utils.block.BlockID.get_blkid">
-<code class="sig-name descname"><span class="pre">get_blkid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/block.html#BlockID.get_blkid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.block.BlockID.get_blkid" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.block.BlockID.get_blkid">
+<span class="sig-name descname"><span class="pre">get_blkid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/block.html#BlockID.get_blkid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.block.BlockID.get_blkid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve information for specified metadata ID from block device</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -766,8 +768,8 @@ also be specified as UUID=&lt;uuid&gt;</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.utils.block.BlockID.get_filesystem">
-<code class="sig-name descname"><span class="pre">get_filesystem</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/block.html#BlockID.get_filesystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.block.BlockID.get_filesystem" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.block.BlockID.get_filesystem">
+<span class="sig-name descname"><span class="pre">get_filesystem</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/block.html#BlockID.get_filesystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.block.BlockID.get_filesystem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve filesystem type from block device</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -780,8 +782,8 @@ also be specified as UUID=&lt;uuid&gt;</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.utils.block.BlockID.get_label">
-<code class="sig-name descname"><span class="pre">get_label</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/block.html#BlockID.get_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.block.BlockID.get_label" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.block.BlockID.get_label">
+<span class="sig-name descname"><span class="pre">get_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/block.html#BlockID.get_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.block.BlockID.get_label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve filesystem label from block device</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -794,8 +796,8 @@ also be specified as UUID=&lt;uuid&gt;</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.utils.block.BlockID.get_uuid">
-<code class="sig-name descname"><span class="pre">get_uuid</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/block.html#BlockID.get_uuid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.block.BlockID.get_uuid" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.block.BlockID.get_uuid">
+<span class="sig-name descname"><span class="pre">get_uuid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/block.html#BlockID.get_uuid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.block.BlockID.get_uuid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve filesystem uuid from block device</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -809,12 +811,12 @@ also be specified as UUID=&lt;uuid&gt;</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.utils.checksum">
+</section>
+<section id="module-kiwi.utils.checksum">
 <span id="kiwi-utils-block-module"></span><h2><a class="reference internal" href="#module-kiwi.utils.block" title="kiwi.utils.block"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.utils.block</span></code></a> Module<a class="headerlink" href="#module-kiwi.utils.checksum" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.utils.checksum.Checksum">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.utils.checksum.</span></code><code class="sig-name descname"><span class="pre">Checksum</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/checksum.html#Checksum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.checksum.Checksum" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.checksum.Checksum">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.utils.checksum.</span></span><span class="sig-name descname"><span class="pre">Checksum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/checksum.html#Checksum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.checksum.Checksum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Manage checksum creation for files</strong></p>
 <dl class="field-list simple">
@@ -826,8 +828,8 @@ also be specified as UUID=&lt;uuid&gt;</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.utils.checksum.Checksum.matches">
-<code class="sig-name descname"><span class="pre">matches</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checksum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/checksum.html#Checksum.matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.checksum.Checksum.matches" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.checksum.Checksum.matches">
+<span class="sig-name descname"><span class="pre">matches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">checksum</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/checksum.html#Checksum.matches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.checksum.Checksum.matches" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compare given checksum with reference checksum stored
 in the provided filename. If the checksum matches the
 method returns True, or False in case it does not match</p>
@@ -848,8 +850,8 @@ method returns True, or False in case it does not match</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.utils.checksum.Checksum.md5">
-<code class="sig-name descname"><span class="pre">md5</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/checksum.html#Checksum.md5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.checksum.Checksum.md5" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.checksum.Checksum.md5">
+<span class="sig-name descname"><span class="pre">md5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/checksum.html#Checksum.md5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.checksum.Checksum.md5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create md5 checksum</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -865,8 +867,8 @@ method returns True, or False in case it does not match</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.utils.checksum.Checksum.sha256">
-<code class="sig-name descname"><span class="pre">sha256</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/checksum.html#Checksum.sha256"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.checksum.Checksum.sha256" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.checksum.Checksum.sha256">
+<span class="sig-name descname"><span class="pre">sha256</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/checksum.html#Checksum.sha256"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.checksum.Checksum.sha256" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create sha256 checksum</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -877,12 +879,12 @@ method returns True, or False in case it does not match</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.utils.compress">
+</section>
+<section id="module-kiwi.utils.compress">
 <span id="kiwi-utils-compress-module"></span><h2><a class="reference internal" href="#module-kiwi.utils.compress" title="kiwi.utils.compress"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.utils.compress</span></code></a> Module<a class="headerlink" href="#module-kiwi.utils.compress" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.utils.compress.Compress">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.utils.compress.</span></code><code class="sig-name descname"><span class="pre">Compress</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_source_on_compress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/compress.html#Compress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.compress.Compress" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.compress.Compress">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.utils.compress.</span></span><span class="sig-name descname"><span class="pre">Compress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_source_on_compress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/compress.html#Compress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.compress.Compress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>File compression / decompression</strong></p>
 <dl class="field-list simple">
@@ -898,8 +900,8 @@ compression suffix</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.utils.compress.Compress.get_format">
-<code class="sig-name descname"><span class="pre">get_format</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/compress.html#Compress.get_format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.compress.Compress.get_format" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.compress.Compress.get_format">
+<span class="sig-name descname"><span class="pre">get_format</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/compress.html#Compress.get_format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.compress.Compress.get_format" title="Permalink to this definition">¶</a></dt>
 <dd><p>Detect compression format</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -912,14 +914,14 @@ compression suffix</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.utils.compress.Compress.gzip">
-<code class="sig-name descname"><span class="pre">gzip</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/compress.html#Compress.gzip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.compress.Compress.gzip" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.compress.Compress.gzip">
+<span class="sig-name descname"><span class="pre">gzip</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/compress.html#Compress.gzip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.compress.Compress.gzip" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create gzip(max compression) compressed file</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.utils.compress.Compress.uncompress">
-<code class="sig-name descname"><span class="pre">uncompress</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temporary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/compress.html#Compress.uncompress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.compress.Compress.uncompress" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.compress.Compress.uncompress">
+<span class="sig-name descname"><span class="pre">uncompress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temporary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/compress.html#Compress.uncompress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.compress.Compress.uncompress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uncompress with format autodetection</p>
 <p>By default the original source file will be changed into
 the uncompressed variant. If temporary is set to True
@@ -932,8 +934,8 @@ a temporary file is created instead</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.utils.compress.Compress.xz">
-<code class="sig-name descname"><span class="pre">xz</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/compress.html#Compress.xz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.compress.Compress.xz" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.compress.Compress.xz">
+<span class="sig-name descname"><span class="pre">xz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/compress.html#Compress.xz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.compress.Compress.xz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create XZ compressed file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -944,12 +946,12 @@ a temporary file is created instead</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.utils.sync">
+</section>
+<section id="module-kiwi.utils.sync">
 <span id="kiwi-utils-sync-module"></span><h2><a class="reference internal" href="#module-kiwi.utils.sync" title="kiwi.utils.sync"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.utils.sync</span></code></a> Module<a class="headerlink" href="#module-kiwi.utils.sync" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.utils.sync.DataSync">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.utils.sync.</span></code><code class="sig-name descname"><span class="pre">DataSync</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sync.html#DataSync"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sync.DataSync" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.sync.DataSync">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.utils.sync.</span></span><span class="sig-name descname"><span class="pre">DataSync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sync.html#DataSync"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sync.DataSync" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Sync data from a source directory to a target directory
 using the rsync protocol</strong></p>
@@ -962,8 +964,8 @@ using the rsync protocol</strong></p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.utils.sync.DataSync.sync_data">
-<code class="sig-name descname"><span class="pre">sync_data</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sync.html#DataSync.sync_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sync.DataSync.sync_data" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.sync.DataSync.sync_data">
+<span class="sig-name descname"><span class="pre">sync_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sync.html#DataSync.sync_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sync.DataSync.sync_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sync data from source to target using rsync</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -976,8 +978,8 @@ using the rsync protocol</strong></p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.utils.sync.DataSync.target_supports_extended_attributes">
-<code class="sig-name descname"><span class="pre">target_supports_extended_attributes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sync.html#DataSync.target_supports_extended_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sync.DataSync.target_supports_extended_attributes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.sync.DataSync.target_supports_extended_attributes">
+<span class="sig-name descname"><span class="pre">target_supports_extended_attributes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sync.html#DataSync.target_supports_extended_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sync.DataSync.target_supports_extended_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the target directory supports extended filesystem
 attributes</p>
 <dl class="field-list simple">
@@ -992,12 +994,12 @@ attributes</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.utils.sysconfig">
+</section>
+<section id="module-kiwi.utils.sysconfig">
 <span id="kiwi-utils-sysconfig-module"></span><h2><a class="reference internal" href="#module-kiwi.utils.sysconfig" title="kiwi.utils.sysconfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.utils.sysconfig</span></code></a> Module<a class="headerlink" href="#module-kiwi.utils.sysconfig" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.utils.sysconfig.SysConfig">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.utils.sysconfig.</span></code><code class="sig-name descname"><span class="pre">SysConfig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sysconfig.html#SysConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sysconfig.SysConfig" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.sysconfig.SysConfig">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.utils.sysconfig.</span></span><span class="sig-name descname"><span class="pre">SysConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sysconfig.html#SysConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sysconfig.SysConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Read and Write sysconfig style files</strong></p>
 <dl class="field-list simple">
@@ -1006,23 +1008,23 @@ attributes</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.utils.sysconfig.SysConfig.get">
-<code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sysconfig.html#SysConfig.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sysconfig.SysConfig.get" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.sysconfig.SysConfig.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sysconfig.html#SysConfig.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sysconfig.SysConfig.get" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.utils.sysconfig.SysConfig.write">
-<code class="sig-name descname"><span class="pre">write</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sysconfig.html#SysConfig.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sysconfig.SysConfig.write" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.utils.sysconfig.SysConfig.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sysconfig.html#SysConfig.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sysconfig.SysConfig.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Write back source file with changed content but in same order</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.utils">
+</section>
+<section id="module-kiwi.utils">
 <span id="module-contents"></span><span id="db-kiwi-utils-content"></span><h2>Module Contents<a class="headerlink" href="#module-kiwi.utils" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

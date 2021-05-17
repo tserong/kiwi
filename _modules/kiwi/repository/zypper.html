@@ -7,12 +7,14 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.repository.zypper &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>kiwi.repository.zypper &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +32,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
@@ -96,8 +99,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -115,7 +117,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -750,8 +751,6 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
 
 <span class="c1"># project</span>
-<span class="kn">import</span> <span class="nn">kiwi.defaults</span> <span class="k">as</span> <span class="nn">defaults</span>
-
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 <span class="kn">from</span> <span class="nn">kiwi.repository.base</span> <span class="kn">import</span> <span class="n">RepositoryBase</span>
@@ -785,6 +784,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="o">=</span> <span class="n">custom_args</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">exclude_docs</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gpgcheck</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">locale</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_arch</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># extract custom arguments used for zypp config only</span>
         <span class="k">if</span> <span class="s1">&#39;exclude_docs&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">:</span>
@@ -795,11 +796,16 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;check_signatures&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">gpgcheck</span> <span class="o">=</span> <span class="kc">True</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">locale</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
-            <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="k">if</span> <span class="s1">&#39;_install_langs&#39;</span> <span class="ow">in</span> <span class="n">item</span>
-        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">argument</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;_install_langs&#39;</span> <span class="ow">in</span> <span class="n">argument</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">locale</span> <span class="o">=</span> <span class="n">argument</span>
+            <span class="k">elif</span> <span class="s1">&#39;_target_arch&#39;</span> <span class="ow">in</span> <span class="n">argument</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">target_arch</span> <span class="o">=</span> <span class="n">argument</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">locale</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">locale</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">locale</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_arch</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_arch</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">target_arch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_arch</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">repo_names</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -862,9 +868,10 @@
             <span class="s1">&#39;main&#39;</span><span class="p">,</span> <span class="s1">&#39;credentials.global.dir&#39;</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">shared_zypper_dir</span><span class="p">[</span><span class="s1">&#39;credentials-dir&#39;</span><span class="p">]</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">runtime_zypp_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
-            <span class="s1">&#39;main&#39;</span><span class="p">,</span> <span class="s1">&#39;arch&#39;</span><span class="p">,</span> <span class="n">defaults</span><span class="o">.</span><span class="n">PLATFORM_MACHINE</span>
-        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_arch</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">runtime_zypp_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+                <span class="s1">&#39;main&#39;</span><span class="p">,</span> <span class="s1">&#39;arch&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_arch</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exclude_docs</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">runtime_zypp_config</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
                 <span class="s1">&#39;main&#39;</span><span class="p">,</span> <span class="s1">&#39;rpm.install.excludedocs&#39;</span><span class="p">,</span> <span class="s1">&#39;yes&#39;</span>
@@ -896,7 +903,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_custom_rpm_image_macro_name</span><span class="p">()</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">locale</span><span class="p">:</span>
-            <span class="n">rpmdb</span><span class="o">.</span><span class="n">set_macro_from_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">locale</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">rpmdb</span><span class="o">.</span><span class="n">set_macro_from_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">locale</span><span class="p">)</span>
         <span class="n">rpmdb</span><span class="o">.</span><span class="n">write_config</span><span class="p">()</span>
 
         <span class="n">rpmdb</span> <span class="o">=</span> <span class="n">RpmDataBase</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>

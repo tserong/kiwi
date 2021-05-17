@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Quick Start &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Quick Start &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="commands/result_list.html">kiwi-ng result list</a><ul>
@@ -728,71 +730,79 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="quick-start">
+  <section id="quick-start">
 <span id="id1"></span><h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Abstract</strong></p>
 <p>This document describes how to start working with KIWI NG, an OS appliance
 builder.
-This description applies for version 9.23.29.</p>
+This description applies for version 9.23.30.</p>
 </div>
-<div class="section" id="before-you-start">
+<section id="before-you-start">
 <h2>Before you start<a class="headerlink" href="#before-you-start" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p>Install KIWI NG first, either via your distributions’ package manager (see
 <a class="reference internal" href="installation.html#kiwi-installation"><span class="std std-ref">Installation</span></a>) or via:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ pip install kiwi
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo pip install kiwi
 </pre></div>
 </div>
 </li>
-<li><p>Clone the repository containing example appliances (see
+<li><p>Clone the KIWI NG repository containing example appliances (see
 <a class="reference internal" href="installation.html#example-descriptions"><span class="std std-ref">Example Appliance Descriptions</span></a>):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/OSInside/kiwi-descriptions
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/OSInside/kiwi
 </pre></div>
 </div>
 </li>
 </ol>
-</div>
-<div class="section" id="choose-a-first-image">
+</section>
+<section id="choose-a-first-image">
 <h2>Choose a First Image<a class="headerlink" href="#choose-a-first-image" title="Permalink to this headline">¶</a></h2>
+<p>Find example appliance descriptions in the KIWI NG repository checkout
+as follows:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ tree -L <span class="m">3</span> kiwi/build-tests
+</pre></div>
+</div>
+</div></blockquote>
 <p>Take a look which images are available in the example appliances repository
 and select one that matches your desired image as close as possible. Or
 just use the one given in the examples below.</p>
-</div>
-<div class="section" id="build-your-first-image">
+</section>
+<section id="build-your-first-image">
 <h2>Build your First Image<a class="headerlink" href="#build-your-first-image" title="Permalink to this headline">¶</a></h2>
 <p>Your first image will be a simple system disk image which can run
 in any full virtualization system like QEMU. Invoke the following KIWI NG
 command in order to build it:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --profile<span class="o">=</span>Disk --type oem system build <span class="se">\</span>
-    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng system build <span class="se">\</span>
+    --description kiwi/build-tests/x86/leap/test-image-disk <span class="se">\</span>
+    --set-repo obs://openSUSE:Leap:15.3/standard <span class="se">\</span>
     --target-dir /tmp/myimage
 </pre></div>
 </div>
 <p>The resulting image will be placed into the folder <code class="file docutils literal notranslate"><span class="pre">/tmp/myimage</span></code>
 with the suffix <code class="file docutils literal notranslate"><span class="pre">.raw</span></code>.</p>
-<p>If you don’t wish to create a openSUSE Leap 15.1 image,
+<p>If you don’t wish to create a openSUSE Leap 15.3 image,
 substitute the folder following the <code class="docutils literal notranslate"><span class="pre">--description</span></code> option with another
 folder that contains the image description which you selected.</p>
-</div>
-<div class="section" id="run-your-image">
+</section>
+<section id="run-your-image">
 <h2>Run your Image<a class="headerlink" href="#run-your-image" title="Permalink to this headline">¶</a></h2>
 <p>Running an image actually means booting the operating system. In order to
 do that attach the disk image to a virtual system. In this example we use
 QEMU and boot it as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qemu -boot c <span class="se">\</span>
-    -drive <span class="nv">file</span><span class="o">=</span>Leap-15.1_appliance.x86_64-1.15.1.raw,format<span class="o">=</span>raw,if<span class="o">=</span>virtio <span class="se">\</span>
-    -m <span class="m">4096</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo qemu -boot c <span class="se">\</span>
+    -drive <span class="nv">file</span><span class="o">=</span>kiwi-test-image-disk.x86_64-1.15.3.raw,format<span class="o">=</span>raw,if<span class="o">=</span>virtio <span class="se">\</span>
+    -m <span class="m">4096</span> -serial stdio
 </pre></div>
 </div>
-</div>
-<div class="section" id="tweak-and-customize-your-image">
+</section>
+<section id="tweak-and-customize-your-image">
 <h2>Tweak and Customize your Image<a class="headerlink" href="#tweak-and-customize-your-image" title="Permalink to this headline">¶</a></h2>
 <p>Now that you have successfully built and started your first image, you can
 start tweaking it to match your needs.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

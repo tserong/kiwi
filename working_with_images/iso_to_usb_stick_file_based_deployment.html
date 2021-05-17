@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Deploy ISO Image as File on a FAT32 Formated USB Stick &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Deploy ISO Image as File on a FAT32 Formated USB Stick &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,9 +732,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="deploy-iso-image-as-file-on-a-fat32-formated-usb-stick">
+  <section id="deploy-iso-image-as-file-on-a-fat32-formated-usb-stick">
 <span id="iso-as-file-to-usb-stick"></span><h1>Deploy ISO Image as File on a FAT32 Formated USB Stick<a class="headerlink" href="#deploy-iso-image-as-file-on-a-fat32-formated-usb-stick" title="Permalink to this headline">¶</a></h1>
-<div class="sidebar">
+<aside class="sidebar">
 <p class="sidebar-title">Abstract</p>
 <p>This page provides further information for handling
 ISO images built with KIWI NG and references the following
@@ -740,7 +742,7 @@ articles:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../building_images/build_live_iso.html#hybrid-iso"><span class="std std-ref">Build an ISO Hybrid Live Image</span></a></p></li>
 </ul>
-</div>
+</aside>
 <p>In KIWI NG, all generated ISO images are created to be hybrid. This means,
 the image can be used as a CD/DVD or as a disk. The deployment of such
 an image onto a disk like an USB stick normally destroys all existing
@@ -774,7 +776,7 @@ storage devices and their filesystems:</p>
 <li><p>Call the <code class="xref py py-obj docutils literal notranslate"><span class="pre">live-grub-stick</span></code> command as follows:</p>
 <p>Assuming “/dev/sdz1” was the FAT32 partition selected from the
 output of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">lsblk</span></code> command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo live-grub-stick Leap-15.1_appliance.x86_64-1.15.1.iso /dev/sdz1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo live-grub-stick <span class="o">{</span>exc_image_base_name<span class="o">}</span>.x86_64-1.15.3.iso /dev/sdz1
 </pre></div>
 </div>
 </li>
@@ -788,7 +790,7 @@ Many firmware offers a boot menu which can be activated at boot time.
 Usually this can be reached by pressing the <kbd class="kbd docutils literal notranslate">Esc</kbd> or <kbd class="kbd docutils literal notranslate">F12</kbd> keys.</p>
 </li>
 </ol>
-</div>
+</section>
 
 
            </div>

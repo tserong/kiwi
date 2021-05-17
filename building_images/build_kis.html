@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Build KIS Image (Kernel, Initrd, System) &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Build KIS Image (Kernel, Initrd, System) &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,15 +732,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="build-kis-image-kernel-initrd-system">
+  <section id="build-kis-image-kernel-initrd-system">
 <span id="kis"></span><h1>Build KIS Image (Kernel, Initrd, System)<a class="headerlink" href="#build-kis-image-kernel-initrd-system" title="Permalink to this headline">¶</a></h1>
-<div class="sidebar">
+<aside class="sidebar">
 <p class="sidebar-title">Abstract</p>
 <p>This page explains how to build an image that consists
 out of three components. The kernel an initrd and an
 optional root filesystem image. In KIWI NG terminology
 this is called KIS.</p>
-</div>
+</aside>
 <p>A KIS image is a collection of image components that are not
 associated with a dedicated use case. This means from a KIWI NG
 perspective we don’t know in which environment these components
@@ -783,8 +785,9 @@ root filesystem image will be effective in the system image of a KIS
 image as well.</p>
 <p>With the appropriate settings present in <code class="file docutils literal notranslate"><span class="pre">config.xml</span></code> KIWI NG can now
 build the image:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --profile KIS system build <span class="se">\</span>
-    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --type kis system build <span class="se">\</span>
+    --description kiwi/build-tests/x86/tumbleweed/test-image-pxe <span class="se">\</span>
+    --set-repo http://download.opensuse.org/tumbleweed/repo/oss <span class="se">\</span>
     --target-dir /tmp/myimage
 </pre></div>
 </div>
@@ -795,7 +798,8 @@ tested with QEMU as follows:</p>
     -kernel /tmp/myimage/*.kernel <span class="se">\</span>
     -initrd /tmp/myimage/*.initrd.xz <span class="se">\</span>
     -append <span class="k">$(</span>cat /tmp/myimage/*.append<span class="k">)</span> <span class="se">\</span>
-    -hda /tmp/myimage/Leap-15.1_appliance.*-1.15.1 <span class="se">\</span>
+    -hda /tmp/myimage/kiwi-test-image-pxe.*-1.15.3 <span class="se">\</span>
+    -serial stdio
 </pre></div>
 </div>
 <div class="admonition note">
@@ -807,7 +811,7 @@ deployment infrastructure using PXE is provided by KIWI NG with the
 longer developed and only kept for compatibiliy reasons. For details
 see <a class="reference internal" href="../working_with_images/legacy_netboot_root_filesystem.html#build-legacy-pxe"><span class="std std-ref">Build PXE Root File System Image for the legacy netboot infrastructure</span></a></p>
 </div>
-</div>
+</section>
 
 
            </div>

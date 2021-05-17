@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Build an Expandable Disk Image &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Build an Expandable Disk Image &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,9 +732,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="build-an-expandable-disk-image">
+  <section id="build-an-expandable-disk-image">
 <span id="expandable-disk"></span><h1>Build an Expandable Disk Image<a class="headerlink" href="#build-an-expandable-disk-image" title="Permalink to this headline">¶</a></h1>
-<div class="sidebar">
+<aside class="sidebar">
 <p class="sidebar-title">Abstract</p>
 <p>This page explains how to build an expandable disk image.
 It contains how to:</p>
@@ -741,7 +743,7 @@ It contains how to:</p>
 <li><p>deploy an expandable disk image</p></li>
 <li><p>run the deployed system</p></li>
 </ul>
-</div>
+</aside>
 <p>An expandable disk represents the system disk with the capability to auto
 expand the disk and its filesystem to a custom disk geometry. This
 allows deploying the same disk image on target systems with different
@@ -754,7 +756,8 @@ system:</p>
 see <a class="reference internal" href="../installation.html#example-descriptions"><span class="std std-ref">Example Appliance Descriptions</span></a>.</p></li>
 <li><p>Build the image with KIWI NG:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --type oem system build <span class="se">\</span>
-    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
+    --description kiwi/build-tests/x86/leap/test-image-disk <span class="se">\</span>
+    --set-repo obs://openSUSE:Leap:15.3/standard <span class="se">\</span>
     --target-dir /tmp/myimage
 </pre></div>
 </div>
@@ -768,7 +771,7 @@ capable to install this image on any target disk.</p></li>
 </ul>
 </li>
 </ol>
-<div class="section" id="deployment-methods">
+<section id="deployment-methods">
 <span id="id1"></span><h2>Deployment Methods<a class="headerlink" href="#deployment-methods" title="Permalink to this headline">¶</a></h2>
 <p>The basic idea behind an expandable disk image is to provide the virtual
 disk data for OEM vendors to support easy deployment of the system to
@@ -787,8 +790,8 @@ deploy the disk image from CD/DVD or USB stick onto the target disk.</p>
 deploy the disk image from the network onto the target disk.</p>
 </li>
 </ol>
-</div>
-<div class="section" id="manual-deployment">
+</section>
+<section id="manual-deployment">
 <span id="deploy-manually"></span><h2>Manual Deployment<a class="headerlink" href="#manual-deployment" title="Permalink to this headline">¶</a></h2>
 <p>The manual deployment method can be tested using virtualization software
 such as QEMU, and an additional virtual target disk of a larger size.
@@ -808,12 +811,12 @@ original disk geometry stays untouched.</p>
 </div>
 </li>
 <li><p>Dump disk image on target disk.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ dd <span class="k">if</span><span class="o">=</span>Leap-15.1_appliance.x86_64-1.15.1.raw <span class="nv">of</span><span class="o">=</span>target_disk <span class="nv">conv</span><span class="o">=</span>notrunc
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ dd <span class="k">if</span><span class="o">=</span>kiwi-test-image-disk.x86_64-1.15.3.raw <span class="nv">of</span><span class="o">=</span>target_disk <span class="nv">conv</span><span class="o">=</span>notrunc
 </pre></div>
 </div>
 </li>
 <li><p>Boot the target disk</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qemu -hda target_disk -m <span class="m">4096</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo qemu -hda target_disk -m <span class="m">4096</span> -serial stdio
 </pre></div>
 </div>
 <p>At first boot of the target_disk the system is expanded to the
@@ -821,8 +824,8 @@ configured storage layout. By default the system root partition
 and filesystem is resized to the maximum free space available.</p>
 </li>
 </ol>
-</div>
-<div class="section" id="cd-dvd-deployment">
+</section>
+<section id="cd-dvd-deployment">
 <span id="deploy-from-iso"></span><h2>CD/DVD Deployment<a class="headerlink" href="#cd-dvd-deployment" title="Permalink to this headline">¶</a></h2>
 <p>The deployment from CD/DVD via the installation image can
 also be tested using virtualization software such as QEMU.
@@ -833,7 +836,9 @@ The following steps shows how to do it:</p>
 </li>
 <li><p>Boot the installation image as CD/DVD with the
 target disk attached.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qemu -cdromLeap-15.1_appliance.x86_64-1.15.1.install.iso -hda target_disk -boot d -m <span class="m">4096</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo qemu -cdrom <span class="se">\</span>
+      kiwi-test-image-disk.x86_64-1.15.3.install.iso -hda target_disk <span class="se">\</span>
+      -boot d -m <span class="m">4096</span> -serial stdio
 </pre></div>
 </div>
 <div class="admonition note">
@@ -846,8 +851,8 @@ serve as installation stick image like it is explained in
 </div>
 </li>
 </ol>
-</div>
-<div class="section" id="network-deployment">
+</section>
+<section id="network-deployment">
 <span id="deploy-from-network"></span><h2>Network Deployment<a class="headerlink" href="#network-deployment" title="Permalink to this headline">¶</a></h2>
 <p>The deployment from the network downloads the disk image from a
 PXE boot server. This requires a PXE network boot server to be setup
@@ -858,7 +863,7 @@ target system:</p>
 <ol class="arabic">
 <li><p>Make sure to create an installation PXE TAR archive along with your
 disk image by replacing the following setup in
-kiwi-descriptions/suse/x86_64/suse-leap-15.1/config.xml</p>
+kiwi/build-tests/x86/leap/test-image-disk/appliance.kiwi</p>
 <p>Instead of</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;oem&quot;</span> <span class="na">installiso=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
 </pre></div>
@@ -869,19 +874,19 @@ kiwi-descriptions/suse/x86_64/suse-leap-15.1/config.xml</p>
 </div>
 </li>
 <li><p>Rebuild the image, unpack the resulting
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.install.tar.xz</span></code>
+<code class="file docutils literal notranslate"><span class="pre">kiwi-test-image-disk.x86_64-1.15.3.install.tar.xz</span></code>
 file to a temporary directory and copy the initrd and kernel images to
 the PXE server:</p>
 <ol class="loweralpha">
 <li><p>Unpack installation tarball</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir /tmp/pxe <span class="o">&amp;&amp;</span> <span class="nb">cd</span> /tmp/pxe
-tar -xf Leap-15.1_appliance.x86_64-1.15.1.install.tar.xz
+tar -xf kiwi-test-image-disk.x86_64-1.15.3.install.tar.xz
 </pre></div>
 </div>
 </li>
 <li><p>Copy kernel and initrd used for pxe boot</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scp pxeboot.Leap-15.1_appliance.x86_64-1.15.1.initrd.xz PXE_SERVER_IP:/srv/tftpboot/boot/initrd
-scp pxeboot.Leap-15.1_appliance.x86_64-1.15.1.kernel PXE_SERVER_IP:/srv/tftpboot/boot/linux
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scp pxeboot.kiwi-test-image-disk.x86_64-1.15.3.initrd.xz PXE_SERVER_IP:/srv/tftpboot/boot/initrd
+scp pxeboot.kiwi-test-image-disk.x86_64-1.15.3.kernel PXE_SERVER_IP:/srv/tftpboot/boot/linux
 </pre></div>
 </div>
 </li>
@@ -893,15 +898,15 @@ the PXE boot server:</p>
 and initrd provided here.</p>
 <ol class="loweralpha">
 <li><p>Copy system image and MD5 checksum</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scp Leap-15.1_appliance.x86_64-1.15.1.xz PXE_SERVER_IP:/srv/tftpboot/image/
-scp Leap-15.1_appliance.x86_64-1.15.1.md5 PXE_SERVER_IP:/srv/tftpboot/image/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scp kiwi-test-image-disk.x86_64-1.15.3.xz PXE_SERVER_IP:/srv/tftpboot/image/
+scp kiwi-test-image-disk.x86_64-1.15.3.md5 PXE_SERVER_IP:/srv/tftpboot/image/
 </pre></div>
 </div>
 </li>
 <li><p>Copy kernel, initrd and bootoptions used for booting the system via kexec</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scp Leap-15.1_appliance.x86_64-1.15.1.initrd PXE_SERVER_IP:/srv/tftpboot/image/
-scp Leap-15.1_appliance.x86_64-1.15.1.kernel PXE_SERVER_IP:/srv/tftpboot/image/
-scp Leap-15.1_appliance.x86_64-1.15.1.config.bootoptions PXE_SERVER_IP:/srv/tftpboot/image/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scp kiwi-test-image-disk.x86_64-1.15.3.initrd PXE_SERVER_IP:/srv/tftpboot/image/
+scp kiwi-test-image-disk.x86_64-1.15.3.kernel PXE_SERVER_IP:/srv/tftpboot/image/
+scp kiwi-test-image-disk.x86_64-1.15.3.config.bootoptions PXE_SERVER_IP:/srv/tftpboot/image/
 </pre></div>
 </div>
 <div class="admonition note">
@@ -921,7 +926,7 @@ adapted to match the correct root reference.</p>
 <p>Edit your PXE configuration (for example <code class="file docutils literal notranslate"><span class="pre">pxelinux.cfg/default</span></code>) on
 the PXE server and add these parameters to the append line, typically
 looking like this:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>append <span class="nv">initrd</span><span class="o">=</span>boot/initrd rd.kiwi.install.pxe rd.kiwi.install.image<span class="o">=</span>tftp://192.168.100.16/image/Leap-15.1_appliance.x86_64-1.15.1.xz
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>append <span class="nv">initrd</span><span class="o">=</span>boot/initrd rd.kiwi.install.pxe rd.kiwi.install.image<span class="o">=</span>tftp://192.168.100.16/image/kiwi-test-image-disk.x86_64-1.15.3.xz
 </pre></div>
 </div>
 <p>The location of the image is specified as a source URI which can point
@@ -963,7 +968,7 @@ from the <code class="xref py py-obj docutils literal notranslate"><span class="
 </li>
 <li><p>Connect the client to the network and boot QEMU with the target disk
 attached to the virtual machine.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qemu -boot n -hda target_disk -m <span class="m">4096</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo qemu -boot n -hda target_disk -m <span class="m">4096</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -976,8 +981,8 @@ to it via a custom /etc/qemu-ifup. For details see
 </div>
 </li>
 </ol>
-</div>
-<div class="section" id="oem-customization">
+</section>
+<section id="oem-customization">
 <span id="oem-customize"></span><h2>OEM Customization<a class="headerlink" href="#oem-customization" title="Permalink to this headline">¶</a></h2>
 <p>The deployment process of an oem image can be customized through
 the <code class="xref py py-obj docutils literal notranslate"><span class="pre">oemconfig</span></code> element which is a child section of the <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a>
@@ -1072,8 +1077,8 @@ possible target devices are discovered the image is deployed to
 the first device. <code class="docutils literal notranslate"><span class="pre">kiwi_oemunattended</span></code> in the initrd</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="installation-media-customization">
+</section>
+<section id="installation-media-customization">
 <span id="installmedia-customize"></span><h2>Installation Media Customization<a class="headerlink" href="#installation-media-customization" title="Permalink to this headline">¶</a></h2>
 <p>The installation media created for OEM network or CD/DVD deployments can
 be customized with the <code class="xref py py-obj docutils literal notranslate"><span class="pre">installmedia</span></code> section which is a child section of the <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a>
@@ -1091,8 +1096,8 @@ request to create an installation media.</p>
 can be omitted, added or staticaly set the list of included ones. This is
 specified with the <code class="xref py py-obj docutils literal notranslate"><span class="pre">action</span></code> attribute and can take <code class="xref py py-obj docutils literal notranslate"><span class="pre">action=&quot;omit&quot;</span></code>,
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">action=&quot;add&quot;</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">action=&quot;set&quot;</span></code> values.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

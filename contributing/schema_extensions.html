@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Extending KIWI NG with Custom Operations &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Extending KIWI NG with Custom Operations &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,7 +732,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="extending-kiwi-ng-with-custom-operations">
+  <section id="extending-kiwi-ng-with-custom-operations">
 <h1>Extending KIWI NG with Custom Operations<a class="headerlink" href="#extending-kiwi-ng-with-custom-operations" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -750,9 +752,9 @@ providing additional KIWI NG commands implemented.</p>
 <p>Depending on the demand for custom plugins, the interface
 to hook in code into other parts of the KIWI NG processing
 needs to be extended.</p>
-<p>This description applies for version 9.23.29.</p>
+<p>This description applies for version 9.23.30.</p>
 </div>
-<div class="section" id="the-extension-section">
+<section id="the-extension-section">
 <h2>The &lt;extension&gt; Section<a class="headerlink" href="#the-extension-section" title="Permalink to this headline">¶</a></h2>
 <p>The main KIWI NG schema supports an extension section which allows
 to specify any XML structure and attributes as long as they are
@@ -773,8 +775,8 @@ structure can be implemented like the following example shows:</p>
 <li><p>Multiple different toplevel namespaces are allowed,
 e.g my_plugin_a, my_plugin_b</p></li>
 </ul>
-</div>
-<div class="section" id="relax-ng-schema-for-the-extension">
+</section>
+<section id="relax-ng-schema-for-the-extension">
 <h2>RELAX NG Schema for the Extension<a class="headerlink" href="#relax-ng-schema-for-the-extension" title="Permalink to this headline">¶</a></h2>
 <p>If an extension section is found, KIWI NG looks up its namespace and asks
 the main XML catalog for the schema file to validate the extension data.
@@ -811,8 +813,8 @@ to place the schema as <code class="file docutils literal notranslate"><span cla
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ trang -I rnc -O rng my_plugin.rnc /usr/share/xml/kiwi/my_plugin.rng
 </pre></div>
 </div>
-</div>
-<div class="section" id="extension-schema-in-xml-catalog">
+</section>
+<section id="extension-schema-in-xml-catalog">
 <h2>Extension Schema in XML catalog<a class="headerlink" href="#extension-schema-in-xml-catalog" title="Permalink to this headline">¶</a></h2>
 <p>As mentioned above the mapping from the extension namespace to the
 correct RELAX NG schema file is handled by a XML catalog file. The
@@ -838,8 +840,8 @@ RELAX NG schema file you are ready for a first test:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ xmlcatalog /etc/xml/catalog http://www.my_plugin.com
 </pre></div>
 </div>
-</div>
-<div class="section" id="using-the-extension">
+</section>
+<section id="using-the-extension">
 <h2>Using the Extension<a class="headerlink" href="#using-the-extension" title="Permalink to this headline">¶</a></h2>
 <p>In order to test your extension place the example extension section
 from the beginning of this document into one of your image description’s
@@ -858,8 +860,8 @@ section of the my_feature root element and prints it:</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">my_plugin</span><span class="o">.</span><span class="n">getroot</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

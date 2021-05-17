@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Adding and Removing Packages &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Adding and Removing Packages &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,12 +732,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="adding-and-removing-packages">
+  <section id="adding-and-removing-packages">
 <span id="packages"></span><h1>Adding and Removing Packages<a class="headerlink" href="#adding-and-removing-packages" title="Permalink to this headline">¶</a></h1>
 <p>On top of the <a class="reference internal" href="repository_setup.html#repositories"><span class="std std-ref">Setting up Repositories</span></a> setup the package setup is
 required. KIWI NG allows the end user to completely customize the selection
 of packages via the <code class="xref py py-obj docutils literal notranslate"><span class="pre">packages</span></code> element.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;Leap-15.1_appliance&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;{exc_image_base_name}&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;packages</span> <span class="na">type=</span><span class="s">&quot;bootstrap&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;udev&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;filesystem&quot;</span><span class="nt">/&gt;</span>
@@ -773,11 +775,11 @@ specific build type is currently processed by KIWI NG.</p>
 </ul>
 <p>The following sections describes the different child elements of
 a <code class="xref py py-obj docutils literal notranslate"><span class="pre">packages</span></code> group.</p>
-<div class="section" id="the-package-element">
+<section id="the-package-element">
 <span id="package-element"></span><h2>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">package</span></code> element<a class="headerlink" href="#the-package-element" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">package</span></code> element represents a single package to be installed (or
 removed), whose name is specified via the mandatory <code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code> attribute:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;Leap-15.1_appliance&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;{exc_image_base_name}&quot;</span><span class="nt">&gt;</span>
     <span class="c">&lt;!-- snip --&gt;</span>
     <span class="nt">&lt;packages</span> <span class="na">type=</span><span class="s">&quot;bootstrap&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;udev&quot;</span><span class="nt">/&gt;</span>
@@ -793,7 +795,7 @@ pass them in this context too. For example, RPM based package managers
 (like <strong class="command">dnf</strong> or <strong class="command">zypper</strong>) can install packages via their
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">Provides:</span></code>. This can be used to add a package that provides a certain
 capability (e.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">Provides:</span> <span class="pre">/usr/bin/my-binary</span></code>) via:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;Leap-15.1_appliance&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;{exc_image_base_name}&quot;</span><span class="nt">&gt;</span>
     <span class="c">&lt;!-- snip --&gt;</span>
     <span class="nt">&lt;packages</span> <span class="na">type=</span><span class="s">&quot;bootstrap&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;/usr/bin/my-binary&quot;</span><span class="nt">/&gt;</span>
@@ -808,7 +810,7 @@ description. Therefore, relying on <code class="xref py py-obj docutils literal 
 <p>Packages can also be included only on specific host architectures via the
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">arch</span></code> attribute. KIWI NG compares the <code class="xref py py-obj docutils literal notranslate"><span class="pre">arch</span></code> attributes value with the host
 architecture that builds the image according to the output of <code class="xref py py-obj docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-m</span></code>.</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;Leap-15.1_appliance&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;{exc_image_base_name}&quot;</span><span class="nt">&gt;</span>
     <span class="c">&lt;!-- snip --&gt;</span>
     <span class="nt">&lt;packages</span> <span class="na">type=</span><span class="s">&quot;image&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;grub2&quot;</span><span class="nt">/&gt;</span>
@@ -821,8 +823,8 @@ architecture that builds the image according to the output of <code class="xref 
 <p>which results in <code class="xref py py-obj docutils literal notranslate"><span class="pre">grub2-x86_64-efi</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">shim</span></code> being only installed if the
 build host is a 64bit x86 machine, but <code class="xref py py-obj docutils literal notranslate"><span class="pre">grub2</span></code> will be installed independent
 of the architecture.</p>
-</div>
-<div class="section" id="the-archive-element">
+</section>
+<section id="the-archive-element">
 <span id="archive-element"></span><h2>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">archive</span></code> element<a class="headerlink" href="#the-archive-element" title="Permalink to this headline">¶</a></h2>
 <p>It is sometimes necessary to include additional packages into the image
 which are not available in the package manager’s native format. KIWI NG
@@ -841,8 +843,8 @@ supported by it can be included. When multiple <code class="xref py py-obj docut
 specified then they will be applied in a top to bottom order. If a file is
 already present in the image, then the file from the archive will overwrite
 it (same as with the image overlay).</p>
-</div>
-<div class="section" id="uninstall-system-packages">
+</section>
+<section id="uninstall-system-packages">
 <span id="id1"></span><h2>Uninstall System Packages<a class="headerlink" href="#uninstall-system-packages" title="Permalink to this headline">¶</a></h2>
 <p>KIWI NG supports two different methods how packages can be removed from the
 appliance:</p>
@@ -877,7 +879,7 @@ dependencies of that tool (as one would have when using
 custom program in <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code>. We ship its source code via an
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">archive</span></code> element and add the build tools (<code class="xref py py-obj docutils literal notranslate"><span class="pre">ninja</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">meson</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">clang</span></code>) to
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;packages</span> <span class="pre">type=&quot;image&quot;&gt;</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;packages</span> <span class="pre">type=&quot;uninstall&quot;&gt;</span></code>:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;Leap-15.1_appliance&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;{exc_image_base_name}&quot;</span><span class="nt">&gt;</span>
     <span class="c">&lt;!-- snip --&gt;</span>
     <span class="nt">&lt;packages</span> <span class="na">type=</span><span class="s">&quot;image&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;ca-certificates&quot;</span><span class="nt">/&gt;</span>
@@ -918,8 +920,8 @@ specialized appliances. For containers one can often remove the package
 partitioning tools (<code class="xref py py-obj docutils literal notranslate"><span class="pre">parted</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">fdisk</span></code>). All networking tools can be
 safely uninstalled in images for embedded devices without a network
 connection.</p>
-</div>
-<div class="section" id="the-product-and-namedcollection-element">
+</section>
+<section id="the-product-and-namedcollection-element">
 <span id="product-and-namedcollection-element"></span><h2>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">product</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">namedCollection</span></code> element<a class="headerlink" href="#the-product-and-namedcollection-element" title="Permalink to this headline">¶</a></h2>
 <p>KIWI NG supports the inclusion of openSUSE products or of namedCollections
 (<em>patterns</em> in SUSE based distributions or <em>groups</em> for RedHat based
@@ -942,14 +944,14 @@ resolution.</p></li>
 <li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">plusRecommended</span></code>: Incorporates patterns and packages that are required
 and recommended by the specified patterns and packages.</p></li>
 </ul>
-</div>
-<div class="section" id="the-ignore-element">
+</section>
+<section id="the-ignore-element">
 <h2>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">ignore</span></code> element<a class="headerlink" href="#the-ignore-element" title="Permalink to this headline">¶</a></h2>
 <p>Packages can be explicitly marked to be ignored for installation inside a
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">packages</span></code> collection. This useful to exclude certain packages from being
 installed when using patterns with <code class="xref py py-obj docutils literal notranslate"><span class="pre">patternType=&quot;plusRecommended&quot;</span></code> as shown
 in the following example:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;Leap-15.1_appliance&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;{exc_image_base_name}&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;packages</span> <span class="na">type=</span><span class="s">&quot;image&quot;</span> <span class="na">patternType=</span><span class="s">&quot;plusRecommended&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;namedCollection</span> <span class="na">name=</span><span class="s">&quot;network-server&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;grub2&quot;</span><span class="nt">/&gt;</span>
@@ -970,8 +972,8 @@ package’s name. Optionally one can also specify the architecture via the
 a <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;packages</span> <span class="pre">type=&quot;uninstall&quot;&gt;</span></code> element has no effect! The packages will
 still get deleted.</p>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

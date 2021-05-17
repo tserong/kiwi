@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Overview &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Overview &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="commands/result_list.html">kiwi-ng result list</a><ul>
@@ -728,7 +730,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="overview">
+  <section id="overview">
 <span id="db-overview"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -736,14 +738,14 @@
 <p>This document provides a conceptual overview about the steps
 of creating an image with KIWI NG. It also explains the terminology
 regarding the concept and process when building system images
-with KIWI NG 9.23.29.</p>
+with KIWI NG 9.23.30.</p>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="overview/workflow.html">Basic Workflow</a></li>
 </ul>
 </div>
-<div class="section" id="conceptual-overview">
+<section id="conceptual-overview">
 <h2>Conceptual Overview<a class="headerlink" href="#conceptual-overview" title="Permalink to this headline">¶</a></h2>
 <p>A system image (usually called “image”), is a <em>complete installation</em> of a Linux
 system within a file. The image represents an operation system and,
@@ -760,8 +762,8 @@ information provided in the configuration file.</p></li>
 <p>The image creation process with KIWI NG is automated and does not require any
 user interaction. The information required for the image creation process is
 provided by the image description.</p>
-</div>
-<div class="section" id="terminology">
+</section>
+<section id="terminology">
 <h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h2>
 <dl class="simple">
 <dt>Appliance</dt><dd><p>An appliance is a ready to use image of an operating system
@@ -796,8 +798,8 @@ Within this documentation the QEMU virtualization system is
 used. Another popular alternative is Virtualbox.</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="system-requirements">
+</section>
+<section id="system-requirements">
 <h2>System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this headline">¶</a></h2>
 <p>To use and run KIWI NG, you need:</p>
 <ul class="simple">
@@ -809,8 +811,8 @@ minimum of 15GB.</p></li>
 <li><p>Git (package <code class="docutils literal notranslate"><span class="pre">git</span></code>) to clone a repository.</p></li>
 <li><p>Any virtualization technology to start the image. We recommend QEMU.</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

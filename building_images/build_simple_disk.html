@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Build a Virtual Disk Image &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Build a Virtual Disk Image &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,9 +732,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="build-a-virtual-disk-image">
+  <section id="build-a-virtual-disk-image">
 <span id="simple-disk"></span><h1>Build a Virtual Disk Image<a class="headerlink" href="#build-a-virtual-disk-image" title="Permalink to this headline">¶</a></h1>
-<div class="sidebar">
+<aside class="sidebar">
 <p class="sidebar-title">Abstract</p>
 <p>This page explains how to build a simple disk image.
 It contains how to:</p>
@@ -741,7 +743,7 @@ It contains how to:</p>
 <li><p>build a simple disk image</p></li>
 <li><p>run it with QEMU</p></li>
 </ul>
-</div>
+</aside>
 <p>A simple Virtual Disk Image is a compressed system disk with additional
 metadata useful for cloud frameworks like Amazon EC2, Google Compute Engine,
 or Microsoft Azure. It is used as the native disk of a system and does
@@ -752,7 +754,7 @@ procedure which is why we call it a <em>simple</em> disk image.</p>
 disabled. An example configuration for a 42 GB large VMDK image with
 512 MB RAM, an IDE controller and a bridged network interface is shown
 below:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;Tumbleweed_appliance&quot;</span><span class="nt">&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;Tumbleweed_appliance&quot;</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- snip --&gt;</span>
   <span class="nt">&lt;preferences&gt;</span>
     <span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;oem&quot;</span> <span class="na">filesystem=</span><span class="s">&quot;ext4&quot;</span> <span class="na">format=</span><span class="s">&quot;vmdk&quot;</span><span class="nt">&gt;</span>
@@ -791,16 +793,17 @@ and <a class="reference internal" href="#disk-the-machine-element"><span class="
 <p>Once your image description is finished (or you are content with a image
 from the <a class="reference internal" href="../installation.html#example-descriptions"><span class="std std-ref">example descriptions</span></a> and use one of
 them) build the image with KIWI NG:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --type oem system build <span class="se">\</span>
-    --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 <span class="se">\</span>
-    --target-dir /tmp/myimage
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng system build <span class="se">\</span>
+     --description kiwi/build-tests/x86/leap/test-image-disk-simple <span class="se">\</span>
+     --set-repo obs://openSUSE:Leap:15.3/standard <span class="se">\</span>
+     --target-dir /tmp/myimage
 </pre></div>
 </div>
 <p>The created image will be in the target directory <code class="file docutils literal notranslate"><span class="pre">/tmp/myimage</span></code> with
 the file extension <code class="file docutils literal notranslate"><span class="pre">.raw</span></code>.</p>
 <p>The live image can then be tested with QEMU:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qemu <span class="se">\</span>
-    -drive <span class="nv">file</span><span class="o">=</span>Leap-15.1_appliance.x86_64-1.15.1.raw,format<span class="o">=</span>raw,if<span class="o">=</span>virtio <span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo qemu <span class="se">\</span>
+    -drive <span class="nv">file</span><span class="o">=</span>kiwi-test-image-disk-simple.x86_64-1.15.3.raw,format<span class="o">=</span>raw,if<span class="o">=</span>virtio <span class="se">\</span>
     -m <span class="m">4096</span>
 </pre></div>
 </div>
@@ -812,7 +815,7 @@ framework see:</p>
 <li><p><a class="reference internal" href="../working_with_images/disk_setup_for_google.html#setup-for-gce"><span class="std std-ref">Image Description for Google Compute Engine</span></a></p></li>
 </ul>
 <p>For information how to setup a Vagrant box, see: <a class="reference internal" href="../working_with_images/disk_setup_for_vagrant.html#setup-vagrant"><span class="std std-ref">Image Description for Vagrant</span></a>.</p>
-<div class="section" id="setting-up-the-bootloader-of-the-image">
+<section id="setting-up-the-bootloader-of-the-image">
 <span id="disk-bootloader"></span><h2>Setting up the Bootloader of the Image<a class="headerlink" href="#setting-up-the-bootloader-of-the-image" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;preferences&gt;</span>
   <span class="nt">&lt;bootloader</span> <span class="na">name=</span><span class="s">&quot;grub2&quot;</span><span class="nt">/&gt;</span>
@@ -854,8 +857,8 @@ emulated DASD devices use <code class="xref py py-obj docutils literal notransla
 zipl loader only</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="modifying-the-size-of-the-image">
+</section>
+<section id="modifying-the-size-of-the-image">
 <span id="disk-the-size-element"></span><h2>Modifying the Size of the Image<a class="headerlink" href="#modifying-the-size-of-the-image" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">size</span></code> child element of <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a> specifies the size of the resulting
 disk image. The following example shows a image description where 20 GB are
@@ -883,8 +886,8 @@ the total size (<code class="xref py py-obj docutils literal notranslate"><span 
 partitioned. This value uses the same unit as defined in the attribute
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">unit</span></code> or the default.</p></li>
 </ul>
-</div>
-<div class="section" id="customizing-the-virtual-machine">
+</section>
+<section id="customizing-the-virtual-machine">
 <span id="disk-the-machine-element"></span><h2>Customizing the Virtual Machine<a class="headerlink" href="#customizing-the-virtual-machine" title="Permalink to this headline">¶</a></h2>
 <p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">machine</span></code> child element of <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a> can be used to customize the virtual
 machine configuration which is used when the image is run, like the number
@@ -920,7 +923,7 @@ formats).</p></li>
 </ul>
 <p>Additionally, <code class="xref py py-obj docutils literal notranslate"><span class="pre">machine</span></code> supports additional child elements that are covered
 in the following subsections.</p>
-<div class="section" id="modifying-the-vm-configuration-directly">
+<section id="modifying-the-vm-configuration-directly">
 <h3>Modifying the VM Configuration Directly<a class="headerlink" href="#modifying-the-vm-configuration-directly" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">vmconfig-entry</span></code> element is used to add entries directly into the
 virtual machine’s configuration file. This is currently only supported for
@@ -942,8 +945,8 @@ forwards them.</p>
 <span class="nt">&lt;/preferences&gt;</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="adding-network-interfaces-to-the-vm">
+</section>
+<section id="adding-network-interfaces-to-the-vm">
 <h3>Adding Network Interfaces to the VM<a class="headerlink" href="#adding-network-interfaces-to-the-vm" title="Permalink to this headline">¶</a></h3>
 <p>Network interfaces can be explicitly specified for the VM when required via
 the <code class="xref py py-obj docutils literal notranslate"><span class="pre">vmnic</span></code> element. This can be used to add another bridged interface or
@@ -970,8 +973,8 @@ to specify the driver which is being used.</p>
 <p>Note that KIWI NG will <strong>not</strong> verify the values that are passed to these
 attributes, it will only paste them into the appropriate configuration
 files.</p>
-</div>
-<div class="section" id="specifying-disks-and-disk-controllers">
+</section>
+<section id="specifying-disks-and-disk-controllers">
 <h3>Specifying Disks and Disk Controllers<a class="headerlink" href="#specifying-disks-and-disk-controllers" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">vmdisk</span></code> element can be used to customize the disks and disk
 controllers for the virtual machine. This element can be specified multiple
@@ -1002,8 +1005,8 @@ only). Supported values are: <code class="xref py py-obj docutils literal notran
 (<code class="xref py py-obj docutils literal notranslate"><span class="pre">ova</span></code> format only). This attribute is currently unused.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#id" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">id</span></code></a>: The disk ID of the VM disk (<code class="xref py py-obj docutils literal notranslate"><span class="pre">vmdk</span></code> format only).</p></li>
 </ul>
-</div>
-<div class="section" id="adding-cd-dvd-drives">
+</section>
+<section id="adding-cd-dvd-drives">
 <h3>Adding CD/DVD Drives<a class="headerlink" href="#adding-cd-dvd-drives" title="Permalink to this headline">¶</a></h3>
 <p>KIWI NG supports the addition of IDE and SCSCI CD/DVD drives to the virtual
 machine using the <code class="xref py py-obj docutils literal notranslate"><span class="pre">vmdvd</span></code> element for the <code class="xref py py-obj docutils literal notranslate"><span class="pre">vmdk</span></code> image format. In the
@@ -1025,9 +1028,9 @@ IDE controller:</p>
 <li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">controller</span></code>: The CD/DVD controller used for the VM guest, supported
 values are <code class="xref py py-obj docutils literal notranslate"><span class="pre">ide</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">scsi</span></code>.</p></li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

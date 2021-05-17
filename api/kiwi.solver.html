@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.solver Package &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>kiwi.solver Package &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,22 +732,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="kiwi-solver-package">
+  <section id="kiwi-solver-package">
 <h1>kiwi.solver Package<a class="headerlink" href="#kiwi-solver-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
+<section id="submodules">
 <span id="db-kiwi-solver-submodules"></span><h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-kiwi.solver.sat">
+</section>
+<section id="module-kiwi.solver.sat">
 <span id="kiwi-solver-sat-module"></span><h2><a class="reference internal" href="#module-kiwi.solver.sat" title="kiwi.solver.sat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.solver.sat</span></code></a> Module<a class="headerlink" href="#module-kiwi.solver.sat" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.solver.sat.Sat">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.solver.sat.</span></code><code class="sig-name descname"><span class="pre">Sat</span></code><a class="reference internal" href="../_modules/kiwi/solver/sat.html#Sat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.solver.sat.Sat" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.solver.sat.Sat">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.solver.sat.</span></span><span class="sig-name descname"><span class="pre">Sat</span></span><a class="reference internal" href="../_modules/kiwi/solver/sat.html#Sat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.solver.sat.Sat" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Sat Solver class to run package solver operations</strong></p>
 <p>The class uses SUSE’s libsolv sat plugin</p>
 <dl class="py method">
-<dt id="kiwi.solver.sat.Sat.add_repository">
-<code class="sig-name descname"><span class="pre">add_repository</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solver_repository</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/solver/sat.html#Sat.add_repository"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.solver.sat.Sat.add_repository" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.solver.sat.Sat.add_repository">
+<span class="sig-name descname"><span class="pre">add_repository</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solver_repository</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/solver/sat.html#Sat.add_repository"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.solver.sat.Sat.add_repository" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a repository solvable to the pool. This basically add the
 required repository metadata which is needed to run a solver
 operation later.</p>
@@ -757,13 +759,13 @@ operation later.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.solver.sat.Sat.set_dist_type">
-<code class="sig-name descname"><span class="pre">set_dist_type</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/solver/sat.html#Sat.set_dist_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.solver.sat.Sat.set_dist_type" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.solver.sat.Sat.set_dist_type">
+<span class="sig-name descname"><span class="pre">set_dist_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/solver/sat.html#Sat.set_dist_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.solver.sat.Sat.set_dist_type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.solver.sat.Sat.solve">
-<code class="sig-name descname"><span class="pre">solve</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_recommended</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/solver/sat.html#Sat.solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.solver.sat.Sat.solve" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.solver.sat.Sat.solve">
+<span class="sig-name descname"><span class="pre">solve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">job_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_recommended</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/solver/sat.html#Sat.solve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.solver.sat.Sat.solve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Solve dependencies for the given job list. The list is allowed
 to contain element names of the following format:</p>
 <ul class="simple">
@@ -800,11 +802,11 @@ metadata. Usually RHEL/CentOS/Fedora repos uses that</p></li>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.solver">
+</section>
+<section id="module-kiwi.solver">
 <span id="module-contents"></span><span id="db-kiwi-solver-content"></span><h2>Module Contents<a class="headerlink" href="#module-kiwi.solver" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

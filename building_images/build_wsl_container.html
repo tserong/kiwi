@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Build a WSL Container Image &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Build a WSL Container Image &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,15 +732,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="build-a-wsl-container-image">
+  <section id="build-a-wsl-container-image">
 <span id="building-wsl-build"></span><h1>Build a WSL Container Image<a class="headerlink" href="#build-a-wsl-container-image" title="Permalink to this headline">¶</a></h1>
-<div class="sidebar">
+<aside class="sidebar">
 <p class="sidebar-title">Abstract</p>
 <p>This page explains how to build a WSL/Appx container image.
 WSL stands for Windows Subsystem Linux and is a zip based
 container format consumable by Windows 10 with enabled
 WSL functionality.</p>
-</div>
+</aside>
 <p>KIWI NG is capable of building WSL images using the <strong class="command">appx</strong>
 utility. Make sure you have installed a package that provides
 this command on your build host.</p>
@@ -765,7 +767,7 @@ Typically this information is delivered in a package
 provided by the Distribution and installed on the
 build host</p>
 </div>
-<div class="section" id="setup-of-the-wsl-distrolauncher">
+<section id="setup-of-the-wsl-distrolauncher">
 <h2>Setup of the WSL-DistroLauncher<a class="headerlink" href="#setup-of-the-wsl-distrolauncher" title="Permalink to this headline">¶</a></h2>
 <p>The contents of the <code class="file docutils literal notranslate"><span class="pre">AppxManifest.xml</span></code> will be changed by KIWI NG
 if a <code class="file docutils literal notranslate"><span class="pre">containerconfig</span></code> section is provided in the XML description.
@@ -839,7 +841,7 @@ Service worker that runs the KIWI NG build process.</p>
 </li>
 <li><p>Setup the image type:</p>
 <p>Edit the XML description file:
-<code class="file docutils literal notranslate"><span class="pre">kiwi-descriptions/suse/x86_64/suse-tumbleweed/config.xml</span></code>
+<code class="file docutils literal notranslate"><span class="pre">kiwi/build-tests/x86/tumbleweed/test-image-wsl/appliance.kiwi</span></code>
 and add the following type and containerconfig:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;appx&quot;</span> <span class="na">metadata_path=</span><span class="s">&quot;/meta/data&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;containerconfig</span> <span class="na">name=</span><span class="s">&quot;Tumbleweed&quot;</span><span class="nt">&gt;</span>
@@ -864,23 +866,24 @@ complete with respect to the requirements of the
 </div>
 </li>
 <li><p>Build the image with KIWI NG:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --type appx system build <span class="se">\</span>
-    --description kiwi-descriptions/suse/x86_64/suse-tumbleweed <span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng system build <span class="se">\</span>
+    --description kiwi/build-tests/x86/tumbleweed/test-image-wsl <span class="se">\</span>
+    --set-repo http://download.opensuse.org/tumbleweed/repo/oss <span class="se">\</span>
     --target-dir /tmp/myimage
 </pre></div>
 </div>
 </li>
 </ol>
-</div>
-<div class="section" id="testing-the-wsl-image">
+</section>
+<section id="testing-the-wsl-image">
 <h2>Testing the WSL image<a class="headerlink" href="#testing-the-wsl-image" title="Permalink to this headline">¶</a></h2>
 <p>For testing the image a Windows 10 system is required. As a first step
 the optional feature named <code class="file docutils literal notranslate"><span class="pre">Microsoft-Windows-Subsystem-Linux</span></code>
 must be enabled. For further details on how to setup the Windows machine
 see the following documentation:
 <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/about">Windows Subsystem for Linux</a></p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

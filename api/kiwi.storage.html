@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.storage Package &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>kiwi.storage Package &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,21 +732,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="kiwi-storage-package">
+  <section id="kiwi-storage-package">
 <h1>kiwi.storage Package<a class="headerlink" href="#kiwi-storage-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
+<section id="submodules">
 <span id="db-kiwi-storage-submodules"></span><h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-kiwi.storage.device_provider">
+</section>
+<section id="module-kiwi.storage.device_provider">
 <span id="kiwi-storage-device-provider-module"></span><h2><a class="reference internal" href="#module-kiwi.storage.device_provider" title="kiwi.storage.device_provider"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.storage.device_provider</span></code></a> Module<a class="headerlink" href="#module-kiwi.storage.device_provider" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.storage.device_provider.DeviceProvider">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.storage.device_provider.</span></code><code class="sig-name descname"><span class="pre">DeviceProvider</span></code><a class="reference internal" href="../_modules/kiwi/storage/device_provider.html#DeviceProvider"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.device_provider.DeviceProvider" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.device_provider.DeviceProvider">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.storage.device_provider.</span></span><span class="sig-name descname"><span class="pre">DeviceProvider</span></span><a class="reference internal" href="../_modules/kiwi/storage/device_provider.html#DeviceProvider"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.device_provider.DeviceProvider" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Base class for any class providing storage devices</strong></p>
 <dl class="py method">
-<dt id="kiwi.storage.device_provider.DeviceProvider.get_byte_size">
-<code class="sig-name descname"><span class="pre">get_byte_size</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><a class="reference internal" href="../_modules/kiwi/storage/device_provider.html#DeviceProvider.get_byte_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.device_provider.DeviceProvider.get_byte_size" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.device_provider.DeviceProvider.get_byte_size">
+<span class="sig-name descname"><span class="pre">get_byte_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><a class="reference internal" href="../_modules/kiwi/storage/device_provider.html#DeviceProvider.get_byte_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.device_provider.DeviceProvider.get_byte_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Size of device in bytes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -760,16 +762,16 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.device_provider.DeviceProvider.get_device">
-<code class="sig-name descname"><span class="pre">get_device</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/device_provider.html#DeviceProvider.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.device_provider.DeviceProvider.get_device" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.device_provider.DeviceProvider.get_device">
+<span class="sig-name descname"><span class="pre">get_device</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/device_provider.html#DeviceProvider.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.device_provider.DeviceProvider.get_device" title="Permalink to this definition">¶</a></dt>
 <dd><p>Representation of device nodes</p>
 <p>Could provide one ore more devices representing the storage
 Implementation in specialized device provider class</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.device_provider.DeviceProvider.get_uuid">
-<code class="sig-name descname"><span class="pre">get_uuid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/storage/device_provider.html#DeviceProvider.get_uuid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.device_provider.DeviceProvider.get_uuid" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.device_provider.DeviceProvider.get_uuid">
+<span class="sig-name descname"><span class="pre">get_uuid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/storage/device_provider.html#DeviceProvider.get_uuid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.device_provider.DeviceProvider.get_uuid" title="Permalink to this definition">¶</a></dt>
 <dd><p>UUID of device</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -785,8 +787,8 @@ Implementation in specialized device provider class</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.device_provider.DeviceProvider.is_loop">
-<code class="sig-name descname"><span class="pre">is_loop</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><a class="reference internal" href="../_modules/kiwi/storage/device_provider.html#DeviceProvider.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.device_provider.DeviceProvider.is_loop" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.device_provider.DeviceProvider.is_loop">
+<span class="sig-name descname"><span class="pre">is_loop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><a class="reference internal" href="../_modules/kiwi/storage/device_provider.html#DeviceProvider.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.device_provider.DeviceProvider.is_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if device provider is loop based</p>
 <p>By default this is always False and needs an implementation
 in the the specialized device provider class</p>
@@ -802,12 +804,12 @@ in the the specialized device provider class</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.storage.disk">
+</section>
+<section id="module-kiwi.storage.disk">
 <span id="kiwi-storage-disk-module"></span><h2><a class="reference internal" href="#module-kiwi.storage.disk" title="kiwi.storage.disk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.storage.disk</span></code></a> Module<a class="headerlink" href="#module-kiwi.storage.disk" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.storage.disk.Disk">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.storage.disk.</span></code><code class="sig-name descname"><span class="pre">Disk</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage_provider</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_sector</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.storage.disk.</span></span><span class="sig-name descname"><span class="pre">Disk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">storage_provider</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_sector</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></code></a></p>
 <p><strong>Implements storage disk and partition table setup</strong></p>
 <dl class="field-list simple">
@@ -820,15 +822,15 @@ in the the specialized device provider class</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.activate_boot_partition">
-<code class="sig-name descname"><span class="pre">activate_boot_partition</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.activate_boot_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.activate_boot_partition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.activate_boot_partition">
+<span class="sig-name descname"><span class="pre">activate_boot_partition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.activate_boot_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.activate_boot_partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Activate boot partition</p>
 <p>Note: not all Partitioner instances supports this</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.create_boot_partition">
-<code class="sig-name descname"><span class="pre">create_boot_partition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_boot_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_boot_partition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_boot_partition">
+<span class="sig-name descname"><span class="pre">create_boot_partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_boot_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_boot_partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create boot partition</p>
 <p>Populates kiwi_BootPart(id)</p>
 <dl class="field-list simple">
@@ -839,8 +841,8 @@ in the the specialized device provider class</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.create_efi_csm_partition">
-<code class="sig-name descname"><span class="pre">create_efi_csm_partition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_efi_csm_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_efi_csm_partition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_efi_csm_partition">
+<span class="sig-name descname"><span class="pre">create_efi_csm_partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_efi_csm_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_efi_csm_partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create EFI bios grub partition</p>
 <p>Populates kiwi_BiosGrub(id)</p>
 <dl class="field-list simple">
@@ -851,8 +853,8 @@ in the the specialized device provider class</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.create_efi_partition">
-<code class="sig-name descname"><span class="pre">create_efi_partition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_efi_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_efi_partition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_efi_partition">
+<span class="sig-name descname"><span class="pre">create_efi_partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_efi_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_efi_partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create EFI partition</p>
 <p>Populates kiwi_EfiPart(id)</p>
 <dl class="field-list simple">
@@ -863,22 +865,22 @@ in the the specialized device provider class</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.create_hybrid_mbr">
-<code class="sig-name descname"><span class="pre">create_hybrid_mbr</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_hybrid_mbr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_hybrid_mbr" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_hybrid_mbr">
+<span class="sig-name descname"><span class="pre">create_hybrid_mbr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_hybrid_mbr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_hybrid_mbr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turn partition table into a hybrid GPT/MBR table</p>
 <p>Note: only GPT tables supports this</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.create_mbr">
-<code class="sig-name descname"><span class="pre">create_mbr</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_mbr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_mbr" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_mbr">
+<span class="sig-name descname"><span class="pre">create_mbr</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_mbr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_mbr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turn partition table into MBR (msdos table)</p>
 <p>Note: only GPT tables supports this</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.create_prep_partition">
-<code class="sig-name descname"><span class="pre">create_prep_partition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_prep_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_prep_partition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_prep_partition">
+<span class="sig-name descname"><span class="pre">create_prep_partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_prep_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_prep_partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create prep partition</p>
 <p>Populates kiwi_PrepPart(id)</p>
 <dl class="field-list simple">
@@ -889,8 +891,8 @@ in the the specialized device provider class</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.create_root_lvm_partition">
-<code class="sig-name descname"><span class="pre">create_root_lvm_partition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_root_lvm_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_root_lvm_partition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_root_lvm_partition">
+<span class="sig-name descname"><span class="pre">create_root_lvm_partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_root_lvm_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_root_lvm_partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create root partition for use with LVM</p>
 <p>Populates kiwi_RootPart(id)</p>
 <dl class="field-list simple">
@@ -901,8 +903,8 @@ in the the specialized device provider class</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.create_root_partition">
-<code class="sig-name descname"><span class="pre">create_root_partition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_root_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_root_partition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_root_partition">
+<span class="sig-name descname"><span class="pre">create_root_partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_root_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_root_partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create root partition</p>
 <p>Populates kiwi_RootPart(id) and kiwi_BootPart(id) if no extra
 boot partition is requested</p>
@@ -914,8 +916,8 @@ boot partition is requested</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.create_root_raid_partition">
-<code class="sig-name descname"><span class="pre">create_root_raid_partition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_root_raid_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_root_raid_partition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_root_raid_partition">
+<span class="sig-name descname"><span class="pre">create_root_raid_partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_root_raid_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_root_raid_partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create root partition for use with MD Raid</p>
 <p>Populates kiwi_RootPart(id) and kiwi_RaidPart(id) as well
 as the default raid device node at boot time which is
@@ -928,8 +930,8 @@ configured to be kiwi_RaidDev(/dev/mdX)</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.create_root_readonly_partition">
-<code class="sig-name descname"><span class="pre">create_root_readonly_partition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_root_readonly_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_root_readonly_partition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_root_readonly_partition">
+<span class="sig-name descname"><span class="pre">create_root_readonly_partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_root_readonly_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_root_readonly_partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create root readonly partition for use with overlayfs</p>
 <p>Populates kiwi_ReadOnlyPart(id), the partition is meant to
 contain a squashfs readonly filesystem. The partition size
@@ -943,8 +945,8 @@ avoid wasting disk space</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.create_spare_partition">
-<code class="sig-name descname"><span class="pre">create_spare_partition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_spare_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_spare_partition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_spare_partition">
+<span class="sig-name descname"><span class="pre">create_spare_partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_spare_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_spare_partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create spare partition for custom use</p>
 <p>Populates kiwi_SparePart(id)</p>
 <dl class="field-list simple">
@@ -955,8 +957,8 @@ avoid wasting disk space</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.create_swap_partition">
-<code class="sig-name descname"><span class="pre">create_swap_partition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_swap_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_swap_partition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_swap_partition">
+<span class="sig-name descname"><span class="pre">create_swap_partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_swap_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_swap_partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create swap partition</p>
 <p>Populates kiwi_SwapPart(id)</p>
 <dl class="field-list simple">
@@ -967,8 +969,8 @@ avoid wasting disk space</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.get_device">
-<code class="sig-name descname"><span class="pre">get_device</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="#kiwi.storage.mapped_device.MappedDevice" title="kiwi.storage.mapped_device.MappedDevice"><span class="pre">kiwi.storage.mapped_device.MappedDevice</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.get_device" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.get_device">
+<span class="sig-name descname"><span class="pre">get_device</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="#kiwi.storage.mapped_device.MappedDevice" title="kiwi.storage.mapped_device.MappedDevice"><span class="pre">kiwi.storage.mapped_device.MappedDevice</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.get_device" title="Permalink to this definition">¶</a></dt>
 <dd><p>Names of partition devices</p>
 <p>Note that the mapping requires an explicit map() call</p>
 <dl class="field-list simple">
@@ -982,14 +984,14 @@ avoid wasting disk space</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.get_public_partition_id_map">
-<code class="sig-name descname"><span class="pre">get_public_partition_id_map</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.get_public_partition_id_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.get_public_partition_id_map" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.get_public_partition_id_map">
+<span class="sig-name descname"><span class="pre">get_public_partition_id_map</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.get_public_partition_id_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.get_public_partition_id_map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Populated partition name to number map</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.is_loop">
-<code class="sig-name descname"><span class="pre">is_loop</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.is_loop" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.is_loop">
+<span class="sig-name descname"><span class="pre">is_loop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.is_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if storage provider is loop based</p>
 <p>The information is taken from the storage provider. If
 the storage provider is loop based the disk is it too</p>
@@ -1004,28 +1006,28 @@ the storage provider is loop based the disk is it too</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.map_partitions">
-<code class="sig-name descname"><span class="pre">map_partitions</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.map_partitions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.map_partitions" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.map_partitions">
+<span class="sig-name descname"><span class="pre">map_partitions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.map_partitions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.map_partitions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Map/Activate partitions</p>
 <p>In order to access the partitions through a device node it is
 required to map them if the storage provider is loop based</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.disk.Disk.wipe">
-<code class="sig-name descname"><span class="pre">wipe</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.wipe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.wipe" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.wipe">
+<span class="sig-name descname"><span class="pre">wipe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.wipe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.wipe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zap (destroy) any GPT and MBR data structures if present
 For DASD disks create a new VTOC table</p>
 </dd></dl>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.storage.loop_device">
+</section>
+<section id="module-kiwi.storage.loop_device">
 <span id="kiwi-storage-loop-device-module"></span><h2><a class="reference internal" href="#module-kiwi.storage.loop_device" title="kiwi.storage.loop_device"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.storage.loop_device</span></code></a> Module<a class="headerlink" href="#module-kiwi.storage.loop_device" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.storage.loop_device.LoopDevice">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.storage.loop_device.</span></code><code class="sig-name descname"><span class="pre">LoopDevice</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesize_mbytes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blocksize_bytes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/loop_device.html#LoopDevice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.loop_device.LoopDevice" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.loop_device.LoopDevice">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.storage.loop_device.</span></span><span class="sig-name descname"><span class="pre">LoopDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesize_mbytes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">blocksize_bytes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/loop_device.html#LoopDevice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.loop_device.LoopDevice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></code></a></p>
 <p><strong>Create and manage loop device file for block operations</strong></p>
 <dl class="field-list simple">
@@ -1038,8 +1040,8 @@ For DASD disks create a new VTOC table</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.storage.loop_device.LoopDevice.create">
-<code class="sig-name descname"><span class="pre">create</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/loop_device.html#LoopDevice.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.loop_device.LoopDevice.create" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.loop_device.LoopDevice.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/loop_device.html#LoopDevice.create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.loop_device.LoopDevice.create" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setup a loop device of the blocksize given in the constructor
 The file to loop is created with the size specified in the
 constructor unless an existing one should not be overwritten</p>
@@ -1051,8 +1053,8 @@ constructor unless an existing one should not be overwritten</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.loop_device.LoopDevice.get_device">
-<code class="sig-name descname"><span class="pre">get_device</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/storage/loop_device.html#LoopDevice.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.loop_device.LoopDevice.get_device" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.loop_device.LoopDevice.get_device">
+<span class="sig-name descname"><span class="pre">get_device</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/storage/loop_device.html#LoopDevice.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.loop_device.LoopDevice.get_device" title="Permalink to this definition">¶</a></dt>
 <dd><p>Device node name</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1065,8 +1067,8 @@ constructor unless an existing one should not be overwritten</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.loop_device.LoopDevice.is_loop">
-<code class="sig-name descname"><span class="pre">is_loop</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><a class="reference internal" href="../_modules/kiwi/storage/loop_device.html#LoopDevice.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.loop_device.LoopDevice.is_loop" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.loop_device.LoopDevice.is_loop">
+<span class="sig-name descname"><span class="pre">is_loop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><a class="reference internal" href="../_modules/kiwi/storage/loop_device.html#LoopDevice.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.loop_device.LoopDevice.is_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Always True</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1080,12 +1082,12 @@ constructor unless an existing one should not be overwritten</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.storage.luks_device">
+</section>
+<section id="module-kiwi.storage.luks_device">
 <span id="kiwi-storage-luks-device-module"></span><h2><a class="reference internal" href="#module-kiwi.storage.luks_device" title="kiwi.storage.luks_device"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.storage.luks_device</span></code></a> Module<a class="headerlink" href="#module-kiwi.storage.luks_device" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.storage.luks_device.LuksDevice">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.storage.luks_device.</span></code><code class="sig-name descname"><span class="pre">LuksDevice</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage_provider</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/luks_device.html#LuksDevice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.luks_device.LuksDevice" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.luks_device.LuksDevice">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.storage.luks_device.</span></span><span class="sig-name descname"><span class="pre">LuksDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage_provider</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/luks_device.html#LuksDevice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.luks_device.LuksDevice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></code></a></p>
 <p><strong>Implements luks setup on a storage device</strong></p>
 <dl class="field-list simple">
@@ -1094,8 +1096,8 @@ constructor unless an existing one should not be overwritten</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.storage.luks_device.LuksDevice.create_crypto_luks">
-<code class="sig-name descname"><span class="pre">create_crypto_luks</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">passphrase</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><span class="pre">list</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyfile</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/luks_device.html#LuksDevice.create_crypto_luks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.luks_device.LuksDevice.create_crypto_luks" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.luks_device.LuksDevice.create_crypto_luks">
+<span class="sig-name descname"><span class="pre">create_crypto_luks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">passphrase</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">os</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><span class="pre">list</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyfile</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/luks_device.html#LuksDevice.create_crypto_luks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.luks_device.LuksDevice.create_crypto_luks" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create luks device. Please note the passphrase is readable
 at creation time of this image. Make sure your host system
 is secure while this process runs</p>
@@ -1115,8 +1117,8 @@ to unlock the luks device</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.luks_device.LuksDevice.create_crypttab">
-<code class="sig-name descname"><span class="pre">create_crypttab</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/luks_device.html#LuksDevice.create_crypttab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.luks_device.LuksDevice.create_crypttab" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.luks_device.LuksDevice.create_crypttab">
+<span class="sig-name descname"><span class="pre">create_crypttab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/luks_device.html#LuksDevice.create_crypttab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.luks_device.LuksDevice.create_crypttab" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create crypttab, setting the UUID of the storage device</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1126,8 +1128,8 @@ to unlock the luks device</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.luks_device.LuksDevice.create_random_keyfile">
-<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">create_random_keyfile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/luks_device.html#LuksDevice.create_random_keyfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.luks_device.LuksDevice.create_random_keyfile" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.luks_device.LuksDevice.create_random_keyfile">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">create_random_keyfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/luks_device.html#LuksDevice.create_random_keyfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.luks_device.LuksDevice.create_random_keyfile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create keyfile with random data</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1137,8 +1139,8 @@ to unlock the luks device</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.luks_device.LuksDevice.get_device">
-<code class="sig-name descname"><span class="pre">get_device</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#kiwi.storage.mapped_device.MappedDevice" title="kiwi.storage.mapped_device.MappedDevice"><span class="pre">kiwi.storage.mapped_device.MappedDevice</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/kiwi/storage/luks_device.html#LuksDevice.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.luks_device.LuksDevice.get_device" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.luks_device.LuksDevice.get_device">
+<span class="sig-name descname"><span class="pre">get_device</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#kiwi.storage.mapped_device.MappedDevice" title="kiwi.storage.mapped_device.MappedDevice"><span class="pre">kiwi.storage.mapped_device.MappedDevice</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/kiwi/storage/luks_device.html#LuksDevice.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.luks_device.LuksDevice.get_device" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instance of MappedDevice providing the luks device</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1151,8 +1153,8 @@ to unlock the luks device</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.luks_device.LuksDevice.is_loop">
-<code class="sig-name descname"><span class="pre">is_loop</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><a class="reference internal" href="../_modules/kiwi/storage/luks_device.html#LuksDevice.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.luks_device.LuksDevice.is_loop" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.luks_device.LuksDevice.is_loop">
+<span class="sig-name descname"><span class="pre">is_loop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><a class="reference internal" href="../_modules/kiwi/storage/luks_device.html#LuksDevice.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.luks_device.LuksDevice.is_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if storage provider is loop based</p>
 <p>Return loop status from base storage provider</p>
 <dl class="field-list simple">
@@ -1167,12 +1169,12 @@ to unlock the luks device</p></li>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.storage.mapped_device">
+</section>
+<section id="module-kiwi.storage.mapped_device">
 <span id="kiwi-storage-mapped-device-module"></span><h2><a class="reference internal" href="#module-kiwi.storage.mapped_device" title="kiwi.storage.mapped_device"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.storage.mapped_device</span></code></a> Module<a class="headerlink" href="#module-kiwi.storage.mapped_device" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.storage.mapped_device.MappedDevice">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.storage.mapped_device.</span></code><code class="sig-name descname"><span class="pre">MappedDevice</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">device_provider</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/mapped_device.html#MappedDevice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.mapped_device.MappedDevice" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.mapped_device.MappedDevice">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.storage.mapped_device.</span></span><span class="sig-name descname"><span class="pre">MappedDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">device_provider</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/mapped_device.html#MappedDevice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.mapped_device.MappedDevice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></code></a></p>
 <p><strong>Hold a reference on a single device</strong></p>
 <dl class="field-list simple">
@@ -1184,8 +1186,8 @@ to unlock the luks device</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.storage.mapped_device.MappedDevice.get_device">
-<code class="sig-name descname"><span class="pre">get_device</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/storage/mapped_device.html#MappedDevice.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.mapped_device.MappedDevice.get_device" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.mapped_device.MappedDevice.get_device">
+<span class="sig-name descname"><span class="pre">get_device</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/storage/mapped_device.html#MappedDevice.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.mapped_device.MappedDevice.get_device" title="Permalink to this definition">¶</a></dt>
 <dd><p>Mapped device node name</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1198,8 +1200,8 @@ to unlock the luks device</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.mapped_device.MappedDevice.is_loop">
-<code class="sig-name descname"><span class="pre">is_loop</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><a class="reference internal" href="../_modules/kiwi/storage/mapped_device.html#MappedDevice.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.mapped_device.MappedDevice.is_loop" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.mapped_device.MappedDevice.is_loop">
+<span class="sig-name descname"><span class="pre">is_loop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><a class="reference internal" href="../_modules/kiwi/storage/mapped_device.html#MappedDevice.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.mapped_device.MappedDevice.is_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if storage provider is loop based</p>
 <p>Return loop status from base storage provider</p>
 <dl class="field-list simple">
@@ -1214,12 +1216,12 @@ to unlock the luks device</p></li>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.storage.raid_device">
+</section>
+<section id="module-kiwi.storage.raid_device">
 <span id="kiwi-storage-raid-device-module"></span><h2><a class="reference internal" href="#module-kiwi.storage.raid_device" title="kiwi.storage.raid_device"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.storage.raid_device</span></code></a> Module<a class="headerlink" href="#module-kiwi.storage.raid_device" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.storage.raid_device.RaidDevice">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.storage.raid_device.</span></code><code class="sig-name descname"><span class="pre">RaidDevice</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage_provider</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/raid_device.html#RaidDevice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.raid_device.RaidDevice" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.raid_device.RaidDevice">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.storage.raid_device.</span></span><span class="sig-name descname"><span class="pre">RaidDevice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">storage_provider</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/raid_device.html#RaidDevice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.raid_device.RaidDevice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.storage.device_provider.DeviceProvider" title="kiwi.storage.device_provider.DeviceProvider"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.storage.device_provider.DeviceProvider</span></code></a></p>
 <p><strong>Implement raid setup on a storage device</strong></p>
 <dl class="field-list simple">
@@ -1228,8 +1230,8 @@ to unlock the luks device</p></li>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.storage.raid_device.RaidDevice.create_degraded_raid">
-<code class="sig-name descname"><span class="pre">create_degraded_raid</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raid_level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/raid_device.html#RaidDevice.create_degraded_raid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.raid_device.RaidDevice.create_degraded_raid" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.raid_device.RaidDevice.create_degraded_raid">
+<span class="sig-name descname"><span class="pre">create_degraded_raid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raid_level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/raid_device.html#RaidDevice.create_degraded_raid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.raid_device.RaidDevice.create_degraded_raid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a raid array in degraded mode with one device missing.
 This only works in the raid levels 0(striping) and 1(mirroring)</p>
 <dl class="field-list simple">
@@ -1240,8 +1242,8 @@ This only works in the raid levels 0(striping) and 1(mirroring)</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.raid_device.RaidDevice.create_raid_config">
-<code class="sig-name descname"><span class="pre">create_raid_config</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/storage/raid_device.html#RaidDevice.create_raid_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.raid_device.RaidDevice.create_raid_config" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.raid_device.RaidDevice.create_raid_config">
+<span class="sig-name descname"><span class="pre">create_raid_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/storage/raid_device.html#RaidDevice.create_raid_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.raid_device.RaidDevice.create_raid_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create mdadm config file from mdadm request</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -1251,8 +1253,8 @@ This only works in the raid levels 0(striping) and 1(mirroring)</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.raid_device.RaidDevice.get_device">
-<code class="sig-name descname"><span class="pre">get_device</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#kiwi.storage.mapped_device.MappedDevice" title="kiwi.storage.mapped_device.MappedDevice"><span class="pre">kiwi.storage.mapped_device.MappedDevice</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/kiwi/storage/raid_device.html#RaidDevice.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.raid_device.RaidDevice.get_device" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.raid_device.RaidDevice.get_device">
+<span class="sig-name descname"><span class="pre">get_device</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#kiwi.storage.mapped_device.MappedDevice" title="kiwi.storage.mapped_device.MappedDevice"><span class="pre">kiwi.storage.mapped_device.MappedDevice</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/kiwi/storage/raid_device.html#RaidDevice.get_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.raid_device.RaidDevice.get_device" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instance of MappedDevice providing the raid device</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1265,8 +1267,8 @@ This only works in the raid levels 0(striping) and 1(mirroring)</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.raid_device.RaidDevice.is_loop">
-<code class="sig-name descname"><span class="pre">is_loop</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><a class="reference internal" href="../_modules/kiwi/storage/raid_device.html#RaidDevice.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.raid_device.RaidDevice.is_loop" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.raid_device.RaidDevice.is_loop">
+<span class="sig-name descname"><span class="pre">is_loop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a><a class="reference internal" href="../_modules/kiwi/storage/raid_device.html#RaidDevice.is_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.raid_device.RaidDevice.is_loop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if storage provider is loop based</p>
 <p>Return loop status from base storage provider</p>
 <dl class="field-list simple">
@@ -1281,12 +1283,12 @@ This only works in the raid levels 0(striping) and 1(mirroring)</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.storage.setup">
+</section>
+<section id="module-kiwi.storage.setup">
 <span id="kiwi-storage-setup-module"></span><h2><a class="reference internal" href="#module-kiwi.storage.setup" title="kiwi.storage.setup"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.storage.setup</span></code></a> Module<a class="headerlink" href="#module-kiwi.storage.setup" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.storage.setup.DiskSetup">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.storage.setup.</span></code><code class="sig-name descname"><span class="pre">DiskSetup</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml_state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="kiwi.html#kiwi.xml_state.XMLState" title="kiwi.xml_state.XMLState"><span class="pre">kiwi.xml_state.XMLState</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.setup.DiskSetup">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.storage.setup.</span></span><span class="sig-name descname"><span class="pre">DiskSetup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml_state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="kiwi.html#kiwi.xml_state.XMLState" title="kiwi.xml_state.XMLState"><span class="pre">kiwi.xml_state.XMLState</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Implements disk setup methods</strong></p>
 <p>Methods from this class provides information required
@@ -1300,8 +1302,8 @@ before building a disk image</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt id="kiwi.storage.setup.DiskSetup.boot_partition_size">
-<code class="sig-name descname"><span class="pre">boot_partition_size</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup.boot_partition_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup.boot_partition_size" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.setup.DiskSetup.boot_partition_size">
+<span class="sig-name descname"><span class="pre">boot_partition_size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup.boot_partition_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup.boot_partition_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Size of the boot partition in mbytes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1314,8 +1316,8 @@ before building a disk image</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.setup.DiskSetup.get_boot_label">
-<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">get_boot_label</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup.get_boot_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup.get_boot_label" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.setup.DiskSetup.get_boot_label">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">get_boot_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup.get_boot_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup.get_boot_label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filesystem Label to use for the boot partition</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1328,8 +1330,8 @@ before building a disk image</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.setup.DiskSetup.get_disksize_mbytes">
-<code class="sig-name descname"><span class="pre">get_disksize_mbytes</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup.get_disksize_mbytes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup.get_disksize_mbytes" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.setup.DiskSetup.get_disksize_mbytes">
+<span class="sig-name descname"><span class="pre">get_disksize_mbytes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><span class="pre">int</span></a><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup.get_disksize_mbytes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup.get_disksize_mbytes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Precalculate disk size requirements in mbytes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1342,8 +1344,8 @@ before building a disk image</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.setup.DiskSetup.get_efi_label">
-<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">get_efi_label</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup.get_efi_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup.get_efi_label" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.setup.DiskSetup.get_efi_label">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">get_efi_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup.get_efi_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup.get_efi_label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filesystem Label to use for the EFI partition</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -1356,8 +1358,8 @@ before building a disk image</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.setup.DiskSetup.get_root_label">
-<code class="sig-name descname"><span class="pre">get_root_label</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup.get_root_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup.get_root_label" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.setup.DiskSetup.get_root_label">
+<span class="sig-name descname"><span class="pre">get_root_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup.get_root_label"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup.get_root_label" title="Permalink to this definition">¶</a></dt>
 <dd><p>Filesystem Label to use for the root partition</p>
 <p>If not specified in the XML configuration the default
 root label is set to ‘ROOT’</p>
@@ -1372,8 +1374,8 @@ root label is set to ‘ROOT’</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.storage.setup.DiskSetup.need_boot_partition">
-<code class="sig-name descname"><span class="pre">need_boot_partition</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup.need_boot_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup.need_boot_partition" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.storage.setup.DiskSetup.need_boot_partition">
+<span class="sig-name descname"><span class="pre">need_boot_partition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/setup.html#DiskSetup.need_boot_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.setup.DiskSetup.need_boot_partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decide if an extra boot partition is needed. This is done with
 the bootpartition attribute from the type, however if it is not
 set it depends on some other type configuration parameters if
@@ -1390,11 +1392,11 @@ we need a boot partition or not</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.storage">
+</section>
+<section id="module-kiwi.storage">
 <span id="module-contents"></span><span id="db-kiwi-storage-content"></span><h2>Module Contents<a class="headerlink" href="#module-kiwi.storage" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

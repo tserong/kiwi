@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Booting a Root Filesystem from Network &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Booting a Root Filesystem from Network &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,9 +732,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="booting-a-root-filesystem-from-network">
+  <section id="booting-a-root-filesystem-from-network">
 <span id="network-overlay-boot"></span><h1>Booting a Root Filesystem from Network<a class="headerlink" href="#booting-a-root-filesystem-from-network" title="Permalink to this headline">¶</a></h1>
-<div class="sidebar">
+<aside class="sidebar">
 <p class="sidebar-title">Abstract</p>
 <p>This page provides further information for handling
 KIS images built with KIWI NG and references the following
@@ -740,7 +742,7 @@ article:</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="../building_images/build_kis.html#kis"><span class="std std-ref">Build KIS Image (Kernel, Initrd, System)</span></a></p></li>
 </ul>
-</div>
+</aside>
 <p>In KIWI NG, the <code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-overlay</span></code> dracut module can be used to boot
 from a remote exported root filesystem. The exported device
 is visible as block device on the network client. KIWI NG
@@ -761,7 +763,7 @@ is required:</p>
 <ul>
 <li><p>Create dracut configuration to include the <code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-overlay</span></code> module</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> kiwi-descriptions/suse/x86_64/suse-leap-15.1
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> kiwi/build-tests/x86/tumbleweed/test-image-pxe
 $ mkdir -p root/etc/dracut.conf.d
 $ <span class="nb">cd</span> root/etc/dracut.conf.d
 $ <span class="nb">echo</span> <span class="s1">&#39;add_dracutmodules+=&quot; kiwi-overlay &quot;&#39;</span> &gt; overlay.conf
@@ -798,7 +800,7 @@ must provide a compatible aoe kernel module compared to the
 kernel used inside of the root filesystem image.</p>
 </div>
 <p>Once done, export the filesystem from the KIS build above as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ vbladed <span class="m">0</span> <span class="m">1</span> IFACE Leap-15.1_appliance.x86_64-1.15.1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ vbladed <span class="m">0</span> <span class="m">1</span> IFACE <span class="o">{</span>exc_image_base_name<span class="o">}</span>.x86_64-1.15.3
 </pre></div>
 </div>
 <p>The above command exports the given filesystem image file as a block
@@ -817,7 +819,7 @@ can see the exported block device.</p>
 <dt>Export via NBD:</dt><dd><p>Install the <code class="xref py py-obj docutils literal notranslate"><span class="pre">nbd</span></code> package on the system which is expected
 to export the root filesystem</p>
 <p>Once done, export the filesystem from the KIS build above as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ losetup /dev/loop0 Leap-15.1_appliance.x86_64-1.15.1
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ losetup /dev/loop0 <span class="o">{</span>exc_image_base_name<span class="o">}</span>.x86_64-1.15.3
 
 $ vi /etc/nbd-server/config
 
@@ -866,12 +868,12 @@ interface name as it was exported by the <strong class="command">vbladed</strong
 <p>Within the network which has access to the PXE server and the
 exported root filesystem image, any network client can now boot the
 system. A test based on QEMU can be done as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ qemu -boot n
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo qemu -boot n
 </pre></div>
 </div>
 </li>
 </ol>
-</div>
+</section>
 
 
            </div>

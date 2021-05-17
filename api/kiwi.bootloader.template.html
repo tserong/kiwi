@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.template Package &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>kiwi.bootloader.template Package &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,21 +732,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="kiwi-bootloader-template-package">
+  <section id="kiwi-bootloader-template-package">
 <h1>kiwi.bootloader.template Package<a class="headerlink" href="#kiwi-bootloader-template-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="submodules">
+<section id="submodules">
 <span id="db-kiwi-bootloader-template-submodules"></span><h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-kiwi.bootloader.template.grub2">
+</section>
+<section id="module-kiwi.bootloader.template.grub2">
 <span id="kiwi-bootloader-template-grub2-module"></span><h2><a class="reference internal" href="#module-kiwi.bootloader.template.grub2" title="kiwi.bootloader.template.grub2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.grub2</span></code></a> Module<a class="headerlink" href="#module-kiwi.bootloader.template.grub2" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.bootloader.template.grub2.</span></code><code class="sig-name descname"><span class="pre">BootLoaderTemplateGrub2</span></code><a class="reference internal" href="../_modules/kiwi/bootloader/template/grub2.html#BootLoaderTemplateGrub2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.bootloader.template.grub2.</span></span><span class="sig-name descname"><span class="pre">BootLoaderTemplateGrub2</span></span><a class="reference internal" href="../_modules/kiwi/bootloader/template/grub2.html#BootLoaderTemplateGrub2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>grub2 configuraton file templates</strong></p>
 <dl class="py method">
-<dt id="kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_install_template">
-<code class="sig-name descname"><span class="pre">get_install_template</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hybrid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gfxterm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/grub2.html#BootLoaderTemplateGrub2.get_install_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_install_template" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_install_template">
+<span class="sig-name descname"><span class="pre">get_install_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hybrid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gfxterm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/grub2.html#BootLoaderTemplateGrub2.get_install_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_install_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bootloader configuration template for install media</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -764,8 +766,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_iso_template">
-<code class="sig-name descname"><span class="pre">get_iso_template</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hybrid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gfxterm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkiso</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/grub2.html#BootLoaderTemplateGrub2.get_iso_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_iso_template" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_iso_template">
+<span class="sig-name descname"><span class="pre">get_iso_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hybrid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gfxterm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkiso</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/grub2.html#BootLoaderTemplateGrub2.get_iso_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_iso_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bootloader configuration template for live ISO media</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -785,8 +787,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_multiboot_install_template">
-<code class="sig-name descname"><span class="pre">get_multiboot_install_template</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gfxterm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/grub2.html#BootLoaderTemplateGrub2.get_multiboot_install_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_multiboot_install_template" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_multiboot_install_template">
+<span class="sig-name descname"><span class="pre">get_multiboot_install_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gfxterm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/grub2.html#BootLoaderTemplateGrub2.get_multiboot_install_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_multiboot_install_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bootloader configuration template for install media with
 hypervisor, e.g Xen dom0</p>
 <dl class="field-list simple">
@@ -806,8 +808,8 @@ hypervisor, e.g Xen dom0</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_multiboot_iso_template">
-<code class="sig-name descname"><span class="pre">get_multiboot_iso_template</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gfxterm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkiso</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/grub2.html#BootLoaderTemplateGrub2.get_multiboot_iso_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_multiboot_iso_template" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_multiboot_iso_template">
+<span class="sig-name descname"><span class="pre">get_multiboot_iso_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gfxterm'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkiso</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/grub2.html#BootLoaderTemplateGrub2.get_multiboot_iso_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.grub2.BootLoaderTemplateGrub2.get_multiboot_iso_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bootloader configuration template for live ISO media with
 hypervisor, e.g Xen dom0</p>
 <dl class="field-list simple">
@@ -828,17 +830,17 @@ hypervisor, e.g Xen dom0</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.bootloader.template.isolinux">
+</section>
+<section id="module-kiwi.bootloader.template.isolinux">
 <span id="kiwi-bootloader-template-isolinux-module"></span><h2><a class="reference internal" href="#module-kiwi.bootloader.template.isolinux" title="kiwi.bootloader.template.isolinux"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.bootloader.template.isolinux</span></code></a> Module<a class="headerlink" href="#module-kiwi.bootloader.template.isolinux" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">kiwi.bootloader.template.isolinux.</span></code><code class="sig-name descname"><span class="pre">BootLoaderTemplateIsoLinux</span></code><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.bootloader.template.isolinux.</span></span><span class="sig-name descname"><span class="pre">BootLoaderTemplateIsoLinux</span></span><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>isolinux configuraton file templates</strong></p>
 <dl class="py method">
-<dt id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_install_message_template">
-<code class="sig-name descname"><span class="pre">get_install_message_template</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux.get_install_message_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_install_message_template" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_install_message_template">
+<span class="sig-name descname"><span class="pre">get_install_message_template</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux.get_install_message_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_install_message_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bootloader template for text message file in install mode.
 isolinux displays this as menu if no graphics mode can be
 initialized</p>
@@ -853,8 +855,8 @@ initialized</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_install_template">
-<code class="sig-name descname"><span class="pre">get_install_template</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux.get_install_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_install_template" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_install_template">
+<span class="sig-name descname"><span class="pre">get_install_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux.get_install_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_install_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bootloader configuration template for install media</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -873,8 +875,8 @@ initialized</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_message_template">
-<code class="sig-name descname"><span class="pre">get_message_template</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux.get_message_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_message_template" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_message_template">
+<span class="sig-name descname"><span class="pre">get_message_template</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux.get_message_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_message_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bootloader template for text message file. isolinux
 displays this as menu if no graphics mode can be initialized</p>
 <dl class="field-list simple">
@@ -888,8 +890,8 @@ displays this as menu if no graphics mode can be initialized</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_multiboot_install_template">
-<code class="sig-name descname"><span class="pre">get_multiboot_install_template</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux.get_multiboot_install_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_multiboot_install_template" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_multiboot_install_template">
+<span class="sig-name descname"><span class="pre">get_multiboot_install_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux.get_multiboot_install_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_multiboot_install_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bootloader configuration template for install media with
 hypervisor, e.g Xen dom0</p>
 <dl class="field-list simple">
@@ -909,8 +911,8 @@ hypervisor, e.g Xen dom0</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_multiboot_template">
-<code class="sig-name descname"><span class="pre">get_multiboot_template</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkiso</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux.get_multiboot_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_multiboot_template" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_multiboot_template">
+<span class="sig-name descname"><span class="pre">get_multiboot_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkiso</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux.get_multiboot_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_multiboot_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bootloader configuration template for live media with
 hypervisor, e.g Xen dom0</p>
 <dl class="field-list simple">
@@ -930,8 +932,8 @@ hypervisor, e.g Xen dom0</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_template">
-<code class="sig-name descname"><span class="pre">get_template</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkiso</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux.get_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_template" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_template">
+<span class="sig-name descname"><span class="pre">get_template</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">failsafe</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_theme</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">terminal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">checkiso</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/bootloader/template/isolinux.html#BootLoaderTemplateIsoLinux.get_template"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.bootloader.template.isolinux.BootLoaderTemplateIsoLinux.get_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bootloader configuration template for live media</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -951,11 +953,11 @@ hypervisor, e.g Xen dom0</p>
 
 </dd></dl>
 
-</div>
-<div class="section" id="module-kiwi.bootloader.template">
+</section>
+<section id="module-kiwi.bootloader.template">
 <span id="module-contents"></span><span id="db-kiwi-bootloader-template-content"></span><h2>Module Contents<a class="headerlink" href="#module-kiwi.bootloader.template" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

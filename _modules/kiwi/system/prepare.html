@@ -7,12 +7,14 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system.prepare &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>kiwi.system.prepare &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +32,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
         <script src="../../../_static/doctools.js"></script>
@@ -96,8 +99,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -115,7 +117,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -745,7 +746,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">List</span><span class="p">,</span> <span class="n">Any</span>
+    <span class="n">List</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">dedent</span>
 
@@ -828,7 +829,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">uri_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Uri</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
 <div class="viewcode-block" id="SystemPrepare.setup_repositories"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.prepare.SystemPrepare.setup_repositories">[docs]</a>    <span class="k">def</span> <span class="nf">setup_repositories</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">clear_cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">signing_keys</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">clear_cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">signing_keys</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">target_arch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PackageManagerBase</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set up repositories for software installation and return a</span>
@@ -838,6 +840,8 @@
 <span class="sd">            Flag the clear cache before configure anything</span>
 <span class="sd">        :param list signing_keys:</span>
 <span class="sd">            Keys imported to the package manager</span>
+<span class="sd">        :param str target_arch:</span>
+<span class="sd">            Target architecture name</span>
 
 <span class="sd">        :return: instance of :class:`PackageManager` subclass</span>
 
@@ -855,6 +859,10 @@
         <span class="k">if</span> <span class="n">rpm_locale_list</span><span class="p">:</span>
             <span class="n">repository_options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                 <span class="s1">&#39;_install_langs%</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rpm_locale_list</span><span class="p">))</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">target_arch</span><span class="p">:</span>
+            <span class="n">repository_options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;_target_arch%</span><span class="si">{</span><span class="n">target_arch</span><span class="si">}</span><span class="s1">&#39;</span>
             <span class="p">)</span>
         <span class="n">repo</span> <span class="o">=</span> <span class="n">Repository</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">root_bind</span><span class="p">,</span> <span class="n">package_manager</span><span class="p">,</span> <span class="n">repository_options</span>

@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Image Types &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Image Types &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="commands/result_list.html">kiwi-ng result list</a><ul>
@@ -728,7 +730,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="image-types">
+  <section id="image-types">
 <span id="id1"></span><h1>Image Types<a class="headerlink" href="#image-types" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -770,7 +772,7 @@ Many different deployment strategies are possible.
 For further details refer to: <a class="reference internal" href="building_images/build_kis.html#kis"><span class="std std-ref">Build KIS Image (Kernel, Initrd, System)</span></a></p>
 </dd>
 </dl>
-<div class="section" id="image-results">
+<section id="image-results">
 <h2>Image Results<a class="headerlink" href="#image-results" title="Permalink to this headline">¶</a></h2>
 <p>KIWI NG execution results in an appliance image after a successful run of
 <a class="reference internal" href="commands/system_build.html#kiwi-system-build"><span class="std std-ref">kiwi-ng system build</span></a> or <a class="reference internal" href="commands/system_create.html#kiwi-system-create"><span class="std std-ref">kiwi-ng system create</span></a> command.
@@ -814,32 +816,32 @@ the image.</p>
 </li>
 </ol>
 <p>More specific  the result files for a given image name and version such
-as <code class="xref py py-obj docutils literal notranslate"><span class="pre">Leap-15.1_appliance</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">1.15.1</span></code> will be:</p>
+as <code class="xref py py-obj docutils literal notranslate"><span class="pre">{exc_image_base_name}</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">1.15.3</span></code> will be:</p>
 <ul class="simple">
 <li><p><strong>image packages</strong>:
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.packages</span></code></p></li>
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.packages</span></code></p></li>
 <li><p><strong>image verified</strong>:
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.verified</span></code></p></li>
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.verified</span></code></p></li>
 </ul>
 <p>In addition to the image binaries itself that depend on the image type:</p>
 <dl>
 <dt>image=”tbz”</dt><dd><p>For this image type the result is mainly a root tree packed in a tarball:</p>
 <ul class="simple">
 <li><p><strong>root archive</strong>:
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.tar.xz</span></code></p></li>
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.tar.xz</span></code></p></li>
 </ul>
 </dd>
 <dt>image=”btrfs|ext2|ext3|ext4|squashfs|xfs”</dt><dd><p>The image root tree data is packed into a filesystem image of the given
 type, hence the resutl for an <code class="xref py py-obj docutils literal notranslate"><span class="pre">ext4</span></code> image would be:</p>
 <ul class="simple">
 <li><p><strong>filesystem image</strong>:
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.ext4</span></code></p></li>
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.ext4</span></code></p></li>
 </ul>
 </dd>
 <dt>image=”iso”</dt><dd><p>The image result is an ISO file:</p>
 <ul class="simple">
 <li><p><strong>live image</strong>:
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.iso</span></code></p></li>
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.iso</span></code></p></li>
 </ul>
 </dd>
 <dt>image=”oem”</dt><dd><p>An image representing an expandable disk image. KIWI NG can also produce an
@@ -850,11 +852,11 @@ For further details see <a class="reference internal" href="building_images/buil
 can be:</p>
 <ul class="simple">
 <li><p><strong>disk image</strong>:
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.raw</span></code></p></li>
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.raw</span></code></p></li>
 <li><p><strong>installation image (optional)</strong>:
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.install.iso</span></code></p></li>
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.install.iso</span></code></p></li>
 <li><p><strong>installation pxe archive (optional)</strong>:
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.install.tar</span></code></p></li>
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.install.tar</span></code></p></li>
 </ul>
 <p>The disk image can also be provided in one of the various virtual disk
 formats which can be specified in <a class="reference external" href="https://docs.python.org/3/library/functions.html#format" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format</span></code></a> attribute of the
@@ -863,7 +865,7 @@ details see <a class="reference internal" href="building_images/build_simple_dis
 would be:</p>
 <ul class="simple">
 <li><p><strong>disk image</strong>:
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.qcow2</span></code></p></li>
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.qcow2</span></code></p></li>
 </ul>
 <p>instead of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">raw</span></code> default disk format.</p>
 </dd>
@@ -871,7 +873,7 @@ would be:</p>
 a loadable (<strong class="command">docker load -i &lt;image&gt;</strong>) tarball:</p>
 <ul class="simple">
 <li><p><strong>container</strong>:
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.docker.tar.xz</span></code></p></li>
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.docker.tar.xz</span></code></p></li>
 </ul>
 </dd>
 <dt>image=”oci”</dt><dd><p>An archive image that builds a container matching the OCI
@@ -879,14 +881,14 @@ a loadable (<strong class="command">docker load -i &lt;image&gt;</strong>) tarba
 standards:</p>
 <ul class="simple">
 <li><p><strong>container</strong>:
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.oci.tar.xz</span></code></p></li>
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.oci.tar.xz</span></code></p></li>
 </ul>
 </dd>
 <dt>image=”appx”</dt><dd><p>An archive image suitable for the Windows Subsystem For Linux
 container engine. The result is an <code class="xref py py-obj docutils literal notranslate"><span class="pre">appx</span></code> binary file:</p>
 <ul class="simple">
 <li><p><strong>container</strong>:
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.appx</span></code></p></li>
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.appx</span></code></p></li>
 </ul>
 </dd>
 <dt>image=”kis”</dt><dd><p>An optional root filesystem image associated with a kernel and initrd.
@@ -894,12 +896,12 @@ All three binaries are packed in a tarball, see <a class="reference internal" hr
 details about the kis archive:</p>
 <ul class="simple">
 <li><p><strong>kis archive</strong>:
-<code class="file docutils literal notranslate"><span class="pre">Leap-15.1_appliance.x86_64-1.15.1.tar.xz</span></code></p></li>
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.tar.xz</span></code></p></li>
 </ul>
 </dd>
 </dl>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

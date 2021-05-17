@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>KIWI NG Documentation &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>KIWI NG Documentation &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
@@ -97,8 +101,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -116,7 +119,6 @@
 <li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="commands/result_list.html">kiwi-ng result list</a><ul>
@@ -727,11 +729,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="kiwi-ng-documentation">
+  <section id="kiwi-ng-documentation">
 <h1>KIWI NG Documentation<a class="headerlink" href="#kiwi-ng-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This documentation covers KIWI Next Generation (KIWI NG) 9.23.29- the command line
+<p>This documentation covers KIWI Next Generation (KIWI NG) 9.23.30- the command line
 utility to build Linux system appliances. KIWI NG is stable and all
 new features, bugfixes, and improvements will be developed here.
 Versions older or equal to v7.x.x are out of maintenance and do
@@ -756,7 +758,7 @@ refer to the documentation for
 <li class="toctree-l1"><a class="reference internal" href="api.html">Python API</a></li>
 </ul>
 </div>
-<div class="sidebar">
+<aside class="sidebar">
 <p class="sidebar-title">Links</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/OSInside/kiwi">GitHub Sources</a></p></li>
@@ -776,8 +778,8 @@ refer to the documentation for
 <li><p><a class="reference external" href="https://build.opensuse.org/project/show/Virtualization:Appliances:Images:Testing_x86:debian">Build Tests Debian(x86)</a></p></li>
 <li><p><a class="reference external" href="https://build.opensuse.org/project/show/Virtualization:Appliances:Images:Testing_x86:archlinux">Build Tests ArchLinux(x86)</a></p></li>
 </ul>
-</div>
-<div class="section" id="the-appliance-concept">
+</aside>
+<section id="the-appliance-concept">
 <h2>The Appliance Concept<a class="headerlink" href="#the-appliance-concept" title="Permalink to this headline">¶</a></h2>
 <p>An appliance is a ready to use image of an operating system including
 a pre-configured application for a specific use case. The appliance is
@@ -790,8 +792,8 @@ PXE or Vagrant boxes.</p>
 in a directory, also called the <code class="xref py py-obj docutils literal notranslate"><span class="pre">image</span> <span class="pre">description</span></code>. At least one XML file
 <code class="file docutils literal notranslate"><span class="pre">config.xml</span></code> or <code class="file docutils literal notranslate"><span class="pre">.kiwi</span></code> is required. In addition there may as
 well be other files like scripts or configuration data.</p>
-</div>
-<div class="section" id="use-cases">
+</section>
+<section id="use-cases">
 <h2>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h2>
 <p>The following list shows a selection of use cases for which an
 appliance is needed:</p>
@@ -830,8 +832,8 @@ be implemented through custom OS appliances.</p>
 <dt>And More</dt><dd><p>…</p>
 </dd>
 </dl>
-</div>
-<div class="section" id="contact">
+</section>
+<section id="contact">
 <h2>Contact<a class="headerlink" href="#contact" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p><a class="reference external" href="https://groups.google.com/forum/#!forum/kiwi-images">Mailing list</a></p>
@@ -845,8 +847,8 @@ even if you do not have a Google account.</p>
 the supported <a class="reference external" href="https://matrix.org/docs/projects/clients-matrix">clients</a>.</p>
 </li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

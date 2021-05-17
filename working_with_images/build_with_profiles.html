@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Building Images with Profiles &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Building Images with Profiles &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,29 +732,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="building-images-with-profiles">
+  <section id="building-images-with-profiles">
 <span id="building-build-with-profiles"></span><h1>Building Images with Profiles<a class="headerlink" href="#building-images-with-profiles" title="Permalink to this headline">¶</a></h1>
 <p>KIWI NG supports so-called <em>profiles</em> inside the XML image description. Profiles
 act as namespaces for additional settings to be applied on top of the
 defaults. For further details, see <a class="reference internal" href="../concept_and_workflow/profiles.html#image-profiles"><span class="std std-ref">Image Profiles</span></a>.</p>
-<div class="section" id="local-builds">
+<section id="local-builds">
 <h2>Local Builds<a class="headerlink" href="#local-builds" title="Permalink to this headline">¶</a></h2>
 <p>To execute local KIWI NG builds with a specific, selected profile, add the
 command line flag <code class="xref py py-obj docutils literal notranslate"><span class="pre">--profile=$PROFILE_NAME</span></code>:</p>
-<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo kiwi-ng --type iso --profile<span class="o">=</span>workstation system build <span class="se">\</span>
-<span class="go">      --description kiwi-descriptions/suse/x86_64/suse-leap-15.1 \</span>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo kiwi-ng --type oem --profile libvirt system build <span class="se">\</span>
+<span class="go">      --description kiwi/build-tests/x86/leap/test-image-vagrant \</span>
+<span class="go">      --set-repo obs://openSUSE:Leap:15.3/standard \</span>
 <span class="go">      --target-dir /tmp/myimage</span>
 </pre></div>
 </div>
 <p>Consult the manual page of <code class="file docutils literal notranslate"><span class="pre">kiwi</span></code> for further details:
 <a class="reference internal" href="../commands/kiwi.html#db-commands-kiwi-synopsis"><span class="std std-ref">SYNOPSIS</span></a>.</p>
-</div>
-<div class="section" id="building-with-the-open-build-service">
+</section>
+<section id="building-with-the-open-build-service">
 <h2>Building with the Open Build Service<a class="headerlink" href="#building-with-the-open-build-service" title="Permalink to this headline">¶</a></h2>
 <p>The Open Build Service (OBS) support profiles via the <a class="reference external" href="https://openbuildservice.org/help/manuals/obs-user-guide/cha.obs.multibuild.html">multibuild</a>
-feature. An example project using this feature is the
-<a class="reference external" href="https://build.opensuse.org/package/show/openSUSE:Factory/openSUSE-Tumbleweed">openSUSE-Tumbleweed</a>
-image.</p>
+feature.</p>
 <p>To enable and use the profiles, follow these steps:</p>
 <ol class="arabic">
 <li><p>Add the following XML comment to your <code class="file docutils literal notranslate"><span class="pre">config.xml</span></code>:</p>
@@ -763,7 +764,7 @@ image.</p>
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;?xml?&gt;</span></code> element, e.g.:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 <span class="c">&lt;!-- OBS-Profiles: @BUILD_FLAVOR@ --&gt;</span>
-<span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.2&quot;</span> <span class="na">name=</span><span class="s">&quot;Leap-15.1_appliance&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;kiwi-test-image-vagrant&quot;</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- snip --&gt;</span>
 <span class="nt">&lt;/image&gt;</span>
 </pre></div>
@@ -788,8 +789,8 @@ achieved via the <code class="xref py py-obj docutils literal notranslate"><span
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>osc build -M <span class="nv">$PROFILE</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>

@@ -4,15 +4,18 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Custom Disk Partitions &mdash; KIWI NG 9.23.29 documentation</title>
+  <title>Custom Disk Partitions &mdash; KIWI NG 9.23.30 documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
 
   
@@ -30,6 +33,7 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
@@ -98,8 +102,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-obs">Installation from OBS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-your-distribution-s-repositories">Installation from your distribution’s repositories</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-pypi">Installation from PyPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation.html#installation-from-distribution-repositories">Installation from Distribution Repositories</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../installation.html#example-appliance-descriptions">Example Appliance Descriptions</a></li>
 </ul>
 </li>
@@ -117,7 +120,6 @@
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#description">DESCRIPTION</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#global-options">GLOBAL OPTIONS</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#example">EXAMPLE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../commands/kiwi.html#compatibility">COMPATIBILITY</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../commands/result_list.html">kiwi-ng result list</a><ul>
@@ -730,15 +732,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="custom-disk-partitions">
+  <section id="custom-disk-partitions">
 <span id="custom-partitions"></span><h1>Custom Disk Partitions<a class="headerlink" href="#custom-disk-partitions" title="Permalink to this headline">¶</a></h1>
-<div class="sidebar">
+<aside class="sidebar">
 <p class="sidebar-title">Abstract</p>
 <p>This page provides some details about what KIWI NG supports and does
 not support regarding customization over the partition scheme. It also
 provides some guidance in case the user requires some custom layout
 beyond KIWI NG supported features.</p>
-</div>
+</aside>
 <p>By design, KIWI NG does not support a customized partition table. Alternatively,
 KIWI NG supports the definition of user-defined volumes which covers most of
 common use cases. See <a class="reference internal" href="custom_volumes.html#custom-volumes"><span class="std std-ref">Custom Disk Volumes</span></a> for
@@ -776,7 +778,7 @@ and set a new extended size for the disk. See KIWI NG commands docs
 </div></blockquote>
 </li>
 </ol>
-<div class="section" id="custom-partitioning-at-boot-time">
+<section id="custom-partitioning-at-boot-time">
 <h2>Custom Partitioning at Boot Time<a class="headerlink" href="#custom-partitioning-at-boot-time" title="Permalink to this headline">¶</a></h2>
 <p>Adding additional partitions at boot time of KIWI NG images is also possible,
 however, setting the tools and scripts for doing so needs to be handled by
@@ -859,8 +861,8 @@ snipped inside the <code class="file docutils literal notranslate"><span class="
 </div></blockquote>
 </li>
 </ol>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
