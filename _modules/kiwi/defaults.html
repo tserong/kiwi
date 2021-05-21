@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.defaults &mdash; KIWI NG 9.23.31 documentation</title>
+  <title>kiwi.defaults &mdash; KIWI NG 9.23.32 documentation</title>
   
 
   
@@ -1371,6 +1371,7 @@
 
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Searching grub file: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">install_dirs</span> <span class="o">=</span> <span class="p">[</span>
             <span class="s1">&#39;usr/share&#39;</span><span class="p">,</span> <span class="s1">&#39;usr/lib&#39;</span>
         <span class="p">]</span>
@@ -1380,7 +1381,9 @@
                 <span class="n">grub_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                     <span class="n">root_path</span><span class="p">,</span> <span class="n">install_dir</span><span class="p">,</span> <span class="n">grub_name</span><span class="p">,</span> <span class="n">filename</span>
                 <span class="p">)</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;--&gt; </span><span class="si">{</span><span class="n">grub_path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">grub_path</span><span class="p">):</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;--&gt; Found in: </span><span class="si">{</span><span class="n">grub_path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
                     <span class="k">return</span> <span class="n">grub_path</span>
                 <span class="n">lookup_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grub_path</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">raise_on_error</span><span class="p">:</span>

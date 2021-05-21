@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi Package &mdash; KIWI NG 9.23.31 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.23.32 documentation</title>
   
 
   
@@ -4465,31 +4465,19 @@ an exception is thrown</p>
 <span id="kiwi-runtime-checker-module"></span><h2><a class="reference internal" href="#module-kiwi.runtime_checker" title="kiwi.runtime_checker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.runtime_checker</span></code></a> Module<a class="headerlink" href="#module-kiwi.runtime_checker" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.runtime_checker.</span></span><span class="sig-name descname"><span class="pre">RuntimeChecker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml_state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.runtime_checker.</span></span><span class="sig-name descname"><span class="pre">RuntimeChecker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml_state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#kiwi.xml_state.XMLState" title="kiwi.xml_state.XMLState"><span class="pre">kiwi.xml_state.XMLState</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Implements build consistency checks at runtime</strong></p>
-<p>The schema of an image description covers structure and syntax of
-the provided data. The RuntimeChecker provides methods to perform
-further semantic checks which allows to recognize potential build
-or boot problems early.</p>
-<ul class="simple">
-<li><dl class="field-list simple">
-<dt class="field-odd">param object xml_state</dt>
-<dd class="field-odd"><p>Instance of XMLState</p>
-</dd>
-</dl>
-</li>
-</ul>
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_appx_naming_conventions_valid">
-<span class="sig-name descname"><span class="pre">check_appx_naming_conventions_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_appx_naming_conventions_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_appx_naming_conventions_valid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_appx_naming_conventions_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_appx_naming_conventions_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_appx_naming_conventions_valid" title="Permalink to this definition">¶</a></dt>
 <dd><p>When building wsl images there are some naming conventions that
 must be fulfilled to run the container on Microsoft Windows</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_architecture_supports_iso_firmware_setup">
-<span class="sig-name descname"><span class="pre">check_architecture_supports_iso_firmware_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_architecture_supports_iso_firmware_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_architecture_supports_iso_firmware_setup" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_architecture_supports_iso_firmware_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_architecture_supports_iso_firmware_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_architecture_supports_iso_firmware_setup" title="Permalink to this definition">¶</a></dt>
 <dd><p>For creating ISO images a different bootloader setup is
 performed depending on the configured firmware. If the
 firmware is set to bios, isolinux is used and that limits
@@ -4501,14 +4489,14 @@ on request of an ISO image.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_boot_description_exists">
-<span class="sig-name descname"><span class="pre">check_boot_description_exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_boot_description_exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_boot_description_exists" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_boot_description_exists</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_boot_description_exists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_boot_description_exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>If a kiwi initrd is used, a lookup to the specified boot
 description is done and fails early if it does not exist</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_consistent_kernel_in_boot_and_system_image">
-<span class="sig-name descname"><span class="pre">check_consistent_kernel_in_boot_and_system_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_consistent_kernel_in_boot_and_system_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_consistent_kernel_in_boot_and_system_image" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_consistent_kernel_in_boot_and_system_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_consistent_kernel_in_boot_and_system_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_consistent_kernel_in_boot_and_system_image" title="Permalink to this definition">¶</a></dt>
 <dd><p>If a kiwi initrd is used, the kernel used to build the kiwi
 initrd and the kernel used in the system image must be the
 same in order to avoid an inconsistent boot setup</p>
@@ -4516,7 +4504,7 @@ same in order to avoid an inconsistent boot setup</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_container_tool_chain_installed">
-<span class="sig-name descname"><span class="pre">check_container_tool_chain_installed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_container_tool_chain_installed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_container_tool_chain_installed" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_container_tool_chain_installed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_container_tool_chain_installed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_container_tool_chain_installed" title="Permalink to this definition">¶</a></dt>
 <dd><p>When creating container images the specific tools are used in order
 to import and export OCI or Docker compatible images. This check
 searches for those tools to be installed in the build system and
@@ -4525,7 +4513,7 @@ fails if it can’t find them</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_dracut_module_for_disk_oem_in_package_list">
-<span class="sig-name descname"><span class="pre">check_dracut_module_for_disk_oem_in_package_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_dracut_module_for_disk_oem_in_package_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_dracut_module_for_disk_oem_in_package_list" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_dracut_module_for_disk_oem_in_package_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_dracut_module_for_disk_oem_in_package_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_dracut_module_for_disk_oem_in_package_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>OEM images if configured to use dracut as initrd system
 requires the KIWI provided dracut-kiwi-oem-repart module
 to be installed at the time dracut is called. Thus this
@@ -4535,7 +4523,7 @@ the package list in the image description.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_dracut_module_for_disk_overlay_in_package_list">
-<span class="sig-name descname"><span class="pre">check_dracut_module_for_disk_overlay_in_package_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_dracut_module_for_disk_overlay_in_package_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_dracut_module_for_disk_overlay_in_package_list" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_dracut_module_for_disk_overlay_in_package_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_dracut_module_for_disk_overlay_in_package_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_dracut_module_for_disk_overlay_in_package_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Disk images configured to use a root filesystem overlay
 requires the KIWI provided kiwi-overlay dracut module to
 be installed at the time dracut is called. Thus this
@@ -4545,7 +4533,7 @@ the package list in the image description.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_dracut_module_for_live_iso_in_package_list">
-<span class="sig-name descname"><span class="pre">check_dracut_module_for_live_iso_in_package_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_dracut_module_for_live_iso_in_package_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_dracut_module_for_live_iso_in_package_list" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_dracut_module_for_live_iso_in_package_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_dracut_module_for_live_iso_in_package_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_dracut_module_for_live_iso_in_package_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>Live ISO images uses a dracut initrd to boot and requires
 the KIWI provided kiwi-live dracut module to be installed
 at the time dracut is called. Thus this runtime check
@@ -4555,7 +4543,7 @@ list in the image description.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_dracut_module_for_oem_install_in_package_list">
-<span class="sig-name descname"><span class="pre">check_dracut_module_for_oem_install_in_package_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_dracut_module_for_oem_install_in_package_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_dracut_module_for_oem_install_in_package_list" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_dracut_module_for_oem_install_in_package_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_dracut_module_for_oem_install_in_package_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_dracut_module_for_oem_install_in_package_list" title="Permalink to this definition">¶</a></dt>
 <dd><p>OEM images if configured to use dracut as initrd system
 and configured with one of the installiso, installstick
 or installpxe attributes requires the KIWI provided
@@ -4567,7 +4555,7 @@ image description.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_dracut_module_versions_compatible_to_kiwi">
-<span class="sig-name descname"><span class="pre">check_dracut_module_versions_compatible_to_kiwi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_dracut_module_versions_compatible_to_kiwi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_dracut_module_versions_compatible_to_kiwi" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_dracut_module_versions_compatible_to_kiwi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_dracut_module_versions_compatible_to_kiwi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_dracut_module_versions_compatible_to_kiwi" title="Permalink to this definition">¶</a></dt>
 <dd><p>KIWI images which makes use of kiwi dracut modules
 has to use module versions compatible with the version
 of this KIWI builder code base. This is important to avoid
@@ -4580,7 +4568,7 @@ for which we know this KIWI builder to be compatible with.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_efi_mode_for_disk_overlay_correctly_setup">
-<span class="sig-name descname"><span class="pre">check_efi_mode_for_disk_overlay_correctly_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_efi_mode_for_disk_overlay_correctly_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_efi_mode_for_disk_overlay_correctly_setup" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_efi_mode_for_disk_overlay_correctly_setup</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_efi_mode_for_disk_overlay_correctly_setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_efi_mode_for_disk_overlay_correctly_setup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Disk images configured to use a root filesystem overlay
 only supports the standard EFI mode and not secure boot.
 That’s because the shim setup performs changes to the
@@ -4591,28 +4579,28 @@ the root filesystem is a read-only squashfs source.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_image_include_repos_publicly_resolvable">
-<span class="sig-name descname"><span class="pre">check_image_include_repos_publicly_resolvable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_image_include_repos_publicly_resolvable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_image_include_repos_publicly_resolvable" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_image_include_repos_publicly_resolvable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_image_include_repos_publicly_resolvable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_image_include_repos_publicly_resolvable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Verify that all repos marked with the imageinclude attribute
 can be resolved into a http based web URL</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_image_type_unique">
-<span class="sig-name descname"><span class="pre">check_image_type_unique</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_image_type_unique"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_image_type_unique" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_image_type_unique</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_image_type_unique"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_image_type_unique" title="Permalink to this definition">¶</a></dt>
 <dd><p>Verify that the selected image type is unique within
 the range of the configured types and profiles.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_image_version_provided">
-<span class="sig-name descname"><span class="pre">check_image_version_provided</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_image_version_provided"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_image_version_provided" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_image_version_provided</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_image_version_provided"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_image_version_provided" title="Permalink to this definition">¶</a></dt>
 <dd><p>Kiwi requires a &lt;version&gt; element to be specified as part
 of at least one &lt;preferences&gt; section.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_initrd_selection_required">
-<span class="sig-name descname"><span class="pre">check_initrd_selection_required</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_initrd_selection_required"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_initrd_selection_required" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_initrd_selection_required</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_initrd_selection_required"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_initrd_selection_required" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the boot attribute is used without selecting kiwi
 as the initrd_system, the setting of the boot attribute
 will not have any effect. We assume that configurations
@@ -4622,7 +4610,7 @@ the custom kiwi initrd system and not dracut.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_mediacheck_installed">
-<span class="sig-name descname"><span class="pre">check_mediacheck_installed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_mediacheck_installed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_mediacheck_installed" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_mediacheck_installed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_mediacheck_installed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_mediacheck_installed" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the image description enables the mediacheck attribute
 the required tools to run this check must be installed
 on the image build host</p>
@@ -4630,13 +4618,13 @@ on the image build host</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_repositories_configured">
-<span class="sig-name descname"><span class="pre">check_repositories_configured</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_repositories_configured"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_repositories_configured" title="Permalink to this definition">¶</a></dt>
-<dd><p>Verify that that there are repositories configured</p>
+<span class="sig-name descname"><span class="pre">check_repositories_configured</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_repositories_configured"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_repositories_configured" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verify that there are repositories configured</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_swap_name_used_with_lvm">
-<span class="sig-name descname"><span class="pre">check_swap_name_used_with_lvm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_swap_name_used_with_lvm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_swap_name_used_with_lvm" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_swap_name_used_with_lvm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_swap_name_used_with_lvm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_swap_name_used_with_lvm" title="Permalink to this definition">¶</a></dt>
 <dd><p>The optional oem-swapname is only effective if used together
 with the LVM volume manager. A name for the swap space can
 only be set if it is created as a LVM volume. In any other
@@ -4645,7 +4633,7 @@ case the name does not apply to the system</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_syslinux_installed_if_isolinux_is_used">
-<span class="sig-name descname"><span class="pre">check_syslinux_installed_if_isolinux_is_used</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_syslinux_installed_if_isolinux_is_used"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_syslinux_installed_if_isolinux_is_used" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_syslinux_installed_if_isolinux_is_used</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_syslinux_installed_if_isolinux_is_used"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_syslinux_installed_if_isolinux_is_used" title="Permalink to this definition">¶</a></dt>
 <dd><p>ISO images that are configured to use isolinux
 requires the host to provide a set of syslinux
 binaries.</p>
@@ -4653,7 +4641,7 @@ binaries.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_target_directory_not_in_shared_cache">
-<span class="sig-name descname"><span class="pre">check_target_directory_not_in_shared_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_target_directory_not_in_shared_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_target_directory_not_in_shared_cache" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">check_target_directory_not_in_shared_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_target_directory_not_in_shared_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_target_directory_not_in_shared_cache" title="Permalink to this definition">¶</a></dt>
 <dd><p>The target directory must be outside of the kiwi shared cache
 directory in order to avoid busy mounts because kiwi bind mounts
 the cache directory into the image root tree to access host
@@ -4667,7 +4655,7 @@ caching information</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_volume_label_used_with_lvm">
-<span class="sig-name descname"><span class="pre">check_volume_label_used_with_lvm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_volume_label_used_with_lvm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_volume_label_used_with_lvm" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_volume_label_used_with_lvm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_volume_label_used_with_lvm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_volume_label_used_with_lvm" title="Permalink to this definition">¶</a></dt>
 <dd><p>The optional volume label in a systemdisk setup is only
 effective if the LVM, logical volume manager system is
 used. In any other case where the filesystem itself offers
@@ -4677,7 +4665,7 @@ labels which can be applied per volume</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_volume_setup_defines_multiple_fullsize_volumes">
-<span class="sig-name descname"><span class="pre">check_volume_setup_defines_multiple_fullsize_volumes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_volume_setup_defines_multiple_fullsize_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_volume_setup_defines_multiple_fullsize_volumes" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_volume_setup_defines_multiple_fullsize_volumes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_volume_setup_defines_multiple_fullsize_volumes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_volume_setup_defines_multiple_fullsize_volumes" title="Permalink to this definition">¶</a></dt>
 <dd><p>The volume size specification ‘all’ makes this volume to
 take the rest space available on the system. It’s only
 allowed to specify one all size volume</p>
@@ -4685,12 +4673,12 @@ allowed to specify one all size volume</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_volume_setup_defines_reserved_labels">
-<span class="sig-name descname"><span class="pre">check_volume_setup_defines_reserved_labels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_volume_setup_defines_reserved_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_volume_setup_defines_reserved_labels" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_volume_setup_defines_reserved_labels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_volume_setup_defines_reserved_labels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_volume_setup_defines_reserved_labels" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_volume_setup_has_no_root_definition">
-<span class="sig-name descname"><span class="pre">check_volume_setup_has_no_root_definition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_volume_setup_has_no_root_definition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_volume_setup_has_no_root_definition" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_volume_setup_has_no_root_definition</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_volume_setup_has_no_root_definition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_volume_setup_has_no_root_definition" title="Permalink to this definition">¶</a></dt>
 <dd><p>The root volume in a systemdisk setup is handled in a special
 way. It is not allowed to setup a custom name or mountpoint for
 the root volume. Therefore the size of the root volume can be
@@ -4701,7 +4689,7 @@ mountpoint which would cause the image build to fail</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_xen_uniquely_setup_as_server_or_guest">
-<span class="sig-name descname"><span class="pre">check_xen_uniquely_setup_as_server_or_guest</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_xen_uniquely_setup_as_server_or_guest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_xen_uniquely_setup_as_server_or_guest" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">check_xen_uniquely_setup_as_server_or_guest</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_xen_uniquely_setup_as_server_or_guest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_xen_uniquely_setup_as_server_or_guest" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the image is classified to be used as Xen image, it can
 be either a Xen Server(dom0) or a Xen guest. The image
 configuration is checked if the information uniquely identifies
