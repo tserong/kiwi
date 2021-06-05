@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.repository.zypper &mdash; KIWI NG 9.23.35 documentation</title>
+  <title>kiwi.repository.zypper &mdash; KIWI NG 9.23.36 documentation</title>
   
 
   
@@ -847,6 +847,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">zypper_args</span> <span class="o">=</span> <span class="p">[</span>
             <span class="s1">&#39;--non-interactive&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;--gpg-auto-import-keys&#39;</span><span class="p">,</span>
             <span class="s1">&#39;--pkg-cache-dir&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_zypper_dir</span><span class="p">[</span><span class="s1">&#39;pkg-cache-dir&#39;</span><span class="p">],</span>
             <span class="s1">&#39;--reposd-dir&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_zypper_dir</span><span class="p">[</span><span class="s1">&#39;reposd-dir&#39;</span><span class="p">],</span>
             <span class="s1">&#39;--solv-cache-dir&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shared_zypper_dir</span><span class="p">[</span><span class="s1">&#39;solv-cache-dir&#39;</span><span class="p">],</span>
