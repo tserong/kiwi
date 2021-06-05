@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.boot.image &mdash; KIWI NG 9.23.34 documentation</title>
+  <title>kiwi.boot.image &mdash; KIWI NG 9.23.35 documentation</title>
   
 
   
@@ -772,12 +772,13 @@
 <div class="viewcode-block" id="BootImage.new"><a class="viewcode-back" href="../../../api/kiwi.boot.image.html#kiwi.boot.image.BootImage.new">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">new</span><span class="p">(</span>
         <span class="n">xml_state</span><span class="p">:</span> <span class="n">XMLState</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">signing_keys</span><span class="p">:</span> <span class="n">List</span><span class="o">=</span><span class="kc">None</span>  <span class="c1"># noqa: E252</span>
+        <span class="n">root_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">signing_keys</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">):</span>
         <span class="n">initrd_system</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_initrd_system</span><span class="p">()</span>
         <span class="n">name_map</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;kiwi&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;builtin_kiwi&#39;</span><span class="p">:</span> <span class="s1">&#39;BootImageKiwi&#39;</span><span class="p">},</span>
-            <span class="s1">&#39;dracut&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;dracut&#39;</span><span class="p">:</span> <span class="s1">&#39;BootImageDracut&#39;</span><span class="p">}</span>
+            <span class="s1">&#39;dracut&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;dracut&#39;</span><span class="p">:</span> <span class="s1">&#39;BootImageDracut&#39;</span><span class="p">},</span>
+            <span class="s1">&#39;none&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;base&#39;</span><span class="p">:</span> <span class="s1">&#39;BootImageBase&#39;</span><span class="p">}</span>
         <span class="p">}</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="p">(</span><span class="n">boot_image_namespace</span><span class="p">,</span> <span class="n">boot_image_name</span><span class="p">)</span> <span class="o">=</span> \

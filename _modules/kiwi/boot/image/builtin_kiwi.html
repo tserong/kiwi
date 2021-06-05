@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.boot.image.builtin_kiwi &mdash; KIWI NG 9.23.34 documentation</title>
+  <title>kiwi.boot.image.builtin_kiwi &mdash; KIWI NG 9.23.35 documentation</title>
   
 
   
@@ -748,9 +748,13 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkdtemp</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span>
+<span class="p">)</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
+<span class="kn">from</span> <span class="nn">kiwi.system.identifier</span> <span class="kn">import</span> <span class="n">SystemIdentifier</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.sync</span> <span class="kn">import</span> <span class="n">DataSync</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.prepare</span> <span class="kn">import</span> <span class="n">SystemPrepare</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.profile</span> <span class="kn">import</span> <span class="n">Profile</span>
@@ -771,7 +775,14 @@
 <span class="sd">    to control the first boot an appliance. The kiwi initrd replaces</span>
 <span class="sd">    itself after first boot by the result of dracut.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="BootImageKiwi.post_init"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.builtin_kiwi.BootImageKiwi.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BootImageKiwi.has_initrd_support"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.builtin_kiwi.BootImageKiwi.has_initrd_support">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">has_initrd_support</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This instance supports initrd preparation and creation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="BootImageKiwi.post_init"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.builtin_kiwi.BootImageKiwi.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Post initialization method</span>
 
@@ -782,74 +793,78 @@
         <span class="c1"># builtin kiwi initrd builds its own root tree to create</span>
         <span class="c1"># an initrd from. Thus there is no pre defined boot root</span>
         <span class="c1"># directory</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">temp_directories</span> <span class="o">=</span> <span class="p">[]</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp_directories</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span></div>
 
-<div class="viewcode-block" id="BootImageKiwi.prepare"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.builtin_kiwi.BootImageKiwi.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BootImageKiwi.prepare"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.builtin_kiwi.BootImageKiwi.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prepare new root system suitable to create a kiwi initrd from it</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">(</span>
-            <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_boot_root.&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">temp_directories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">load_boot_xml_description</span><span class="p">()</span>
-        <span class="n">boot_image_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_xml_state</span><span class="o">.</span><span class="n">xml_data</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_xml_state</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">(</span>
+                <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_boot_root.&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">temp_directories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load_boot_xml_description</span><span class="p">()</span>
+            <span class="n">boot_image_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_xml_state</span><span class="o">.</span><span class="n">xml_data</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">import_system_description_elements</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">import_system_description_elements</span><span class="p">()</span>
 
-        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Preparing boot image&#39;</span><span class="p">)</span>
-        <span class="n">system</span> <span class="o">=</span> <span class="n">SystemPrepare</span><span class="p">(</span>
-            <span class="n">xml_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_xml_state</span><span class="p">,</span>
-            <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span><span class="p">,</span>
-            <span class="n">allow_existing</span><span class="o">=</span><span class="kc">True</span>
-        <span class="p">)</span>
-        <span class="n">manager</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">setup_repositories</span><span class="p">(</span>
-            <span class="n">signing_keys</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">signing_keys</span><span class="p">,</span> <span class="n">target_arch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_arch</span>
-        <span class="p">)</span>
-        <span class="n">system</span><span class="o">.</span><span class="n">install_bootstrap</span><span class="p">(</span>
-            <span class="n">manager</span>
-        <span class="p">)</span>
-        <span class="n">system</span><span class="o">.</span><span class="n">install_system</span><span class="p">(</span>
-            <span class="n">manager</span>
-        <span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Preparing boot image&#39;</span><span class="p">)</span>
+            <span class="n">system</span> <span class="o">=</span> <span class="n">SystemPrepare</span><span class="p">(</span>
+                <span class="n">xml_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_xml_state</span><span class="p">,</span>
+                <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span><span class="p">,</span>
+                <span class="n">allow_existing</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+            <span class="n">manager</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">setup_repositories</span><span class="p">(</span>
+                <span class="n">signing_keys</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">signing_keys</span><span class="p">,</span> <span class="n">target_arch</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_arch</span>
+            <span class="p">)</span>
+            <span class="n">system</span><span class="o">.</span><span class="n">install_bootstrap</span><span class="p">(</span>
+                <span class="n">manager</span>
+            <span class="p">)</span>
+            <span class="n">system</span><span class="o">.</span><span class="n">install_system</span><span class="p">(</span>
+                <span class="n">manager</span>
+            <span class="p">)</span>
 
-        <span class="n">profile</span> <span class="o">=</span> <span class="n">Profile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_xml_state</span><span class="p">)</span>
-        <span class="n">profile</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;kiwi_initrdname&#39;</span><span class="p">,</span> <span class="n">boot_image_name</span><span class="p">)</span>
+            <span class="n">profile</span> <span class="o">=</span> <span class="n">Profile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_xml_state</span><span class="p">)</span>
+            <span class="n">profile</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;kiwi_initrdname&#39;</span><span class="p">,</span> <span class="n">boot_image_name</span><span class="p">)</span>
 
-        <span class="n">defaults</span> <span class="o">=</span> <span class="n">Defaults</span><span class="p">()</span>
-        <span class="n">defaults</span><span class="o">.</span><span class="n">to_profile</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>
+            <span class="n">defaults</span> <span class="o">=</span> <span class="n">Defaults</span><span class="p">()</span>
+            <span class="n">defaults</span><span class="o">.</span><span class="n">to_profile</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span> <span class="o">=</span> <span class="n">SystemSetup</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">boot_xml_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span>
-        <span class="p">)</span>
-        <span class="n">profile</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
-            <span class="n">Defaults</span><span class="o">.</span><span class="n">get_profile_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">import_description</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">import_overlay_files</span><span class="p">(</span>
-            <span class="n">follow_links</span><span class="o">=</span><span class="kc">True</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">call_config_script</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span> <span class="o">=</span> <span class="n">SystemSetup</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">boot_xml_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span>
+            <span class="p">)</span>
+            <span class="n">profile</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                <span class="n">Defaults</span><span class="o">.</span><span class="n">get_profile_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">import_description</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">import_overlay_files</span><span class="p">(</span>
+                <span class="n">follow_links</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">call_config_script</span><span class="p">()</span>
 
-        <span class="n">system</span><span class="o">.</span><span class="n">pinch_system</span><span class="p">(</span>
-            <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span>
-        <span class="p">)</span>
-        <span class="c1"># make sure system instance is cleaned up before setting up</span>
-        <span class="k">del</span> <span class="n">system</span>
+            <span class="n">system</span><span class="o">.</span><span class="n">pinch_system</span><span class="p">(</span>
+                <span class="n">manager</span><span class="o">=</span><span class="n">manager</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+            <span class="c1"># make sure system instance is cleaned up before setting up</span>
+            <span class="k">del</span> <span class="n">system</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">call_image_script</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">create_init_link_from_linuxrc</span><span class="p">()</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">call_image_script</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">create_init_link_from_linuxrc</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="BootImageKiwi.create_initrd"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.builtin_kiwi.BootImageKiwi.create_initrd">[docs]</a>    <span class="k">def</span> <span class="nf">create_initrd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbrid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">install_initrd</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="BootImageKiwi.create_initrd"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.builtin_kiwi.BootImageKiwi.create_initrd">[docs]</a>    <span class="k">def</span> <span class="nf">create_initrd</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">mbrid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SystemIdentifier</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">basename</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">install_initrd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create initrd from prepared boot system tree and compress the result</span>
 
-<span class="sd">        :param object mbrid: instance of ImageIdentifier</span>
-<span class="sd">        :param string basename: base initrd file name</span>
+<span class="sd">        :param SystemIdentifier mbrid: instance of ImageIdentifier</span>
+<span class="sd">        :param str basename: base initrd file name</span>
 <span class="sd">        :param bool install_initrd: installation media initrd</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -920,7 +935,7 @@
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">initrd_filename</span> <span class="o">=</span> <span class="n">compress</span><span class="o">.</span><span class="n">compressed_filename</span></div>
 
-<div class="viewcode-block" id="BootImageKiwi.cleanup"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.builtin_kiwi.BootImageKiwi.cleanup">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BootImageKiwi.cleanup"><a class="viewcode-back" href="../../../../api/kiwi.boot.image.html#kiwi.boot.image.builtin_kiwi.BootImageKiwi.cleanup">[docs]</a>    <span class="k">def</span> <span class="nf">cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">directory</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_directories</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">directory</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
                 <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span></div></div>

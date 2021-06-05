@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Image Description Elements &mdash; KIWI NG 9.23.34 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.23.35 documentation</title>
   
 
   
@@ -737,7 +737,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.23.34</p>
+and attributes of the KIWI NG XML document in version 9.23.35</p>
 </div>
 <section id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -907,7 +907,7 @@ corresponds to a map file in <code class="docutils literal notranslate"><span cl
 relative to <code class="docutils literal notranslate"><span class="pre">/usr/share/zoneinfo</span></code>. For example, specify
 Europe/Berlin for <code class="docutils literal notranslate"><span class="pre">/usr/share/zoneinfo/Europe/Berlin</span></code>.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;preferences&gt;</span>
-  <span class="nt">&lt;keytable&gt;</span>Europe/Berlin<span class="nt">&lt;/keytable&gt;</span>
+  <span class="nt">&lt;timezone&gt;</span>Europe/Berlin<span class="nt">&lt;/timezone&gt;</span>
 <span class="nt">&lt;/preferences&gt;</span>
 </pre></div>
 </div>
@@ -1223,7 +1223,11 @@ a COW file to keep data persistent over a reboot</p>
 writing if a hybrid image is used as disk on e.g a USB Stick.
 By default the ext4 filesystem is used.</p>
 </dd>
-<dt>initrd_system=”kiwi|dracut”:</dt><dd><p>Specify which initrd builder to use, default is set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">dracut</span></code></p>
+<dt>initrd_system=”kiwi|dracut|none”:</dt><dd><p>Specify which initrd builder to use, default is set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">dracut</span></code>.
+If set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">none</span></code> the image is build without an initrd. Depending
+on the image type this can lead to a non bootable system as its
+now a kernel responsibility if the given root device can be
+mounted or not.</p>
 </dd>
 <dt>metadata_path=”dir_path”:</dt><dd><p>Specifies a path to additional metadata required for the selected
 image type or its tools used to create that image type.</p>

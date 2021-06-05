@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.xml_state &mdash; KIWI NG 9.23.34 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.23.35 documentation</title>
   
 
   
@@ -902,24 +902,28 @@
 
 <span class="sd">        Depending on the image type a specific initrd system is</span>
 <span class="sd">        either pre selected or free of choice according to the</span>
-<span class="sd">        XML type setup</span>
+<span class="sd">        XML type setup.</span>
 
-<span class="sd">        :return: dracut, kiwi or None</span>
+<span class="sd">        :return: &#39;dracut&#39;, &#39;kiwi&#39; or &#39;none&#39;</span>
 
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_build_type_name</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;vmx&#39;</span><span class="p">,</span> <span class="s1">&#39;iso&#39;</span><span class="p">,</span> <span class="s1">&#39;kis&#39;</span><span class="p">]:</span>
-            <span class="c1"># vmx, iso and kis image types always use dracut as initrd system</span>
-            <span class="n">initrd_system</span> <span class="o">=</span> <span class="s1">&#39;dracut&#39;</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_build_type_name</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;pxe&#39;</span><span class="p">:</span>
-            <span class="c1"># pxe image type defaults to kiwi if unset</span>
-            <span class="n">initrd_system</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_initrd_system</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;kiwi&#39;</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_build_type_name</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;oem&#39;</span><span class="p">:</span>
-            <span class="c1"># oem image type defaults to dracut if unset</span>
-            <span class="n">initrd_system</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_initrd_system</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;dracut&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">initrd_system</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_initrd_system</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">initrd_system</span></div>
+        <span class="n">pre_selection_map</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;vmx&#39;</span><span class="p">:</span> <span class="s1">&#39;dracut&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;oem&#39;</span><span class="p">:</span> <span class="s1">&#39;dracut&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;iso&#39;</span><span class="p">:</span> <span class="s1">&#39;dracut&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;kis&#39;</span><span class="p">:</span> <span class="s1">&#39;dracut&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;pxe&#39;</span><span class="p">:</span> <span class="s1">&#39;kiwi&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">build_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_build_type_name</span><span class="p">()</span>
+        <span class="n">default_initrd_system</span> <span class="o">=</span> <span class="n">pre_selection_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">build_type</span><span class="p">)</span> <span class="ow">or</span> <span class="s1">&#39;none&#39;</span>
+
+        <span class="k">if</span> <span class="n">build_type</span> <span class="o">==</span> <span class="s1">&#39;iso&#39;</span><span class="p">:</span>
+            <span class="c1"># iso type always use dracut as initrd system</span>
+            <span class="k">return</span> <span class="n">default_initrd_system</span>
+
+        <span class="c1"># Allow to choose for any other build type</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_initrd_system</span><span class="p">()</span> <span class="ow">or</span> <span class="n">default_initrd_system</span></div>
 
 <div class="viewcode-block" id="XMLState.get_locale"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_locale">[docs]</a>    <span class="k">def</span> <span class="nf">get_locale</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>

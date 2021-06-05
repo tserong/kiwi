@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.34 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.35 documentation</title>
   
 
   
@@ -884,6 +884,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">Result</span><span class="p">(</span><span class="n">xml_state</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span> <span class="o">=</span> <span class="n">RuntimeConfig</span><span class="p">()</span>
 
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">has_initrd_support</span><span class="p">():</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Building without initrd support !&#39;</span><span class="p">)</span>
+
 <div class="viewcode-block" id="DiskBuilder.create"><a class="viewcode-back" href="../../../api/kiwi.builder.html#kiwi.builder.disk.DiskBuilder.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build a bootable disk image and optional installation image</span>
@@ -949,9 +952,10 @@
         <span class="c1"># setup recovery archive, cleanup and create archive if requested</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">system_setup</span><span class="o">.</span><span class="n">create_recovery_archive</span><span class="p">()</span>
 
-        <span class="c1"># prepare boot(initrd) root system</span>
-        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Preparing boot system&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
+        <span class="c1"># prepare initrd</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">has_initrd_support</span><span class="p">():</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Preparing boot system&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
 
         <span class="c1"># precalculate needed disk size</span>
         <span class="n">disksize_mbytes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">disk_setup</span><span class="o">.</span><span class="n">get_disksize_mbytes</span><span class="p">()</span>
@@ -1131,8 +1135,9 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">disk_resize_requested</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">include_module</span><span class="p">(</span><span class="s1">&#39;kiwi-repart&#39;</span><span class="p">)</span>
 
-        <span class="c1"># create initrd cpio archive</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">create_initrd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mbrid</span><span class="p">)</span>
+        <span class="c1"># create initrd</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">has_initrd_support</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">create_initrd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mbrid</span><span class="p">)</span>
 
         <span class="c1"># create second stage metadata to system image</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_copy_first_boot_files_to_system_image</span><span class="p">()</span>
@@ -1270,9 +1275,8 @@
 <span class="sd">        :rtype: instance of :class:`Result`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">install_media</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initrd_system</span> <span class="o">==</span> <span class="s1">&#39;dracut&#39;</span><span class="p">:</span>
-                <span class="n">boot_image</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="k">else</span><span class="p">:</span>
+            <span class="n">boot_image</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initrd_system</span> <span class="o">==</span> <span class="s1">&#39;kiwi&#39;</span><span class="p">:</span>
                 <span class="n">boot_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span>
             <span class="n">install_image</span> <span class="o">=</span> <span class="n">InstallImageBuilder</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span><span class="p">,</span>
@@ -1887,13 +1891,14 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">boot_root_directory</span>
                     <span class="p">)</span>
 
-        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; initrd archive as </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">boot_names</span><span class="o">.</span><span class="n">initrd_name</span><span class="p">)</span>
-        <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-            <span class="p">[</span>
-                <span class="s1">&#39;mv&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">initrd_filename</span><span class="p">,</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;/boot/&#39;</span><span class="p">,</span> <span class="n">boot_names</span><span class="o">.</span><span class="n">initrd_name</span><span class="p">])</span>
-            <span class="p">]</span>
-        <span class="p">)</span></div>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">initrd_filename</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; initrd archive as </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">boot_names</span><span class="o">.</span><span class="n">initrd_name</span><span class="p">)</span>
+            <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="s1">&#39;mv&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">initrd_filename</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;/boot/&#39;</span><span class="p">,</span> <span class="n">boot_names</span><span class="o">.</span><span class="n">initrd_name</span><span class="p">])</span>
+                <span class="p">]</span>
+            <span class="p">)</span></div>
 </pre></div>
 
            </div>
