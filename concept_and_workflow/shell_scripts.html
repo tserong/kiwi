@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>User Defined Scripts &mdash; KIWI NG 9.23.36 documentation</title>
+  <title>User Defined Scripts &mdash; KIWI NG 9.23.37 documentation</title>
   
 
   
@@ -820,46 +820,20 @@ specific to SUSE Linux Enterprise and openSUSE begin with the name
 name <code class="docutils literal notranslate"><span class="pre">base</span></code>.</p>
 <p>The following list describes all functions provided by <code class="file docutils literal notranslate"><span class="pre">.kconfig</span></code>:</p>
 <dl>
-<dt>baseCleanMount</dt><dd><p>Unmount the filesystems <code class="file docutils literal notranslate"><span class="pre">/proc</span></code>, <code class="file docutils literal notranslate"><span class="pre">/dev/pts</span></code>, <code class="file docutils literal notranslate"><span class="pre">/sys</span></code> and
-<code class="file docutils literal notranslate"><span class="pre">/proc/sys/fs/binfmt_misc</span></code>.</p>
-</dd>
-<dt>baseGetPackagesForDeletion</dt><dd><p>Return the name(s) of the packages marked for deletion in the image
-description.</p>
-</dd>
-<dt>baseGetProfilesUsed</dt><dd><p>Return the name(s) of profiles used to build this image.</p>
-</dd>
 <dt>baseSetRunlevel {value}</dt><dd><p>Set the default run level.</p>
-</dd>
-<dt>baseSetupUserPermissions</dt><dd><p>Set the ownership of all home directories and their content to the correct
-users and groups listed in <code class="file docutils literal notranslate"><span class="pre">/etc/passwd</span></code>.</p>
 </dd>
 <dt>baseStripAndKeep {list of info-files to keep}</dt><dd><p>Helper function for the <code class="docutils literal notranslate"><span class="pre">baseStrip*</span></code> functions, reads the list of files
 to check from stdin for removing
 params: files which should be kept</p>
 </dd>
-<dt>baseStripDocs {list of docu names to keep}</dt><dd><p>Remove all documentation files, except for the ones given as the
-parameter.</p>
-</dd>
-<dt>baseStripInfos {list of info-files to keep}</dt><dd><p>Remove all info files, except for the one given as the parameter.</p>
-</dd>
 <dt>baseStripLocales {list of locales}</dt><dd><p>Remove all locales, except for the ones given as the parameter.</p>
 </dd>
 <dt>baseStripTranslations {list of translations}</dt><dd><p>Remove all translations, except for the ones given as the parameter.</p>
-</dd>
-<dt>baseStripMans {list of manpages to keep}</dt><dd><p>Remove all manual pages, except for the ones given as the parameter.</p>
-<p>Example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>baseStripMans more less
-</pre></div>
-</div>
-</dd>
-<dt>suseImportBuildKey</dt><dd><p>Add the SUSE build keys to the RPM database.</p>
 </dd>
 <dt>baseStripUnusedLibs</dt><dd><p>Remove libraries which are not directly linked against applications
 in the bin directories.</p>
 </dd>
 <dt>baseUpdateSysConfig {filename} {variable} {value}</dt><dd><p>Update the contents of a sysconfig variable</p>
-</dd>
-<dt>suseConfig</dt><dd><p>This function is deprecated and is a NOP.</p>
 </dd>
 <dt>baseSystemdServiceInstalled {service}</dt><dd><p>Prints the path of the first found systemd unit or mount with name passed
 as the first parameter.</p>
@@ -891,16 +865,10 @@ compatibility reasons.</p>
 <dt>suseService {servicename} {on|off}</dt><dd><p>Calls baseService and exists only for compatibility
 reasons.</p>
 </dd>
-<dt>suseActivateDefaultServices</dt><dd><p>Activates the <code class="xref py py-obj docutils literal notranslate"><span class="pre">network</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">cron</span></code> services to run at boot.</p>
-</dd>
 <dt>suseSetupProduct</dt><dd><p>Creates the <code class="file docutils literal notranslate"><span class="pre">/etc/products.d/baseproduct</span></code> link
 pointing to the product referenced by either <code class="file docutils literal notranslate"><span class="pre">/etc/SuSE-brand</span></code> or
 <code class="file docutils literal notranslate"><span class="pre">/etc/os-release</span></code> or the latest <code class="xref py py-obj docutils literal notranslate"><span class="pre">prod</span></code> file available in
 <code class="file docutils literal notranslate"><span class="pre">/etc/products.d</span></code></p>
-</dd>
-<dt>suseSetupProductInformation</dt><dd><p>Uses <strong class="command">zypper</strong> to search for the installed product
-and installs all product specific packages. This function fails
-when <strong class="command">zypper</strong> is not the appliances package manager.</p>
 </dd>
 <dt>baseVagrantSetup</dt><dd><p>Configures the image to work as a vagrant box by performing the following
 changes:</p>
@@ -918,9 +886,6 @@ set to 1 (it is off by default).</p>
 <dt>Echo {echo commandline}</dt><dd><p>Helper function to print a message to the controlling terminal.</p>
 </dd>
 <dt>Rm {list of files}</dt><dd><p>Helper function to delete files and log the deletion.</p>
-</dd>
-<dt>Rpm {rpm commandline}</dt><dd><p>Helper function for calling <code class="docutils literal notranslate"><span class="pre">rpm</span></code>: forwards all commandline arguments to
-<code class="docutils literal notranslate"><span class="pre">rpm</span></code> and logs the call.</p>
 </dd>
 </dl>
 </section>
