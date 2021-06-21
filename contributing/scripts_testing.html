@@ -4,10 +4,11 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Overview: module code &mdash; KIWI NG 9.23.39 documentation</title>
+  <title>Write Integration Tests for the Scripts &mdash; KIWI NG 9.23.39 documentation</title>
   
 
   
@@ -41,7 +42,9 @@
 
     
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Extending KIWI NG with Custom Operations" href="schema_extensions.html" />
+    <link rel="prev" title="Plugin Architecture" href="kiwi_plugin_architecture.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,7 +89,7 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../overview.html">Overview</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../overview/workflow.html">Basic Workflow</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../overview/workflow.html#components-of-an-image-description">Components of an Image Description</a></li>
@@ -377,22 +380,22 @@
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/use_suse_media.html">Using SUSE Product ISO To Build</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/kiwi_from_python.html">Using KIWI NG in a Python Project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/kiwi_plugin_architecture.html">Plugin Architecture</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../contributing/kiwi_plugin_architecture.html#naming-conventions">Naming Conventions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contributing/kiwi_plugin_architecture.html#example-plugin">Example Plugin</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../contributing.html">Contributing</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="kiwi_from_python.html">Using KIWI NG in a Python Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kiwi_plugin_architecture.html">Plugin Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kiwi_plugin_architecture.html#naming-conventions">Naming Conventions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="kiwi_plugin_architecture.html#example-plugin">Example Plugin</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/scripts_testing.html">Write Integration Tests for the Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../contributing/scripts_testing.html#running-tests-for-multiple-container-images">Running Tests for multiple container images</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Write Integration Tests for the Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-tests-for-multiple-container-images">Running Tests for multiple container images</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../contributing/schema_extensions.html">Extending KIWI NG with Custom Operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../contributing/schema_extensions.html#the-extension-section">The &lt;extension&gt; Section</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contributing/schema_extensions.html#relax-ng-schema-for-the-extension">RELAX NG Schema for the Extension</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contributing/schema_extensions.html#extension-schema-in-xml-catalog">Extension Schema in XML catalog</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../contributing/schema_extensions.html#using-the-extension">Using the Extension</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schema_extensions.html">Extending KIWI NG with Custom Operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="schema_extensions.html#the-extension-section">The &lt;extension&gt; Section</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schema_extensions.html#relax-ng-schema-for-the-extension">RELAX NG Schema for the Extension</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schema_extensions.html#extension-schema-in-xml-catalog">Extension Schema in XML catalog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schema_extensions.html#using-the-extension">Using the Extension</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing.html#the-basics">The Basics</a></li>
@@ -712,10 +715,16 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Overview: module code</li>
+          <li><a href="../contributing.html">Contributing</a> &raquo;</li>
+        
+      <li>Write Integration Tests for the Scripts</li>
     
     
       <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/contributing/scripts_testing.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -727,148 +736,84 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>All modules for which code is available</h1>
-<ul><li><a href="kiwi/app.html">kiwi.app</a></li>
-<li><a href="kiwi/archive/cpio.html">kiwi.archive.cpio</a></li>
-<li><a href="kiwi/archive/tar.html">kiwi.archive.tar</a></li>
-<li><a href="kiwi/boot/image.html">kiwi.boot.image</a></li>
-<ul><li><a href="kiwi/boot/image/base.html">kiwi.boot.image.base</a></li>
-<li><a href="kiwi/boot/image/builtin_kiwi.html">kiwi.boot.image.builtin_kiwi</a></li>
-<li><a href="kiwi/boot/image/dracut.html">kiwi.boot.image.dracut</a></li>
-</ul><li><a href="kiwi/bootloader/config.html">kiwi.bootloader.config</a></li>
-<ul><li><a href="kiwi/bootloader/config/base.html">kiwi.bootloader.config.base</a></li>
-<li><a href="kiwi/bootloader/config/grub2.html">kiwi.bootloader.config.grub2</a></li>
-<li><a href="kiwi/bootloader/config/isolinux.html">kiwi.bootloader.config.isolinux</a></li>
-</ul><li><a href="kiwi/bootloader/install.html">kiwi.bootloader.install</a></li>
-<ul><li><a href="kiwi/bootloader/install/base.html">kiwi.bootloader.install.base</a></li>
-<li><a href="kiwi/bootloader/install/grub2.html">kiwi.bootloader.install.grub2</a></li>
-</ul><li><a href="kiwi/bootloader/template/grub2.html">kiwi.bootloader.template.grub2</a></li>
-<li><a href="kiwi/bootloader/template/isolinux.html">kiwi.bootloader.template.isolinux</a></li>
-<li><a href="kiwi/builder.html">kiwi.builder</a></li>
-<ul><li><a href="kiwi/builder/archive.html">kiwi.builder.archive</a></li>
-<li><a href="kiwi/builder/container.html">kiwi.builder.container</a></li>
-<li><a href="kiwi/builder/disk.html">kiwi.builder.disk</a></li>
-<li><a href="kiwi/builder/filesystem.html">kiwi.builder.filesystem</a></li>
-<li><a href="kiwi/builder/install.html">kiwi.builder.install</a></li>
-<li><a href="kiwi/builder/kis.html">kiwi.builder.kis</a></li>
-<li><a href="kiwi/builder/live.html">kiwi.builder.live</a></li>
-</ul><li><a href="kiwi/cli.html">kiwi.cli</a></li>
-<li><a href="kiwi/command.html">kiwi.command</a></li>
-<li><a href="kiwi/command_process.html">kiwi.command_process</a></li>
-<li><a href="kiwi/container.html">kiwi.container</a></li>
-<ul><li><a href="kiwi/container/oci.html">kiwi.container.oci</a></li>
-<li><a href="kiwi/container/setup.html">kiwi.container.setup</a></li>
-<ul><li><a href="kiwi/container/setup/base.html">kiwi.container.setup.base</a></li>
-<li><a href="kiwi/container/setup/docker.html">kiwi.container.setup.docker</a></li>
-</ul></ul><li><a href="kiwi/defaults.html">kiwi.defaults</a></li>
-<li><a href="kiwi/exceptions.html">kiwi.exceptions</a></li>
-<li><a href="kiwi/filesystem.html">kiwi.filesystem</a></li>
-<ul><li><a href="kiwi/filesystem/base.html">kiwi.filesystem.base</a></li>
-<li><a href="kiwi/filesystem/btrfs.html">kiwi.filesystem.btrfs</a></li>
-<li><a href="kiwi/filesystem/clicfs.html">kiwi.filesystem.clicfs</a></li>
-<li><a href="kiwi/filesystem/ext2.html">kiwi.filesystem.ext2</a></li>
-<li><a href="kiwi/filesystem/ext3.html">kiwi.filesystem.ext3</a></li>
-<li><a href="kiwi/filesystem/ext4.html">kiwi.filesystem.ext4</a></li>
-<li><a href="kiwi/filesystem/fat16.html">kiwi.filesystem.fat16</a></li>
-<li><a href="kiwi/filesystem/fat32.html">kiwi.filesystem.fat32</a></li>
-<li><a href="kiwi/filesystem/isofs.html">kiwi.filesystem.isofs</a></li>
-<li><a href="kiwi/filesystem/setup.html">kiwi.filesystem.setup</a></li>
-<li><a href="kiwi/filesystem/squashfs.html">kiwi.filesystem.squashfs</a></li>
-<li><a href="kiwi/filesystem/xfs.html">kiwi.filesystem.xfs</a></li>
-</ul><li><a href="kiwi/firmware.html">kiwi.firmware</a></li>
-<li><a href="kiwi/help.html">kiwi.help</a></li>
-<li><a href="kiwi/iso_tools.html">kiwi.iso_tools</a></li>
-<ul><li><a href="kiwi/iso_tools/base.html">kiwi.iso_tools.base</a></li>
-<li><a href="kiwi/iso_tools/cdrtools.html">kiwi.iso_tools.cdrtools</a></li>
-<li><a href="kiwi/iso_tools/iso.html">kiwi.iso_tools.iso</a></li>
-</ul><li><a href="kiwi/kiwi.html">kiwi.kiwi</a></li>
-<li><a href="kiwi/logger.html">kiwi.logger</a></li>
-<li><a href="kiwi/logger_color_formatter.html">kiwi.logger_color_formatter</a></li>
-<li><a href="kiwi/logger_filter.html">kiwi.logger_filter</a></li>
-<li><a href="kiwi/mount_manager.html">kiwi.mount_manager</a></li>
-<li><a href="kiwi/package_manager.html">kiwi.package_manager</a></li>
-<ul><li><a href="kiwi/package_manager/base.html">kiwi.package_manager.base</a></li>
-<li><a href="kiwi/package_manager/dnf.html">kiwi.package_manager.dnf</a></li>
-<li><a href="kiwi/package_manager/zypper.html">kiwi.package_manager.zypper</a></li>
-</ul><li><a href="kiwi/partitioner.html">kiwi.partitioner</a></li>
-<ul><li><a href="kiwi/partitioner/base.html">kiwi.partitioner.base</a></li>
-<li><a href="kiwi/partitioner/dasd.html">kiwi.partitioner.dasd</a></li>
-<li><a href="kiwi/partitioner/gpt.html">kiwi.partitioner.gpt</a></li>
-<li><a href="kiwi/partitioner/msdos.html">kiwi.partitioner.msdos</a></li>
-</ul><li><a href="kiwi/path.html">kiwi.path</a></li>
-<li><a href="kiwi/privileges.html">kiwi.privileges</a></li>
-<li><a href="kiwi/repository.html">kiwi.repository</a></li>
-<ul><li><a href="kiwi/repository/base.html">kiwi.repository.base</a></li>
-<li><a href="kiwi/repository/dnf.html">kiwi.repository.dnf</a></li>
-<li><a href="kiwi/repository/template/apt.html">kiwi.repository.template.apt</a></li>
-<li><a href="kiwi/repository/zypper.html">kiwi.repository.zypper</a></li>
-</ul><li><a href="kiwi/runtime_checker.html">kiwi.runtime_checker</a></li>
-<li><a href="kiwi/runtime_config.html">kiwi.runtime_config</a></li>
-<li><a href="kiwi/solver/repository.html">kiwi.solver.repository</a></li>
-<ul><li><a href="kiwi/solver/repository/base.html">kiwi.solver.repository.base</a></li>
-<li><a href="kiwi/solver/repository/rpm_dir.html">kiwi.solver.repository.rpm_dir</a></li>
-<li><a href="kiwi/solver/repository/rpm_md.html">kiwi.solver.repository.rpm_md</a></li>
-<li><a href="kiwi/solver/repository/suse.html">kiwi.solver.repository.suse</a></li>
-</ul><li><a href="kiwi/solver/sat.html">kiwi.solver.sat</a></li>
-<li><a href="kiwi/storage/device_provider.html">kiwi.storage.device_provider</a></li>
-<li><a href="kiwi/storage/disk.html">kiwi.storage.disk</a></li>
-<li><a href="kiwi/storage/loop_device.html">kiwi.storage.loop_device</a></li>
-<li><a href="kiwi/storage/luks_device.html">kiwi.storage.luks_device</a></li>
-<li><a href="kiwi/storage/mapped_device.html">kiwi.storage.mapped_device</a></li>
-<li><a href="kiwi/storage/raid_device.html">kiwi.storage.raid_device</a></li>
-<li><a href="kiwi/storage/setup.html">kiwi.storage.setup</a></li>
-<li><a href="kiwi/storage/subformat.html">kiwi.storage.subformat</a></li>
-<ul><li><a href="kiwi/storage/subformat/base.html">kiwi.storage.subformat.base</a></li>
-<li><a href="kiwi/storage/subformat/gce.html">kiwi.storage.subformat.gce</a></li>
-<li><a href="kiwi/storage/subformat/ova.html">kiwi.storage.subformat.ova</a></li>
-<li><a href="kiwi/storage/subformat/qcow2.html">kiwi.storage.subformat.qcow2</a></li>
-<li><a href="kiwi/storage/subformat/template/vagrant_config.html">kiwi.storage.subformat.template.vagrant_config</a></li>
-<li><a href="kiwi/storage/subformat/template/virtualbox_ovf.html">kiwi.storage.subformat.template.virtualbox_ovf</a></li>
-<li><a href="kiwi/storage/subformat/template/vmware_settings.html">kiwi.storage.subformat.template.vmware_settings</a></li>
-<li><a href="kiwi/storage/subformat/vagrant_base.html">kiwi.storage.subformat.vagrant_base</a></li>
-<li><a href="kiwi/storage/subformat/vagrant_libvirt.html">kiwi.storage.subformat.vagrant_libvirt</a></li>
-<li><a href="kiwi/storage/subformat/vagrant_virtualbox.html">kiwi.storage.subformat.vagrant_virtualbox</a></li>
-<li><a href="kiwi/storage/subformat/vdi.html">kiwi.storage.subformat.vdi</a></li>
-<li><a href="kiwi/storage/subformat/vhd.html">kiwi.storage.subformat.vhd</a></li>
-<li><a href="kiwi/storage/subformat/vhdfixed.html">kiwi.storage.subformat.vhdfixed</a></li>
-<li><a href="kiwi/storage/subformat/vhdx.html">kiwi.storage.subformat.vhdx</a></li>
-<li><a href="kiwi/storage/subformat/vmdk.html">kiwi.storage.subformat.vmdk</a></li>
-</ul><li><a href="kiwi/system/identifier.html">kiwi.system.identifier</a></li>
-<li><a href="kiwi/system/kernel.html">kiwi.system.kernel</a></li>
-<li><a href="kiwi/system/prepare.html">kiwi.system.prepare</a></li>
-<li><a href="kiwi/system/profile.html">kiwi.system.profile</a></li>
-<li><a href="kiwi/system/result.html">kiwi.system.result</a></li>
-<li><a href="kiwi/system/root_bind.html">kiwi.system.root_bind</a></li>
-<li><a href="kiwi/system/root_init.html">kiwi.system.root_init</a></li>
-<li><a href="kiwi/system/setup.html">kiwi.system.setup</a></li>
-<li><a href="kiwi/system/shell.html">kiwi.system.shell</a></li>
-<li><a href="kiwi/system/size.html">kiwi.system.size</a></li>
-<li><a href="kiwi/system/uri.html">kiwi.system.uri</a></li>
-<li><a href="kiwi/system/users.html">kiwi.system.users</a></li>
-<li><a href="kiwi/tasks/base.html">kiwi.tasks.base</a></li>
-<li><a href="kiwi/tasks/result_bundle.html">kiwi.tasks.result_bundle</a></li>
-<li><a href="kiwi/tasks/result_list.html">kiwi.tasks.result_list</a></li>
-<li><a href="kiwi/tasks/system_build.html">kiwi.tasks.system_build</a></li>
-<li><a href="kiwi/tasks/system_create.html">kiwi.tasks.system_create</a></li>
-<li><a href="kiwi/tasks/system_prepare.html">kiwi.tasks.system_prepare</a></li>
-<li><a href="kiwi/tasks/system_update.html">kiwi.tasks.system_update</a></li>
-<li><a href="kiwi/utils/block.html">kiwi.utils.block</a></li>
-<li><a href="kiwi/utils/checksum.html">kiwi.utils.checksum</a></li>
-<li><a href="kiwi/utils/compress.html">kiwi.utils.compress</a></li>
-<li><a href="kiwi/utils/sync.html">kiwi.utils.sync</a></li>
-<li><a href="kiwi/utils/sysconfig.html">kiwi.utils.sysconfig</a></li>
-<li><a href="kiwi/volume_manager.html">kiwi.volume_manager</a></li>
-<ul><li><a href="kiwi/volume_manager/base.html">kiwi.volume_manager.base</a></li>
-<li><a href="kiwi/volume_manager/btrfs.html">kiwi.volume_manager.btrfs</a></li>
-<li><a href="kiwi/volume_manager/lvm.html">kiwi.volume_manager.lvm</a></li>
-</ul><li><a href="kiwi/xml_description.html">kiwi.xml_description</a></li>
-<li><a href="kiwi/xml_state.html">kiwi.xml_state</a></li>
-</ul>
+  <section id="write-integration-tests-for-the-scripts">
+<h1>Write Integration Tests for the Scripts<a class="headerlink" href="#write-integration-tests-for-the-scripts" title="Permalink to this headline">¶</a></h1>
+<p>Kiwi ships a set of helper functions that can be used in <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code> (see
+also: <a class="reference internal" href="../concept_and_workflow/shell_scripts.html#working-with-kiwi-user-defined-scripts"><span class="std std-ref">User Defined Scripts</span></a>). These utilize containers
+to run the individual functions and verify that they resulted in the desired
+state.</p>
+<p>Ensure that you have either <strong class="command">podman</strong> or <strong class="command">docker</strong> installed and
+configured on your system. The integration tests will use <strong class="command">podman</strong> in
+<strong>rootless mode</strong> by default, if it is installed on your system. You can select
+<strong class="command">docker</strong> instead by setting the environment variable
+<code class="docutils literal notranslate"><span class="pre">CONTAINER_RUNTIME</span></code> to <code class="docutils literal notranslate"><span class="pre">docker</span></code>. Then you can run the integration tests via
+tox:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>tox -e scripts -- -n NUMBER_OF_THREADS
+</pre></div>
+</div>
+<p>It is recommended to leverage <a class="reference external" href="https://testinfra.readthedocs.io/">testinfra</a>
+and the <code class="docutils literal notranslate"><span class="pre">shared_container</span></code> and <code class="docutils literal notranslate"><span class="pre">container_per_test</span></code> fixtures for writing
+these integration tests. The fixtures give your test functions a connection to a
+running container (by default that will be <code class="docutils literal notranslate"><span class="pre">opensuse/tumbleweed</span></code>)
+<code class="file docutils literal notranslate"><span class="pre">functions.sh</span></code> copied to <code class="file docutils literal notranslate"><span class="pre">/bin/functions.sh</span></code> inside the
+container. You can then use the connection to perform some setup, tear down and
+the actual tests as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_RmWorks</span><span class="p">(</span><span class="n">shared_container</span><span class="p">):</span>
+    <span class="c1"># create the file /root/foobar</span>
+    <span class="n">shared_container</span><span class="o">.</span><span class="n">run_expect</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;touch /root/foobar&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">shared_container</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s2">&quot;/root/foobar&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span>
+
+    <span class="c1"># source the functions and execute our function under test</span>
+    <span class="n">shared_container</span><span class="o">.</span><span class="n">run_expect</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;. /bin/functions.sh &amp;&amp; Rm /root/foobar&quot;</span><span class="p">)</span>
+
+    <span class="c1"># verify the result</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">shared_container</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s2">&quot;/root/foobar&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span>
+</pre></div>
+</div>
+<p>In this example we used the <code class="docutils literal notranslate"><span class="pre">shared_container</span></code> fixture: it creates a podman
+container at the start of the test session and gives each function using this
+fixture the same connection. Therefore you must only use it for tests where you
+do not perform any mutation of the container that you are not undoing
+afterwards! If you need to perform extensive mutation that you cannot or do not
+want to undo yourself, then resort to the <code class="docutils literal notranslate"><span class="pre">container_per_test</span></code> fixture. It
+will give you a fresh container for each test function. While this makes writing
+tests simpler, it also increases the runtime significantly, thus only use it
+when necessary.</p>
+<section id="running-tests-for-multiple-container-images">
+<h2>Running Tests for multiple container images<a class="headerlink" href="#running-tests-for-multiple-container-images" title="Permalink to this headline">¶</a></h2>
+<p>It is important to test certain functions on multiple operating systems &amp;
+versions, to e.g. ensure that older tools behave the same way that you expect
+them to.</p>
+<p>This can be achieved by leveraging pytest’s <a class="reference external" href="https://docs.pytest.org/en/stable/parametrize.html">fixture parametrization</a> as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span>
+    <span class="s2">&quot;shared_container&quot;</span><span class="p">,</span>
+    <span class="p">(</span>
+        <span class="s2">&quot;Tumbleweed&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Leap-15.3&quot;</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">indirect</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_something</span><span class="p">(</span><span class="n">shared_container</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Where we pass multiple image names to the container images to the
+<code class="docutils literal notranslate"><span class="pre">shared_container</span></code> fixture. Pytest will then look for the image with the given
+name in the predefined list of containers in <code class="file docutils literal notranslate"><span class="pre">conftest.py</span></code>.</p>
+<p>To add a new container, simply add a new <code class="docutils literal notranslate"><span class="pre">Container</span></code> class to the
+<code class="docutils literal notranslate"><span class="pre">CONTAINERS</span></code> list and give it appropriate values for <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">url</span></code>.</p>
+</section>
+</section>
+
 
            </div>
            
           </div>
           <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="schema_extensions.html" class="btn btn-neutral float-right" title="Extending KIWI NG with Custom Operations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="kiwi_plugin_architecture.html" class="btn btn-neutral float-left" title="Plugin Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

@@ -8,7 +8,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Contributing &mdash; KIWI NG 9.23.38 documentation</title>
+  <title>Contributing &mdash; KIWI NG 9.23.39 documentation</title>
   
 
   
@@ -387,6 +387,10 @@
 <li class="toctree-l3"><a class="reference internal" href="contributing/kiwi_plugin_architecture.html#example-plugin">Example Plugin</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="contributing/scripts_testing.html">Write Integration Tests for the Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contributing/scripts_testing.html#running-tests-for-multiple-container-images">Running Tests for multiple container images</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="contributing/schema_extensions.html">Extending KIWI NG with Custom Operations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="contributing/schema_extensions.html#the-extension-section">The &lt;extension&gt; Section</a></li>
 <li class="toctree-l3"><a class="reference internal" href="contributing/schema_extensions.html#relax-ng-schema-for-the-extension">RELAX NG Schema for the Extension</a></li>
@@ -737,12 +741,13 @@
 <p><strong>Abstract</strong></p>
 <p>This document describes the development process of KIWI NG
 and how you can be part of it. This description applies
-to version 9.23.38.</p>
+to version 9.23.39.</p>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="contributing/kiwi_from_python.html">Using KIWI NG in a Python Project</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing/kiwi_plugin_architecture.html">Plugin Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing/scripts_testing.html">Write Integration Tests for the Scripts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing/schema_extensions.html">Extending KIWI NG with Custom Operations</a></li>
 </ul>
 </div>
@@ -837,6 +842,11 @@ to run an actual build using your local changes:</p>
 </div>
 <p>To resume your work, <strong class="command">cd</strong> into your local Git repository and call:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">source</span> .tox/3/bin/activate
+</pre></div>
+</div>
+<p>Alternatively, you can launch single commands inside the virtualenv without
+sourcing it directly:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>tox -e devel -- kiwi-ng --version
 </pre></div>
 </div>
 </section>

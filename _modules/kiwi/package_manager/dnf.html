@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.package_manager.dnf &mdash; KIWI NG 9.23.38 documentation</title>
+  <title>kiwi.package_manager.dnf &mdash; KIWI NG 9.23.39 documentation</title>
   
 
   
@@ -382,6 +382,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../contributing/kiwi_plugin_architecture.html">Plugin Architecture</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../contributing/kiwi_plugin_architecture.html#naming-conventions">Naming Conventions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../contributing/kiwi_plugin_architecture.html#example-plugin">Example Plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing/scripts_testing.html">Write Integration Tests for the Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../contributing/scripts_testing.html#running-tests-for-multiple-container-images">Running Tests for multiple container images</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../contributing/schema_extensions.html">Extending KIWI NG with Custom Operations</a><ul>
@@ -794,9 +798,9 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Queue a collection request</span>
 
-<span class="sd">        :param str name: dnf group name</span>
+<span class="sd">        :param str name: dnf group ID name</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">collection_requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">collection_requests</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;@</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PackageManagerDnf.request_product"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.dnf.PackageManagerDnf.request_product">[docs]</a>    <span class="k">def</span> <span class="nf">request_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -831,22 +835,16 @@
         <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
             <span class="p">[</span><span class="s1">&#39;dnf&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dnf_args</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;makecache&#39;</span><span class="p">]</span>
         <span class="p">)</span>
-        <span class="n">bash_command</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">dnf_command</span> <span class="o">=</span> <span class="p">[</span>
             <span class="s1">&#39;dnf&#39;</span>
         <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dnf_args</span> <span class="o">+</span> <span class="p">[</span>
             <span class="s1">&#39;--installroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span>
-        <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;install&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_requests</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_requests</span><span class="p">:</span>
-            <span class="n">bash_command</span> <span class="o">+=</span> <span class="p">[</span>
-                <span class="s1">&#39;&amp;&amp;&#39;</span><span class="p">,</span> <span class="s1">&#39;dnf&#39;</span>
-            <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dnf_args</span> <span class="o">+</span> <span class="p">[</span>
-                <span class="s1">&#39;--installroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span>
-            <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="o">+</span> <span class="p">[</span>
-                <span class="s1">&#39;group&#39;</span><span class="p">,</span> <span class="s1">&#39;install&#39;</span>
-            <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_requests</span>
+        <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="o">+</span> <span class="p">[</span>
+            <span class="s1">&#39;install&#39;</span>
+        <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_requests</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_requests</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_requests</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">Command</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
-            <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bash_command</span><span class="p">)],</span> <span class="bp">self</span><span class="o">.</span><span class="n">command_env</span>
+            <span class="n">dnf_command</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">command_env</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="PackageManagerDnf.process_install_requests"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.dnf.PackageManagerDnf.process_install_requests">[docs]</a>    <span class="k">def</span> <span class="nf">process_install_requests</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">command_call_type</span><span class="p">:</span>
@@ -868,20 +866,14 @@
         <span class="n">chroot_dnf_args</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">move_to_root</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dnf_args</span>
         <span class="p">)</span>
-        <span class="n">bash_command</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">dnf_command</span> <span class="o">=</span> <span class="p">[</span>
             <span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;dnf&#39;</span>
         <span class="p">]</span> <span class="o">+</span> <span class="n">chroot_dnf_args</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="o">+</span> <span class="n">exclude_args</span> <span class="o">+</span> <span class="p">[</span>
             <span class="s1">&#39;install&#39;</span>
-        <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_requests</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_requests</span><span class="p">:</span>
-            <span class="n">bash_command</span> <span class="o">+=</span> <span class="p">[</span>
-                <span class="s1">&#39;&amp;&amp;&#39;</span><span class="p">,</span> <span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;dnf&#39;</span>
-            <span class="p">]</span> <span class="o">+</span> <span class="n">chroot_dnf_args</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="o">+</span> <span class="n">exclude_args</span> <span class="o">+</span> <span class="p">[</span>
-                <span class="s1">&#39;group&#39;</span><span class="p">,</span> <span class="s1">&#39;install&#39;</span>
-            <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_requests</span>
+        <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_requests</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">collection_requests</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_requests</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">Command</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
-            <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bash_command</span><span class="p">)],</span> <span class="bp">self</span><span class="o">.</span><span class="n">command_env</span>
+            <span class="n">dnf_command</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">command_env</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="PackageManagerDnf.process_delete_requests"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.dnf.PackageManagerDnf.process_delete_requests">[docs]</a>    <span class="k">def</span> <span class="nf">process_delete_requests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">command_call_type</span><span class="p">:</span>

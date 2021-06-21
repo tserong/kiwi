@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.storage.luks_device &mdash; KIWI NG 9.23.38 documentation</title>
+  <title>kiwi.storage.luks_device &mdash; KIWI NG 9.23.39 documentation</title>
   
 
   
@@ -382,6 +382,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../contributing/kiwi_plugin_architecture.html">Plugin Architecture</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../contributing/kiwi_plugin_architecture.html#naming-conventions">Naming Conventions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../contributing/kiwi_plugin_architecture.html#example-plugin">Example Plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing/scripts_testing.html">Write Integration Tests for the Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../contributing/scripts_testing.html#running-tests-for-multiple-container-images">Running Tests for multiple container images</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../contributing/schema_extensions.html">Extending KIWI NG with Custom Operations</a><ul>
@@ -819,10 +823,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">options</span><span class="p">:</span>
             <span class="n">options</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">passphrase</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">KiwiLuksSetupError</span><span class="p">(</span>
-                <span class="s1">&#39;passphrase must not be empty&#39;</span>
-            <span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">os</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">option_map</span><span class="p">:</span>
                 <span class="n">options</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">option_map</span><span class="p">[</span><span class="n">os</span><span class="p">]</span>
@@ -830,8 +830,13 @@
                 <span class="k">raise</span> <span class="n">KiwiLuksSetupError</span><span class="p">(</span>
                     <span class="s1">&#39;no custom option configuration found for OS </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">os</span>
                 <span class="p">)</span>
+        <span class="n">extra_options</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">storage_device</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage_provider</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Creating crypto LUKS on </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">storage_device</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">passphrase</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Using an empty passphrase for the key setup&#39;</span><span class="p">)</span>
+
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Randomizing...&#39;</span><span class="p">)</span>
         <span class="n">storage_size_mbytes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage_provider</span><span class="o">.</span><span class="n">get_byte_size</span><span class="p">(</span>
             <span class="n">storage_device</span>
@@ -844,13 +849,23 @@
             <span class="p">]</span>
         <span class="p">)</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Creating LUKS map&#39;</span><span class="p">)</span>
-        <span class="n">passphrase_file</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">passphrase_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">credentials</span><span class="p">:</span>
-            <span class="n">credentials</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">passphrase</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">passphrase</span><span class="p">:</span>
+            <span class="n">passphrase_file_tmp</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">passphrase_file_tmp</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">credentials</span><span class="p">:</span>
+                <span class="n">credentials</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">passphrase</span><span class="p">)</span>
+            <span class="n">passphrase_file</span> <span class="o">=</span> <span class="n">passphrase_file_tmp</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">passphrase_file_zero</span> <span class="o">=</span> <span class="s1">&#39;/dev/zero&#39;</span>
+            <span class="n">extra_options</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s1">&#39;--keyfile-size&#39;</span><span class="p">,</span> <span class="s1">&#39;32&#39;</span>
+            <span class="p">]</span>
+            <span class="n">passphrase_file</span> <span class="o">=</span> <span class="n">passphrase_file_zero</span>
+
         <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
             <span class="p">[</span>
-                <span class="s1">&#39;cryptsetup&#39;</span><span class="p">,</span> <span class="s1">&#39;-q&#39;</span><span class="p">,</span> <span class="s1">&#39;--key-file&#39;</span><span class="p">,</span> <span class="n">passphrase_file</span><span class="o">.</span><span class="n">name</span>
-            <span class="p">]</span> <span class="o">+</span> <span class="n">options</span> <span class="o">+</span> <span class="p">[</span>
+                <span class="s1">&#39;cryptsetup&#39;</span><span class="p">,</span> <span class="s1">&#39;-q&#39;</span><span class="p">,</span> <span class="s1">&#39;--key-file&#39;</span><span class="p">,</span> <span class="n">passphrase_file</span>
+            <span class="p">]</span> <span class="o">+</span> <span class="n">options</span> <span class="o">+</span> <span class="n">extra_options</span> <span class="o">+</span> <span class="p">[</span>
                 <span class="s1">&#39;luksFormat&#39;</span><span class="p">,</span> <span class="n">storage_device</span>
             <span class="p">]</span>
         <span class="p">)</span>
@@ -859,13 +874,15 @@
             <span class="n">LuksDevice</span><span class="o">.</span><span class="n">create_random_keyfile</span><span class="p">(</span><span class="n">keyfile</span><span class="p">)</span>
             <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
                 <span class="p">[</span>
-                    <span class="s1">&#39;cryptsetup&#39;</span><span class="p">,</span> <span class="s1">&#39;--key-file&#39;</span><span class="p">,</span> <span class="n">passphrase_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="s1">&#39;cryptsetup&#39;</span><span class="p">,</span> <span class="s1">&#39;--key-file&#39;</span><span class="p">,</span> <span class="n">passphrase_file</span>
+                <span class="p">]</span> <span class="o">+</span> <span class="n">extra_options</span> <span class="o">+</span> <span class="p">[</span>
                     <span class="s1">&#39;luksAddKey&#39;</span><span class="p">,</span> <span class="n">storage_device</span><span class="p">,</span> <span class="n">keyfile</span>
                 <span class="p">]</span>
             <span class="p">)</span>
         <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
             <span class="p">[</span>
-                <span class="s1">&#39;cryptsetup&#39;</span><span class="p">,</span> <span class="s1">&#39;--key-file&#39;</span><span class="p">,</span> <span class="n">passphrase_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="s1">&#39;cryptsetup&#39;</span><span class="p">,</span> <span class="s1">&#39;--key-file&#39;</span><span class="p">,</span> <span class="n">passphrase_file</span>
+            <span class="p">]</span> <span class="o">+</span> <span class="n">extra_options</span> <span class="o">+</span> <span class="p">[</span>
                 <span class="s1">&#39;luksOpen&#39;</span><span class="p">,</span> <span class="n">storage_device</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">luks_name</span>
             <span class="p">]</span>
         <span class="p">)</span>

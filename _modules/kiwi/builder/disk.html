@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.38 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.39 documentation</title>
   
 
   
@@ -382,6 +382,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../contributing/kiwi_plugin_architecture.html">Plugin Architecture</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../contributing/kiwi_plugin_architecture.html#naming-conventions">Naming Conventions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../contributing/kiwi_plugin_architecture.html#example-plugin">Example Plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing/scripts_testing.html">Write Integration Tests for the Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../contributing/scripts_testing.html#running-tests-for-multiple-container-images">Running Tests for multiple container images</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../contributing/schema_extensions.html">Extending KIWI NG with Custom Operations</a><ul>
@@ -981,6 +985,8 @@
                         <span class="n">loop_provider</span><span class="o">.</span><span class="n">get_device</span><span class="p">(),</span>
                     <span class="s1">&#39;grub_directory_name&#39;</span><span class="p">:</span>
                         <span class="n">Defaults</span><span class="o">.</span><span class="n">get_grub_boot_directory_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">),</span>
+                    <span class="s1">&#39;crypto_disk&#39;</span><span class="p">:</span>
+                        <span class="kc">True</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">luks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">False</span><span class="p">,</span>
                     <span class="s1">&#39;boot_is_crypto&#39;</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">boot_is_crypto</span>
                 <span class="p">}</span>
@@ -1002,18 +1008,31 @@
 
         <span class="c1"># create luks on current root device if requested</span>
         <span class="n">luks_root</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">luks</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">luks</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">luks_root</span> <span class="o">=</span> <span class="n">LuksDevice</span><span class="p">(</span><span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;root&#39;</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">luks_boot_keyname</span> <span class="o">=</span> <span class="s1">&#39;/.root.keyfile&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">luks_boot_keyfile</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">luks_boot_keyname</span><span class="p">]</span>
             <span class="p">)</span>
+            <span class="c1"># use LUKS key file for the following conditions:</span>
+            <span class="c1"># 1. /boot is encrypted</span>
+            <span class="c1">#    In this case grub needs to read from LUKS via the</span>
+            <span class="c1">#    cryptodisk module which at the moment always asks</span>
+            <span class="c1">#    for the passphrase even when empty. The keyfile</span>
+            <span class="c1">#    setup makes sure only one interaction on the grub</span>
+            <span class="c1">#    stage is needed</span>
+            <span class="c1"># 2. LUKS passphrase is configured as empty string</span>
+            <span class="c1">#    In this case the keyfile allows to open the</span>
+            <span class="c1">#    LUKS pool without asking</span>
+            <span class="c1">#</span>
+            <span class="n">luks_need_keyfile</span> <span class="o">=</span> \
+                <span class="kc">True</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_is_crypto</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">luks</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="k">else</span> <span class="kc">False</span>
             <span class="n">luks_root</span><span class="o">.</span><span class="n">create_crypto_luks</span><span class="p">(</span>
                 <span class="n">passphrase</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">luks</span><span class="p">,</span>
                 <span class="n">os</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">luks_os</span><span class="p">,</span>
-                <span class="n">keyfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">luks_boot_keyfile</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_is_crypto</span> <span class="k">else</span> <span class="kc">None</span>
+                <span class="n">keyfile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">luks_boot_keyfile</span> <span class="k">if</span> <span class="n">luks_need_keyfile</span> <span class="k">else</span> <span class="kc">None</span>
             <span class="p">)</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_is_crypto</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">luks_need_keyfile</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">luks_boot_keyfile_setup</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                     <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;/etc/dracut.conf.d/99-luks-boot.conf&#39;</span><span class="p">]</span>
                 <span class="p">)</span>

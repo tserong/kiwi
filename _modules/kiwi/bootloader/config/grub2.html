@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.38 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.39 documentation</title>
   
 
   
@@ -382,6 +382,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../contributing/kiwi_plugin_architecture.html">Plugin Architecture</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../../contributing/kiwi_plugin_architecture.html#naming-conventions">Naming Conventions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../contributing/kiwi_plugin_architecture.html#example-plugin">Example Plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contributing/scripts_testing.html">Write Integration Tests for the Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../contributing/scripts_testing.html#running-tests-for-multiple-container-images">Running Tests for multiple container images</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../contributing/schema_extensions.html">Extending KIWI NG with Custom Operations</a><ul>
@@ -1416,7 +1420,7 @@
                     <span class="n">grub_default_entries</span><span class="p">[</span><span class="s1">&#39;GRUB_USE_INITRDEFI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_btrfs_root_is_snapshot</span><span class="p">():</span>
             <span class="n">grub_default_entries</span><span class="p">[</span><span class="s1">&#39;SUSE_BTRFS_SNAPSHOT_BOOTING&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;boot_is_crypto&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;crypto_disk&#39;</span><span class="p">):</span>
             <span class="n">grub_default_entries</span><span class="p">[</span><span class="s1">&#39;GRUB_ENABLE_CRYPTODISK&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;y&#39;</span>
 
         <span class="n">enable_blscfg_implemented</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
