@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.boot.image.dracut &mdash; KIWI NG 9.23.39 documentation</title>
+  <title>kiwi.boot.image.dracut &mdash; KIWI NG 9.23.40 documentation</title>
   
 
   
@@ -763,6 +763,7 @@
 <span class="kn">from</span> <span class="nn">kiwi.system.profile</span> <span class="kn">import</span> <span class="n">Profile</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.setup</span> <span class="kn">import</span> <span class="n">SystemSetup</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.identifier</span> <span class="kn">import</span> <span class="n">SystemIdentifier</span>
+<span class="kn">from</span> <span class="nn">kiwi.mount_manager</span> <span class="kn">import</span> <span class="n">MountManager</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
 
@@ -784,6 +785,9 @@
 
 <span class="sd">        Initialize empty list of dracut caller options</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device_mount</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MountManager</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">proc_mount</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MountManager</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
         <span class="c1"># signing keys are only taken into account on install of</span>
         <span class="c1"># packages. As dracut runs from a pre defined root directory,</span>
         <span class="c1"># no signing keys will be used in the process of creating</span>
@@ -929,6 +933,16 @@
             <span class="n">dracut_initrd_basename</span> <span class="o">+=</span> <span class="s1">&#39;.xz&#39;</span>
             <span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dracut_options</span> <span class="o">+</span> <span class="n">modules_args</span> <span class="o">+</span> <span class="n">included_files</span>
             <span class="k">if</span> <span class="n">kernel_details</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">device_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                    <span class="n">device</span><span class="o">=</span><span class="s1">&#39;/dev&#39;</span><span class="p">,</span>
+                    <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span> <span class="o">+</span> <span class="s1">&#39;/dev&#39;</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">device_mount</span><span class="o">.</span><span class="n">bind_mount</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">proc_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
+                    <span class="n">device</span><span class="o">=</span><span class="s1">&#39;/proc&#39;</span><span class="p">,</span>
+                    <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span> <span class="o">+</span> <span class="s1">&#39;/proc&#39;</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">proc_mount</span><span class="o">.</span><span class="n">bind_mount</span><span class="p">()</span>
                 <span class="n">dracut_call</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
                     <span class="p">[</span>
                         <span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span><span class="p">,</span>
@@ -942,6 +956,8 @@
                     <span class="p">],</span>
                     <span class="n">stderr_to_stdout</span><span class="o">=</span><span class="kc">True</span>
                 <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">device_mount</span><span class="o">.</span><span class="n">umount</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">proc_mount</span><span class="o">.</span><span class="n">umount</span><span class="p">()</span>
             <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">dracut_call</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
             <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
                 <span class="p">[</span>
@@ -978,7 +994,14 @@
         <span class="n">defaults</span><span class="o">.</span><span class="n">to_profile</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>
         <span class="n">profile</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
             <span class="n">Defaults</span><span class="o">.</span><span class="n">get_profile_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span><span class="p">)</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Cleaning up </span><span class="si">%s</span><span class="s1"> instance&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">device_mount</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">device_mount</span><span class="o">.</span><span class="n">umount</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">proc_mount</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">proc_mount</span><span class="o">.</span><span class="n">umount</span><span class="p">()</span></div>
 </pre></div>
 
            </div>

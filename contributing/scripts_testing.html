@@ -4,11 +4,10 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Write Integration Tests for the Scripts &mdash; KIWI NG 9.23.39 documentation</title>
+  <title>Write Integration Tests for the Scripts &mdash; KIWI NG 9.23.40 documentation</title>
   
 
   
@@ -736,7 +735,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="write-integration-tests-for-the-scripts">
+  <div class="section" id="write-integration-tests-for-the-scripts">
 <h1>Write Integration Tests for the Scripts<a class="headerlink" href="#write-integration-tests-for-the-scripts" title="Permalink to this headline">¶</a></h1>
 <p>Kiwi ships a set of helper functions that can be used in <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code> (see
 also: <a class="reference internal" href="../concept_and_workflow/shell_scripts.html#working-with-kiwi-user-defined-scripts"><span class="std std-ref">User Defined Scripts</span></a>). These utilize containers
@@ -779,7 +778,7 @@ want to undo yourself, then resort to the <code class="docutils literal notransl
 will give you a fresh container for each test function. While this makes writing
 tests simpler, it also increases the runtime significantly, thus only use it
 when necessary.</p>
-<section id="running-tests-for-multiple-container-images">
+<div class="section" id="running-tests-for-multiple-container-images">
 <h2>Running Tests for multiple container images<a class="headerlink" href="#running-tests-for-multiple-container-images" title="Permalink to this headline">¶</a></h2>
 <p>It is important to test certain functions on multiple operating systems &amp;
 versions, to e.g. ensure that older tools behave the same way that you expect
@@ -802,8 +801,8 @@ them to.</p>
 name in the predefined list of containers in <code class="file docutils literal notranslate"><span class="pre">conftest.py</span></code>.</p>
 <p>To add a new container, simply add a new <code class="docutils literal notranslate"><span class="pre">Container</span></code> class to the
 <code class="docutils literal notranslate"><span class="pre">CONTAINERS</span></code> list and give it appropriate values for <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">url</span></code>.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

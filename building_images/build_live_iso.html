@@ -4,11 +4,10 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Build an ISO Hybrid Live Image &mdash; KIWI NG 9.23.39 documentation</title>
+  <title>Build an ISO Hybrid Live Image &mdash; KIWI NG 9.23.40 documentation</title>
   
 
   
@@ -736,16 +735,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="build-an-iso-hybrid-live-image">
+  <div class="section" id="build-an-iso-hybrid-live-image">
 <span id="hybrid-iso"></span><h1>Build an ISO Hybrid Live Image<a class="headerlink" href="#build-an-iso-hybrid-live-image" title="Permalink to this headline">¶</a></h1>
-<aside class="sidebar">
+<div class="sidebar">
 <p class="sidebar-title">Abstract</p>
 <p>This page explains how to build a live image. It contains:</p>
 <ul class="simple">
 <li><p>how to build an ISO image</p></li>
 <li><p>how to run it with QEMU</p></li>
 </ul>
-</aside>
+</div>
 <p>A Live ISO image is a system on a removable media, e.g CD/DVD or USB stick.
 Once built and deployed it boots off from this media without interfering
 with other system storage components making it a useful pocket system for
@@ -798,7 +797,7 @@ be tested with QEMU:</p>
 <p>The image is now complete and ready to use. See <a class="reference internal" href="../working_with_images/iso_to_usb_stick_deployment.html#iso-to-usb-stick"><span class="std std-ref">Deploy ISO Image on an USB Stick</span></a> and
 <a class="reference internal" href="../working_with_images/iso_to_usb_stick_file_based_deployment.html#iso-as-file-to-usb-stick"><span class="std std-ref">Deploy ISO Image as File on a FAT32 Formated USB Stick</span></a> for further information concerning
 deployment.</p>
-<section id="decision-for-a-live-iso-technology">
+<div class="section" id="decision-for-a-live-iso-technology">
 <span id="live-features"></span><h2>Decision for a live ISO technology<a class="headerlink" href="#decision-for-a-live-iso-technology" title="Permalink to this headline">¶</a></h2>
 <p>The decision for the <code class="xref py py-obj docutils literal notranslate"><span class="pre">overlay</span></code> vs. <code class="xref py py-obj docutils literal notranslate"><span class="pre">dmsquash</span></code> dracut module depends on
 the features one wants to use. From a design perspective the <code class="xref py py-obj docutils literal notranslate"><span class="pre">overlay</span></code>
@@ -863,8 +862,8 @@ partition in disk mode.</p>
 <a class="reference external" href="http://man7.org/linux/man-pages/man7/dracut.cmdline.7.html">here</a>.
 Options to setup <code class="xref py py-obj docutils literal notranslate"><span class="pre">dmsquash</span></code> are marked with <code class="xref py py-obj docutils literal notranslate"><span class="pre">rd.live</span></code></p>
 </div>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
