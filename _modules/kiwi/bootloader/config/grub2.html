@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.43 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.44 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
 
           
             
-            <img src="../../../../_static/kiwi-logo.png" class="logo" alt="Logo"/>
+            <img src="../../../../_static/.images/kiwi-logo.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -1375,7 +1375,7 @@
             <span class="s1">&#39;GRUB_TERMINAL&#39;</span><span class="p">:</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">terminal</span><span class="p">)</span>
         <span class="p">}</span>
         <span class="n">grub_final_cmdline</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
-            <span class="sa">r</span><span class="s1">&#39;root=.* |root=.*$&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdline</span>
+            <span class="sa">r</span><span class="s1">&#39;(^root=[^\s]+)|( root=[^\s]+)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cmdline</span>
         <span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">persistency_type</span> <span class="o">!=</span> <span class="s1">&#39;by-uuid&#39;</span><span class="p">:</span>
             <span class="n">grub_default_entries</span><span class="p">[</span><span class="s1">&#39;GRUB_DISABLE_LINUX_UUID&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span>
@@ -1484,6 +1484,11 @@
                     <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">efi_boot_path</span><span class="p">,</span> <span class="n">grub_image</span><span class="o">.</span><span class="n">binaryname</span><span class="p">])</span>
                 <span class="p">]</span>
             <span class="p">)</span>
+            <span class="n">mok_manager</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_mok_manager</span><span class="p">(</span><span class="n">lookup_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">mok_manager</span><span class="p">:</span>
+                <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                    <span class="p">[</span><span class="s1">&#39;cp&#39;</span><span class="p">,</span> <span class="n">mok_manager</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">efi_boot_path</span><span class="p">]</span>
+                <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Without shim a self signed grub image is used that</span>
             <span class="c1"># gets loaded by the firmware</span>

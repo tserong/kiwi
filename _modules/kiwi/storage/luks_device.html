@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.storage.luks_device &mdash; KIWI NG 9.23.43 documentation</title>
+  <title>kiwi.storage.luks_device &mdash; KIWI NG 9.23.44 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
 
           
             
-            <img src="../../../_static/kiwi-logo.png" class="logo" alt="Logo"/>
+            <img src="../../../_static/.images/kiwi-logo.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -931,7 +931,8 @@
 <span class="sd">        :param string filename: file path name</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">keyfile</span><span class="p">:</span>
-            <span class="n">keyfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="n">Defaults</span><span class="o">.</span><span class="n">get_luks_key_length</span><span class="p">()))</span></div>
+            <span class="n">keyfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">urandom</span><span class="p">(</span><span class="n">Defaults</span><span class="o">.</span><span class="n">get_luks_key_length</span><span class="p">()))</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="mo">0o600</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">luks_device</span><span class="p">:</span>
