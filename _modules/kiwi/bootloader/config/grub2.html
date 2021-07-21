@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.44 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.45 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
 
           
             
-            <img src="../../../../_static/.images/kiwi-logo.png" class="logo" alt="Logo"/>
+            <img src="../../../../_static/kiwi-logo.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -1558,7 +1558,7 @@
             <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_dir</span> <span class="o">+</span> <span class="s1">&#39;/boot/&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">,</span> <span class="s1">&#39;/efi&#39;</span><span class="p">]</span>
         <span class="p">)</span>
         <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-            <span class="p">[</span><span class="s1">&#39;qemu-img&#39;</span><span class="p">,</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="n">efi_fat_image</span><span class="p">,</span> <span class="s1">&#39;15M&#39;</span><span class="p">]</span>
+            <span class="p">[</span><span class="s1">&#39;qemu-img&#39;</span><span class="p">,</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="n">efi_fat_image</span><span class="p">,</span> <span class="s1">&#39;20M&#39;</span><span class="p">]</span>
         <span class="p">)</span>
         <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
             <span class="p">[</span><span class="s1">&#39;mkdosfs&#39;</span><span class="p">,</span> <span class="s1">&#39;-n&#39;</span><span class="p">,</span> <span class="s1">&#39;BOOT&#39;</span><span class="p">,</span> <span class="n">efi_fat_image</span><span class="p">]</span>

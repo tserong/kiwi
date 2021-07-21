@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Build an Expandable Disk Image &mdash; KIWI NG 9.23.44 documentation</title>
+  <title>Build an Expandable Disk Image &mdash; KIWI NG 9.23.45 documentation</title>
   
 
   
@@ -62,7 +62,7 @@
 
           
             
-            <img src="../_static/.images/kiwi-logo.png" class="logo" alt="Logo"/>
+            <img src="../_static/kiwi-logo.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -1078,6 +1078,13 @@ in the initrd</p>
 automatically without requiring user interaction. If multiple
 possible target devices are discovered the image is deployed to
 the first device. <code class="docutils literal notranslate"><span class="pre">kiwi_oemunattended</span></code> in the initrd</p>
+</dd>
+<dt>oemconfig.oem-skip-verify Element</dt><dd><p>Do not perform the checksum verification process after install
+of the image to the target disk. The verification process computes
+the checksum of the image byte size installed to the target
+and compares this value with the initrd embedded checksum
+information at build time of the image. Depending on the size of
+the image and machine power the computation can take some time.</p>
 </dd>
 </dl>
 </div>
