@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.45 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.46 documentation</title>
   
 
   
@@ -751,7 +751,6 @@
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
 <span class="p">)</span>
@@ -759,6 +758,7 @@
 <span class="c1"># project</span>
 <span class="kn">import</span> <span class="nn">kiwi.defaults</span> <span class="k">as</span> <span class="nn">defaults</span>
 
+<span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
 <span class="kn">from</span> <span class="nn">kiwi.filesystem.base</span> <span class="kn">import</span> <span class="n">FileSystemBase</span>
 <span class="kn">from</span> <span class="nn">kiwi.bootloader.config</span> <span class="kn">import</span> <span class="n">BootLoaderConfig</span>
@@ -1476,7 +1476,7 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; creating readonly root partition&#39;</span><span class="p">)</span>
-            <span class="n">squashed_root_file</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;/var/tmp&#39;</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi-&#39;</span><span class="p">)</span>
+            <span class="n">squashed_root_file</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
             <span class="n">squashed_root</span> <span class="o">=</span> <span class="n">FileSystemSquashFs</span><span class="p">(</span>
                 <span class="n">device_provider</span><span class="o">=</span><span class="n">DeviceProvider</span><span class="p">(),</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
                 <span class="n">custom_args</span><span class="o">=</span><span class="p">{</span>
@@ -1786,7 +1786,7 @@
 
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Syncing root filesystem data&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span><span class="p">:</span>
-            <span class="n">squashed_root_file</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;/var/tmp&#39;</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi-&#39;</span><span class="p">)</span>
+            <span class="n">squashed_root_file</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
             <span class="n">squashed_root</span> <span class="o">=</span> <span class="n">FileSystemSquashFs</span><span class="p">(</span>
                 <span class="n">device_provider</span><span class="o">=</span><span class="n">DeviceProvider</span><span class="p">(),</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
                 <span class="n">custom_args</span><span class="o">=</span><span class="p">{</span>

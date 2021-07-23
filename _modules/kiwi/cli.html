@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.cli &mdash; KIWI NG 9.23.45 documentation</title>
+  <title>kiwi.cli &mdash; KIWI NG 9.23.46 documentation</title>
   
 
   
@@ -750,6 +750,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">usage: kiwi-ng -h | --help</span>
 <span class="sd">       kiwi-ng [--profile=&lt;name&gt;...]</span>
+<span class="sd">               [--temp-dir=&lt;directory&gt;]</span>
 <span class="sd">               [--type=&lt;build_type&gt;]</span>
 <span class="sd">               [--logfile=&lt;filename&gt;]</span>
 <span class="sd">               [--debug]</span>
@@ -762,6 +763,7 @@
 <span class="sd">           result &lt;command&gt; [&lt;args&gt;...]</span>
 <span class="sd">       kiwi-ng [--profile=&lt;name&gt;...]</span>
 <span class="sd">               [--shared-cache-dir=&lt;directory&gt;]</span>
+<span class="sd">               [--temp-dir=&lt;directory&gt;]</span>
 <span class="sd">               [--target-arch=&lt;name&gt;]</span>
 <span class="sd">               [--type=&lt;build_type&gt;]</span>
 <span class="sd">               [--logfile=&lt;filename&gt;]</span>
@@ -801,6 +803,10 @@
 <span class="sd">        is shared via bind mount between the build host and image</span>
 <span class="sd">        root system and contains information about package repositories</span>
 <span class="sd">        and their cache and meta data.</span>
+<span class="sd">    --temp-dir=&lt;directory&gt;</span>
+<span class="sd">        specify an alternative base temporary directory. The</span>
+<span class="sd">        provided path is used as base directory to store temporary</span>
+<span class="sd">        files and directories. By default /var/tmp is used.</span>
 <span class="sd">    --type=&lt;build_type&gt;</span>
 <span class="sd">        image build type. If not set the default XML specified</span>
 <span class="sd">        build type will be used</span>
@@ -961,6 +967,10 @@
                     <span class="n">value</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_shared_cache_location</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;--shared-cache-dir&#39;</span> <span class="ow">and</span> <span class="n">value</span><span class="p">:</span>
                     <span class="n">Defaults</span><span class="o">.</span><span class="n">set_shared_cache_location</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;--temp-dir&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_temp_location</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;--temp-dir&#39;</span> <span class="ow">and</span> <span class="n">value</span><span class="p">:</span>
+                    <span class="n">Defaults</span><span class="o">.</span><span class="n">set_temp_location</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;--target-arch&#39;</span> <span class="ow">and</span> <span class="n">value</span><span class="p">:</span>
                     <span class="n">Defaults</span><span class="o">.</span><span class="n">set_platform_name</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="s1">&#39;--config&#39;</span> <span class="ow">and</span> <span class="n">value</span><span class="p">:</span>

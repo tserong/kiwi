@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.volume_manager.btrfs &mdash; KIWI NG 9.23.45 documentation</title>
+  <title>kiwi.volume_manager.btrfs &mdash; KIWI NG 9.23.46 documentation</title>
   
 
   
@@ -1187,8 +1187,7 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">umount_volumes</span><span class="p">():</span>
                 <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Subvolumes still busy&#39;</span><span class="p">)</span>
                 <span class="k">return</span>
-            <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup_tempdirs</span><span class="p">()</span></div>
+            <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

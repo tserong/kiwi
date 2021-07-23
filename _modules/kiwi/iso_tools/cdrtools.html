@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.iso_tools.cdrtools &mdash; KIWI NG 9.23.45 documentation</title>
+  <title>kiwi.iso_tools.cdrtools &mdash; KIWI NG 9.23.46 documentation</title>
   
 
   
@@ -751,13 +751,13 @@
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">namedtuple</span><span class="p">,</span>
     <span class="n">OrderedDict</span>
 <span class="p">)</span>
 
 <span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
 <span class="kn">from</span> <span class="nn">kiwi.iso_tools.base</span> <span class="kn">import</span> <span class="n">IsoToolsBase</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.command_capabilities</span> <span class="kn">import</span> <span class="n">CommandCapabilities</span>
@@ -984,7 +984,7 @@
 
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">iso_sortfile</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iso_sortfile</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
         <span class="n">catalog_file</span> <span class="o">=</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">source_dir</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_path</span> <span class="o">+</span> <span class="s1">&#39;/boot.catalog&#39;</span>
         <span class="n">loader_file</span> <span class="o">=</span> \

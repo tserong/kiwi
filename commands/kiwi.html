@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi-ng &mdash; KIWI NG 9.23.45 documentation</title>
+  <title>kiwi-ng &mdash; KIWI NG 9.23.46 documentation</title>
   
 
   
@@ -743,6 +743,7 @@
 
 kiwi-ng -h <span class="p">|</span> --help
 kiwi-ng <span class="o">[</span>--profile<span class="o">=</span>&lt;name&gt;...<span class="o">]</span>
+        <span class="o">[</span>--temp-dir<span class="o">=</span>&lt;directory&gt;<span class="o">]</span>
         <span class="o">[</span>--type<span class="o">=</span>&lt;build_type&gt;<span class="o">]</span>
         <span class="o">[</span>--logfile<span class="o">=</span>&lt;filename&gt;<span class="o">]</span>
         <span class="o">[</span>--debug<span class="o">]</span>
@@ -755,6 +756,7 @@ kiwi-ng <span class="o">[</span>--debug<span class="o">]</span>
     result &lt;command&gt; <span class="o">[</span>&lt;args&gt;...<span class="o">]</span>
 kiwi-ng <span class="o">[</span>--profile<span class="o">=</span>&lt;name&gt;...<span class="o">]</span>
         <span class="o">[</span>--shared-cache-dir<span class="o">=</span>&lt;directory&gt;<span class="o">]</span>
+        <span class="o">[</span>--temp-dir<span class="o">=</span>&lt;directory&gt;<span class="o">]</span>
         <span class="o">[</span>--target-arch<span class="o">=</span>&lt;name&gt;<span class="o">]</span>
         <span class="o">[</span>--type<span class="o">=</span>&lt;build_type&gt;<span class="o">]</span>
         <span class="o">[</span>--logfile<span class="o">=</span>&lt;filename&gt;<span class="o">]</span>
@@ -824,14 +826,19 @@ the process.</p>
 <dt><kbd><span class="option">--profile=<var>&lt;name&gt;</var></span></kbd></dt>
 <dd><p>Select profile to use. The specified profile must be part of the
 XML description. The option can be specified multiple times to
-allow using a combination of profiles</p>
+allow using a combination of profiles.</p>
 </dd>
 <dt><kbd><span class="option">--shared-cache-dir=<var>&lt;directory&gt;</var></span></kbd></dt>
 <dd><p>Specify an alternative shared cache directory. The directory
 is shared via bind mount between the build host and image
 root system and contains information about package repositories
 and their cache and meta data. The default location is set
-to /var/cache/kiwi</p>
+to <code class="xref py py-obj docutils literal notranslate"><span class="pre">/var/cache/kiwi</span></code>.</p>
+</dd>
+<dt><kbd><span class="option">--temp-dir=<var>&lt;directory&gt;</var></span></kbd></dt>
+<dd><p>Specify an alternative base temporary directory. The
+provided path is used as base directory to store temporary
+files and directories. By default <code class="xref py py-obj docutils literal notranslate"><span class="pre">/var/tmp</span></code> is used.</p>
 </dd>
 <dt><kbd><span class="option">--target-arch=<var>&lt;name&gt;</var></span></kbd></dt>
 <dd><p>Specify the image architecture. By default the host architecture is

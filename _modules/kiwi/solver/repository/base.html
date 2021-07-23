@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.solver.repository.base &mdash; KIWI NG 9.23.45 documentation</title>
+  <title>kiwi.solver.repository.base &mdash; KIWI NG 9.23.46 documentation</title>
   
 
   
@@ -752,8 +752,7 @@
 <span class="kn">from</span> <span class="nn">base64</span> <span class="kn">import</span> <span class="n">b64encode</span>
 <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">Request</span>
-<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
-<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkdtemp</span>
+<span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
 <span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">glob</span>
@@ -780,7 +779,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="n">uri</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">user</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">secret</span> <span class="o">=</span> <span class="n">secret</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_init_temporary_dir_names</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repository_metadata_dirs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repository_solvable_dir</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="SolverRepositoryBase.create_repository_solvable"><a class="viewcode-back" href="../../../../api/kiwi.solver.repository.html#kiwi.solver.repository.base.SolverRepositoryBase.create_repository_solvable">[docs]</a>    <span class="k">def</span> <span class="nf">create_repository_solvable</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">target_dir</span><span class="o">=</span><span class="n">Defaults</span><span class="o">.</span><span class="n">get_solvable_location</span><span class="p">()</span>
@@ -803,7 +803,6 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_uptodate</span><span class="p">(</span><span class="n">target_dir</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_setup_repository_metadata</span><span class="p">()</span>
             <span class="n">solvable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_solvables</span><span class="p">(</span><span class="n">target_dir</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="n">solvable</span></div>
 
@@ -905,7 +904,7 @@
 
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">dir_listing_download</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
+        <span class="n">dir_listing_download</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">download_from_repository</span><span class="p">(</span>
             <span class="n">defaults</span><span class="o">.</span><span class="n">PLATFORM_MACHINE</span><span class="p">,</span> <span class="n">dir_listing_download</span><span class="o">.</span><span class="n">name</span>
         <span class="p">)</span>
@@ -927,7 +926,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">repo_source</span> <span class="o">=</span> <span class="s1">&#39;Packages.gz&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">download_dir</span><span class="p">:</span>
-            <span class="n">packages_download</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
+            <span class="n">packages_download</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">download_from_repository</span><span class="p">(</span><span class="n">repo_source</span><span class="p">,</span> <span class="n">packages_download</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">packages_download</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">packages_download</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">as</span> <span class="n">packages</span><span class="p">:</span>
@@ -950,7 +949,7 @@
 
 <span class="sd">        :rtype: XML etree</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">xml_download</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
+        <span class="n">xml_download</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
         <span class="n">xml_setup_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">lookup_path</span><span class="p">,</span> <span class="s1">&#39;repomd.xml&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">download_from_repository</span><span class="p">(</span><span class="n">xml_setup_file</span><span class="p">,</span> <span class="n">xml_download</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">xml_download</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -1016,7 +1015,9 @@
 <span class="sd">        :param str tool: one of the above tools</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">repository_solvable_dir</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">repository_solvable_dir</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;solvable_dir.&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">repository_solvable_dir</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">(</span>
+                <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_solvable_dir.&#39;</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">new_dir</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">tool</span> <span class="o">==</span> <span class="s1">&#39;rpms2solv&#39;</span><span class="p">:</span>
             <span class="c1"># solvable is created from a bunch of rpm files</span>
@@ -1051,7 +1052,8 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repository_solvable_dir</span><span class="p">:</span>
             <span class="n">solvable</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">target_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="o">.</span><span class="n">alias</span><span class="p">()])</span>
             <span class="n">bash_command</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="s1">&#39;mergesolv&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">repository_solvable_dir</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">]),</span>
+                <span class="s1">&#39;mergesolv&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">repository_solvable_dir</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">]),</span>
                 <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="n">solvable</span>
             <span class="p">]</span>
             <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bash_command</span><span class="p">)])</span>
@@ -1060,18 +1062,6 @@
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">solvable</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">]),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">solvable_time</span><span class="p">:</span>
                 <span class="n">solvable_time</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="p">())</span>
             <span class="k">return</span> <span class="n">solvable</span>
-
-    <span class="k">def</span> <span class="nf">_cleanup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Delete all temporary directories</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">for</span> <span class="n">metadata_dir</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">repository_metadata_dirs</span><span class="p">:</span>
-            <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="n">metadata_dir</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repository_solvable_dir</span><span class="p">:</span>
-            <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">repository_solvable_dir</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_init_temporary_dir_names</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_get_mime_typed_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1085,15 +1075,6 @@
             <span class="p">[</span><span class="s1">&#39;file://&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="o">.</span><span class="n">translate</span><span class="p">()]</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_init_temporary_dir_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Initialize data structures to store temporary directory names</span>
-<span class="sd">        required to hold the repository metadata and solvable files</span>
-<span class="sd">        until the final repository solvable got created</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">repository_metadata_dirs</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">repository_solvable_dir</span> <span class="o">=</span> <span class="kc">None</span>
-
     <span class="k">def</span> <span class="nf">_create_temporary_metadata_dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create and manage a temporary metadata directory</span>
@@ -1102,22 +1083,19 @@
 
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">metadata_dir</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;metadata_dir.&#39;</span><span class="p">)</span>
+        <span class="n">metadata_dir</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_metadata_dir.&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">new_dir</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">repository_metadata_dirs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">metadata_dir</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">metadata_dir</span>
+        <span class="k">return</span> <span class="n">metadata_dir</span><span class="o">.</span><span class="n">name</span>
 
     <span class="k">def</span> <span class="nf">_get_random_solvable_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">repository_solvable_dir</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/solvable-</span><span class="si">{1}{2}{3}{4}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">repository_solvable_dir</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">repository_solvable_dir</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_rand</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rand</span><span class="p">()</span>
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_rand</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%02x</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mh">0xfe</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_cleanup</span><span class="p">()</span></div>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%02x</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mh">0xfe</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

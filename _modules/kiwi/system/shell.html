@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system.shell &mdash; KIWI NG 9.23.45 documentation</title>
+  <title>kiwi.system.shell &mdash; KIWI NG 9.23.46 documentation</title>
   
 
   
@@ -747,11 +747,11 @@
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
-<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
 
 <span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
 
@@ -795,7 +795,7 @@
 
 <span class="sd">        :rtype: List[str]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">temp_copy</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
+        <span class="n">temp_copy</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
         <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;cp&#39;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">temp_copy</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
         <span class="n">Shell</span><span class="o">.</span><span class="n">run_common_function</span><span class="p">(</span><span class="s1">&#39;baseQuoteFile&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">temp_copy</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">temp_copy</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="k">as</span> <span class="n">quoted</span><span class="p">:</span>

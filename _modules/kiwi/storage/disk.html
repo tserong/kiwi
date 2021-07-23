@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.storage.disk &mdash; KIWI NG 9.23.45 documentation</title>
+  <title>kiwi.storage.disk &mdash; KIWI NG 9.23.46 documentation</title>
   
 
   
@@ -751,9 +751,9 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
-<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
 
 <span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.device_provider</span> <span class="kn">import</span> <span class="n">DeviceProvider</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.mapped_device</span> <span class="kn">import</span> <span class="n">MappedDevice</span>
@@ -991,7 +991,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="s1">&#39;dasd&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">table_type</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Initialize DASD disk with new VTOC table&#39;</span><span class="p">)</span>
-            <span class="n">fdasd_input</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">()</span>
+            <span class="n">fdasd_input</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fdasd_input</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">vtoc</span><span class="p">:</span>
                 <span class="n">vtoc</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;y</span><span class="se">\n\n</span><span class="s1">w</span><span class="se">\n</span><span class="s1">q</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">bash_command</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>

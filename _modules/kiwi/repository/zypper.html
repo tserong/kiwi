@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.repository.zypper &mdash; KIWI NG 9.23.45 documentation</title>
+  <title>kiwi.repository.zypper &mdash; KIWI NG 9.23.46 documentation</title>
   
 
   
@@ -751,10 +751,10 @@
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">configparser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
-<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
 
 <span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 <span class="kn">from</span> <span class="nn">kiwi.repository.base</span> <span class="kn">import</span> <span class="n">RepositoryBase</span>
@@ -842,12 +842,12 @@
             <span class="p">)</span>
         <span class="p">}</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">runtime_zypper_config_file</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runtime_zypper_config_file</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">(</span>
             <span class="nb">dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">runtime_zypp_config_file</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runtime_zypp_config_file</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">(</span>
             <span class="nb">dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span>
-        <span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">zypper_args</span> <span class="o">=</span> <span class="p">[</span>
             <span class="s1">&#39;--non-interactive&#39;</span><span class="p">,</span>

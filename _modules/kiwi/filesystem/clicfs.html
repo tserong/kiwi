@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.filesystem.clicfs &mdash; KIWI NG 9.23.45 documentation</title>
+  <title>kiwi.filesystem.clicfs &mdash; KIWI NG 9.23.46 documentation</title>
   
 
   
@@ -749,18 +749,17 @@
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
-<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkdtemp</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+    <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
 <span class="p">)</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
 <span class="kn">from</span> <span class="nn">kiwi.filesystem.base</span> <span class="kn">import</span> <span class="n">FileSystemBase</span>
 <span class="kn">from</span> <span class="nn">kiwi.filesystem.ext4</span> <span class="kn">import</span> <span class="n">FileSystemExt4</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.size</span> <span class="kn">import</span> <span class="n">SystemSize</span>
-<span class="kn">from</span> <span class="nn">kiwi.path</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.loop_device</span> <span class="kn">import</span> <span class="n">LoopDevice</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
@@ -779,7 +778,7 @@
 
 <span class="sd">        :param dict custom_args: unused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">container_dir</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></div>
+        <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="FileSystemClicFs.create_on_file"><a class="viewcode-back" href="../../../api/kiwi.filesystem.html#kiwi.filesystem.clicfs.FileSystemClicFs.create_on_file">[docs]</a>    <span class="k">def</span> <span class="nf">create_on_file</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exclude</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -797,8 +796,8 @@
 <span class="sd">        :param string label: unused</span>
 <span class="sd">        :param list exclude: unused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">container_dir</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_clicfs.&#39;</span><span class="p">)</span>
-        <span class="n">clicfs_container_filesystem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_dir</span> <span class="o">+</span> <span class="s1">&#39;/fsdata.ext4&#39;</span>
+        <span class="n">container_dir</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_clicfs.&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">new_dir</span><span class="p">()</span>
+        <span class="n">clicfs_container_filesystem</span> <span class="o">=</span> <span class="n">container_dir</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;/fsdata.ext4&#39;</span>
         <span class="n">loop_provider</span> <span class="o">=</span> <span class="n">LoopDevice</span><span class="p">(</span>
             <span class="n">clicfs_container_filesystem</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_get_container_filesystem_size_mbytes</span><span class="p">()</span>
@@ -824,12 +823,7 @@
     <span class="k">def</span> <span class="nf">_get_container_filesystem_size_mbytes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">size</span> <span class="o">=</span> <span class="n">SystemSize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>
         <span class="n">root_dir_mbytes</span> <span class="o">=</span> <span class="n">size</span><span class="o">.</span><span class="n">accumulate_mbyte_file_sizes</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">size</span><span class="o">.</span><span class="n">customize</span><span class="p">(</span><span class="n">root_dir_mbytes</span><span class="p">,</span> <span class="s1">&#39;ext4&#39;</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">container_dir</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Cleaning up </span><span class="si">%s</span><span class="s1"> instance&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
-            <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container_dir</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">size</span><span class="o">.</span><span class="n">customize</span><span class="p">(</span><span class="n">root_dir_mbytes</span><span class="p">,</span> <span class="s1">&#39;ext4&#39;</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

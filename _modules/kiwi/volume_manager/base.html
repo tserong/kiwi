@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.volume_manager.base &mdash; KIWI NG 9.23.45 documentation</title>
+  <title>kiwi.volume_manager.base &mdash; KIWI NG 9.23.46 documentation</title>
   
 
   
@@ -750,11 +750,11 @@
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
-<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkdtemp</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.device_provider</span> <span class="kn">import</span> <span class="n">DeviceProvider</span>
 <span class="kn">from</span> <span class="nn">kiwi.mount_manager</span> <span class="kn">import</span> <span class="n">MountManager</span>
@@ -1092,12 +1092,9 @@
 <span class="sd">        Implements creation of a master directory holding</span>
 <span class="sd">        the mounts of all volumes</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_volumes.&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">temp_directories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">)</span></div>
-
-    <span class="k">def</span> <span class="nf">_cleanup_tempdirs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">directory</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">temp_directories</span><span class="p">:</span>
-            <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint_tempdir</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_volumes.&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">new_dir</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint_tempdir</span><span class="o">.</span><span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temp_directories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mountpoint_tempdir</span><span class="p">)</span></div></div>
 </pre></div>
 
            </div>

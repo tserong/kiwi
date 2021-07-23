@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system.root_init &mdash; KIWI NG 9.23.45 documentation</title>
+  <title>kiwi.system.root_init &mdash; KIWI NG 9.23.46 documentation</title>
   
 
   
@@ -748,12 +748,11 @@
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
 <span class="kn">from</span> <span class="nn">pwd</span> <span class="kn">import</span> <span class="n">getpwnam</span>
-<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkdtemp</span>
-<span class="kn">from</span> <span class="nn">shutil</span> <span class="kn">import</span> <span class="n">rmtree</span>
 <span class="kn">from</span> <span class="nn">shutil</span> <span class="kn">import</span> <span class="n">copy</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.sync</span> <span class="kn">import</span> <span class="n">DataSync</span>
 <span class="kn">from</span> <span class="nn">kiwi.path</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
@@ -805,26 +804,25 @@
 <span class="sd">        :raises KiwiRootInitCreationError: if the init creation fails</span>
 <span class="sd">            at some point</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">root</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_root.&#39;</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_root.&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">new_dir</span><span class="p">()</span>
         <span class="n">Path</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_create_base_directories</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_create_base_links</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
-            <span class="n">data</span> <span class="o">=</span> <span class="n">DataSync</span><span class="p">(</span><span class="n">root</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_create_base_directories</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_create_base_links</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">DataSync</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>
             <span class="n">data</span><span class="o">.</span><span class="n">sync_data</span><span class="p">(</span>
                 <span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-a&#39;</span><span class="p">,</span> <span class="s1">&#39;--ignore-existing&#39;</span><span class="p">]</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">is_buildservice_worker</span><span class="p">():</span>
                 <span class="n">copy</span><span class="p">(</span>
                     <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_buildservice_env_name</span><span class="p">(),</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span>
+                <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
             <span class="k">raise</span> <span class="n">KiwiRootInitCreationError</span><span class="p">(</span>
                 <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-            <span class="p">)</span>
-        <span class="k">finally</span><span class="p">:</span>
-            <span class="n">rmtree</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+            <span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_create_base_directories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
