@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.volume_manager.btrfs &mdash; KIWI NG 9.23.46 documentation</title>
+  <title>kiwi.volume_manager.btrfs &mdash; KIWI NG 9.23.47 documentation</title>
   
 
   
@@ -759,6 +759,8 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="c1"># project</span>
+<span class="kn">import</span> <span class="nn">kiwi.defaults</span> <span class="k">as</span> <span class="nn">defaults</span>
+
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 <span class="kn">from</span> <span class="nn">kiwi.volume_manager.base</span> <span class="kn">import</span> <span class="n">VolumeManagerBase</span>
 <span class="kn">from</span> <span class="nn">kiwi.mount_manager</span> <span class="kn">import</span> <span class="n">MountManager</span>
@@ -1176,7 +1178,10 @@
             <span class="n">snapshot_info_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_xml_pretty</span><span class="p">(</span><span class="n">snapshot</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_get_subvol_name_from_mountpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">volume_mount</span><span class="p">):</span>
-        <span class="n">subvol_name</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">volume_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">3</span><span class="p">:])</span>
+        <span class="n">path_start_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">defaults</span><span class="o">.</span><span class="n">TEMP_DIR</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">subvol_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">volume_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="n">path_start_index</span><span class="p">:]</span>
+        <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">toplevel_volume</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">toplevel_volume</span> <span class="ow">in</span> <span class="n">subvol_name</span><span class="p">:</span>
             <span class="n">subvol_name</span> <span class="o">=</span> <span class="n">subvol_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toplevel_volume</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;@&#39;</span><span class="p">,</span> <span class="n">subvol_name</span><span class="p">]))</span>
@@ -1185,9 +1190,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">toplevel_mount</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Cleaning up </span><span class="si">%s</span><span class="s1"> instance&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">umount_volumes</span><span class="p">():</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Subvolumes still busy&#39;</span><span class="p">)</span>
-                <span class="k">return</span>
-            <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">)</span></div>
+                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Subvolumes still busy&#39;</span><span class="p">)</span></div>
 </pre></div>
 
            </div>
