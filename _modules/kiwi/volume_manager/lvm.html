@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.volume_manager.lvm &mdash; KIWI NG 9.23.47 documentation</title>
+  <title>kiwi.volume_manager.lvm &mdash; KIWI NG 9.23.48 documentation</title>
   
 
   
@@ -1009,8 +1009,11 @@
 <span class="sd">        :rtype: dict</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">volumes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">path_start_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">defaults</span><span class="o">.</span><span class="n">TEMP_DIR</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">for</span> <span class="n">volume_mount</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mount_list</span><span class="p">:</span>
-            <span class="n">mount_path</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">volume_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">3</span><span class="p">:])</span>
+            <span class="n">mount_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="n">volume_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="n">path_start_index</span><span class="p">:]</span>
+            <span class="p">)</span>
             <span class="k">if</span> <span class="n">mount_path</span><span class="p">:</span>
                 <span class="n">volumes</span><span class="p">[</span><span class="n">mount_path</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
                     <span class="s1">&#39;volume_options&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">mount_options</span><span class="p">,</span>
