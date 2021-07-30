@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.48 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.49 documentation</title>
   
 
   
@@ -1654,7 +1654,7 @@
             <span class="n">options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;defaults&#39;</span><span class="p">]</span>
         <span class="n">block_operation</span> <span class="o">=</span> <span class="n">BlockID</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager_name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager_name</span> <span class="o">==</span> <span class="s1">&#39;lvm&#39;</span> \
-           <span class="ow">and</span> <span class="n">mount_point</span> <span class="o">==</span> <span class="s1">&#39;/&#39;</span><span class="p">:</span>
+           <span class="ow">and</span> <span class="p">(</span><span class="n">mount_point</span> <span class="o">==</span> <span class="s1">&#39;/&#39;</span> <span class="ow">or</span> <span class="n">mount_point</span> <span class="o">==</span> <span class="s1">&#39;swap&#39;</span><span class="p">):</span>
             <span class="n">fstab_entry</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                 <span class="p">[</span>
                     <span class="n">device</span><span class="p">,</span> <span class="n">mount_point</span><span class="p">,</span>
