@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.repository.base &mdash; KIWI NG 9.23.49 documentation</title>
+  <title>kiwi.repository.base &mdash; KIWI NG 9.23.50 documentation</title>
   
 
   
@@ -754,6 +754,7 @@
 <span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.system.root_bind</span> <span class="kn">import</span> <span class="n">RootBind</span>
+<span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 
 
 <div class="viewcode-block" id="RepositoryBase"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase">[docs]</a><span class="k">class</span> <span class="nc">RepositoryBase</span><span class="p">:</span>
@@ -807,7 +808,7 @@
         <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prio</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dist</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">components</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">secret</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">credentials_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">repo_gpgcheck</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">pkg_gpgcheck</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">sourcetype</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">use_for_bootstrap</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">use_for_bootstrap</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">customization_script</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add repository</span>
@@ -827,6 +828,7 @@
 <span class="sd">        :param bool pkg_gpgcheck: unused</span>
 <span class="sd">        :param str sourcetype: unused</span>
 <span class="sd">        :param bool use_for_bootstrap: unused</span>
+<span class="sd">        :param str customization_script: unused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
@@ -885,7 +887,19 @@
 
 <span class="sd">        :param str name: unused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div></div>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="RepositoryBase.run_repo_customize"><a class="viewcode-back" href="../../../api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.run_repo_customize">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">run_repo_customize</span><span class="p">(</span><span class="n">script_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_file</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run an optional customization script</span>
+
+<span class="sd">        :param str script_path: unused</span>
+<span class="sd">        :param str repo_file: unused</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;--norc&#39;</span><span class="p">,</span> <span class="n">script_path</span><span class="p">,</span> <span class="n">repo_file</span><span class="p">]</span>
+        <span class="p">)</span></div></div>
 </pre></div>
 
            </div>

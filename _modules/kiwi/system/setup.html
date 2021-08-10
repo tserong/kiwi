@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system.setup &mdash; KIWI NG 9.23.49 documentation</title>
+  <title>kiwi.system.setup &mdash; KIWI NG 9.23.50 documentation</title>
   
 
   
@@ -759,6 +759,7 @@
 <span class="c1"># project</span>
 <span class="kn">import</span> <span class="nn">kiwi.defaults</span> <span class="k">as</span> <span class="nn">defaults</span>
 
+<span class="kn">from</span> <span class="nn">kiwi.xml_parse</span> <span class="kn">import</span> <span class="n">repository</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.fstab</span> <span class="kn">import</span> <span class="n">Fstab</span>
 <span class="kn">from</span> <span class="nn">kiwi.xml_state</span> <span class="kn">import</span> <span class="n">XMLState</span>
 <span class="kn">from</span> <span class="nn">kiwi.runtime_config</span> <span class="kn">import</span> <span class="n">RuntimeConfig</span>
@@ -882,7 +883,11 @@
             <span class="n">repo_components</span> <span class="o">=</span> <span class="n">xml_repo</span><span class="o">.</span><span class="n">get_components</span><span class="p">()</span>
             <span class="n">repo_repository_gpgcheck</span> <span class="o">=</span> <span class="n">xml_repo</span><span class="o">.</span><span class="n">get_repository_gpgcheck</span><span class="p">()</span>
             <span class="n">repo_package_gpgcheck</span> <span class="o">=</span> <span class="n">xml_repo</span><span class="o">.</span><span class="n">get_package_gpgcheck</span><span class="p">()</span>
+            <span class="n">repo_customization_script</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_repo_customization_script</span><span class="p">(</span>
+                <span class="n">xml_repo</span>
+            <span class="p">)</span>
             <span class="n">repo_sourcetype</span> <span class="o">=</span> <span class="n">xml_repo</span><span class="o">.</span><span class="n">get_sourcetype</span><span class="p">()</span>
+            <span class="n">repo_use_for_bootstrap</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="n">uri</span> <span class="o">=</span> <span class="n">Uri</span><span class="p">(</span><span class="n">repo_source</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">)</span>
             <span class="n">repo_source_translated</span> <span class="o">=</span> <span class="n">uri</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
                 <span class="n">check_build_environment</span><span class="o">=</span><span class="kc">False</span>
@@ -898,7 +903,8 @@
                 <span class="n">repo_type</span><span class="p">,</span> <span class="n">repo_priority</span><span class="p">,</span> <span class="n">repo_dist</span><span class="p">,</span> <span class="n">repo_components</span><span class="p">,</span>
                 <span class="n">repo_user</span><span class="p">,</span> <span class="n">repo_secret</span><span class="p">,</span> <span class="n">uri</span><span class="o">.</span><span class="n">credentials_file_name</span><span class="p">(),</span>
                 <span class="n">repo_repository_gpgcheck</span><span class="p">,</span> <span class="n">repo_package_gpgcheck</span><span class="p">,</span>
-                <span class="n">repo_sourcetype</span>
+                <span class="n">repo_sourcetype</span><span class="p">,</span> <span class="n">repo_use_for_bootstrap</span><span class="p">,</span>
+                <span class="n">repo_customization_script</span>
             <span class="p">)</span></div>
 
 <div class="viewcode-block" id="SystemSetup.import_cdroot_files"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.setup.SystemSetup.import_cdroot_files">[docs]</a>    <span class="k">def</span> <span class="nf">import_cdroot_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1966,7 +1972,13 @@
         <span class="p">)</span>
         <span class="n">data</span><span class="o">.</span><span class="n">sync_data</span><span class="p">(</span>
             <span class="n">options</span><span class="o">=</span><span class="n">sync_options</span>
-        <span class="p">)</span></div>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_repo_customization_script</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_repo</span><span class="p">:</span> <span class="n">repository</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">script_path</span> <span class="o">=</span> <span class="n">xml_repo</span><span class="o">.</span><span class="n">get_customize</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">script_path</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">script_path</span><span class="p">):</span>
+            <span class="n">script_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description_dir</span><span class="p">,</span> <span class="n">script_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">script_path</span></div>
 </pre></div>
 
            </div>

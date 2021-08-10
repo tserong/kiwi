@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Setting up Repositories &mdash; KIWI NG 9.23.49 documentation</title>
+  <title>Setting up Repositories &mdash; KIWI NG 9.23.50 documentation</title>
   
 
   
@@ -769,7 +769,7 @@ http URL will also be included in the final appliance.</p></li>
 <p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">repository</span></code> element accepts one <code class="xref py py-obj docutils literal notranslate"><span class="pre">source</span></code> child element, which
 contains the URL to the repository in an appropriate format and the
 following optional attributes:</p>
-<ul class="simple">
+<ul>
 <li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">imageinclude</span></code>: Specify whether this repository should be added to the
 resulting image, defaults to false.</p></li>
 <li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">imageonly</span></code>: A repository with <code class="xref py py-obj docutils literal notranslate"><span class="pre">imageonly=&quot;true&quot;</span></code> will not be available
@@ -793,6 +793,26 @@ will be used</p></li>
 defaults to <code class="xref py py-obj docutils literal notranslate"><span class="pre">main</span></code>.</p></li>
 <li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">distribution</span></code>: Distribution name information, used for deb repositories.</p></li>
 <li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">profiles</span></code>: List of profiles to which this repository applies.</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">customize</span></code>: Script to run custom modifications to the repo file(s).
+repo files allows for several customization options which not all of them
+are supported to be set by kiwi through the current repository schema.
+As the options used do not follow any standard and are not compatible
+between package managers and distributions, the only generic way to handle
+this is through a script hook which is invoked with the repo file as
+parameter for each file created by KIWI NG.</p>
+<p>An example for a script call to add the <code class="xref py py-obj docutils literal notranslate"><span class="pre">module_hotfixes</span></code> option
+for a <code class="xref py py-obj docutils literal notranslate"><span class="pre">dnf</span></code> compatible repository configuration could look like
+this</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">repo_file</span><span class="o">=</span><span class="nv">$1</span>
+<span class="nb">echo</span> <span class="s1">&#39;module_hotfixes = 1&#39;</span> &gt;&gt; <span class="si">${</span><span class="nv">repo_file</span><span class="si">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the script is provided as relative path it will
+be searched in the image description directory</p>
+</div>
+</li>
 </ul>
 <div class="section" id="supported-repository-paths">
 <span id="id1"></span><h3>Supported repository paths<a class="headerlink" href="#supported-repository-paths" title="Permalink to this headline">¶</a></h3>

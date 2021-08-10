@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.system.prepare &mdash; KIWI NG 9.23.49 documentation</title>
+  <title>kiwi.system.prepare &mdash; KIWI NG 9.23.50 documentation</title>
   
 
   
@@ -755,6 +755,7 @@
 <span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">dedent</span>
 
 <span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.xml_parse</span> <span class="kn">import</span> <span class="n">repository</span>
 <span class="kn">from</span> <span class="nn">kiwi.xml_state</span> <span class="kn">import</span> <span class="n">XMLState</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.root_init</span> <span class="kn">import</span> <span class="n">RootInit</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.root_import</span> <span class="kn">import</span> <span class="n">RootImport</span>
@@ -885,6 +886,9 @@
             <span class="n">repo_components</span> <span class="o">=</span> <span class="n">xml_repo</span><span class="o">.</span><span class="n">get_components</span><span class="p">()</span>
             <span class="n">repo_repository_gpgcheck</span> <span class="o">=</span> <span class="n">xml_repo</span><span class="o">.</span><span class="n">get_repository_gpgcheck</span><span class="p">()</span>
             <span class="n">repo_package_gpgcheck</span> <span class="o">=</span> <span class="n">xml_repo</span><span class="o">.</span><span class="n">get_package_gpgcheck</span><span class="p">()</span>
+            <span class="n">repo_customization_script</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_repo_customization_script</span><span class="p">(</span>
+                <span class="n">xml_repo</span>
+            <span class="p">)</span>
             <span class="n">repo_sourcetype</span> <span class="o">=</span> <span class="n">xml_repo</span><span class="o">.</span><span class="n">get_sourcetype</span><span class="p">()</span>
             <span class="n">repo_use_for_bootstrap</span> <span class="o">=</span> \
                 <span class="kc">True</span> <span class="k">if</span> <span class="n">xml_repo</span><span class="o">.</span><span class="n">get_use_for_bootstrap</span><span class="p">()</span> <span class="k">else</span> <span class="kc">False</span>
@@ -919,7 +923,8 @@
                 <span class="n">repo_type</span><span class="p">,</span> <span class="n">repo_priority</span><span class="p">,</span> <span class="n">repo_dist</span><span class="p">,</span> <span class="n">repo_components</span><span class="p">,</span>
                 <span class="n">repo_user</span><span class="p">,</span> <span class="n">repo_secret</span><span class="p">,</span> <span class="n">uri</span><span class="o">.</span><span class="n">credentials_file_name</span><span class="p">(),</span>
                 <span class="n">repo_repository_gpgcheck</span><span class="p">,</span> <span class="n">repo_package_gpgcheck</span><span class="p">,</span>
-                <span class="n">repo_sourcetype</span><span class="p">,</span> <span class="n">repo_use_for_bootstrap</span>
+                <span class="n">repo_sourcetype</span><span class="p">,</span> <span class="n">repo_use_for_bootstrap</span><span class="p">,</span>
+                <span class="n">repo_customization_script</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">clear_cache</span><span class="p">:</span>
                 <span class="n">repo</span><span class="o">.</span><span class="n">delete_repo_cache</span><span class="p">(</span><span class="n">repo_alias</span><span class="p">)</span>
@@ -1271,6 +1276,14 @@
             <span class="n">manager</span><span class="o">.</span><span class="n">collection_requests</span> <span class="o">+</span> \
             <span class="n">manager</span><span class="o">.</span><span class="n">product_requests</span> <span class="o">+</span> \
             <span class="n">manager</span><span class="o">.</span><span class="n">exclude_requests</span>
+
+    <span class="k">def</span> <span class="nf">_get_repo_customization_script</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_repo</span><span class="p">:</span> <span class="n">repository</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">script_path</span> <span class="o">=</span> <span class="n">xml_repo</span><span class="o">.</span><span class="n">get_customize</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">script_path</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">script_path</span><span class="p">):</span>
+            <span class="n">script_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">xml_data</span><span class="o">.</span><span class="n">description_dir</span><span class="p">,</span> <span class="n">script_path</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">script_path</span>
 
     <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Cleaning up </span><span class="si">{:s}</span><span class="s1"> instance&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>

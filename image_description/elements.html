@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Image Description Elements &mdash; KIWI NG 9.23.49 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.23.50 documentation</title>
   
 
   
@@ -740,7 +740,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.23.49</p>
+and attributes of the KIWI NG XML document in version 9.23.50</p>
 </div>
 <div class="section" id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -1371,6 +1371,14 @@ to run repository signature validation. If not set, no value is
 appended into the repository configuration file. If set the
 relevant key information needs to be provided on the KIWI NG
 commandline using the <code class="xref py py-obj docutils literal notranslate"><span class="pre">--signing-key</span></code> option</p>
+</dd>
+<dt>customize=”/path/to/custom_script”</dt><dd><p>Custom script hook which is invoked with the repo file as parameter
+for each file created by KIWI NG.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the script is provided as relative path it will
+be searched in the image description directory</p>
+</div>
 </dd>
 <dt>imageinclude=”true|false”</dt><dd><p>Specifies whether the given repository should be configured as a
 repository in the image or not. The default behavior is that
