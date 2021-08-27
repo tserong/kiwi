@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.50 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.23.51 documentation</title>
   
 
   
@@ -1197,13 +1197,14 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">diskname</span>
         <span class="p">)</span>
         <span class="c1"># store image file name in result</span>
+        <span class="n">compression</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span><span class="o">.</span><span class="n">get_bundle_compression</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">luks</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">compression</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
             <span class="n">key</span><span class="o">=</span><span class="s1">&#39;disk_image&#39;</span><span class="p">,</span>
             <span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">diskname</span><span class="p">,</span>
             <span class="n">use_for_bundle</span><span class="o">=</span><span class="kc">True</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_format</span> <span class="k">else</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="n">compress</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span><span class="o">.</span><span class="n">get_bundle_compression</span><span class="p">(</span>
-                <span class="n">default</span><span class="o">=</span><span class="kc">True</span>
-            <span class="p">),</span>
+            <span class="n">compress</span><span class="o">=</span><span class="n">compression</span><span class="p">,</span>
             <span class="n">shasum</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
 

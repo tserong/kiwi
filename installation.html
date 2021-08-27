@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Installation &mdash; KIWI NG 9.23.50 documentation</title>
+  <title>Installation &mdash; KIWI NG 9.23.51 documentation</title>
   
 
   
@@ -760,8 +760,8 @@ copy the URL. In Firefox it is the menu <span class="menuselection">Copy link ad
 placeholder contains the respective distribution.
 Use <strong class="command">zypper addrepo</strong> to add it to the list of your repositories:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo zypper addrepo <span class="se">\</span>
-<span class="go">      http://download.opensuse.org/repositories/Virtualization:/Appliances:/Builder/&lt;DIST&gt; \</span>
-<span class="go">      kiwi-appliance-builder</span>
+      http://download.opensuse.org/repositories/Virtualization:/Appliances:/Builder/&lt;DIST&gt; <span class="se">\</span>
+      kiwi-appliance-builder
 </pre></div>
 </div>
 </li>
@@ -778,7 +778,7 @@ Use <strong class="command">zypper addrepo</strong> to add it to the list of you
 package manager’s appropriate command instead. For <strong class="command">dnf</strong>,
 as an example, that is:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo dnf config-manager <span class="se">\</span>
-<span class="go">      --add-repo https://download.opensuse.org/repositories/Virtualization:/Appliances:/Builder/&lt;DIST&gt;/Virtualization:Appliances:Builder.repo</span>
+      --add-repo https://download.opensuse.org/repositories/Virtualization:/Appliances:/Builder/&lt;DIST&gt;/Virtualization:Appliances:Builder.repo
 
 <span class="gp">$ </span>sudo dnf install python3-kiwi
 </pre></div>

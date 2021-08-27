@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Extending KIWI NG with Custom Operations &mdash; KIWI NG 9.23.50 documentation</title>
+  <title>Extending KIWI NG with Custom Operations &mdash; KIWI NG 9.23.51 documentation</title>
   
 
   
@@ -755,7 +755,7 @@ providing additional KIWI NG commands implemented.</p>
 <p>Depending on the demand for custom plugins, the interface
 to hook in code into other parts of the KIWI NG processing
 needs to be extended.</p>
-<p>This description applies for version 9.23.50.</p>
+<p>This description applies for version 9.23.51.</p>
 </div>
 <div class="section" id="the-extension-section">
 <h2>The &lt;extension&gt; Section<a class="headerlink" href="#the-extension-section" title="Permalink to this headline">¶</a></h2>
@@ -787,29 +787,29 @@ The schema file must be a RELAX NG schema in the .rng format. We recommend
 to place the schema as <code class="file docutils literal notranslate"><span class="pre">/usr/share/xml/kiwi/my_plugin.rng</span></code></p>
 <p>For the above example the RELAX NG Schema in the compressed format
 <code class="file docutils literal notranslate"><span class="pre">my_plugin.rnc</span></code> would look like this:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nn">my_plugin</span> <span class="o">=</span> <span class="s">&quot;http://www.my_plugin.com&quot;</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">my_plugin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;http://www.my_plugin.com&quot;</span><span class="w"></span>
 
-<span class="nn">start</span> <span class="o">=</span>
-    <span class="nn">k</span><span class="p">.</span><span class="nn">my_feature</span>
+<span class="nn">start</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">    </span><span class="nn">k</span><span class="p">.</span><span class="nn">my_feature</span><span class="w"></span>
 
-<span class="nn">div</span> <span class="p">{</span>
-    <span class="n">k</span><span class="p">.</span><span class="n">my_feature</span><span class="p">.</span><span class="n">attlist</span> <span class="o">=</span> <span class="n">empty</span>
-    <span class="n">k</span><span class="p">.</span><span class="n">my_feature</span> <span class="o">=</span>
-        <span class="n">element</span> <span class="nl">my_plugin</span><span class="p">:</span><span class="n">my_feature</span> <span class="p">{</span>
-            <span class="n">k</span><span class="p">.</span><span class="n">my_feature</span><span class="p">.</span><span class="n">attlist</span> <span class="o">&amp;</span>
-            <span class="n">k</span><span class="p">.</span><span class="n">title</span>
-        <span class="p">}</span>
-<span class="p">}</span>
+<span class="nn">div</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">k</span><span class="p">.</span><span class="n">my_feature</span><span class="p">.</span><span class="n">attlist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">empty</span><span class="w"></span>
+<span class="w">    </span><span class="n">k</span><span class="p">.</span><span class="n">my_feature</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">        </span><span class="n">element</span><span class="w"> </span><span class="nl">my_plugin</span><span class="p">:</span><span class="n">my_feature</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">k</span><span class="p">.</span><span class="n">my_feature</span><span class="p">.</span><span class="n">attlist</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
+<span class="w">            </span><span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="n">div</span> <span class="p">{</span>
-    <span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="n">attribute</span> <span class="o">=</span>
-        <span class="n">attribute</span> <span class="n">name</span> <span class="p">{</span> <span class="n">text</span> <span class="p">}</span>
-    <span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">attlist</span> <span class="o">=</span> <span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="n">attribute</span>
-    <span class="n">k</span><span class="p">.</span><span class="n">title</span> <span class="o">=</span>
-        <span class="n">element</span> <span class="nl">my_plugin</span><span class="p">:</span><span class="n">title</span> <span class="p">{</span>
-            <span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">attlist</span>
-        <span class="p">}</span>
-<span class="p">}</span>
+<span class="n">div</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="n">attribute</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">        </span><span class="n">attribute</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">attlist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="n">attribute</span><span class="w"></span>
+<span class="w">    </span><span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
+<span class="w">        </span><span class="n">element</span><span class="w"> </span><span class="nl">my_plugin</span><span class="p">:</span><span class="n">title</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">attlist</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>In order to convert this schema to the .rng format just call:</p>

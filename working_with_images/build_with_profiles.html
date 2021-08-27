@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Building Images with Profiles &mdash; KIWI NG 9.23.50 documentation</title>
+  <title>Building Images with Profiles &mdash; KIWI NG 9.23.51 documentation</title>
   
 
   
@@ -745,9 +745,9 @@ defaults. For further details, see <a class="reference internal" href="../concep
 <p>To execute local KIWI NG builds with a specific, selected profile, add the
 command line flag <code class="xref py py-obj docutils literal notranslate"><span class="pre">--profile=$PROFILE_NAME</span></code>:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo kiwi-ng --type oem --profile libvirt system build <span class="se">\</span>
-<span class="go">      --description kiwi/build-tests/x86/leap/test-image-vagrant \</span>
-<span class="go">      --set-repo obs://openSUSE:Leap:15.3/standard \</span>
-<span class="go">      --target-dir /tmp/myimage</span>
+      --description kiwi/build-tests/x86/leap/test-image-vagrant <span class="se">\</span>
+      --set-repo obs://openSUSE:Leap:15.3/standard <span class="se">\</span>
+      --target-dir /tmp/myimage
 </pre></div>
 </div>
 <p>Consult the manual page of <code class="file docutils literal notranslate"><span class="pre">kiwi</span></code> for further details:
