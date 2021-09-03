@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.builder.live &mdash; KIWI NG 9.23.52 documentation</title>
+  <title>kiwi.builder.live &mdash; KIWI NG 9.23.53 documentation</title>
   
 
   
@@ -320,6 +320,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../working_with_images.html">Working with Images</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/iso_to_usb_stick_deployment.html">Deploy ISO Image on an USB Stick</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/iso_to_usb_stick_file_based_deployment.html">Deploy ISO Image as File on a FAT32 Formated USB Stick</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/iso_to_usb_stick_grub2_boot_from_iso.html">Booting a Live ISO Images from Grub2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_setup_for_ec2.html">Image Description for Amazon EC2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_setup_for_azure.html">Image Description for Microsoft Azure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_setup_for_google.html">Image Description for Google Compute Engine</a></li>
@@ -858,7 +859,7 @@
         <span class="c1"># custom iso metadata</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Using following live ISO metadata:&#39;</span><span class="p">)</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Application id: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mbrid</span><span class="o">.</span><span class="n">get_id</span><span class="p">()))</span>
-        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Publisher: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Defaults</span><span class="o">.</span><span class="n">get_publisher</span><span class="p">()))</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Publisher: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">publisher</span><span class="p">))</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Volume id: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">volume_id</span><span class="p">))</span>
         <span class="n">custom_iso_args</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;meta_data&#39;</span><span class="p">:</span> <span class="p">{</span>

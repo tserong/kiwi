@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.template.grub2 &mdash; KIWI NG 9.23.52 documentation</title>
+  <title>kiwi.bootloader.template.grub2 &mdash; KIWI NG 9.23.53 documentation</title>
   
 
   
@@ -320,6 +320,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../working_with_images.html">Working with Images</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/iso_to_usb_stick_deployment.html">Deploy ISO Image on an USB Stick</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/iso_to_usb_stick_file_based_deployment.html">Deploy ISO Image as File on a FAT32 Formated USB Stick</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/iso_to_usb_stick_grub2_boot_from_iso.html">Booting a Live ISO Images from Grub2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_ec2.html">Image Description for Amazon EC2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_azure.html">Image Description for Microsoft Azure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_google.html">Image Description for Google Compute Engine</a></li>
@@ -768,6 +769,9 @@
 <span class="s1">                menuentry &quot;If OK, run snapper rollback and reboot.&quot; { true; }</span>
 <span class="s1">              }</span>
 <span class="s1">            fi</span>
+<span class="s1">            if [ -n &quot;$$</span><span class="si">{iso_path}</span><span class="s1">&quot; ]; then</span>
+<span class="s1">                isoboot=&quot;iso-scan/filename=$$</span><span class="si">{iso_path}</span><span class="s1">&quot;</span>
+<span class="s1">            fi</span>
 <span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">timeout</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
@@ -875,7 +879,7 @@
 <span class="s1">            menuentry &quot;$</span><span class="si">{title}</span><span class="s1">&quot; --class os --unrestricted {</span>
 <span class="s1">                set gfxpayload=keep</span>
 <span class="s1">                echo Loading kernel...</span>
-<span class="s1">                $$linux ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{kernel_file}</span><span class="s1"> $$</span><span class="si">{extra_cmdline}</span><span class="s1"> $</span><span class="si">{boot_options}</span><span class="s1"></span>
+<span class="s1">                $$linux ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{kernel_file}</span><span class="s1"> $$</span><span class="si">{extra_cmdline}</span><span class="s1"> $$</span><span class="si">{isoboot}</span><span class="s1"> $</span><span class="si">{boot_options}</span><span class="s1"></span>
 <span class="s1">                echo Loading initrd...</span>
 <span class="s1">                $$initrd ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{initrd_file}</span><span class="s1"></span>
 <span class="s1">            }</span>
@@ -897,7 +901,7 @@
 <span class="s1">            menuentry &quot;$</span><span class="si">{title}</span><span class="s1">&quot; --class os --unrestricted {</span>
 <span class="s1">                set gfxpayload=keep</span>
 <span class="s1">                echo Loading kernel...</span>
-<span class="s1">                linux ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{kernel_file}</span><span class="s1"> $$</span><span class="si">{extra_cmdline}</span><span class="s1"> $</span><span class="si">{boot_options}</span><span class="s1"></span>
+<span class="s1">                linux ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{kernel_file}</span><span class="s1"> $$</span><span class="si">{extra_cmdline}</span><span class="s1"> $$</span><span class="si">{isoboot}</span><span class="s1"> $</span><span class="si">{boot_options}</span><span class="s1"></span>
 <span class="s1">                echo Loading initrd...</span>
 <span class="s1">                initrd ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{initrd_file}</span><span class="s1"></span>
 <span class="s1">            }</span>
@@ -907,7 +911,7 @@
 <span class="s1">            menuentry &quot;Failsafe -- $</span><span class="si">{title}</span><span class="s1">&quot; --class os --unrestricted {</span>
 <span class="s1">                set gfxpayload=keep</span>
 <span class="s1">                echo Loading kernel...</span>
-<span class="s1">                $$linux ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{kernel_file}</span><span class="s1"> $$</span><span class="si">{extra_cmdline}</span><span class="s1"> $</span><span class="si">{failsafe_boot_options}</span><span class="s1"></span>
+<span class="s1">                $$linux ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{kernel_file}</span><span class="s1"> $$</span><span class="si">{extra_cmdline}</span><span class="s1"> $$</span><span class="si">{isoboot}</span><span class="s1"> $</span><span class="si">{failsafe_boot_options}</span><span class="s1"></span>
 <span class="s1">                echo Loading initrd...</span>
 <span class="s1">                $$initrd ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{initrd_file}</span><span class="s1"></span>
 <span class="s1">            }</span>
@@ -929,7 +933,7 @@
 <span class="s1">            menuentry &quot;Failsafe -- $</span><span class="si">{title}</span><span class="s1">&quot; --class os --unrestricted {</span>
 <span class="s1">                set gfxpayload=keep</span>
 <span class="s1">                echo Loading kernel...</span>
-<span class="s1">                linux ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{kernel_file}</span><span class="s1"> $$</span><span class="si">{extra_cmdline}</span><span class="s1"> $</span><span class="si">{failsafe_boot_options}</span><span class="s1"></span>
+<span class="s1">                linux ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{kernel_file}</span><span class="s1"> $$</span><span class="si">{extra_cmdline}</span><span class="s1"> $$</span><span class="si">{isoboot}</span><span class="s1"> $</span><span class="si">{failsafe_boot_options}</span><span class="s1"></span>
 <span class="s1">                echo Loading initrd...</span>
 <span class="s1">                initrd ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{initrd_file}</span><span class="s1"></span>
 <span class="s1">            }</span>
@@ -971,7 +975,7 @@
 <span class="s1">            menuentry &quot;Mediacheck&quot; --class os --unrestricted {</span>
 <span class="s1">                set gfxpayload=keep</span>
 <span class="s1">                echo Loading kernel...</span>
-<span class="s1">                $$linux ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{kernel_file}</span><span class="s1"> mediacheck=1 plymouth.enable=0 $</span><span class="si">{boot_options}</span><span class="s1"></span>
+<span class="s1">                $$linux ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{kernel_file}</span><span class="s1"> mediacheck=1 plymouth.enable=0 $$</span><span class="si">{isoboot}</span><span class="s1"> $</span><span class="si">{boot_options}</span><span class="s1"></span>
 <span class="s1">                echo Loading initrd...</span>
 <span class="s1">                $$initrd ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{initrd_file}</span><span class="s1"></span>
 <span class="s1">            }</span>
@@ -993,7 +997,7 @@
 <span class="s1">            menuentry &quot;Mediacheck&quot; --class os --unrestricted {</span>
 <span class="s1">                set gfxpayload=keep</span>
 <span class="s1">                echo Loading kernel...</span>
-<span class="s1">                linux ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{kernel_file}</span><span class="s1"> mediacheck=1 plymouth.enable=0 $</span><span class="si">{boot_options}</span><span class="s1"></span>
+<span class="s1">                linux ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{kernel_file}</span><span class="s1"> mediacheck=1 plymouth.enable=0 $$</span><span class="si">{isoboot}</span><span class="s1"> $</span><span class="si">{boot_options}</span><span class="s1"></span>
 <span class="s1">                echo Loading initrd...</span>
 <span class="s1">                initrd ($$root)$</span><span class="si">{bootpath}</span><span class="s1">/$</span><span class="si">{initrd_file}</span><span class="s1"></span>
 <span class="s1">            }</span>

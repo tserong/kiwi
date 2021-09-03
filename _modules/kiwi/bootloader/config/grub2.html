@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.52 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.53 documentation</title>
   
 
   
@@ -320,6 +320,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../../working_with_images.html">Working with Images</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/iso_to_usb_stick_deployment.html">Deploy ISO Image on an USB Stick</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/iso_to_usb_stick_file_based_deployment.html">Deploy ISO Image as File on a FAT32 Formated USB Stick</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/iso_to_usb_stick_grub2_boot_from_iso.html">Booting a Live ISO Images from Grub2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_ec2.html">Image Description for Amazon EC2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_azure.html">Image Description for Microsoft Azure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../working_with_images/disk_setup_for_google.html">Image Description for Google Compute Engine</a></li>
@@ -1171,7 +1172,20 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_copy_efi_modules_to_boot_directory</span><span class="p">(</span><span class="n">lookup_path</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_setup_secure_boot_efi_image</span><span class="p">(</span>
                 <span class="n">lookup_path</span><span class="o">=</span><span class="n">lookup_path</span><span class="p">,</span> <span class="n">mbrid</span><span class="o">=</span><span class="n">mbrid</span>
-            <span class="p">)</span></div>
+            <span class="p">)</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Creating loopback config&#39;</span><span class="p">)</span>
+        <span class="n">loopback_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">boot_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_boot_path</span><span class="p">(),</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">boot_directory_name</span><span class="p">,</span> <span class="s1">&#39;/loopback.cfg&#39;</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_create_loopback_config</span><span class="p">(</span>
+            <span class="n">loopback_file</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="BootLoaderConfigGrub2.setup_live_boot_images"><a class="viewcode-back" href="../../../../api/kiwi.bootloader.config.html#kiwi.bootloader.config.grub2.BootLoaderConfigGrub2.setup_live_boot_images">[docs]</a>    <span class="k">def</span> <span class="nf">setup_live_boot_images</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbrid</span><span class="p">,</span> <span class="n">lookup_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -2136,6 +2150,14 @@
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiDiskGeometryError</span><span class="p">(</span>
                 <span class="s1">&#39;unknown format for disk geometry: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">fdasd_output</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_loopback_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">loopback_cfg</span><span class="p">:</span>
+            <span class="n">loopback_cfg</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                <span class="s1">&#39;source /boot/</span><span class="si">{0}</span><span class="s1">/grub.cfg</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">boot_directory_name</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span>
+                <span class="p">)</span>
             <span class="p">)</span></div>
 </pre></div>
 
