@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.storage.subformat.vmdk &mdash; KIWI NG 9.23.53 documentation</title>
+  <title>kiwi.storage.subformat.vmdk &mdash; KIWI NG 9.23.54 documentation</title>
   
 
   
@@ -779,11 +779,7 @@
 <span class="sd">        :param dict custom_args: custom qemu arguments dictionary</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">image_format</span> <span class="o">=</span> <span class="s1">&#39;vmdk&#39;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_qemu_option_list</span><span class="p">(</span><span class="n">custom_args</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">patch_header_for_pvscsi</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="n">custom_args</span> <span class="ow">and</span> <span class="s1">&#39;adapter_type=pvscsi&#39;</span> <span class="ow">in</span> <span class="n">custom_args</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">patch_header_for_pvscsi</span> <span class="o">=</span> <span class="kc">True</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_qemu_option_list</span><span class="p">(</span><span class="n">custom_args</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DiskFormatVmdk.create_image_format"><a class="viewcode-back" href="../../../../api/kiwi.storage.subformat.html#kiwi.storage.subformat.vmdk.DiskFormatVmdk.create_image_format">[docs]</a>    <span class="k">def</span> <span class="nf">create_image_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -797,8 +793,6 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">get_target_file_path_for_format</span><span class="p">(</span><span class="s1">&#39;vmdk&#39;</span><span class="p">)</span>
             <span class="p">]</span>
         <span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">patch_header_for_pvscsi</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_inject_pvscsi_adapter_type</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_create_vmware_settings_file</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="DiskFormatVmdk.store_to_result"><a class="viewcode-back" href="../../../../api/kiwi.storage.subformat.html#kiwi.storage.subformat.vmdk.DiskFormatVmdk.store_to_result">[docs]</a>    <span class="k">def</span> <span class="nf">store_to_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Result</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -912,28 +906,7 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiTemplateError</span><span class="p">(</span>
                 <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-            <span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_inject_pvscsi_adapter_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        QEMU does not support the pvscsi adapter type.</span>
-<span class="sd">        According to suggestions VMware giving to their customers, just</span>
-<span class="sd">        open the VMDK file, and change ddb.adapterType directly.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">vmdk_image_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_target_file_path_for_format</span><span class="p">(</span><span class="s1">&#39;vmdk&#39;</span><span class="p">)</span>
-        <span class="n">vmdk_descriptor</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">vmdk_image_name</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">vmdk</span><span class="p">:</span>
-            <span class="n">vmdk</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-            <span class="n">vmdk_descriptor</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">vmdk</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">1024</span><span class="p">))</span>
-
-        <span class="k">if</span> <span class="n">vmdk_descriptor</span><span class="p">:</span>
-            <span class="n">vmdk_descriptor</span> <span class="o">=</span> <span class="n">vmdk_descriptor</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                <span class="sa">b</span><span class="s1">&#39;&quot;lsilogic&quot;&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&quot;pvscsi&quot;&#39;</span>
-            <span class="p">)</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">vmdk_image_name</span><span class="p">,</span> <span class="s1">&#39;r+b&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">vmdk</span><span class="p">:</span>
-                <span class="n">vmdk</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-                <span class="n">vmdk</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">vmdk_descriptor</span><span class="p">)</span>
-                <span class="n">vmdk</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span></div>
+            <span class="p">)</span></div>
 </pre></div>
 
            </div>

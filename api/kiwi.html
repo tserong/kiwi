@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi Package &mdash; KIWI NG 9.23.53 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.23.54 documentation</title>
   
 
   
@@ -5369,6 +5369,14 @@ configured profiles</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="kiwi.xml_state.XMLState.get_archives_target_dirs">
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">get_archives_target_dirs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">packages_sections_names</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">kiwi.xml_parse.packages</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_archives_target_dirs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_archives_target_dirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dict of archive names and target dirs for packages section(s), if any
+:return: archive names and its target dir
+:rtype: dict</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="kiwi.xml_state.XMLState.get_bootstrap_archives">
 <span class="sig-name descname"><span class="pre">get_bootstrap_archives</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_archives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_archives" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of archive names from the type=”bootstrap” packages section(s)</p>
@@ -5380,6 +5388,15 @@ configured profiles</p>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kiwi.xml_state.XMLState.get_bootstrap_archives_target_dirs">
+<span class="sig-name descname"><span class="pre">get_bootstrap_archives_target_dirs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_bootstrap_archives_target_dirs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_bootstrap_archives_target_dirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dict of archive names and target dirs from the type=”bootstrap”
+packages section(s)
+:return: archive names and its target dir
+:rtype: dict</p>
 </dd></dl>
 
 <dl class="py method">
@@ -6364,6 +6381,15 @@ type=”image” and type=build_type</p>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)">list</a></p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kiwi.xml_state.XMLState.get_system_archives_target_dirs">
+<span class="sig-name descname"><span class="pre">get_system_archives_target_dirs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_system_archives_target_dirs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_system_archives_target_dirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dict of archive names and its target dir from the packages sections matching
+type=”image” and type=build_type
+:return: archive names and its target dir
+:rtype: dict</p>
 </dd></dl>
 
 <dl class="py method">

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.utils.sync &mdash; KIWI NG 9.23.53 documentation</title>
+  <title>kiwi.utils.sync &mdash; KIWI NG 9.23.54 documentation</title>
   
 
   
@@ -751,6 +751,7 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">stat</span> <span class="kn">import</span> <span class="n">ST_MODE</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">import</span> <span class="nn">xattr</span>
 
 <span class="c1"># project</span>
@@ -761,23 +762,59 @@
 
 <div class="viewcode-block" id="DataSync"><a class="viewcode-back" href="../../../api/kiwi.utils.html#kiwi.utils.sync.DataSync">[docs]</a><span class="k">class</span> <span class="nc">DataSync</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    **Sync data from a source directory to a target directory</span>
-<span class="sd">    using the rsync protocol**</span>
-
-<span class="sd">    :param str source_dir: source directory path name</span>
-<span class="sd">    :param str target_dir: target directory path name</span>
+<span class="sd">    **Sync data from a source directory to a target directory**</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_dir</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a new DataSync instance and initialize</span>
+<span class="sd">        sync source and target</span>
+
+<span class="sd">        :param str source_dir: source directory path name</span>
+<span class="sd">        :param str target_dir: target directory path name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">source_dir</span> <span class="o">=</span> <span class="n">source_dir</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span> <span class="o">=</span> <span class="n">target_dir</span>
 
-<div class="viewcode-block" id="DataSync.sync_data"><a class="viewcode-back" href="../../../api/kiwi.utils.html#kiwi.utils.sync.DataSync.sync_data">[docs]</a>    <span class="k">def</span> <span class="nf">sync_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="DataSync.sync_data"><a class="viewcode-back" href="../../../api/kiwi.utils.html#kiwi.utils.sync.DataSync.sync_data">[docs]</a>    <span class="k">def</span> <span class="nf">sync_data</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">exclude</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="n">force_trailing_slash</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Sync data from source to target using rsync</span>
+<span class="sd">        Sync data from source to target using the rsync protocol</span>
 
 <span class="sd">        :param list options: rsync options</span>
 <span class="sd">        :param list exclude: file patterns to exclude</span>
+<span class="sd">        :param bool force_trailing_slash: add &#39;/&#39; to source_dir if not present</span>
+
+<span class="sd">        A speciality of the rsync tool is that it behaves differently</span>
+<span class="sd">        if the given source_dir ends with a &#39;/&#39; or not. If it ends</span>
+<span class="sd">        with a slash the data structure below will be synced to the</span>
+<span class="sd">        target_dir. If it does not end with a slash the source_dir</span>
+<span class="sd">        and its contents are synced to the target_dir. For example</span>
+
+<span class="sd">        .. code:: bash</span>
+
+<span class="sd">            source</span>
+<span class="sd">              └── some_data</span>
+
+<span class="sd">            1. $ rsync -a source target</span>
+
+<span class="sd">            target</span>
+<span class="sd">              └── source</span>
+<span class="sd">                    └── some_data</span>
+
+<span class="sd">            2. $ rsync -a source/ target</span>
+
+<span class="sd">            target</span>
+<span class="sd">              └── some_data</span>
+
+<span class="sd">        The parameter force_trailing_slash can be used to make</span>
+<span class="sd">        sure rsync behaves like shown in the second case. If</span>
+<span class="sd">        set to true a &#39;/&#39; is appended to the given source_dir</span>
+<span class="sd">        if not already present</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">force_trailing_slash</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">source_dir</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">source_dir</span> <span class="o">+=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
         <span class="n">target_entry_permissions</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">exclude_options</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">rsync_options</span> <span class="o">=</span> <span class="p">[]</span>
@@ -820,7 +857,7 @@
             <span class="c1"># not changed</span>
             <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span><span class="p">,</span> <span class="n">target_entry_permissions</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="DataSync.target_supports_extended_attributes"><a class="viewcode-back" href="../../../api/kiwi.utils.html#kiwi.utils.sync.DataSync.target_supports_extended_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">target_supports_extended_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DataSync.target_supports_extended_attributes"><a class="viewcode-back" href="../../../api/kiwi.utils.html#kiwi.utils.sync.DataSync.target_supports_extended_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">target_supports_extended_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check if the target directory supports extended filesystem</span>
 <span class="sd">        attributes</span>

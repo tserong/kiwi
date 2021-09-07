@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.storage.subformat.base &mdash; KIWI NG 9.23.53 documentation</title>
+  <title>kiwi.storage.subformat.base &mdash; KIWI NG 9.23.54 documentation</title>
   
 
   
@@ -872,13 +872,9 @@
             <span class="n">ordered_args</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">custom_args</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">ordered_args</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
                 <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s1">&#39;adapter_type=pvscsi&#39;</span><span class="p">:</span>
-                    <span class="c1"># qemu does not support the pvscsi type:</span>
-                    <span class="c1"># To build a vmdk image with ddb.adapterType set to</span>
-                    <span class="c1"># pvscsi we need to manually change the header but</span>
-                    <span class="c1"># have to create a vmdk with lsilogic as scsi adapter</span>
-                    <span class="c1"># first. I don&#39;t really like this hack but it seems</span>
-                    <span class="c1"># there is no way around. For details see</span>
-                    <span class="c1"># bsc#1099569</span>
+                    <span class="c1"># Building for the pvscsi ddb.adapterType only</span>
+                    <span class="c1"># affects the guest configuration (vmx). For the</span>
+                    <span class="c1"># vmdk disk format this is the same as lsilogic</span>
                     <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;adapter_type=lsilogic&#39;</span>
                 <span class="n">options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;-o&#39;</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">value</span><span class="p">:</span>

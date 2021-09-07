@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.utils Package &mdash; KIWI NG 9.23.53 documentation</title>
+  <title>kiwi.utils Package &mdash; KIWI NG 9.23.54 documentation</title>
   
 
   
@@ -955,35 +955,51 @@ a temporary file is created instead</p>
 <span id="kiwi-utils-sync-module"></span><h2><a class="reference internal" href="#module-kiwi.utils.sync" title="kiwi.utils.sync"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.utils.sync</span></code></a> Module<a class="headerlink" href="#module-kiwi.utils.sync" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="kiwi.utils.sync.DataSync">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.utils.sync.</span></span><span class="sig-name descname"><span class="pre">DataSync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sync.html#DataSync"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sync.DataSync" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.utils.sync.</span></span><span class="sig-name descname"><span class="pre">DataSync</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sync.html#DataSync"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sync.DataSync" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p><strong>Sync data from a source directory to a target directory
-using the rsync protocol</strong></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>source_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – source directory path name</p></li>
-<li><p><strong>target_dir</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – target directory path name</p></li>
-</ul>
-</dd>
-</dl>
+<p><strong>Sync data from a source directory to a target directory</strong></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.utils.sync.DataSync.sync_data">
-<span class="sig-name descname"><span class="pre">sync_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sync.html#DataSync.sync_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sync.DataSync.sync_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sync data from source to target using rsync</p>
+<span class="sig-name descname"><span class="pre">sync_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_trailing_slash</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/kiwi/utils/sync.html#DataSync.sync_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sync.DataSync.sync_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sync data from source to target using the rsync protocol</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – rsync options</p></li>
 <li><p><strong>exclude</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – file patterns to exclude</p></li>
+<li><p><strong>force_trailing_slash</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – add ‘/’ to source_dir if not present</p></li>
 </ul>
 </dd>
 </dl>
+<p>A speciality of the rsync tool is that it behaves differently
+if the given source_dir ends with a ‘/’ or not. If it ends
+with a slash the data structure below will be synced to the
+target_dir. If it does not end with a slash the source_dir
+and its contents are synced to the target_dir. For example</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span>
+  └── some_data
+
+<span class="m">1</span>. $ rsync -a <span class="nb">source</span> target
+
+target
+  └── <span class="nb">source</span>
+        └── some_data
+
+<span class="m">2</span>. $ rsync -a source/ target
+
+target
+  └── some_data
+</pre></div>
+</div>
+<p>The parameter force_trailing_slash can be used to make
+sure rsync behaves like shown in the second case. If
+set to true a ‘/’ is appended to the given source_dir
+if not already present</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.utils.sync.DataSync.target_supports_extended_attributes">
-<span class="sig-name descname"><span class="pre">target_supports_extended_attributes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/utils/sync.html#DataSync.target_supports_extended_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sync.DataSync.target_supports_extended_attributes" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">target_supports_extended_attributes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/kiwi/utils/sync.html#DataSync.target_supports_extended_attributes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.utils.sync.DataSync.target_supports_extended_attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the target directory supports extended filesystem
 attributes</p>
 <dl class="field-list simple">

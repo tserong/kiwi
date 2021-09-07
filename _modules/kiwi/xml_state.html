@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.xml_state &mdash; KIWI NG 9.23.53 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.23.54 documentation</title>
   
 
   
@@ -2842,6 +2842,45 @@
 <span class="sd">        Return preserved UUID</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_uuid</span></div>
+
+<div class="viewcode-block" id="XMLState.get_archives_target_dirs"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_archives_target_dirs">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_archives_target_dirs</span><span class="p">(</span>
+        <span class="n">packages_sections_names</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">xml_parse</span><span class="o">.</span><span class="n">packages</span><span class="p">]]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dict of archive names and target dirs for packages section(s), if any</span>
+<span class="sd">        :return: archive names and its target dir</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">packages_sections_names</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">package_section_name</span> <span class="ow">in</span> <span class="n">packages_sections_names</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">archive</span> <span class="ow">in</span> <span class="n">package_section_name</span><span class="o">.</span><span class="n">get_archive</span><span class="p">():</span>
+                    <span class="n">result</span><span class="p">[</span><span class="n">archive</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">get_target_dir</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="XMLState.get_bootstrap_archives_target_dirs"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_bootstrap_archives_target_dirs">[docs]</a>    <span class="k">def</span> <span class="nf">get_bootstrap_archives_target_dirs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dict of archive names and target dirs from the type=&quot;bootstrap&quot;</span>
+<span class="sd">        packages section(s)</span>
+<span class="sd">        :return: archive names and its target dir</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_archives_target_dirs</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_packages_sections</span><span class="p">([</span><span class="s1">&#39;bootstrap&#39;</span><span class="p">])</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="XMLState.get_system_archives_target_dirs"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_system_archives_target_dirs">[docs]</a>    <span class="k">def</span> <span class="nf">get_system_archives_target_dirs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dict of archive names and its target dir from the packages sections matching</span>
+<span class="sd">        type=&quot;image&quot; and type=build_type</span>
+<span class="sd">        :return: archive names and its target dir</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_archives_target_dirs</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_packages_sections</span><span class="p">([</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_build_type_name</span><span class="p">()])</span>
+        <span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_used_profiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">profiles</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
