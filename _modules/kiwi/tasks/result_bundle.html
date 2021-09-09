@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.tasks.result_bundle &mdash; KIWI NG 9.23.54 documentation</title>
+  <title>kiwi.tasks.result_bundle &mdash; KIWI NG 9.23.55 documentation</title>
   
 
   
@@ -752,6 +752,7 @@
 <span class="sd">usage: kiwi-ng result bundle -h | --help</span>
 <span class="sd">       kiwi-ng result bundle --target-dir=&lt;directory&gt; --id=&lt;bundle_id&gt; --bundle-dir=&lt;directory&gt;</span>
 <span class="sd">           [--zsync-source=&lt;download_location&gt;]</span>
+<span class="sd">           [--package-as-rpm]</span>
 <span class="sd">       kiwi-ng result bundle help</span>
 
 <span class="sd">commands:</span>
@@ -778,9 +779,14 @@
 <span class="sd">        in a kiwi build only those are meaningful for a partial binary</span>
 <span class="sd">        file download. It is expected that all files from a bundle</span>
 <span class="sd">        are placed to the same download location</span>
+<span class="sd">    --package-as-rpm</span>
+<span class="sd">        Take all result files and create an rpm package out of it</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">dedent</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">glob</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
 <span class="c1"># project</span>
@@ -790,6 +796,7 @@
 <span class="kn">from</span> <span class="nn">kiwi.path</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.compress</span> <span class="kn">import</span> <span class="n">Compress</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.checksum</span> <span class="kn">import</span> <span class="n">Checksum</span>
+<span class="kn">from</span> <span class="nn">kiwi.privileges</span> <span class="kn">import</span> <span class="n">Privileges</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
@@ -820,6 +827,9 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_help</span><span class="p">():</span>
             <span class="k">return</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">command_args</span><span class="p">[</span><span class="s1">&#39;--package-as-rpm&#39;</span><span class="p">]:</span>
+            <span class="n">Privileges</span><span class="o">.</span><span class="n">check_for_root_permissions</span><span class="p">()</span>
+
         <span class="c1"># load serialized result object from target directory</span>
         <span class="n">result_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">command_args</span><span class="p">[</span><span class="s1">&#39;--target-dir&#39;</span><span class="p">])</span>
         <span class="n">bundle_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">command_args</span><span class="p">[</span><span class="s1">&#39;--bundle-dir&#39;</span><span class="p">])</span>
@@ -836,11 +846,12 @@
         <span class="p">)</span>
         <span class="n">image_version</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_image_version</span><span class="p">()</span>
         <span class="n">image_name</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">xml_data</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+        <span class="n">image_description</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_description_section</span><span class="p">()</span>
         <span class="n">ordered_results</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
 
         <span class="c1"># hard link bundle files, compress and build checksum</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">bundle_directory</span><span class="p">):</span>
-            <span class="n">Path</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">bundle_directory</span><span class="p">)</span>
+        <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="n">bundle_directory</span><span class="p">)</span>
+        <span class="n">Path</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">bundle_directory</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">result_file</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">ordered_results</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
             <span class="k">if</span> <span class="n">result_file</span><span class="o">.</span><span class="n">use_for_bundle</span><span class="p">:</span>
                 <span class="n">bundle_file_basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">result_file</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>
@@ -902,7 +913,87 @@
                                 <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">bundle_file</span><span class="p">),</span>
                                 <span class="n">os</span><span class="o">.</span><span class="n">linesep</span>
                             <span class="p">)</span>
-                        <span class="p">)</span></div>
+                        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">command_args</span><span class="p">[</span><span class="s1">&#39;--package-as-rpm&#39;</span><span class="p">]:</span>
+            <span class="n">ResultBundleTask</span><span class="o">.</span><span class="n">_build_rpm_package</span><span class="p">(</span>
+                <span class="n">bundle_directory</span><span class="p">,</span> <span class="n">image_name</span><span class="p">,</span> <span class="n">image_version</span><span class="p">,</span>
+                <span class="n">image_description</span><span class="o">.</span><span class="n">specification</span><span class="p">,</span>
+                <span class="nb">list</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">iglob</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bundle_directory</span><span class="si">}</span><span class="s1">/*&#39;</span><span class="p">))</span>
+            <span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_build_rpm_package</span><span class="p">(</span>
+        <span class="n">bundle_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">image_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">image_version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">description_text</span><span class="p">,</span> <span class="n">filenames</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">source_links</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">source_file</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+            <span class="n">source_links</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="s1">&#39;ln&#39;</span><span class="p">,</span> <span class="s1">&#39;%</span><span class="si">{_sourcedir}</span><span class="s1">/&#39;</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">source_file</span><span class="p">),</span>
+                        <span class="s1">&#39;%</span><span class="si">{buildroot}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;/var/tmp/</span><span class="si">{</span><span class="n">image_name</span><span class="si">}</span><span class="s1">&#39;</span>
+                    <span class="p">]</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="n">spec_file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bundle_directory</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">image_name</span><span class="si">}</span><span class="s1">.spec&#39;</span><span class="p">)</span>
+        <span class="n">spec_data</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            </span><span class="si">%g</span><span class="s1">lobal _sourcedir %(pwd)</span>
+<span class="s1">            </span><span class="si">%g</span><span class="s1">lobal _rpmdir .</span>
+
+<span class="s1">            Url:            https://osinside.github.io/kiwi</span>
+<span class="s1">            Name:           </span><span class="si">{name}</span><span class="s1"></span>
+<span class="s1">            Summary:        </span><span class="si">{name}</span><span class="s1"></span>
+<span class="s1">            Version:        </span><span class="si">{version}</span><span class="s1"></span>
+<span class="s1">            Release:        0</span>
+<span class="s1">            Group:          %{{sysgroup}}</span>
+<span class="s1">            License:        GPL-3.0-or-later</span>
+<span class="s1">            BuildRoot:      %{{_tmppath}}/%{{name}}-%{{version}}-build</span>
+<span class="s1">            BuildArch:      noarch</span>
+
+<span class="s1">            </span><span class="si">%d</span><span class="s1">escription</span>
+<span class="s1">            </span><span class="si">{description}</span><span class="s1"></span>
+
+<span class="s1">            %prep</span>
+
+<span class="s1">            %build</span>
+
+<span class="s1">            </span><span class="si">%i</span><span class="s1">nstall</span>
+<span class="s1">            install -d -m 755 %{{buildroot}}/var/tmp/</span><span class="si">{name}</span><span class="s1"></span>
+
+<span class="s1">            </span><span class="si">{source_links}</span><span class="s1"></span>
+
+<span class="s1">            </span><span class="si">%c</span><span class="s1">lean</span>
+<span class="s1">            rm -rf %{{buildroot}}</span>
+
+<span class="s1">            </span><span class="si">%f</span><span class="s1">iles</span>
+<span class="s1">            </span><span class="si">%d</span><span class="s1">efattr(-, root, root)</span>
+<span class="s1">            /var/tmp/</span><span class="si">{name}</span><span class="s1"></span>
+
+<span class="s1">            </span><span class="si">%c</span><span class="s1">hangelog</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">image_name</span><span class="p">,</span>
+            <span class="n">version</span><span class="o">=</span><span class="n">image_version</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">description_text</span><span class="p">,</span>
+            <span class="n">source_links</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">source_links</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">spec_file_name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">spec</span><span class="p">:</span>
+            <span class="n">spec</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">spec_data</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">bundle_directory</span><span class="p">)</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Creating rpm package...&#39;</span><span class="p">)</span>
+        <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="s1">&#39;rpmbuild&#39;</span><span class="p">,</span> <span class="s1">&#39;--nodeps&#39;</span><span class="p">,</span> <span class="s1">&#39;--nocheck&#39;</span><span class="p">,</span> <span class="s1">&#39;--rmspec&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;-bb&#39;</span><span class="p">,</span> <span class="n">spec_file_name</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">source_file</span> <span class="ow">in</span> <span class="n">filenames</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">source_file</span><span class="p">)</span>
+        <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39;mv noarch/*.rpm . &amp;&amp; rmdir noarch&#39;</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_help</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">command_args</span><span class="p">[</span><span class="s1">&#39;help&#39;</span><span class="p">]:</span>
