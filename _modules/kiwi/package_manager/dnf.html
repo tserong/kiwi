@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.package_manager.dnf &mdash; KIWI NG 9.23.55 documentation</title>
+  <title>kiwi.package_manager.dnf &mdash; KIWI NG 9.23.56 documentation</title>
   
 
   
@@ -889,20 +889,22 @@
 
 <span class="sd">        :rtype: namedtuple</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">delete_items</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">delete_item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_requests</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;rpm&#39;</span><span class="p">,</span> <span class="s1">&#39;-q&#39;</span><span class="p">,</span> <span class="n">delete_item</span><span class="p">])</span>
-                <span class="n">delete_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">delete_item</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                <span class="c1"># ignore packages which are not installed</span>
-                <span class="k">pass</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">delete_items</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">KiwiRequestError</span><span class="p">(</span>
-                <span class="s1">&#39;None of the requested packages to delete are installed&#39;</span>
-            <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_requests</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">force</span><span class="p">:</span>
+            <span class="n">delete_items</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">delete_item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_requests</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                        <span class="p">[</span><span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;rpm&#39;</span><span class="p">,</span> <span class="s1">&#39;-q&#39;</span><span class="p">,</span> <span class="n">delete_item</span><span class="p">]</span>
+                    <span class="p">)</span>
+                    <span class="n">delete_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">delete_item</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                    <span class="c1"># ignore packages which are not installed</span>
+                    <span class="k">pass</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">delete_items</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">KiwiRequestError</span><span class="p">(</span>
+                    <span class="s1">&#39;None of the requested packages to delete are installed&#39;</span>
+                <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_requests</span><span class="p">()</span>
             <span class="n">delete_options</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;--nodeps&#39;</span><span class="p">,</span> <span class="s1">&#39;--allmatches&#39;</span><span class="p">,</span> <span class="s1">&#39;--noscripts&#39;</span><span class="p">]</span>
             <span class="k">return</span> <span class="n">Command</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
                 <span class="p">[</span>
@@ -912,13 +914,14 @@
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">chroot_dnf_args</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">move_to_root</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dnf_args</span><span class="p">)</span>
+            <span class="n">dnf_command</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;dnf&#39;</span>
+            <span class="p">]</span> <span class="o">+</span> <span class="n">chroot_dnf_args</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="o">+</span> <span class="p">[</span>
+                <span class="s1">&#39;autoremove&#39;</span>
+            <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_requests</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cleanup_requests</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">Command</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
-                <span class="p">[</span>
-                    <span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;dnf&#39;</span>
-                <span class="p">]</span> <span class="o">+</span> <span class="n">chroot_dnf_args</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_args</span> <span class="o">+</span> <span class="p">[</span>
-                    <span class="s1">&#39;autoremove&#39;</span>
-                <span class="p">]</span> <span class="o">+</span> <span class="n">delete_items</span><span class="p">,</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">command_env</span>
+                <span class="n">dnf_command</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">command_env</span>
             <span class="p">)</span></div>
 
 <div class="viewcode-block" id="PackageManagerDnf.update"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.dnf.PackageManagerDnf.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">command_call_type</span><span class="p">:</span>

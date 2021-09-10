@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.tasks.result_bundle &mdash; KIWI NG 9.23.55 documentation</title>
+  <title>kiwi.tasks.result_bundle &mdash; KIWI NG 9.23.56 documentation</title>
   
 
   
@@ -850,8 +850,10 @@
         <span class="n">ordered_results</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span>
 
         <span class="c1"># hard link bundle files, compress and build checksum</span>
-        <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="n">bundle_directory</span><span class="p">)</span>
-        <span class="n">Path</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">bundle_directory</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">command_args</span><span class="p">[</span><span class="s1">&#39;--package-as-rpm&#39;</span><span class="p">]:</span>
+            <span class="n">Path</span><span class="o">.</span><span class="n">wipe</span><span class="p">(</span><span class="n">bundle_directory</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">bundle_directory</span><span class="p">):</span>
+            <span class="n">Path</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">bundle_directory</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">result_file</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">ordered_results</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
             <span class="k">if</span> <span class="n">result_file</span><span class="o">.</span><span class="n">use_for_bundle</span><span class="p">:</span>
                 <span class="n">bundle_file_basename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">result_file</span><span class="o">.</span><span class="n">filename</span><span class="p">)</span>

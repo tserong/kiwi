@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>kiwi.cli &mdash; KIWI NG 9.23.55 documentation</title>
+  <title>kiwi.cli &mdash; KIWI NG 9.23.56 documentation</title>
   
 
   
@@ -758,7 +758,8 @@
 <span class="sd">               [--color-output]</span>
 <span class="sd">               [--config=&lt;configfile&gt;]</span>
 <span class="sd">           image &lt;command&gt; [&lt;args&gt;...]</span>
-<span class="sd">       kiwi-ng [--debug]</span>
+<span class="sd">       kiwi-ng [--logfile=&lt;filename&gt;]</span>
+<span class="sd">               [--debug]</span>
 <span class="sd">               [--color-output]</span>
 <span class="sd">               [--config=&lt;configfile&gt;]</span>
 <span class="sd">           result &lt;command&gt; [&lt;args&gt;...]</span>
@@ -784,6 +785,10 @@
 <span class="sd">        use specified runtime configuration file. If</span>
 <span class="sd">        not specified the runtime configuration is looked</span>
 <span class="sd">        up at ~/.config/kiwi/config.yml or /etc/kiwi.yml</span>
+<span class="sd">    --logfile=&lt;filename&gt;</span>
+<span class="sd">        create a log file containing all log information including</span>
+<span class="sd">        debug information even if this is was not requested by the</span>
+<span class="sd">        debug switch</span>
 <span class="sd">    --debug</span>
 <span class="sd">        print debug information</span>
 <span class="sd">    -v --version</span>
@@ -792,10 +797,6 @@
 <span class="sd">        show manual page</span>
 
 <span class="sd">global options for services: image, system</span>
-<span class="sd">    --logfile=&lt;filename&gt;</span>
-<span class="sd">        create a log file containing all log information including</span>
-<span class="sd">        debug information even if this is was not requested by the</span>
-<span class="sd">        debug switch</span>
 <span class="sd">    --profile=&lt;name&gt;</span>
 <span class="sd">        profile name, multiple profiles can be selected by passing</span>
 <span class="sd">        this option multiple times</span>
