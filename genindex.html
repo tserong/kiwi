@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; KIWI NG 9.23.60 documentation</title>
+  <title>Index &mdash; KIWI NG 9.23.61 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -151,13 +151,12 @@
 <li class="toctree-l2"><a class="reference internal" href="concept_and_workflow/profiles.html">Image Profiles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concept_and_workflow/users.html">Adding Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concept_and_workflow/shell_scripts.html">User Defined Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="concept_and_workflow/shell_scripts.html#script-template-for-config-sh-images-sh">Script Template for config.sh / images.sh</a></li>
-<li class="toctree-l3"><a class="reference internal" href="concept_and_workflow/shell_scripts.html#functions-and-variables-provided-by-kiwi-ng">Functions and Variables Provided by KIWI NG</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="concept_and_workflow/shell_scripts.html#functions">Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="concept_and_workflow/shell_scripts.html#profile-environment-variables">Profile Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="concept_and_workflow/shell_scripts.html#developing-debugging-scripts">Developing/Debugging Scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="concept_and_workflow/shell_scripts.html#script-template-for-config-sh-images-sh">Script Template for config.sh / images.sh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="concept_and_workflow/shell_scripts.html#functions-and-variables-provided-by-kiwi-ng">Functions and Variables Provided by KIWI NG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="concept_and_workflow/shell_scripts.html#configuration-tips">Configuration Tips</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="concept_and_workflow/shell_scripts.html#configuration-tips">Configuration Tips</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="concept_and_workflow/runtime_configuration.html">The Runtime Configuration File</a></li>
@@ -739,7 +738,11 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/kiwi.html#kiwi.defaults.grub_loader_type.binaryname">binaryname (kiwi.defaults.grub_loader_type property)</a>
+
+      <ul>
+        <li><a href="api/kiwi.html#kiwi.defaults.shim_loader_type.binaryname">(kiwi.defaults.shim_loader_type property)</a>
 </li>
+      </ul></li>
       <li><a href="api/kiwi.html#kiwi.mount_manager.MountManager.bind_mount">bind_mount() (kiwi.mount_manager.MountManager method)</a>
 </li>
       <li><a href="api/kiwi.html#kiwi.firmware.FirmWare.bios_mode">bios_mode() (kiwi.firmware.FirmWare method)</a>
@@ -1293,6 +1296,8 @@
       <li><a href="api/kiwi.html#kiwi.defaults.grub_loader_type.filename">filename (kiwi.defaults.grub_loader_type property)</a>
 
       <ul>
+        <li><a href="api/kiwi.html#kiwi.defaults.shim_loader_type.filename">(kiwi.defaults.shim_loader_type property)</a>
+</li>
         <li><a href="api/kiwi.system.html#kiwi.system.kernel.kernel_type.filename">(kiwi.system.kernel.kernel_type property)</a>
 </li>
         <li><a href="api/kiwi.system.html#kiwi.system.kernel.xen_hypervisor_type.filename">(kiwi.system.kernel.xen_hypervisor_type property)</a>
@@ -1318,10 +1323,10 @@
 </li>
       <li><a href="api/kiwi.filesystem.html#kiwi.filesystem.fat16.FileSystemFat16">FileSystemFat16 (class in kiwi.filesystem.fat16)</a>
 </li>
-      <li><a href="api/kiwi.filesystem.html#kiwi.filesystem.fat32.FileSystemFat32">FileSystemFat32 (class in kiwi.filesystem.fat32)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/kiwi.filesystem.html#kiwi.filesystem.fat32.FileSystemFat32">FileSystemFat32 (class in kiwi.filesystem.fat32)</a>
+</li>
       <li><a href="api/kiwi.filesystem.html#kiwi.filesystem.isofs.FileSystemIsoFs">FileSystemIsoFs (class in kiwi.filesystem.isofs)</a>
 </li>
       <li><a href="api/kiwi.filesystem.html#kiwi.filesystem.setup.FileSystemSetup">FileSystemSetup (class in kiwi.filesystem.setup)</a>
@@ -4392,6 +4397,8 @@
       <li><a href="api/kiwi.system.html#kiwi.system.result.result_file_type.shasum">shasum (kiwi.system.result.result_file_type property)</a>
 </li>
       <li><a href="api/kiwi.system.html#kiwi.system.shell.Shell">Shell (class in kiwi.system.shell)</a>
+</li>
+      <li><a href="api/kiwi.html#kiwi.defaults.shim_loader_type">shim_loader_type (class in kiwi.defaults)</a>
 </li>
       <li><a href="api/kiwi.html#kiwi.help.Help.show">show() (kiwi.help.Help method)</a>
 </li>

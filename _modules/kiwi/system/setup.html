@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.system.setup &mdash; KIWI NG 9.23.60 documentation</title>
+  <title>kiwi.system.setup &mdash; KIWI NG 9.23.61 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -151,13 +151,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../concept_and_workflow/profiles.html">Image Profiles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../concept_and_workflow/users.html">Adding Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../concept_and_workflow/shell_scripts.html">User Defined Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../concept_and_workflow/shell_scripts.html#script-template-for-config-sh-images-sh">Script Template for config.sh / images.sh</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../concept_and_workflow/shell_scripts.html#functions-and-variables-provided-by-kiwi-ng">Functions and Variables Provided by KIWI NG</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../concept_and_workflow/shell_scripts.html#functions">Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../concept_and_workflow/shell_scripts.html#profile-environment-variables">Profile Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../concept_and_workflow/shell_scripts.html#developing-debugging-scripts">Developing/Debugging Scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../concept_and_workflow/shell_scripts.html#script-template-for-config-sh-images-sh">Script Template for config.sh / images.sh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../concept_and_workflow/shell_scripts.html#functions-and-variables-provided-by-kiwi-ng">Functions and Variables Provided by KIWI NG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../concept_and_workflow/shell_scripts.html#configuration-tips">Configuration Tips</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../concept_and_workflow/shell_scripts.html#configuration-tips">Configuration Tips</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../concept_and_workflow/runtime_configuration.html">The Runtime Configuration File</a></li>
@@ -1642,7 +1641,14 @@
         <span class="n">script_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">script_path</span><span class="p">):</span>
             <span class="n">options</span> <span class="o">=</span> <span class="n">option_list</span> <span class="ow">or</span> <span class="p">[]</span>
-            <span class="n">command</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">log</span><span class="o">.</span><span class="n">getLogLevel</span><span class="p">()</span> <span class="o">==</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span>
+                <span class="c1"># In debug mode run scripts in a screen session to</span>
+                <span class="c1"># allow attaching and debugging</span>
+                <span class="n">command</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;screen&#39;</span><span class="p">,</span> <span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="s1">&#39;-X&#39;</span><span class="p">,</span> <span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># In standard mode run scripts without a terminal</span>
+                <span class="c1"># associated to them</span>
+                <span class="n">command</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">]</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">Path</span><span class="o">.</span><span class="n">access</span><span class="p">(</span><span class="n">script_path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">X_OK</span><span class="p">):</span>
                 <span class="n">command</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;bash&#39;</span><span class="p">)</span>
             <span class="n">command</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
@@ -1675,9 +1681,17 @@
                 <span class="s1">&#39;cd&#39;</span><span class="p">,</span> <span class="n">working_directory</span><span class="p">,</span> <span class="s1">&#39;&amp;&amp;&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;--norc&#39;</span><span class="p">,</span> <span class="n">script_path</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">option_list</span><span class="p">)</span>
             <span class="p">]</span>
-            <span class="n">config_script</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
-                <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bash_command</span><span class="p">)]</span>
-            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">log</span><span class="o">.</span><span class="n">getLogLevel</span><span class="p">()</span> <span class="o">==</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span>
+                <span class="c1"># In debug mode run scripts in a screen session to</span>
+                <span class="c1"># allow attaching and debugging</span>
+                <span class="n">config_script</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+                    <span class="p">[</span><span class="s1">&#39;screen&#39;</span><span class="p">,</span> <span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="s1">&#39;-X&#39;</span><span class="p">,</span> <span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bash_command</span><span class="p">)]</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># In standard mode run script through bash</span>
+                <span class="n">config_script</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+                    <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">bash_command</span><span class="p">)]</span>
+                <span class="p">)</span>
             <span class="n">process</span> <span class="o">=</span> <span class="n">CommandProcess</span><span class="p">(</span>
                 <span class="n">command</span><span class="o">=</span><span class="n">config_script</span><span class="p">,</span> <span class="n">log_topic</span><span class="o">=</span><span class="s1">&#39;Calling &#39;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39; script&#39;</span>
             <span class="p">)</span>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi Package &mdash; KIWI NG 9.23.60 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.23.61 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -154,13 +154,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../concept_and_workflow/profiles.html">Image Profiles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../concept_and_workflow/users.html">Adding Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../concept_and_workflow/shell_scripts.html">User Defined Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../concept_and_workflow/shell_scripts.html#script-template-for-config-sh-images-sh">Script Template for config.sh / images.sh</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../concept_and_workflow/shell_scripts.html#functions-and-variables-provided-by-kiwi-ng">Functions and Variables Provided by KIWI NG</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../concept_and_workflow/shell_scripts.html#functions">Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../concept_and_workflow/shell_scripts.html#profile-environment-variables">Profile Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../concept_and_workflow/shell_scripts.html#developing-debugging-scripts">Developing/Debugging Scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../concept_and_workflow/shell_scripts.html#script-template-for-config-sh-images-sh">Script Template for config.sh / images.sh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../concept_and_workflow/shell_scripts.html#functions-and-variables-provided-by-kiwi-ng">Functions and Variables Provided by KIWI NG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../concept_and_workflow/shell_scripts.html#configuration-tips">Configuration Tips</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../concept_and_workflow/shell_scripts.html#configuration-tips">Configuration Tips</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../concept_and_workflow/runtime_configuration.html">The Runtime Configuration File</a></li>
@@ -2314,7 +2313,7 @@ inside of the image imageroot/&lt;cache-dir&gt;</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.defaults.Defaults.get_shim_loader">
-<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">get_shim_loader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/defaults.html#Defaults.get_shim_loader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.defaults.Defaults.get_shim_loader" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span> </em><span class="sig-name descname"><span class="pre">get_shim_loader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#kiwi.defaults.shim_loader_type" title="kiwi.defaults.shim_loader_type"><span class="pre">kiwi.defaults.shim_loader_type</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/kiwi/defaults.html#Defaults.get_shim_loader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.defaults.Defaults.get_shim_loader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Provides shim loader file path</p>
 <p>Searches distribution specific locations to find shim.efi
 below the given root path</p>
@@ -2323,10 +2322,10 @@ below the given root path</p>
 <dd class="field-odd"><p><strong>root_path</strong> (<em>string</em>) – image root path</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>file path or None</p>
+<dd class="field-even"><p>shim_loader_type | None</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dd class="field-odd"><p>NamedTuple</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2693,6 +2692,24 @@ to the specified instance of a Profile class</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="kiwi.defaults.grub_loader_type.filename">
 <em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#kiwi.defaults.grub_loader_type.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kiwi.defaults.shim_loader_type">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.defaults.</span></span><span class="sig-name descname"><span class="pre">shim_loader_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binaryname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kiwi.defaults.shim_loader_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="kiwi.defaults.shim_loader_type.binaryname">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">binaryname</span></span><a class="headerlink" href="#kiwi.defaults.shim_loader_type.binaryname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="kiwi.defaults.shim_loader_type.filename">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#kiwi.defaults.shim_loader_type.filename" title="Permalink to this definition">¶</a></dt>
 <dd><p>Alias for field number 0</p>
 </dd></dl>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.defaults &mdash; KIWI NG 9.23.60 documentation</title>
+  <title>kiwi.defaults &mdash; KIWI NG 9.23.61 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -151,13 +151,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../concept_and_workflow/profiles.html">Image Profiles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../concept_and_workflow/users.html">Adding Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../concept_and_workflow/shell_scripts.html">User Defined Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../concept_and_workflow/shell_scripts.html#script-template-for-config-sh-images-sh">Script Template for config.sh / images.sh</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../concept_and_workflow/shell_scripts.html#functions-and-variables-provided-by-kiwi-ng">Functions and Variables Provided by KIWI NG</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../concept_and_workflow/shell_scripts.html#functions">Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../concept_and_workflow/shell_scripts.html#profile-environment-variables">Profile Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../concept_and_workflow/shell_scripts.html#developing-debugging-scripts">Developing/Debugging Scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../concept_and_workflow/shell_scripts.html#script-template-for-config-sh-images-sh">Script Template for config.sh / images.sh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../concept_and_workflow/shell_scripts.html#functions-and-variables-provided-by-kiwi-ng">Functions and Variables Provided by KIWI NG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../concept_and_workflow/shell_scripts.html#configuration-tips">Configuration Tips</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../concept_and_workflow/shell_scripts.html#configuration-tips">Configuration Tips</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../concept_and_workflow/runtime_configuration.html">The Runtime Configuration File</a></li>
@@ -694,6 +693,13 @@
 <span class="n">PLATFORM_MACHINE</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">machine</span><span class="p">()</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
+
+<span class="n">shim_loader_type</span> <span class="o">=</span> <span class="n">NamedTuple</span><span class="p">(</span>
+    <span class="s1">&#39;shim_loader_type&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;filename&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;binaryname&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
 
 <span class="n">grub_loader_type</span> <span class="o">=</span> <span class="n">NamedTuple</span><span class="p">(</span>
     <span class="s1">&#39;grub_loader_type&#39;</span><span class="p">,</span> <span class="p">[</span>
@@ -1357,7 +1363,7 @@
         <span class="k">return</span> <span class="s1">&#39;SUSE LINUX GmbH&#39;</span></div>
 
 <div class="viewcode-block" id="Defaults.get_shim_loader"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.get_shim_loader">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_shim_loader</span><span class="p">(</span><span class="n">root_path</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_shim_loader</span><span class="p">(</span><span class="n">root_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">shim_loader_type</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Provides shim loader file path</span>
 
@@ -1366,19 +1372,33 @@
 
 <span class="sd">        :param string root_path: image root path</span>
 
-<span class="sd">        :return: file path or None</span>
+<span class="sd">        :return: shim_loader_type | None</span>
 
-<span class="sd">        :rtype: str</span>
+<span class="sd">        :rtype: NamedTuple</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">shim_pattern_type</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
+            <span class="s1">&#39;shim_pattern_type&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;pattern&#39;</span><span class="p">,</span> <span class="s1">&#39;binaryname&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+
         <span class="n">shim_file_patterns</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s1">&#39;/usr/share/efi/*/shim.efi&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;/usr/lib64/efi/shim.efi&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;/boot/efi/EFI/*/shim*.efi&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;/usr/lib/shim/shim*.efi&#39;</span>
+            <span class="n">shim_pattern_type</span><span class="p">(</span><span class="s1">&#39;/usr/lib/shim/shim*.efi.signed&#39;</span><span class="p">,</span> <span class="s1">&#39;shimx64.efi&#39;</span><span class="p">),</span>
+            <span class="n">shim_pattern_type</span><span class="p">(</span><span class="s1">&#39;/usr/share/efi/*/shim.efi&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">shim_pattern_type</span><span class="p">(</span><span class="s1">&#39;/usr/lib64/efi/shim.efi&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">shim_pattern_type</span><span class="p">(</span><span class="s1">&#39;/boot/efi/EFI/*/shim*.efi&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+            <span class="n">shim_pattern_type</span><span class="p">(</span><span class="s1">&#39;/usr/lib/shim/shim*.efi&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="p">]</span>
         <span class="k">for</span> <span class="n">shim_file_pattern</span> <span class="ow">in</span> <span class="n">shim_file_patterns</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">shim_file</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">iglob</span><span class="p">(</span><span class="n">root_path</span> <span class="o">+</span> <span class="n">shim_file_pattern</span><span class="p">):</span>
-                <span class="k">return</span> <span class="n">shim_file</span></div>
+            <span class="k">for</span> <span class="n">shim_file</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">iglob</span><span class="p">(</span><span class="n">root_path</span> <span class="o">+</span> <span class="n">shim_file_pattern</span><span class="o">.</span><span class="n">pattern</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">shim_file_pattern</span><span class="o">.</span><span class="n">binaryname</span><span class="p">:</span>
+                    <span class="n">binaryname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">shim_file</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">binaryname</span> <span class="o">=</span> <span class="n">shim_file_pattern</span><span class="o">.</span><span class="n">binaryname</span>
+                <span class="k">return</span> <span class="n">shim_loader_type</span><span class="p">(</span>
+                    <span class="n">shim_file</span><span class="p">,</span> <span class="n">binaryname</span>
+                <span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="Defaults.get_mok_manager"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.get_mok_manager">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_mok_manager</span><span class="p">(</span><span class="n">root_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>

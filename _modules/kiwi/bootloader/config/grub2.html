@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.60 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.23.61 documentation</title>
       <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
@@ -151,13 +151,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../concept_and_workflow/profiles.html">Image Profiles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../concept_and_workflow/users.html">Adding Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../concept_and_workflow/shell_scripts.html">User Defined Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../../concept_and_workflow/shell_scripts.html#script-template-for-config-sh-images-sh">Script Template for config.sh / images.sh</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../concept_and_workflow/shell_scripts.html#functions-and-variables-provided-by-kiwi-ng">Functions and Variables Provided by KIWI NG</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../../../../concept_and_workflow/shell_scripts.html#functions">Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../../../../concept_and_workflow/shell_scripts.html#profile-environment-variables">Profile Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../concept_and_workflow/shell_scripts.html#developing-debugging-scripts">Developing/Debugging Scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../concept_and_workflow/shell_scripts.html#script-template-for-config-sh-images-sh">Script Template for config.sh / images.sh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../concept_and_workflow/shell_scripts.html#functions-and-variables-provided-by-kiwi-ng">Functions and Variables Provided by KIWI NG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../concept_and_workflow/shell_scripts.html#configuration-tips">Configuration Tips</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../concept_and_workflow/shell_scripts.html#configuration-tips">Configuration Tips</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../concept_and_workflow/runtime_configuration.html">The Runtime Configuration File</a></li>
@@ -1393,14 +1392,14 @@
                 <span class="s1">&#39;Signed grub2 efi loader not found&#39;</span>
             <span class="p">)</span>
         <span class="n">shim_image</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_shim_loader</span><span class="p">(</span><span class="n">lookup_path</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">shim_image</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">shim_image</span> <span class="ow">and</span> <span class="n">shim_image</span><span class="o">.</span><span class="n">filename</span><span class="p">:</span>
             <span class="c1"># The shim concept is based on a two step system including a</span>
             <span class="c1"># grub image(shim) that got signed by Microsoft followed by</span>
             <span class="c1"># a grub image that got signed by the shim. The shim image</span>
             <span class="c1"># is the one that gets loaded by the firmware which itself</span>
             <span class="c1"># loads the second stage grub image</span>
             <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-                <span class="p">[</span><span class="s1">&#39;cp&#39;</span><span class="p">,</span> <span class="n">shim_image</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_efi_image_name</span><span class="p">()]</span>
+                <span class="p">[</span><span class="s1">&#39;cp&#39;</span><span class="p">,</span> <span class="n">shim_image</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_efi_image_name</span><span class="p">()]</span>
             <span class="p">)</span>
             <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
                 <span class="p">[</span>

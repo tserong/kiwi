@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Defined Scripts &mdash; KIWI NG 9.23.60 documentation</title>
+  <title>User Defined Scripts &mdash; KIWI NG 9.23.61 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -154,13 +154,12 @@
 <li class="toctree-l2"><a class="reference internal" href="profiles.html">Image Profiles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="users.html">Adding Users</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">User Defined Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#script-template-for-config-sh-images-sh">Script Template for config.sh / images.sh</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#functions-and-variables-provided-by-kiwi-ng">Functions and Variables Provided by KIWI NG</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#profile-environment-variables">Profile Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#developing-debugging-scripts">Developing/Debugging Scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#script-template-for-config-sh-images-sh">Script Template for config.sh / images.sh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functions-and-variables-provided-by-kiwi-ng">Functions and Variables Provided by KIWI NG</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-tips">Configuration Tips</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#configuration-tips">Configuration Tips</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="runtime_configuration.html">The Runtime Configuration File</a></li>
@@ -694,8 +693,48 @@ bootloader or filesystem attributes.</p>
 bit is set (in that case a shebang is mandatory) otherwise they will be
 invoked via the BASH. If a script exits with a non-zero exit code
 then KIWI NG will report the failure and abort the image creation.</p>
+<section id="developing-debugging-scripts">
+<h2>Developing/Debugging Scripts<a class="headerlink" href="#developing-debugging-scripts" title="Permalink to this headline">¶</a></h2>
+<p>When creating a custom script it usually takes some iterations of
+try and testing until a final stable state is reached. To support
+developers with this task KIWI NG calls scripts associated with a
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">screen</span></code> session. The connection to <code class="xref py py-obj docutils literal notranslate"><span class="pre">screen</span></code> is only done if KIWI NG
+is called with the <code class="xref py py-obj docutils literal notranslate"><span class="pre">--debug</span></code> option.</p>
+<p>In this mode a script can start like the following template:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># The magic bits are still not set</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;break&quot;</span>
+/bin/bash
+</pre></div>
+</div>
+<p>At call time of the script a <code class="xref py py-obj docutils literal notranslate"><span class="pre">screen</span></code> session executes and you get
+access to the break in shell. From this environment the needed script
+code can be implemented. Once the shell is closed the KIWI NG process
+continues.</p>
+<p>Apart from providing a full featured terminal throughout the
+execution of the script code, there is also the advantage to
+have control on the session during the process of the image
+creation. Listing the active sessions for script execution
+can be done as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo screen -list
+
+There is a screen on:
+     <span class="m">19699</span>.pts-4.asterix     <span class="o">(</span>Attached<span class="o">)</span>
+<span class="m">1</span> Socket <span class="k">in</span> /run/screens/S-root.
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As shown above the screen session(s) to execute script code
+provides extended control which could also be considered a
+security risk. Because of that KIWI NG only runs scripts through
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">screen</span></code> when explicitly enabled via the <code class="xref py py-obj docutils literal notranslate"><span class="pre">--debug</span></code> switch.
+For production processes all scripts should run in their
+native way and should not require a terminal to operate
+correctly !</p>
+</div>
 <section id="script-template-for-config-sh-images-sh">
-<h2>Script Template for config.sh / images.sh<a class="headerlink" href="#script-template-for-config-sh-images-sh" title="Permalink to this headline">¶</a></h2>
+<h3>Script Template for config.sh / images.sh<a class="headerlink" href="#script-template-for-config-sh-images-sh" title="Permalink to this headline">¶</a></h3>
 <p>KIWI NG provides a collection of methods and variables that supports users
 with custom operations. For details see <a class="reference internal" href="#image-customization-methods"><span class="std std-ref">Functions and Variables Provided by KIWI NG</span></a>.
 The following template shows how to import this information in your
@@ -718,7 +757,7 @@ and will not be automatically restored!</p>
 </div>
 </section>
 <section id="functions-and-variables-provided-by-kiwi-ng">
-<span id="image-customization-methods"></span><h2>Functions and Variables Provided by KIWI NG<a class="headerlink" href="#functions-and-variables-provided-by-kiwi-ng" title="Permalink to this headline">¶</a></h2>
+<span id="image-customization-methods"></span><h3>Functions and Variables Provided by KIWI NG<a class="headerlink" href="#functions-and-variables-provided-by-kiwi-ng" title="Permalink to this headline">¶</a></h3>
 <p>KIWI NG creates the <code class="file docutils literal notranslate"><span class="pre">.kconfig</span></code> and <code class="file docutils literal notranslate"><span class="pre">.profile</span></code> files to be sourced
 by the shell scripts <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code> and <code class="file docutils literal notranslate"><span class="pre">images.sh</span></code>.
 <code class="file docutils literal notranslate"><span class="pre">.kconfig</span></code> contains various helper functions which can be used to
@@ -726,7 +765,7 @@ simplify the image configuration and <code class="file docutils literal notransl
 variables which get populated from the settings provided in the image
 description.</p>
 <section id="functions">
-<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<h4>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h4>
 <p>The <code class="file docutils literal notranslate"><span class="pre">.kconfig</span></code> file provides a common set of functions.  Functions
 specific to SUSE Linux Enterprise and openSUSE begin with the name
 <code class="docutils literal notranslate"><span class="pre">suse</span></code>, functions applicable to all Linux distributions start with the
@@ -803,7 +842,7 @@ set to 1 (it is off by default).</p>
 </dl>
 </section>
 <section id="profile-environment-variables">
-<h3>Profile Environment Variables<a class="headerlink" href="#profile-environment-variables" title="Permalink to this headline">¶</a></h3>
+<h4>Profile Environment Variables<a class="headerlink" href="#profile-environment-variables" title="Permalink to this headline">¶</a></h4>
 <p>The <code class="file docutils literal notranslate"><span class="pre">.profile</span></code> environment file is created by KIWI NG and contains a
 specific set of variables which are listed below.</p>
 <dl class="simple">
@@ -835,7 +874,7 @@ with <code class="xref py py-obj docutils literal notranslate"><span class="pre"
 </section>
 </section>
 <section id="configuration-tips">
-<h2>Configuration Tips<a class="headerlink" href="#configuration-tips" title="Permalink to this headline">¶</a></h2>
+<h3>Configuration Tips<a class="headerlink" href="#configuration-tips" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
 <li><p><strong>Locale configuration:</strong></p></li>
 </ol>
@@ -905,6 +944,7 @@ ln -s /etc/machine-id /var/lib/dbus/machine-id
 </div>
 </div>
 </div></blockquote>
+</section>
 </section>
 </section>
 
