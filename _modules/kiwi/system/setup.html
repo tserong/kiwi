@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.system.setup &mdash; KIWI NG 9.23.61 documentation</title>
+  <title>kiwi.system.setup &mdash; KIWI NG 9.23.62 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -1641,7 +1641,8 @@
         <span class="n">script_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">script_path</span><span class="p">):</span>
             <span class="n">options</span> <span class="o">=</span> <span class="n">option_list</span> <span class="ow">or</span> <span class="p">[]</span>
-            <span class="k">if</span> <span class="n">log</span><span class="o">.</span><span class="n">getLogLevel</span><span class="p">()</span> <span class="o">==</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">log</span><span class="o">.</span><span class="n">getLogLevel</span><span class="p">()</span> <span class="o">==</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span> <span class="ow">and</span> <span class="ow">not</span> \
+               <span class="n">Defaults</span><span class="o">.</span><span class="n">is_buildservice_worker</span><span class="p">():</span>
                 <span class="c1"># In debug mode run scripts in a screen session to</span>
                 <span class="c1"># allow attaching and debugging</span>
                 <span class="n">command</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;screen&#39;</span><span class="p">,</span> <span class="s1">&#39;-t&#39;</span><span class="p">,</span> <span class="s1">&#39;-X&#39;</span><span class="p">,</span> <span class="s1">&#39;chroot&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">]</span>
@@ -1681,7 +1682,8 @@
                 <span class="s1">&#39;cd&#39;</span><span class="p">,</span> <span class="n">working_directory</span><span class="p">,</span> <span class="s1">&#39;&amp;&amp;&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;--norc&#39;</span><span class="p">,</span> <span class="n">script_path</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">option_list</span><span class="p">)</span>
             <span class="p">]</span>
-            <span class="k">if</span> <span class="n">log</span><span class="o">.</span><span class="n">getLogLevel</span><span class="p">()</span> <span class="o">==</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">log</span><span class="o">.</span><span class="n">getLogLevel</span><span class="p">()</span> <span class="o">==</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span> <span class="ow">and</span> <span class="ow">not</span> \
+               <span class="n">Defaults</span><span class="o">.</span><span class="n">is_buildservice_worker</span><span class="p">():</span>
                 <span class="c1"># In debug mode run scripts in a screen session to</span>
                 <span class="c1"># allow attaching and debugging</span>
                 <span class="n">config_script</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
