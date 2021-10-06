@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.logger &mdash; KIWI NG 9.23.62 documentation</title>
+  <title>kiwi.logger &mdash; KIWI NG 9.23.63 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -759,17 +759,24 @@
 <span class="sd">        :param str filename: logfile file path</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">logfile</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span>
-                <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span>
-            <span class="p">)</span>
-            <span class="n">logfile</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span>
+            <span class="k">if</span> <span class="n">filename</span> <span class="o">==</span> <span class="s1">&#39;stdout&#39;</span><span class="p">:</span>
+                <span class="c1"># special case, log usual log file contents to stdout</span>
+                <span class="n">handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">__stdout__</span><span class="p">)</span>
+                <span class="c1"># deactivate standard console logger by setting</span>
+                <span class="c1"># the highest possible log entry level</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setLogLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">FileHandler</span><span class="p">(</span>
+                    <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="n">filename</span>
+            <span class="n">handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span>
                 <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span>
                     <span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="s1">: </span><span class="si">%(asctime)-8s</span><span class="s1"> | </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;%H:%M:%S&#39;</span>
                 <span class="p">)</span>
             <span class="p">)</span>
-            <span class="n">logfile</span><span class="o">.</span><span class="n">addFilter</span><span class="p">(</span><span class="n">LoggerSchedulerFilter</span><span class="p">())</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logfile</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="n">filename</span>
+            <span class="n">handler</span><span class="o">.</span><span class="n">addFilter</span><span class="p">(</span><span class="n">LoggerSchedulerFilter</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiLogFileSetupFailed</span><span class="p">(</span>
                 <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.iso_tools Package &mdash; KIWI NG 9.23.62 documentation</title>
+  <title>kiwi.iso_tools Package &mdash; KIWI NG 9.23.63 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -654,15 +654,15 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="kiwi.iso_tools.base.IsoToolsBase">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.iso_tools.base.</span></span><span class="sig-name descname"><span class="pre">IsoToolsBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/iso_tools/base.html#IsoToolsBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.iso_tools.base.IsoToolsBase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Base Class for Parameter API for iso creation tools</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source_dir</strong> (<em>string</em>) – data source dir, usually root_dir</p></li>
-<li><p><strong>boot_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – architecture specific boot path on the ISO</p></li>
-<li><p><strong>iso_parameters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – list of ISO creation parameters</p></li>
-<li><p><strong>iso_loaders</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – list of ISO loaders to embed</p></li>
+<li><p><strong>boot_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – architecture specific boot path on the ISO</p></li>
+<li><p><strong>iso_parameters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – list of ISO creation parameters</p></li>
+<li><p><strong>iso_loaders</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – list of ISO loaders to embed</p></li>
 </ul>
 </dd>
 </dl>
@@ -681,8 +681,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – unused</p></li>
-<li><p><strong>hidden_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – unused</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – unused</p></li>
+<li><p><strong>hidden_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – unused</p></li>
 </ul>
 </dd>
 </dl>
@@ -698,7 +698,7 @@
 <dd class="field-odd"><p>tool name</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -719,7 +719,7 @@ used as both; an iso and a disk</p>
 <p>Implementation in specialized tool class</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>custom_args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – unused</p>
+<dd class="field-odd"><p><strong>custom_args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – unused</p>
 </dd>
 </dl>
 </dd></dl>
@@ -730,7 +730,7 @@ used as both; an iso and a disk</p>
 <dd><p>List contents of an ISO image</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>isofile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – unused</p>
+<dd class="field-odd"><p><strong>isofile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – unused</p>
 </dd>
 </dl>
 </dd></dl>
@@ -772,8 +772,8 @@ bootloader/config/grub2.py</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – output filename</p></li>
-<li><p><strong>hidden_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – list of hidden files</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – output filename</p></li>
+<li><p><strong>hidden_files</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – list of hidden files</p></li>
 </ul>
 </dd>
 </dl>
@@ -793,7 +793,7 @@ mkisofs is preferred over genisoimage</p>
 <dd class="field-even"><p>tool name</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -809,7 +809,7 @@ used as both; an iso and a disk</p>
 <dd class="field-odd"><p>True or False</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -820,7 +820,7 @@ used as both; an iso and a disk</p>
 <dd><p>Create a set of standard parameters</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>custom_args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – custom ISO creation args</p>
+<dd class="field-odd"><p><strong>custom_args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – custom ISO creation args</p>
 </dd>
 </dl>
 </dd></dl>
@@ -831,13 +831,13 @@ used as both; an iso and a disk</p>
 <dd><p>List contents of an ISO image</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>isofile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – path to the ISO file</p>
+<dd class="field-odd"><p><strong>isofile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – path to the ISO file</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>formatted isoinfo result</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)">dict</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -850,15 +850,15 @@ used as both; an iso and a disk</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="kiwi.iso_tools.iso.Iso">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.iso_tools.iso.</span></span><span class="sig-name descname"><span class="pre">Iso</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/iso_tools/iso.html#Iso"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.iso_tools.iso.Iso" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Implements helper methods around the creation of ISO filesystems</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>header_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – static identifier string for self written headers</p></li>
-<li><p><strong>header_end_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – file name to store the header_id to</p></li>
-<li><p><strong>header_end_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – full file path for the header_end_name file</p></li>
-<li><p><strong>boot_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – architecture specific boot path on the ISO</p></li>
+<li><p><strong>header_id</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – static identifier string for self written headers</p></li>
+<li><p><strong>header_end_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – file name to store the header_id to</p></li>
+<li><p><strong>header_end_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – full file path for the header_end_name file</p></li>
+<li><p><strong>boot_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – architecture specific boot path on the ISO</p></li>
 </ul>
 </dd>
 </dl>
@@ -880,7 +880,7 @@ images, meaning to let isohybrid work correctly</p>
 <dd class="field-odd"><p>512 byte blocks offset address</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -905,10 +905,10 @@ the disk signatures</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – hex offset</p></li>
-<li><p><strong>mbrid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – boot record id</p></li>
-<li><p><strong>isofile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – path to the ISO file</p></li>
-<li><p><strong>efi_mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – sets the iso to support efi firmware or not</p></li>
+<li><p><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – hex offset</p></li>
+<li><p><strong>mbrid</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – boot record id</p></li>
+<li><p><strong>isofile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – path to the ISO file</p></li>
+<li><p><strong>efi_mode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – sets the iso to support efi firmware or not</p></li>
 </ul>
 </dd>
 </dl>
@@ -922,7 +922,7 @@ the disk signatures</p>
 complete metadata information e.g catalog name</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>isofile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – path to the ISO file</p>
+<dd class="field-odd"><p><strong>isofile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – path to the ISO file</p>
 </dd>
 </dl>
 </dd></dl>
@@ -935,7 +935,7 @@ complete metadata information e.g catalog name</p>
 all BIOS and firwmare implementations expects it</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>isofile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – path to the ISO file</p>
+<dd class="field-odd"><p><strong>isofile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – path to the ISO file</p>
 </dd>
 </dl>
 </dd></dl>
@@ -947,7 +947,7 @@ all BIOS and firwmare implementations expects it</p>
 the mediacheck program.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>isofile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – path to the ISO file</p>
+<dd class="field-odd"><p><strong>isofile</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – path to the ISO file</p>
 </dd>
 </dl>
 </dd></dl>
@@ -971,7 +971,7 @@ the mediacheck program.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="kiwi.iso_tools.IsoTools">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.iso_tools.</span></span><span class="sig-name descname"><span class="pre">IsoTools</span></span><a class="reference internal" href="../_modules/kiwi/iso_tools.html#IsoTools"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.iso_tools.IsoTools" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>IsoTools factory</strong></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.iso_tools.IsoTools.new">
