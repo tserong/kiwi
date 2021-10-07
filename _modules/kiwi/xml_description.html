@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.xml_description &mdash; KIWI NG 9.23.63 documentation</title>
+  <title>kiwi.xml_description &mdash; KIWI NG 9.24.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -179,6 +179,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../image_description.html">Image Description</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../image_description/elements.html">Image Description Elements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#image">&lt;image&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#include">&lt;include&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#description">&lt;description&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#preferences">&lt;preferences&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-version">&lt;preferences&gt;&lt;version&gt;</a></li>
@@ -225,6 +226,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-content-setup">Image Content Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-users">Image Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-namespace">Image Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-includes">Image Includes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../image_types_and_results.html">Image Types</a><ul>
@@ -750,8 +752,10 @@
                 <span class="n">schematron</span><span class="o">.</span><span class="n">validation_report</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">validation_rng</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">validation_schematron</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
             <span class="k">raise</span> <span class="n">KiwiDescriptionInvalid</span><span class="p">(</span>
-                <span class="s1">&#39;Failed to validate schema and/or schematron rules&#39;</span>
+                <span class="s1">&#39;Failed to validate schema and/or schematron rules. &#39;</span>
+                <span class="s1">&#39;Use --debug for more details&#39;</span>
             <span class="p">)</span>
 
         <span class="n">parse_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse</span><span class="p">()</span>

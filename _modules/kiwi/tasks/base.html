@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.tasks.base &mdash; KIWI NG 9.23.63 documentation</title>
+  <title>kiwi.tasks.base &mdash; KIWI NG 9.24.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -179,6 +179,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../image_description.html">Image Description</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../image_description/elements.html">Image Description Elements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../image_description/elements.html#image">&lt;image&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../image_description/elements.html#include">&lt;include&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../image_description/elements.html#description">&lt;description&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../image_description/elements.html#preferences">&lt;preferences&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-version">&lt;preferences&gt;&lt;version&gt;</a></li>
@@ -225,6 +226,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../image_description.html#image-content-setup">Image Content Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../image_description.html#image-users">Image Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../image_description.html#image-namespace">Image Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../image_description.html#image-includes">Image Includes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../image_types_and_results.html">Image Types</a><ul>
@@ -734,7 +736,8 @@
             <span class="s1">&#39;check_architecture_supports_iso_firmware_setup&#39;</span><span class="p">:</span> <span class="p">[],</span>
             <span class="s1">&#39;check_appx_naming_conventions_valid&#39;</span><span class="p">:</span> <span class="p">[],</span>
             <span class="s1">&#39;check_syslinux_installed_if_isolinux_is_used&#39;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s1">&#39;check_image_type_unique&#39;</span><span class="p">:</span> <span class="p">[]</span>
+            <span class="s1">&#39;check_image_type_unique&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;check_include_references_unresolvable&#39;</span><span class="p">:</span> <span class="p">[]</span>
         <span class="p">}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">checks_after_command_args</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;check_repositories_configured&#39;</span><span class="p">:</span> <span class="p">[],</span>

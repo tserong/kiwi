@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Description Elements &mdash; KIWI NG 9.23.63 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.24.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -182,6 +182,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../image_description.html">Image Description</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Image Description Elements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#image">&lt;image&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#include">&lt;include&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#description">&lt;description&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#preferences">&lt;preferences&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#preferences-version">&lt;preferences&gt;&lt;version&gt;</a></li>
@@ -228,6 +229,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../image_description.html#image-content-setup">Image Content Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../image_description.html#image-users">Image Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../image_description.html#image-namespace">Image Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../image_description.html#image-includes">Image Includes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../image_types_and_results.html">Image Types</a><ul>
@@ -649,7 +651,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.23.63</p>
+and attributes of the KIWI NG XML document in version 9.24.0</p>
 </div>
 <section id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -677,6 +679,49 @@ from the ones which can’t</p>
 within the image.</p>
 </dd>
 </dl>
+</section>
+<section id="include">
+<span id="sec-include"></span><h2>&lt;include&gt;<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h2>
+<p>Optional include of XML file content from file</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;{exc_image_base_name}&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;include</span> <span class="na">from=</span><span class="s">&quot;description.xml&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/image&gt;</span>
+</pre></div>
+</div>
+<p>with file <code class="file docutils literal notranslate"><span class="pre">description.xml</span></code> as follows:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image&gt;</span>
+    <span class="nt">&lt;description</span> <span class="na">type=</span><span class="s">&quot;system&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;author&gt;</span>name<span class="nt">&lt;/author&gt;</span>
+        <span class="nt">&lt;contact&gt;</span>contact<span class="nt">&lt;/contact&gt;</span>
+        <span class="nt">&lt;specification&gt;</span>text<span class="nt">&lt;/specification&gt;</span>
+    <span class="nt">&lt;/description&gt;</span>
+<span class="nt">&lt;/image&gt;</span>
+</pre></div>
+</div>
+<p>This will replace the <code class="xref py py-obj docutils literal notranslate"><span class="pre">include</span></code> statement with the contents
+of <code class="file docutils literal notranslate"><span class="pre">description.xml</span></code>. The validation of the result happens
+after the inclusion of all <code class="xref py py-obj docutils literal notranslate"><span class="pre">include</span></code> references.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The include information must be embedded into an <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;image&gt;</span></code>
+root node. Only the inner elements of the root node will
+be included. The processing of XML data via XSLT always
+requires a root node which is the reason why this is
+required to be specified for include files as well.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Nesting of include statements in other include files is
+not supported. This will lead to unresolved include
+statements in the final document and will cause the
+runtime checker to complain about it.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The include is implemented via a XSLT stylesheet and therefore
+expects an XML document. Other markup formats are not supported
+as include reference.</p>
+</div>
 </section>
 <section id="description">
 <span id="sec-description"></span><h2>&lt;description&gt;<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h2>

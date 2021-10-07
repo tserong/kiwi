@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build PXE Root File System Image for the legacy netboot infrastructure &mdash; KIWI NG 9.23.63 documentation</title>
+  <title>Build PXE Root File System Image for the legacy netboot infrastructure &mdash; KIWI NG 9.24.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -182,6 +182,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../image_description.html">Image Description</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../image_description/elements.html">Image Description Elements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../image_description/elements.html#image">&lt;image&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../image_description/elements.html#include">&lt;include&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../image_description/elements.html#description">&lt;description&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../image_description/elements.html#preferences">&lt;preferences&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-version">&lt;preferences&gt;&lt;version&gt;</a></li>
@@ -228,6 +229,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../image_description.html#image-content-setup">Image Content Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../image_description.html#image-users">Image Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../image_description.html#image-namespace">Image Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../image_description.html#image-includes">Image Includes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../image_types_and_results.html">Image Types</a><ul>
@@ -703,7 +705,7 @@ PXE.</p></li>
 <li><p>Make sure you have checked out the example image descriptions,
 see <a class="reference internal" href="../installation.html#example-descriptions"><span class="std std-ref">Example Appliance Descriptions</span></a>.</p></li>
 <li><p>Build the image with KIWI NG:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --type pxe system build <span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo kiwi-ng --profile Flat system build <span class="se">\</span>
     --description kiwi/build-tests/x86/tumbleweed/test-image-pxe <span class="se">\</span>
     --set-repo http://download.opensuse.org/tumbleweed/repo/oss <span class="se">\</span>
     --target-dir /tmp/mypxe-result

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi Package &mdash; KIWI NG 9.23.63 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.24.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -182,6 +182,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../image_description.html">Image Description</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../image_description/elements.html">Image Description Elements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../image_description/elements.html#image">&lt;image&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../image_description/elements.html#include">&lt;include&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../image_description/elements.html#description">&lt;description&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../image_description/elements.html#preferences">&lt;preferences&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-version">&lt;preferences&gt;&lt;version&gt;</a></li>
@@ -228,6 +229,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../image_description.html#image-content-setup">Image Content Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../image_description.html#image-users">Image Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../image_description.html#image-namespace">Image Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../image_description.html#image-includes">Image Includes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../image_types_and_results.html">Image Types</a><ul>
@@ -3109,6 +3111,14 @@ not be imported into the root of the image.</p>
 </dd></dl>
 
 <dl class="py exception">
+<dt class="sig sig-object py" id="kiwi.exceptions.KiwiIncludFileNotFoundError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.exceptions.</span></span><span class="sig-name descname"><span class="pre">KiwiIncludFileNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/exceptions.html#KiwiIncludFileNotFoundError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.exceptions.KiwiIncludFileNotFoundError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
+<p>Exception raised if the file reference in an &lt;include&gt;
+statement could not be found</p>
+</dd></dl>
+
+<dl class="py exception">
 <dt class="sig sig-object py" id="kiwi.exceptions.KiwiInstallBootImageError">
 <em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.exceptions.</span></span><span class="sig-name descname"><span class="pre">KiwiInstallBootImageError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/exceptions.html#KiwiInstallBootImageError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.exceptions.KiwiInstallBootImageError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
@@ -4575,6 +4585,16 @@ of at least one &lt;preferences&gt; section.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_include_references_unresolvable">
+<span class="sig-name descname"><span class="pre">check_include_references_unresolvable</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_include_references_unresolvable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_include_references_unresolvable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raise for still included &lt;include&gt; statements as not resolvable.
+The KIWI XSLT processing replaces the specified include
+directive(s) with the given file reference(s). If this action
+did not happen for example on nested includes, it can happen
+that they stay in the document as sort of waste.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="kiwi.runtime_checker.RuntimeChecker.check_initrd_selection_required">
 <span class="sig-name descname"><span class="pre">check_initrd_selection_required</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/kiwi/runtime_checker.html#RuntimeChecker.check_initrd_selection_required"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.runtime_checker.RuntimeChecker.check_initrd_selection_required" title="Permalink to this definition">¶</a></dt>
 <dd><p>If the boot attribute is used without selecting kiwi
@@ -5908,6 +5928,20 @@ final image version</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kiwi.xml_state.XMLState.get_include_section_reference_file_names">
+<span class="sig-name descname"><span class="pre">get_include_section_reference_file_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_include_section_reference_file_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_include_section_reference_file_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of all &lt;include&gt; section file name references</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
 </dd>
 </dl>
 </dd></dl>

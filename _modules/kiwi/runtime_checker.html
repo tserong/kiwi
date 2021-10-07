@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.runtime_checker &mdash; KIWI NG 9.23.63 documentation</title>
+  <title>kiwi.runtime_checker &mdash; KIWI NG 9.24.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -179,6 +179,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../image_description.html">Image Description</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../image_description/elements.html">Image Description Elements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#image">&lt;image&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#include">&lt;include&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#description">&lt;description&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#preferences">&lt;preferences&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-version">&lt;preferences&gt;&lt;version&gt;</a></li>
@@ -225,6 +226,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-content-setup">Image Content Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-users">Image Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-namespace">Image Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-includes">Image Includes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../image_types_and_results.html">Image Types</a><ul>
@@ -659,6 +661,7 @@
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">dedent</span>
@@ -714,6 +717,32 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_repository_sections</span><span class="p">():</span>
             <span class="k">raise</span> <span class="n">KiwiRuntimeError</span><span class="p">(</span>
                 <span class="s1">&#39;No repositories configured&#39;</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="RuntimeChecker.check_include_references_unresolvable"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.runtime_checker.RuntimeChecker.check_include_references_unresolvable">[docs]</a>    <span class="k">def</span> <span class="nf">check_include_references_unresolvable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Raise for still included &lt;include&gt; statements as not resolvable.</span>
+<span class="sd">        The KIWI XSLT processing replaces the specified include</span>
+<span class="sd">        directive(s) with the given file reference(s). If this action</span>
+<span class="sd">        did not happen for example on nested includes, it can happen</span>
+<span class="sd">        that they stay in the document as sort of waste.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span><span class="se">\n</span><span class="s1"></span>
+<span class="s1">            One ore more &lt;include&gt; statements are unresolvable</span>
+
+<span class="s1">            The following include references could not be resolved.</span>
+<span class="s1">            Please verify the specified location(s) and/or delete</span>
+<span class="s1">            the broken include directive(s) from the description.</span>
+<span class="s1">            Please also note, nested includes from other include</span>
+<span class="s1">            files are not supported:</span>
+
+<span class="s1">            </span><span class="si">{0}</span><span class="s1"></span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">include_files</span> <span class="o">=</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_include_section_reference_file_names</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">include_files</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">KiwiRuntimeError</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">include_files</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>
             <span class="p">)</span></div>
 
 <div class="viewcode-block" id="RuntimeChecker.check_image_include_repos_publicly_resolvable"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.runtime_checker.RuntimeChecker.check_image_include_repos_publicly_resolvable">[docs]</a>    <span class="k">def</span> <span class="nf">check_image_include_repos_publicly_resolvable</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>

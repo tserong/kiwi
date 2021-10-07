@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Description &mdash; KIWI NG 9.23.63 documentation</title>
+  <title>Image Description &mdash; KIWI NG 9.24.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -182,6 +182,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Image Description</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="image_description/elements.html">Image Description Elements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="image_description/elements.html#image">&lt;image&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="image_description/elements.html#include">&lt;include&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="image_description/elements.html#description">&lt;description&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="image_description/elements.html#preferences">&lt;preferences&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#preferences-version">&lt;preferences&gt;&lt;version&gt;</a></li>
@@ -228,6 +229,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#image-content-setup">Image Content Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#image-users">Image Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#image-namespace">Image Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#image-includes">Image Includes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="image_types_and_results.html">Image Types</a><ul>
@@ -648,7 +650,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document explains the toplevel structure of the
-KIWI NG image description document for version 9.23.63</p>
+KIWI NG image description document for version 9.24.0</p>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
@@ -722,6 +724,17 @@ elements</p>
 or more namespaces to an image description. The namespace can be
 used with any of the above elements and therefore tie them into
 a namespace which can be selected at call time of KIWI NG</p>
+</section>
+<section id="image-includes">
+<h2>Image Includes<a class="headerlink" href="#image-includes" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;include</span> <span class="na">from=</span><span class="s">&quot;filename.xml&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>The optional <a class="reference internal" href="image_description/elements.html#sec-include"><span class="std std-ref">&lt;include&gt;</span></a> element allows to drop in the contents
+of the specified <code class="file docutils literal notranslate"><span class="pre">filename.xml</span></code> file at the place were the <code class="xref py py-obj docutils literal notranslate"><span class="pre">include</span></code>
+statement was specified in the document. The <code class="xref py py-obj docutils literal notranslate"><span class="pre">include</span></code> statement is
+only allowed as descendant of the root (top-level element) of the
+image description.</p>
 </section>
 </section>
 

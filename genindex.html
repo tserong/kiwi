@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; KIWI NG 9.23.63 documentation</title>
+  <title>Index &mdash; KIWI NG 9.24.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -179,6 +179,7 @@
 <li class="toctree-l1"><a class="reference internal" href="image_description.html">Image Description</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="image_description/elements.html">Image Description Elements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="image_description/elements.html#image">&lt;image&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="image_description/elements.html#include">&lt;include&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="image_description/elements.html#description">&lt;description&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="image_description/elements.html#preferences">&lt;preferences&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#preferences-version">&lt;preferences&gt;&lt;version&gt;</a></li>
@@ -225,6 +226,7 @@
 <li class="toctree-l2"><a class="reference internal" href="image_description.html#image-content-setup">Image Content Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_description.html#image-users">Image Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="image_description.html#image-namespace">Image Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_description.html#image-includes">Image Includes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="image_types_and_results.html">Image Types</a><ul>
@@ -832,6 +834,8 @@
       <li><a href="api/kiwi.html#kiwi.runtime_checker.RuntimeChecker.check_image_type_unique">check_image_type_unique() (kiwi.runtime_checker.RuntimeChecker method)</a>
 </li>
       <li><a href="api/kiwi.html#kiwi.runtime_checker.RuntimeChecker.check_image_version_provided">check_image_version_provided() (kiwi.runtime_checker.RuntimeChecker method)</a>
+</li>
+      <li><a href="api/kiwi.html#kiwi.runtime_checker.RuntimeChecker.check_include_references_unresolvable">check_include_references_unresolvable() (kiwi.runtime_checker.RuntimeChecker method)</a>
 </li>
       <li><a href="api/kiwi.html#kiwi.runtime_checker.RuntimeChecker.check_initrd_selection_required">check_initrd_selection_required() (kiwi.runtime_checker.RuntimeChecker method)</a>
 </li>
@@ -1680,6 +1684,8 @@
       <li><a href="api/kiwi.html#kiwi.xml_state.XMLState.get_image_version">get_image_version() (kiwi.xml_state.XMLState method)</a>
 </li>
       <li><a href="api/kiwi.html#kiwi.defaults.Defaults.get_imported_root_image">get_imported_root_image() (kiwi.defaults.Defaults static method)</a>
+</li>
+      <li><a href="api/kiwi.html#kiwi.xml_state.XMLState.get_include_section_reference_file_names">get_include_section_reference_file_names() (kiwi.xml_state.XMLState method)</a>
 </li>
       <li><a href="api/kiwi.html#kiwi.xml_state.XMLState.get_initrd_system">get_initrd_system() (kiwi.xml_state.XMLState method)</a>
 </li>
@@ -3286,6 +3292,8 @@
       <li><a href="api/kiwi.html#kiwi.exceptions.KiwiImageResizeError">KiwiImageResizeError</a>
 </li>
       <li><a href="api/kiwi.html#kiwi.exceptions.KiwiImportDescriptionError">KiwiImportDescriptionError</a>
+</li>
+      <li><a href="api/kiwi.html#kiwi.exceptions.KiwiIncludFileNotFoundError">KiwiIncludFileNotFoundError</a>
 </li>
       <li><a href="api/kiwi.html#kiwi.exceptions.KiwiInstallBootImageError">KiwiInstallBootImageError</a>
 </li>

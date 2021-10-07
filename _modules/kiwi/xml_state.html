@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.xml_state &mdash; KIWI NG 9.23.63 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.24.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -179,6 +179,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../image_description.html">Image Description</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../image_description/elements.html">Image Description Elements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#image">&lt;image&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#include">&lt;include&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#description">&lt;description&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#preferences">&lt;preferences&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-version">&lt;preferences&gt;&lt;version&gt;</a></li>
@@ -225,6 +226,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-content-setup">Image Content Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-users">Image Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-namespace">Image Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-includes">Image Includes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../image_types_and_results.html">Image Types</a><ul>
@@ -2223,6 +2225,19 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_strip_list</span><span class="p">(</span><span class="s1">&#39;libs&#39;</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="XMLState.get_include_section_reference_file_names"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_include_section_reference_file_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_include_section_reference_file_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        List of all &lt;include&gt; section file name references</span>
+
+<span class="sd">        :return: List[str]</span>
+
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">include_files</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">include</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_data</span><span class="o">.</span><span class="n">get_include</span><span class="p">():</span>
+            <span class="n">include_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">include</span><span class="o">.</span><span class="n">get_from</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">include_files</span></div>
+
 <div class="viewcode-block" id="XMLState.get_repository_sections"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_repository_sections">[docs]</a>    <span class="k">def</span> <span class="nf">get_repository_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List of all repository sections matching configured profiles</span>
@@ -2809,14 +2824,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">available_profiles</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
         <span class="n">import_profiles</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">profiles_section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_data</span><span class="o">.</span><span class="n">get_profiles</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">profiles_section</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">profile</span> <span class="ow">in</span> <span class="n">profiles_section</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_profile</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">profiles_section</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_data</span><span class="o">.</span><span class="n">get_profiles</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">profile</span> <span class="ow">in</span> <span class="n">profiles_section</span><span class="o">.</span><span class="n">get_profile</span><span class="p">():</span>
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">profile_matches_host_architecture</span><span class="p">(</span><span class="n">profile</span><span class="p">):</span>
                     <span class="n">name</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
                     <span class="n">available_profiles</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">profile</span>
                     <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">get_import</span><span class="p">():</span>
                         <span class="n">import_profiles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="n">profiles</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">import_profiles</span>
         <span class="k">else</span><span class="p">:</span>
@@ -3011,8 +3026,8 @@
                 <span class="k">if</span> <span class="n">build_type</span> <span class="o">==</span> <span class="n">image_type</span><span class="o">.</span><span class="n">get_image</span><span class="p">():</span>
                     <span class="k">return</span> <span class="n">image_type</span>
             <span class="k">raise</span> <span class="n">KiwiTypeNotFound</span><span class="p">(</span>
-                <span class="s1">&#39;build type </span><span class="si">{0}</span><span class="s1"> not found in </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="n">build_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_data</span><span class="o">.</span><span class="n">description</span>
+                <span class="s1">&#39;Build type </span><span class="si">{0!r}</span><span class="s1"> not found for applied profiles: </span><span class="si">{1!r}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">build_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span>
                 <span class="p">)</span>
             <span class="p">)</span>
 
@@ -3025,7 +3040,9 @@
         <span class="k">if</span> <span class="n">image_type_sections</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">image_type_sections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">raise</span> <span class="n">KiwiTypeNotFound</span><span class="p">(</span>
-            <span class="s1">&#39;No build type defined in </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xml_data</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+            <span class="s1">&#39;No build type defined with applied profiles: </span><span class="si">{0!r}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span>
+            <span class="p">)</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_profiled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xml_abstract</span><span class="p">):</span>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.exceptions &mdash; KIWI NG 9.23.63 documentation</title>
+  <title>kiwi.exceptions &mdash; KIWI NG 9.24.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -179,6 +179,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../image_description.html">Image Description</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../image_description/elements.html">Image Description Elements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#image">&lt;image&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#include">&lt;include&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#description">&lt;description&gt;</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#preferences">&lt;preferences&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-version">&lt;preferences&gt;&lt;version&gt;</a></li>
@@ -225,6 +226,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-content-setup">Image Content Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-users">Image Users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-namespace">Image Namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../image_description.html#image-includes">Image Includes</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../image_types_and_results.html">Image Types</a><ul>
@@ -1443,6 +1445,13 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Exception raised if a given python value cannot be converted</span>
 <span class="sd">    into a string representation for use in shell scripts</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+<div class="viewcode-block" id="KiwiIncludFileNotFoundError"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.exceptions.KiwiIncludFileNotFoundError">[docs]</a><span class="k">class</span> <span class="nc">KiwiIncludFileNotFoundError</span><span class="p">(</span><span class="n">KiwiError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Exception raised if the file reference in an &lt;include&gt;</span>
+<span class="sd">    statement could not be found</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
 </pre></div>
 
