@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Building in a Self-Contained Environment &mdash; KIWI NG 9.24.0 documentation</title>
+  <title>KIWI Plugins &mdash; KIWI NG 9.24.1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Concept and Workflow" href="concept_and_workflow.html" />
+    <link rel="next" title="Building in a Self-Contained Environment" href="plugins/self_contained.html" />
     <link rel="prev" title="Incompatible Filesystem Settings on Host vs. Image" href="troubleshooting/filesystems.html" /> 
 </head>
 
@@ -129,9 +129,20 @@
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#architectures">Architectures</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Building in a Self-Contained Environment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#building-with-the-boxbuild-command">Building with the boxbuild command</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">KIWI Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plugins/self_contained.html">Building in a Self-Contained Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plugins/self_contained.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/self_contained.html#building-with-the-boxbuild-command">Building with the boxbuild command</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="plugins/stackbuild.html">Building based on Containers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plugins/stackbuild.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/stackbuild.html#concept">Concept</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/stackbuild.html#create-a-stash">Create a stash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/stackbuild.html#rebuild-from-a-stash">Rebuild from a stash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plugins/stackbuild.html#turn-a-container-into-a-vm-image">Turn a container into a VM image</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="concept_and_workflow.html">Concept and Workflow</a><ul>
@@ -635,9 +646,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Building in a Self-Contained Environment</li>
+      <li>KIWI Plugins</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/self_contained.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/plugins.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -645,75 +656,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="building-in-a-self-contained-environment">
-<span id="self-contained"></span><h1>Building in a Self-Contained Environment<a class="headerlink" href="#building-in-a-self-contained-environment" title="Permalink to this headline">¶</a></h1>
+  <section id="kiwi-plugins">
+<h1>KIWI Plugins<a class="headerlink" href="#kiwi-plugins" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>Abstract</strong></p>
-<p>Users building images with KIWI NG face problems if they want
-to build an image matching one of the following criteria:</p>
-<ul class="simple">
-<li><p>build should happen as non root user.</p></li>
-<li><p>build should happen on a host system distribution for which
-no KIWI NG packages exists.</p></li>
-<li><p>build happens on an incompatible host system distribution
-compared to the target image distribution. For example
-building an apt/dpkg  based system on an rpm based system.</p></li>
-<li><p>run more than one build process at the same time on the
-same host.</p></li>
-<li><p>run a build process for a different target architecture
-compared to the host architecture (Cross Arch Image Build)</p></li>
+<p>This document provides a list of the existing KIWI Next Generation (KIWI NG) plugins
+which provides extended functionality for version 9.24.1.</p>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="plugins/self_contained.html">Building in a Self-Contained Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plugins/stackbuild.html">Building based on Containers</a></li>
 </ul>
-<p>This document describes how to perform the build process in
-a self contained environment using fast booting virtual
-machines to address the issues listed above.</p>
-<p>The changes on the machine to become a build host will
-be reduced to the requirements of the KIWI NG <code class="xref py py-obj docutils literal notranslate"><span class="pre">boxed</span> <span class="pre">plugin</span></code></p>
 </div>
-<section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>Add the KIWI NG repo from the Open Build Service. For details see
-<a class="reference internal" href="installation.html#installation-from-obs"><span class="std std-ref">Installation from OBS</span></a>. The following KIWI NG plugin needs to be
-installed on the build system:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo zypper <span class="k">in</span> python3-kiwi_boxed_plugin
-</pre></div>
-</div>
-</section>
-<section id="building-with-the-boxbuild-command">
-<h2>Building with the boxbuild command<a class="headerlink" href="#building-with-the-boxbuild-command" title="Permalink to this headline">¶</a></h2>
-<p>The installation of the KIWI NG boxed plugin has registered a new kiwi
-command named <code class="xref py py-obj docutils literal notranslate"><span class="pre">boxbuild</span></code>. The command implementation uses KVM as
-virtualization technology and runs the KIWI NG <code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code> command inside of
-a KVM controlled virtual machine. For running the build process in a
-virtual machine it’s required to provide VM images that are suitable
-to perform this job. We call the VM images <code class="xref py py-obj docutils literal notranslate"><span class="pre">boxes</span></code> and they contain
-kiwi itself as well as all other components needed to build appliances.
-Those boxes are hosted in the Open Build Service and are publicly
-available at the <code class="xref py py-obj docutils literal notranslate"><span class="pre">Subprojects</span></code> tab in the: <a class="reference external" href="https://build.opensuse.org/project/show/Virtualization:Appliances:SelfContained">Virtualization:Appliances:SelfContained</a>
-project.</p>
-<p>As a user you don’t need to work with the boxes because this is all done
-by the plugin and provided as a service by the KIWI NG team. The <code class="xref py py-obj docutils literal notranslate"><span class="pre">boxbuild</span></code>
-command knows where to fetch the box and also cares for an update of the
-box when it has changed.</p>
-<p>Building an image with the <code class="xref py py-obj docutils literal notranslate"><span class="pre">boxbuild</span></code> command is similar to building with
-the <code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code> command. The plugin validates the given command call with the
-capabilities of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code> command. Thus one part of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">boxbuild</span></code> command
-is exactly the same as with the <code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code> command. The separation between
-<code class="xref py py-obj docutils literal notranslate"><span class="pre">boxbuild</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">build</span></code> options is done using the <code class="xref py py-obj docutils literal notranslate"><span class="pre">--</span></code> separator like
-shown in the following example:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kiwi-ng --type iso system boxbuild --box leap -- <span class="se">\</span>
-      --description kiwi/build-tests/x86/leap/test-image-disk <span class="se">\</span>
-      --set-repo obs://openSUSE:Leap:15.3/standard <span class="se">\</span>
-      --target-dir /tmp/myimage
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The provided <code class="xref py py-obj docutils literal notranslate"><span class="pre">--description</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">--target-dir</span></code> options are
-setup as shared folders between the host and the guest. No other
-data will be shared with the host.</p>
-</div>
-</section>
 </section>
 
 
@@ -721,7 +676,7 @@ data will be shared with the host.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="troubleshooting/filesystems.html" class="btn btn-neutral float-left" title="Incompatible Filesystem Settings on Host vs. Image" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="concept_and_workflow.html" class="btn btn-neutral float-right" title="Concept and Workflow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plugins/self_contained.html" class="btn btn-neutral float-right" title="Building in a Self-Contained Environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

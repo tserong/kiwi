@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Incompatible Filesystem Settings on Host vs. Image &mdash; KIWI NG 9.24.0 documentation</title>
+  <title>Incompatible Filesystem Settings on Host vs. Image &mdash; KIWI NG 9.24.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -19,7 +19,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Building in a Self-Contained Environment" href="../self_contained.html" />
+    <link rel="next" title="KIWI Plugins" href="../plugins.html" />
     <link rel="prev" title="Troubleshooting" href="../troubleshooting.html" /> 
 </head>
 
@@ -129,9 +129,20 @@
 <li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#architectures">Architectures</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../self_contained.html">Building in a Self-Contained Environment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../self_contained.html#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../self_contained.html#building-with-the-boxbuild-command">Building with the boxbuild command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">KIWI Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/self_contained.html">Building in a Self-Contained Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/self_contained.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/self_contained.html#building-with-the-boxbuild-command">Building with the boxbuild command</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/stackbuild.html">Building based on Containers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/stackbuild.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/stackbuild.html#concept">Concept</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/stackbuild.html#create-a-stash">Create a stash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/stackbuild.html#rebuild-from-a-stash">Rebuild from a stash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/stackbuild.html#turn-a-container-into-a-vm-image">Turn a container into a VM image</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../concept_and_workflow.html">Concept and Workflow</a><ul>
@@ -699,7 +710,7 @@ build the image in a compatible environment. At best the
 build host distribution is of the same major Linux version
 than the image target. For this purpose KIWI NG provides the
 so called <code class="xref py py-obj docutils literal notranslate"><span class="pre">boxed-plugin</span></code>. Further details can be found
-in <a class="reference internal" href="../self_contained.html#self-contained"><span class="std std-ref">Building in a Self-Contained Environment</span></a></p>
+in <a class="reference internal" href="../plugins/self_contained.html#self-contained"><span class="std std-ref">Building in a Self-Contained Environment</span></a></p>
 </div>
 </section>
 
@@ -708,7 +719,7 @@ in <a class="reference internal" href="../self_contained.html#self-contained"><s
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../troubleshooting.html" class="btn btn-neutral float-left" title="Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../self_contained.html" class="btn btn-neutral float-right" title="Building in a Self-Contained Environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../plugins.html" class="btn btn-neutral float-right" title="KIWI Plugins" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

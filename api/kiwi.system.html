@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.system Package &mdash; KIWI NG 9.24.0 documentation</title>
+  <title>kiwi.system Package &mdash; KIWI NG 9.24.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -129,9 +129,20 @@
 <li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#architectures">Architectures</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../self_contained.html">Building in a Self-Contained Environment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../self_contained.html#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../self_contained.html#building-with-the-boxbuild-command">Building with the boxbuild command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plugins.html">KIWI Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/self_contained.html">Building in a Self-Contained Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/self_contained.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/self_contained.html#building-with-the-boxbuild-command">Building with the boxbuild command</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../plugins/stackbuild.html">Building based on Containers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/stackbuild.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/stackbuild.html#concept">Concept</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/stackbuild.html#create-a-stash">Create a stash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/stackbuild.html#rebuild-from-a-stash">Rebuild from a stash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/stackbuild.html#turn-a-container-into-a-vm-image">Turn a container into a VM image</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../concept_and_workflow.html">Concept and Workflow</a><ul>
@@ -1087,11 +1098,17 @@ new root directory</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.system.result.Result.dump">
-<span class="sig-name descname"><span class="pre">dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/kiwi/system/result.html#Result.dump"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.system.result.Result.dump" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">portable</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/kiwi/system/result.html#Result.dump"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.system.result.Result.dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Picke dump this instance to a file</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – file path name</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – file path name</p></li>
+<li><p><strong>portable</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – If set to true also create a .json formatted variant
+of the dump file which contains the elements of this
+instance that could be expressed in a portable json
+document. Default is set to: True</p></li>
+</ul>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference internal" href="kiwi.html#kiwi.exceptions.KiwiResultError" title="kiwi.exceptions.KiwiResultError"><strong>KiwiResultError</strong></a> – if pickle fails to dump <a class="reference internal" href="#kiwi.system.result.Result" title="kiwi.system.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>

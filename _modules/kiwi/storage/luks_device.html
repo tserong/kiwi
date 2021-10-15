@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.storage.luks_device &mdash; KIWI NG 9.24.0 documentation</title>
+  <title>kiwi.storage.luks_device &mdash; KIWI NG 9.24.1 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -126,9 +126,20 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../troubleshooting.html#architectures">Architectures</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../../self_contained.html">Building in a Self-Contained Environment</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../../self_contained.html#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../self_contained.html#building-with-the-boxbuild-command">Building with the boxbuild command</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plugins.html">KIWI Plugins</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/self_contained.html">Building in a Self-Contained Environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/self_contained.html#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/self_contained.html#building-with-the-boxbuild-command">Building with the boxbuild command</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../plugins/stackbuild.html">Building based on Containers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/stackbuild.html#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/stackbuild.html#concept">Concept</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/stackbuild.html#create-a-stash">Create a stash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/stackbuild.html#rebuild-from-a-stash">Rebuild from a stash</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../plugins/stackbuild.html#turn-a-container-into-a-vm-image">Turn a container into a VM image</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../concept_and_workflow.html">Concept and Workflow</a><ul>
@@ -684,7 +695,7 @@
 
 <span class="sd">    :param object storage_provider: Instance of class based on DeviceProvider</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">storage_provider</span><span class="p">:</span> <span class="n">DeviceProvider</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">storage_provider</span><span class="p">:</span> <span class="n">DeviceProvider</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># bind the underlaying block device providing class instance</span>
         <span class="c1"># to this object (e.g loop) if present. This is done to guarantee</span>
         <span class="c1"># the correct destructor order when the device should be released.</span>
@@ -718,8 +729,8 @@
 
 <div class="viewcode-block" id="LuksDevice.create_crypto_luks"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.luks_device.LuksDevice.create_crypto_luks">[docs]</a>    <span class="k">def</span> <span class="nf">create_crypto_luks</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">passphrase</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">options</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">keyfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="p">):</span>
+        <span class="n">options</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">keyfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create luks device. Please note the passphrase is readable</span>
 <span class="sd">        at creation time of this image. Make sure your host system</span>
@@ -801,7 +812,7 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">luks_device</span> <span class="o">=</span> <span class="s1">&#39;/dev/mapper/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">luks_name</span></div>
 
-<div class="viewcode-block" id="LuksDevice.create_crypttab"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.luks_device.LuksDevice.create_crypttab">[docs]</a>    <span class="k">def</span> <span class="nf">create_crypttab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="viewcode-block" id="LuksDevice.create_crypttab"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.luks_device.LuksDevice.create_crypttab">[docs]</a>    <span class="k">def</span> <span class="nf">create_crypttab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create crypttab, setting the UUID of the storage device</span>
 
@@ -837,7 +848,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage_provider</span><span class="o">.</span><span class="n">is_loop</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="LuksDevice.create_random_keyfile"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.luks_device.LuksDevice.create_random_keyfile">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">create_random_keyfile</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">create_random_keyfile</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create keyfile with random data</span>
 
