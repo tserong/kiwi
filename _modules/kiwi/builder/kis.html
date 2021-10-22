@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.builder.kis &mdash; KIWI NG 9.24.1 documentation</title>
+  <title>kiwi.builder.kis &mdash; KIWI NG 9.24.2 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -242,6 +242,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../image_types_and_results.html">Image Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../image_types_and_results.html#image-results">Image Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../image_types_and_results.html#image-bundle-format">Image Bundle Format</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../../building_images.html">Building Images for Supported Types</a><ul>
@@ -733,6 +734,7 @@
             <span class="n">xml_state</span><span class="p">,</span> <span class="n">target_dir</span><span class="p">,</span> <span class="n">root_dir</span><span class="p">,</span>
             <span class="n">signing_keys</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">boot_signing_keys</span>
         <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bundle_format</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_build_type_bundle_format</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">image_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="p">[</span>
                 <span class="n">target_dir</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
@@ -893,7 +895,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span><span class="o">.</span><span class="n">get_max_size_constraint</span><span class="p">(),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">archive_name</span>
         <span class="p">)</span>
-        <span class="c1"># store results</span>
+        <span class="c1"># store image bundle_format in result</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bundle_format</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">add_bundle_format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bundle_format</span><span class="p">)</span>
+
+        <span class="c1"># # store archive file name in result</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
             <span class="n">key</span><span class="o">=</span><span class="s1">&#39;kis_archive&#39;</span><span class="p">,</span>
             <span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">archive_name</span><span class="p">,</span>

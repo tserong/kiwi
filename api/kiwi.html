@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi Package &mdash; KIWI NG 9.24.1 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.24.2 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -245,6 +245,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../image_types_and_results.html">Image Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../image_types_and_results.html#image-results">Image Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../image_types_and_results.html#image-bundle-format">Image Bundle Format</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../building_images.html">Building Images for Supported Types</a><ul>
@@ -3562,6 +3563,13 @@ configuration file template has failed.</p>
 </dd></dl>
 
 <dl class="py exception">
+<dt class="sig sig-object py" id="kiwi.exceptions.KiwiUmountBusyError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.exceptions.</span></span><span class="sig-name descname"><span class="pre">KiwiUmountBusyError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/exceptions.html#KiwiUmountBusyError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.exceptions.KiwiUmountBusyError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
+<p>Exception raised if the attempt to umount a resource has failed</p>
+</dd></dl>
+
+<dl class="py exception">
 <dt class="sig sig-object py" id="kiwi.exceptions.KiwiUnknownServiceName">
 <em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.exceptions.</span></span><span class="sig-name descname"><span class="pre">KiwiUnknownServiceName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/exceptions.html#KiwiUnknownServiceName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.exceptions.KiwiUnknownServiceName" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
@@ -4176,7 +4184,7 @@ for messages with another level an extra handler is used</p>
 <span id="kiwi-mount-manager-module"></span><h2><a class="reference internal" href="#module-kiwi.mount_manager" title="kiwi.mount_manager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.mount_manager</span></code></a> Module<a class="headerlink" href="#module-kiwi.mount_manager" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="kiwi.mount_manager.MountManager">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.mount_manager.</span></span><span class="sig-name descname"><span class="pre">MountManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mountpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/mount_manager.html#MountManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.mount_manager.MountManager" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.mount_manager.</span></span><span class="sig-name descname"><span class="pre">MountManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mountpoint</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/mount_manager.html#MountManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.mount_manager.MountManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p><strong>Implements methods for mounting, umounting and mount checking</strong></p>
 <p>If a MountManager instance is used to mount a device the caller
@@ -4199,13 +4207,13 @@ intentional</p>
 </ul>
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.mount_manager.MountManager.bind_mount">
-<span class="sig-name descname"><span class="pre">bind_mount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/mount_manager.html#MountManager.bind_mount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.mount_manager.MountManager.bind_mount" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">bind_mount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/kiwi/mount_manager.html#MountManager.bind_mount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.mount_manager.MountManager.bind_mount" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bind mount the device to the mountpoint</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.mount_manager.MountManager.is_mounted">
-<span class="sig-name descname"><span class="pre">is_mounted</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/mount_manager.html#MountManager.is_mounted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.mount_manager.MountManager.is_mounted" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">is_mounted</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/kiwi/mount_manager.html#MountManager.is_mounted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.mount_manager.MountManager.is_mounted" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if mounted</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
@@ -4219,7 +4227,7 @@ intentional</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.mount_manager.MountManager.mount">
-<span class="sig-name descname"><span class="pre">mount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/mount_manager.html#MountManager.mount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.mount_manager.MountManager.mount" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">mount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/kiwi/mount_manager.html#MountManager.mount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.mount_manager.MountManager.mount" title="Permalink to this definition">¶</a></dt>
 <dd><p>Standard mount the device to the mountpoint</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -4230,9 +4238,13 @@ intentional</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.mount_manager.MountManager.umount">
-<span class="sig-name descname"><span class="pre">umount</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/mount_manager.html#MountManager.umount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.mount_manager.MountManager.umount" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">umount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raise_on_busy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/kiwi/mount_manager.html#MountManager.umount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.mount_manager.MountManager.umount" title="Permalink to this definition">¶</a></dt>
 <dd><p>Umount by the mountpoint directory</p>
-<p>If the resource is busy the call will return False</p>
+<p>Wait up to 10sec trying to umount. If the resource stays
+busy the call will raise an exception unless raise_on_busy
+is set to False. In case the umount failed and raise_on_busy
+is set to False, the method returns False to indicate the
+error condition.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>True or False</p>
@@ -4245,7 +4257,7 @@ intentional</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.mount_manager.MountManager.umount_lazy">
-<span class="sig-name descname"><span class="pre">umount_lazy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/mount_manager.html#MountManager.umount_lazy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.mount_manager.MountManager.umount_lazy" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">umount_lazy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/kiwi/mount_manager.html#MountManager.umount_lazy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.mount_manager.MountManager.umount_lazy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Umount by the mountpoint directory in lazy mode</p>
 <p>Release the mount in any case, however the time when the mounted
 resource is released by the kernel depends on when the resource
@@ -5528,6 +5540,22 @@ depending on the storage target it runs later</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>timeout_style string</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kiwi.xml_state.XMLState.get_build_type_bundle_format">
+<span class="sig-name descname"><span class="pre">get_build_type_bundle_format</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_bundle_format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_bundle_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return bundle_format for build type</p>
+<p>The bundle_format string is validated against the available
+name tags from kiwi.system.result::result_name_tags.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>bundle format string</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>

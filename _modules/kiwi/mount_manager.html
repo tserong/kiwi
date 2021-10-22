@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.mount_manager &mdash; KIWI NG 9.24.1 documentation</title>
+  <title>kiwi.mount_manager &mdash; KIWI NG 9.24.2 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -242,6 +242,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../image_types_and_results.html">Image Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../image_types_and_results.html#image-results">Image Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../image_types_and_results.html#image-bundle-format">Image Bundle Format</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../building_images.html">Building Images for Supported Types</a><ul>
@@ -671,12 +672,17 @@
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">textwrap</span> <span class="kn">import</span> <span class="n">dedent</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.path</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
+<span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="n">KiwiUmountBusyError</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
 
@@ -693,7 +699,7 @@
 <span class="sd">    * :param string device: device node name</span>
 <span class="sd">    * :param string mountpoint: mountpoint directory name</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">mountpoint</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mountpoint</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">mountpoint</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint_tempdir</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">(</span>
@@ -703,7 +709,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">=</span> <span class="n">mountpoint</span>
 
-<div class="viewcode-block" id="MountManager.bind_mount"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.mount_manager.MountManager.bind_mount">[docs]</a>    <span class="k">def</span> <span class="nf">bind_mount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="MountManager.bind_mount"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.mount_manager.MountManager.bind_mount">[docs]</a>    <span class="k">def</span> <span class="nf">bind_mount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Bind mount the device to the mountpoint</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -712,7 +718,7 @@
                 <span class="p">[</span><span class="s1">&#39;mount&#39;</span><span class="p">,</span> <span class="s1">&#39;-n&#39;</span><span class="p">,</span> <span class="s1">&#39;--bind&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">]</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="MountManager.mount"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.mount_manager.MountManager.mount">[docs]</a>    <span class="k">def</span> <span class="nf">mount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="MountManager.mount"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.mount_manager.MountManager.mount">[docs]</a>    <span class="k">def</span> <span class="nf">mount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Standard mount the device to the mountpoint</span>
 
@@ -726,7 +732,7 @@
                 <span class="p">[</span><span class="s1">&#39;mount&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">option_list</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">]</span>
             <span class="p">)</span></div>
 
-<div class="viewcode-block" id="MountManager.umount_lazy"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.mount_manager.MountManager.umount_lazy">[docs]</a>    <span class="k">def</span> <span class="nf">umount_lazy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="MountManager.umount_lazy"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.mount_manager.MountManager.umount_lazy">[docs]</a>    <span class="k">def</span> <span class="nf">umount_lazy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Umount by the mountpoint directory in lazy mode</span>
 
@@ -737,11 +743,15 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_mounted</span><span class="p">():</span>
             <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;umount&#39;</span><span class="p">,</span> <span class="s1">&#39;-l&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="MountManager.umount"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.mount_manager.MountManager.umount">[docs]</a>    <span class="k">def</span> <span class="nf">umount</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="MountManager.umount"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.mount_manager.MountManager.umount">[docs]</a>    <span class="k">def</span> <span class="nf">umount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raise_on_busy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Umount by the mountpoint directory</span>
 
-<span class="sd">        If the resource is busy the call will return False</span>
+<span class="sd">        Wait up to 10sec trying to umount. If the resource stays</span>
+<span class="sd">        busy the call will raise an exception unless raise_on_busy</span>
+<span class="sd">        is set to False. In case the umount failed and raise_on_busy</span>
+<span class="sd">        is set to False, the method returns False to indicate the</span>
+<span class="sd">        error condition.</span>
 
 <span class="sd">        :return: True or False</span>
 
@@ -749,7 +759,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_mounted</span><span class="p">():</span>
             <span class="n">umounted_successfully</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="k">for</span> <span class="n">busy</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">busy</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;umount&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">])</span>
                     <span class="n">umounted_successfully</span> <span class="o">=</span> <span class="kc">True</span>
@@ -761,15 +771,47 @@
                     <span class="p">)</span>
                     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">umounted_successfully</span><span class="p">:</span>
-                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                    <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> still busy at </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
-                <span class="p">)</span>
-                <span class="c1"># skip removing the mountpoint directory</span>
-                <span class="k">return</span> <span class="kc">False</span>
+                <span class="k">if</span> <span class="n">raise_on_busy</span><span class="p">:</span>
+                    <span class="n">lsof</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">which</span><span class="p">(</span><span class="s1">&#39;lsof&#39;</span><span class="p">,</span> <span class="n">access_mode</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">X_OK</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">lsof</span><span class="p">:</span>
+                        <span class="n">open_files</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                            <span class="p">[</span><span class="n">lsof</span><span class="p">,</span> <span class="s1">&#39;+c&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">],</span>
+                            <span class="n">raise_on_error</span><span class="o">=</span><span class="kc">False</span>
+                        <span class="p">)</span>
+                        <span class="n">open_files_info</span> <span class="o">=</span> <span class="s1">&#39;Open files status:</span><span class="si">{0}{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">os</span><span class="o">.</span><span class="n">linesep</span><span class="p">,</span> <span class="n">open_files</span><span class="o">.</span><span class="n">output</span>
+                        <span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">open_files_info</span> <span class="o">=</span> <span class="s1">&#39;For further details install: lsof&#39;</span>
+                    <span class="n">message</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span><span class="se">\n</span><span class="s1"></span>
+<span class="s1">                        Failed to umount: </span><span class="si">{0}</span><span class="s1">.</span>
 
+<span class="s1">                        Your build host system is in an inconsistent state.</span>
+<span class="s1">                        The cleanup of the created resource was not possible</span>
+<span class="s1">                        because it is still busy. This resource and all nested</span>
+<span class="s1">                        resources stays active on your host and needs a manual</span>
+<span class="s1">                        cleanup.</span>
+
+<span class="s1">                        Please do not use the intermediate state of the image</span>
+<span class="s1">                        files created so far. There is no guarantee that the</span>
+<span class="s1">                        produced results are valid.</span>
+
+<span class="s1">                        </span><span class="si">{1}</span><span class="s1"></span>
+<span class="s1">                    &#39;&#39;&#39;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="n">KiwiUmountBusyError</span><span class="p">(</span>
+                        <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span> <span class="n">open_files_info</span><span class="p">)</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> still busy at </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
+                    <span class="c1"># skip removing the mountpoint directory</span>
+                    <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="MountManager.is_mounted"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.mount_manager.MountManager.is_mounted">[docs]</a>    <span class="k">def</span> <span class="nf">is_mounted</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="MountManager.is_mounted"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.mount_manager.MountManager.is_mounted">[docs]</a>    <span class="k">def</span> <span class="nf">is_mounted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check if mounted</span>
 

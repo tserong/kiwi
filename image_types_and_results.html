@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Types &mdash; KIWI NG 9.24.1 documentation</title>
+  <title>Image Types &mdash; KIWI NG 9.24.2 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -245,6 +245,7 @@
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Image Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#image-results">Image Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#image-bundle-format">Image Bundle Format</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="building_images.html">Building Images for Supported Types</a><ul>
@@ -680,7 +681,8 @@ For further details refer to <a class="reference internal" href="building_images
 deployment the system can resize itself to the new disk geometry.
 The resize operation is configurable as part of the image description
 and an installation image for CD/DVD, USB stick and Network deployment
-can be created in addition. For further details refer to: <a class="reference internal" href="building_images/build_expandable_disk.html#expandable-disk"><span class="std std-ref">Build an Expandable Disk Image</span></a></p>
+can be created in addition. For further details refer to:
+<a class="reference internal" href="building_images/build_expandable_disk.html#expandable-disk"><span class="std std-ref">Build an Expandable Disk Image</span></a></p>
 </dd>
 <dt>Docker Container Image</dt><dd><p>An archive image suitable for the docker container engine.
 The image can be loaded via the <code class="xref py py-obj docutils literal notranslate"><span class="pre">docker</span> <span class="pre">load</span></code> command and
@@ -702,9 +704,9 @@ For further details refer to: <a class="reference internal" href="building_image
 <h2>Image Results<a class="headerlink" href="#image-results" title="Permalink to this headline">¶</a></h2>
 <p>KIWI NG execution results in an appliance image after a successful run of
 <a class="reference internal" href="commands/system_build.html#kiwi-system-build"><span class="std std-ref">kiwi-ng system build</span></a> or <a class="reference internal" href="commands/system_create.html#kiwi-system-create"><span class="std std-ref">kiwi-ng system create</span></a> command.
-The result is the image binary in addition a couple of metadata files that can
-be handy to describe or identify the resulting image. The output files follow
-this naming convention:</p>
+The result is the image binary plus some additional metadata files
+which are needed for image deployment and/or exists for informative
+reasons. By default the output files follow this naming convention:</p>
 <p><code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;image-name&gt;.&lt;arch&gt;-&lt;version&gt;.&lt;extension&gt;</span></code></p>
 <p>where <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;image-name&gt;</span></code> is the name stated in the <a class="reference internal" href="image_description.html#image-description"><span class="std std-ref">Image Description</span></a> as an
 attribute of the <a class="reference internal" href="image_description/elements.html#sec-image"><span class="std std-ref">&lt;image&gt;</span></a> element. The <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;arch&gt;</span></code> is the CPU
@@ -716,7 +718,7 @@ and the <code class="xref py py-obj docutils literal notranslate"><span class="p
 <li><p>The image binary, <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;image-name&gt;.&lt;arch&gt;-&lt;version&gt;.&lt;image-extension&gt;</span></code>:</p>
 <p>This is the file containig the actual image binary, depending
 on the image type and its definition it can be a virtual disk image
-file, and ISO image, a tarball, etc.</p>
+file, an ISO image, a tarball, etc.</p>
 </li>
 <li><p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;image-name&gt;.&lt;arch&gt;-&lt;version&gt;.packages</span></code> file:</p>
 <p>This file includes a sorted list of the packages
@@ -741,15 +743,7 @@ provides an overview of all packages status right before any boot of
 the image.</p>
 </li>
 </ol>
-<p>More specific  the result files for a given image name and version such
-as <code class="xref py py-obj docutils literal notranslate"><span class="pre">{exc_image_base_name}</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">1.15.3</span></code> will be:</p>
-<ul class="simple">
-<li><p><strong>image packages</strong>:
-<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.packages</span></code></p></li>
-<li><p><strong>image verified</strong>:
-<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.verified</span></code></p></li>
-</ul>
-<p>In addition to the image binaries itself that depend on the image type:</p>
+<p>Depending on the image type, the following output files exists:</p>
 <dl>
 <dt>image=”tbz”</dt><dd><p>For this image type the result is mainly a root tree packed in a tarball:</p>
 <ul class="simple">
@@ -824,6 +818,64 @@ details about the kis archive:</p>
 <li><p><strong>kis archive</strong>:
 <code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.tar.xz</span></code></p></li>
 </ul>
+</dd>
+</dl>
+</section>
+<section id="image-bundle-format">
+<h2>Image Bundle Format<a class="headerlink" href="#image-bundle-format" title="Permalink to this headline">¶</a></h2>
+<p>The result files as mentioned above are used in the KIWI NG result bundler.
+The <code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-ng</span> <span class="pre">result</span> <span class="pre">bundle</span></code> command can be used to copy or package the
+mandatory image files to create a customer release. In this process it’s
+possible to apply a specific name pattern suitable for the requirements
+of the release. A typical result bundle call can look like the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ kiwi-ng result bundle --target-dir /path/to/image/build_result <span class="se">\</span>
+      --bundle-dir<span class="o">=</span>/path/to/image/release_result <span class="se">\</span>
+      --id<span class="o">=</span>release_identifier
+</pre></div>
+</div>
+<p>In this call and depending on the image type the required files as they
+exist in <code class="file docutils literal notranslate"><span class="pre">/path/to/image/build_result</span></code> are copied to
+<code class="file docutils literal notranslate"><span class="pre">/path/to/image/release_result/</span></code>. The only modification on the file
+names is the <code class="xref py py-obj docutils literal notranslate"><span class="pre">--id</span></code> information which is appended with a <code class="xref py py-obj docutils literal notranslate"><span class="pre">-</span></code> to at the
+end of the version substring. If we take
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3.iso</span></code> as example.
+This file would be bundled as
+<code class="file docutils literal notranslate"><em><span class="pre">exc_image_base_name</span></em><span class="pre">.x86_64-1.15.3-release_identifier.iso</span></code></p>
+<p>Depending on the use case and the customer requirements this naming
+schema and the default way how the kiwi bundler processes the result files
+is not appropriate. To allow for a more flexible naming schema when
+bundling results, KIWI NG allows to specify a bundle_format per type like
+in the following example:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;...&quot;</span> <span class="na">bundle_format=</span><span class="s">&quot;name_pattern&quot;</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- type definition --&gt;</span>
+<span class="nt">&lt;/type&gt;</span>
+</pre></div>
+</div>
+<p>The specified <code class="xref py py-obj docutils literal notranslate"><span class="pre">name_pattern</span></code> is used as the base name for the image
+files the bundler uses. As part of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">name_pattern</span></code> the following
+placeholders which gets replaced by their real value can be used:</p>
+<dl class="simple">
+<dt>%N</dt><dd><p>Turns into the contents of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code> attribute of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;image&gt;</span></code> section</p>
+</dd>
+<dt>%P</dt><dd><p>Turns into the profile name used at build time of the image.
+If multiple profiles were used to build the image the result
+name consists out of the individual profile names concatenated
+by a <code class="xref py py-obj docutils literal notranslate"><span class="pre">_</span></code> in the order of their specification in the image
+description and/or the commandline.</p>
+</dd>
+<dt>%A</dt><dd><p>Turns into the architecture name at build time of the image.
+Arch names are taken from Python’s <a class="reference external" href="https://docs.python.org/3/library/platform.html#platform.machine" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">platform.machine</span></code></a> information.</p>
+</dd>
+<dt>%I</dt><dd><p>Turns into the identifier name given via the <code class="xref py py-obj docutils literal notranslate"><span class="pre">--id</span></code> option at
+call time of the bundler</p>
+</dd>
+<dt>%T</dt><dd><p>Turns into the contents of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">image</span></code> attribute of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;type&gt;</span></code> section</p>
+</dd>
+<dt>%M</dt><dd><p>Turns into the major number of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code> section</p>
+</dd>
+<dt>%m</dt><dd><p>Turns into the minor number of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code> section</p>
+</dd>
+<dt>%p</dt><dd><p>Turns into the patch number of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code> section</p>
 </dd>
 </dl>
 </section>

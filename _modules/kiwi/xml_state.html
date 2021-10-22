@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.xml_state &mdash; KIWI NG 9.24.1 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.24.2 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -242,6 +242,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../image_types_and_results.html">Image Types</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../image_types_and_results.html#image-results">Image Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../image_types_and_results.html#image-bundle-format">Image Bundle Format</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../building_images.html">Building Images for Supported Types</a><ul>
@@ -795,6 +796,19 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_profiled</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">xml_data</span><span class="o">.</span><span class="n">get_users</span><span class="p">()</span>
         <span class="p">)</span></div>
+
+<div class="viewcode-block" id="XMLState.get_build_type_bundle_format"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_build_type_bundle_format">[docs]</a>    <span class="k">def</span> <span class="nf">get_build_type_bundle_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return bundle_format for build type</span>
+
+<span class="sd">        The bundle_format string is validated against the available</span>
+<span class="sd">        name tags from kiwi.system.result::result_name_tags.</span>
+
+<span class="sd">        :return: bundle format string</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_bundle_format</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="XMLState.get_build_type_name"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_build_type_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_build_type_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
