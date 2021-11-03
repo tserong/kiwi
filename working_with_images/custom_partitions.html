@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Custom Disk Partitions &mdash; KIWI NG 9.24.2 documentation</title>
+  <title>Custom Disk Partitions &mdash; KIWI NG 9.24.3 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -211,6 +211,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-vagrantconfig">&lt;preferences&gt;&lt;type&gt;&lt;vagrantconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-systemdisk">&lt;preferences&gt;&lt;type&gt;&lt;systemdisk&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-partitions">&lt;preferences&gt;&lt;type&gt;&lt;partitions&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-oemconfig">&lt;preferences&gt;&lt;type&gt;&lt;oemconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-size">&lt;preferences&gt;&lt;type&gt;&lt;size&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-machine">&lt;preferences&gt;&lt;type&gt;&lt;machine&gt;</a></li>
@@ -296,10 +297,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="disk_ramdisk_deployment.html">Deploy and Run System in a RamDisk</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Custom Disk Partitions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#custom-partitioning-at-boot-time">Custom Partitioning at Boot Time</a></li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Custom Disk Partitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="custom_volumes.html">Custom Disk Volumes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
@@ -662,132 +660,99 @@
 <span id="custom-partitions"></span><h1>Custom Disk Partitions<a class="headerlink" href="#custom-disk-partitions" title="Permalink to this headline">¶</a></h1>
 <aside class="sidebar">
 <p class="sidebar-title">Abstract</p>
-<p>This page provides some details about what KIWI NG supports and does
-not support regarding customization over the partition scheme. It also
-provides some guidance in case the user requires some custom layout
-beyond KIWI NG supported features.</p>
+<p>This page provides details about the opportunities and limitations
+to customize the partition table in addition to the volume management
+settings from <a class="reference internal" href="custom_volumes.html#custom-volumes"><span class="std std-ref">Custom Disk Volumes</span></a>.</p>
 </aside>
-<p>By design, KIWI NG does not support a customized partition table. Alternatively,
-KIWI NG supports the definition of user-defined volumes which covers most of
-common use cases. See <a class="reference internal" href="custom_volumes.html#custom-volumes"><span class="std std-ref">Custom Disk Volumes</span></a> for
-further details about that.</p>
 <p>KIWI NG has its own partitioning schema which is defined according to several
 different user configurations: boot firmware, boot partition,
 expandable layouts, etc. Those supported features have an impact on the
-partitioning schema. MBR or GUID partition tables are not flexible,
-carry limitations and are tied to some specific disk geometry. Because
-of that the preferred alternative to disk layouts based on traditional
-partition tables is using flexible approaches like logic volumes.</p>
-<p>As an example, expandable OEM images is a relevant KIWI NG feature that
-is incompatible with the idea of adding user defined partitions on the
-system area.</p>
-<p>Despite no full customization is supported, some aspects of the partition
-schema can be customized. KIWI NG supports:</p>
-<ol class="arabic">
-<li><p>Adding a spare partition <em>before</em> the root (<code class="xref py py-obj docutils literal notranslate"><span class="pre">/</span></code>) partition.</p>
-<blockquote>
-<div><p>It can be achieved by using the <code class="xref py py-obj docutils literal notranslate"><span class="pre">spare_part</span></code> type attribute.</p>
-</div></blockquote>
-</li>
-<li><p>Leaving some unpartitioned area at the <em>end</em> of the disk.</p>
-<blockquote>
-<div><p>Setting some unpartitioned free space on the disk can be done using
-the <code class="xref py py-obj docutils literal notranslate"><span class="pre">unpartitioned</span></code> attribute of <code class="xref py py-obj docutils literal notranslate"><span class="pre">size</span></code> element in type’s section. [LINK]</p>
-</div></blockquote>
-</li>
-<li><p>Expand built disks to a new size adding unpartitioned free space at
-the <em>end</em> of the disk.</p>
-<blockquote>
-<div><p>A built image can be resized by using the <code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-ng</span> <span class="pre">image</span> <span class="pre">resize</span></code> command
-and set a new extended size for the disk. See KIWI NG commands docs
-<a class="reference internal" href="../commands/image_resize.html#db-kiwi-image-resize"><span class="std std-ref">here</span></a>.</p>
-</div></blockquote>
-</li>
-</ol>
-<section id="custom-partitioning-at-boot-time">
-<h2>Custom Partitioning at Boot Time<a class="headerlink" href="#custom-partitioning-at-boot-time" title="Permalink to this headline">¶</a></h2>
-<p>Adding additional partitions at boot time of KIWI NG images is also possible,
-however, setting the tools and scripts for doing so needs to be handled by
-the user. A possible strategy to add partitions on system area are described
-below.</p>
-<p>The main idea consists on running a first boot service that creates the
-partitions that are needed. Adding custom services is simple, use the
-following steps:</p>
-<ol class="arabic">
-<li><p>Create a unit file for a systemd service:</p>
-<blockquote>
-<div><div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>Unit<span class="o">]</span>
-<span class="nv">Description</span><span class="o">=</span>Add a data partition
-<span class="nv">After</span><span class="o">=</span>basic.target
-<span class="nv">Wants</span><span class="o">=</span>basic.target
-
-<span class="o">[</span>Service<span class="o">]</span>
-<span class="nv">Type</span><span class="o">=</span>oneshot
-<span class="nv">ExecStart</span><span class="o">=</span>/bin/bash /usr/local/bin/create_part
+partitioning schema.</p>
+<p>MBR or GUID partition tables are not flexible, carry limitations and are
+tied to some specific disk geometry. Because of that the preferred alternative
+to disk layouts based on traditional partition tables is using flexible
+approaches like logic volumes.</p>
+<p>However, on certain conditions additional entries to the low level
+partition table are needed. For this purpose the <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;partitions&gt;</span></code> section
+exists and allows to add custom entries like shown in the following
+example:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;partitions&gt;</span>
+    <span class="nt">&lt;partition</span> <span class="na">name=</span><span class="s">&quot;var&quot;</span> <span class="na">size=</span><span class="s">&quot;100&quot;</span> <span class="na">mountpoint=</span><span class="s">&quot;/var&quot;</span> <span class="na">filesystem=</span><span class="s">&quot;ext3&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/partitions&gt;</span>
 </pre></div>
 </div>
-<p>This systemd unit file will run at boot time once systemd reaches the basic
-target. At this stage all basic services are up an running (devices mounted,
-network interfaces up, etc.). In case the service is required to run on
-earlier stages for some reason, default dependencies need to be disabled,
-see <a class="reference external" href="https://www.freedesktop.org/software/systemd/man/systemd.service.html">systemd man pages</a>.</p>
-</div></blockquote>
+<p>Each <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;partition&gt;</span></code> entry puts a partition of the configured size in the
+low level partition table, creates a filesystem on it and includes
+it to the system’s fstab file. If parts of the root filesystem are
+moved into its own partition like it’s the case in the above example,
+this partition will also contain the data that gets installed during
+the image creation process to that area.</p>
+<p>The following attributes must/can be set to configured a partition entry:</p>
+<dl>
+<dt>name=”identifier”</dt><dd><p>Mandatory name of the partition as handled by KIWI NG.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are the following reserved names which cannot be used
+because they are already represented by existing attributes:
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">root</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">readonly</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">boot</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">prep</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">spare</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">swap</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">efi_csm</span></code>
+and <code class="xref py py-obj docutils literal notranslate"><span class="pre">efi</span></code>.</p>
+</div>
+</dd>
+<dt>partition_name=”name”</dt><dd><p>Optional name of the partition as it appears when listing the
+table contents with tools like <code class="xref py py-obj docutils literal notranslate"><span class="pre">gdisk</span></code>. If no name is set
+KIWI NG constructs a name of the form <code class="xref py py-obj docutils literal notranslate"><span class="pre">p.lx(identifier_from_name_attr)</span></code></p>
+</dd>
+<dt>partition_type=”type_identifier”</dt><dd><p>Optional partition type identifier as handled by KIWI NG.
+Allowed values are <code class="xref py py-obj docutils literal notranslate"><span class="pre">t.linux</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">t.raid</span></code>. If not specified
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">t.linux</span></code> is the default.</p>
+</dd>
+<dt>size=”size_string”</dt><dd><p>Mandatory size of the partition. A size string can end with <code class="xref py py-obj docutils literal notranslate"><span class="pre">M</span></code> or
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">G</span></code> to indicate a mega-Byte or giga-Byte value. Without a unit
+specification mega-Byte is used.</p>
+</dd>
+<dt>mountpoint=”path”</dt><dd><p>Mandatory mountpoint to mount the partition in the system.</p>
+</dd>
+<dt>filesystem=”btrfs|ext2|ext3|ext4|squashfs|xfs</dt><dd><p>Mandatory filesystem configuration to create one of the supported
+filesystems on the partition.</p>
+</dd>
+</dl>
+<p>Despite the customization options of the partition table shown above
+there are the following limitations:</p>
+<ol class="arabic">
+<li><p>The root partition is always the last one</p>
+<p>Disk imags build with KIWI NG are designed to be expandable.
+For this feature to work the partition containing the system
+rootfs must always be the last one. If this is unwanted for
+some reason KIWI NG offers an opportunity for one extra/spare
+partition with the option to be also placed at the end of the
+table. For details lookup <code class="xref py py-obj docutils literal notranslate"><span class="pre">spare_part</span></code> in <a class="reference internal" href="../image_description/elements.html#image-description-elements"><span class="std std-ref">Image Description Elements</span></a></p>
 </li>
-<li><p>Create partitioner shell script matching your specific needs</p>
-<blockquote>
-<div><p>Consider the following steps for a partitioner shell script that
-creates a new partition. Following the above unit file example
-the <code class="xref py py-obj docutils literal notranslate"><span class="pre">/usr/local/bin/create_part</span></code> script should cover the following
-steps:</p>
-<ol class="loweralpha">
-<li><p>Verify partition exists</p>
-<p>Verify the required partition is not mounted neither exists. Exit
-zero (0) if is already there.</p>
-<p>Use tools such <code class="xref py py-obj docutils literal notranslate"><span class="pre">findmnt</span></code> to find the root device and <code class="xref py py-obj docutils literal notranslate"><span class="pre">blkid</span></code>
-or <code class="xref py py-obj docutils literal notranslate"><span class="pre">lsblk</span></code> to find a partition with certain label or similar
-criteria.</p>
+<li><p>There can be no gaps in the partition table</p>
+<p>The way partitions are configured does not allow for gaps in the
+table. As of today there was no use case were it made sense to
+leave a gap between table entries. However, leaving some space
+free at the <strong>end</strong> of the partition geometry is possible in the
+following ways:</p>
+<ul>
+<li><p><strong>Deploy with unpartitioned free space.</strong></p>
+<p>To leave space unpartitioned on first boot of a disk image
+it is possible to configured an <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;oem-systemsize&gt;</span></code> which is
+smaller than the disk the image gets deployed to. Details
+about this setting can be found in <a class="reference internal" href="../image_description/elements.html#image-description-elements"><span class="std std-ref">Image Description Elements</span></a></p>
 </li>
-<li><p>Create a new partition</p>
-<p>Create a new partition. On error, exit with non zero.</p>
-<p>Use partitioner tools such as <code class="xref py py-obj docutils literal notranslate"><span class="pre">sgdisk</span></code> that can be easily used
-in non interactive scripts. Using <code class="xref py py-obj docutils literal notranslate"><span class="pre">partprobe</span></code> to reload partition
-table to make OS aware of the changes is handy.</p>
+<li><p><strong>Build with unpartitioned free space.</strong></p>
+<p>Setting some unpartitioned free space on the disk can be done using
+the <code class="xref py py-obj docutils literal notranslate"><span class="pre">unpartitioned</span></code> attribute of <code class="xref py py-obj docutils literal notranslate"><span class="pre">size</span></code> element in type’s section.
+For details see <a class="reference internal" href="../building_images/build_simple_disk.html#disk-the-size-element"><span class="std std-ref">Modifying the Size of the Image</span></a></p>
 </li>
-<li><p>Make filesystem</p>
-<p>Add the desired filesystem to the new partitions. On error, exit
-with non zero.</p>
-<p>Regular filesystem formatting tools (<code class="xref py py-obj docutils literal notranslate"><span class="pre">mkfs.ext4</span></code> just to mention one)
-can be used to apply the desired filesystem to the just created
-new partition. At this stage it is handy to add a label to the
-filesystem for easy recognition on later stages or script reruns.</p>
+<li><p><strong>Resize built image adding unpartitioned free space.</strong></p>
+<p>A built image can be resized by using the <code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi-ng</span> <span class="pre">image</span> <span class="pre">resize</span></code> command
+and set a new extended size for the disk. See KIWI NG commands docs
+<a class="reference internal" href="../commands/image_resize.html#db-kiwi-image-resize"><span class="std std-ref">here</span></a>.</p>
 </li>
-<li><p>Update fstab file</p>
-<p>Just echo and append the desired entry in /etc/fstab.</p>
-</li>
-<li><p>Mount partition</p>
-<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">mount</span> <span class="pre">--all</span></code> will try to mount all fstab volumes, it just omits
-any already mounted device.</p>
+</ul>
 </li>
 </ol>
-</div></blockquote>
-</li>
-<li><p>Add additional files into the root overlay tree.</p>
-<blockquote>
-<div><p>The above described unit files and partition creation shell script
-need to be included into the overlay tree of the image, thus they should
-be placed into the expected paths in root folder (or in
-<code class="file docutils literal notranslate"><span class="pre">root.tar.gz</span></code> tarball).</p>
-</div></blockquote>
-</li>
-<li><p>Activate the service in <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code></p>
-<blockquote>
-<div><p>The service needs to be enabled during image built time to be
-run during the very first boot. In can be done by adding the following
-snipped inside the <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code>.</p>
-</div></blockquote>
-</li>
-</ol>
-</section>
 </section>
 
 

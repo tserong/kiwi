@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.24.2 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.24.3 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -208,6 +208,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-vagrantconfig">&lt;preferences&gt;&lt;type&gt;&lt;vagrantconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-systemdisk">&lt;preferences&gt;&lt;type&gt;&lt;systemdisk&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-partitions">&lt;preferences&gt;&lt;type&gt;&lt;partitions&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-oemconfig">&lt;preferences&gt;&lt;type&gt;&lt;oemconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-size">&lt;preferences&gt;&lt;type&gt;&lt;size&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-machine">&lt;preferences&gt;&lt;type&gt;&lt;machine&gt;</a></li>
@@ -293,10 +294,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_ramdisk_deployment.html">Deploy and Run System in a RamDisk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/custom_partitions.html">Custom Disk Partitions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/custom_partitions.html#custom-partitioning-at-boot-time">Custom Partitioning at Boot Time</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/custom_partitions.html">Custom Disk Partitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/custom_volumes.html">Custom Disk Volumes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
@@ -683,6 +681,7 @@
 <span class="kn">import</span> <span class="nn">kiwi.defaults</span> <span class="k">as</span> <span class="nn">defaults</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
+<span class="kn">from</span> <span class="nn">kiwi.storage.disk</span> <span class="kn">import</span> <span class="n">ptable_entry_type</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
 <span class="kn">from</span> <span class="nn">kiwi.filesystem.base</span> <span class="kn">import</span> <span class="n">FileSystemBase</span>
 <span class="kn">from</span> <span class="nn">kiwi.bootloader.config</span> <span class="kn">import</span> <span class="n">BootLoaderConfig</span>
@@ -756,6 +755,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">blocksize</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_target_blocksize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager_name</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_volume_management</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_volumes</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_partitions</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">volume_group_name</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_volume_group_name</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mdraid</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_mdraid</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hybrid_mbr</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_gpt_hybrid_mbr</span><span class="p">()</span>
@@ -866,6 +866,10 @@
         <span class="c1"># representing the spare_part_mountpoint area of the disk</span>
         <span class="n">system_spare</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FileSystemBase</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
+        <span class="c1"># a list of instances with the sync_data capability</span>
+        <span class="c1"># representing the custom partitions area of the disk</span>
+        <span class="n">system_custom_parts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FileSystemBase</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">install_media</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_type_name</span> <span class="o">!=</span> <span class="s1">&#39;oem&#39;</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiInstallMediaError</span><span class="p">(</span>
                 <span class="s1">&#39;Install media requires oem type setup, got </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
@@ -973,6 +977,10 @@
 
         <span class="c1"># create spare filesystem on spare partition if present</span>
         <span class="n">system_spare</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_spare_filesystem</span><span class="p">(</span><span class="n">device_map</span><span class="p">)</span>
+
+        <span class="n">system_custom_parts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_custom_parts_filesystem</span><span class="p">(</span>
+            <span class="n">device_map</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span>
+        <span class="p">)</span>
 
         <span class="c1"># create filesystems on boot partition(s) if any</span>
         <span class="n">system_boot</span><span class="p">,</span> <span class="n">system_efi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_boot_filesystems</span><span class="p">(</span><span class="n">device_map</span><span class="p">)</span>
@@ -1097,7 +1105,8 @@
 
         <span class="c1"># syncing system data to disk image</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sync_system_to_image</span><span class="p">(</span>
-            <span class="n">device_map</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">system_boot</span><span class="p">,</span> <span class="n">system_efi</span><span class="p">,</span> <span class="n">system_spare</span>
+            <span class="n">device_map</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">system_boot</span><span class="p">,</span> <span class="n">system_efi</span><span class="p">,</span> <span class="n">system_spare</span><span class="p">,</span>
+            <span class="n">system_custom_parts</span>
         <span class="p">)</span>
 
         <span class="c1"># run post sync script hook</span>
@@ -1288,11 +1297,39 @@
         <span class="k">if</span> <span class="s1">&#39;efi&#39;</span> <span class="ow">in</span> <span class="n">device_map</span><span class="p">:</span>
             <span class="n">exclude_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;boot/efi/*&#39;</span><span class="p">)</span>
             <span class="n">exclude_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;boot/efi/.*&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="n">device_map</span><span class="p">:</span>
+                    <span class="n">mountpoint</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">mountpoint</span>
+                    <span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+                    <span class="n">exclude_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">mountpoint</span><span class="si">}</span><span class="s1">/*&#39;</span><span class="p">)</span>
+                    <span class="n">exclude_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">mountpoint</span><span class="si">}</span><span class="s1">/.*&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">exclude_list</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_get_exclude_list_for_boot_data_sync</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;efi/*&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_build_custom_parts_filesystem</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">device_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span>
+        <span class="n">custom_partitions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="s1">&#39;str&#39;</span><span class="p">,</span> <span class="n">ptable_entry_type</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">FileSystemBase</span><span class="p">]:</span>
+        <span class="n">filesystem_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">custom_partitions</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">custom_partitions</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="n">device_map</span><span class="p">:</span>
+                    <span class="n">ptable_entry</span> <span class="o">=</span> <span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span>
+                    <span class="n">filesystem</span> <span class="o">=</span> <span class="n">FileSystem</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+                        <span class="n">ptable_entry</span><span class="o">.</span><span class="n">filesystem</span><span class="p">,</span>
+                        <span class="n">device_map</span><span class="p">[</span><span class="n">map_name</span><span class="p">],</span>
+                        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="si">}{</span><span class="n">ptable_entry</span><span class="o">.</span><span class="n">mountpoint</span><span class="si">}</span><span class="s1">/&#39;</span>
+                    <span class="p">)</span>
+                    <span class="n">filesystem</span><span class="o">.</span><span class="n">create_on_device</span><span class="p">(</span>
+                        <span class="n">label</span><span class="o">=</span><span class="n">map_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                    <span class="p">)</span>
+                    <span class="n">filesystem_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filesystem</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">filesystem_list</span>
 
     <span class="k">def</span> <span class="nf">_build_spare_filesystem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FileSystemBase</span><span class="p">]:</span>
         <span class="k">if</span> <span class="s1">&#39;spare&#39;</span> <span class="ow">in</span> <span class="n">device_map</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">spare_part_fs</span><span class="p">:</span>
@@ -1355,7 +1392,9 @@
             <span class="n">system_boot</span> <span class="o">=</span> <span class="n">filesystem</span>
         <span class="k">return</span> <span class="n">system_boot</span><span class="p">,</span> <span class="n">system_efi</span>
 
-    <span class="k">def</span> <span class="nf">_build_and_map_disk_partitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disk</span><span class="p">:</span> <span class="n">Disk</span><span class="p">,</span> <span class="n">disksize_mbytes</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_build_and_map_disk_partitions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">disk</span><span class="p">:</span> <span class="n">Disk</span><span class="p">,</span> <span class="n">disksize_mbytes</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
         <span class="n">disk</span><span class="o">.</span><span class="n">wipe</span><span class="p">()</span>
         <span class="n">disksize_used_mbytes</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">legacy_bios_mode</span><span class="p">():</span>
@@ -1397,6 +1436,14 @@
                     <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">swap_mbytes</span><span class="si">}</span><span class="s1">&#39;</span>
                 <span class="p">)</span>
                 <span class="n">disksize_used_mbytes</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">swap_mbytes</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s1">&#39;--&gt; creating custom partition(s): </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">disk</span><span class="o">.</span><span class="n">create_custom_partitions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spare_part_mbsize</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spare_part_is_last</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; creating spare partition&#39;</span><span class="p">)</span>
@@ -1572,6 +1619,13 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_add_fstab_entry</span><span class="p">(</span>
                 <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;swap&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">(),</span> <span class="s1">&#39;swap&#39;</span>
             <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="n">device_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">map_name</span><span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_add_fstab_entry</span><span class="p">(</span>
+                        <span class="n">device_map</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">(),</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">mountpoint</span>
+                    <span class="p">)</span>
         <span class="n">setup</span><span class="o">.</span><span class="n">create_fstab</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fstab</span>
         <span class="p">)</span>
@@ -1698,11 +1752,17 @@
         <span class="bp">self</span><span class="p">,</span> <span class="n">device_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
         <span class="n">system_boot</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FileSystemBase</span><span class="p">],</span>
         <span class="n">system_efi</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FileSystemBase</span><span class="p">],</span>
-        <span class="n">system_spare</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FileSystemBase</span><span class="p">]</span>
+        <span class="n">system_spare</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FileSystemBase</span><span class="p">],</span>
+        <span class="n">system_custom_parts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FileSystemBase</span><span class="p">]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Syncing system to image&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">system_spare</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Syncing spare partition data&#39;</span><span class="p">)</span>
             <span class="n">system_spare</span><span class="o">.</span><span class="n">sync_data</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">system_custom_part</span> <span class="ow">in</span> <span class="n">system_custom_parts</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Syncing custom partition(s) data&#39;</span><span class="p">)</span>
+            <span class="n">system_custom_part</span><span class="o">.</span><span class="n">sync_data</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">system_efi</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Syncing EFI boot data to EFI partition&#39;</span><span class="p">)</span>

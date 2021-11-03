@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.storage.disk &mdash; KIWI NG 9.24.2 documentation</title>
+  <title>kiwi.storage.disk &mdash; KIWI NG 9.24.3 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -208,6 +208,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-vagrantconfig">&lt;preferences&gt;&lt;type&gt;&lt;vagrantconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-systemdisk">&lt;preferences&gt;&lt;type&gt;&lt;systemdisk&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-partitions">&lt;preferences&gt;&lt;type&gt;&lt;partitions&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-oemconfig">&lt;preferences&gt;&lt;type&gt;&lt;oemconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-size">&lt;preferences&gt;&lt;type&gt;&lt;size&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-machine">&lt;preferences&gt;&lt;type&gt;&lt;machine&gt;</a></li>
@@ -293,10 +294,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/disk_ramdisk_deployment.html">Deploy and Run System in a RamDisk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/custom_partitions.html">Custom Disk Partitions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/custom_partitions.html#custom-partitioning-at-boot-time">Custom Partitioning at Boot Time</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/custom_partitions.html">Custom Disk Partitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/custom_volumes.html">Custom Disk Volumes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
@@ -675,7 +673,9 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Dict</span><span class="p">,</span> <span class="n">NamedTuple</span>
+<span class="p">)</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
@@ -683,6 +683,17 @@
 <span class="kn">from</span> <span class="nn">kiwi.storage.device_provider</span> <span class="kn">import</span> <span class="n">DeviceProvider</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.mapped_device</span> <span class="kn">import</span> <span class="n">MappedDevice</span>
 <span class="kn">from</span> <span class="nn">kiwi.partitioner</span> <span class="kn">import</span> <span class="n">Partitioner</span>
+<span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="n">KiwiCustomPartitionConflictError</span>
+
+<span class="n">ptable_entry_type</span> <span class="o">=</span> <span class="n">NamedTuple</span><span class="p">(</span>
+    <span class="s1">&#39;ptable_entry_type&#39;</span><span class="p">,</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;mbsize&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;partition_name&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;partition_type&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;mountpoint&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;filesystem&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
 
@@ -703,6 +714,21 @@
         <span class="c1"># to this object (e.g loop) if present. This is done to guarantee</span>
         <span class="c1"># the correct destructor order when the device should be released.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">storage_provider</span> <span class="o">=</span> <span class="n">storage_provider</span>
+
+        <span class="c1"># list of protected map ids. If used in a custom partitions</span>
+        <span class="c1"># setup this will lead to a raise conditition in order to</span>
+        <span class="c1"># avoid conflicts with the existing partition layout and its</span>
+        <span class="c1"># customizaton capabilities</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protected_map_ids</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;root&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;readonly&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;boot&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;prep&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;spare&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;swap&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;efi_csm&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;efi&#39;</span>
+        <span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">partition_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">public_partition_id_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
@@ -744,6 +770,33 @@
 <span class="sd">        :rtype: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage_provider</span><span class="o">.</span><span class="n">is_loop</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Disk.create_custom_partitions"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_custom_partitions">[docs]</a>    <span class="k">def</span> <span class="nf">create_custom_partitions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">table_entries</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ptable_entry_type</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create partitions from custom data set</span>
+
+<span class="sd">        .. code:: python</span>
+
+<span class="sd">           table_entries = {</span>
+<span class="sd">               map_name: ptable_entry_type</span>
+<span class="sd">           }</span>
+
+<span class="sd">        :param dict table: partition table spec</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="n">table_entries</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">protected_map_ids</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">KiwiCustomPartitionConflictError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s1">&#39;Cannot use reserved table entry name: </span><span class="si">{</span><span class="n">map_name</span><span class="si">!r}</span><span class="s1">&#39;</span>
+                <span class="p">)</span>
+            <span class="n">id_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;kiwi_</span><span class="si">{</span><span class="n">map_name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s1">Part&#39;</span>
+            <span class="n">entry</span> <span class="o">=</span> <span class="n">table_entries</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+                <span class="n">entry</span><span class="o">.</span><span class="n">partition_name</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">mbsize</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">partition_type</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_map</span><span class="p">(</span><span class="n">map_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_add_to_public_id_map</span><span class="p">(</span><span class="n">id_name</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Disk.create_root_partition"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk.create_root_partition">[docs]</a>    <span class="k">def</span> <span class="nf">create_root_partition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi Package &mdash; KIWI NG 9.24.2 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.24.3 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -211,6 +211,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-vagrantconfig">&lt;preferences&gt;&lt;type&gt;&lt;vagrantconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-systemdisk">&lt;preferences&gt;&lt;type&gt;&lt;systemdisk&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-partitions">&lt;preferences&gt;&lt;type&gt;&lt;partitions&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-oemconfig">&lt;preferences&gt;&lt;type&gt;&lt;oemconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-size">&lt;preferences&gt;&lt;type&gt;&lt;size&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-machine">&lt;preferences&gt;&lt;type&gt;&lt;machine&gt;</a></li>
@@ -296,10 +297,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/disk_ramdisk_deployment.html">Deploy and Run System in a RamDisk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../working_with_images/custom_partitions.html">Custom Disk Partitions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../working_with_images/custom_partitions.html#custom-partitioning-at-boot-time">Custom Partitioning at Boot Time</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_images/custom_partitions.html">Custom Disk Partitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/custom_volumes.html">Custom Disk Volumes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
@@ -2963,6 +2961,14 @@ container archive happened.</p>
 </dd></dl>
 
 <dl class="py exception">
+<dt class="sig sig-object py" id="kiwi.exceptions.KiwiCustomPartitionConflictError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.exceptions.</span></span><span class="sig-name descname"><span class="pre">KiwiCustomPartitionConflictError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/exceptions.html#KiwiCustomPartitionConflictError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.exceptions.KiwiCustomPartitionConflictError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
+<p>Exception raised if the entry in a custom partition setup
+conflicts with an existing partition table layout setting</p>
+</dd></dl>
+
+<dl class="py exception">
 <dt class="sig sig-object py" id="kiwi.exceptions.KiwiDataStructureError">
 <em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.exceptions.</span></span><span class="sig-name descname"><span class="pre">KiwiDataStructureError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/exceptions.html#KiwiDataStructureError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.exceptions.KiwiDataStructureError" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
@@ -3290,6 +3296,14 @@ manager instance for an unsupported package manager.</p>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
 <p>Exception raised if the packages deletion phase in system prepare
 fails.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kiwi.exceptions.KiwiPartitionTooSmallError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.exceptions.</span></span><span class="sig-name descname"><span class="pre">KiwiPartitionTooSmallError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/exceptions.html#KiwiPartitionTooSmallError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.exceptions.KiwiPartitionTooSmallError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
+<p>Exception raised if the specified partition size is smaller
+than the required bytes to store the data</p>
 </dd></dl>
 
 <dl class="py exception">
@@ -3639,6 +3653,14 @@ management system.</p>
 <dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
 <p>Exception raised if the root volume can not be found. This
 concept currently exists only for the btrfs subvolume system.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kiwi.exceptions.KiwiVolumeTooSmallError">
+<em class="property"><span class="pre">exception</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.exceptions.</span></span><span class="sig-name descname"><span class="pre">KiwiVolumeTooSmallError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/exceptions.html#KiwiVolumeTooSmallError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.exceptions.KiwiVolumeTooSmallError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#kiwi.exceptions.KiwiError" title="kiwi.exceptions.KiwiError"><code class="xref py py-class docutils literal notranslate"><span class="pre">kiwi.exceptions.KiwiError</span></code></a></p>
+<p>Exception raised if the specified volume size is smaller
+than the required bytes to store the data</p>
 </dd></dl>
 
 </section>
@@ -5634,6 +5656,20 @@ name tags from kiwi.system.result::result_name_tags.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="kiwi.xml_state.XMLState.get_build_type_partitions_section">
+<span class="sig-name descname"><span class="pre">get_build_type_partitions_section</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_partitions_section"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_partitions_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>First partitions section from the build type section</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>&lt;partitions&gt; section reference</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>xml_parse::partitions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="kiwi.xml_state.XMLState.get_build_type_size">
 <span class="sig-name descname"><span class="pre">get_build_type_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_unpartitioned</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><span class="pre">bool</span></a></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#kiwi.xml_state.size_type" title="kiwi.xml_state.size_type"><span class="pre">kiwi.xml_state.size_type</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_build_type_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_build_type_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Size information from the build type section.
@@ -6151,6 +6187,35 @@ the host architecture matches the configured architecture</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kiwi.xml_state.XMLState.get_partitions">
+<span class="sig-name descname"><span class="pre">get_partitions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="kiwi.storage.html#kiwi.storage.disk.ptable_entry_type" title="kiwi.storage.disk.ptable_entry_type"><span class="pre">kiwi.storage.disk.ptable_entry_type</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.get_partitions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.get_partitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of configured partitions.</p>
+<p>Each entry in the dict references a ptable_entry_type
+Each key in the dict references the name of the
+partition entry as handled by KIWI</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>Contains dict of ptable_entry_type tuples</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;NAME&#39;</span><span class="p">:</span> <span class="n">ptable_entry_type</span><span class="p">(</span>
+        <span class="n">mbsize</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">partition_name</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">partition_type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">mountpoint</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">filesystem</span><span class="o">=</span><span class="nb">str</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>

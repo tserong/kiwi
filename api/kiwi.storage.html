@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.storage Package &mdash; KIWI NG 9.24.2 documentation</title>
+  <title>kiwi.storage Package &mdash; KIWI NG 9.24.3 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -211,6 +211,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-vagrantconfig">&lt;preferences&gt;&lt;type&gt;&lt;vagrantconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-systemdisk">&lt;preferences&gt;&lt;type&gt;&lt;systemdisk&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-partitions">&lt;preferences&gt;&lt;type&gt;&lt;partitions&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-oemconfig">&lt;preferences&gt;&lt;type&gt;&lt;oemconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-size">&lt;preferences&gt;&lt;type&gt;&lt;size&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-machine">&lt;preferences&gt;&lt;type&gt;&lt;machine&gt;</a></li>
@@ -296,10 +297,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/disk_ramdisk_deployment.html">Deploy and Run System in a RamDisk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../working_with_images/custom_partitions.html">Custom Disk Partitions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../working_with_images/custom_partitions.html#custom-partitioning-at-boot-time">Custom Partitioning at Boot Time</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../working_with_images/custom_partitions.html">Custom Disk Partitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/custom_volumes.html">Custom Disk Volumes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
@@ -767,6 +765,22 @@ in the the specialized device provider class</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_custom_partitions">
+<span class="sig-name descname"><span class="pre">create_custom_partitions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_entries</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="#kiwi.storage.disk.ptable_entry_type" title="kiwi.storage.disk.ptable_entry_type"><span class="pre">kiwi.storage.disk.ptable_entry_type</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_custom_partitions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_custom_partitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create partitions from custom data set</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">table_entries</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">map_name</span><span class="p">:</span> <span class="n">ptable_entry_type</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>table</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a>) – partition table spec</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="kiwi.storage.disk.Disk.create_efi_csm_partition">
 <span class="sig-name descname"><span class="pre">create_efi_csm_partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.create_efi_csm_partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.create_efi_csm_partition" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create EFI bios grub partition</p>
@@ -944,6 +958,42 @@ required to map them if the storage provider is loop based</p>
 <span class="sig-name descname"><span class="pre">wipe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/storage/disk.html#Disk.wipe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.storage.disk.Disk.wipe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Zap (destroy) any GPT and MBR data structures if present
 For DASD disks create a new VTOC table</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kiwi.storage.disk.ptable_entry_type">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">kiwi.storage.disk.</span></span><span class="sig-name descname"><span class="pre">ptable_entry_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mbsize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mountpoint</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filesystem</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kiwi.storage.disk.ptable_entry_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="kiwi.storage.disk.ptable_entry_type.filesystem">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">filesystem</span></span><a class="headerlink" href="#kiwi.storage.disk.ptable_entry_type.filesystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 4</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="kiwi.storage.disk.ptable_entry_type.mbsize">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">mbsize</span></span><a class="headerlink" href="#kiwi.storage.disk.ptable_entry_type.mbsize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="kiwi.storage.disk.ptable_entry_type.mountpoint">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">mountpoint</span></span><a class="headerlink" href="#kiwi.storage.disk.ptable_entry_type.mountpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="kiwi.storage.disk.ptable_entry_type.partition_name">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">partition_name</span></span><a class="headerlink" href="#kiwi.storage.disk.ptable_entry_type.partition_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="kiwi.storage.disk.ptable_entry_type.partition_type">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">partition_type</span></span><a class="headerlink" href="#kiwi.storage.disk.ptable_entry_type.partition_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 2</p>
 </dd></dl>
 
 </dd></dl>

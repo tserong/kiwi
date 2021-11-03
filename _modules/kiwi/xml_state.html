@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.xml_state &mdash; KIWI NG 9.24.2 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.24.3 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -208,6 +208,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-type-vagrantconfig">&lt;preferences&gt;&lt;type&gt;&lt;vagrantconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-type-systemdisk">&lt;preferences&gt;&lt;type&gt;&lt;systemdisk&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-type-partitions">&lt;preferences&gt;&lt;type&gt;&lt;partitions&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-type-oemconfig">&lt;preferences&gt;&lt;type&gt;&lt;oemconfig&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-type-size">&lt;preferences&gt;&lt;type&gt;&lt;size&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-type-machine">&lt;preferences&gt;&lt;type&gt;&lt;machine&gt;</a></li>
@@ -293,10 +294,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../working_with_images/disk_setup_for_luks.html">Image Description Encrypted Disk</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../working_with_images/disk_ramdisk_deployment.html">Deploy and Run System in a RamDisk</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../working_with_images/custom_partitions.html">Custom Disk Partitions</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../working_with_images/custom_partitions.html#custom-partitioning-at-boot-time">Custom Partitioning at Boot Time</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../../working_with_images/custom_partitions.html">Custom Disk Partitions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../working_with_images/custom_volumes.html">Custom Disk Volumes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../working_with_images/setup_network_bootserver.html">Setting Up a Network Boot Server</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../working_with_images/setup_network_bootserver.html#installing-and-configuring-dhcp-and-tftp-with-dnsmasq">Installing and Configuring DHCP and TFTP with dnsmasq</a></li>
@@ -684,6 +682,7 @@
 <span class="kn">import</span> <span class="nn">kiwi.defaults</span> <span class="k">as</span> <span class="nn">defaults</span>
 
 <span class="kn">from</span> <span class="nn">kiwi</span> <span class="kn">import</span> <span class="n">xml_parse</span>
+<span class="kn">from</span> <span class="nn">kiwi.storage.disk</span> <span class="kn">import</span> <span class="n">ptable_entry_type</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.uri</span> <span class="kn">import</span> <span class="n">Uri</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.size</span> <span class="kn">import</span> <span class="n">StringToSize</span>
@@ -1384,6 +1383,19 @@
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 
+<div class="viewcode-block" id="XMLState.get_build_type_partitions_section"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_build_type_partitions_section">[docs]</a>    <span class="k">def</span> <span class="nf">get_build_type_partitions_section</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        First partitions section from the build type section</span>
+
+<span class="sd">        :return: &lt;partitions&gt; section reference</span>
+
+<span class="sd">        :rtype: xml_parse::partitions</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">partitions_sections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_partitions</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">partitions_sections</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">partitions_sections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
 <div class="viewcode-block" id="XMLState.get_build_type_system_disk_section"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_build_type_system_disk_section">[docs]</a>    <span class="k">def</span> <span class="nf">get_build_type_system_disk_section</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        First system disk section from the build type section</span>
@@ -1988,6 +2000,47 @@
             <span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">add_label</span><span class="p">(</span><span class="n">xml_parse</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">label_name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
 
         <span class="n">container_config_section</span><span class="o">.</span><span class="n">set_labels</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XMLState.get_partitions"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_partitions">[docs]</a>    <span class="k">def</span> <span class="nf">get_partitions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ptable_entry_type</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dictionary of configured partitions.</span>
+
+<span class="sd">        Each entry in the dict references a ptable_entry_type</span>
+<span class="sd">        Each key in the dict references the name of the</span>
+<span class="sd">        partition entry as handled by KIWI</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            Contains dict of ptable_entry_type tuples</span>
+
+<span class="sd">            .. code:: python</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &#39;NAME&#39;: ptable_entry_type(</span>
+<span class="sd">                        mbsize=int,</span>
+<span class="sd">                        partition_name=str,</span>
+<span class="sd">                        partition_type=str,</span>
+<span class="sd">                        mountpoint=str,</span>
+<span class="sd">                        filesystem=str</span>
+<span class="sd">                    )</span>
+<span class="sd">                }</span>
+
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">partitions</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ptable_entry_type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">partitions_section</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_build_type_partitions_section</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">partitions_section</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">partitions</span>
+        <span class="k">for</span> <span class="n">partition</span> <span class="ow">in</span> <span class="n">partitions_section</span><span class="o">.</span><span class="n">get_partition</span><span class="p">():</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">partition</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+            <span class="n">partition_name</span> <span class="o">=</span> <span class="n">partition</span><span class="o">.</span><span class="n">get_partition_name</span><span class="p">()</span> <span class="ow">or</span> <span class="sa">f</span><span class="s1">&#39;p.lx</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">partitions</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">ptable_entry_type</span><span class="p">(</span>
+                <span class="n">mbsize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_mega_byte</span><span class="p">(</span><span class="n">partition</span><span class="o">.</span><span class="n">get_size</span><span class="p">()),</span>
+                <span class="n">partition_name</span><span class="o">=</span><span class="n">partition_name</span><span class="p">,</span>
+                <span class="n">partition_type</span><span class="o">=</span><span class="n">partition</span><span class="o">.</span><span class="n">get_partition_type</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;t.linux&#39;</span><span class="p">,</span>
+                <span class="n">mountpoint</span><span class="o">=</span><span class="n">partition</span><span class="o">.</span><span class="n">get_mountpoint</span><span class="p">(),</span>
+                <span class="n">filesystem</span><span class="o">=</span><span class="n">partition</span><span class="o">.</span><span class="n">get_filesystem</span><span class="p">()</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">partitions</span></div>
 
 <div class="viewcode-block" id="XMLState.get_volumes"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_volumes">[docs]</a>    <span class="k">def</span> <span class="nf">get_volumes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">volume_type</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
