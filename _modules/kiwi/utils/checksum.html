@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.utils.checksum &mdash; KIWI NG 9.24.3 documentation</title>
+  <title>kiwi.utils.checksum &mdash; KIWI NG 9.24.4 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -492,7 +492,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../api/kiwi.iso_tools.html">kiwi.iso_tools Package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.base</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.cdrtools"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.cdrtools</span></code> Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.xorriso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.xorriso</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.iso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.iso</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools">Module Contents</a></li>
 </ul>
@@ -676,8 +676,8 @@
 <span class="kn">import</span> <span class="nn">encodings.ascii</span> <span class="k">as</span> <span class="nn">encoding</span>
 
 <span class="c1"># project</span>
-<span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.compress</span> <span class="kn">import</span> <span class="n">Compress</span>
+<span class="kn">from</span> <span class="nn">kiwi.utils.primes</span> <span class="kn">import</span> <span class="n">factors</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">KiwiFileNotFound</span>
@@ -824,7 +824,7 @@
 <span class="sd">        :rtype: tuple</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">blocksize</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">for</span> <span class="n">factor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prime_factors</span><span class="p">(</span><span class="n">file_size</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">factor</span> <span class="ow">in</span> <span class="n">factors</span><span class="p">(</span><span class="n">file_size</span><span class="p">,</span> <span class="mi">8192</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">blocksize</span> <span class="o">*</span> <span class="n">factor</span> <span class="o">&gt;</span> <span class="mi">8192</span><span class="p">:</span>
                 <span class="k">break</span>
             <span class="n">blocksize</span> <span class="o">*=</span> <span class="n">factor</span>
@@ -835,21 +835,7 @@
         <span class="k">return</span> <span class="n">block_list</span><span class="p">(</span>
             <span class="n">blocksize</span><span class="o">=</span><span class="n">blocksize</span><span class="p">,</span>
             <span class="n">blocks</span><span class="o">=</span><span class="n">blocks</span>
-        <span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_prime_factors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Get prime factors for the given number</span>
-
-<span class="sd">        :param int number: number to factorize</span>
-
-<span class="sd">        :return: prime factors</span>
-
-<span class="sd">        :rtype: int generator</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">factor_call</span> <span class="o">=</span> <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;factor&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">number</span><span class="p">)])</span>
-        <span class="k">for</span> <span class="n">factor</span> <span class="ow">in</span> <span class="n">factor_call</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">):</span>
-            <span class="k">yield</span> <span class="nb">int</span><span class="p">(</span><span class="n">factor</span><span class="p">)</span></div>
+        <span class="p">)</span></div>
 </pre></div>
 
            </div>

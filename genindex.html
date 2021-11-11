@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; KIWI NG 9.24.3 documentation</title>
+  <title>Index &mdash; KIWI NG 9.24.4 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -492,7 +492,7 @@
 <li class="toctree-l2"><a class="reference internal" href="api/kiwi.iso_tools.html">kiwi.iso_tools Package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api/kiwi.iso_tools.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/kiwi.iso_tools.html#module-kiwi.iso_tools.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.base</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/kiwi.iso_tools.html#module-kiwi.iso_tools.cdrtools"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.cdrtools</span></code> Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/kiwi.iso_tools.html#module-kiwi.iso_tools.xorriso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.xorriso</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/kiwi.iso_tools.html#module-kiwi.iso_tools.iso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.iso</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/kiwi.iso_tools.html#module-kiwi.iso_tools">Module Contents</a></li>
 </ul>
@@ -706,7 +706,7 @@
       <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.add_efi_loader_parameters">add_efi_loader_parameters() (kiwi.iso_tools.base.IsoToolsBase method)</a>
 
       <ul>
-        <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.cdrtools.IsoToolsCdrTools.add_efi_loader_parameters">(kiwi.iso_tools.cdrtools.IsoToolsCdrTools method)</a>
+        <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.xorriso.IsoToolsXorrIso.add_efi_loader_parameters">(kiwi.iso_tools.xorriso.IsoToolsXorrIso method)</a>
 </li>
       </ul></li>
       <li><a href="api/kiwi.repository.html#kiwi.repository.base.RepositoryBase.add_repo">add_repo() (kiwi.repository.base.RepositoryBase method)</a>
@@ -1043,12 +1043,6 @@
 </li>
       <li><a href="api/kiwi.archive.html#kiwi.archive.tar.ArchiveTar.create_gnu_gzip_compressed">create_gnu_gzip_compressed() (kiwi.archive.tar.ArchiveTar method)</a>
 </li>
-      <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.iso.Iso.create_header_end_block">create_header_end_block() (kiwi.iso_tools.iso.Iso method)</a>
-</li>
-      <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.iso.Iso.create_header_end_marker">create_header_end_marker() (kiwi.iso_tools.iso.Iso method)</a>
-</li>
-      <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.iso.Iso.create_hybrid">create_hybrid() (kiwi.iso_tools.iso.Iso static method)</a>
-</li>
       <li><a href="api/kiwi.storage.html#kiwi.storage.disk.Disk.create_hybrid_mbr">create_hybrid_mbr() (kiwi.storage.disk.Disk method)</a>
 </li>
       <li><a href="api/kiwi.storage.subformat.html#kiwi.storage.subformat.base.DiskFormatBase.create_image_format">create_image_format() (kiwi.storage.subformat.base.DiskFormatBase method)</a>
@@ -1092,7 +1086,7 @@
       <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.create_iso">create_iso() (kiwi.iso_tools.base.IsoToolsBase method)</a>
 
       <ul>
-        <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.cdrtools.IsoToolsCdrTools.create_iso">(kiwi.iso_tools.cdrtools.IsoToolsCdrTools method)</a>
+        <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.xorriso.IsoToolsXorrIso.create_iso">(kiwi.iso_tools.xorriso.IsoToolsXorrIso method)</a>
 </li>
       </ul></li>
       <li><a href="api/kiwi.html#kiwi.command_process.CommandProcess.create_match_method">create_match_method() (kiwi.command_process.CommandProcess method)</a>
@@ -1343,10 +1337,10 @@
 </li>
       <li><a href="api/kiwi.filesystem.html#kiwi.filesystem.ext4.FileSystemExt4">FileSystemExt4 (class in kiwi.filesystem.ext4)</a>
 </li>
-      <li><a href="api/kiwi.filesystem.html#kiwi.filesystem.fat16.FileSystemFat16">FileSystemFat16 (class in kiwi.filesystem.fat16)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/kiwi.filesystem.html#kiwi.filesystem.fat16.FileSystemFat16">FileSystemFat16 (class in kiwi.filesystem.fat16)</a>
+</li>
       <li><a href="api/kiwi.filesystem.html#kiwi.filesystem.fat32.FileSystemFat32">FileSystemFat32 (class in kiwi.filesystem.fat32)</a>
 </li>
       <li><a href="api/kiwi.filesystem.html#kiwi.filesystem.isofs.FileSystemIsoFs">FileSystemIsoFs (class in kiwi.filesystem.isofs)</a>
@@ -1370,8 +1364,6 @@
 </li>
       </ul></li>
       <li><a href="api/kiwi.html#kiwi.firmware.FirmWare">FirmWare (class in kiwi.firmware)</a>
-</li>
-      <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.iso.Iso.fix_boot_catalog">fix_boot_catalog() (kiwi.iso_tools.iso.Iso static method)</a>
 </li>
       <li><a href="api/kiwi.html#kiwi.logger_color_formatter.ColorFormatter.format">format() (kiwi.logger_color_formatter.ColorFormatter method)</a>
 </li>
@@ -1950,7 +1942,7 @@
       <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.get_tool_name">get_tool_name() (kiwi.iso_tools.base.IsoToolsBase method)</a>
 
       <ul>
-        <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.cdrtools.IsoToolsCdrTools.get_tool_name">(kiwi.iso_tools.cdrtools.IsoToolsCdrTools method)</a>
+        <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.xorriso.IsoToolsXorrIso.get_tool_name">(kiwi.iso_tools.xorriso.IsoToolsXorrIso method)</a>
 </li>
       </ul></li>
       <li><a href="api/kiwi.html#kiwi.defaults.Defaults.get_unsigned_grub_loader">get_unsigned_grub_loader() (kiwi.defaults.Defaults static method)</a>
@@ -2038,7 +2030,7 @@
       <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.has_iso_hybrid_capability">has_iso_hybrid_capability() (kiwi.iso_tools.base.IsoToolsBase method)</a>
 
       <ul>
-        <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.cdrtools.IsoToolsCdrTools.has_iso_hybrid_capability">(kiwi.iso_tools.cdrtools.IsoToolsCdrTools method)</a>
+        <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.xorriso.IsoToolsXorrIso.has_iso_hybrid_capability">(kiwi.iso_tools.xorriso.IsoToolsXorrIso method)</a>
 </li>
       </ul></li>
       <li><a href="api/kiwi.storage.subformat.html#kiwi.storage.subformat.base.DiskFormatBase.has_raw_disk">has_raw_disk() (kiwi.storage.subformat.base.DiskFormatBase method)</a>
@@ -2092,7 +2084,7 @@
       <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.init_iso_creation_parameters">init_iso_creation_parameters() (kiwi.iso_tools.base.IsoToolsBase method)</a>
 
       <ul>
-        <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.cdrtools.IsoToolsCdrTools.init_iso_creation_parameters">(kiwi.iso_tools.cdrtools.IsoToolsCdrTools method)</a>
+        <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.xorriso.IsoToolsXorrIso.init_iso_creation_parameters">(kiwi.iso_tools.xorriso.IsoToolsXorrIso method)</a>
 </li>
       </ul></li>
       <li><a href="api/kiwi.boot.image.html#kiwi.boot.image.base.boot_names_type.initrd_name">initrd_name (kiwi.boot.image.base.boot_names_type property)</a>
@@ -2165,7 +2157,7 @@
 </li>
       <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase">IsoToolsBase (class in kiwi.iso_tools.base)</a>
 </li>
-      <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.cdrtools.IsoToolsCdrTools">IsoToolsCdrTools (class in kiwi.iso_tools.cdrtools)</a>
+      <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.xorriso.IsoToolsXorrIso">IsoToolsXorrIso (class in kiwi.iso_tools.xorriso)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -2576,17 +2568,17 @@
 </li>
       </ul></li>
       <li>
-    kiwi.iso_tools.cdrtools
-
-      <ul>
-        <li><a href="api/kiwi.iso_tools.html#module-kiwi.iso_tools.cdrtools">module</a>
-</li>
-      </ul></li>
-      <li>
     kiwi.iso_tools.iso
 
       <ul>
         <li><a href="api/kiwi.iso_tools.html#module-kiwi.iso_tools.iso">module</a>
+</li>
+      </ul></li>
+      <li>
+    kiwi.iso_tools.xorriso
+
+      <ul>
+        <li><a href="api/kiwi.iso_tools.html#module-kiwi.iso_tools.xorriso">module</a>
 </li>
       </ul></li>
       <li>
@@ -3466,11 +3458,7 @@
       <li><a href="api/kiwi.html#kiwi.firmware.FirmWare.legacy_bios_mode">legacy_bios_mode() (kiwi.firmware.FirmWare method)</a>
 </li>
       <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.list_iso">list_iso() (kiwi.iso_tools.base.IsoToolsBase method)</a>
-
-      <ul>
-        <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.cdrtools.IsoToolsCdrTools.list_iso">(kiwi.iso_tools.cdrtools.IsoToolsCdrTools method)</a>
 </li>
-      </ul></li>
       <li><a href="api/kiwi.builder.html#kiwi.builder.live.LiveImageBuilder">LiveImageBuilder (class in kiwi.builder.live)</a>
 </li>
       <li><a href="api/kiwi.system.html#kiwi.system.result.Result.load">load() (kiwi.system.result.Result static method)</a>
@@ -3653,9 +3641,9 @@
 </li>
         <li><a href="api/kiwi.iso_tools.html#module-kiwi.iso_tools.base">kiwi.iso_tools.base</a>
 </li>
-        <li><a href="api/kiwi.iso_tools.html#module-kiwi.iso_tools.cdrtools">kiwi.iso_tools.cdrtools</a>
-</li>
         <li><a href="api/kiwi.iso_tools.html#module-kiwi.iso_tools.iso">kiwi.iso_tools.iso</a>
+</li>
+        <li><a href="api/kiwi.iso_tools.html#module-kiwi.iso_tools.xorriso">kiwi.iso_tools.xorriso</a>
 </li>
         <li><a href="api/kiwi.html#module-kiwi.kiwi">kiwi.kiwi</a>
 </li>
@@ -4179,8 +4167,6 @@
       <li><a href="api/kiwi.html#kiwi.xml_state.volume_type.realpath">realpath (kiwi.xml_state.volume_type property)</a>
 </li>
       <li><a href="api/kiwi.html#kiwi.path.Path.rebase_to_root">rebase_to_root() (kiwi.path.Path static method)</a>
-</li>
-      <li><a href="api/kiwi.iso_tools.html#kiwi.iso_tools.iso.Iso.relocate_boot_catalog">relocate_boot_catalog() (kiwi.iso_tools.iso.Iso static method)</a>
 </li>
       <li><a href="api/kiwi.html#kiwi.path.Path.remove">remove() (kiwi.path.Path static method)</a>
 </li>

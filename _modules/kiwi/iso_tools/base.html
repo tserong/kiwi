@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.iso_tools.base &mdash; KIWI NG 9.24.3 documentation</title>
+  <title>kiwi.iso_tools.base &mdash; KIWI NG 9.24.4 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -492,7 +492,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../api/kiwi.iso_tools.html">kiwi.iso_tools Package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.base</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.cdrtools"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.cdrtools</span></code> Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.xorriso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.xorriso</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.iso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.iso</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools">Module Contents</a></li>
 </ul>
@@ -674,6 +674,9 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
+<span class="p">)</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
@@ -687,21 +690,21 @@
 <div class="viewcode-block" id="IsoToolsBase"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase">[docs]</a><span class="k">class</span> <span class="nc">IsoToolsBase</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Base Class for Parameter API for iso creation tools**</span>
-
-<span class="sd">    :param string source_dir: data source dir, usually root_dir</span>
-<span class="sd">    :param str boot_path: architecture specific boot path on the ISO</span>
-<span class="sd">    :param str iso_parameters: list of ISO creation parameters</span>
-<span class="sd">    :param str iso_loaders: list of ISO loaders to embed</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_dir</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Base class for IsoTools</span>
+
+<span class="sd">        :param string source_dir: data source dir, usually root_dir</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arch</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_platform_name</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">source_dir</span> <span class="o">=</span> <span class="n">source_dir</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">boot_path</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_iso_boot_path</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">iso_parameters</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">iso_loaders</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iso_parameters</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iso_loaders</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
-<div class="viewcode-block" id="IsoToolsBase.get_tool_name"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.get_tool_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_tool_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="IsoToolsBase.get_tool_name"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.get_tool_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_tool_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return caller name for iso creation tool</span>
 
@@ -713,7 +716,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="IsoToolsBase.init_iso_creation_parameters"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.init_iso_creation_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">init_iso_creation_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">custom_args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="IsoToolsBase.init_iso_creation_parameters"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.init_iso_creation_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">init_iso_creation_parameters</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a set of standard parameters for the main isolinux loader</span>
 
@@ -723,7 +728,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="IsoToolsBase.add_efi_loader_parameters"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.add_efi_loader_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">add_efi_loader_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="IsoToolsBase.add_efi_loader_parameters"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.add_efi_loader_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">add_efi_loader_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add ISO creation parameters to embed the EFI loader</span>
 
@@ -731,7 +736,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="IsoToolsBase.create_iso"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.create_iso">[docs]</a>    <span class="k">def</span> <span class="nf">create_iso</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">hidden_files</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="IsoToolsBase.create_iso"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.create_iso">[docs]</a>    <span class="k">def</span> <span class="nf">create_iso</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">hidden_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create iso file</span>
 
@@ -742,7 +749,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="IsoToolsBase.list_iso"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.list_iso">[docs]</a>    <span class="k">def</span> <span class="nf">list_iso</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isofile</span><span class="p">):</span>
+<div class="viewcode-block" id="IsoToolsBase.list_iso"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.list_iso">[docs]</a>    <span class="k">def</span> <span class="nf">list_iso</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">isofile</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        List contents of an ISO image</span>
 
@@ -750,7 +757,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="IsoToolsBase.has_iso_hybrid_capability"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.has_iso_hybrid_capability">[docs]</a>    <span class="k">def</span> <span class="nf">has_iso_hybrid_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="IsoToolsBase.has_iso_hybrid_capability"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.has_iso_hybrid_capability">[docs]</a>    <span class="k">def</span> <span class="nf">has_iso_hybrid_capability</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Indicate if the iso tool has the capability to embed</span>
 <span class="sd">        a partition table into the iso such that it can be</span>
@@ -761,7 +768,9 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 <div class="viewcode-block" id="IsoToolsBase.setup_media_loader_directory"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.base.IsoToolsBase.setup_media_loader_directory">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">setup_media_loader_directory</span><span class="p">(</span><span class="n">lookup_path</span><span class="p">,</span> <span class="n">media_path</span><span class="p">,</span> <span class="n">boot_theme</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setup_media_loader_directory</span><span class="p">(</span>
+        <span class="n">lookup_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">media_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">boot_theme</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">):</span>
         <span class="n">loader_data</span> <span class="o">=</span> <span class="n">lookup_path</span> <span class="o">+</span> <span class="s1">&#39;/image/loader/&#39;</span>
         <span class="n">media_boot_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="p">[</span><span class="n">media_path</span><span class="p">,</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_iso_boot_path</span><span class="p">(),</span> <span class="s1">&#39;loader&#39;</span><span class="p">]</span>

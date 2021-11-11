@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.runtime_config &mdash; KIWI NG 9.24.3 documentation</title>
+  <title>kiwi.runtime_config &mdash; KIWI NG 9.24.4 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -492,7 +492,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../api/kiwi.iso_tools.html">kiwi.iso_tools Package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.iso_tools.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.base</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.cdrtools"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.cdrtools</span></code> Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.xorriso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.xorriso</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.iso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.iso</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.iso_tools.html#module-kiwi.iso_tools">Module Contents</a></li>
 </ul>
@@ -920,7 +920,7 @@
 <span class="sd">        Return tool category which should be used to build iso images</span>
 
 <span class="sd">        iso:</span>
-<span class="sd">          - tool_category: cdrtools|xorriso</span>
+<span class="sd">          - tool_category: xorriso</span>
 
 <span class="sd">        if no or invalid configuration exists the default tool category</span>
 <span class="sd">        from the Defaults class is returned</span>
@@ -934,7 +934,7 @@
         <span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">iso_tool_category</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_iso_tool_category</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="s1">&#39;cdrtools&#39;</span> <span class="ow">in</span> <span class="n">iso_tool_category</span> <span class="ow">or</span> <span class="s1">&#39;xorriso&#39;</span> <span class="ow">in</span> <span class="n">iso_tool_category</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="s1">&#39;xorriso&#39;</span> <span class="ow">in</span> <span class="n">iso_tool_category</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">iso_tool_category</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>

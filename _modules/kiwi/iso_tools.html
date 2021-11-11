@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.iso_tools &mdash; KIWI NG 9.24.3 documentation</title>
+  <title>kiwi.iso_tools &mdash; KIWI NG 9.24.4 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -492,7 +492,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../api/kiwi.iso_tools.html">kiwi.iso_tools Package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.iso_tools.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.base</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.cdrtools"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.cdrtools</span></code> Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.xorriso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.xorriso</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.iso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.iso</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../api/kiwi.iso_tools.html#module-kiwi.iso_tools">Module Contents</a></li>
 </ul>
@@ -671,6 +671,7 @@
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">importlib</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">ABCMeta</span><span class="p">,</span>
     <span class="n">abstractmethod</span>
@@ -690,10 +691,9 @@
         <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># pragma: no cover</span>
 
 <div class="viewcode-block" id="IsoTools.new"><a class="viewcode-back" href="../../api/kiwi.iso_tools.html#kiwi.iso_tools.IsoTools.new">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="n">source_dir</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="n">source_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="n">name_map</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;xorriso&#39;</span><span class="p">:</span> <span class="s1">&#39;XorrIso&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;cdrtools&#39;</span><span class="p">:</span> <span class="s1">&#39;CdrTools&#39;</span>
+            <span class="s1">&#39;xorriso&#39;</span><span class="p">:</span> <span class="s1">&#39;XorrIso&#39;</span>
         <span class="p">}</span>
         <span class="n">runtime_config</span> <span class="o">=</span> <span class="n">RuntimeConfig</span><span class="p">()</span>
         <span class="n">tool</span> <span class="o">=</span> <span class="n">runtime_config</span><span class="o">.</span><span class="n">get_iso_tool_category</span><span class="p">()</span>

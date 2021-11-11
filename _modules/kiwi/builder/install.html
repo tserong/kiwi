@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.builder.install &mdash; KIWI NG 9.24.3 documentation</title>
+  <title>kiwi.builder.install &mdash; KIWI NG 9.24.4 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -492,7 +492,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../api/kiwi.iso_tools.html">kiwi.iso_tools Package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.base"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.base</span></code> Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.cdrtools"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.cdrtools</span></code> Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.xorriso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.xorriso</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools.iso"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kiwi.iso_tools.iso</span></code> Module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../api/kiwi.iso_tools.html#module-kiwi.iso_tools">Module Contents</a></li>
 </ul>
@@ -802,7 +802,7 @@
 <span class="sd">        * installstick=&quot;true|false&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">media_dir</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">(</span>
-            <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_install_media.&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span>
+            <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_install_media.&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span>
         <span class="p">)</span><span class="o">.</span><span class="n">new_dir</span><span class="p">()</span>
         <span class="c1"># unpack cdroot user files to media dir</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setup</span><span class="o">.</span><span class="n">import_cdroot_files</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">media_dir</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -820,7 +820,7 @@
         <span class="c1"># the system image transfer is checked against a checksum</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Creating disk image checksum&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">squashed_contents</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">(</span>
-            <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_install_squashfs.&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span>
+            <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_install_squashfs.&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span>
         <span class="p">)</span><span class="o">.</span><span class="n">new_dir</span><span class="p">()</span>
         <span class="n">checksum</span> <span class="o">=</span> <span class="n">Checksum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">diskname</span><span class="p">)</span>
         <span class="n">checksum</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">squashed_contents</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">md5name</span><span class="p">)</span>
@@ -927,7 +927,7 @@
 <span class="sd">        * installpxe=&quot;true|false&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pxe_dir</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">(</span>
-            <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_pxe_install_media.&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span>
+            <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;kiwi_pxe_install_media.&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span>
         <span class="p">)</span><span class="o">.</span><span class="n">new_dir</span><span class="p">()</span>
         <span class="c1"># the system image is transfered as xz compressed variant</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;xz compressing disk image&#39;</span><span class="p">)</span>
