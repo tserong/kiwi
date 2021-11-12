@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Description Elements &mdash; KIWI NG 9.24.4 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.24.5 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -661,7 +661,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.24.4</p>
+and attributes of the KIWI NG XML document in version 9.24.5</p>
 </div>
 <section id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -694,7 +694,7 @@ within the image.</p>
 <span id="sec-include"></span><h2>&lt;include&gt;<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h2>
 <p>Optional include of XML file content from file</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;{exc_image_base_name}&quot;</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;include</span> <span class="na">from=</span><span class="s">&quot;description.xml&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;include</span> <span class="na">from=</span><span class="s">&quot;file://description.xml&quot;</span><span class="nt">/&gt;</span>
 <span class="nt">&lt;/image&gt;</span>
 </pre></div>
 </div>
@@ -710,7 +710,9 @@ within the image.</p>
 </div>
 <p>This will replace the <code class="xref py py-obj docutils literal notranslate"><span class="pre">include</span></code> statement with the contents
 of <code class="file docutils literal notranslate"><span class="pre">description.xml</span></code>. The validation of the result happens
-after the inclusion of all <code class="xref py py-obj docutils literal notranslate"><span class="pre">include</span></code> references.</p>
+after the inclusion of all <code class="xref py py-obj docutils literal notranslate"><span class="pre">include</span></code> references. The value for
+the <code class="xref py py-obj docutils literal notranslate"><span class="pre">from</span></code> attribute is interpreted as an URI, as of now only
+local URI types are supported.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The include information must be embedded into an <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;image&gt;</span></code>
