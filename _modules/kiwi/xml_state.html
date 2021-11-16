@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.xml_state &mdash; KIWI NG 9.24.6 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.24.7 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -2376,6 +2376,16 @@
             <span class="p">]</span>
         <span class="p">)</span></div>
 
+<div class="viewcode-block" id="XMLState.get_repositories_signing_keys"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_repositories_signing_keys">[docs]</a>    <span class="k">def</span> <span class="nf">get_repositories_signing_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get list of signing keys specified on the repositories</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">key_file_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">repository</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_repository_sections</span><span class="p">()</span> <span class="ow">or</span> <span class="p">[]:</span>
+            <span class="k">for</span> <span class="n">signing</span> <span class="ow">in</span> <span class="n">repository</span><span class="o">.</span><span class="n">get_source</span><span class="p">()</span><span class="o">.</span><span class="n">get_signing</span><span class="p">()</span> <span class="ow">or</span> <span class="p">[]:</span>
+                <span class="n">key_file_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">signing</span><span class="o">.</span><span class="n">get_key</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">key_file_list</span></div>
+
 <div class="viewcode-block" id="XMLState.set_repository"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.set_repository">[docs]</a>    <span class="k">def</span> <span class="nf">set_repository</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">repo_source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_alias</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">repo_prio</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_imageinclude</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -2410,7 +2420,8 @@
 <div class="viewcode-block" id="XMLState.add_repository"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.add_repository">[docs]</a>    <span class="k">def</span> <span class="nf">add_repository</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">repo_source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_alias</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">repo_prio</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">repo_imageinclude</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">repo_package_gpgcheck</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">repo_package_gpgcheck</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">repo_signing_keys</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add a new repository section at the end of the list</span>
@@ -2433,7 +2444,12 @@
                 <span class="n">type_</span><span class="o">=</span><span class="n">repo_type</span><span class="p">,</span>
                 <span class="n">alias</span><span class="o">=</span><span class="n">repo_alias</span><span class="p">,</span>
                 <span class="n">priority</span><span class="o">=</span><span class="n">priority_number</span><span class="p">,</span>
-                <span class="n">source</span><span class="o">=</span><span class="n">xml_parse</span><span class="o">.</span><span class="n">source</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">repo_source</span><span class="p">),</span>
+                <span class="n">source</span><span class="o">=</span><span class="n">xml_parse</span><span class="o">.</span><span class="n">source</span><span class="p">(</span>
+                    <span class="n">path</span><span class="o">=</span><span class="n">repo_source</span><span class="p">,</span>
+                    <span class="n">signing</span><span class="o">=</span><span class="p">[</span>
+                        <span class="n">xml_parse</span><span class="o">.</span><span class="n">signing</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">repo_signing_keys</span>
+                    <span class="p">]</span>
+                <span class="p">),</span>
                 <span class="n">imageinclude</span><span class="o">=</span><span class="n">repo_imageinclude</span><span class="p">,</span>
                 <span class="n">package_gpgcheck</span><span class="o">=</span><span class="n">repo_package_gpgcheck</span>
             <span class="p">)</span>
