@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.tasks.system_build &mdash; KIWI NG 9.24.7 documentation</title>
+  <title>kiwi.tasks.system_build &mdash; KIWI NG 9.24.8 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -851,7 +851,9 @@
         <span class="p">)</span>
         <span class="n">manager</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">setup_repositories</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">command_args</span><span class="p">[</span><span class="s1">&#39;--clear-cache&#39;</span><span class="p">],</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">command_args</span><span class="p">[</span><span class="s1">&#39;--signing-key&#39;</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">command_args</span><span class="p">[</span>
+                <span class="s1">&#39;--signing-key&#39;</span>
+            <span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_repositories_signing_keys</span><span class="p">(),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">global_args</span><span class="p">[</span><span class="s1">&#39;--target-arch&#39;</span><span class="p">]</span>
         <span class="p">)</span>
         <span class="n">system</span><span class="o">.</span><span class="n">install_bootstrap</span><span class="p">(</span>
