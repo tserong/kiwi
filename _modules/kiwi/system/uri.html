@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.system.uri &mdash; KIWI NG 9.24.8 documentation</title>
+  <title>kiwi.system.uri &mdash; KIWI NG 9.24.9 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -672,9 +672,15 @@
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlparse</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">urlparse</span><span class="p">,</span> <span class="n">ParseResult</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">Request</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
@@ -691,20 +697,30 @@
 
 <div class="viewcode-block" id="Uri"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.uri.Uri">[docs]</a><span class="k">class</span> <span class="nc">Uri</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    **Normalize url types**</span>
-
-<span class="sd">    Allow to translate the available KIWI repo source types</span>
-<span class="sd">    into standard mime types</span>
-
-<span class="sd">    :param str uri: URI, remote or local repository location</span>
-<span class="sd">    :param str repo_type:</span>
-<span class="sd">        repository type name, defaults to &#39;rpm-md&#39; and is only</span>
-<span class="sd">        effectively used when building inside of the open</span>
-<span class="sd">        build service which maps local repositories to a</span>
-<span class="sd">        specific environment</span>
+<span class="sd">    **Normalize and manage URI types**</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;rpm-md&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repo_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;rpm-md&#39;</span><span class="p">,</span> <span class="n">source_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Manage kiwi source URIs and allow transformation into</span>
+<span class="sd">        standard URLs</span>
+
+<span class="sd">        :param str uri: URI, remote, local or metalink repository location</span>
+<span class="sd">        :param str repo_type:</span>
+<span class="sd">            repository type name, defaults to &#39;rpm-md&#39; and is only</span>
+<span class="sd">            effectively used when building inside of the open</span>
+<span class="sd">            build service which maps local repositories to a</span>
+<span class="sd">            specific environment</span>
+<span class="sd">        :param str source_type:</span>
+<span class="sd">            specify source type if the provided URI is a service.</span>
+<span class="sd">            Currently only the metalink source type is handled</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span> <span class="o">=</span> <span class="n">RuntimeConfig</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">source_type</span> <span class="o">==</span> <span class="s1">&#39;metalink&#39;</span><span class="p">:</span>
+            <span class="n">uri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_metalink_uri</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">repo_type</span> <span class="o">=</span> <span class="n">repo_type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">uri</span> <span class="o">=</span> <span class="n">uri</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">uri</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
             <span class="p">[</span><span class="n">Defaults</span><span class="o">.</span><span class="n">get_default_uri_type</span><span class="p">(),</span> <span class="n">uri</span><span class="p">]</span>
@@ -802,7 +818,7 @@
         <span class="n">query</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;credentials&#39;</span><span class="p">:</span> <span class="s1">&#39;kiwiRepoCredentials&#39;</span><span class="p">}</span>
 
         <span class="k">if</span> <span class="n">uri</span><span class="p">:</span>
-            <span class="n">query</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">uri</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&amp;&#39;</span><span class="p">))</span>
+            <span class="n">query</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">uri</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;&amp;&#39;</span><span class="p">))</span>  <span class="c1"># type: ignore</span>
 
         <span class="k">return</span> <span class="n">query</span><span class="p">[</span><span class="s1">&#39;credentials&#39;</span><span class="p">]</span></div>
 
@@ -878,15 +894,17 @@
         <span class="n">uri</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">uri</span><span class="o">.</span><span class="n">fragment</span></div>
 
-    <span class="k">def</span> <span class="nf">_get_credentials_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_get_credentials_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ParseResult</span><span class="p">]:</span>
         <span class="n">uri</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">uri</span><span class="p">)</span>
+        <span class="n">credentials_uri</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">uri</span><span class="o">.</span><span class="n">query</span> <span class="ow">and</span> <span class="n">uri</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;credentials=&#39;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">uri</span>
+            <span class="n">credentials_uri</span> <span class="o">=</span> <span class="n">uri</span>
+        <span class="k">return</span> <span class="n">credentials_uri</span>
 
-    <span class="k">def</span> <span class="nf">_local_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_local_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">_obs_project_download_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_obs_project_download_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">name_parts</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
         <span class="n">repository</span> <span class="o">=</span> <span class="n">name_parts</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
         <span class="n">project</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">name_parts</span><span class="p">)</span>
@@ -913,7 +931,9 @@
                 <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">download_link</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">issue</span><span class="si">}</span><span class="s1">&#39;</span>
             <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_buildservice_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">urischeme</span><span class="p">,</span> <span class="n">fragment</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_buildservice_path</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">urischeme</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">fragment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Special to openSUSE buildservice. If the buildservice builds</span>
 <span class="sd">        the image it arranges the repos for each build in a special</span>
@@ -935,7 +955,38 @@
             <span class="n">local_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
                 <span class="p">[</span><span class="n">bs_source_dir</span><span class="p">,</span> <span class="s1">&#39;repos&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">]</span>
             <span class="p">)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_path</span><span class="p">(</span><span class="n">local_path</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_local_path</span><span class="p">(</span><span class="n">local_path</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_resolve_metalink_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">selected_repo_source</span> <span class="o">=</span> <span class="n">uri</span>
+        <span class="n">namespace_map</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">metalink</span><span class="o">=</span><span class="s2">&quot;http://www.metalinker.org/&quot;</span>
+        <span class="p">)</span>
+        <span class="n">expression</span> <span class="o">=</span> <span class="s1">&#39;//metalink:file[@name=&quot;repomd.xml&quot;]/metalink:resources/*&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">metalink_location</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">Request</span><span class="p">(</span><span class="n">uri</span><span class="p">))</span>
+            <span class="n">xml</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">metalink_location</span><span class="p">)</span>
+            <span class="n">url_list</span> <span class="o">=</span> <span class="n">xml</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span>
+                <span class="n">expression</span><span class="p">,</span> <span class="n">namespaces</span><span class="o">=</span><span class="n">namespace_map</span>
+            <span class="p">)</span>
+            <span class="n">source_dict</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">url_list</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">url</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;protocol&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;https&#39;</span><span class="p">:</span>
+                    <span class="n">source_dict</span><span class="p">[</span><span class="n">url</span><span class="o">.</span><span class="n">text</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">url</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;preference&#39;</span><span class="p">))</span>
+            <span class="n">start_preference</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">source_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="n">preference</span> <span class="o">=</span> <span class="n">source_dict</span><span class="p">[</span><span class="n">url</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">preference</span> <span class="o">&gt;</span> <span class="n">start_preference</span><span class="p">:</span>
+                    <span class="n">selected_repo_source</span> <span class="o">=</span> <span class="n">url</span>
+                    <span class="n">start_preference</span> <span class="o">=</span> <span class="n">preference</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">issue</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">KiwiUriOpenError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s1">&#39;Failed to resolve metalink URI: </span><span class="si">{</span><span class="n">issue</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="p">)</span>
+        <span class="n">selected_repo_source</span> <span class="o">=</span> <span class="n">selected_repo_source</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+            <span class="s1">&#39;repodata/repomd.xml&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">selected_repo_source</span></div>
 </pre></div>
 
            </div>
