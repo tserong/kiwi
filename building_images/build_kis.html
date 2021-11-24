@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build KIS Image (Kernel, Initrd, System) &mdash; KIWI NG 9.24.10 documentation</title>
+  <title>Build KIS Image (Kernel, Initrd, System) &mdash; KIWI NG 9.24.11 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -721,7 +721,7 @@ Outside of a deployment infrastructure the example KIS image can be
 tested with QEMU as follows:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ sudo qemu
     -kernel /tmp/myimage/*.kernel <span class="se">\</span>
-    -initrd /tmp/myimage/*.initrd.xz <span class="se">\</span>
+    -initrd /tmp/myimage/*.initrd <span class="se">\</span>
     -append <span class="k">$(</span>cat /tmp/myimage/*.append<span class="k">)</span> <span class="se">\</span>
     -hda /tmp/myimage/kiwi-test-image-pxe.*-1.15.3 <span class="se">\</span>
     -serial stdio

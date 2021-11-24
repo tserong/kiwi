@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Booting a Root Filesystem from Network &mdash; KIWI NG 9.24.10 documentation</title>
+  <title>Booting a Root Filesystem from Network &mdash; KIWI NG 9.24.11 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -705,7 +705,7 @@ from the network:</p>
 <p>The PXE boot process loads the configured kernel and initrd from
 the PXE server. For this reason, the following files must be
 copied to the PXE server as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cp *.initrd.xz /srv/tftpboot/boot/initrd
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cp *.initrd /srv/tftpboot/boot/initrd
 $ cp *.kernel /srv/tftpboot/boot/linux
 </pre></div>
 </div>
