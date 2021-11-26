@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.system.uri &mdash; KIWI NG 9.24.11 documentation</title>
+  <title>kiwi.system.uri &mdash; KIWI NG 9.24.12 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -708,6 +708,23 @@
 <span class="sd">        standard URLs</span>
 
 <span class="sd">        :param str uri: URI, remote, local or metalink repository location</span>
+<span class="sd">            The resource type as part of the URI can be set to one of:</span>
+<span class="sd">            * http:</span>
+<span class="sd">            * https:</span>
+<span class="sd">            * ftp:</span>
+<span class="sd">            * obs:</span>
+<span class="sd">            * dir:</span>
+<span class="sd">            * file:</span>
+<span class="sd">            * obsrepositories:</span>
+<span class="sd">            * this:</span>
+<span class="sd">            The special this:// type resolve to the image description</span>
+<span class="sd">            directory. The code to resolve this is not part of the Uri</span>
+<span class="sd">            class because it has no state information about the image</span>
+<span class="sd">            description directory. Therefore the resolving of the this://</span>
+<span class="sd">            path happens on construction of an XMLState object as</span>
+<span class="sd">            part of the resolve_this_path() method. The method resolves</span>
+<span class="sd">            the path into a native dir:// URI which can be properly</span>
+<span class="sd">            handled here.</span>
 <span class="sd">        :param str repo_type:</span>
 <span class="sd">            repository type name, defaults to &#39;rpm-md&#39; and is only</span>
 <span class="sd">            effectively used when building inside of the open</span>

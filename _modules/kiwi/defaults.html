@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.defaults &mdash; KIWI NG 9.24.11 documentation</title>
+  <title>kiwi.defaults &mdash; KIWI NG 9.24.12 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -1126,15 +1126,26 @@
         <span class="k">return</span> <span class="s1">&#39;INSTALL&#39;</span></div>
 
 <div class="viewcode-block" id="Defaults.get_snapper_config_template_file"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.get_snapper_config_template_file">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_snapper_config_template_file</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">get_snapper_config_template_file</span><span class="p">(</span><span class="n">root</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Provides the default configuration template file for snapper</span>
+<span class="sd">        Provides the default configuration template file for snapper.</span>
+<span class="sd">        The location in etc/ are preferred over files in usr/</span>
 
-<span class="sd">        :return: file</span>
+<span class="sd">        :return: file path</span>
 
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="s1">&#39;/etc/snapper/config-templates/default&#39;</span></div>
+        <span class="n">snapper_templates</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;etc/snapper/config-templates/default&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;usr/share/snapper/config-templates/default&#39;</span>
+        <span class="p">]</span>
+        <span class="n">snapper_default_conf</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">snapper_template</span> <span class="ow">in</span> <span class="n">snapper_templates</span><span class="p">:</span>
+            <span class="n">template_config</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">snapper_template</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">template_config</span><span class="p">):</span>
+                <span class="n">snapper_default_conf</span> <span class="o">=</span> <span class="n">template_config</span>
+                <span class="k">break</span>
+        <span class="k">return</span> <span class="n">snapper_default_conf</span></div>
 
 <div class="viewcode-block" id="Defaults.get_default_video_mode"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.get_default_video_mode">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_default_video_mode</span><span class="p">():</span>

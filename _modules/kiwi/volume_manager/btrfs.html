@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.volume_manager.btrfs &mdash; KIWI NG 9.24.11 documentation</title>
+  <title>kiwi.volume_manager.btrfs &mdash; KIWI NG 9.24.12 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -1044,10 +1044,10 @@
 
     <span class="k">def</span> <span class="nf">_create_snapper_quota_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">root_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span> <span class="s1">&#39;@/.snapshots/1/snapshot&#39;</span><span class="p">])</span>
-        <span class="n">snapper_default_conf</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="p">[</span><span class="n">root_path</span><span class="p">,</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_snapper_config_template_file</span><span class="p">()]</span>
-        <span class="p">))</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">snapper_default_conf</span><span class="p">):</span>
+        <span class="n">snapper_default_conf</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_snapper_config_template_file</span><span class="p">(</span>
+            <span class="n">root_path</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">snapper_default_conf</span><span class="p">:</span>
             <span class="c1"># snapper requires an extra parent qgroup to operate with quotas</span>
             <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
                 <span class="p">[</span><span class="s1">&#39;btrfs&#39;</span><span class="p">,</span> <span class="s1">&#39;qgroup&#39;</span><span class="p">,</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="s1">&#39;1/0&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">]</span>
