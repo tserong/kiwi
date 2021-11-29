@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi-ng &mdash; KIWI NG 9.24.12 documentation</title>
+  <title>kiwi-ng &mdash; KIWI NG 9.24.13 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -671,6 +671,7 @@ kiwi-ng <span class="o">[</span>--profile<span class="o">=</span>&lt;name&gt;...
         <span class="o">[</span>--debug<span class="o">]</span>
         <span class="o">[</span>--color-output<span class="o">]</span>
         <span class="o">[</span>--config<span class="o">=</span>&lt;configfile&gt;<span class="o">]</span>
+        <span class="o">[</span>--kiwi-file<span class="o">=</span>&lt;kiwifile&gt;<span class="o">]</span>
     image &lt;command&gt; <span class="o">[</span>&lt;args&gt;...<span class="o">]</span>
 kiwi-ng <span class="o">[</span>--debug<span class="o">]</span>
         <span class="o">[</span>--color-output<span class="o">]</span>
@@ -685,6 +686,7 @@ kiwi-ng <span class="o">[</span>--profile<span class="o">=</span>&lt;name&gt;...
         <span class="o">[</span>--debug<span class="o">]</span>
         <span class="o">[</span>--color-output<span class="o">]</span>
         <span class="o">[</span>--config<span class="o">=</span>&lt;configfile&gt;<span class="o">]</span>
+        <span class="o">[</span>--kiwi-file<span class="o">=</span>&lt;kiwifile&gt;<span class="o">]</span>
     system &lt;command&gt; <span class="o">[</span>&lt;args&gt;...<span class="o">]</span>
 kiwi-ng compat &lt;legacy_args&gt;...
 kiwi-ng -v <span class="p">|</span> --version
@@ -775,6 +777,11 @@ and not a responsibility of KIWI NG.</p>
 <dt><kbd><span class="option">--type=<var>&lt;build_type&gt;</var></span></kbd></dt>
 <dd><p>Select image build type. The specified build type must be configured
 as part of the XML description.</p>
+</dd>
+<dt><kbd><span class="option">--kiwi-file=<var>&lt;kiwifile&gt;</var></span></kbd></dt>
+<dd><p>Basename of kiwi file which contains the main image
+configuration elements. If not specified kiwi searches for
+a file named <code class="xref py py-obj docutils literal notranslate"><span class="pre">config.xml</span></code> or a file matching <code class="xref py py-obj docutils literal notranslate"><span class="pre">*.kiwi</span></code></p>
 </dd>
 <dt><kbd><span class="option">--version</span></kbd></dt>
 <dd><p>Show program version</p>

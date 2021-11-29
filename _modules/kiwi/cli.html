@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.cli &mdash; KIWI NG 9.24.12 documentation</title>
+  <title>kiwi.cli &mdash; KIWI NG 9.24.13 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -680,6 +680,7 @@
 <span class="sd">               [--debug]</span>
 <span class="sd">               [--color-output]</span>
 <span class="sd">               [--config=&lt;configfile&gt;]</span>
+<span class="sd">               [--kiwi-file=&lt;kiwifile&gt;]</span>
 <span class="sd">           image &lt;command&gt; [&lt;args&gt;...]</span>
 <span class="sd">       kiwi-ng [--logfile=&lt;filename&gt;]</span>
 <span class="sd">               [--debug]</span>
@@ -695,6 +696,7 @@
 <span class="sd">               [--debug]</span>
 <span class="sd">               [--color-output]</span>
 <span class="sd">               [--config=&lt;configfile&gt;]</span>
+<span class="sd">               [--kiwi-file=&lt;kiwifile&gt;]</span>
 <span class="sd">           system &lt;command&gt; [&lt;args&gt;...]</span>
 <span class="sd">       kiwi-ng compat &lt;legacy_args&gt;...</span>
 <span class="sd">       kiwi-ng --compat &lt;legacy_args&gt;...</span>
@@ -736,6 +738,10 @@
 <span class="sd">    --type=&lt;build_type&gt;</span>
 <span class="sd">        image build type. If not set the default XML specified</span>
 <span class="sd">        build type will be used</span>
+<span class="sd">    --kiwi-file=&lt;kiwifile&gt;</span>
+<span class="sd">        Basename of kiwi file which contains the main image</span>
+<span class="sd">        configuration elements. If not specified kiwi searches for</span>
+<span class="sd">        a file named config.xml or a file matching *.kiwi</span>
 
 <span class="sd">global options for services: system</span>
 <span class="sd">    --target-arch=&lt;name&gt;</span>

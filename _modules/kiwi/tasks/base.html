@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.tasks.base &mdash; KIWI NG 9.24.12 documentation</title>
+  <title>kiwi.tasks.base &mdash; KIWI NG 9.24.13 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -674,6 +674,9 @@
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Any</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">attrgetter</span>
 
 <span class="c1"># project</span>
@@ -687,7 +690,7 @@
     <span class="n">KiwiConfigFileNotFound</span>
 <span class="p">)</span>
 
-<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
+<span class="n">log</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="CliTask"><a class="viewcode-back" href="../../../api/kiwi.tasks.html#kiwi.tasks.base.CliTask">[docs]</a><span class="k">class</span> <span class="nc">CliTask</span><span class="p">:</span>
@@ -704,11 +707,11 @@
 <span class="sd">        * setup logfile</span>
 <span class="sd">        * setup color output</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">should_perform_task_setup</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">should_perform_task_setup</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cli</span> <span class="o">=</span> <span class="n">Cli</span><span class="p">()</span>
 
         <span class="c1"># initialize runtime checker</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">runtime_checker</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runtime_checker</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">RuntimeChecker</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
         <span class="c1"># help requested</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">show_and_exit_on_help_request</span><span class="p">()</span>
@@ -726,7 +729,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span> <span class="o">=</span> <span class="n">RuntimeConfig</span><span class="p">()</span>
 
         <span class="c1"># initialize generic runtime check dicts</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">checks_before_command_args</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checks_before_command_args</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;check_image_version_provided&#39;</span><span class="p">:</span> <span class="p">[],</span>
             <span class="s1">&#39;check_efi_mode_for_disk_overlay_correctly_setup&#39;</span><span class="p">:</span> <span class="p">[],</span>
             <span class="s1">&#39;check_initrd_selection_required&#39;</span><span class="p">:</span> <span class="p">[],</span>
@@ -750,7 +753,7 @@
             <span class="s1">&#39;check_image_type_unique&#39;</span><span class="p">:</span> <span class="p">[],</span>
             <span class="s1">&#39;check_include_references_unresolvable&#39;</span><span class="p">:</span> <span class="p">[]</span>
         <span class="p">}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">checks_after_command_args</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">checks_after_command_args</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;check_repositories_configured&#39;</span><span class="p">:</span> <span class="p">[],</span>
             <span class="s1">&#39;check_image_include_repos_publicly_resolvable&#39;</span><span class="p">:</span> <span class="p">[]</span>
         <span class="p">}</span>
@@ -771,32 +774,35 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_args</span><span class="p">[</span><span class="s1">&#39;--color-output&#39;</span><span class="p">]:</span>
                 <span class="n">log</span><span class="o">.</span><span class="n">set_color_format</span><span class="p">()</span>
 
-<div class="viewcode-block" id="CliTask.load_xml_description"><a class="viewcode-back" href="../../../api/kiwi.tasks.html#kiwi.tasks.base.CliTask.load_xml_description">[docs]</a>    <span class="k">def</span> <span class="nf">load_xml_description</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description_directory</span><span class="p">):</span>
+<div class="viewcode-block" id="CliTask.load_xml_description"><a class="viewcode-back" href="../../../api/kiwi.tasks.html#kiwi.tasks.base.CliTask.load_xml_description">[docs]</a>    <span class="k">def</span> <span class="nf">load_xml_description</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">description_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kiwi_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Load, upgrade, validate XML description</span>
 
-<span class="sd">        Attributes</span>
+<span class="sd">        :param str description_directory:</span>
+<span class="sd">            Path to the image description</span>
 
-<span class="sd">        * :attr:`xml_data`</span>
-<span class="sd">            instance of XML data toplevel domain (image), stateless data</span>
-
-<span class="sd">        * :attr:`config_file`</span>
-<span class="sd">            used config file path</span>
-
-<span class="sd">        * :attr:`xml_state`</span>
-<span class="sd">            Instance of XMLState, stateful data</span>
+<span class="sd">        :param str kiwi_file:</span>
+<span class="sd">            Basename of kiwi file which contains the main</span>
+<span class="sd">            image configuration elements. If not specified</span>
+<span class="sd">            kiwi searches for a file named config.xml or</span>
+<span class="sd">            a file matching .kiwi</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Loading XML description&#39;</span><span class="p">)</span>
-        <span class="n">config_file</span> <span class="o">=</span> <span class="n">description_directory</span> <span class="o">+</span> <span class="s1">&#39;/config.xml&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>
-            <span class="c1"># alternative config file lookup location</span>
-            <span class="n">config_file</span> <span class="o">=</span> <span class="n">description_directory</span> <span class="o">+</span> <span class="s1">&#39;/image/config.xml&#39;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>
-            <span class="c1"># glob config file search, first match wins</span>
-            <span class="n">glob_match</span> <span class="o">=</span> <span class="n">description_directory</span> <span class="o">+</span> <span class="s1">&#39;/*.kiwi&#39;</span>
-            <span class="k">for</span> <span class="n">kiwi_file</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">iglob</span><span class="p">(</span><span class="n">glob_match</span><span class="p">)):</span>
-                <span class="n">config_file</span> <span class="o">=</span> <span class="n">kiwi_file</span>
-                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">kiwi_file</span><span class="p">:</span>
+            <span class="n">config_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">description_directory</span><span class="p">,</span> <span class="n">kiwi_file</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">config_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">description_directory</span><span class="p">,</span> <span class="s1">&#39;/config.xml&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>
+                <span class="c1"># alternative config file lookup location</span>
+                <span class="n">config_file</span> <span class="o">=</span> <span class="n">description_directory</span> <span class="o">+</span> <span class="s1">&#39;/image/config.xml&#39;</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>
+                <span class="c1"># glob config file search, first match wins</span>
+                <span class="n">glob_match</span> <span class="o">=</span> <span class="n">description_directory</span> <span class="o">+</span> <span class="s1">&#39;/*.kiwi&#39;</span>
+                <span class="k">for</span> <span class="n">kiwi_file</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">iglob</span><span class="p">(</span><span class="n">glob_match</span><span class="p">)):</span>
+                    <span class="n">config_file</span> <span class="o">=</span> <span class="n">kiwi_file</span>
+                    <span class="k">break</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">config_file</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">KiwiConfigFileNotFound</span><span class="p">(</span>
@@ -828,7 +834,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">runtime_checker</span> <span class="o">=</span> <span class="n">RuntimeChecker</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CliTask.quadruple_token"><a class="viewcode-back" href="../../../api/kiwi.tasks.html#kiwi.tasks.base.CliTask.quadruple_token">[docs]</a>    <span class="k">def</span> <span class="nf">quadruple_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">):</span>
+<div class="viewcode-block" id="CliTask.quadruple_token"><a class="viewcode-back" href="../../../api/kiwi.tasks.html#kiwi.tasks.base.CliTask.quadruple_token">[docs]</a>    <span class="k">def</span> <span class="nf">quadruple_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Helper method for commandline options of the form --option a,b,c,d</span>
 
@@ -843,7 +849,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ntuple_token</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CliTask.sextuple_token"><a class="viewcode-back" href="../../../api/kiwi.tasks.html#kiwi.tasks.base.CliTask.sextuple_token">[docs]</a>    <span class="k">def</span> <span class="nf">sextuple_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">):</span>
+<div class="viewcode-block" id="CliTask.sextuple_token"><a class="viewcode-back" href="../../../api/kiwi.tasks.html#kiwi.tasks.base.CliTask.sextuple_token">[docs]</a>    <span class="k">def</span> <span class="nf">sextuple_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Helper method for commandline options of the form --option a,b,c,d,e,f</span>
 
@@ -858,7 +864,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ntuple_token</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="CliTask.run_checks"><a class="viewcode-back" href="../../../api/kiwi.tasks.html#kiwi.tasks.base.CliTask.run_checks">[docs]</a>    <span class="k">def</span> <span class="nf">run_checks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checks</span><span class="p">):</span>
+<div class="viewcode-block" id="CliTask.run_checks"><a class="viewcode-back" href="../../../api/kiwi.tasks.html#kiwi.tasks.base.CliTask.run_checks">[docs]</a>    <span class="k">def</span> <span class="nf">run_checks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checks</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method runs the given runtime checks excluding the ones disabled</span>
 <span class="sd">        in the runtime configuration file.</span>
@@ -874,7 +880,7 @@
             <span class="p">}</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">attrgetter</span><span class="p">(</span><span class="n">method</span><span class="p">)(</span><span class="bp">self</span><span class="o">.</span><span class="n">runtime_checker</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_pop_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokens</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_pop_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokens</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
         <span class="n">token</span> <span class="o">=</span> <span class="n">tokens</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">token</span> <span class="o">==</span> <span class="s1">&#39;true&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
@@ -883,7 +889,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">token</span>
 
-    <span class="k">def</span> <span class="nf">_ntuple_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">tuple_count</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_ntuple_token</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tuple_count</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Helper method for commandline options of the form --option a,b,c,d,e,f</span>
 
