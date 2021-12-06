@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build an Expandable Disk Image &mdash; KIWI NG 9.24.13 documentation</title>
+  <title>Build an Expandable Disk Image &mdash; KIWI NG 9.24.14 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -207,6 +207,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-locale">&lt;preferences&gt;&lt;locale&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-bootsplash-theme">&lt;preferences&gt;&lt;bootsplash-theme&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-bootloader-theme">&lt;preferences&gt;&lt;bootloader-theme&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-release-version">&lt;preferences&gt;&lt;release-version&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type">&lt;preferences&gt;&lt;type&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-bootloader">&lt;preferences&gt;&lt;type&gt;&lt;bootloader&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
@@ -910,7 +911,7 @@ to it via a custom /etc/qemu-ifup. For details see
 <section id="oem-customization">
 <span id="oem-customize"></span><h2>OEM Customization<a class="headerlink" href="#oem-customization" title="Permalink to this headline">¶</a></h2>
 <p>The deployment process of an oem image can be customized through
-the <code class="xref py py-obj docutils literal notranslate"><span class="pre">oemconfig</span></code> element which is a child section of the <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a>
+the <code class="xref py py-obj docutils literal notranslate"><span class="pre">oemconfig</span></code> element which is a child section of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code>
 element like the following example shows:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;oemconfig&gt;</span>
   <span class="nt">&lt;oem-swapsize&gt;</span>512<span class="nt">&lt;/oem-swapsize&gt;</span>
@@ -1013,7 +1014,7 @@ the image and machine power the computation can take some time.</p>
 <section id="installation-media-customization">
 <span id="installmedia-customize"></span><h2>Installation Media Customization<a class="headerlink" href="#installation-media-customization" title="Permalink to this headline">¶</a></h2>
 <p>The installation media created for OEM network or CD/DVD deployments can
-be customized with the <code class="xref py py-obj docutils literal notranslate"><span class="pre">installmedia</span></code> section which is a child section of the <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a>
+be customized with the <code class="xref py py-obj docutils literal notranslate"><span class="pre">installmedia</span></code> section which is a child section of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code>
 element as it appears in the following example:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;installmedia&gt;</span>
   <span class="nt">&lt;initrd</span> <span class="na">action=</span><span class="s">&quot;omit&quot;</span><span class="nt">&gt;</span>

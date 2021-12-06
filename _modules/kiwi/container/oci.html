@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.container.oci &mdash; KIWI NG 9.24.13 documentation</title>
+  <title>kiwi.container.oci &mdash; KIWI NG 9.24.14 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -204,6 +204,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-locale">&lt;preferences&gt;&lt;locale&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-bootsplash-theme">&lt;preferences&gt;&lt;bootsplash-theme&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-bootloader-theme">&lt;preferences&gt;&lt;bootloader-theme&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-release-version">&lt;preferences&gt;&lt;release-version&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type">&lt;preferences&gt;&lt;type&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-bootloader">&lt;preferences&gt;&lt;type&gt;&lt;bootloader&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
@@ -677,9 +678,7 @@
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
-<span class="kn">from</span> <span class="nn">kiwi.runtime_config</span> <span class="kn">import</span> <span class="n">RuntimeConfig</span>
 <span class="kn">from</span> <span class="nn">kiwi.oci_tools</span> <span class="kn">import</span> <span class="n">OCI</span>
-<span class="kn">from</span> <span class="nn">kiwi.utils.compress</span> <span class="kn">import</span> <span class="n">Compress</span>
 
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;kiwi&#39;</span><span class="p">)</span>
 
@@ -724,8 +723,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">oci_config</span> <span class="o">=</span> <span class="n">custom_args</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">oci_config</span> <span class="o">=</span> <span class="p">{}</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span> <span class="o">=</span> <span class="n">RuntimeConfig</span><span class="p">()</span>
 
         <span class="c1"># for builds inside the buildservice we include a reference to the</span>
         <span class="c1"># specific build. Thus disturl label only exists inside the</span>
@@ -817,11 +814,7 @@
             <span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">archive_transport</span><span class="p">,</span> <span class="n">image_ref</span><span class="p">,</span> <span class="n">additional_refs</span>
         <span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span><span class="o">.</span><span class="n">get_container_compression</span><span class="p">():</span>
-            <span class="n">compressor</span> <span class="o">=</span> <span class="n">Compress</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">compressor</span><span class="o">.</span><span class="n">xz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">runtime_config</span><span class="o">.</span><span class="n">get_xz_options</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">filename</span></div>
+        <span class="k">return</span> <span class="n">filename</span></div>
 
     <span class="k">def</span> <span class="nf">_append_buildservice_disturl_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_buildservice_env_name</span><span class="p">())</span> <span class="k">as</span> <span class="n">env</span><span class="p">:</span>

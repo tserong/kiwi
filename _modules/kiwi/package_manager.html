@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.package_manager &mdash; KIWI NG 9.24.13 documentation</title>
+  <title>kiwi.package_manager &mdash; KIWI NG 9.24.14 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -204,6 +204,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-locale">&lt;preferences&gt;&lt;locale&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-bootsplash-theme">&lt;preferences&gt;&lt;bootsplash-theme&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-bootloader-theme">&lt;preferences&gt;&lt;bootloader-theme&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-release-version">&lt;preferences&gt;&lt;release-version&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-type">&lt;preferences&gt;&lt;type&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-type-bootloader">&lt;preferences&gt;&lt;type&gt;&lt;bootloader&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
@@ -706,7 +707,7 @@
 <div class="viewcode-block" id="PackageManager.new"><a class="viewcode-back" href="../../api/kiwi.package_manager.html#kiwi.package_manager.PackageManager.new">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">new</span><span class="p">(</span>
         <span class="n">repository</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">package_manager_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">custom_args</span><span class="p">:</span> <span class="n">List</span><span class="o">=</span><span class="kc">None</span>  <span class="c1"># noqa: E252</span>
+        <span class="n">custom_args</span><span class="p">:</span> <span class="n">List</span> <span class="o">=</span> <span class="p">[],</span> <span class="n">release_version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="p">):</span>
         <span class="n">name_map</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;zypper&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;zypper&#39;</span><span class="p">,</span> <span class="s1">&#39;Zypper&#39;</span><span class="p">],</span>
@@ -722,7 +723,7 @@
             <span class="p">)</span>
             <span class="n">module_name</span> <span class="o">=</span> <span class="s1">&#39;PackageManager</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
             <span class="n">manager</span> <span class="o">=</span> <span class="n">package_manager</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">module_name</span><span class="p">](</span>
-                <span class="n">repository</span><span class="p">,</span> <span class="n">custom_args</span>
+                <span class="n">repository</span><span class="p">,</span> <span class="n">custom_args</span><span class="p">,</span> <span class="n">release_version</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">issue</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiPackageManagerSetupError</span><span class="p">(</span>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build an ISO Hybrid Live Image &mdash; KIWI NG 9.24.13 documentation</title>
+  <title>Build an ISO Hybrid Live Image &mdash; KIWI NG 9.24.14 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -207,6 +207,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-locale">&lt;preferences&gt;&lt;locale&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-bootsplash-theme">&lt;preferences&gt;&lt;bootsplash-theme&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-bootloader-theme">&lt;preferences&gt;&lt;bootloader-theme&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-release-version">&lt;preferences&gt;&lt;release-version&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type">&lt;preferences&gt;&lt;type&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-bootloader">&lt;preferences&gt;&lt;type&gt;&lt;bootloader&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
@@ -671,7 +672,7 @@
 Once built and deployed it boots off from this media without interfering
 with other system storage components making it a useful pocket system for
 testing and demo- and debugging-purposes.</p>
-<p>To add a live ISO build to your appliance, create a <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a> element with
+<p>To add a live ISO build to your appliance, create a <code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code> element with
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">image</span></code> set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">iso</span></code> in your <code class="file docutils literal notranslate"><span class="pre">config.xml</span></code> as shown below:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;Tumbleweed_appliance&quot;</span><span class="nt">&gt;</span>
   <span class="c">&lt;!-- snip --&gt;</span>
@@ -683,7 +684,7 @@ testing and demo- and debugging-purposes.</p>
 <span class="nt">&lt;/image&gt;</span>
 </pre></div>
 </div>
-<p>The following attributes of the <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.10)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code></a> element are relevant when building
+<p>The following attributes of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code> element are relevant when building
 live ISO images:</p>
 <ul>
 <li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">flags</span></code>: Specifies the live ISO technology and dracut module to use, can

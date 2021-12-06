@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.system.prepare &mdash; KIWI NG 9.24.13 documentation</title>
+  <title>kiwi.system.prepare &mdash; KIWI NG 9.24.14 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -204,6 +204,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-locale">&lt;preferences&gt;&lt;locale&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-bootsplash-theme">&lt;preferences&gt;&lt;bootsplash-theme&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-bootloader-theme">&lt;preferences&gt;&lt;bootloader-theme&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-release-version">&lt;preferences&gt;&lt;release-version&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type">&lt;preferences&gt;&lt;type&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-bootloader">&lt;preferences&gt;&lt;type&gt;&lt;bootloader&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
@@ -780,6 +781,7 @@
         <span class="n">repository_sections</span> <span class="o">=</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_repository_sections_used_for_build</span><span class="p">()</span>
         <span class="n">package_manager</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_package_manager</span><span class="p">()</span>
+        <span class="n">release_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_release_version</span><span class="p">()</span>
         <span class="n">rpm_locale_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_rpm_locale</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_rpm_check_signatures</span><span class="p">():</span>
             <span class="n">repository_options</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;check_signatures&#39;</span><span class="p">)</span>
@@ -855,7 +857,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">uri_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
         <span class="n">repo</span><span class="o">.</span><span class="n">cleanup_unused_repos</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">PackageManager</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-            <span class="n">repo</span><span class="p">,</span> <span class="n">package_manager</span>
+            <span class="n">repository</span><span class="o">=</span><span class="n">repo</span><span class="p">,</span>
+            <span class="n">package_manager_name</span><span class="o">=</span><span class="n">package_manager</span><span class="p">,</span>
+            <span class="n">release_version</span><span class="o">=</span><span class="n">release_version</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="SystemPrepare.install_bootstrap"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.prepare.SystemPrepare.install_bootstrap">[docs]</a>    <span class="k">def</span> <span class="nf">install_bootstrap</span><span class="p">(</span>
@@ -1030,9 +1034,13 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">manager</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">package_manager</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_package_manager</span><span class="p">()</span>
+                    <span class="n">release_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_release_version</span><span class="p">()</span>
                     <span class="n">manager</span> <span class="o">=</span> <span class="n">PackageManager</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-                        <span class="n">Repository</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_bind</span><span class="p">,</span> <span class="n">package_manager</span><span class="p">),</span>
-                        <span class="n">package_manager</span>
+                        <span class="n">repository</span><span class="o">=</span><span class="n">Repository</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">root_bind</span><span class="p">,</span> <span class="n">package_manager</span>
+                        <span class="p">),</span>
+                        <span class="n">package_manager_name</span><span class="o">=</span><span class="n">package_manager</span><span class="p">,</span>
+                        <span class="n">release_version</span><span class="o">=</span><span class="n">release_version</span>
                     <span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">delete_packages</span><span class="p">(</span>
                     <span class="n">manager</span><span class="p">,</span> <span class="n">to_become_deleted_packages</span><span class="p">,</span> <span class="n">force</span>
@@ -1153,9 +1161,11 @@
 <span class="sd">        at run time such as macros</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">package_manager</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_package_manager</span><span class="p">()</span>
+        <span class="n">release_version</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_release_version</span><span class="p">()</span>
         <span class="n">manager</span> <span class="o">=</span> <span class="n">PackageManager</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-            <span class="n">Repository</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_bind</span><span class="p">,</span> <span class="n">package_manager</span><span class="p">),</span>
-            <span class="n">package_manager</span>
+            <span class="n">repository</span><span class="o">=</span><span class="n">Repository</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_bind</span><span class="p">,</span> <span class="n">package_manager</span><span class="p">),</span>
+            <span class="n">package_manager_name</span><span class="o">=</span><span class="n">package_manager</span><span class="p">,</span>
+            <span class="n">release_version</span><span class="o">=</span><span class="n">release_version</span>
         <span class="p">)</span>
         <span class="n">manager</span><span class="o">.</span><span class="n">clean_leftovers</span><span class="p">()</span></div>
 

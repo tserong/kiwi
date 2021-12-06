@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.runtime_config &mdash; KIWI NG 9.24.13 documentation</title>
+  <title>kiwi.runtime_config &mdash; KIWI NG 9.24.14 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -204,6 +204,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-locale">&lt;preferences&gt;&lt;locale&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-bootsplash-theme">&lt;preferences&gt;&lt;bootsplash-theme&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-bootloader-theme">&lt;preferences&gt;&lt;bootloader-theme&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-release-version">&lt;preferences&gt;&lt;release-version&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-type">&lt;preferences&gt;&lt;type&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-type-bootloader">&lt;preferences&gt;&lt;type&gt;&lt;bootloader&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
@@ -887,27 +888,27 @@
 
 <div class="viewcode-block" id="RuntimeConfig.get_container_compression"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.runtime_config.RuntimeConfig.get_container_compression">[docs]</a>    <span class="k">def</span> <span class="nf">get_container_compression</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return compression algorithm to use for compression of container images</span>
+<span class="sd">        Return compression for container images</span>
 
 <span class="sd">        container:</span>
-<span class="sd">          - compress: xz|none</span>
+<span class="sd">          - compress: xz|none|true|false</span>
 
 <span class="sd">        if no or invalid configuration data is provided, the default</span>
-<span class="sd">        compression algorithm from the Defaults class is returned</span>
+<span class="sd">        compression from the Defaults class is returned</span>
 
-<span class="sd">        :return: A name</span>
+<span class="sd">        :return: True or False</span>
 
-<span class="sd">        :rtype: str</span>
+<span class="sd">        :rtype: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">container_compression</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_attribute</span><span class="p">(</span>
             <span class="n">element</span><span class="o">=</span><span class="s1">&#39;container&#39;</span><span class="p">,</span> <span class="n">attribute</span><span class="o">=</span><span class="s1">&#39;compress&#39;</span>
         <span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">container_compression</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">container_compression</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_container_compression</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="s1">&#39;xz&#39;</span> <span class="ow">in</span> <span class="n">container_compression</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">container_compression</span>
-        <span class="k">elif</span> <span class="s1">&#39;none&#39;</span> <span class="ow">in</span> <span class="n">container_compression</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="s1">&#39;xz&#39;</span> <span class="o">==</span> <span class="n">container_compression</span> <span class="ow">or</span> <span class="n">container_compression</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="s1">&#39;none&#39;</span> <span class="o">==</span> <span class="n">container_compression</span> <span class="ow">or</span> <span class="n">container_compression</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
                 <span class="s1">&#39;Skipping invalid container compression: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>

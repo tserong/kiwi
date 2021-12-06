@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.solver Package &mdash; KIWI NG 9.24.13 documentation</title>
+  <title>kiwi.solver Package &mdash; KIWI NG 9.24.14 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -207,6 +207,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-locale">&lt;preferences&gt;&lt;locale&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-bootsplash-theme">&lt;preferences&gt;&lt;bootsplash-theme&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-bootloader-theme">&lt;preferences&gt;&lt;bootloader-theme&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-release-version">&lt;preferences&gt;&lt;release-version&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type">&lt;preferences&gt;&lt;type&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-bootloader">&lt;preferences&gt;&lt;type&gt;&lt;bootloader&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
@@ -667,7 +668,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="kiwi.solver.sat.Sat">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kiwi.solver.sat.</span></span><span class="sig-name descname"><span class="pre">Sat</span></span><a class="reference internal" href="../_modules/kiwi/solver/sat.html#Sat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.solver.sat.Sat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p><strong>Sat Solver class to run package solver operations</strong></p>
 <p>The class uses SUSE’s libsolv sat plugin</p>
 <dl class="py method">
@@ -678,7 +679,7 @@ required repository metadata which is needed to run a solver
 operation later.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>solver_repository</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><em>object</em></a>) – Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">SolverRepository</span></code></p>
+<dd class="field-odd"><p><strong>solver_repository</strong> (<em>object</em>) – Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">SolverRepository</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -708,9 +709,9 @@ metadata. Usually RHEL/CentOS/Fedora repos uses that</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>job_names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – list of strings</p></li>
-<li><p><strong>skip_missing</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – skip job if not found</p></li>
-<li><p><strong>ignore_recommended</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – do not include recommended packages</p></li>
+<li><p><strong>job_names</strong> (<em>list</em>) – list of strings</p></li>
+<li><p><strong>skip_missing</strong> (<em>bool</em>) – skip job if not found</p></li>
+<li><p><strong>ignore_recommended</strong> (<em>bool</em>) – do not include recommended packages</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises</dt>
@@ -720,7 +721,7 @@ metadata. Usually RHEL/CentOS/Fedora repos uses that</p></li>
 <dd class="field-odd"><p>Transaction result information</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
+<dd class="field-even"><p>dict</p>
 </dd>
 </dl>
 </dd></dl>

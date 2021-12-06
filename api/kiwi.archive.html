@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.archive Package &mdash; KIWI NG 9.24.13 documentation</title>
+  <title>kiwi.archive Package &mdash; KIWI NG 9.24.14 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -207,6 +207,7 @@
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-locale">&lt;preferences&gt;&lt;locale&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-bootsplash-theme">&lt;preferences&gt;&lt;bootsplash-theme&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-bootloader-theme">&lt;preferences&gt;&lt;bootloader-theme&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-release-version">&lt;preferences&gt;&lt;release-version&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type">&lt;preferences&gt;&lt;type&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-bootloader">&lt;preferences&gt;&lt;type&gt;&lt;bootloader&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#preferences-type-containerconfig">&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;</a></li>
@@ -667,7 +668,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="kiwi.archive.cpio.ArchiveCpio">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kiwi.archive.cpio.</span></span><span class="sig-name descname"><span class="pre">ArchiveCpio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/archive/cpio.html#ArchiveCpio"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.archive.cpio.ArchiveCpio" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p><strong>Extraction/Creation of cpio archives</strong></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -682,7 +683,7 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source_dir</strong> (<em>string</em>) – data source directory</p></li>
-<li><p><strong>exclude</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – list of excluded items</p></li>
+<li><p><strong>exclude</strong> (<em>list</em>) – list of excluded items</p></li>
 </ul>
 </dd>
 </dl>
@@ -707,7 +708,7 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="kiwi.archive.tar.ArchiveTar">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">kiwi.archive.tar.</span></span><span class="sig-name descname"><span class="pre">ArchiveTar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create_from_file_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/kiwi/archive/tar.html#ArchiveTar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.archive.tar.ArchiveTar" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p><strong>Extraction/Creation of tar archives</strong></p>
 <p>The tarfile python module is not used by that class,
 since it does not provide support for some relevant features
@@ -718,8 +719,8 @@ Python v2.7.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> (<em>string</em>) – filename to use for archive extraction or creation</p></li>
-<li><p><strong>create_from_file_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – use file list not entire directory to create the archive</p></li>
-<li><p><strong>file_list</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – list of files and directorie names to archive</p></li>
+<li><p><strong>create_from_file_list</strong> (<em>bool</em>) – use file list not entire directory to create the archive</p></li>
+<li><p><strong>file_list</strong> (<em>list</em>) – list of files and directorie names to archive</p></li>
 </ul>
 </dd>
 </dl>
@@ -731,8 +732,8 @@ Python v2.7.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source_dir</strong> (<em>string</em>) – data source directory</p></li>
-<li><p><strong>files_to_append</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – list of items to append</p></li>
-<li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – custom options</p></li>
+<li><p><strong>files_to_append</strong> (<em>list</em>) – list of items to append</p></li>
+<li><p><strong>options</strong> (<em>list</em>) – custom options</p></li>
 </ul>
 </dd>
 </dl>
@@ -746,8 +747,8 @@ Python v2.7.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source_dir</strong> (<em>string</em>) – data source directory</p></li>
-<li><p><strong>exclude</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – list of excluded items</p></li>
-<li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – custom creation options</p></li>
+<li><p><strong>exclude</strong> (<em>list</em>) – list of excluded items</p></li>
+<li><p><strong>options</strong> (<em>list</em>) – custom creation options</p></li>
 </ul>
 </dd>
 </dl>
@@ -761,7 +762,7 @@ Python v2.7.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source_dir</strong> (<em>string</em>) – data source directory</p></li>
-<li><p><strong>exclude</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – list of excluded items</p></li>
+<li><p><strong>exclude</strong> (<em>list</em>) – list of excluded items</p></li>
 </ul>
 </dd>
 </dl>
@@ -775,9 +776,9 @@ Python v2.7.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>source_dir</strong> (<em>string</em>) – data source directory</p></li>
-<li><p><strong>exclude</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – list of excluded items</p></li>
-<li><p><strong>options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – custom tar creation options</p></li>
-<li><p><strong>xz_options</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – custom xz compression options</p></li>
+<li><p><strong>exclude</strong> (<em>list</em>) – list of excluded items</p></li>
+<li><p><strong>options</strong> (<em>list</em>) – custom tar creation options</p></li>
+<li><p><strong>xz_options</strong> (<em>list</em>) – custom xz compression options</p></li>
 </ul>
 </dd>
 </dl>
