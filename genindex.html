@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; KIWI NG 9.24.14 documentation</title>
+  <title>Index &mdash; KIWI NG 9.24.15 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -121,9 +121,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/buildhost_constraints.html">Build Host Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/architectures.html">Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/security.html">Host Security Settings Conflicts with KIWI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting/filesystems.html">Incompatible Filesystem Settings on Host vs. Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#build-host-constraints">Build Host Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#architectures">Architectures</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="plugins.html">KIWI Plugins</a><ul>
@@ -224,6 +225,7 @@
 <li class="toctree-l3"><a class="reference internal" href="image_description/elements.html#packages">&lt;packages&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#packages-package">&lt;packages&gt;&lt;package&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#packages-namedcollection">&lt;packages&gt;&lt;namedCollection&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#packages-collectionmodule">&lt;packages&gt;&lt;collectionModule&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#packages-archive">&lt;packages&gt;&lt;archive&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#packages-ignore">&lt;packages&gt;&lt;ignore&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#packages-product">&lt;packages&gt;&lt;product&gt;</a></li>
@@ -349,7 +351,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="contributing/scripts_testing.html">Write Integration Tests for the Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="contributing/scripts_testing.html#running-tests-for-multiple-container-images">Running Tests for multiple container images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing/scripts_testing.html#test-setup">Test Setup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="contributing/schema_extensions.html">Extending KIWI NG with Custom Operations</a><ul>
@@ -1499,6 +1501,8 @@
 </li>
       <li><a href="api/kiwi.volume_manager.html#kiwi.volume_manager.base.VolumeManagerBase.get_canonical_volume_list">get_canonical_volume_list() (kiwi.volume_manager.base.VolumeManagerBase method)</a>
 </li>
+      <li><a href="api/kiwi.html#kiwi.xml_state.XMLState.get_collection_modules">get_collection_modules() (kiwi.xml_state.XMLState method)</a>
+</li>
       <li><a href="api/kiwi.html#kiwi.xml_state.XMLState.get_collection_type">get_collection_type() (kiwi.xml_state.XMLState method)</a>
 </li>
       <li><a href="api/kiwi.html#kiwi.xml_state.XMLState.get_collections">get_collections() (kiwi.xml_state.XMLState method)</a>
@@ -1685,14 +1689,14 @@
 </li>
       <li><a href="api/kiwi.repository.template.html#kiwi.repository.template.apt.PackageManagerTemplateAptGet.get_host_template">get_host_template() (kiwi.repository.template.apt.PackageManagerTemplateAptGet method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/kiwi.partitioner.html#kiwi.partitioner.base.PartitionerBase.get_id">get_id() (kiwi.partitioner.base.PartitionerBase method)</a>
 
       <ul>
         <li><a href="api/kiwi.system.html#kiwi.system.identifier.SystemIdentifier.get_id">(kiwi.system.identifier.SystemIdentifier method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/kiwi.html#kiwi.xml_state.XMLState.get_image_packages_sections">get_image_packages_sections() (kiwi.xml_state.XMLState method)</a>
 </li>
       <li><a href="api/kiwi.repository.template.html#kiwi.repository.template.apt.PackageManagerTemplateAptGet.get_image_template">get_image_template() (kiwi.repository.template.apt.PackageManagerTemplateAptGet method)</a>
@@ -4440,6 +4444,14 @@
 </li>
       <li><a href="api/kiwi.system.html#kiwi.system.prepare.SystemPrepare.setup_repositories">setup_repositories() (kiwi.system.prepare.SystemPrepare method)</a>
 </li>
+      <li><a href="api/kiwi.package_manager.html#kiwi.package_manager.base.PackageManagerBase.setup_repository_modules">setup_repository_modules() (kiwi.package_manager.base.PackageManagerBase method)</a>
+
+      <ul>
+        <li><a href="api/kiwi.package_manager.html#kiwi.package_manager.dnf.PackageManagerDnf.setup_repository_modules">(kiwi.package_manager.dnf.PackageManagerDnf method)</a>
+</li>
+        <li><a href="api/kiwi.package_manager.html#kiwi.package_manager.zypper.PackageManagerZypper.setup_repository_modules">(kiwi.package_manager.zypper.PackageManagerZypper method)</a>
+</li>
+      </ul></li>
       <li><a href="api/kiwi.container.setup.html#kiwi.container.setup.base.ContainerSetupBase.setup_root_console">setup_root_console() (kiwi.container.setup.base.ContainerSetupBase method)</a>
 </li>
       <li><a href="api/kiwi.container.setup.html#kiwi.container.setup.base.ContainerSetupBase.setup_static_device_nodes">setup_static_device_nodes() (kiwi.container.setup.base.ContainerSetupBase method)</a>

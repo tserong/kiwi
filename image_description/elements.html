@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Description Elements &mdash; KIWI NG 9.24.14 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.24.15 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -124,9 +124,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting/buildhost_constraints.html">Build Host Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting/architectures.html">Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting/security.html">Host Security Settings Conflicts with KIWI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../troubleshooting/filesystems.html">Incompatible Filesystem Settings on Host vs. Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#build-host-constraints">Build Host Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#architectures">Architectures</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">KIWI Plugins</a><ul>
@@ -227,6 +228,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#packages">&lt;packages&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#packages-package">&lt;packages&gt;&lt;package&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#packages-namedcollection">&lt;packages&gt;&lt;namedCollection&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#packages-collectionmodule">&lt;packages&gt;&lt;collectionModule&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#packages-archive">&lt;packages&gt;&lt;archive&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#packages-ignore">&lt;packages&gt;&lt;ignore&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#packages-product">&lt;packages&gt;&lt;product&gt;</a></li>
@@ -352,7 +354,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing/scripts_testing.html">Write Integration Tests for the Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../contributing/scripts_testing.html#running-tests-for-multiple-container-images">Running Tests for multiple container images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../contributing/scripts_testing.html#test-setup">Test Setup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../contributing/schema_extensions.html">Extending KIWI NG with Custom Operations</a><ul>
@@ -663,7 +665,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.24.14</p>
+and attributes of the KIWI NG XML document in version 9.24.15</p>
 </div>
 <section id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -1563,7 +1565,7 @@ any of its required packages and any recommended packages.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Collections on SUSE</p>
-<p>On SUSE based distributions collections are names patterns and are
+<p>On SUSE based distributions collections are called <code class="xref py py-obj docutils literal notranslate"><span class="pre">patterns</span></code> and are
 just simple packages. To get the names of the patterns such that
 they can be used in a namedCollection type the following command:
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">$</span> <span class="pre">zypper</span> <span class="pre">patterns</span></code>. If for some reason the collection name cannot
@@ -1576,11 +1578,39 @@ with the name “patterns-” are representing a pattern package.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Collections on RedHat</p>
-<p>On RedHat based distributions collections are named groups and are
+<p>On RedHat based distributions collections are called <code class="xref py py-obj docutils literal notranslate"><span class="pre">groups</span></code> and are
 extra metadata. To get the names of these groups type the following
 command: <code class="xref py py-obj docutils literal notranslate"><span class="pre">$</span> <span class="pre">dnf</span> <span class="pre">group</span> <span class="pre">list</span></code>. Please note that group names are allowed
 to contain whitespace characters.</p>
 </div>
+</section>
+<section id="packages-collectionmodule">
+<h3>&lt;packages&gt;&lt;collectionModule&gt;<a class="headerlink" href="#packages-collectionmodule" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;packages</span> <span class="na">type=</span><span class="s">&quot;bootstrap&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;collectionModule</span> <span class="na">name=</span><span class="s">&quot;module&quot;</span> <span class="na">stream=</span><span class="s">&quot;stream&quot;</span> <span class="na">enable=</span><span class="s">&quot;true|false&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/packages&gt;</span>
+</pre></div>
+</div>
+<p>In CentOS Stream &gt;= 8 and Red Hat Enterprise Linux &gt;= 8, there are
+Application Streams that are offered in the form of modules
+(using Fedora Modularity technology). To build images that use
+this content KIWI NG offers to enable/disable modules when using
+the <code class="xref py py-obj docutils literal notranslate"><span class="pre">dnf</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">microdnf</span></code> package manager backend. Modules are setup
+prior the bootstrap phase and its setup persists as part of the
+image.</p>
+<p>There are the following constraints when adding <code class="xref py py-obj docutils literal notranslate"><span class="pre">collectionModule</span></code>
+elements:</p>
+<ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">collectionModule</span></code> elements can only be specified as part of the
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;packages</span> <span class="pre">type=&quot;bootstrap&quot;&gt;</span></code> section. This is because the setup of
+modules must be done once and as early as possible in the process
+of installing the image root tree.</p></li>
+<li><p>Disabling a module can only be done as a whole and therefore the
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">stream</span></code> attribute is not allowed for disabling modules. For
+enabling modules the stream` attribute is optional</p></li>
+<li><p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">enable</span></code> attribute is mandatory because it should be an explicit
+setting if a module is effectively used or not.</p></li>
+</ul>
 </section>
 <section id="packages-archive">
 <h3>&lt;packages&gt;&lt;archive&gt;<a class="headerlink" href="#packages-archive" title="Permalink to this headline">¶</a></h3>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Troubleshooting &mdash; KIWI NG 9.24.14 documentation</title>
+  <title>Troubleshooting &mdash; KIWI NG 9.24.15 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Incompatible Filesystem Settings on Host vs. Image" href="troubleshooting/filesystems.html" />
+    <link rel="next" title="Build Host Constraints" href="troubleshooting/buildhost_constraints.html" />
     <link rel="prev" title="kiwi-ng image info" href="commands/image_info.html" /> 
 </head>
 
@@ -124,9 +124,10 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/buildhost_constraints.html">Build Host Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/architectures.html">Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting/security.html">Host Security Settings Conflicts with KIWI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting/filesystems.html">Incompatible Filesystem Settings on Host vs. Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#build-host-constraints">Build Host Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#architectures">Architectures</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="plugins.html">KIWI Plugins</a><ul>
@@ -227,6 +228,7 @@
 <li class="toctree-l3"><a class="reference internal" href="image_description/elements.html#packages">&lt;packages&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#packages-package">&lt;packages&gt;&lt;package&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#packages-namedcollection">&lt;packages&gt;&lt;namedCollection&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#packages-collectionmodule">&lt;packages&gt;&lt;collectionModule&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#packages-archive">&lt;packages&gt;&lt;archive&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#packages-ignore">&lt;packages&gt;&lt;ignore&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="image_description/elements.html#packages-product">&lt;packages&gt;&lt;product&gt;</a></li>
@@ -352,7 +354,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="contributing/scripts_testing.html">Write Integration Tests for the Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="contributing/scripts_testing.html#running-tests-for-multiple-container-images">Running Tests for multiple container images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="contributing/scripts_testing.html#test-setup">Test Setup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="contributing/schema_extensions.html">Extending KIWI NG with Custom Operations</a><ul>
@@ -658,7 +660,7 @@
            <div itemprop="articleBody">
              
   <section id="troubleshooting">
-<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Abstract</strong></p>
@@ -669,87 +671,12 @@ are just one out of other possible solution candidates.</p>
 </div>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting/buildhost_constraints.html">Build Host Constraints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting/architectures.html">Architectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting/security.html">Host Security Settings Conflicts with KIWI</a></li>
 <li class="toctree-l1"><a class="reference internal" href="troubleshooting/filesystems.html">Incompatible Filesystem Settings on Host vs. Image</a></li>
 </ul>
 </div>
-<section id="build-host-constraints">
-<span id="supported-distributions"></span><h2>Build Host Constraints<a class="headerlink" href="#build-host-constraints" title="Permalink to this headline">¶</a></h2>
-<p>For building images a host system is required that runs the build process.
-Tools to create the image are used from that host and this creates an
-indirect dependency to the target image. For example; Building an
-Ubuntu image requires the apt and dpkg tools and metadata to be available
-and functional on the host to build an Ubuntu image. There are many more
-of those host vs. image dependencies and not all of them can be resolved
-in a clear and clean way.</p>
-<p>The most compatible environment is provided if the build host is of the same
-distribution than the target image. In other cases our recommendation is that
-the build host is of the same distribution than the target and near to the
-major version (+-1) compared to the target. Such an environment can be
-found in:</p>
-<ul class="simple">
-<li><p>The Open Build Service <a class="reference external" href="https://build.opensuse.org">OBS</a>.</p></li>
-<li><p>The KIWI NG boxed plugin: <a class="reference internal" href="plugins/self_contained.html#self-contained"><span class="std std-ref">Building in a Self-Contained Environment</span></a></p></li>
-</ul>
-<p>In general, our goal is to support any major distribution with KIWI NG. However
-for building images we rely on core tools which are not under our control.
-Also several design aspects of distributions like <strong>secure boot</strong> and working
-with <strong>upstream projects</strong> are different and not influenced by us. There
-are many side effects that can be annoying especially if the build host
-is not of the same distribution vendor than the image target.</p>
-</section>
-<section id="architectures">
-<h2>Architectures<a class="headerlink" href="#architectures" title="Permalink to this headline">¶</a></h2>
-<p>As described in the section above one requirement between the build host
-and the image when it comes to architecture support is, that the image
-architecture should match the build host architecture. Cross arch building
-would require any core tool that is used to build an image to be cross
-arch capable. To patch e.g an x86_64 system such that it can build an
-aarch64 image would require some work on binutils and hacks as well as
-performance tweaks which is all not worth the effort and still can lead
-to broken results. Thus we recommend to provide native systems for the
-target architecture and build there. One possible alternative is to
-use the kiwi boxed plugin as mentioned above together with a box
-created for the desired architecture. However keep in mind the
-performance problematic when running a VM of a different
-architecture.</p>
-<p>The majority of the image builds are based on the x86 architecture.
-As mentioned KIWI NG also supports other architectures, shown in the
-table below:</p>
-<table class="docutils align-left">
-<colgroup>
-<col style="width: 40%" />
-<col style="width: 60%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>Architecture</p></th>
-<th class="head"><p>Supported</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>x86_64</p></td>
-<td><p>yes</p></td>
-</tr>
-<tr class="row-odd"><td><p>ix86</p></td>
-<td><p>yes <strong>note:distro</strong></p></td>
-</tr>
-<tr class="row-even"><td><p>s390/s390x</p></td>
-<td><p>yes <strong>note:distro</strong></p></td>
-</tr>
-<tr class="row-odd"><td><p>arm/aarch64</p></td>
-<td><p>yes <strong>note:distro</strong></p></td>
-</tr>
-<tr class="row-even"><td><p>ppc64</p></td>
-<td><p>yes <strong>note:distro</strong></p></td>
-</tr>
-</tbody>
-</table>
-<div class="admonition-distro admonition">
-<p class="admonition-title">distro</p>
-<p>The support status for an architecture depends on the distribution.
-If the distribution does not build its packages for the desired
-architecture, KIWI NG will not be able to build an image for it</p>
-</div>
-</section>
 </section>
 
 
@@ -757,7 +684,7 @@ architecture, KIWI NG will not be able to build an image for it</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="commands/image_info.html" class="btn btn-neutral float-left" title="kiwi-ng image info" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="troubleshooting/filesystems.html" class="btn btn-neutral float-right" title="Incompatible Filesystem Settings on Host vs. Image" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="troubleshooting/buildhost_constraints.html" class="btn btn-neutral float-right" title="Build Host Constraints" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

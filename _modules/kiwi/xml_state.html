@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.xml_state &mdash; KIWI NG 9.24.14 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.24.15 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -121,9 +121,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting/buildhost_constraints.html">Build Host Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting/architectures.html">Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting/security.html">Host Security Settings Conflicts with KIWI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../troubleshooting/filesystems.html">Incompatible Filesystem Settings on Host vs. Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting.html#build-host-constraints">Build Host Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../troubleshooting.html#architectures">Architectures</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../plugins.html">KIWI Plugins</a><ul>
@@ -224,6 +225,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../image_description/elements.html#packages">&lt;packages&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#packages-package">&lt;packages&gt;&lt;package&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#packages-namedcollection">&lt;packages&gt;&lt;namedCollection&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#packages-collectionmodule">&lt;packages&gt;&lt;collectionModule&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#packages-archive">&lt;packages&gt;&lt;archive&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#packages-ignore">&lt;packages&gt;&lt;ignore&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../../image_description/elements.html#packages-product">&lt;packages&gt;&lt;product&gt;</a></li>
@@ -349,7 +351,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../contributing/scripts_testing.html">Write Integration Tests for the Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../contributing/scripts_testing.html#running-tests-for-multiple-container-images">Running Tests for multiple container images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../contributing/scripts_testing.html#test-setup">Test Setup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../contributing/schema_extensions.html">Extending KIWI NG with Custom Operations</a><ul>
@@ -1279,6 +1281,43 @@
 <span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_collection_type</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XMLState.get_collection_modules"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_collection_modules">[docs]</a>    <span class="k">def</span> <span class="nf">get_collection_modules</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Dict of collection modules to enable and/or disable</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            Dict of the form:</span>
+
+<span class="sd">            .. code:: python</span>
+
+<span class="sd">                {</span>
+<span class="sd">                    &#39;enable&#39;: [</span>
+<span class="sd">                        &quot;module:stream&quot;, &quot;module&quot;</span>
+<span class="sd">                    ],</span>
+<span class="sd">                    &#39;disable&#39;: [</span>
+<span class="sd">                        &quot;module&quot;</span>
+<span class="sd">                    ]</span>
+<span class="sd">                }</span>
+
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">modules</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;disable&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;enable&#39;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+        <span class="k">for</span> <span class="n">packages</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_bootstrap_packages_sections</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">collection_module</span> <span class="ow">in</span> <span class="n">packages</span><span class="o">.</span><span class="n">get_collectionModule</span><span class="p">():</span>
+                <span class="n">module_name</span> <span class="o">=</span> <span class="n">collection_module</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">collection_module</span><span class="o">.</span><span class="n">get_enable</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                    <span class="n">modules</span><span class="p">[</span><span class="s1">&#39;disable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">stream</span> <span class="o">=</span> <span class="n">collection_module</span><span class="o">.</span><span class="n">get_stream</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">stream</span><span class="p">:</span>
+                        <span class="n">modules</span><span class="p">[</span><span class="s1">&#39;enable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s1">:</span><span class="si">{</span><span class="n">stream</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">modules</span><span class="p">[</span><span class="s1">&#39;enable&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">modules</span></div>
 
 <div class="viewcode-block" id="XMLState.get_collections"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.get_collections">[docs]</a>    <span class="k">def</span> <span class="nf">get_collections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;image&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>

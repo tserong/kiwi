@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Write Integration Tests for the Scripts &mdash; KIWI NG 9.24.14 documentation</title>
+  <title>Write Integration Tests for the Scripts &mdash; KIWI NG 9.24.15 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -124,9 +124,10 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting/buildhost_constraints.html">Build Host Constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting/architectures.html">Architectures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../troubleshooting/security.html">Host Security Settings Conflicts with KIWI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../troubleshooting/filesystems.html">Incompatible Filesystem Settings on Host vs. Image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#build-host-constraints">Build Host Constraints</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../troubleshooting.html#architectures">Architectures</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../plugins.html">KIWI Plugins</a><ul>
@@ -227,6 +228,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../image_description/elements.html#packages">&lt;packages&gt;</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#packages-package">&lt;packages&gt;&lt;package&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#packages-namedcollection">&lt;packages&gt;&lt;namedCollection&gt;</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#packages-collectionmodule">&lt;packages&gt;&lt;collectionModule&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#packages-archive">&lt;packages&gt;&lt;archive&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#packages-ignore">&lt;packages&gt;&lt;ignore&gt;</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../image_description/elements.html#packages-product">&lt;packages&gt;&lt;product&gt;</a></li>
@@ -352,7 +354,7 @@
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Write Integration Tests for the Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#running-tests-for-multiple-container-images">Running Tests for multiple container images</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-setup">Test Setup</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="schema_extensions.html">Extending KIWI NG with Custom Operations</a><ul>
@@ -673,57 +675,42 @@ tox:</p>
 <div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>tox -e scripts -- -n NUMBER_OF_THREADS
 </pre></div>
 </div>
-<p>It is recommended to leverage <a class="reference external" href="https://testinfra.readthedocs.io/">testinfra</a>
-and the <code class="docutils literal notranslate"><span class="pre">shared_container</span></code> and <code class="docutils literal notranslate"><span class="pre">container_per_test</span></code> fixtures for writing
-these integration tests. The fixtures give your test functions a connection to a
-running container (by default that will be <code class="docutils literal notranslate"><span class="pre">opensuse/tumbleweed</span></code>)
-<code class="file docutils literal notranslate"><span class="pre">functions.sh</span></code> copied to <code class="file docutils literal notranslate"><span class="pre">/bin/functions.sh</span></code> inside the
-container. You can then use the connection to perform some setup, tear down and
-the actual tests as follows:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_RmWorks</span><span class="p">(</span><span class="n">shared_container</span><span class="p">):</span>
+<p>The tests are written using the <a class="reference external" href="https://github.com/dcermak/pytest_container">pytest-container</a> plugin. If applicable please
+leverage the utility functions and fixtures of that plugin, e.g. the
+<code class="docutils literal notranslate"><span class="pre">auto_container</span></code> and <code class="docutils literal notranslate"><span class="pre">auto_container_per_test</span></code> fixtures in conjunction with
+<a class="reference external" href="https://testinfra.readthedocs.io/">testinfra</a>.</p>
+<section id="test-setup">
+<h2>Test Setup<a class="headerlink" href="#test-setup" title="Permalink to this headline">¶</a></h2>
+<p>The script tests can be run inside different containers, which are setup in
+<code class="file docutils literal notranslate"><span class="pre">test/scripts/conftest.py</span></code>. This file contains the <code class="docutils literal notranslate"><span class="pre">CONTAINERS</span></code> list
+with all currently present images. These images get pulled and build when needed
+and the <code class="file docutils literal notranslate"><span class="pre">functions.sh</span></code> is copied into <code class="file docutils literal notranslate"><span class="pre">/bin/</span></code>, so that it is
+available in <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
+<p>To use any of these containers, you can either define the global variable
+<code class="docutils literal notranslate"><span class="pre">CONTAINER_IMAGES</span></code> in a test module and use the <code class="docutils literal notranslate"><span class="pre">auto_container</span></code> fixture or
+<a class="reference external" href="https://docs.pytest.org/en/stable/parametrize.html">parametrize</a> the
+<code class="docutils literal notranslate"><span class="pre">container</span></code> fixture indirectly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;container_per_test&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">TUMBLEWEED</span><span class="p">,</span> <span class="n">LEAP_15_3</span><span class="p">),</span> <span class="n">indirect</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">test_RmWorks</span><span class="p">(</span><span class="n">container_per_test</span><span class="p">):</span>
     <span class="c1"># create the file /root/foobar</span>
-    <span class="n">shared_container</span><span class="o">.</span><span class="n">run_expect</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;touch /root/foobar&quot;</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">shared_container</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s2">&quot;/root/foobar&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span>
+    <span class="n">container_per_test</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">run_expect</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;touch /root/foobar&quot;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">container_per_test</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s2">&quot;/root/foobar&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span>
 
     <span class="c1"># source the functions and execute our function under test</span>
-    <span class="n">shared_container</span><span class="o">.</span><span class="n">run_expect</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;. /bin/functions.sh &amp;&amp; Rm /root/foobar&quot;</span><span class="p">)</span>
+    <span class="n">container_per_test</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">run_expect</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;. /bin/functions.sh &amp;&amp; Rm /root/foobar&quot;</span><span class="p">)</span>
 
     <span class="c1"># verify the result</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="n">shared_container</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s2">&quot;/root/foobar&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">container_per_test</span><span class="o">.</span><span class="n">connection</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s2">&quot;/root/foobar&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span>
 </pre></div>
 </div>
-<p>In this example we used the <code class="docutils literal notranslate"><span class="pre">shared_container</span></code> fixture: it creates a podman
-container at the start of the test session and gives each function using this
-fixture the same connection. Therefore you must only use it for tests where you
-do not perform any mutation of the container that you are not undoing
-afterwards! If you need to perform extensive mutation that you cannot or do not
-want to undo yourself, then resort to the <code class="docutils literal notranslate"><span class="pre">container_per_test</span></code> fixture. It
-will give you a fresh container for each test function. While this makes writing
-tests simpler, it also increases the runtime significantly, thus only use it
-when necessary.</p>
-<section id="running-tests-for-multiple-container-images">
-<h2>Running Tests for multiple container images<a class="headerlink" href="#running-tests-for-multiple-container-images" title="Permalink to this headline">¶</a></h2>
-<p>It is important to test certain functions on multiple operating systems &amp;
-versions, to e.g. ensure that older tools behave the same way that you expect
-them to.</p>
-<p>This can be achieved by leveraging pytest’s <a class="reference external" href="https://docs.pytest.org/en/stable/parametrize.html">fixture parametrization</a> as follows:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span>
-    <span class="s2">&quot;shared_container&quot;</span><span class="p">,</span>
-    <span class="p">(</span>
-        <span class="s2">&quot;Tumbleweed&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Leap-15.3&quot;</span><span class="p">,</span>
-    <span class="p">),</span>
-    <span class="n">indirect</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="k">def</span> <span class="nf">test_something</span><span class="p">(</span><span class="n">shared_container</span><span class="p">):</span>
-    <span class="k">pass</span>
-</pre></div>
-</div>
-<p>Where we pass multiple image names to the container images to the
-<code class="docutils literal notranslate"><span class="pre">shared_container</span></code> fixture. Pytest will then look for the image with the given
-name in the predefined list of containers in <code class="file docutils literal notranslate"><span class="pre">conftest.py</span></code>.</p>
-<p>To add a new container, simply add a new <code class="docutils literal notranslate"><span class="pre">Container</span></code> class to the
-<code class="docutils literal notranslate"><span class="pre">CONTAINERS</span></code> list and give it appropriate values for <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">url</span></code>.</p>
+<p>We used the <code class="docutils literal notranslate"><span class="pre">_per_test</span></code> variant of the <code class="docutils literal notranslate"><span class="pre">container</span></code> fixture in the above
+example. This fixture ensures that this container is only used in a single test
+function. You should use this variant for tests that mutate the system under
+test, as otherwise hard to debug race conditions could occur. For tests that
+only perform reads, you can omit the <code class="docutils literal notranslate"><span class="pre">_per_test</span></code> suffix and the container
+environment will be shared with other tests. This improves execution speed, but
+comes at the expense of safety in case mutation does occur.</p>
+<p>For further information please refer to the documentation of <a class="reference external" href="https://github.com/dcermak/pytest_container">pytest-container</a>.</p>
 </section>
 </section>
 
