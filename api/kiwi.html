@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi Package &mdash; KIWI NG 9.24.15 documentation</title>
+  <title>kiwi Package &mdash; KIWI NG 9.24.16 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -3932,6 +3932,20 @@ short form by default, long form with -h | –help</p></li>
 </dd>
 </dl>
 <dl class="py method">
+<dt class="sig sig-object py" id="kiwi.logger.Logger.getLogFlags">
+<span class="sig-name descname"><span class="pre">getLogFlags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.getLogFlags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.logger.Logger.getLogFlags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return logging flags</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary with flags and their activation status</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="kiwi.logger.Logger.getLogLevel">
 <span class="sig-name descname"><span class="pre">getLogLevel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.getLogLevel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.logger.Logger.getLogLevel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return currently used log level</p>
@@ -3974,6 +3988,21 @@ the log file</p>
 <li><p><strong>prefix</strong> (<em>string</em>) – prefix name</p></li>
 <li><p><strong>bar_length</strong> (<em>int</em>) – length of progress bar</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kiwi.logger.Logger.setLogFlag">
+<span class="sig-name descname"><span class="pre">setLogFlag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/kiwi/logger.html#Logger.setLogFlag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.logger.Logger.setLogFlag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set logging flag for further properties of the logging facility
+Available flags are:</p>
+<ul class="simple">
+<li><p>run-scripts-in-screen</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>flag</strong> (<em>str</em>) – name</p>
 </dd>
 </dl>
 </dd></dl>
@@ -5207,11 +5236,10 @@ section in the target xml state</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="kiwi.xml_state.XMLState.copy_bootincluded_packages">
 <span class="sig-name descname"><span class="pre">copy_bootincluded_packages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/kiwi/xml_state.html#XMLState.copy_bootincluded_packages"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.xml_state.XMLState.copy_bootincluded_packages" title="Permalink to this definition">¶</a></dt>
-<dd><p>Copy packages marked as bootinclude to the packages type=image
-(or type=bootstrap if no type=image was found) section in the
-target xml state. The package will also be removed from the
-packages type=delete section in the target xml state if
-present there</p>
+<dd><p>Copy packages marked as bootinclude to the packages
+type=bootstrap section in the target xml state. The package
+will also be removed from the packages type=delete section
+in the target xml state if present there</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>target_state</strong> (<em>object</em>) – XMLState instance</p>

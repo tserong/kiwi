@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Building Images with Profiles &mdash; KIWI NG 9.24.15 documentation</title>
+  <title>Building Images with Profiles &mdash; KIWI NG 9.24.16 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -685,15 +685,15 @@ feature.</p>
 <p>To enable and use the profiles, follow these steps:</p>
 <ol class="arabic">
 <li><p>Add the following XML comment to your <code class="file docutils literal notranslate"><span class="pre">config.xml</span></code>:</p>
-<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="c">&lt;!-- OBS-Profiles: @BUILD_FLAVOR@ --&gt;</span>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cm">&lt;!-- OBS-Profiles: @BUILD_FLAVOR@ --&gt;</span>
 </pre></div>
 </div>
 <p>It must be added before the opening <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;image&gt;</span></code> element and after the
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;?xml?&gt;</span></code> element, e.g.:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="c">&lt;!-- OBS-Profiles: @BUILD_FLAVOR@ --&gt;</span>
+<span class="cm">&lt;!-- OBS-Profiles: @BUILD_FLAVOR@ --&gt;</span>
 <span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;kiwi-test-image-vagrant&quot;</span><span class="nt">&gt;</span>
-  <span class="c">&lt;!-- snip --&gt;</span>
+  <span class="cm">&lt;!-- snip --&gt;</span>
 <span class="nt">&lt;/image&gt;</span>
 </pre></div>
 </div>

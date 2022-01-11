@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.tasks.base &mdash; KIWI NG 9.24.15 documentation</title>
+  <title>kiwi.tasks.base &mdash; KIWI NG 9.24.16 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -767,6 +767,10 @@
                 <span class="n">log</span><span class="o">.</span><span class="n">setLogLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">log</span><span class="o">.</span><span class="n">setLogLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+            <span class="c1"># set log flags</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_args</span><span class="p">[</span><span class="s1">&#39;--debug-run-scripts-in-screen&#39;</span><span class="p">]:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">setLogFlag</span><span class="p">(</span><span class="s1">&#39;run-scripts-in-screen&#39;</span><span class="p">)</span>
 
             <span class="c1"># set log file</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_args</span><span class="p">[</span><span class="s1">&#39;--logfile&#39;</span><span class="p">]:</span>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build an ISO Hybrid Live Image &mdash; KIWI NG 9.24.15 documentation</title>
+  <title>Build an ISO Hybrid Live Image &mdash; KIWI NG 9.24.16 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -677,12 +677,12 @@ testing and demo- and debugging-purposes.</p>
 <p>To add a live ISO build to your appliance, create a <code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code> element with
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">image</span></code> set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">iso</span></code> in your <code class="file docutils literal notranslate"><span class="pre">config.xml</span></code> as shown below:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;Tumbleweed_appliance&quot;</span><span class="nt">&gt;</span>
-  <span class="c">&lt;!-- snip --&gt;</span>
+  <span class="cm">&lt;!-- snip --&gt;</span>
   <span class="nt">&lt;preferences&gt;</span>
     <span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;iso&quot;</span> <span class="na">primary=</span><span class="s">&quot;true&quot;</span> <span class="na">flags=</span><span class="s">&quot;overlay&quot;</span> <span class="na">hybridpersistent_filesystem=</span><span class="s">&quot;ext4&quot;</span> <span class="na">hybridpersistent=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
-    <span class="c">&lt;!-- additional preferences --&gt;</span>
+    <span class="cm">&lt;!-- additional preferences --&gt;</span>
   <span class="nt">&lt;/preferences&gt;</span>
-  <span class="c">&lt;!-- snip --&gt;</span>
+  <span class="cm">&lt;!-- snip --&gt;</span>
 <span class="nt">&lt;/image&gt;</span>
 </pre></div>
 </div>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.logger &mdash; KIWI NG 9.24.15 documentation</title>
+  <title>kiwi.logger &mdash; KIWI NG 9.24.16 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -729,6 +729,7 @@
             <span class="n">sys</span><span class="o">.</span><span class="n">__stderr__</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">level</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_flags</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="Logger.getLogLevel"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.logger.Logger.getLogLevel">[docs]</a>    <span class="k">def</span> <span class="nf">getLogLevel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -740,6 +741,17 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_level</span></div>
 
+<div class="viewcode-block" id="Logger.getLogFlags"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.logger.Logger.getLogFlags">[docs]</a>    <span class="k">def</span> <span class="nf">getLogFlags</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return logging flags</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            Dictionary with flags and their activation status</span>
+
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_flags</span></div>
+
 <div class="viewcode-block" id="Logger.setLogLevel"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.logger.Logger.setLogLevel">[docs]</a>    <span class="k">def</span> <span class="nf">setLogLevel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set custom log level for all console handlers</span>
@@ -749,6 +761,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="n">level</span>
         <span class="k">for</span> <span class="n">handler_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">console_handlers</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">console_handlers</span><span class="p">[</span><span class="n">handler_type</span><span class="p">]</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Logger.setLogFlag"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.logger.Logger.setLogFlag">[docs]</a>    <span class="k">def</span> <span class="nf">setLogFlag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set logging flag for further properties of the logging facility</span>
+<span class="sd">        Available flags are:</span>
+
+<span class="sd">        * run-scripts-in-screen</span>
+
+<span class="sd">        :param str flag: name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_flags</span><span class="p">[</span><span class="n">flag</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span></div>
 
 <div class="viewcode-block" id="Logger.set_color_format"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.logger.Logger.set_color_format">[docs]</a>    <span class="k">def</span> <span class="nf">set_color_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.xml_state &mdash; KIWI NG 9.24.15 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.24.16 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -2699,20 +2699,15 @@
 
 <div class="viewcode-block" id="XMLState.copy_bootincluded_packages"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.xml_state.XMLState.copy_bootincluded_packages">[docs]</a>    <span class="k">def</span> <span class="nf">copy_bootincluded_packages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_state</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Copy packages marked as bootinclude to the packages type=image</span>
-<span class="sd">        (or type=bootstrap if no type=image was found) section in the</span>
-<span class="sd">        target xml state. The package will also be removed from the</span>
-<span class="sd">        packages type=delete section in the target xml state if</span>
-<span class="sd">        present there</span>
+<span class="sd">        Copy packages marked as bootinclude to the packages</span>
+<span class="sd">        type=bootstrap section in the target xml state. The package</span>
+<span class="sd">        will also be removed from the packages type=delete section</span>
+<span class="sd">        in the target xml state if present there</span>
 
 <span class="sd">        :param object target_state: XMLState instance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">target_packages_sections</span> <span class="o">=</span> \
-            <span class="n">target_state</span><span class="o">.</span><span class="n">get_image_packages_sections</span><span class="p">()</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">target_packages_sections</span><span class="p">:</span>
-            <span class="c1"># no packages type=image section was found, add to bootstrap</span>
-            <span class="n">target_packages_sections</span> <span class="o">=</span> \
-                <span class="n">target_state</span><span class="o">.</span><span class="n">get_bootstrap_packages_sections</span><span class="p">()</span>
+            <span class="n">target_state</span><span class="o">.</span><span class="n">get_bootstrap_packages_sections</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">target_packages_sections</span><span class="p">:</span>
             <span class="n">target_packages_section</span> <span class="o">=</span> \
                 <span class="n">target_packages_sections</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>

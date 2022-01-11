@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Building in the Open Build Service &mdash; KIWI NG 9.24.15 documentation</title>
+  <title>Building in the Open Build Service &mdash; KIWI NG 9.24.16 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -666,7 +666,7 @@
 <p class="admonition-title">Note</p>
 <p><strong>Abstract</strong></p>
 <p>This document gives a brief overview how to build images with
-KIWI NG in version 9.24.15 inside of the Open Build Service.
+KIWI NG in version 9.24.16 inside of the Open Build Service.
 A tutorial on the Open Buildservice itself can be found here:
 <a class="reference external" href="https://en.opensuse.org/openSUSE:Build_Service_Tutorial">https://en.opensuse.org/openSUSE:Build_Service_Tutorial</a></p>
 </div>
@@ -742,11 +742,11 @@ types.</p>
 declaration (<code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;?xml</span> <span class="pre">..?&gt;</span></code>):</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 
-<span class="c">&lt;!-- OBS-Profiles: foo_profile bar_profile --&gt;</span>
+<span class="cm">&lt;!-- OBS-Profiles: foo_profile bar_profile --&gt;</span>
 
 <span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;openSUSE-Leap-15.1&quot;</span><span class="nt">&gt;</span>
-  <span class="c">&lt;!-- image description with the profiles foo_profile and bar_profile</span>
-<span class="c">&lt;/image&gt;</span>
+  <span class="cp">&lt;!-- image description with the profiles foo_profile and bar_profile</span>
+<span class="cp">&lt;/image&gt;</span>
 </pre></div>
 </div>
 </li>
@@ -759,11 +759,11 @@ but requires an additional <code class="file docutils literal notranslate"><span
 <code class="file docutils literal notranslate"><span class="pre">config.xml</span></code> would have to be adapted as follows:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
 
-<span class="c">&lt;!-- OBS-Profiles: @BUILD_FLAVOR@ --&gt;</span>
+<span class="cm">&lt;!-- OBS-Profiles: @BUILD_FLAVOR@ --&gt;</span>
 
 <span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;openSUSE-Leap-15.1&quot;</span><span class="nt">&gt;</span>
-  <span class="c">&lt;!-- image description with the profiles foo_profile and bar_profile</span>
-<span class="c">&lt;/image&gt;</span>
+  <span class="cp">&lt;!-- image description with the profiles foo_profile and bar_profile</span>
+<span class="cp">&lt;/image&gt;</span>
 </pre></div>
 </div>
 <p>The file <code class="file docutils literal notranslate"><span class="pre">_multibuild</span></code> would have the following contents:</p>

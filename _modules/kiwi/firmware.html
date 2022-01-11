@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.firmware &mdash; KIWI NG 9.24.15 documentation</title>
+  <title>kiwi.firmware &mdash; KIWI NG 9.24.16 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -705,7 +705,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_default_firmware</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span> <span class="o">!=</span> <span class="s1">&#39;custom&#39;</span><span class="p">:</span>
             <span class="n">firmware_types</span> <span class="o">=</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_firmware_types</span><span class="p">()</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">firmware_types</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">]:</span>
                 <span class="k">raise</span> <span class="n">KiwiNotImplementedError</span><span class="p">(</span>

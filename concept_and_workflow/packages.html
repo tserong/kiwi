@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Adding and Removing Packages &mdash; KIWI NG 9.24.15 documentation</title>
+  <title>Adding and Removing Packages &mdash; KIWI NG 9.24.16 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -670,11 +670,11 @@ of packages via the <code class="xref py py-obj docutils literal notranslate"><s
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;udev&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;filesystem&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;openSUSE-release&quot;</span><span class="nt">/&gt;</span>
-        <span class="c">&lt;!-- additional packages installed before the chroot is created --&gt;</span>
+        <span class="cm">&lt;!-- additional packages installed before the chroot is created --&gt;</span>
     <span class="nt">&lt;/packages&gt;</span>
     <span class="nt">&lt;packages</span> <span class="na">type=</span><span class="s">&quot;image&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;patterns-openSUSE-base&quot;</span><span class="nt">/&gt;</span>
-        <span class="c">&lt;!-- additional packages to be installed into the chroot --&gt;</span>
+        <span class="cm">&lt;!-- additional packages to be installed into the chroot --&gt;</span>
     <span class="nt">&lt;/packages&gt;</span>
 <span class="nt">&lt;/image&gt;</span>
 </pre></div>
@@ -708,7 +708,7 @@ a <code class="xref py py-obj docutils literal notranslate"><span class="pre">pa
 <p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">package</span></code> element represents a single package to be installed (or
 removed), whose name is specified via the mandatory <code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code> attribute:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;{exc_image_base_name}&quot;</span><span class="nt">&gt;</span>
-    <span class="c">&lt;!-- snip --&gt;</span>
+    <span class="cm">&lt;!-- snip --&gt;</span>
     <span class="nt">&lt;packages</span> <span class="na">type=</span><span class="s">&quot;bootstrap&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;udev&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/packages&gt;</span>
@@ -724,7 +724,7 @@ pass them in this context too. For example, RPM based package managers
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">Provides:</span></code>. This can be used to add a package that provides a certain
 capability (e.g. <code class="xref py py-obj docutils literal notranslate"><span class="pre">Provides:</span> <span class="pre">/usr/bin/my-binary</span></code>) via:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;{exc_image_base_name}&quot;</span><span class="nt">&gt;</span>
-    <span class="c">&lt;!-- snip --&gt;</span>
+    <span class="cm">&lt;!-- snip --&gt;</span>
     <span class="nt">&lt;packages</span> <span class="na">type=</span><span class="s">&quot;bootstrap&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;/usr/bin/my-binary&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/packages&gt;</span>
@@ -739,7 +739,7 @@ description. Therefore, relying on <code class="xref py py-obj docutils literal 
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">arch</span></code> attribute. KIWI NG compares the <code class="xref py py-obj docutils literal notranslate"><span class="pre">arch</span></code> attributes value with the host
 architecture that builds the image according to the output of <code class="xref py py-obj docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-m</span></code>.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;{exc_image_base_name}&quot;</span><span class="nt">&gt;</span>
-    <span class="c">&lt;!-- snip --&gt;</span>
+    <span class="cm">&lt;!-- snip --&gt;</span>
     <span class="nt">&lt;packages</span> <span class="na">type=</span><span class="s">&quot;image&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;grub2&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;grub2-x86_64-efi&quot;</span> <span class="na">arch=</span><span class="s">&quot;x86_64&quot;</span><span class="nt">/&gt;</span>
@@ -808,7 +808,7 @@ custom program in <code class="file docutils literal notranslate"><span class="p
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">archive</span></code> element and add the build tools (<code class="xref py py-obj docutils literal notranslate"><span class="pre">ninja</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">meson</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">clang</span></code>) to
 <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;packages</span> <span class="pre">type=&quot;image&quot;&gt;</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;packages</span> <span class="pre">type=&quot;uninstall&quot;&gt;</span></code>:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;{exc_image_base_name}&quot;</span><span class="nt">&gt;</span>
-    <span class="c">&lt;!-- snip --&gt;</span>
+    <span class="cm">&lt;!-- snip --&gt;</span>
     <span class="nt">&lt;packages</span> <span class="na">type=</span><span class="s">&quot;image&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;ca-certificates&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;coreutils&quot;</span><span class="nt">/&gt;</span>
@@ -817,7 +817,7 @@ custom program in <code class="file docutils literal notranslate"><span class="p
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;meson&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;archive</span> <span class="na">name=</span><span class="s">&quot;foo_app_sources.tar.gz&quot;</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/packages&gt;</span>
-    <span class="c">&lt;!-- These packages will be uninstalled after running config.sh --&gt;</span>
+    <span class="cm">&lt;!-- These packages will be uninstalled after running config.sh --&gt;</span>
     <span class="nt">&lt;packages</span> <span class="na">type=</span><span class="s">&quot;uninstall&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;ninja&quot;</span><span class="nt">/&gt;</span>
         <span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;meson&quot;</span><span class="nt">/&gt;</span>

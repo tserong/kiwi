@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Extending KIWI NG with Custom Operations &mdash; KIWI NG 9.24.15 documentation</title>
+  <title>Extending KIWI NG with Custom Operations &mdash; KIWI NG 9.24.16 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -680,7 +680,7 @@ providing additional KIWI NG commands implemented.</p>
 <p>Depending on the demand for custom plugins, the interface
 to hook in code into other parts of the KIWI NG processing
 needs to be extended.</p>
-<p>This description applies for version 9.24.15.</p>
+<p>This description applies for version 9.24.16.</p>
 </div>
 <section id="the-extension-section">
 <h2>The &lt;extension&gt; Section<a class="headerlink" href="#the-extension-section" title="Permalink to this headline">¶</a></h2>
@@ -720,7 +720,7 @@ to place the schema as <code class="file docutils literal notranslate"><span cla
 <span class="nn">div</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="n">k</span><span class="p">.</span><span class="n">my_feature</span><span class="p">.</span><span class="n">attlist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">empty</span><span class="w"></span>
 <span class="w">    </span><span class="n">k</span><span class="p">.</span><span class="n">my_feature</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">        </span><span class="n">element</span><span class="w"> </span><span class="nl">my_plugin</span><span class="p">:</span><span class="n">my_feature</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">element</span><span class="w"> </span><span class="n">my_plugin</span><span class="o">:</span><span class="n">my_feature</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">            </span><span class="n">k</span><span class="p">.</span><span class="n">my_feature</span><span class="p">.</span><span class="n">attlist</span><span class="w"> </span><span class="o">&amp;</span><span class="w"></span>
 <span class="w">            </span><span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
@@ -731,7 +731,7 @@ to place the schema as <code class="file docutils literal notranslate"><span cla
 <span class="w">        </span><span class="n">attribute</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">attlist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">name</span><span class="p">.</span><span class="n">attribute</span><span class="w"></span>
 <span class="w">    </span><span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"></span>
-<span class="w">        </span><span class="n">element</span><span class="w"> </span><span class="nl">my_plugin</span><span class="p">:</span><span class="n">title</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">element</span><span class="w"> </span><span class="n">my_plugin</span><span class="o">:</span><span class="n">title</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">            </span><span class="n">k</span><span class="p">.</span><span class="n">title</span><span class="p">.</span><span class="n">attlist</span><span class="w"></span>
 <span class="w">        </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>

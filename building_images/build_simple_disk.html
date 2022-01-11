@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build a Virtual Disk Image &mdash; KIWI NG 9.24.15 documentation</title>
+  <title>Build a Virtual Disk Image &mdash; KIWI NG 9.24.16 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -683,7 +683,7 @@ disabled. An example configuration for a 42 GB large VMDK image with
 512 MB RAM, an IDE controller and a bridged network interface is shown
 below:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;image</span> <span class="na">schemaversion=</span><span class="s">&quot;7.4&quot;</span> <span class="na">name=</span><span class="s">&quot;Tumbleweed_appliance&quot;</span><span class="nt">&gt;</span>
-  <span class="c">&lt;!-- snip --&gt;</span>
+  <span class="cm">&lt;!-- snip --&gt;</span>
   <span class="nt">&lt;preferences&gt;</span>
     <span class="nt">&lt;type</span> <span class="na">image=</span><span class="s">&quot;oem&quot;</span> <span class="na">filesystem=</span><span class="s">&quot;ext4&quot;</span> <span class="na">format=</span><span class="s">&quot;vmdk&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;bootloader</span> <span class="na">name=</span><span class="s">&quot;grub2&quot;</span> <span class="na">timeout=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
@@ -696,9 +696,9 @@ below:</p>
         <span class="nt">&lt;vmnic</span> <span class="na">driver=</span><span class="s">&quot;e1000&quot;</span> <span class="na">interface=</span><span class="s">&quot;0&quot;</span> <span class="na">mode=</span><span class="s">&quot;bridged&quot;</span><span class="nt">/&gt;</span>
       <span class="nt">&lt;/machine&gt;</span>
     <span class="nt">&lt;/type&gt;</span>
-    <span class="c">&lt;!-- additional preferences --&gt;</span>
+    <span class="cm">&lt;!-- additional preferences --&gt;</span>
   <span class="nt">&lt;/preferences&gt;</span>
-  <span class="c">&lt;!-- snip --&gt;</span>
+  <span class="cm">&lt;!-- snip --&gt;</span>
 <span class="nt">&lt;/image&gt;</span>
 </pre></div>
 </div>
