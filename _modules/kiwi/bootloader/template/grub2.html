@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.bootloader.template.grub2 &mdash; KIWI NG 9.24.16 documentation</title>
+  <title>kiwi.bootloader.template.grub2 &mdash; KIWI NG 9.24.17 documentation</title>
       <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
@@ -711,12 +711,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">header_hybrid</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
 <span class="s1">            set linux=linux</span>
 <span class="s1">            set initrd=initrd</span>
-<span class="s1">            if [ &quot;$$</span><span class="si">{grub_cpu}</span><span class="s1">&quot; = &quot;x86_64&quot; -o &quot;$$</span><span class="si">{grub_cpu}</span><span class="s1">&quot; = &quot;i386&quot; ];then</span>
+<span class="s1">            if [ &quot;$$</span><span class="si">{grub_cpu}</span><span class="s1">&quot; = &quot;x86_64&quot; -o &quot;$$</span><span class="si">{grub_cpu}</span><span class="s1">&quot; = &quot;i386&quot; ]; then</span>
 <span class="s1">                if [ &quot;$$</span><span class="si">{grub_platform}</span><span class="s1">&quot; = &quot;efi&quot; ]; then</span>
 <span class="s1">                    set linux=linuxefi</span>
 <span class="s1">                    set initrd=initrdefi</span>
 <span class="s1">                fi</span>
 <span class="s1">            fi</span>
+<span class="s1">            export linux initrd</span>
 <span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">header_gfxterm</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>

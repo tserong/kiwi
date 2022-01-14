@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.boot.image.base &mdash; KIWI NG 9.24.16 documentation</title>
+  <title>kiwi.boot.image.base &mdash; KIWI NG 9.24.17 documentation</title>
       <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
@@ -864,6 +864,8 @@
         <span class="p">)</span>
         <span class="n">kernel_info</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">get_kernel</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">kernel_info</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_initrd_system</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;none&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">boot_names_type</span><span class="p">(</span><span class="n">kernel_name</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">initrd_name</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
             <span class="k">raise</span> <span class="n">KiwiDiskBootImageError</span><span class="p">(</span>
                 <span class="s1">&#39;No kernel in boot image tree </span><span class="si">%s</span><span class="s1"> found&#39;</span> <span class="o">%</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">boot_root_directory</span>
