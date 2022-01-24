@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.volume_manager.btrfs &mdash; KIWI NG 9.24.17 documentation</title>
+  <title>kiwi.volume_manager.btrfs &mdash; KIWI NG 9.24.18 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -781,6 +781,7 @@
             <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
                 <span class="p">[</span><span class="s1">&#39;btrfs&#39;</span><span class="p">,</span> <span class="s1">&#39;subvolume&#39;</span><span class="p">,</span> <span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="n">snapshot_volume</span><span class="p">]</span>
             <span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">snapshot_volume</span><span class="p">,</span> <span class="mo">0o700</span><span class="p">)</span>
             <span class="n">volume_mount</span> <span class="o">=</span> <span class="n">MountManager</span><span class="p">(</span>
                 <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
                 <span class="n">mountpoint</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">mountpoint</span> <span class="o">+</span> <span class="s1">&#39;/.snapshots&#39;</span>

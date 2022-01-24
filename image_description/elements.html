@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Description Elements &mdash; KIWI NG 9.24.17 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.24.18 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -665,7 +665,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.24.17</p>
+and attributes of the KIWI NG XML document in version 9.24.18</p>
 </div>
 <section id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -1282,9 +1282,122 @@ base root to work on.</p>
 element including references to their usage in a detailed type setup:</p>
 </section>
 <section id="preferences-type-bootloader">
-<h3>&lt;preferences&gt;&lt;type&gt;&lt;bootloader&gt;<a class="headerlink" href="#preferences-type-bootloader" title="Permalink to this headline">¶</a></h3>
-<p>Used to describe the bootloader setup in the oem disk image type.
-For details see: <a class="reference internal" href="../building_images/build_simple_disk.html#disk-bootloader"><span class="std std-ref">Setting up the Bootloader of the Image</span></a></p>
+<span id="id2"></span><h3>&lt;preferences&gt;&lt;type&gt;&lt;bootloader&gt;<a class="headerlink" href="#preferences-type-bootloader" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">bootloader</span></code> element is used to select the bootloader. At the moment,
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">grub2</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">isolinux</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">zipl</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">grub2_s390x_emu</span></code> (a combination of zipl
+and a userspace GRUB2) are supported. The special <code class="xref py py-obj docutils literal notranslate"><span class="pre">custom</span></code> entry allows
+to skip the bootloader configuration and installation and leaves this up
+to the user, which can be done by using the <code class="xref py py-obj docutils literal notranslate"><span class="pre">editbootinstall</span></code> and
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">editbootconfig</span></code> custom scripts.</p>
+<p>In addition to the mandatory name attribute, the following optional
+attributes are supported:</p>
+<dl>
+<dt>console=”console|gfxterm|serial”:</dt><dd><p>Specifies the bootloader console. The attribute is available for the
+grub and isolinux bootloader types. By default, a graphics console
+setup is used.</p>
+</dd>
+<dt>grub_template=”filename”:</dt><dd><p>Specifies a custom grub bootloader template file which will be used
+instead of the one provided with Kiwi. A static bootloader template to
+create the grub config file is only used in Kiwi if the native method
+via the grub mkconfig toolchain does not work properly. As of today,
+this is only the case for live and install ISO images. Thus, this
+setting only affects the oem and iso image types.</p>
+<p>The template file should contain a <a class="reference external" href="https://docs.python.org/3.4/library/string.html#template-strings">Template string</a>
+and can use the following variables:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>search_params</p></td>
+<td><p>parameters needed for grub’s <code class="xref py py-obj docutils literal notranslate"><span class="pre">search</span></code>
+command to locate the root volume</p></td>
+</tr>
+<tr class="row-odd"><td><p>default_boot</p></td>
+<td><p>number of the default menu item to boot</p></td>
+</tr>
+<tr class="row-even"><td><p>kernel_file</p></td>
+<td><p>the name of the kernel file</p></td>
+</tr>
+<tr class="row-odd"><td><p>initrd_file</p></td>
+<td><p>the name of the initial ramdisk file</p></td>
+</tr>
+<tr class="row-even"><td><p>boot_options</p></td>
+<td><p>kernel command line options for booting
+normally</p></td>
+</tr>
+<tr class="row-odd"><td><p>failsafe_boot_options</p></td>
+<td><p>kernel command line options for booting in
+failsafe mode</p></td>
+</tr>
+<tr class="row-even"><td><p>gfxmode</p></td>
+<td><p>the resolution to use for the bootloader;
+passed to grub’s <code class="xref py py-obj docutils literal notranslate"><span class="pre">gfxmode</span></code> command</p></td>
+</tr>
+<tr class="row-odd"><td><p>theme</p></td>
+<td><p>the name of a graphical theme to use</p></td>
+</tr>
+<tr class="row-even"><td><p>boot_timeout</p></td>
+<td><p>the boot menu timeout, set by the <code class="xref py py-obj docutils literal notranslate"><span class="pre">timeout</span></code>
+attribute</p></td>
+</tr>
+<tr class="row-odd"><td><p>boot_timeout_style</p></td>
+<td><p>the boot timeout style, set by the
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">timeout_style</span></code> attribute</p></td>
+</tr>
+<tr class="row-even"><td><p>serial_line_setup</p></td>
+<td><p>directives used to initialize the serial
+port, set by the <code class="xref py py-obj docutils literal notranslate"><span class="pre">serial_line</span></code> attribute</p></td>
+</tr>
+<tr class="row-odd"><td><p>title</p></td>
+<td><p>a title for the image: this will be the
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;image&gt;</span></code> tag’s <code class="xref py py-obj docutils literal notranslate"><span class="pre">displayname</span></code> attribute or
+its <code class="xref py py-obj docutils literal notranslate"><span class="pre">name</span></code> attribute if <code class="xref py py-obj docutils literal notranslate"><span class="pre">displayname</span></code> is not
+set; see: <a class="reference internal" href="#sec-image"><span class="std std-ref">&lt;image&gt;</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>bootpath</p></td>
+<td><p>the bootloader lookup path</p></td>
+</tr>
+<tr class="row-odd"><td><p>boot_directory_name</p></td>
+<td><p>the name of the grub directory</p></td>
+</tr>
+<tr class="row-even"><td><p>efi_image_name</p></td>
+<td><p>architecture-specific EFI boot binary name</p></td>
+</tr>
+<tr class="row-odd"><td><p>terminal_setup</p></td>
+<td><p>the bootloader console mode, set by the
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">console</span></code> attribute</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>serial_line=”string”:</dt><dd><p>Specifies the bootloader serial line setup. The setup is effective if
+the bootloader console is set to use the serial line. The attribute is
+available for the grub bootloader only.</p>
+</dd>
+<dt>timeout=”number”:</dt><dd><p>Specifies the boot timeout in seconds prior to launching the default
+boot option. By default, the timeout is set to 10 seconds. It makes
+sense to set this value to <code class="xref py py-obj docutils literal notranslate"><span class="pre">0</span></code> for images intended to be started
+non-interactively (e.g. virtual machines).</p>
+</dd>
+<dt>timeout_style=”countdown|hidden”:</dt><dd><p>Specifies the boot timeout style to control the way in which the timeout
+interacts with displaying the menu. If set, the display of the
+bootloader menu is delayed after the timeout expired. In countdown mode,
+an indication of the remaining time is displayed. The attribute is
+available for the grub loader only.</p>
+</dd>
+<dt>targettype=”CDL|LDL|FBA|SCSI”:</dt><dd><p>Specifies the device type of the disk zipl should boot.
+On zFCP devices, use <code class="xref py py-obj docutils literal notranslate"><span class="pre">SCSI</span></code>; on DASD devices, use <code class="xref py py-obj docutils literal notranslate"><span class="pre">CDL</span></code> or <code class="xref py py-obj docutils literal notranslate"><span class="pre">LDL</span></code>; on
+emulated DASD devices, use <code class="xref py py-obj docutils literal notranslate"><span class="pre">FBA</span></code>. The attribute is available for the
+zipl loader only.</p>
+</dd>
+</dl>
 </section>
 <section id="preferences-type-containerconfig">
 <h3>&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;<a class="headerlink" href="#preferences-type-containerconfig" title="Permalink to this headline">¶</a></h3>

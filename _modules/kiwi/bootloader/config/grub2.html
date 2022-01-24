@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.24.17 documentation</title>
+  <title>kiwi.bootloader.config.grub2 &mdash; KIWI NG 9.24.18 documentation</title>
       <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/custom.css" type="text/css" />
@@ -688,6 +688,7 @@
 <span class="kn">from</span> <span class="nn">kiwi.bootloader.template.grub2</span> <span class="kn">import</span> <span class="n">BootLoaderTemplateGrub2</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
+<span class="kn">from</span> <span class="nn">kiwi.exceptions</span> <span class="kn">import</span> <span class="n">KiwiFileNotFound</span>
 <span class="kn">from</span> <span class="nn">kiwi.firmware</span> <span class="kn">import</span> <span class="n">FirmWare</span>
 <span class="kn">from</span> <span class="nn">kiwi.path</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.sync</span> <span class="kn">import</span> <span class="n">DataSync</span>
@@ -931,6 +932,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_fix_grub_to_support_dynamic_efi_and_bios_boot</span><span class="p">(</span><span class="n">config_file</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fix_grub_root_device_reference</span><span class="p">(</span><span class="n">config_file</span><span class="p">,</span> <span class="n">boot_options</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_fix_grub_loader_entries_boot_cmdline</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fix_grub_loader_entries_linux_and_initrd_paths</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">efi_mode</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">early_boot_script_efi</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_copy_grub_config_to_efi_path</span><span class="p">(</span>
@@ -1032,7 +1034,12 @@
             <span class="s1">&#39;efi_image_name&#39;</span><span class="p">:</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_efi_image_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arch</span><span class="p">),</span>
             <span class="s1">&#39;terminal_setup&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal</span>
         <span class="p">}</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiboot</span><span class="p">:</span>
+        <span class="n">custom_template_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_custom_template</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">custom_template_path</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Using custom boot template&#39;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">custom_template_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">custom_template_file</span><span class="p">:</span>
+                <span class="n">template</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="n">custom_template_file</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">multiboot</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; Using multiboot template&#39;</span><span class="p">)</span>
             <span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;hypervisor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">hypervisor</span>
             <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grub2</span><span class="o">.</span><span class="n">get_multiboot_iso_template</span><span class="p">(</span>
@@ -1095,7 +1102,6 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_setup_efi_image</span><span class="p">(</span><span class="n">mbrid</span><span class="o">=</span><span class="n">mbrid</span><span class="p">,</span> <span class="n">lookup_path</span><span class="o">=</span><span class="n">lookup_path</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_copy_efi_modules_to_boot_directory</span><span class="p">(</span><span class="n">lookup_path</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">efi_mode</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;uefi&#39;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_copy_efi_modules_to_boot_directory</span><span class="p">(</span><span class="n">lookup_path</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_setup_secure_boot_efi_image</span><span class="p">(</span>
                 <span class="n">lookup_path</span><span class="o">=</span><span class="n">lookup_path</span><span class="p">,</span> <span class="n">mbrid</span><span class="o">=</span><span class="n">mbrid</span>
             <span class="p">)</span>
@@ -2008,6 +2014,27 @@
                 <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">menu_entry_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_menu_entry_file</span><span class="p">:</span>
                     <span class="n">grub_menu_entry_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">menu_entry</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">_fix_grub_loader_entries_linux_and_initrd_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># For the same reasons encoded in _fix_grub_loader_entries_boot_cmdline</span>
+        <span class="c1"># this method exists. In this method the wrong paths to the linux</span>
+        <span class="c1"># kernel and initrd gets fixed</span>
+        <span class="n">loader_entries_pattern</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root_mount</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">,</span>
+                <span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="s1">&#39;loader&#39;</span><span class="p">,</span> <span class="s1">&#39;entries&#39;</span><span class="p">,</span> <span class="s1">&#39;*.conf&#39;</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">menu_entry_file</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">iglob</span><span class="p">(</span><span class="n">loader_entries_pattern</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">menu_entry_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_menu_entry_file</span><span class="p">:</span>
+                <span class="n">menu_entry</span> <span class="o">=</span> <span class="n">grub_menu_entry_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="n">menu_entry</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
+                    <span class="sa">r</span><span class="s1">&#39;(linux|initrd) .*(/boot.*)&#39;</span><span class="p">,</span>
+                    <span class="sa">r</span><span class="s1">&#39;\1 \2&#39;</span><span class="p">,</span>
+                    <span class="n">menu_entry</span>
+                <span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">menu_entry_file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">grub_menu_entry_file</span><span class="p">:</span>
+                <span class="n">grub_menu_entry_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">menu_entry</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">_get_partition_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disk_device</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_table_type</span> <span class="o">==</span> <span class="s1">&#39;dasd&#39;</span><span class="p">:</span>
             <span class="n">blocks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_dasd_disk_geometry_element</span><span class="p">(</span>
@@ -2079,7 +2106,21 @@
                 <span class="s1">&#39;source /boot/</span><span class="si">{0}</span><span class="s1">/grub.cfg</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">boot_directory_name</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">linesep</span>
                 <span class="p">)</span>
-            <span class="p">)</span></div>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_custom_template</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">bootloader</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">template_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">bootloader</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_grub_template</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">template_file</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="n">template_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">xml_data</span><span class="o">.</span><span class="n">description_dir</span><span class="p">),</span>
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">bootloader</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_grub_template</span><span class="p">())</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">template_path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">KiwiFileNotFound</span><span class="p">(</span><span class="s1">&#39;failed to locate custom GRUB template </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">template_file</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">template_path</span></div>
 </pre></div>
 
            </div>
