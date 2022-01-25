@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Defined Scripts &mdash; KIWI NG 9.24.18 documentation</title>
+  <title>User Defined Scripts &mdash; KIWI NG 9.24.19 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -891,11 +891,9 @@ with <code class="xref py py-obj docutils literal notranslate"><span class="pre"
 </section>
 <section id="configuration-tips">
 <h3>Configuration Tips<a class="headerlink" href="#configuration-tips" title="Permalink to this headline">¶</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Locale configuration:</strong></p></li>
-</ol>
-<blockquote>
-<div><p>KIWI in order to set the locale relies on <strong class="command">systemd-firstboot</strong>,
+<ol class="arabic">
+<li><p><strong>Locale configuration:</strong></p>
+<p>KIWI in order to set the locale relies on <strong class="command">systemd-firstboot</strong>,
 which in turn writes the locale configuration file <code class="file docutils literal notranslate"><span class="pre">/etc/locale.conf</span></code>.
 The values for the locale settings are taken from the description XML
 file in the <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;locale&gt;</span></code> element under <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;preferences&gt;</span></code>.</p>
@@ -914,30 +912,36 @@ could still relay on <code class="xref py py-obj docutils literal notranslate"><
 any distribution specific way to configure the locale setting inside the
 <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code> script or by adding any additional configuration file
 as part of the overlay root-tree.</p>
-</div></blockquote>
-<ol class="arabic simple">
-<li><p><strong>Stateless systemd UUIDs:</strong></p></li>
-</ol>
-<blockquote>
-<div><p>Machine ID files are created and set (<code class="file docutils literal notranslate"><span class="pre">/etc/machine-id</span></code>,
-<code class="file docutils literal notranslate"><span class="pre">/var/lib/dbus/machine-id</span></code>) during the image package installation
-when <em>systemd</em> and/or <em>dbus</em> are installed. Those UUIDs are intended to
-be unique and set only once in each deployment. KIWI NG follows the <a class="reference external" href="https://www.freedesktop.org/software/systemd/man/machine-id.html">systemd
-recommendations</a> and
-wipes any <code class="file docutils literal notranslate"><span class="pre">/etc/machine-id</span></code> content, leaving it as an empty file.
-Note, this only applies to images based on a dracut initrd, it does not
-apply for container images.</p>
-<p>In case this setting is also required for a non dracut based image,
-the same result can achieved by removing <code class="file docutils literal notranslate"><span class="pre">/etc/machine-id</span></code> in
-<code class="file docutils literal notranslate"><span class="pre">config.sh</span></code>.</p>
+</li>
+<li><p><strong>Stateless systemd UUIDs:</strong></p>
+<p>Machine ID files (<code class="file docutils literal notranslate"><span class="pre">/etc/machine-id</span></code>, <code class="file docutils literal notranslate"><span class="pre">/var/lib/dbus/machine-id</span></code>)
+may be created and set during the image package installation depending on
+the distribution. Those UUIDs are intended to be unique and set only once
+in each deployment.</p>
+<p>If <code class="file docutils literal notranslate"><span class="pre">/etc/machine-id</span></code> does not exist or contains the string
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">uninitialized</span></code> (systemd v249 and later), this triggers firstboot behaviour
+in systemd and services using <code class="xref py py-obj docutils literal notranslate"><span class="pre">ConditionFirstBoot=yes</span></code> will run. Unless the
+file already contains a valid machine ID, systemd will generate one and
+write it into the file, creating it if necessary. See the <a class="reference external" href="https://www.freedesktop.org/software/systemd/man/machine-id.html">machine-id man
+page</a>
+for more details.</p>
+<p>Depending on whether firstboot behaviour should be triggered or not,
+<code class="file docutils literal notranslate"><span class="pre">/etc/machine-id</span></code> can be created, removed or filled with
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">uninitialized</span></code> by <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code>.</p>
+<p>To prevent that images include a generated machine ID, KIWI will clear
+<code class="file docutils literal notranslate"><span class="pre">/etc/machine-id</span></code> if it exists and does not contain the string
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">uninitialized</span></code>. This only applies to images based on a dracut initrd, it
+does not apply for container images.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Avoid interactive boot</p>
-<p>It is important to remark that the file <code class="file docutils literal notranslate"><span class="pre">/etc/machine-id</span></code> is set
-to an empty file instead of deleting it. <strong class="command">systemd</strong> may
-trigger <strong class="command">systemd-firstboot</strong> service if this file is not
-present, which leads to an interactive firstboot where the user is
-asked to provide some data.</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rw</span></code> might be necessary if <code class="file docutils literal notranslate"><span class="pre">/etc/machine-id</span></code> does not exist</p>
+<p>For systemd to be able to write <code class="file docutils literal notranslate"><span class="pre">/etc/machine-id</span></code> on boot,
+it must either exist already (so that a bind mount can be created) or
+<code class="file docutils literal notranslate"><span class="pre">/etc</span></code> must be writable.</p>
+<p>By default, the root filesystem is mounted read-only by dracut/systemd,
+thus a missing <code class="file docutils literal notranslate"><span class="pre">/etc/machine-id</span></code> will result in an error on boot.
+The <code class="xref py py-obj docutils literal notranslate"><span class="pre">rw</span></code> option can be added to the kernel commandline to force the
+initial mount to be read-write.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -959,7 +963,8 @@ ln -s /etc/machine-id /var/lib/dbus/machine-id
 </pre></div>
 </div>
 </div>
-</div></blockquote>
+</li>
+</ol>
 </section>
 </section>
 </section>

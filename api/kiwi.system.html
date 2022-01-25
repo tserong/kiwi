@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.system Package &mdash; KIWI NG 9.24.18 documentation</title>
+  <title>kiwi.system Package &mdash; KIWI NG 9.24.19 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -1678,16 +1678,20 @@ on the files matching the security_context_file</p>
 <dt class="sig sig-object py" id="kiwi.system.setup.SystemSetup.setup_machine_id">
 <span class="sig-name descname"><span class="pre">setup_machine_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/kiwi/system/setup.html#SystemSetup.setup_machine_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#kiwi.system.setup.SystemSetup.setup_machine_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setup systemd machine id</p>
-<p>Empty out the machine id which was provided by the package
-installation process. This will instruct the dracut initrd
-code to create a new machine id. This way a golden image
-produces unique machine id’s on first deployment and boot
-of the image.</p>
-<p>Note: Requires dracut connected image type</p>
-<p>This method must only be called if the image is of
-a type which gets booted via a dracut created initrd.
-Deleting the machine-id without the dracut initrd
-creating a new one produces an inconsistent system</p>
+<p>There are various states of /etc/machine-id:</p>
+<ol class="loweralpha simple">
+<li><p>Does not exist: Triggers ConditionFirstBoot, but does not work
+if the filesystem is initially read-only (booted without “rw”).</p></li>
+<li><p>Exists, is empty: Does not trigger ConditionFirstBoot, but works
+with read-only mounts.</p></li>
+<li><p>Exists, contains the string “uninitialized”: Same as b), but
+triggers ConditionFirstBoot. Supported by systemd v247+ only.</p></li>
+<li><p>Exists, contains a valid ID.</p></li>
+</ol>
+<p>See the machine-id(5) man page for details.</p>
+<p>In images, d) is not desirable, so truncate the file. This is the
+previous behaviour and what existing images expect. If the image
+has one of the other states, keep it as-is.</p>
 </dd></dl>
 
 <dl class="py method">

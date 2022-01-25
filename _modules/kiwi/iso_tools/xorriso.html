@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.iso_tools.xorriso &mdash; KIWI NG 9.24.18 documentation</title>
+  <title>kiwi.iso_tools.xorriso &mdash; KIWI NG 9.24.19 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -796,7 +796,7 @@
             <span class="s1">&#39;-boot_image&#39;</span><span class="p">,</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="s1">&#39;load_size=2048&#39;</span>
         <span class="p">]</span></div>
 
-<div class="viewcode-block" id="IsoToolsXorrIso.add_efi_loader_parameters"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.xorriso.IsoToolsXorrIso.add_efi_loader_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">add_efi_loader_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="IsoToolsXorrIso.add_efi_loader_parameters"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.xorriso.IsoToolsXorrIso.add_efi_loader_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">add_efi_loader_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loader_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Add ISO creation parameters to embed the EFI loader</span>
 
@@ -807,16 +807,14 @@
 <span class="sd">        file refer to _create_embedded_fat_efi_image() from</span>
 <span class="sd">        bootloader/config/grub2.py</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">loader_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">source_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_path</span><span class="p">,</span> <span class="s1">&#39;efi&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">loader_file</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">iso_loaders</span> <span class="o">+=</span> <span class="p">[</span>
-                <span class="s1">&#39;-append_partition&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;0xef&#39;</span><span class="p">,</span> <span class="n">loader_file</span><span class="p">,</span>
-                <span class="s1">&#39;-boot_image&#39;</span><span class="p">,</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="s1">&#39;next&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;-boot_image&#39;</span><span class="p">,</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;efi_path=--interval:appended_partition_2:all::&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;-boot_image&#39;</span><span class="p">,</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="s1">&#39;platform_id=0xef&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;-boot_image&#39;</span><span class="p">,</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="s1">&#39;emul_type=no_emulation&#39;</span>
-            <span class="p">]</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iso_loaders</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="s1">&#39;-append_partition&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;0xef&#39;</span><span class="p">,</span> <span class="n">loader_file</span><span class="p">,</span>
+            <span class="s1">&#39;-boot_image&#39;</span><span class="p">,</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="s1">&#39;next&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;-boot_image&#39;</span><span class="p">,</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;efi_path=--interval:appended_partition_2:all::&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;-boot_image&#39;</span><span class="p">,</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="s1">&#39;platform_id=0xef&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;-boot_image&#39;</span><span class="p">,</span> <span class="s1">&#39;any&#39;</span><span class="p">,</span> <span class="s1">&#39;emul_type=no_emulation&#39;</span>
+        <span class="p">]</span></div>
 
 <div class="viewcode-block" id="IsoToolsXorrIso.create_iso"><a class="viewcode-back" href="../../../api/kiwi.iso_tools.html#kiwi.iso_tools.xorriso.IsoToolsXorrIso.create_iso">[docs]</a>    <span class="k">def</span> <span class="nf">create_iso</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">hidden_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>

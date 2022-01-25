@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.builder.live &mdash; KIWI NG 9.24.18 documentation</title>
+  <title>kiwi.builder.live &mdash; KIWI NG 9.24.19 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -838,6 +838,13 @@
             <span class="n">filesystem</span><span class="o">=</span><span class="s1">&#39;iso:</span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">media_dir</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">boot_part_id</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
             <span class="n">working_directory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span>
         <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">efi_mode</span><span class="p">():</span>
+            <span class="n">efi_loader</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">(</span>
+                <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;efi-loader.&#39;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_dir</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
+            <span class="n">bootloader_config</span><span class="o">.</span><span class="n">_create_embedded_fat_efi_image</span><span class="p">(</span><span class="n">efi_loader</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">custom_iso_args</span><span class="p">[</span><span class="s1">&#39;meta_data&#39;</span><span class="p">][</span><span class="s1">&#39;efi_loader&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">efi_loader</span><span class="o">.</span><span class="n">name</span>
 
         <span class="c1"># prepare dracut initrd call</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">boot_image</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>

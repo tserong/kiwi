@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.system.prepare &mdash; KIWI NG 9.24.18 documentation</title>
+  <title>kiwi.system.prepare &mdash; KIWI NG 9.24.19 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -1128,6 +1128,7 @@
                         <span class="n">manager</span><span class="o">.</span><span class="n">match_package_deleted</span>
                     <span class="p">)</span>
                 <span class="p">)</span>
+                <span class="n">manager</span><span class="o">.</span><span class="n">post_process_delete_requests</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_bind</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">issue</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">KiwiSystemDeletePackagesFailed</span><span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">issue_message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
