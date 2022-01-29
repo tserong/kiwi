@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.defaults &mdash; KIWI NG 9.24.19 documentation</title>
+  <title>kiwi.defaults &mdash; KIWI NG 9.24.20 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -973,7 +973,10 @@
 
 <span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;-a&#39;</span><span class="p">,</span> <span class="s1">&#39;-H&#39;</span><span class="p">,</span> <span class="s1">&#39;-X&#39;</span><span class="p">,</span> <span class="s1">&#39;-A&#39;</span><span class="p">,</span> <span class="s1">&#39;--one-file-system&#39;</span><span class="p">,</span> <span class="s1">&#39;--inplace&#39;</span><span class="p">]</span></div>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="s1">&#39;--archive&#39;</span><span class="p">,</span> <span class="s1">&#39;--hard-links&#39;</span><span class="p">,</span> <span class="s1">&#39;--xattrs&#39;</span><span class="p">,</span> <span class="s1">&#39;--acls&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;--one-file-system&#39;</span><span class="p">,</span> <span class="s1">&#39;--inplace&#39;</span>
+        <span class="p">]</span></div>
 
 <div class="viewcode-block" id="Defaults.get_exclude_list_for_root_data_sync"><a class="viewcode-back" href="../../api/kiwi.html#kiwi.defaults.Defaults.get_exclude_list_for_root_data_sync">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_exclude_list_for_root_data_sync</span><span class="p">():</span>

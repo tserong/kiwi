@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.utils.sync &mdash; KIWI NG 9.24.19 documentation</title>
+  <title>kiwi.utils.sync &mdash; KIWI NG 9.24.20 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -748,11 +748,11 @@
             <span class="n">rsync_options</span> <span class="o">=</span> <span class="n">options</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_supports_extended_attributes</span><span class="p">():</span>
             <span class="n">warn_me</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="k">if</span> <span class="s1">&#39;-X&#39;</span> <span class="ow">in</span> <span class="n">rsync_options</span><span class="p">:</span>
-                <span class="n">rsync_options</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;-X&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;--xattrs&#39;</span> <span class="ow">in</span> <span class="n">rsync_options</span><span class="p">:</span>
+                <span class="n">rsync_options</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;--xattrs&#39;</span><span class="p">)</span>
                 <span class="n">warn_me</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="k">if</span> <span class="s1">&#39;-A&#39;</span> <span class="ow">in</span> <span class="n">rsync_options</span><span class="p">:</span>
-                <span class="n">rsync_options</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;-A&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;--acls&#39;</span> <span class="ow">in</span> <span class="n">rsync_options</span><span class="p">:</span>
+                <span class="n">rsync_options</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;--acls&#39;</span><span class="p">)</span>
                 <span class="n">warn_me</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">if</span> <span class="n">warn_me</span><span class="p">:</span>
                 <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
