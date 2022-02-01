@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.24.20 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.24.21 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -1718,7 +1718,7 @@
             <span class="p">)</span>
             <span class="n">boot_uuid_unmapped</span> <span class="o">=</span> <span class="n">disk</span><span class="o">.</span><span class="n">get_uuid</span><span class="p">(</span>
                 <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;luks_root&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>
-            <span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">luks</span> <span class="k">else</span> <span class="n">boot_uuid</span>
+            <span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">luks</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">boot_is_crypto</span> <span class="k">else</span> <span class="n">boot_uuid</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bootloader_config</span><span class="o">.</span><span class="n">setup_disk_boot_images</span><span class="p">(</span>
                 <span class="n">boot_uuid_unmapped</span>
             <span class="p">)</span>
