@@ -42,7 +42,7 @@ class BootLoaderConfigBase:
     :param string root_dir: root directory path name
     :param dict custom_args: custom bootloader arguments dictionary
     """
-    def __init__(self, xml_state, root_dir, boot_dir=None, custom_args=None):
+    def __init__(self, xml_state, root_dir, boot_dir=None, custom_args={}):
         self.root_dir = root_dir
         self.boot_dir = boot_dir or root_dir
         self.xml_state = xml_state
