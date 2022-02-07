@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.defaults &mdash; KIWI NG 9.24.21 documentation</title>
+  <title>kiwi.defaults &mdash; KIWI NG 9.24.22 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -1829,6 +1829,7 @@
             <span class="s1">&#39;armv6l&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;efi&#39;</span><span class="p">,</span> <span class="s1">&#39;uefi&#39;</span><span class="p">],</span>
             <span class="s1">&#39;armv7hl&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;efi&#39;</span><span class="p">,</span> <span class="s1">&#39;uefi&#39;</span><span class="p">],</span>
             <span class="s1">&#39;armv7l&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;efi&#39;</span><span class="p">,</span> <span class="s1">&#39;uefi&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;armv8l&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;efi&#39;</span><span class="p">,</span> <span class="s1">&#39;uefi&#39;</span><span class="p">],</span>
             <span class="s1">&#39;ppc&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ofw&#39;</span><span class="p">],</span>
             <span class="s1">&#39;ppc64&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ofw&#39;</span><span class="p">,</span> <span class="s1">&#39;opal&#39;</span><span class="p">],</span>
             <span class="s1">&#39;ppc64le&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ofw&#39;</span><span class="p">,</span> <span class="s1">&#39;opal&#39;</span><span class="p">],</span>
@@ -1864,6 +1865,7 @@
             <span class="s1">&#39;armv6l&#39;</span><span class="p">:</span> <span class="s1">&#39;efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;armv7hl&#39;</span><span class="p">:</span> <span class="s1">&#39;efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;armv7l&#39;</span><span class="p">:</span> <span class="s1">&#39;efi&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;armv8l&#39;</span><span class="p">:</span> <span class="s1">&#39;efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;riscv64&#39;</span><span class="p">:</span> <span class="s1">&#39;efi&#39;</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="n">arch</span> <span class="ow">in</span> <span class="n">default_firmware</span><span class="p">:</span>
@@ -1921,6 +1923,7 @@
             <span class="s1">&#39;armv5tel&#39;</span><span class="p">:</span> <span class="s1">&#39;arm-efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;armv6l&#39;</span><span class="p">:</span> <span class="s1">&#39;arm-efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;armv7l&#39;</span><span class="p">:</span> <span class="s1">&#39;arm-efi&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;armv8l&#39;</span><span class="p">:</span> <span class="s1">&#39;arm-efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;riscv64&#39;</span><span class="p">:</span> <span class="s1">&#39;riscv64-efi&#39;</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="n">arch</span> <span class="ow">in</span> <span class="n">default_module_directory_names</span><span class="p">:</span>
@@ -1956,6 +1959,7 @@
             <span class="s1">&#39;armv5tel&#39;</span><span class="p">:</span> <span class="s1">&#39;bootarm.efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;armv6l&#39;</span><span class="p">:</span> <span class="s1">&#39;bootarm.efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;armv7l&#39;</span><span class="p">:</span> <span class="s1">&#39;bootarm.efi&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;armv8l&#39;</span><span class="p">:</span> <span class="s1">&#39;bootarm.efi&#39;</span><span class="p">,</span>
             <span class="s1">&#39;riscv64&#39;</span><span class="p">:</span> <span class="s1">&#39;bootriscv64.efi&#39;</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="n">arch</span> <span class="ow">in</span> <span class="n">default_efi_image_names</span><span class="p">:</span>
