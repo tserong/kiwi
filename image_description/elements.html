@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Description Elements &mdash; KIWI NG 9.24.23 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.24.24 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -665,7 +665,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.24.23</p>
+and attributes of the KIWI NG XML document in version 9.24.24</p>
 </div>
 <section id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -1168,6 +1168,14 @@ size the squashfs read-only system needs. If the <code class="xref py py-obj doc
 element is set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">true</span></code> an eventually given <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;size&gt;</span></code> element
 will not have any effect because the write partition will be
 resized on first boot to the available disk space.</p>
+</dd>
+<dt>overlayroot_write_partition=”true|false”</dt><dd><p>For the <code class="xref py py-obj docutils literal notranslate"><span class="pre">oem</span></code> type only, allows to specify if the extra read-write
+partition in an <code class="xref py py-obj docutils literal notranslate"><span class="pre">overlayroot</span></code> setup should be created or not.
+By default the partition is created and the kiwi-overlay dracut
+module also expect it to be present. However, the overlayroot
+feature can also be used without dracut (<code class="xref py py-obj docutils literal notranslate"><span class="pre">initrd_system=&quot;none&quot;</span></code>)
+and under certain circumstances it is handy to configure if the
+partition table should contain the read-write partition or not.</p>
 </dd>
 <dt>bootfilesystem=”ext2|ext3|ext4|fat32|fat16”:</dt><dd><p>If an extra boot partition is required this attribute
 specify which filesystem should be used for it. The

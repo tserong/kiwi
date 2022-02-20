@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.system.setup &mdash; KIWI NG 9.24.23 documentation</title>
+  <title>kiwi.system.setup &mdash; KIWI NG 9.24.24 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -1256,6 +1256,14 @@
             <span class="n">defaults</span><span class="o">.</span><span class="n">POST_DISK_SYNC_SCRIPT</span>
         <span class="p">)</span></div>
 
+<div class="viewcode-block" id="SystemSetup.call_pre_disk_script"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.setup.SystemSetup.call_pre_disk_script">[docs]</a>    <span class="k">def</span> <span class="nf">call_pre_disk_script</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Call pre_disk_sync.sh script chrooted</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_call_script</span><span class="p">(</span>
+            <span class="n">defaults</span><span class="o">.</span><span class="n">PRE_DISK_SYNC_SCRIPT</span>
+        <span class="p">)</span></div>
+
 <div class="viewcode-block" id="SystemSetup.call_post_bootstrap_script"><a class="viewcode-back" href="../../../api/kiwi.system.html#kiwi.system.setup.SystemSetup.call_post_bootstrap_script">[docs]</a>    <span class="k">def</span> <span class="nf">call_post_bootstrap_script</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Call post_bootstrap.sh script chrooted</span>
@@ -1595,6 +1603,10 @@
             <span class="p">),</span>
             <span class="n">defaults</span><span class="o">.</span><span class="n">PRE_CREATE_SCRIPT</span><span class="p">:</span> <span class="n">script_type</span><span class="p">(</span>
                 <span class="n">filepath</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">PRE_CREATE_SCRIPT</span><span class="p">,</span>
+                <span class="n">raise_if_not_exists</span><span class="o">=</span><span class="kc">False</span>
+            <span class="p">),</span>
+            <span class="n">defaults</span><span class="o">.</span><span class="n">PRE_DISK_SYNC_SCRIPT</span><span class="p">:</span> <span class="n">script_type</span><span class="p">(</span>
+                <span class="n">filepath</span><span class="o">=</span><span class="n">defaults</span><span class="o">.</span><span class="n">PRE_DISK_SYNC_SCRIPT</span><span class="p">,</span>
                 <span class="n">raise_if_not_exists</span><span class="o">=</span><span class="kc">False</span>
             <span class="p">),</span>
             <span class="n">defaults</span><span class="o">.</span><span class="n">POST_DISK_SYNC_SCRIPT</span><span class="p">:</span> <span class="n">script_type</span><span class="p">(</span>

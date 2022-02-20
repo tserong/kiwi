@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.24.23 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.24.24 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -749,6 +749,8 @@
             <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_spare_part_mountpoint</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">persistency_type</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_devicepersistency</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_overlayroot</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_has_write_partition</span> <span class="o">=</span> \
+            <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_overlayroot_write_partition</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">custom_root_mount_args</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_fs_mount_option_list</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">custom_root_creation_args</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_fs_create_option_list</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_type_name</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_build_type_name</span><span class="p">()</span>
@@ -928,6 +930,12 @@
         <span class="c1"># create disk partitions and instance device map</span>
         <span class="n">device_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_and_map_disk_partitions</span><span class="p">(</span><span class="n">disk</span><span class="p">,</span> <span class="n">disksize_mbytes</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span> <span class="ow">and</span> \
+           <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_has_write_partition</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;root&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;readonly&#39;</span><span class="p">]</span>
+            <span class="n">disk</span><span class="o">.</span><span class="n">public_partition_id_map</span><span class="p">[</span><span class="s1">&#39;kiwi_RootPart&#39;</span><span class="p">]</span> <span class="o">=</span> \
+                <span class="n">disk</span><span class="o">.</span><span class="n">public_partition_id_map</span><span class="p">[</span><span class="s1">&#39;kiwi_ROPart&#39;</span><span class="p">]</span>
+
         <span class="c1"># create raid on current root device if requested</span>
         <span class="n">raid_root</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdraid</span><span class="p">:</span>
@@ -978,6 +986,9 @@
                 <span class="p">)</span>
             <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;luks_root&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;root&#39;</span><span class="p">]</span>
             <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;root&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">luks_root</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span> <span class="ow">and</span> \
+               <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_has_write_partition</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;readonly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;root&#39;</span><span class="p">]</span>
 
         <span class="c1"># create spare filesystem on spare partition if present</span>
         <span class="n">system_spare</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_spare_filesystem</span><span class="p">(</span><span class="n">device_map</span><span class="p">)</span>
@@ -1106,6 +1117,15 @@
 
         <span class="c1"># set SELinux file security contexts if context exists</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_setup_selinux_file_contexts</span><span class="p">()</span>
+
+        <span class="c1"># run pre sync script hook</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_setup</span><span class="o">.</span><span class="n">script_exists</span><span class="p">(</span>
+            <span class="n">defaults</span><span class="o">.</span><span class="n">PRE_DISK_SYNC_SCRIPT</span>
+        <span class="p">):</span>
+            <span class="n">disk_system</span> <span class="o">=</span> <span class="n">SystemSetup</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span>
+            <span class="p">)</span>
+            <span class="n">disk_system</span><span class="o">.</span><span class="n">call_pre_disk_script</span><span class="p">()</span>
 
         <span class="c1"># syncing system data to disk image</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sync_system_to_image</span><span class="p">(</span>
@@ -1483,17 +1503,21 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">rootfs_mbsize</span> <span class="o">=</span> <span class="s1">&#39;all_free&#39;</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager_name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager_name</span> <span class="o">==</span> <span class="s1">&#39;lvm&#39;</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; creating LVM root partition&#39;</span><span class="p">)</span>
-            <span class="n">disk</span><span class="o">.</span><span class="n">create_root_lvm_partition</span><span class="p">(</span><span class="n">rootfs_mbsize</span><span class="p">)</span>
-
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdraid</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; creating mdraid root partition&#39;</span><span class="p">)</span>
-            <span class="n">disk</span><span class="o">.</span><span class="n">create_root_raid_partition</span><span class="p">(</span><span class="n">rootfs_mbsize</span><span class="p">)</span>
-
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span> <span class="ow">and</span> \
+           <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_has_write_partition</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s1">&#39;--&gt; overlayroot explicitly requested no write partition&#39;</span>
+            <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; creating root partition&#39;</span><span class="p">)</span>
-            <span class="n">disk</span><span class="o">.</span><span class="n">create_root_partition</span><span class="p">(</span><span class="n">rootfs_mbsize</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager_name</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager_name</span> <span class="o">==</span> <span class="s1">&#39;lvm&#39;</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; creating LVM root partition&#39;</span><span class="p">)</span>
+                <span class="n">disk</span><span class="o">.</span><span class="n">create_root_lvm_partition</span><span class="p">(</span><span class="n">rootfs_mbsize</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdraid</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; creating mdraid root partition&#39;</span><span class="p">)</span>
+                <span class="n">disk</span><span class="o">.</span><span class="n">create_root_raid_partition</span><span class="p">(</span><span class="n">rootfs_mbsize</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; creating root partition&#39;</span><span class="p">)</span>
+                <span class="n">disk</span><span class="o">.</span><span class="n">create_root_partition</span><span class="p">(</span><span class="n">rootfs_mbsize</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spare_part_mbsize</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">spare_part_is_last</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; creating spare partition&#39;</span><span class="p">)</span>
