@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.package_manager.base &mdash; KIWI NG 9.24.24 documentation</title>
+  <title>kiwi.package_manager.base &mdash; KIWI NG 9.24.25 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -904,6 +904,20 @@
 <span class="sd">        :rtype: boolean</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="PackageManagerBase.get_error_details"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.base.PackageManagerBase.get_error_details">[docs]</a>    <span class="k">def</span> <span class="nf">get_error_details</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Provide further error details</span>
+
+<span class="sd">        In case the package manager call failed this</span>
+<span class="sd">        method will return package manager specific error</span>
+<span class="sd">        information if there is any</span>
+
+<span class="sd">        :return: further error data as str or empty str</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span></div>
 
 <div class="viewcode-block" id="PackageManagerBase.clean_leftovers"><a class="viewcode-back" href="../../../api/kiwi.package_manager.html#kiwi.package_manager.base.PackageManagerBase.clean_leftovers">[docs]</a>    <span class="k">def</span> <span class="nf">clean_leftovers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
