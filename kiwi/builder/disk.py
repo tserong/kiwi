@@ -1167,6 +1167,7 @@ class DiskBuilder:
                 partition_uuid = block_operation.get_blkid('PARTUUID')
                 verity_hash_offset = os.path.getsize(squashed_root_file.name)
                 verity_credentials = f'{self.root_dir}/boot/overlayroot.verity'
+                log.info('--> Creating dm verity hash...')
                 verity_call = Command.run(
                     [
                         'veritysetup', 'format',
@@ -1180,13 +1181,13 @@ class DiskBuilder:
                 with open(verity_credentials, 'w') as verity:
                     verity.write(verity_call.output.strip())
                     verity.write(os.linesep)
-                    verity.write(f'Target PARTUUID: {partition_uuid}')
+                    verity.write(f'PARTUUID: {partition_uuid}')
                     verity.write(os.linesep)
-                    verity.write(f'Hash Offset: {verity_hash_offset}')
+                    verity.write(f'Root hashoffset: {verity_hash_offset}')
                     verity.write(os.linesep)
-                    verity.write(
-                        f'Blocks(no-superblock): {defaults.VERITY_DATA_BLOCKS}'
-                    )
+                    verity.write(f'Data Blocks: {defaults.VERITY_DATA_BLOCKS}')
+                    verity.write(os.linesep)
+                    verity.write('Superblock: --no-superblock')
                     verity.write(os.linesep)
 
             readonly_target = device_map['readonly'].get_device()
@@ -1194,7 +1195,7 @@ class DiskBuilder:
                 readonly_target
             )
             log.info(
-                '--> Dumping rootfs file({0} bytes) -> to {1}({2} bytes)'.format(
+                '--> Dumping rootfs file({0} bytes) -> {1}({2} bytes)'.format(
                     os.path.getsize(squashed_root_file.name),
                     readonly_target, readonly_target_bytesize
                 )

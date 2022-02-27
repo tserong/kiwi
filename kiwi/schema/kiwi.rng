@@ -2240,15 +2240,16 @@ image type oem</a:documentation>
     </define>
     <define name="k.type.overlayroot_verity_setup.attribute">
       <attribute name="overlayroot_verity_setup">
-        <a:documentation>Specifies to create a dm verity hash placed at the end
+        <a:documentation>Specifies to create a dm verity hash, placed at the end
 of the squashfs compressed read-only root filesystem.
 The verification credentials information produced
 by veritysetup for later verification is stored as
-a file in /boot/overlayroot.verity. It is up to the
+a file in /boot/overlayroot.verity and NOT put into
+the image by default. It is in the responsibility of the
 author of the image description how to handle the
-credentials file. Without further action the file
-will be available in /boot of the image as described
-above.</a:documentation>
+credentials file. One option to handle the credentials
+data is as part of a disk.sh script which would allow
+to access and handle the information.</a:documentation>
         <data type="boolean"/>
       </attribute>
       <sch:pattern id="overlayroot_verity_setup" is-a="image_type">
