@@ -1537,6 +1537,21 @@ div {
             sch:param [ name = "attr" value = "overlayroot" ]
             sch:param [ name = "types" value = "oem" ]
         ]
+    k.type.overlayroot_verity_setup.attribute =
+        ## Specifies to create a dm verity hash placed at the end
+        ## of the squashfs compressed read-only root filesystem.
+        ## The verification credentials information produced
+        ## by veritysetup for later verification is stored as
+        ## a file in /boot/overlayroot.verity. It is up to the
+        ## author of the image description how to handle the
+        ## credentials file. Without further action the file
+        ## will be available in /boot of the image as described
+        ## above.
+        attribute overlayroot_verity_setup { xsd:boolean }
+        >> sch:pattern [ id = "overlayroot_verity_setup" is-a = "image_type"
+            sch:param [ name = "attr" value = "overlayroot_verity_setup" ]
+            sch:param [ name = "types" value = "oem" ]
+        ]
     k.type.overlayroot_write_partition.attribute =
         ## Specifies to create an extra read-write partition
         ## in combination with the overlayroot attribute on the
@@ -1968,6 +1983,7 @@ div {
         k.type.overlayroot.attribute? &
         k.type.overlayroot_write_partition.attribute? &
         k.type.overlayroot_readonly_partsize.attribute? &
+        k.type.overlayroot_verity_setup.attribute? &
         k.type.primary.attribute? &
         k.type.ramonly.attribute? &
         k.type.rootfs_label.attribute? &

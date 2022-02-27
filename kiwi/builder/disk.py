@@ -93,6 +93,8 @@ class DiskBuilder:
             xml_state.build_type.get_overlayroot_write_partition()
         self.root_filesystem_read_only_partsize = \
             xml_state.build_type.get_overlayroot_readonly_partsize()
+        self.root_filesystem_wants_overlay_with_verity = \
+            xml_state.build_type.get_overlayroot_verity_setup()
         self.custom_root_mount_args = xml_state.get_fs_mount_option_list()
         self.custom_root_creation_args = xml_state.get_fs_create_option_list()
         self.build_type_name = xml_state.get_build_type_name()
@@ -1160,6 +1162,33 @@ class DiskBuilder:
                 filename=squashed_root_file.name,
                 exclude=self._get_exclude_list_for_root_data_sync(device_map)
             )
+            if self.root_filesystem_wants_overlay_with_verity:
+                block_operation = BlockID(device_map['readonly'].get_device())
+                partition_uuid = block_operation.get_blkid('PARTUUID')
+                verity_hash_offset = os.path.getsize(squashed_root_file.name)
+                verity_credentials = f'{self.root_dir}/boot/overlayroot.verity'
+                verity_call = Command.run(
+                    [
+                        'veritysetup', 'format',
+                        squashed_root_file.name, squashed_root_file.name,
+                        '--no-superblock',
+                        f'--hash-offset={verity_hash_offset}',
+                        f'--data-blocks={defaults.VERITY_DATA_BLOCKS}',
+                        f'--salt={defaults.VERITY_SALT}'
+                    ]
+                )
+                with open(verity_credentials, 'w') as verity:
+                    verity.write(verity_call.output.strip())
+                    verity.write(os.linesep)
+                    verity.write(f'Target PARTUUID: {partition_uuid}')
+                    verity.write(os.linesep)
+                    verity.write(f'Hash Offset: {verity_hash_offset}')
+                    verity.write(os.linesep)
+                    verity.write(
+                        f'Blocks(no-superblock): {defaults.VERITY_DATA_BLOCKS}'
+                    )
+                    verity.write(os.linesep)
+
             readonly_target = device_map['readonly'].get_device()
             readonly_target_bytesize = device_map['readonly'].get_byte_size(
                 readonly_target

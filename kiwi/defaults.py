@@ -36,6 +36,8 @@ from kiwi.version import (
 from kiwi.exceptions import KiwiBootLoaderGrubDataError
 
 # Default module variables
+VERITY_DATA_BLOCKS = 10
+VERITY_SALT = 'fb074d1db5035d82bdb9f30a056961d8608c0a94635ab204734066dff18bc420'
 POST_DISK_SYNC_SCRIPT = 'disk.sh'
 PRE_DISK_SYNC_SCRIPT = 'pre_disk_sync.sh'
 POST_BOOTSTRAP_SCRIPT = 'post_bootstrap.sh'
