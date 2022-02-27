@@ -2244,12 +2244,12 @@ image type oem</a:documentation>
 of the squashfs compressed read-only root filesystem.
 The verification credentials information produced
 by veritysetup for later verification is stored as
-a file in /boot/overlayroot.verity and NOT put into
-the image by default. It is in the responsibility of the
+a file in /boot/overlayroot.verity and is put as such
+into the image by default. It is a responsibility of the
 author of the image description how to handle the
-credentials file. One option to handle the credentials
-data is as part of a disk.sh script which would allow
-to access and handle the information.</a:documentation>
+credentials file in the desired way. One option to handle
+the credentials data is as part of a disk.sh script which
+would allow to access and manage the information.</a:documentation>
         <data type="boolean"/>
       </attribute>
       <sch:pattern id="overlayroot_verity_setup" is-a="image_type">
