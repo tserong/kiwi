@@ -29,6 +29,8 @@ from kiwi.storage.disk import ptable_entry_type
 from kiwi.defaults import Defaults
 from kiwi.filesystem.base import FileSystemBase
 from kiwi.bootloader.config import BootLoaderConfig
+from kiwi.mount_manager import MountManager
+from kiwi.bootloader.config.base import BootLoaderConfigBase
 from kiwi.bootloader.install import BootLoaderInstall
 from kiwi.system.identifier import SystemIdentifier
 from kiwi.boot.image import BootImage
@@ -481,12 +483,56 @@ class DiskBuilder:
         if self.system_setup.script_exists(
             defaults.POST_DISK_SYNC_SCRIPT
         ):
-            disk_system = SystemSetup(
-                self.xml_state, system.get_mountpoint()
+            root_device = device_map['root'].get_device()
+            boot_device = root_device
+            efi_device = None
+            volumes = None
+            if 'boot' in device_map:
+                boot_device = device_map['boot'].get_device()
+            if 'readonly' in device_map:
+                root_device = device_map['readonly'].get_device()
+            if 'efi' in device_map:
+                efi_device = device_map['efi'].get_device()
+            if self.volume_manager_name:
+                volumes = system.get_volumes()
+            # the BootLoaderConfigBase class provides a method to
+            # mount the system because this is needed for installing
+            # loaders under certain conditions. To avoid code
+            # duplication we use the private _mount_system member
+            # from this class. From a coding perspective this can
+            # be done better and should be refactored
+            bootloader_base = BootLoaderConfigBase(
+                self.xml_state, root_dir=self.root_dir
             )
-            disk_system.import_description()
-            disk_system.call_disk_script()
-            disk_system.cleanup()
+            bootloader_base._mount_system(
+                root_device, boot_device, efi_device, volumes
+            )
+            # bind mount /image to get access to the scripts
+            image_mount = MountManager(
+                device=os.path.join(self.root_dir, 'image'),
+                mountpoint=os.path.join(
+                    bootloader_base.root_mount.mountpoint, 'image'
+                )
+            )
+            # make /var/tmp writable to allow more flexibility
+            # in the script code with regards to readonly rootfs
+            var_tmp_mount = MountManager(
+                device='tmpfs',
+                mountpoint=os.path.join(
+                    bootloader_base.root_mount.mountpoint, 'var', 'tmp'
+                )
+            )
+            image_mount.bind_mount()
+            var_tmp_mount.tmpfs_mount()
+            disk_system = SystemSetup(
+                self.xml_state, bootloader_base.root_mount.mountpoint
+            )
+            try:
+                disk_system.call_disk_script()
+            finally:
+                image_mount.umount()
+                var_tmp_mount.umount()
+                del bootloader_base
 
         # install boot loader
         self._install_bootloader(device_map, disk, system)
