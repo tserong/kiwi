@@ -25,12 +25,11 @@ from typing import (
 import kiwi.defaults as defaults
 
 from kiwi.utils.temporary import Temporary
+from kiwi.system.mount import ImageSystem
 from kiwi.storage.disk import ptable_entry_type
 from kiwi.defaults import Defaults
 from kiwi.filesystem.base import FileSystemBase
 from kiwi.bootloader.config import BootLoaderConfig
-from kiwi.mount_manager import MountManager
-from kiwi.bootloader.config.base import BootLoaderConfigBase
 from kiwi.bootloader.install import BootLoaderInstall
 from kiwi.system.identifier import SystemIdentifier
 from kiwi.boot.image import BootImage
@@ -382,23 +381,25 @@ class DiskBuilder:
             device_map['root'] = volume_manager.get_device().get('root')
             device_map['swap'] = volume_manager.get_device().get('swap')
         else:
-            log.info(
-                'Creating root(%s) filesystem on %s',
-                self.requested_filesystem, device_map['root'].get_device()
-            )
-            filesystem_custom_parameters = {
-                'mount_options': self.custom_root_mount_args,
-                'create_options': self.custom_root_creation_args
-            }
-            filesystem = FileSystem.new(
-                self.requested_filesystem, device_map['root'],
-                self.root_dir + '/',
-                filesystem_custom_parameters
-            )
-            filesystem.create_on_device(
-                label=self.disk_setup.get_root_label()
-            )
-            system = filesystem
+            if not self.root_filesystem_is_overlay or \
+               self.root_filesystem_has_write_partition is not False:
+                log.info(
+                    'Creating root(%s) filesystem on %s',
+                    self.requested_filesystem, device_map['root'].get_device()
+                )
+                filesystem_custom_parameters = {
+                    'mount_options': self.custom_root_mount_args,
+                    'create_options': self.custom_root_creation_args
+                }
+                filesystem = FileSystem.new(
+                    self.requested_filesystem, device_map['root'],
+                    self.root_dir + '/',
+                    filesystem_custom_parameters
+                )
+                filesystem.create_on_device(
+                    label=self.disk_setup.get_root_label()
+                )
+                system = filesystem
 
         # create swap on current root device if requested
         if self.swap_mbytes:
@@ -483,56 +484,18 @@ class DiskBuilder:
         if self.system_setup.script_exists(
             defaults.POST_DISK_SYNC_SCRIPT
         ):
-            root_device = device_map['root'].get_device()
-            boot_device = root_device
-            efi_device = None
-            volumes = None
-            if 'boot' in device_map:
-                boot_device = device_map['boot'].get_device()
-            if 'readonly' in device_map:
-                root_device = device_map['readonly'].get_device()
-            if 'efi' in device_map:
-                efi_device = device_map['efi'].get_device()
-            if self.volume_manager_name:
-                volumes = system.get_volumes()
-            # the BootLoaderConfigBase class provides a method to
-            # mount the system because this is needed for installing
-            # loaders under certain conditions. To avoid code
-            # duplication we use the private _mount_system member
-            # from this class. From a coding perspective this can
-            # be done better and should be refactored
-            bootloader_base = BootLoaderConfigBase(
-                self.xml_state, root_dir=self.root_dir
+            image_system = ImageSystem(
+                device_map, self.root_dir,
+                system.get_volumes() if self.volume_manager_name else {}
             )
-            bootloader_base._mount_system(
-                root_device, boot_device, efi_device, volumes
-            )
-            # bind mount /image to get access to the scripts
-            image_mount = MountManager(
-                device=os.path.join(self.root_dir, 'image'),
-                mountpoint=os.path.join(
-                    bootloader_base.root_mount.mountpoint, 'image'
-                )
-            )
-            # make /var/tmp writable to allow more flexibility
-            # in the script code with regards to readonly rootfs
-            var_tmp_mount = MountManager(
-                device='tmpfs',
-                mountpoint=os.path.join(
-                    bootloader_base.root_mount.mountpoint, 'var', 'tmp'
-                )
-            )
-            image_mount.bind_mount()
-            var_tmp_mount.tmpfs_mount()
+            image_system.mount()
             disk_system = SystemSetup(
-                self.xml_state, bootloader_base.root_mount.mountpoint
+                self.xml_state, image_system.mountpoint()
             )
             try:
                 disk_system.call_disk_script()
             finally:
-                image_mount.umount()
-                var_tmp_mount.umount()
-                del bootloader_base
+                image_system.umount()
 
         # install boot loader
         self._install_bootloader(device_map, disk, system)
@@ -1212,7 +1175,6 @@ class DiskBuilder:
                 block_operation = BlockID(device_map['readonly'].get_device())
                 partition_uuid = block_operation.get_blkid('PARTUUID')
                 verity_hash_offset = os.path.getsize(squashed_root_file.name)
-                verity_credentials = f'{self.root_dir}/boot/overlayroot.verity'
                 log.info('--> Creating dm verity hash...')
                 verity_call = Command.run(
                     [
@@ -1220,21 +1182,32 @@ class DiskBuilder:
                         squashed_root_file.name, squashed_root_file.name,
                         '--no-superblock',
                         f'--hash-offset={verity_hash_offset}',
-                        f'--data-blocks={defaults.VERITY_DATA_BLOCKS}',
-                        f'--salt={defaults.VERITY_SALT}'
+                        f'--data-blocks={defaults.VERITY_DATA_BLOCKS}'
                     ]
                 )
-                with open(verity_credentials, 'w') as verity:
-                    verity.write(verity_call.output.strip())
-                    verity.write(os.linesep)
-                    verity.write(f'PARTUUID: {partition_uuid}')
-                    verity.write(os.linesep)
-                    verity.write(f'Root hashoffset: {verity_hash_offset}')
-                    verity.write(os.linesep)
-                    verity.write(f'Data Blocks: {defaults.VERITY_DATA_BLOCKS}')
-                    verity.write(os.linesep)
-                    verity.write('Superblock: --no-superblock')
-                    verity.write(os.linesep)
+                if system_boot:
+                    verity_credentials = '{0}/overlayroot.verity'.format(
+                        system_boot.get_mountpoint()
+                    )
+                    with open(verity_credentials, 'w') as verity:
+                        verity.write(verity_call.output.strip())
+                        verity.write(os.linesep)
+                        verity.write(
+                            f'PARTUUID: {partition_uuid}')
+                        verity.write(os.linesep)
+                        verity.write(
+                            f'Root hashoffset: {verity_hash_offset}')
+                        verity.write(os.linesep)
+                        verity.write(
+                            f'Data Blocks: {defaults.VERITY_DATA_BLOCKS}'
+                        )
+                        verity.write(os.linesep)
+                        verity.write('Superblock: --no-superblock')
+                        verity.write(os.linesep)
+                else:
+                    log.warning(
+                        'No write space for veritysetup credentials available'
+                    )
 
             readonly_target = device_map['readonly'].get_device()
             readonly_target_bytesize = device_map['readonly'].get_byte_size(
