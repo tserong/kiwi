@@ -1167,9 +1167,12 @@ class DiskBuilder:
                         self.xml_state.build_type.get_squashfscompression()
                 }
             )
+            exclude_list = self._get_exclude_list_for_root_data_sync(device_map)
+            exclude_list.remove('image')
+            exclude_list.append('image/*')
             squashed_root.create_on_file(
                 filename=squashed_root_file.name,
-                exclude=self._get_exclude_list_for_root_data_sync(device_map)
+                exclude=exclude_list
             )
             if self.root_filesystem_wants_overlay_with_verity:
                 block_operation = BlockID(device_map['readonly'].get_device())

@@ -17,7 +17,9 @@
 #
 import os
 import logging
-from typing import Dict
+from typing import (
+    List, Dict
+)
 
 # project
 from kiwi.path import Path
@@ -45,7 +47,7 @@ class ImageSystem:
         self.device_map = device_map
         self.root_dir = root_dir
         self.volumes = volumes
-        self.mount_list = []
+        self.mount_list: List[MountManager] = []
 
     def mountpoint(self) -> str:
         """
@@ -100,7 +102,7 @@ class ImageSystem:
             efi_mount.mount()
 
         if self.volumes:
-            self._mount_volumes(self.root_mount.mountpoint)
+            self._mount_volumes(root_mount.mountpoint)
 
         # bind mount /image from unpacked root to get access to e.g scripts
         image_mount = MountManager(
