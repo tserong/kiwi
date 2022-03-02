@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.24.26 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.24.27 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -685,6 +685,7 @@
 <span class="kn">import</span> <span class="nn">kiwi.defaults</span> <span class="k">as</span> <span class="nn">defaults</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
+<span class="kn">from</span> <span class="nn">kiwi.system.mount</span> <span class="kn">import</span> <span class="n">ImageSystem</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.disk</span> <span class="kn">import</span> <span class="n">ptable_entry_type</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
 <span class="kn">from</span> <span class="nn">kiwi.filesystem.base</span> <span class="kn">import</span> <span class="n">FileSystemBase</span>
@@ -751,6 +752,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_overlayroot</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_has_write_partition</span> <span class="o">=</span> \
             <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_overlayroot_write_partition</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_read_only_partsize</span> <span class="o">=</span> \
+            <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_overlayroot_readonly_partsize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">custom_root_mount_args</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_fs_mount_option_list</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">custom_root_creation_args</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_fs_create_option_list</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_type_name</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_build_type_name</span><span class="p">()</span>
@@ -1036,23 +1039,25 @@
             <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;root&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume_manager</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;root&#39;</span><span class="p">)</span>
             <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;swap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">volume_manager</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;swap&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-                <span class="s1">&#39;Creating root(</span><span class="si">%s</span><span class="s1">) filesystem on </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">requested_filesystem</span><span class="p">,</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;root&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>
-            <span class="p">)</span>
-            <span class="n">filesystem_custom_parameters</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s1">&#39;mount_options&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_root_mount_args</span><span class="p">,</span>
-                <span class="s1">&#39;create_options&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_root_creation_args</span>
-            <span class="p">}</span>
-            <span class="n">filesystem</span> <span class="o">=</span> <span class="n">FileSystem</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">requested_filesystem</span><span class="p">,</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;root&#39;</span><span class="p">],</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
-                <span class="n">filesystem_custom_parameters</span>
-            <span class="p">)</span>
-            <span class="n">filesystem</span><span class="o">.</span><span class="n">create_on_device</span><span class="p">(</span>
-                <span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">disk_setup</span><span class="o">.</span><span class="n">get_root_label</span><span class="p">()</span>
-            <span class="p">)</span>
-            <span class="n">system</span> <span class="o">=</span> <span class="n">filesystem</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span> <span class="ow">or</span> \
+               <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_has_write_partition</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s1">&#39;Creating root(</span><span class="si">%s</span><span class="s1">) filesystem on </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">requested_filesystem</span><span class="p">,</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;root&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>
+                <span class="p">)</span>
+                <span class="n">filesystem_custom_parameters</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;mount_options&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_root_mount_args</span><span class="p">,</span>
+                    <span class="s1">&#39;create_options&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_root_creation_args</span>
+                <span class="p">}</span>
+                <span class="n">filesystem</span> <span class="o">=</span> <span class="n">FileSystem</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">requested_filesystem</span><span class="p">,</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;root&#39;</span><span class="p">],</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+                    <span class="n">filesystem_custom_parameters</span>
+                <span class="p">)</span>
+                <span class="n">filesystem</span><span class="o">.</span><span class="n">create_on_device</span><span class="p">(</span>
+                    <span class="n">label</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">disk_setup</span><span class="o">.</span><span class="n">get_root_label</span><span class="p">()</span>
+                <span class="p">)</span>
+                <span class="n">system</span> <span class="o">=</span> <span class="n">filesystem</span>
 
         <span class="c1"># create swap on current root device if requested</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">swap_mbytes</span><span class="p">:</span>
@@ -1137,12 +1142,18 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">system_setup</span><span class="o">.</span><span class="n">script_exists</span><span class="p">(</span>
             <span class="n">defaults</span><span class="o">.</span><span class="n">POST_DISK_SYNC_SCRIPT</span>
         <span class="p">):</span>
-            <span class="n">disk_system</span> <span class="o">=</span> <span class="n">SystemSetup</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="p">,</span> <span class="n">system</span><span class="o">.</span><span class="n">get_mountpoint</span><span class="p">()</span>
+            <span class="n">image_system</span> <span class="o">=</span> <span class="n">ImageSystem</span><span class="p">(</span>
+                <span class="n">device_map</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
+                <span class="n">system</span><span class="o">.</span><span class="n">get_volumes</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">volume_manager_name</span> <span class="k">else</span> <span class="p">{}</span>
             <span class="p">)</span>
-            <span class="n">disk_system</span><span class="o">.</span><span class="n">import_description</span><span class="p">()</span>
-            <span class="n">disk_system</span><span class="o">.</span><span class="n">call_disk_script</span><span class="p">()</span>
-            <span class="n">disk_system</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
+            <span class="n">image_system</span><span class="o">.</span><span class="n">mount</span><span class="p">()</span>
+            <span class="n">disk_system</span> <span class="o">=</span> <span class="n">SystemSetup</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="p">,</span> <span class="n">image_system</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">disk_system</span><span class="o">.</span><span class="n">call_disk_script</span><span class="p">()</span>
+            <span class="k">finally</span><span class="p">:</span>
+                <span class="n">image_system</span><span class="o">.</span><span class="n">umount</span><span class="p">()</span>
 
         <span class="c1"># install boot loader</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_install_bootloader</span><span class="p">(</span><span class="n">device_map</span><span class="p">,</span> <span class="n">disk</span><span class="p">,</span> <span class="n">system</span><span class="p">)</span>
@@ -1477,21 +1488,23 @@
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_is_overlay</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;--&gt; creating readonly root partition&#39;</span><span class="p">)</span>
-            <span class="n">squashed_root_file</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
-            <span class="n">squashed_root</span> <span class="o">=</span> <span class="n">FileSystemSquashFs</span><span class="p">(</span>
-                <span class="n">device_provider</span><span class="o">=</span><span class="n">DeviceProvider</span><span class="p">(),</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
-                <span class="n">custom_args</span><span class="o">=</span><span class="p">{</span>
-                    <span class="s1">&#39;compression&#39;</span><span class="p">:</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_squashfscompression</span><span class="p">()</span>
-                <span class="p">}</span>
-            <span class="p">)</span>
-            <span class="n">squashed_root</span><span class="o">.</span><span class="n">create_on_file</span><span class="p">(</span>
-                <span class="n">filename</span><span class="o">=</span><span class="n">squashed_root_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="n">Defaults</span><span class="o">.</span><span class="n">get_shared_cache_location</span><span class="p">()]</span>
-            <span class="p">)</span>
-            <span class="n">squashed_rootfs_mbsize</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">squashed_root_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1048576</span>
-            <span class="p">)</span> <span class="o">+</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_min_partition_mbytes</span><span class="p">()</span>
+            <span class="n">squashed_rootfs_mbsize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_read_only_partsize</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_read_only_partsize</span><span class="p">:</span>
+                <span class="n">squashed_root_file</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
+                <span class="n">squashed_root</span> <span class="o">=</span> <span class="n">FileSystemSquashFs</span><span class="p">(</span>
+                    <span class="n">device_provider</span><span class="o">=</span><span class="n">DeviceProvider</span><span class="p">(),</span> <span class="n">root_dir</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span>
+                    <span class="n">custom_args</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s1">&#39;compression&#39;</span><span class="p">:</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_squashfscompression</span><span class="p">()</span>
+                    <span class="p">}</span>
+                <span class="p">)</span>
+                <span class="n">squashed_root</span><span class="o">.</span><span class="n">create_on_file</span><span class="p">(</span>
+                    <span class="n">filename</span><span class="o">=</span><span class="n">squashed_root_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="n">Defaults</span><span class="o">.</span><span class="n">get_shared_cache_location</span><span class="p">()]</span>
+                <span class="p">)</span>
+                <span class="n">squashed_rootfs_mbsize</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">squashed_root_file</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1048576</span>
+                <span class="p">)</span> <span class="o">+</span> <span class="n">Defaults</span><span class="o">.</span><span class="n">get_min_partition_mbytes</span><span class="p">()</span>
             <span class="n">disk</span><span class="o">.</span><span class="n">create_root_readonly_partition</span><span class="p">(</span>
                 <span class="n">squashed_rootfs_mbsize</span>
             <span class="p">)</span>
@@ -1812,15 +1825,32 @@
                         <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_squashfscompression</span><span class="p">()</span>
                 <span class="p">}</span>
             <span class="p">)</span>
+            <span class="n">exclude_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_exclude_list_for_root_data_sync</span><span class="p">(</span><span class="n">device_map</span><span class="p">)</span>
+            <span class="c1"># To allow running custom scripts in a read-only root</span>
+            <span class="c1"># it&#39;s required to keep the /image mountpoint directory</span>
+            <span class="c1"># such that it can be bind mounted from the unpacked</span>
+            <span class="c1"># root tree</span>
+            <span class="n">exclude_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">)</span>
+            <span class="n">exclude_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;image/*&#39;</span><span class="p">)</span>
             <span class="n">squashed_root</span><span class="o">.</span><span class="n">create_on_file</span><span class="p">(</span>
                 <span class="n">filename</span><span class="o">=</span><span class="n">squashed_root_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                <span class="n">exclude</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_exclude_list_for_root_data_sync</span><span class="p">(</span><span class="n">device_map</span><span class="p">)</span>
+                <span class="n">exclude</span><span class="o">=</span><span class="n">exclude_list</span>
+            <span class="p">)</span>
+            <span class="n">readonly_target</span> <span class="o">=</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;readonly&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>
+            <span class="n">readonly_target_bytesize</span> <span class="o">=</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;readonly&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_byte_size</span><span class="p">(</span>
+                <span class="n">readonly_target</span>
+            <span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s1">&#39;--&gt; Dumping rootfs file(</span><span class="si">{0}</span><span class="s1"> bytes) -&gt; </span><span class="si">{1}</span><span class="s1">(</span><span class="si">{2}</span><span class="s1"> bytes)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="n">squashed_root_file</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+                    <span class="n">readonly_target</span><span class="p">,</span> <span class="n">readonly_target_bytesize</span>
+                <span class="p">)</span>
             <span class="p">)</span>
             <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
                 <span class="p">[</span>
                     <span class="s1">&#39;dd&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;if=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">squashed_root_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                    <span class="s1">&#39;of=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;readonly&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>
+                    <span class="s1">&#39;of=</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">readonly_target</span>
                 <span class="p">]</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>

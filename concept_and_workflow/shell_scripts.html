@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Defined Scripts &mdash; KIWI NG 9.24.26 documentation</title>
+  <title>User Defined Scripts &mdash; KIWI NG 9.24.27 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -709,7 +709,8 @@ The chroot environment for this script call is the virtual disk itself
 and not the root tree as with <code class="file docutils literal notranslate"><span class="pre">config.sh</span></code> and <code class="file docutils literal notranslate"><span class="pre">images.sh</span></code>.
 The script <code class="file docutils literal notranslate"><span class="pre">disk.sh</span></code> is usually used to apply changes at parts of
 the system that are not an element of the file based root tree such as
-the partition table, the bootloader or filesystem attributes.</p>
+the partition table, the contents of the final initrd, the bootloader,
+filesystem attributes and more.</p>
 </dd>
 </dl>
 <p>KIWI NG executes scripts via the operating system if their executable
