@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.24.27 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.24.28 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -685,6 +685,7 @@
 <span class="kn">import</span> <span class="nn">kiwi.defaults</span> <span class="k">as</span> <span class="nn">defaults</span>
 
 <span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
+<span class="kn">from</span> <span class="nn">kiwi.utils.veritysetup</span> <span class="kn">import</span> <span class="n">VeritySetup</span>
 <span class="kn">from</span> <span class="nn">kiwi.system.mount</span> <span class="kn">import</span> <span class="n">ImageSystem</span>
 <span class="kn">from</span> <span class="nn">kiwi.storage.disk</span> <span class="kn">import</span> <span class="n">ptable_entry_type</span>
 <span class="kn">from</span> <span class="nn">kiwi.defaults</span> <span class="kn">import</span> <span class="n">Defaults</span>
@@ -754,6 +755,8 @@
             <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_overlayroot_write_partition</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_read_only_partsize</span> <span class="o">=</span> \
             <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_overlayroot_readonly_partsize</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_verity_blocks</span> <span class="o">=</span> \
+            <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_overlayroot_verity_blocks</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">custom_root_mount_args</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_fs_mount_option_list</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">custom_root_creation_args</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_fs_create_option_list</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_type_name</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_build_type_name</span><span class="p">()</span>
@@ -1836,6 +1839,30 @@
                 <span class="n">filename</span><span class="o">=</span><span class="n">squashed_root_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
                 <span class="n">exclude</span><span class="o">=</span><span class="n">exclude_list</span>
             <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_verity_blocks</span><span class="p">:</span>
+                <span class="n">veritysetup</span> <span class="o">=</span> <span class="n">VeritySetup</span><span class="p">(</span>
+                    <span class="n">squashed_root_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_verity_blocks</span> <span class="k">if</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_verity_blocks</span> <span class="o">!=</span> <span class="s1">&#39;all&#39;</span> <span class="k">else</span> <span class="kc">None</span>
+                <span class="p">)</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s1">&#39;--&gt; Creating dm verity hash (</span><span class="si">{0}</span><span class="s1"> blocks)...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_verity_blocks</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">veritysetup</span><span class="o">.</span><span class="n">format</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">system_boot</span><span class="p">:</span>
+                    <span class="n">veritysetup</span><span class="o">.</span><span class="n">store_credentials</span><span class="p">(</span>
+                        <span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">/overlayroot.verity&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">system_boot</span><span class="o">.</span><span class="n">get_mountpoint</span><span class="p">()</span>
+                        <span class="p">),</span> <span class="n">BlockID</span><span class="p">(</span><span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;readonly&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">())</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="s1">&#39;No write space for veritysetup credentials available&#39;</span>
+                    <span class="p">)</span>
+
             <span class="n">readonly_target</span> <span class="o">=</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;readonly&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>
             <span class="n">readonly_target_bytesize</span> <span class="o">=</span> <span class="n">device_map</span><span class="p">[</span><span class="s1">&#39;readonly&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_byte_size</span><span class="p">(</span>
                 <span class="n">readonly_target</span>

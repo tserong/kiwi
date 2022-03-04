@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Description Elements &mdash; KIWI NG 9.24.27 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.24.28 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -665,7 +665,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.24.27</p>
+and attributes of the KIWI NG XML document in version 9.24.28</p>
 </div>
 <section id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -1168,6 +1168,47 @@ size the squashfs read-only system needs. If the <code class="xref py py-obj doc
 element is set to <code class="xref py py-obj docutils literal notranslate"><span class="pre">true</span></code> an eventually given <code class="xref py py-obj docutils literal notranslate"><span class="pre">&lt;size&gt;</span></code> element
 will not have any effect because the write partition will be
 resized on first boot to the available disk space.</p>
+</dd>
+<dt>overlayroot_verity_blocks=”number|all”</dt><dd><p>For the <code class="xref py py-obj docutils literal notranslate"><span class="pre">oem</span></code> type only, specifies to create a dm verity hash
+from the number of given blocks (or all) placed at the end of the squashfs
+compressed read-only root filesystem. For later verification of the device,
+the credentials information produced by <code class="xref py py-obj docutils literal notranslate"><span class="pre">veritysetup</span></code> from the
+cryptsetup tools, is created as a file in <code class="xref py py-obj docutils literal notranslate"><span class="pre">/boot/overlayroot.verity</span></code>
+and is stored as such into the image by default. The verification
+file contents looks like the following example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Hash type:         <span class="m">1</span>
+Data blocks:       <span class="m">10</span>
+Data block size:   <span class="m">4096</span>
+Hash block size:   <span class="m">4096</span>
+Hash algorithm:    sha256
+Salt:              -SECRET-
+Root hash:         -SECRET-
+PARTUUID:          56d4ec24-393b-4ef5-af6b-6a8e1130b2c6
+Root hashoffset:   <span class="m">226885632</span>
+Superblock:        --no-superblock
+</pre></div>
+</div>
+<p>For verification of the device using the above information the
+following <code class="xref py py-obj docutils literal notranslate"><span class="pre">veritysetup</span></code> call is required</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>veritysetup verify <span class="se">\</span>
+    /dev/matching<span class="o">[</span>PARTUUID<span class="o">]</span> /dev/matching<span class="o">[</span>PARTUUID<span class="o">]</span> <span class="se">\</span>
+    <span class="s2">&quot;Value of Root hash:&quot;</span> <span class="se">\</span>
+    --debug <span class="se">\</span>
+    --no-superblock <span class="se">\</span>
+    --salt<span class="o">=</span><span class="s2">&quot;Value of Salt:&quot;</span> <span class="se">\</span>
+    --data-blocks<span class="o">=</span><span class="s2">&quot;Value of Data Blocks:&quot;</span> <span class="se">\</span>
+    --hash-offset<span class="o">=</span><span class="s2">&quot;Value of Root hashoffset:&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is a responsibility of the author of the image description
+how to handle the credentials file in the desired way. The
+standard way of KIWI NG to place it in <code class="xref py py-obj docutils literal notranslate"><span class="pre">/boot</span></code> is most probably
+not appropriate. One option to handle the credentials data is
+as part of a <code class="xref py py-obj docutils literal notranslate"><span class="pre">disk.sh</span></code> script which would allow to access and
+manage the information in a custom way.</p>
+</div>
 </dd>
 <dt>overlayroot_write_partition=”true|false”</dt><dd><p>For the <code class="xref py py-obj docutils literal notranslate"><span class="pre">oem</span></code> type only, allows to specify if the extra read-write
 partition in an <code class="xref py py-obj docutils literal notranslate"><span class="pre">overlayroot</span></code> setup should be created or not.
