@@ -243,7 +243,10 @@ class DiskBuilder:
             self.boot_image.prepare()
 
         # precalculate needed disk size
-        disksize_mbytes = self.disk_setup.get_disksize_mbytes()
+        # TODO: parameters needs to be handled from XML
+        disksize_mbytes = self.disk_setup.get_disksize_mbytes(
+            root_clone=False, boot_clone=True
+        )
 
         # create the disk
         log.info('Creating raw disk image %s', self.diskname)
@@ -800,12 +803,18 @@ class DiskBuilder:
             disksize_used_mbytes += partition_mbsize
 
         if self.disk_setup.need_boot_partition():
-            log.info('--> creating boot partition')
+            # TODO
+            # paramters needs to be handled from XML
+            clone = True
+
+            log.info(f'--> creating boot partition (with clone={clone})')
             partition_mbsize = self.disk_setup.boot_partition_size()
             disk.create_boot_partition(
-                partition_mbsize
+                partition_mbsize, clone
             )
             disksize_used_mbytes += partition_mbsize
+            if clone:
+                disksize_used_mbytes += partition_mbsize
 
         if self.swap_mbytes:
             if not self.volume_manager_name or self.volume_manager_name != 'lvm':
@@ -851,6 +860,7 @@ class DiskBuilder:
             disk.create_root_readonly_partition(
                 squashed_rootfs_mbsize
             )
+            # TODO: create clone of read-only if root clone is configured
             disksize_used_mbytes += squashed_rootfs_mbsize
 
         if self.spare_part_mbsize and self.spare_part_is_last:
@@ -868,12 +878,15 @@ class DiskBuilder:
             if self.volume_manager_name and self.volume_manager_name == 'lvm':
                 log.info('--> creating LVM root partition')
                 disk.create_root_lvm_partition(rootfs_mbsize)
+                # TODO: create clone of root if root clone is configured
             elif self.mdraid:
                 log.info('--> creating mdraid root partition')
                 disk.create_root_raid_partition(rootfs_mbsize)
+                # TODO: create clone of root if root clone is configured
             else:
                 log.info('--> creating root partition')
                 disk.create_root_partition(rootfs_mbsize)
+                # TODO: create clone of root if root clone is configured
 
         if self.spare_part_mbsize and self.spare_part_is_last:
             log.info('--> creating spare partition')
@@ -1157,6 +1170,9 @@ class DiskBuilder:
             system_boot.sync_data(
                 self._get_exclude_list_for_boot_data_sync()
             )
+            if device_map.get('bootclone'):
+                log.info('--> Syncing boot clone data at extra partition')
+                # TODO: dd boot part to bootclone
 
         log.info('--> Syncing root filesystem data')
         if self.root_filesystem_is_overlay:
@@ -1220,10 +1236,16 @@ class DiskBuilder:
                     'of=%s' % readonly_target
                 ]
             )
+            if device_map.get('rootclone'):
+                log.info('--> Syncing root clone data at extra partition')
+                # TODO: dump this to root clone if configured
         else:
             system.sync_data(
                 self._get_exclude_list_for_root_data_sync(device_map)
             )
+            if device_map.get('rootclone'):
+                log.info('--> Syncing root clone data at extra partition')
+                # TODO: dump this to root clone if configured
 
     def _install_bootloader(
         self, device_map: Dict, disk, system: Any

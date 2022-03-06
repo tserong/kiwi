@@ -202,17 +202,22 @@ class Disk(DeviceProvider):
         self._add_to_map('readonly')
         self._add_to_public_id_map('kiwi_ROPart')
 
-    def create_boot_partition(self, mbsize: str):
+    def create_boot_partition(self, mbsize: str, clone: bool = False):
         """
         Create boot partition
 
-        Populates kiwi_BootPart(id)
+        Populates kiwi_BootPart(id) and optional kiwi_BootPartClone(id)
 
         :param str mbsize: partition size NumberString or 'all_free'
+        :param bool clone: create a copy(clone) of the boot partition
         """
         self.partitioner.create('p.lxboot', mbsize, 't.linux')
         self._add_to_map('boot')
         self._add_to_public_id_map('kiwi_BootPart')
+        if clone:
+            self.partitioner.create('p.lxbootclone', mbsize, 't.linux')
+            self._add_to_map('bootclone')
+            self._add_to_public_id_map('kiwi_BootPartClone')
 
     def create_prep_partition(self, mbsize: str):
         """
