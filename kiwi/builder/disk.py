@@ -1172,6 +1172,14 @@ class DiskBuilder:
             )
             if device_map.get('bootclone'):
                 log.info('--> Syncing boot clone data at extra partition')
+                Command.run(
+                    [
+                        'dd',
+                        'if={0}'.format(system_boot.device_provider.get_device()),
+                        'of={0}'.format(device_map.get('bootclone').get_device())
+                    ]
+                )
+                # print("{0} -> {1}".format(system_boot.device_provider.get_device(), device_map.get('bootclone').get_device()))
                 # TODO: dd boot part to bootclone
 
         log.info('--> Syncing root filesystem data')

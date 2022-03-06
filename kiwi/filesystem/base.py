@@ -106,6 +106,28 @@ class FileSystemBase:
         if not self.custom_args.get('fs_attributes'):
             self.custom_args['fs_attributes'] = []
 
+    def set_uuid(self):
+        """
+        Create new random filesystem UUID
+
+        Implement in specialized filesystem class for filesystems which
+        supports the concept of an UUID and allows to change it
+        """
+        # TODO
+        # tune2fs -U random /dev/sdb1
+
+        # xfs_admin -U generate /dev/sdb1
+
+        # btrfstune -U $(uuidgen) /dev/sdb1  / btrfstune -u /dev/sdaX
+
+        # swaplabel -U $NEW_UUID
+
+        # echo 'drive d: file="/dev/sdb3" exclusive' >>/etc/mtools.conf
+        # mlabel -n d:
+
+        # ntfslabel --new-half-serial /dev/sdXN
+        pass
+
     def create_on_device(self, label: str = None):
         """
         Create filesystem on block device
