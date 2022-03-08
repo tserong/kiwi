@@ -31,7 +31,7 @@ target_type = NamedTuple(
 )
 
 
-class BootLoaderSystemdSpecBase(BootLoaderConfigBase):
+class BootLoaderSpecBase(BootLoaderConfigBase):
     """
     **Base class for Bootloader Spec configuration**
 

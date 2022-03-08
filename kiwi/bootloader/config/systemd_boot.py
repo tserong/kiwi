@@ -16,10 +16,10 @@
 # along with kiwi.  If not, see <http://www.gnu.org/licenses/>
 #
 # project
-from kiwi.bootloader.config.systemd_spec_base import BootLoaderSystemdSpecBase
+from kiwi.bootloader.config.bootloader_spec_base import BootLoaderSpecBase
 
 
-class BootLoaderSystemdBoot(BootLoaderSystemdSpecBase):
+class BootLoaderSystemdBoot(BootLoaderSpecBase):
     def setup_loader(self, target: str) -> None:
         # TODO: implementation missing
         pass

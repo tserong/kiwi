@@ -6,10 +6,10 @@ from pytest import (
 from kiwi.defaults import Defaults
 from kiwi.xml_state import XMLState
 from kiwi.xml_description import XMLDescription
-from kiwi.bootloader.config.systemd_spec_base import BootLoaderSystemdSpecBase
+from kiwi.bootloader.config.bootloader_spec_base import BootLoaderSpecBase
 
 
-class TestBootLoaderSystemdSpecBase:
+class TestBootLoaderSpecBase:
     @fixture(autouse=True)
     def inject_fixtures(self, caplog):
         self._caplog = caplog
@@ -22,7 +22,7 @@ class TestBootLoaderSystemdSpecBase:
         self.state = XMLState(
             description.load()
         )
-        self.bootloader = BootLoaderSystemdSpecBase(
+        self.bootloader = BootLoaderSpecBase(
             self.state, 'root_dir'
         )
         self.custom_args = {
@@ -33,8 +33,8 @@ class TestBootLoaderSystemdSpecBase:
             'boot_options': 'options'
         }
 
-    @patch.object(BootLoaderSystemdSpecBase, 'setup_loader')
-    @patch.object(BootLoaderSystemdSpecBase, 'set_loader_entry')
+    @patch.object(BootLoaderSpecBase, 'setup_loader')
+    @patch.object(BootLoaderSpecBase, 'set_loader_entry')
     def test_setup_disk_image_config(
         self, mock_setup_loader, mock_set_loader_entry
     ):
@@ -46,8 +46,8 @@ class TestBootLoaderSystemdSpecBase:
         mock_setup_loader.assert_called_once_with('disk')
         mock_set_loader_entry.assert_called_once_with('disk')
 
-    @patch.object(BootLoaderSystemdSpecBase, 'setup_loader')
-    @patch.object(BootLoaderSystemdSpecBase, 'set_loader_entry')
+    @patch.object(BootLoaderSpecBase, 'setup_loader')
+    @patch.object(BootLoaderSpecBase, 'set_loader_entry')
     def test_setup_install_image_config(
         self, mock_setup_loader, mock_set_loader_entry
     ):
@@ -59,8 +59,8 @@ class TestBootLoaderSystemdSpecBase:
         mock_setup_loader.assert_called_once_with('install(iso)')
         mock_set_loader_entry.assert_called_once_with('install(iso)')
 
-    @patch.object(BootLoaderSystemdSpecBase, 'setup_loader')
-    @patch.object(BootLoaderSystemdSpecBase, 'set_loader_entry')
+    @patch.object(BootLoaderSpecBase, 'setup_loader')
+    @patch.object(BootLoaderSpecBase, 'set_loader_entry')
     def test_setup_live_image_config(
         self, mock_setup_loader, mock_set_loader_entry
     ):
@@ -72,21 +72,21 @@ class TestBootLoaderSystemdSpecBase:
         mock_setup_loader.assert_called_once_with('live(iso)')
         mock_set_loader_entry.assert_called_once_with('live(iso)')
 
-    @patch.object(BootLoaderSystemdSpecBase, 'create_loader_image')
+    @patch.object(BootLoaderSpecBase, 'create_loader_image')
     def test_setup_disk_boot_images(self, mock_create_loader_image):
         self.bootloader.setup_disk_boot_images('uuid')
         self.custom_args['mbrid'] = 'mbrid'
         assert self.bootloader.custom_args == self.custom_args
         mock_create_loader_image.assert_called_once_with('disk')
 
-    @patch.object(BootLoaderSystemdSpecBase, 'create_loader_image')
+    @patch.object(BootLoaderSpecBase, 'create_loader_image')
     def test_setup_install_boot_images(self, mock_create_loader_image):
         self.bootloader.setup_install_boot_images('mbrid')
         self.custom_args['mbrid'] = 'mbrid'
         assert self.bootloader.custom_args == self.custom_args
         mock_create_loader_image.assert_called_once_with('install(iso)')
 
-    @patch.object(BootLoaderSystemdSpecBase, 'create_loader_image')
+    @patch.object(BootLoaderSpecBase, 'create_loader_image')
     def test_setup_live_boot_images(self, mock_create_loader_image):
         self.bootloader.setup_live_boot_images('mbrid')
         self.custom_args['mbrid'] = 'mbrid'
