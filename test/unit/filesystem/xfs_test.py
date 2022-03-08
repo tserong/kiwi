@@ -28,3 +28,10 @@ class TestFileSystemXfs:
         call = mock_command.call_args_list[0]
         assert mock_command.call_args_list[0] == \
             call(['mkfs.xfs', '-f', '-L', 'label', '/dev/foo'])
+
+    @patch('kiwi.filesystem.xfs.Command.run')
+    def test_set_uuid(self, mock_command):
+        self.xfs.set_uuid()
+        mock_command.assert_called_once_with(
+            ['xfs_admin', '-U', 'generate', '/dev/foo']
+        )

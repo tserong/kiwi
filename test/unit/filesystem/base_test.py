@@ -1,5 +1,8 @@
+import logging
 from mock import patch
-from pytest import raises
+from pytest import (
+    raises, fixture
+)
 import mock
 
 from kiwi.filesystem.base import FileSystemBase
@@ -8,6 +11,10 @@ from kiwi.exceptions import KiwiFileSystemSyncError
 
 
 class TestFileSystemBase:
+    @fixture(autouse=True)
+    def inject_fixtures(self, caplog):
+        self._caplog = caplog
+
     def setup(self):
         provider = mock.Mock()
         provider.get_device = mock.Mock(
@@ -82,6 +89,10 @@ class TestFileSystemBase:
         self.fsbase.filesystem_mount = mount
         self.fsbase.umount()
         mount.umount.assert_called_once_with()
+
+    def test_set_uuid(self):
+        with self._caplog.at_level(logging.WARNING):
+            self.fsbase.set_uuid()
 
     def test_destructor_valid_mountpoint(self):
         self.fsbase.filesystem_mount = mock.Mock()

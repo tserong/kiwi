@@ -28,3 +28,10 @@ class TestFileSystemBtrfs:
         call = mock_command.call_args_list[0]
         assert mock_command.call_args_list[0] == \
             call(['mkfs.btrfs', '-L', 'label', '/dev/foo'])
+
+    @patch('kiwi.filesystem.btrfs.Command.run')
+    def test_set_uuid(self, mock_command):
+        self.btrfs.set_uuid()
+        mock_command.assert_called_once_with(
+            ['btrfstune', '-u', '/dev/foo']
+        )

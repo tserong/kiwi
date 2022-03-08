@@ -28,3 +28,10 @@ class TestFileSystemFat32:
         call = mock_command.call_args_list[0]
         assert mock_command.call_args_list[0] == \
             call(['mkdosfs', '-F32', '-I', '-n', 'label', '/dev/foo'])
+
+    @patch('kiwi.filesystem.fat32.Command.run')
+    def test_set_uuid(self, mock_command):
+        self.fat32.set_uuid()
+        mock_command.assert_called_once_with(
+            ['mlabel', '-n', '-i', '/dev/foo', '::']
+        )
