@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build a Docker Container Image &mdash; KIWI NG 9.24.28 documentation</title>
+  <title>Build a Container Image &mdash; KIWI NG 9.24.29 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -279,7 +279,7 @@
 <li class="toctree-l3"><a class="reference internal" href="build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Build a Docker Container Image</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Build a Container Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="build_wsl_container.html">Build a WSL Container Image</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="build_wsl_container.html#setup-of-the-wsl-distrolauncher">Setup of the WSL-DistroLauncher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="build_wsl_container.html#testing-the-wsl-image">Testing the WSL image</a></li>
@@ -650,9 +650,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../building_images.html">Building Images for Supported Types</a> &raquo;</li>
-      <li>Build a Docker Container Image</li>
+      <li>Build a Container Image</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/building_images/build_docker_container.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/building_images/build_container_image.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -660,60 +660,62 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="build-a-docker-container-image">
-<span id="building-docker-build"></span><h1>Build a Docker Container Image<a class="headerlink" href="#build-a-docker-container-image" title="Permalink to this headline">¶</a></h1>
+  <section id="build-a-container-image">
+<span id="building-container-build"></span><h1>Build a Container Image<a class="headerlink" href="#build-a-container-image" title="Permalink to this headline">¶</a></h1>
 <aside class="sidebar">
 <p class="sidebar-title">Abstract</p>
-<p>This page explains how to build a Docker base image. It contains</p>
+<p>This page explains how to build a Container Image. It contains</p>
 <ul class="simple">
 <li><p>basic configuration explanation</p></li>
-<li><p>how to build a Docker image</p></li>
-<li><p>how to run it with the Docker daemon</p></li>
+<li><p>how to build a Container Image</p></li>
+<li><p>how to run it with a Container Runtime</p></li>
 </ul>
 </aside>
-<p>KIWI NG is capable of building native Docker images, from scratch and derived
-ones. KIWI NG Docker images are considered to be native since the KIWI NG
-tarball image is ready to be loaded to a Docker daemon, including common
-container configurations.</p>
-<p>The Docker configuration metadata is provided to KIWI NG as part of the
+<p>KIWI NG is capable of building native Container Images from scratch and
+derived ones. KIWI NG Container images are considered to be native since the
+KIWI NG tarball image is ready to be loaded into a Container Runtime like
+Podman, Docker or Containerd, including common container configurations.</p>
+<p>The Container configuration metadata is provided to KIWI NG as part of the
 <a class="reference internal" href="../overview/workflow.html#description-components"><span class="std std-ref">XML description file</span></a> using the
 <code class="docutils literal notranslate"><span class="pre">&lt;containerconfig&gt;</span></code> tag. The following configuration metadata can be
 specified:</p>
 <p><code class="xref py py-obj docutils literal notranslate"><span class="pre">containerconfig</span></code> attributes:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: Specifies the repository name of the Docker
-image.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tag</span></code>: Sets the tag of the Docker image.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">maintainer</span></code>: Specifies the author field of
-the container.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code>: Specifies the repository name of the Container Image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tag</span></code>: Sets the tag of the Container Image.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maintainer</span></code>: Specifies the author field of the container, this is
+equivalent to the <code class="xref py py-obj docutils literal notranslate"><span class="pre">MAINTAINER</span></code> directive in a <code class="file docutils literal notranslate"><span class="pre">Dockerfile</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">user</span></code>: Sets the user name or user id (UID) to be used when
-running <code class="xref py py-obj docutils literal notranslate"><span class="pre">entrypoint</span></code> and
-<code class="xref py py-obj docutils literal notranslate"><span class="pre">subcommand</span></code>. Equivalent of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">USER</span></code> directive of a Docker file.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">workingdir</span></code>: Sets the working directory to be used when running <code class="xref py py-obj docutils literal notranslate"><span class="pre">cmd</span></code> and
-<code class="xref py py-obj docutils literal notranslate"><span class="pre">entrypoint</span></code>. Equivalent of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">WORKDIR</span></code> directive of a Docker file.</p></li>
+running <code class="xref py py-obj docutils literal notranslate"><span class="pre">entrypoint</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">subcommand</span></code>. Equivalent of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">USER</span></code>
+directive of a <code class="file docutils literal notranslate"><span class="pre">Dockerfile</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workingdir</span></code>: Sets the working directory to be used when running
+<code class="xref py py-obj docutils literal notranslate"><span class="pre">cmd</span></code> and <code class="xref py py-obj docutils literal notranslate"><span class="pre">entrypoint</span></code>. Equivalent of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">WORKDIR</span></code> directive in a
+<code class="file docutils literal notranslate"><span class="pre">Dockerfile</span></code>.</p></li>
 </ul>
 <p><code class="xref py py-obj docutils literal notranslate"><span class="pre">containerconfig</span></code> child tags:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">subcommand</span></code>: Provides the default execution parameters of the
-container. Equivalent of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">CMD</span></code> directive of a Docker file.</p></li>
+container. Equivalent of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">CMD</span></code> directive in a <code class="file docutils literal notranslate"><span class="pre">Dockerfile</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">labels</span></code>: Adds custom metadata to an image using key-value pairs.
-Equivalent to one or more <code class="xref py py-obj docutils literal notranslate"><span class="pre">LABEL</span></code> directives of a Docker file.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">expose</span></code>: Informs at which ports is the container listening at runtime.
-Equivalent to one or more <code class="xref py py-obj docutils literal notranslate"><span class="pre">EXPOSE</span></code> directives of a Docker file.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">environment</span></code>: Sets an environment values using key-value pairs.
-Equivalent to one or more the <code class="xref py py-obj docutils literal notranslate"><span class="pre">env</span></code> directives of a Docker file.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">entrypoint</span></code>: Sets the command that the container will run, it can
-include parameters. Equivalent of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> directive of a Docker
-file.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">volumes</span></code>: Create mountpoints with the given name and mark it to hold
+Equivalent to one or more <code class="xref py py-obj docutils literal notranslate"><span class="pre">LABEL</span></code> directives in a <code class="file docutils literal notranslate"><span class="pre">Dockerfile</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expose</span></code>: Define which ports can be exposed to the outside when
+running this container image.  Equivalent to one or more <code class="xref py py-obj docutils literal notranslate"><span class="pre">EXPOSE</span></code>
+directives in a <code class="file docutils literal notranslate"><span class="pre">Dockerfile</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">environment</span></code>: Sets environment variables using key-value pairs.
+Equivalent to one or multiple <code class="xref py py-obj docutils literal notranslate"><span class="pre">ENV</span></code> directives in a <code class="file docutils literal notranslate"><span class="pre">Dockerfile</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entrypoint</span></code>: Sets the binary via which all commands inside the
+container will be executed. Equivalent of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> directive
+in a <code class="file docutils literal notranslate"><span class="pre">Dockerfile</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">volumes</span></code>: Create mountpoints with the given name and mark them to hold
 external volumes from the host or from other containers. Equivalent to
-one or more <code class="xref py py-obj docutils literal notranslate"><span class="pre">VOLUME</span></code> directives of a Docker file.</p></li>
+one or more <code class="xref py py-obj docutils literal notranslate"><span class="pre">VOLUME</span></code> directives in a <code class="file docutils literal notranslate"><span class="pre">Dockerfile</span></code>.</p></li>
 </ul>
-<p>Other Docker file directives such as <code class="docutils literal notranslate"><span class="pre">RUN</span></code>, <code class="docutils literal notranslate"><span class="pre">COPY</span></code> or <code class="docutils literal notranslate"><span class="pre">ADD</span></code>, can be
-mapped to KIWI NG by using the <a class="reference internal" href="../overview/workflow.html#description-components"><span class="std std-ref">config.sh</span></a>
-script file to run bash commands or the
-<a class="reference internal" href="../overview/workflow.html#description-components"><span class="std std-ref">overlay tree</span></a> to include extra files.</p>
-<p>The following example shows how to build a Docker base image based on
+<p>Other <code class="file docutils literal notranslate"><span class="pre">Dockerfile</span></code> directives such as <code class="docutils literal notranslate"><span class="pre">RUN</span></code>, <code class="docutils literal notranslate"><span class="pre">COPY</span></code> or <code class="docutils literal notranslate"><span class="pre">ADD</span></code>,
+can be mapped to KIWI NG using the
+<a class="reference internal" href="../overview/workflow.html#description-components"><span class="std std-ref">config.sh</span></a> script file to run bash commands
+or the <a class="reference internal" href="../overview/workflow.html#description-components"><span class="std std-ref">overlay tree</span></a> to include
+additional files.</p>
+<p>The following example illustrates how to build a Container Image based on
 openSUSE Leap:</p>
 <ol class="arabic">
 <li><p>Make sure you have checked out the example image descriptions,
@@ -737,13 +739,13 @@ see <a class="reference internal" href="../installation.html#example-description
 </pre></div>
 </div>
 </li>
-<li><p>Test the Docker image.</p>
-<p>First load the new image</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ docker load -i kiwi-test-image-docker.x86_64-1.15.3.docker.tar.xz
+<li><p>Test the Container image.</p>
+<p>First load the new image into your Container Runtime:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ podman load -i kiwi-test-image-docker.x86_64-1.15.3.docker.tar.xz
 </pre></div>
 </div>
-<p>then run the loaded image:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ docker run -it buildsystem /bin/bash
+<p>and then run the image:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ podman run --rm -it buildsystem /bin/bash
 </pre></div>
 </div>
 </li>

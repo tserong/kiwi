@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.runtime_checker &mdash; KIWI NG 9.24.28 documentation</title>
+  <title>kiwi.runtime_checker &mdash; KIWI NG 9.24.29 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -276,7 +276,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../building_images/build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../building_images/build_container_image.html">Build a Container Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../building_images/build_wsl_container.html">Build a WSL Container Image</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../building_images/build_wsl_container.html#setup-of-the-wsl-distrolauncher">Setup of the WSL-DistroLauncher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../building_images/build_wsl_container.html#testing-the-wsl-image">Testing the WSL image</a></li>
@@ -1011,7 +1011,7 @@
 <span class="s1">            --help&#39;).</span><span class="se">\n</span><span class="s1"></span>
 <span class="s1">            It is known to be present since v0.1.30</span>
 <span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;additional_tags&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_container_config</span><span class="p">():</span>
+        <span class="k">if</span> <span class="s1">&#39;additional_names&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_container_config</span><span class="p">():</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">CommandCapabilities</span><span class="o">.</span><span class="n">has_option_in_help</span><span class="p">(</span>
                 <span class="s1">&#39;skopeo&#39;</span><span class="p">,</span> <span class="s1">&#39;--additional-tag&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;copy&#39;</span><span class="p">,</span> <span class="s1">&#39;--help&#39;</span><span class="p">],</span>
                 <span class="n">raise_on_error</span><span class="o">=</span><span class="kc">False</span>

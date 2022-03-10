@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.partitioner.base &mdash; KIWI NG 9.24.28 documentation</title>
+  <title>kiwi.partitioner.base &mdash; KIWI NG 9.24.29 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -276,7 +276,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_container_image.html">Build a Container Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_wsl_container.html">Build a WSL Container Image</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_wsl_container.html#setup-of-the-wsl-distrolauncher">Setup of the WSL-DistroLauncher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_wsl_container.html#testing-the-wsl-image">Testing the WSL image</a></li>
@@ -675,25 +675,44 @@
 <span class="c1"># You should have received a copy of the GNU General Public License</span>
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span>
+<span class="p">)</span>
+
+<span class="c1"># project</span>
+<span class="kn">from</span> <span class="nn">kiwi.storage.device_provider</span> <span class="kn">import</span> <span class="n">DeviceProvider</span>
 
 
 <div class="viewcode-block" id="PartitionerBase"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.base.PartitionerBase">[docs]</a><span class="k">class</span> <span class="nc">PartitionerBase</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Base class for partitioners**</span>
-
-<span class="sd">    :param object disk_provider: Instance of DeviceProvider</span>
-<span class="sd">    :param int start_sector: sector number</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">disk_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">disk_provider</span><span class="p">:</span> <span class="n">DeviceProvider</span><span class="p">,</span> <span class="n">start_sector</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">extended_layout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Base class constructor for partitioners</span>
+
+<span class="sd">        :param object disk_provider: Instance of DeviceProvider</span>
+<span class="sd">        :param int start_sector: sector number</span>
+<span class="sd">        :param bool extended_layout:</span>
+<span class="sd">            If set to true and on msdos table type when creating</span>
+<span class="sd">            more than 4 partitions, this will cause the fourth</span>
+<span class="sd">            partition to be an extended partition and all following</span>
+<span class="sd">            partitions will be placed as logical partitions inside</span>
+<span class="sd">            of that extended partition</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">disk_device</span> <span class="o">=</span> <span class="n">disk_provider</span><span class="o">.</span><span class="n">get_device</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">start_sector</span> <span class="o">=</span> <span class="n">start_sector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">extended_layout</span> <span class="o">=</span> <span class="n">extended_layout</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">flag_map</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flag_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">post_init</span><span class="p">()</span>
 
-<div class="viewcode-block" id="PartitionerBase.post_init"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.base.PartitionerBase.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerBase.post_init"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.base.PartitionerBase.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Post initialization method</span>
 
@@ -701,7 +720,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="PartitionerBase.get_id"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.base.PartitionerBase.get_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerBase.get_id"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.base.PartitionerBase.get_id">[docs]</a>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Current partition number</span>
 
@@ -713,7 +732,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span></div>
 
-<div class="viewcode-block" id="PartitionerBase.create"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.base.PartitionerBase.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="n">type_name</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerBase.create"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.base.PartitionerBase.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">type_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">flags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create partition</span>
 
@@ -726,7 +747,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="PartitionerBase.set_flag"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.base.PartitionerBase.set_flag">[docs]</a>    <span class="k">def</span> <span class="nf">set_flag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partition_id</span><span class="p">,</span> <span class="n">flag_name</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerBase.set_flag"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.base.PartitionerBase.set_flag">[docs]</a>    <span class="k">def</span> <span class="nf">set_flag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partition_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">flag_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set partition flag</span>
 
@@ -753,7 +774,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
-<div class="viewcode-block" id="PartitionerBase.resize_table"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.base.PartitionerBase.resize_table">[docs]</a>    <span class="k">def</span> <span class="nf">resize_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entries</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerBase.resize_table"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.base.PartitionerBase.resize_table">[docs]</a>    <span class="k">def</span> <span class="nf">resize_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entries</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Resize partition table</span>
 

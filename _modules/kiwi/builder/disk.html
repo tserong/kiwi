@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.builder.disk &mdash; KIWI NG 9.24.28 documentation</title>
+  <title>kiwi.builder.disk &mdash; KIWI NG 9.24.29 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -276,7 +276,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_container_image.html">Build a Container Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_wsl_container.html">Build a WSL Container Image</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_wsl_container.html#setup-of-the-wsl-distrolauncher">Setup of the WSL-DistroLauncher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_wsl_container.html#testing-the-wsl-image">Testing the WSL image</a></li>
@@ -757,6 +757,8 @@
             <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_overlayroot_readonly_partsize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root_filesystem_verity_blocks</span> <span class="o">=</span> \
             <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_overlayroot_verity_blocks</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dosparttable_extended_layout</span> <span class="o">=</span> \
+            <span class="n">xml_state</span><span class="o">.</span><span class="n">build_type</span><span class="o">.</span><span class="n">get_dosparttable_extended_layout</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">custom_root_mount_args</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_fs_mount_option_list</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">custom_root_creation_args</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_fs_create_option_list</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">build_type_name</span> <span class="o">=</span> <span class="n">xml_state</span><span class="o">.</span><span class="n">get_build_type_name</span><span class="p">()</span>
@@ -914,7 +916,8 @@
 
         <span class="n">disk</span> <span class="o">=</span> <span class="n">Disk</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="o">.</span><span class="n">get_partition_table_type</span><span class="p">(),</span> <span class="n">loop_provider</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_disk_start_sector</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">xml_state</span><span class="o">.</span><span class="n">get_disk_start_sector</span><span class="p">(),</span>
+            <span class="n">extended_layout</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dosparttable_extended_layout</span><span class="p">)</span>
         <span class="p">)</span>
 
         <span class="c1"># create the bootloader instance</span>
@@ -1337,7 +1340,8 @@
             <span class="n">exclude_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;boot/efi/.*&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
-                <span class="k">if</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="n">device_map</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="n">device_map</span> <span class="ow">and</span> \
+                   <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">:</span>
                     <span class="n">mountpoint</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">mountpoint</span>
                     <span class="p">)</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
@@ -1358,15 +1362,16 @@
             <span class="k">for</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">custom_partitions</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
                 <span class="k">if</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="n">device_map</span><span class="p">:</span>
                     <span class="n">ptable_entry</span> <span class="o">=</span> <span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span>
-                    <span class="n">filesystem</span> <span class="o">=</span> <span class="n">FileSystem</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-                        <span class="n">ptable_entry</span><span class="o">.</span><span class="n">filesystem</span><span class="p">,</span>
-                        <span class="n">device_map</span><span class="p">[</span><span class="n">map_name</span><span class="p">],</span>
-                        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="si">}{</span><span class="n">ptable_entry</span><span class="o">.</span><span class="n">mountpoint</span><span class="si">}</span><span class="s1">/&#39;</span>
-                    <span class="p">)</span>
-                    <span class="n">filesystem</span><span class="o">.</span><span class="n">create_on_device</span><span class="p">(</span>
-                        <span class="n">label</span><span class="o">=</span><span class="n">map_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-                    <span class="p">)</span>
-                    <span class="n">filesystem_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filesystem</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">ptable_entry</span><span class="o">.</span><span class="n">filesystem</span><span class="p">:</span>
+                        <span class="n">filesystem</span> <span class="o">=</span> <span class="n">FileSystem</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+                            <span class="n">ptable_entry</span><span class="o">.</span><span class="n">filesystem</span><span class="p">,</span>
+                            <span class="n">device_map</span><span class="p">[</span><span class="n">map_name</span><span class="p">],</span>
+                            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="si">}{</span><span class="n">ptable_entry</span><span class="o">.</span><span class="n">mountpoint</span><span class="si">}</span><span class="s1">/&#39;</span>
+                        <span class="p">)</span>
+                        <span class="n">filesystem</span><span class="o">.</span><span class="n">create_on_device</span><span class="p">(</span>
+                            <span class="n">label</span><span class="o">=</span><span class="n">map_name</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+                        <span class="p">)</span>
+                        <span class="n">filesystem_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filesystem</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">filesystem_list</span>
 
     <span class="k">def</span> <span class="nf">_build_spare_filesystem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_map</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">FileSystemBase</span><span class="p">]:</span>
@@ -1665,7 +1670,8 @@
             <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
-                <span class="k">if</span> <span class="n">device_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">map_name</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">device_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">map_name</span><span class="p">)</span> <span class="ow">and</span> \
+                   <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_add_fstab_entry</span><span class="p">(</span>
                         <span class="n">device_map</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">get_device</span><span class="p">(),</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">mountpoint</span>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.storage.setup &mdash; KIWI NG 9.24.28 documentation</title>
+  <title>kiwi.storage.setup &mdash; KIWI NG 9.24.29 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -276,7 +276,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_container_image.html">Build a Container Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_wsl_container.html">Build a WSL Container Image</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_wsl_container.html#setup-of-the-wsl-distrolauncher">Setup of the WSL-DistroLauncher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_wsl_container.html#testing-the-wsl-image">Testing the WSL image</a></li>
@@ -946,24 +946,25 @@
         <span class="n">data_partition_mbytes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_partition_mbytes</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
             <span class="n">partition_mount_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">mountpoint</span>
-            <span class="n">partition_mbsize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">mbsize</span>
-            <span class="n">disk_add_mbytes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">partition_mbsize</span><span class="p">)</span> <span class="o">-</span> \
-                <span class="n">data_partition_mbytes</span><span class="o">.</span><span class="n">partition</span><span class="p">[</span><span class="n">partition_mount_path</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">disk_add_mbytes</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">disk_partition_mbytes</span> <span class="o">+=</span> <span class="n">disk_add_mbytes</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">message</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span><span class="se">\n</span><span class="s1"></span>
-<span class="s1">                    Requested partition size </span><span class="si">{0}</span><span class="s1">MB for </span><span class="si">{1!r}</span><span class="s1"> is too small</span>
+            <span class="k">if</span> <span class="n">partition_mount_path</span><span class="p">:</span>
+                <span class="n">partition_mbsize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">mbsize</span>
+                <span class="n">disk_add_mbytes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">partition_mbsize</span><span class="p">)</span> <span class="o">-</span> \
+                    <span class="n">data_partition_mbytes</span><span class="o">.</span><span class="n">partition</span><span class="p">[</span><span class="n">partition_mount_path</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">disk_add_mbytes</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">disk_partition_mbytes</span> <span class="o">+=</span> <span class="n">disk_add_mbytes</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">message</span> <span class="o">=</span> <span class="n">dedent</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span><span class="se">\n</span><span class="s1"></span>
+<span class="s1">                        Requested partition size </span><span class="si">{0}</span><span class="s1">MB for </span><span class="si">{1!r}</span><span class="s1"> is too small</span>
 
-<span class="s1">                    The minimum byte value to store the data below</span>
-<span class="s1">                    the </span><span class="si">{1!r}</span><span class="s1"> path was calculated to be </span><span class="si">{2}</span><span class="s1">MB</span>
-<span class="s1">                &#39;&#39;&#39;</span><span class="p">)</span>
-                <span class="k">raise</span> <span class="n">KiwiPartitionTooSmallError</span><span class="p">(</span>
-                    <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="n">partition_mbsize</span><span class="p">,</span> <span class="n">partition_mount_path</span><span class="p">,</span>
-                        <span class="n">data_partition_mbytes</span><span class="o">.</span><span class="n">partition</span><span class="p">[</span><span class="n">partition_mount_path</span><span class="p">]</span>
+<span class="s1">                        The minimum byte value to store the data below</span>
+<span class="s1">                        the </span><span class="si">{1!r}</span><span class="s1"> path was calculated to be </span><span class="si">{2}</span><span class="s1">MB</span>
+<span class="s1">                    &#39;&#39;&#39;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="n">KiwiPartitionTooSmallError</span><span class="p">(</span>
+                        <span class="n">message</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                            <span class="n">partition_mbsize</span><span class="p">,</span> <span class="n">partition_mount_path</span><span class="p">,</span>
+                            <span class="n">data_partition_mbytes</span><span class="o">.</span><span class="n">partition</span><span class="p">[</span><span class="n">partition_mount_path</span><span class="p">]</span>
+                        <span class="p">)</span>
                     <span class="p">)</span>
-                <span class="p">)</span>
         <span class="k">return</span> <span class="n">disk_partition_mbytes</span>
 
     <span class="k">def</span> <span class="nf">_accumulate_volume_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root_mbytes</span><span class="p">):</span>
@@ -1087,18 +1088,19 @@
         <span class="n">partition_mbytes</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">map_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
             <span class="n">partition_mount_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">mountpoint</span>
-            <span class="n">partition_filesystem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">filesystem</span>
-            <span class="n">path_to_partition</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span>
-                <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">partition_mount_path</span><span class="p">])</span>
-            <span class="p">)</span>
-            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_to_partition</span><span class="p">):</span>
-                <span class="n">partition_size</span> <span class="o">=</span> <span class="n">SystemSize</span><span class="p">(</span><span class="n">path_to_partition</span><span class="p">)</span>
-                <span class="n">partition_mbytes</span><span class="p">[</span><span class="n">partition_mount_path</span><span class="p">]</span> <span class="o">=</span> <span class="n">partition_size</span><span class="o">.</span><span class="n">customize</span><span class="p">(</span>
-                    <span class="n">partition_size</span><span class="o">.</span><span class="n">accumulate_mbyte_file_sizes</span><span class="p">(),</span>
-                    <span class="n">partition_filesystem</span>
+            <span class="k">if</span> <span class="n">partition_mount_path</span><span class="p">:</span>
+                <span class="n">partition_filesystem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_partitions</span><span class="p">[</span><span class="n">map_name</span><span class="p">]</span><span class="o">.</span><span class="n">filesystem</span>
+                <span class="n">path_to_partition</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">root_dir</span><span class="p">,</span> <span class="n">partition_mount_path</span><span class="p">])</span>
                 <span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">partition_mbytes</span><span class="p">[</span><span class="n">partition_mount_path</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_to_partition</span><span class="p">):</span>
+                    <span class="n">partition_size</span> <span class="o">=</span> <span class="n">SystemSize</span><span class="p">(</span><span class="n">path_to_partition</span><span class="p">)</span>
+                    <span class="n">partition_mbytes</span><span class="p">[</span><span class="n">partition_mount_path</span><span class="p">]</span> <span class="o">=</span> <span class="n">partition_size</span><span class="o">.</span><span class="n">customize</span><span class="p">(</span>
+                        <span class="n">partition_size</span><span class="o">.</span><span class="n">accumulate_mbyte_file_sizes</span><span class="p">(),</span>
+                        <span class="n">partition_filesystem</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">partition_mbytes</span><span class="p">[</span><span class="n">partition_mount_path</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">return</span> <span class="n">partition_mbytes_type</span><span class="p">(</span>
             <span class="n">partition</span><span class="o">=</span><span class="n">partition_mbytes</span>
         <span class="p">)</span></div>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.partitioner.gpt &mdash; KIWI NG 9.24.28 documentation</title>
+  <title>kiwi.partitioner.gpt &mdash; KIWI NG 9.24.29 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -276,7 +276,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_container_image.html">Build a Container Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_wsl_container.html">Build a WSL Container Image</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_wsl_container.html#setup-of-the-wsl-distrolauncher">Setup of the WSL-DistroLauncher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_wsl_container.html#testing-the-wsl-image">Testing the WSL image</a></li>
@@ -676,6 +676,7 @@
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.command</span> <span class="kn">import</span> <span class="n">Command</span>
@@ -692,7 +693,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Implements GPT partition setup**</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="PartitionerGpt.post_init"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.gpt.PartitionerGpt.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerGpt.post_init"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.gpt.PartitionerGpt.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Post initialization method</span>
 
@@ -709,7 +710,9 @@
             <span class="s1">&#39;t.prep&#39;</span><span class="p">:</span> <span class="s1">&#39;4100&#39;</span>
         <span class="p">}</span></div>
 
-<div class="viewcode-block" id="PartitionerGpt.create"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.gpt.PartitionerGpt.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="n">type_name</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerGpt.create"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.gpt.PartitionerGpt.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">type_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">flags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create GPT partition</span>
 
@@ -744,7 +747,7 @@
             <span class="k">for</span> <span class="n">flag_name</span> <span class="ow">in</span> <span class="n">flags</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span> <span class="n">flag_name</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PartitionerGpt.set_flag"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.gpt.PartitionerGpt.set_flag">[docs]</a>    <span class="k">def</span> <span class="nf">set_flag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partition_id</span><span class="p">,</span> <span class="n">flag_name</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerGpt.set_flag"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.gpt.PartitionerGpt.set_flag">[docs]</a>    <span class="k">def</span> <span class="nf">set_flag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partition_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">flag_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set GPT partition flag</span>
 
@@ -759,14 +762,19 @@
             <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
                 <span class="p">[</span>
                     <span class="s1">&#39;sgdisk&#39;</span><span class="p">,</span> <span class="s1">&#39;-t&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">format</span><span class="p">(</span><span class="n">partition_id</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">flag_map</span><span class="p">[</span><span class="n">flag_name</span><span class="p">]]),</span>
+                    <span class="s1">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                        <span class="p">[</span>
+                            <span class="nb">format</span><span class="p">(</span><span class="n">partition_id</span><span class="p">),</span>
+                            <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flag_map</span><span class="p">[</span><span class="n">flag_name</span><span class="p">])</span>
+                        <span class="p">]</span>
+                    <span class="p">),</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">disk_device</span>
                 <span class="p">]</span>
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Flag </span><span class="si">%s</span><span class="s1"> ignored on GPT&#39;</span><span class="p">,</span> <span class="n">flag_name</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PartitionerGpt.set_hybrid_mbr"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.gpt.PartitionerGpt.set_hybrid_mbr">[docs]</a>    <span class="k">def</span> <span class="nf">set_hybrid_mbr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerGpt.set_hybrid_mbr"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.gpt.PartitionerGpt.set_hybrid_mbr">[docs]</a>    <span class="k">def</span> <span class="nf">set_hybrid_mbr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Turn partition table into hybrid GPT/MBR table</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -790,7 +798,7 @@
             <span class="p">[</span><span class="s1">&#39;sgdisk&#39;</span><span class="p">,</span> <span class="s1">&#39;-h&#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">partition_ids</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">disk_device</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="PartitionerGpt.set_mbr"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.gpt.PartitionerGpt.set_mbr">[docs]</a>    <span class="k">def</span> <span class="nf">set_mbr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerGpt.set_mbr"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.gpt.PartitionerGpt.set_mbr">[docs]</a>    <span class="k">def</span> <span class="nf">set_mbr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Turn partition table into MBR (msdos table)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -810,7 +818,7 @@
             <span class="p">[</span><span class="s1">&#39;sgdisk&#39;</span><span class="p">,</span> <span class="s1">&#39;-m&#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">partition_ids</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">disk_device</span><span class="p">]</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="PartitionerGpt.resize_table"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.gpt.PartitionerGpt.resize_table">[docs]</a>    <span class="k">def</span> <span class="nf">resize_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entries</span><span class="o">=</span><span class="mi">128</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerGpt.resize_table"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.gpt.PartitionerGpt.resize_table">[docs]</a>    <span class="k">def</span> <span class="nf">resize_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entries</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">128</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Resize partition table</span>
 

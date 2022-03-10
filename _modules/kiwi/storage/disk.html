@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.storage.disk &mdash; KIWI NG 9.24.28 documentation</title>
+  <title>kiwi.storage.disk &mdash; KIWI NG 9.24.29 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -276,7 +276,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_container_image.html">Build a Container Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_wsl_container.html">Build a WSL Container Image</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_wsl_container.html#setup-of-the-wsl-distrolauncher">Setup of the WSL-DistroLauncher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_wsl_container.html#testing-the-wsl-image">Testing the WSL image</a></li>
@@ -705,15 +705,25 @@
 <div class="viewcode-block" id="Disk"><a class="viewcode-back" href="../../../api/kiwi.storage.html#kiwi.storage.disk.Disk">[docs]</a><span class="k">class</span> <span class="nc">Disk</span><span class="p">(</span><span class="n">DeviceProvider</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Implements storage disk and partition table setup**</span>
-
-<span class="sd">    :param string table_type: Partition table type name</span>
-<span class="sd">    :param object storage_provider: Instance of class based on DeviceProvider</span>
-<span class="sd">    :param int start_sector: sector number</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">table_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">storage_provider</span><span class="p">:</span> <span class="n">DeviceProvider</span><span class="p">,</span>
-        <span class="n">start_sector</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">start_sector</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">extended_layout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construct a new Disk layout object</span>
+
+<span class="sd">        :param string table_type: Partition table type name</span>
+<span class="sd">        :param object storage_provider:</span>
+<span class="sd">            Instance of class based on DeviceProvider</span>
+<span class="sd">        :param int start_sector: sector number</span>
+<span class="sd">        :param bool extended_layout:</span>
+<span class="sd">            If set to true and on msdos table type when creating</span>
+<span class="sd">            more than 4 partitions, this will cause the fourth</span>
+<span class="sd">            partition to be an extended partition and all following</span>
+<span class="sd">            partitions will be placed as logical partitions inside</span>
+<span class="sd">            of that extended partition</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># bind the underlaying block device providing class instance</span>
         <span class="c1"># to this object (e.g loop) if present. This is done to guarantee</span>
         <span class="c1"># the correct destructor order when the device should be released.</span>
@@ -740,7 +750,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">is_mapped</span> <span class="o">=</span> <span class="kc">False</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">partitioner</span> <span class="o">=</span> <span class="n">Partitioner</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-            <span class="n">table_type</span><span class="p">,</span> <span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span>
+            <span class="n">table_type</span><span class="p">,</span> <span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="p">,</span> <span class="n">extended_layout</span>
         <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">table_type</span> <span class="o">=</span> <span class="n">table_type</span>
@@ -1059,6 +1069,9 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">device_node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">partition_map</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
                     <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="s1">&#39;dmsetup&#39;</span><span class="p">,</span> <span class="s1">&#39;remove&#39;</span><span class="p">,</span> <span class="n">device_node</span><span class="p">])</span>
+                <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                    <span class="p">[</span><span class="s1">&#39;kpartx&#39;</span><span class="p">,</span> <span class="s1">&#39;-d&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage_provider</span><span class="o">.</span><span class="n">get_device</span><span class="p">()]</span>
+                <span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
                     <span class="s1">&#39;cleanup of partition device maps failed, </span><span class="si">%s</span><span class="s1"> still busy&#39;</span><span class="p">,</span>

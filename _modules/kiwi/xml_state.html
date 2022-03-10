@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.xml_state &mdash; KIWI NG 9.24.28 documentation</title>
+  <title>kiwi.xml_state &mdash; KIWI NG 9.24.29 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -276,7 +276,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../building_images/build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../building_images/build_container_image.html">Build a Container Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../building_images/build_wsl_container.html">Build a WSL Container Image</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../building_images/build_wsl_container.html#setup-of-the-wsl-distrolauncher">Setup of the WSL-DistroLauncher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../building_images/build_wsl_container.html#testing-the-wsl-image">Testing the WSL image</a></li>
@@ -3027,15 +3027,15 @@
             <span class="n">maintainer</span> <span class="o">=</span> <span class="n">container_config_section</span><span class="o">.</span><span class="n">get_maintainer</span><span class="p">()</span>
             <span class="n">user</span> <span class="o">=</span> <span class="n">container_config_section</span><span class="o">.</span><span class="n">get_user</span><span class="p">()</span>
             <span class="n">workingdir</span> <span class="o">=</span> <span class="n">container_config_section</span><span class="o">.</span><span class="n">get_workingdir</span><span class="p">()</span>
-            <span class="n">additional_tags</span> <span class="o">=</span> <span class="n">container_config_section</span><span class="o">.</span><span class="n">get_additionaltags</span><span class="p">()</span>
+            <span class="n">additional_names</span> <span class="o">=</span> <span class="n">container_config_section</span><span class="o">.</span><span class="n">get_additionalnames</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
                 <span class="n">container_base</span><span class="p">[</span><span class="s1">&#39;container_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
 
             <span class="k">if</span> <span class="n">tag</span><span class="p">:</span>
                 <span class="n">container_base</span><span class="p">[</span><span class="s1">&#39;container_tag&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tag</span>
 
-            <span class="k">if</span> <span class="n">additional_tags</span><span class="p">:</span>
-                <span class="n">container_base</span><span class="p">[</span><span class="s1">&#39;additional_tags&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">additional_tags</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">additional_names</span><span class="p">:</span>
+                <span class="n">container_base</span><span class="p">[</span><span class="s1">&#39;additional_names&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">additional_names</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">maintainer</span><span class="p">:</span>
                 <span class="n">container_base</span><span class="p">[</span><span class="s1">&#39;maintainer&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">maintainer</span>

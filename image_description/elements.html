@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Image Description Elements &mdash; KIWI NG 9.24.28 documentation</title>
+  <title>Image Description Elements &mdash; KIWI NG 9.24.29 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -279,7 +279,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../building_images/build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../building_images/build_container_image.html">Build a Container Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../building_images/build_wsl_container.html">Build a WSL Container Image</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../building_images/build_wsl_container.html#setup-of-the-wsl-distrolauncher">Setup of the WSL-DistroLauncher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../building_images/build_wsl_container.html#testing-the-wsl-image">Testing the WSL image</a></li>
@@ -665,7 +665,7 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document provides a reference for the elements
-and attributes of the KIWI NG XML document in version 9.24.28</p>
+and attributes of the KIWI NG XML document in version 9.24.29</p>
 </div>
 <section id="image">
 <span id="sec-image"></span><h2>&lt;image&gt;<a class="headerlink" href="#image" title="Permalink to this headline">¶</a></h2>
@@ -1015,6 +1015,14 @@ size is set to 20 MB</p>
 <dt>efiparttable=”msdos|gpt”:</dt><dd><p>For images with an EFI firmware specifies the partition
 table type to use. If not set defaults to the GPT partition
 table type</p>
+</dd>
+<dt>dosparttable_extended_layout=”true|false”:</dt><dd><p>For oem disk images, specifies to make use of logical partitions
+inside of an extended one. If set to true and if the msdos table type
+is active, this will cause the fourth partition to be an
+extended partition and all following partitions will be
+placed as logical partitions inside of that extended
+partition. This setting is useful if more than 4 primary
+partitions needs to be created in an msdos table</p>
 </dd>
 <dt>btrfs_quota_groups=”true|false”:</dt><dd><p>Boolean parameter to activate filesystem quotas if
 the filesystem is <code class="xref py py-obj docutils literal notranslate"><span class="pre">btrfs</span></code>. By default quotas are inactive.</p>
@@ -1464,7 +1472,7 @@ zipl loader only.</p>
 <section id="preferences-type-containerconfig">
 <h3>&lt;preferences&gt;&lt;type&gt;&lt;containerconfig&gt;<a class="headerlink" href="#preferences-type-containerconfig" title="Permalink to this headline">¶</a></h3>
 <p>Used to describe the container configuration metadata in docker or wsl
-image types. For details see: <a class="reference internal" href="../building_images/build_docker_container.html#building-docker-build"><span class="std std-ref">Build a Docker Container Image</span></a> and:
+image types. For details see: <a class="reference internal" href="../building_images/build_container_image.html#building-container-build"><span class="std std-ref">Build a Container Image</span></a> and:
 <a class="reference internal" href="../building_images/build_wsl_container.html#building-wsl-build"><span class="std std-ref">Build a WSL Container Image</span></a></p>
 </section>
 <section id="preferences-type-vagrantconfig">

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.partitioner.msdos &mdash; KIWI NG 9.24.28 documentation</title>
+  <title>kiwi.partitioner.msdos &mdash; KIWI NG 9.24.29 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
@@ -276,7 +276,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_container_image.html">Build a Container Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../building_images/build_wsl_container.html">Build a WSL Container Image</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_wsl_container.html#setup-of-the-wsl-distrolauncher">Setup of the WSL-DistroLauncher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../building_images/build_wsl_container.html#testing-the-wsl-image">Testing the WSL image</a></li>
@@ -676,6 +676,7 @@
 <span class="c1"># along with kiwi.  If not, see &lt;http://www.gnu.org/licenses/&gt;</span>
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 <span class="c1"># project</span>
 <span class="kn">from</span> <span class="nn">kiwi.utils.temporary</span> <span class="kn">import</span> <span class="n">Temporary</span>
@@ -693,7 +694,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    **Implement old style msdos partition setup**</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="PartitionerMsDos.post_init"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.msdos.PartitionerMsDos.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerMsDos.post_init"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.msdos.PartitionerMsDos.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Post initialization method</span>
 
@@ -707,10 +708,13 @@
             <span class="s1">&#39;t.raid&#39;</span><span class="p">:</span> <span class="s1">&#39;fd&#39;</span><span class="p">,</span>
             <span class="s1">&#39;t.efi&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
             <span class="s1">&#39;t.csm&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s1">&#39;t.prep&#39;</span><span class="p">:</span> <span class="s1">&#39;41&#39;</span>
+            <span class="s1">&#39;t.prep&#39;</span><span class="p">:</span> <span class="s1">&#39;41&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;t.extended&#39;</span><span class="p">:</span> <span class="s1">&#39;5&#39;</span>
         <span class="p">}</span></div>
 
-<div class="viewcode-block" id="PartitionerMsDos.create"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.msdos.PartitionerMsDos.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="n">type_name</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerMsDos.create"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.msdos.PartitionerMsDos.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">type_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">flags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create msdos partition</span>
 
@@ -719,45 +723,21 @@
 <span class="sd">        :param string type_name: partition type</span>
 <span class="sd">        :param list flags: additional flags</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">fdisk_input</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="c1"># Undefined start sector value skips this for fdisk and</span>
-            <span class="c1"># use its default value</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">start_sector</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fdisk_input</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">partition</span><span class="p">:</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-                <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: fdisk: n p </span><span class="si">%d</span><span class="s1"> cur_position +</span><span class="si">%s</span><span class="s1">M w q&#39;</span><span class="p">,</span>
-                <span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">mbsize</span><span class="p">)</span>
-            <span class="p">)</span>
-            <span class="n">partition</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
-                <span class="s1">&#39;n</span><span class="se">\n</span><span class="s1">p</span><span class="se">\n</span><span class="si">{0}</span><span class="se">\n</span><span class="si">{1}</span><span class="se">\n</span><span class="si">{2}</span><span class="se">\n</span><span class="s1">w</span><span class="se">\n</span><span class="s1">q</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span>
-                    <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_sector</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_sector</span><span class="p">,</span>
-                    <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">mbsize</span> <span class="o">==</span> <span class="s1">&#39;all_free&#39;</span> <span class="k">else</span> <span class="s1">&#39;+</span><span class="si">{0}</span><span class="s1">M&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mbsize</span><span class="p">)</span>
-                <span class="p">)</span>
-            <span class="p">)</span>
-        <span class="n">bash_command</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-            <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">fdisk_input</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;fdisk&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">disk_device</span><span class="p">]</span>
-        <span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-                <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="n">bash_command</span><span class="p">]</span>
-            <span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="c1"># unfortunately fdisk reports that it can&#39;t read in the partition</span>
-            <span class="c1"># table which I consider a bug in fdisk. However the table was</span>
-            <span class="c1"># correctly created and therefore we continue. Problem is that we</span>
-            <span class="c1"># are not able to detect real errors with the fdisk operation at</span>
-            <span class="c1"># that point.</span>
-            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;potential fdisk errors were ignored&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">extended_layout</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="c1"># in primary boundary</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_create_primary</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="n">type_name</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="c1"># at primary boundary, create extended + logical</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_create_extended</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_create_logical</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="n">type_name</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="c1"># in logical boundary</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_create_logical</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="n">type_name</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_create_primary</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">,</span> <span class="n">type_name</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span></div>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span> <span class="n">type_name</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">flags</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">flag_name</span> <span class="ow">in</span> <span class="n">flags</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span> <span class="n">flag_name</span><span class="p">)</span></div>
-
-<div class="viewcode-block" id="PartitionerMsDos.set_flag"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.msdos.PartitionerMsDos.set_flag">[docs]</a>    <span class="k">def</span> <span class="nf">set_flag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partition_id</span><span class="p">,</span> <span class="n">flag_name</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerMsDos.set_flag"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.msdos.PartitionerMsDos.set_flag">[docs]</a>    <span class="k">def</span> <span class="nf">set_flag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partition_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">flag_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set msdos partition flag</span>
 
@@ -786,7 +766,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Flag </span><span class="si">%s</span><span class="s1"> ignored on msdos&#39;</span><span class="p">,</span> <span class="n">flag_name</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PartitionerMsDos.resize_table"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.msdos.PartitionerMsDos.resize_table">[docs]</a>    <span class="k">def</span> <span class="nf">resize_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entries</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PartitionerMsDos.resize_table"><a class="viewcode-back" href="../../../api/kiwi.partitioner.html#kiwi.partitioner.msdos.PartitionerMsDos.resize_table">[docs]</a>    <span class="k">def</span> <span class="nf">resize_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entries</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Resize partition table</span>
 
@@ -794,7 +774,97 @@
 
 <span class="sd">        :param int entries: unused</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div></div>
+        <span class="k">pass</span></div>
+
+    <span class="k">def</span> <span class="nf">_create_primary</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">type_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">flags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create primary msdos partition</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">fdisk_input</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># Undefined start sector value skips this for fdisk and</span>
+            <span class="c1"># use its default value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_sector</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fdisk_input</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">partition</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: fdisk: n p </span><span class="si">%d</span><span class="s1"> cur_position +</span><span class="si">%s</span><span class="s1">M w q&#39;</span><span class="p">,</span>
+                <span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">mbsize</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">partition</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                <span class="s1">&#39;n</span><span class="se">\n</span><span class="s1">p</span><span class="se">\n</span><span class="si">{0}</span><span class="se">\n</span><span class="si">{1}</span><span class="se">\n</span><span class="si">{2}</span><span class="se">\n</span><span class="s1">w</span><span class="se">\n</span><span class="s1">q</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span>
+                    <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_sector</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_sector</span><span class="p">,</span>
+                    <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">mbsize</span> <span class="o">==</span> <span class="s1">&#39;all_free&#39;</span> <span class="k">else</span> <span class="s1">&#39;+</span><span class="si">{0}</span><span class="s1">M&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mbsize</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_call_fdisk</span><span class="p">(</span><span class="n">fdisk_input</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_all_flags</span><span class="p">(</span><span class="n">type_name</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_extended</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create extended msdos partition</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">fdisk_input</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fdisk_input</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">partition</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: fdisk: n e </span><span class="si">%d</span><span class="s1"> cur_position +all_freeM w q&#39;</span><span class="p">,</span>
+                <span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span>
+            <span class="p">)</span>
+            <span class="n">partition</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                <span class="s1">&#39;n</span><span class="se">\n</span><span class="s1">e</span><span class="se">\n</span><span class="si">{0}</span><span class="se">\n</span><span class="si">{1}</span><span class="se">\n</span><span class="si">{2}</span><span class="se">\n</span><span class="s1">w</span><span class="se">\n</span><span class="s1">q</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_call_fdisk</span><span class="p">(</span><span class="n">fdisk_input</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_logical</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mbsize</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">type_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">flags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create logical msdos partition</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">fdisk_input</span> <span class="o">=</span> <span class="n">Temporary</span><span class="p">()</span><span class="o">.</span><span class="n">new_file</span><span class="p">()</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fdisk_input</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">partition</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: fdisk: n </span><span class="si">%d</span><span class="s1"> cur_position +</span><span class="si">%s</span><span class="s1">M w q&#39;</span><span class="p">,</span>
+                <span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span> <span class="nb">format</span><span class="p">(</span><span class="n">mbsize</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">partition</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                <span class="s1">&#39;n</span><span class="se">\n</span><span class="si">{0}</span><span class="se">\n</span><span class="si">{1}</span><span class="se">\n</span><span class="si">{2}</span><span class="se">\n</span><span class="s1">w</span><span class="se">\n</span><span class="s1">q</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span>
+                    <span class="s1">&#39;&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">mbsize</span> <span class="o">==</span> <span class="s1">&#39;all_free&#39;</span> <span class="k">else</span> <span class="s1">&#39;+</span><span class="si">{0}</span><span class="s1">M&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mbsize</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_call_fdisk</span><span class="p">(</span><span class="n">fdisk_input</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_all_flags</span><span class="p">(</span><span class="n">type_name</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_set_all_flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">type_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">flags</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span> <span class="n">type_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">flags</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">flag_name</span> <span class="ow">in</span> <span class="n">flags</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_flag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partition_id</span><span class="p">,</span> <span class="n">flag_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_call_fdisk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fdisk_config_file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">bash_command</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">fdisk_config_file_path</span><span class="p">,</span> <span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="s1">&#39;fdisk&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">disk_device</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">Command</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="p">[</span><span class="s1">&#39;bash&#39;</span><span class="p">,</span> <span class="s1">&#39;-c&#39;</span><span class="p">,</span> <span class="n">bash_command</span><span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="c1"># unfortunately fdisk reports that it can&#39;t read in the partition</span>
+            <span class="c1"># table which I consider a bug in fdisk. However the table was</span>
+            <span class="c1"># correctly created and therefore we continue. Problem is that we</span>
+            <span class="c1"># are not able to detect real errors with the fdisk operation at</span>
+            <span class="c1"># that point.</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;potential fdisk errors were ignored&#39;</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

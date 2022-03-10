@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>kiwi.partitioner &mdash; KIWI NG 9.24.28 documentation</title>
+  <title>kiwi.partitioner &mdash; KIWI NG 9.24.29 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -276,7 +276,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../../building_images/build_expandable_disk.html#installation-media-customization">Installation Media Customization</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../building_images/build_docker_container.html">Build a Docker Container Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../building_images/build_container_image.html">Build a Container Image</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../building_images/build_wsl_container.html">Build a WSL Container Image</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../building_images/build_wsl_container.html#setup-of-the-wsl-distrolauncher">Setup of the WSL-DistroLauncher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../building_images/build_wsl_container.html#testing-the-wsl-image">Testing the WSL image</a></li>
@@ -694,6 +694,7 @@
 <span class="sd">    :param string table_type: Table type name</span>
 <span class="sd">    :param object storage_provider: Instance of class based on DeviceProvider</span>
 <span class="sd">    :param int start_sector: sector number</span>
+<span class="sd">    :param bool extended_layout: support extended layout for msdos table</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -702,7 +703,7 @@
 <div class="viewcode-block" id="Partitioner.new"><a class="viewcode-back" href="../../api/kiwi.partitioner.html#kiwi.partitioner.Partitioner.new">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">new</span><span class="p">(</span>
         <span class="n">table_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">storage_provider</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span>
-        <span class="n">start_sector</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span>  <span class="c1"># noqa: E252</span>
+        <span class="n">start_sector</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">extended_layout</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">):</span>
         <span class="n">name_map</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s1">&#39;msdos&#39;</span><span class="p">:</span> <span class="s1">&#39;MsDos&#39;</span><span class="p">,</span>
@@ -720,7 +721,7 @@
                 <span class="p">)</span>
                 <span class="n">start_sector</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">return</span> <span class="n">partitioner</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">module_name</span><span class="p">](</span>
-                <span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span>
+                <span class="n">storage_provider</span><span class="p">,</span> <span class="n">start_sector</span><span class="p">,</span> <span class="n">extended_layout</span>
             <span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">issue</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">KiwiPartitionerSetupError</span><span class="p">(</span>
