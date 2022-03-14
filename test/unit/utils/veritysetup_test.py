@@ -97,3 +97,6 @@ class TestVeritySetup:
         assert self.veritysetup.get_block_storage_filesystem() == 'ext3'
         block_id.get_filesystem.side_effect = Exception
         assert self.veritysetup.get_block_storage_filesystem() == ''
+
+    def test_add_verification_meta(self):
+        self.veritysetup.add_verification_meta()

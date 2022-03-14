@@ -92,6 +92,40 @@ class VeritySetup:
         except Exception:
             return ''
 
+    def add_verification_meta(self, device_node: str) -> None:
+        """
+        Create a metadata block beginning at getsize64() - 4k
+        of the given device_node containing information for
+        verification in the following format:
+
+        Please note, writing of the metadata block can destroy
+        the filesystem on the device_node if it was not created
+        with a smaller size than the device_node
+
+        # TODO
+        """
+        # TODO
+        # open self.image_filepath in wb
+        # seek to the END - 4k
+        # add metadata
+        pass
+
+    def get_block_storage_filesystem(self) -> str:
+        """
+        Retrieve filesystem type from image_filepath. The method
+        only returns a value if image_filepath at construction
+        time of the VeritySetup object is a block device containing
+        a filesystem
+
+        :rtype: blkid TYPE value or empty string
+
+        :return: str
+        """
+        try:
+            return BlockID(self.image_filepath).get_filesystem()
+        except Exception:
+            return ''
+
     def store_credentials(
         self, credentials_filepath: str, target_block_id: BlockID
     ) -> None:
