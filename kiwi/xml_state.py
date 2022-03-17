@@ -36,7 +36,8 @@ from kiwi.utils.size import StringToSize
 from kiwi.exceptions import (
     KiwiProfileNotFound,
     KiwiTypeNotFound,
-    KiwiDistributionNameError
+    KiwiDistributionNameError,
+    KiwiFileAccessError
 )
 
 log = logging.getLogger('kiwi')
@@ -2211,6 +2212,23 @@ class XMLState:
             option_list = create_options.split()
 
         return option_list
+
+    def get_luks_credentials(self) -> Optional[str]:
+        """
+        Return key or passphrase credentials to open the luks pool
+
+        :return: data
+
+        :rtype: str
+        """
+        data = self.build_type.get_luks()
+        if data and data.startswith('file://'):
+            try:
+                with open(data.replace('file://', '')) as keyfile:
+                    return keyfile.read()
+            except Exception as issue:
+                raise KiwiFileAccessError(f'Failed to read {data!r}: {issue}')
+        return data
 
     def get_derived_from_image_uri(self) -> Optional[Uri]:
         """

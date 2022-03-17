@@ -2639,12 +2639,27 @@ kernel command line options</a:documentation>
       <attribute name="luks">
         <a:documentation>Setup cryptographic volume along with the given filesystem
 using the LUKS extension. The value of this attribute
-represents the password string used to be able to
-mount that filesystem while booting</a:documentation>
+represents either the password string or the location of
+a key file if specified as file:// resource. When using
+a key file it is in the responsibility of the user how
+this key file is actually being used. By default any
+distribution will just open an interactive dialog asking
+for credentials at boot time.</a:documentation>
       </attribute>
       <sch:pattern id="luks" is-a="image_type">
         <sch:param name="attr" value="luks"/>
         <sch:param name="types" value="oem iso pxe kis"/>
+      </sch:pattern>
+    </define>
+    <define name="k.type.luks_format_options.attribute">
+      <attribute name="luks_format_options">
+        <a:documentation>Specifies additional luks options passed on to cryptsetup
+luksFormat. The given string is split into tokens separated
+by the space character and passed along to the caller</a:documentation>
+      </attribute>
+      <sch:pattern id="luks_format_options" is-a="image_type">
+        <sch:param name="attr" value="luks_format_options"/>
+        <sch:param name="types" value="oem"/>
       </sch:pattern>
     </define>
     <define name="k.type.luksOS.attribute">
@@ -2653,7 +2668,7 @@ mount that filesystem while booting</a:documentation>
 and hash format options is passed to the cryptsetup call
 in order to create a format compatible to the specified
 distribution</a:documentation>
-        <value>sle11</value>
+        <value>sle12</value>
       </attribute>
       <sch:pattern id="luksOS" is-a="image_type">
         <sch:param name="attr" value="luksOS"/>
@@ -2932,6 +2947,9 @@ kiwi-ng result bundle ...</a:documentation>
         </optional>
         <optional>
           <ref name="k.type.luks.attribute"/>
+        </optional>
+        <optional>
+          <ref name="k.type.luks_format_options.attribute"/>
         </optional>
         <optional>
           <ref name="k.type.luksOS.attribute"/>
