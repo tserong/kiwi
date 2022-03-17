@@ -1208,6 +1208,9 @@ class DiskBuilder:
                     'of=%s' % readonly_target
                 ]
             )
+            squashed_root.create_verification_metadata(
+                readonly_target
+            )
         else:
             system.sync_data(
                 self._get_exclude_list_for_root_data_sync(device_map)

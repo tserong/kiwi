@@ -74,6 +74,7 @@ class FileSystemBase:
 
         self.custom_args: Dict = {}
         self.post_init(custom_args)
+        self.veritysetup = None
 
     def post_init(self, custom_args: Dict):
         """
@@ -185,7 +186,14 @@ class FileSystemBase:
         )
 
     def create_verity_layer(self, blocks: Optional[int] = None):
-        veritysetup = VeritySetup(
+        """
+        Create veritysetup on device
+
+        :param int block:
+            Number of blocks to use for veritysetup.
+            If not specified the entire root device is used
+        """
+        self.veritysetup = VeritySetup(
             self.filename if self.filename else
             self.device_provider.get_device(),
             blocks
@@ -196,8 +204,23 @@ class FileSystemBase:
             )
         )
         log.debug(
-            '--> dm verity metadata: {0}'.format(veritysetup.format())
+            '--> dm verity metadata: {0}'.format(self.veritysetup.format())
         )
+
+    def create_verification_metadata(self, device_node: str = '') -> None:
+        """
+        Write verification block at the end of the device
+
+        :param str device_node:
+            Target device node, if not specified the root device
+            from this instance is used
+        """
+        if self.veritysetup:
+            log.info('--> Creating verification metadata')
+            self.veritysetup.create_verity_verification_metadata()
+            self.veritysetup.write_verification_metadata(
+                device_node or self.device_provider.get_device()
+            )
 
     def umount(self):
         """

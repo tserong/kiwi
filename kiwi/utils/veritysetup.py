@@ -21,8 +21,17 @@ from typing import (
 )
 
 # project
+import kiwi.defaults as defaults
+
+from kiwi.runtime_config import RuntimeConfig
+from kiwi.utils.temporary import Temporary
 from kiwi.command import Command
 from kiwi.utils.block import BlockID
+
+from kiwi.exceptions import (
+    KiwiCredentialsError,
+    KiwiOffsetError
+)
 
 
 class VeritySetup:
@@ -44,6 +53,7 @@ class VeritySetup:
         self.data_blocks = data_blocks
         self.verity_hash_offset = os.path.getsize(self.image_filepath)
         self.verity_dict: Dict[str, str] = {}
+        self.verification_metadata_file = None
 
     def format(self) -> Dict[str, str]:
         """
@@ -92,39 +102,111 @@ class VeritySetup:
         except Exception:
             return ''
 
-    def add_verification_meta(self, device_node: str) -> None:
+    def write_verification_metadata(self, device_node: str) -> None:
         """
-        Create a metadata block beginning at getsize64() - 4k
-        of the given device_node containing information for
-        verification in the following format:
+        Write metadata block beginning at
+        getsize64() - defaults.VERIFICATION_METADATA_OFFSET
+        of the given device_node
+
+        :param str device_node: block device node name
+        """
+        if self.verification_metadata_file:
+            meta_data_size = os.path.getsize(
+                self.verification_metadata_file.name
+            )
+            if meta_data_size > defaults.VERIFICATION_METADATA_OFFSET:
+                raise KiwiOffsetError(
+                    'Metadata size of {0}b exceeds {1}b limit'.format(
+                        meta_data_size, defaults.VERIFICATION_METADATA_OFFSET
+                    )
+                )
+            with open(self.verification_metadata_file.name, 'rb') as meta:
+                with open(device_node, 'r+b') as target:
+                    # seek -4k from the end to reach the metadata start
+                    # Please note, writing of the metadata block can destroy
+                    # the filesystem on the device_node if it was not created
+                    # with a smaller size than the device_node, you have been
+                    # warned.
+                    target.seek(-defaults.VERIFICATION_METADATA_OFFSET, 2)
+                    target.write(meta.read())
+
+    def create_verity_verification_metadata(self) -> None:
+        """
+        Create a metadata block containing information for
+        dm_verity verification in the following format:
+
+        |header_string|0xFF|dm_verity_credentials|0xFF|dm_crypt_credentials|0x0|
+
+        header_string:
+            '{version} {fstype} {ro|rw} verity'
+
+        dm_verity_credentials:
+            '{hash_type} {data_blksize} {hash_blksize}
+             {data_blocks} {data_blocks} {algorithm} {root_hash} {salt}'
+
+        dm_crypt_credentials:
+            reserved empty space
 
         Please note, writing of the metadata block can destroy
         the filesystem on the device_node if it was not created
-        with a smaller size than the device_node
-
-        # TODO
+        with a smaller size than the device_node !
         """
-        # TODO
-        # open self.image_filepath in wb
-        # seek to the END - 4k
-        # add metadata
-        pass
+        metadata_format_version = defaults.VERIFICATION_METADATA_FORMAT_VERSION
+        filesystem = self.get_block_storage_filesystem()
+        if filesystem and self.verity_dict:
+            filesystem_mode = 'ro' if filesystem == 'squashfs' else 'rw'
 
-    def get_block_storage_filesystem(self) -> str:
-        """
-        Retrieve filesystem type from image_filepath. The method
-        only returns a value if image_filepath at construction
-        time of the VeritySetup object is a block device containing
-        a filesystem
+            header_string = '{0} {1} {2} verity'.format(
+                metadata_format_version, filesystem, filesystem_mode
+            )
 
-        :rtype: blkid TYPE value or empty string
+            dm_verity_credentials = '{0} {1} {2} {3} {3} {4} {5} {6}'.format(
+                self.verity_dict['Hashtype'],
+                self.verity_dict['Datablocksize'],
+                self.verity_dict['Hashblocksize'],
+                self.verity_dict['Datablocks'],
+                self.verity_dict['Hashalgorithm'],
+                self.verity_dict['Roothash'],
+                self.verity_dict['Salt']
+            )
 
-        :return: str
-        """
-        try:
-            return BlockID(self.image_filepath).get_filesystem()
-        except Exception:
-            return ''
+            dm_crypt_credentials = ''
+
+            self.verification_metadata_file = Temporary().new_file()
+            with open(self.verification_metadata_file.name, 'wb') as meta:
+                meta.write(header_string.encode("ascii"))
+                meta.write(b'\xFF')
+                meta.write(dm_verity_credentials.encode("ascii"))
+                meta.write(b'\xFF')
+                meta.write(dm_crypt_credentials.encode("ascii"))
+                meta.write(b'\0')
+
+    def sign_verification_metadata(self):
+        if self.verification_metadata_file:
+            runtime_config = RuntimeConfig()
+            signing_key_file = \
+                runtime_config.get_credentials_signing_key_file()
+            if not signing_key_file:
+                raise KiwiCredentialsError(
+                    'No rootfs_signing_key_file configured in runtime config'
+                )
+            signature_file = Temporary().new_file()
+            Command.run(
+                [
+                    'openssl', 'dgst', '-sha256',
+                    '-sigopt', 'rsa_padding_mode:pss',
+                    '-sigopt', 'rsa_pss_saltlen:-1',
+                    '-sigopt', 'rsa_mgf1_md:sha256',
+                    '-sign', signing_key_file,
+                    '-out',
+                    signature_file.name,
+                    self.verification_metadata_file.name
+                ]
+            )
+            with open(signature_file.name, 'rb') as sig_fd:
+                signature = sig_fd.read()
+                with open(self.verification_metadata_file.name, 'ab') as meta:
+                    meta.write(signature)
 
     def store_credentials(
         self, credentials_filepath: str, target_block_id: BlockID
