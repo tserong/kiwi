@@ -114,6 +114,7 @@ class DiskBuilder:
         self.hybrid_mbr = xml_state.build_type.get_gpt_hybrid_mbr()
         self.force_mbr = xml_state.build_type.get_force_mbr()
         self.luks = xml_state.get_luks_credentials()
+        self.luks_format_options = xml_state.get_luks_format_options()
         self.luks_os = xml_state.build_type.get_luksOS()
         self.xen_server = xml_state.is_xen_server()
         self.requested_filesystem = xml_state.build_type.get_filesystem()
@@ -319,6 +320,7 @@ class DiskBuilder:
             luks_root.create_crypto_luks(
                 passphrase=self.luks,
                 os=self.luks_os,
+                options=self.luks_format_options,
                 keyfile=self.luks_boot_keyfile if luks_need_keyfile else ''
             )
             if luks_need_keyfile:

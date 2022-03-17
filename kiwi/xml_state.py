@@ -2230,6 +2230,22 @@ class XMLState:
                 raise KiwiFileAccessError(f'Failed to read {data!r}: {issue}')
         return data
 
+    def get_luks_format_options(self) -> List[str]:
+        """
+        Return list of luks format options
+
+        :return: list of options
+
+        :rtype: list
+        """
+        result = []
+        format_options_string = self.build_type.get_luks_format_options()
+        if format_options_string:
+            for item in format_options_string.split(' '):
+                if item:
+                    result.append(item)
+        return result
+
     def get_derived_from_image_uri(self) -> Optional[Uri]:
         """
         Uri object of derived image if configured

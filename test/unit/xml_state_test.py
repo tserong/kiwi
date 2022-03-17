@@ -1056,3 +1056,15 @@ class TestXMLState:
             file_handle.read.side_effect = Exception
             with raises(KiwiFileAccessError):
                 self.state.get_luks_credentials()
+
+    @patch('kiwi.xml_parse.type_.get_luks_format_options')
+    def test_get_luks_format_options(self, mock_get_luks_format_options):
+        mock_get_luks_format_options.return_value = \
+            '--opt   val -x 2 --integrity'
+        assert self.state.get_luks_format_options() == [
+            '--opt',
+            'val',
+            '-x',
+            '2',
+            '--integrity'
+        ]
